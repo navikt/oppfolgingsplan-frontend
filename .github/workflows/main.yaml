@@ -1,0 +1,85 @@
+name: main
+
+on: push
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+jobs:
+  build:
+    name: Checkout code and create docker tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install deps
+        run: |
+          npm install
+      - name: Build
+        run: |
+          npm run build
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and publish Docker image
+        run: |
+          docker build --tag ${IMAGE} .
+          docker push ${IMAGE}
+          echo ${IMAGE}
+
+  deploy-dev:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy to dev-gcp
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: ./nais/naiserator-dev.yaml
+
+  deploy-labs:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy to labs
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: labs-gcp
+          RESOURCE: ./nais/naiserator-labs.yaml
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy to prod-gcp
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-gcp
+          RESOURCE: ./nais/naiserator-prod.yaml

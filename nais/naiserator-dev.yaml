@@ -1,0 +1,58 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: oppfolgingsplaner-frontend
+  namespace: team-esyfo
+  labels:
+    team: team-esyfo
+spec:
+  image: {{ image }}
+  replicas:
+    min: 2
+    max: 4
+    cpuThresholdPercentage: 90
+  port: 8080
+  tokenx:
+    enabled: true
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+  liveness:
+    path: syk/oppfolgingsplaner/api/isAlive
+    initialDelay: 20
+    timeout: 5
+    periodSeconds: 5
+    failureThreshold: 30
+  readiness:
+    path: syk/oppfolgingsplaner/api/isReady
+    initialDelay: 20
+    periodSeconds: 5
+    timeout: 5
+  prometheus:
+    enabled: true
+    path: actuator/metrics
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  ingresses:
+    - "https://www-gcp.dev.nav.no/syk/oppfolgingsplaner"
+  env:
+    - name: DECORATOR_URL
+      value: https://dekoratoren.dev.nav.no
+    - name: DECORATOR_ENV
+      value: "dev"
+    - name: LOGINSERVICE_URL
+      value: https://loginservice.dev.nav.no/login
+    - name: DITTNAV_URL
+      value: https://www.dev.nav.no/person/dittnav
+    - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
+      value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
+  accessPolicy:
+    outbound:
+      external:
+        - host: syfooppfolgingsplanservice.dev-fss-pub.nais.io
