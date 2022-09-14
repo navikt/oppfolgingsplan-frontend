@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import Panel from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
 import {
   STATUS_TILTAK,
@@ -24,6 +23,7 @@ import TiltakForeslaattAv from './TiltakForeslaattAv';
 import TiltakInfoVarsel from './TiltakInfoVarsel';
 import TiltakVarselFeil from './TiltakVarselFeil';
 import { tiltakSkjemaFeltPt } from '../../../propTypes/tiltakproptypes';
+import {Panel} from "@navikt/ds-react";
 
 export const OPPRETT_TILTAK_NY = 'OPPRETT_TILTAK_NY';
 

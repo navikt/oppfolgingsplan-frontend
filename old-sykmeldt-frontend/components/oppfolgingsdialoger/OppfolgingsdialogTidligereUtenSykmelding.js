@@ -1,9 +1,9 @@
 import React from 'react';
-import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '@/common/utils/oppfolgingsdialogUtils';
 import { hentStatusUtenAktivSykmelding } from '@/common/utils/teaserUtils';
 import getContextRoot from '@/common/utils/getContextRoot';
+import {LenkepanelBase} from "@/common/old-designsystem/nav-frontend-lenkepanel";
 
 const OppfolgingsdialogTidligereUtenSykmelding = ({ oppfolgingsdialog }) => {
   const planStatus = hentStatusUtenAktivSykmelding(oppfolgingsdialog);

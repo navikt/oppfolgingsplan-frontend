@@ -2,7 +2,7 @@ import * as PT from "prop-types";
 import * as React from "react";
 import classNames from "classnames";
 import { omit } from "nav-frontend-js-utils";
-import "nav-frontend-knapper-style";
+import "./less/index.less";
 
 import { CustomHTMLButtonAttributes } from "./CustomHTMLButtonAttributes";
 

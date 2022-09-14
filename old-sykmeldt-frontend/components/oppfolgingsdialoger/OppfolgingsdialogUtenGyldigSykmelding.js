@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Panel from 'nav-frontend-paneler';
 import { OppfolgingsdialogIkkeAktivSykmeldingImage } from '@/common/images/imageComponents';
+import {Panel} from "@navikt/ds-react";
 
 const texts = {
   title: 'Aktiv oppfølgingsplan',
@@ -15,7 +15,7 @@ const OppfolgingsdialogUtenGyldigSykmelding = ({ sykmeldtHarIngenSendteSykmeldin
       <header className="oppfolgingsdialogUtenAktivSykmelding__header">
         <h2>{texts.title}</h2>
       </header>
-      <Panel border>
+      <Panel border={true}>
         <div className="oppfolgingsdialogUtenAktivSykmelding__blokk">
           <img alt="" src={OppfolgingsdialogIkkeAktivSykmeldingImage} />
           <div className="inngangspanel__innhold">

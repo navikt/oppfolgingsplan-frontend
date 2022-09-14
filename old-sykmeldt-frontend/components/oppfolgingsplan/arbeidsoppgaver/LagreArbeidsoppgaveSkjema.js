@@ -4,7 +4,6 @@ import connect from 'react-redux/lib/connect/connect';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
-import Panel from 'nav-frontend-paneler';
 import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '@/common/konstanter';
 import InfoVarsel from './InfoVarsel';
 import Checkbox from '../../skjema/Checkbox';
@@ -15,6 +14,7 @@ import { KANGJENNOMFOERES, TILRETTELEGGING } from './arbeidsoppgavesvar';
 import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
+import {Panel} from "@navikt/ds-react";
 
 const texts = {
   infoVarsel: `

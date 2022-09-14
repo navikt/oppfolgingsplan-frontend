@@ -1,7 +1,7 @@
 import * as PT from "prop-types";
 import * as React from "react";
 import classNames from "classnames";
-import "nav-frontend-grid-style";
+import "./less/index.less";
 
 const cls = (className: any) => classNames("row", className, {});
 

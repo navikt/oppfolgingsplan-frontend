@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Panel from 'nav-frontend-paneler';
 import { textBothApprovedOppfolgingsplan } from '@/common/utils/textUtils';
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from '@/common/utils/oppfolgingsdialogUtils';
 import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
@@ -12,6 +11,7 @@ import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 import { PlanAvbruttImage } from '@/common/images/imageComponents';
+import {Panel} from "@navikt/ds-react";
 
 const texts = {
   linkActivePlan: 'Tilbake til den gjeldende utgave',
@@ -35,7 +35,7 @@ const GodkjentPlanAvbrutt = ({
   const godkjentPlan = oppfolgingsdialog.godkjentPlan;
 
   return (
-    <Panel border className="godkjentPlanAvbrutt">
+    <Panel border={true} className="godkjentPlanAvbrutt">
       <div className="godkjentPlanAvbrutt_lenke">
         {aktivPlan && (
           <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${aktivPlan.id}`}>

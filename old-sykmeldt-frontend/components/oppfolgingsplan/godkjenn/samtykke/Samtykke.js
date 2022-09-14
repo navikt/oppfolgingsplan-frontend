@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Panel from 'nav-frontend-paneler';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { SamtykkeIllustrasjonImage } from '@/common/images/imageComponents';
-import {Button} from "@navikt/ds-react";
+import {Button, Panel} from "@navikt/ds-react";
 
 const texts = {
   title: 'Vil du gjøre det lettere for andre som skal fylle ut?',
@@ -72,7 +71,7 @@ class Samtykke extends Component {
         <div className="inputgruppe inputgruppe--samtykke">
           <div tabIndex="-1" id="samtykkeGitt" className="skjema__feilomrade">
             <div className="inputgruppe">
-              <Panel border>
+              <Panl border={true}>
                 <input
                   type="radio"
                   className="skjemaelement__input radioknapp"
@@ -86,8 +85,8 @@ class Samtykke extends Component {
                 <label className="skjemaelement__label" htmlFor="giSamtykke">
                   {texts.approve.yes}
                 </label>
-              </Panel>
-              <Panel border>
+              </Panl>
+              <Panel border={true}>
                 <input
                   type="radio"
                   className="skjemaelement__input radioknapp"

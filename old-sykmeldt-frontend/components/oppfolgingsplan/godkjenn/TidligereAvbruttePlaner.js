@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { restdatoTildato } from '@/common/utils/datoUtils';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
+import {Accordion} from "@navikt/ds-react";
 
 const texts = {
   title: 'Se tidligere utgaver av denne planen',
@@ -15,19 +15,26 @@ const textLink = (date) => {
 const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
   if (oppfolgingsdialog.avbruttPlanListe && oppfolgingsdialog.avbruttPlanListe.length > 0) {
     return (
-      <Ekspanderbartpanel border tittel={texts.title}>
-        <ul>
-          {oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
-            return (
-              <li key={idx}>
-                <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}>
-                  {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </Ekspanderbartpanel>
+        <Accordion>
+          <Accordion.Item>
+            <Accordion.Header>
+              {texts.title}
+            </Accordion.Header>
+            <Accordion.Content>
+              <ul>
+                {oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
+                  return (
+                      <li key={idx}>
+                        <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}>
+                          {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
+                        </a>
+                      </li>
+                  );
+                })}
+              </ul>
+            </Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
     );
   }
   return null;

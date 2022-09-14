@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Panel from 'nav-frontend-paneler';
 import { opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
 import { erOppfolgingsplanOpprettbarDirekte } from '@/common/utils/oppfolgingsdialogUtils';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import { OppfolgingsdialogTomImage } from '@/common/images/imageComponents';
 import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Panel} from "@navikt/ds-react";
 
 const texts = {
   tittel: 'Aktiv oppfølgingsplan',
@@ -62,7 +62,7 @@ const OppfolgingsdialogerIngenplan = ({ arbeidsgivere, oppfolgingsplaner, oppret
       <header className="oppfolgingsdialogerIngenplan__header">
         <h2>{texts.tittel}</h2>
       </header>
-      <Panel border>
+      <Panel border={true}>
         <div className="oppfolgingsdialogerIngenplan__blokk">
           <img alt="" src={OppfolgingsdialogTomImage} />
           <div className="inngangspanel__innhold">

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import * as opProptypes from '../../propTypes/opproptypes';
 import {
   finnOppfolgingsdialogMotpartNavn,
@@ -9,6 +8,7 @@ import {
 } from '@/common/utils/oppfolgingsdialogUtils';
 import { hentPlanStatus } from '@/common/utils/teaserUtils';
 import {Tag} from "@navikt/ds-react";
+import {LenkepanelBase} from "@/common/old-designsystem/nav-frontend-lenkepanel";
 
 const texts = {
   etiketter: {

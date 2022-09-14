@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Alert, Button} from "@navikt/ds-react";
-import Veilederpanel from 'nav-frontend-veilederpanel';
+import {Alert, Button, GuidePanel} from "@navikt/ds-react";
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { erArbeidstakerEgenLeder, erIkkeOppfolgingsdialogUtfylt } from '@/common/utils/oppfolgingsdialogUtils';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
@@ -61,7 +60,7 @@ class ReviderEllerGodkjennPlan extends Component {
             </Alert>
           ) : (
             <React.Fragment>
-              <Veilederpanel svg={<VeilederAvatar />}>{texts.veileder}</Veilederpanel>
+              <GuidePanel illustration={<VeilederAvatar />}>{texts.veileder}</GuidePanel>
               {this.state.visIkkeUtfyltFeilmelding && (
                 <IkkeUtfyltPlanFeilmelding oppfolgingsdialog={oppfolgingsdialog} settAktivtSteg={settAktivtSteg} />
               )}

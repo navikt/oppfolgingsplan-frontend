@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { VenstreChevron } from 'nav-frontend-chevron';
-import Lenke from 'nav-frontend-lenker';
+import { Back } from "@navikt/ds-icons";
 import getContextRoot from '@/common/utils/getContextRoot';
 import {Hovedknapp, Knapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Link} from "@navikt/ds-react";
 
 const tekster = {
   knapp: {
@@ -23,10 +23,10 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
 const NavigasjonsBunn = ({ steg, settAktivtSteg, disabled }) => {
   if (disabled) {
     return (
-      <Lenke href={`${getContextRoot()}/oppfolgingsplaner`}>
-        <VenstreChevron />
+      <Link href={`${getContextRoot()}/oppfolgingsplaner`}>
+        <Back />
         {tekster.knapp.oversikt}
-      </Lenke>
+      </Link>
     );
   }
   return (

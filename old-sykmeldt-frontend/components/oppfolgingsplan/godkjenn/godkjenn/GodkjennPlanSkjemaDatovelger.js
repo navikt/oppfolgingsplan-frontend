@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Undertekst } from 'nav-frontend-typografi';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { datovelgerFeltPt } from '../../../../propTypes/tiltakproptypes';
 import Datovelger from '../../../skjema/Datovelger';
 import { getEndDateFromTiltakListe, getStartDateFromTiltakListe } from '@/common/utils/tiltakUtils';
+import {Detail} from "@navikt/ds-react";
 
 const texts = {
   felter: {
@@ -63,7 +63,7 @@ const GodkjennPlanSkjemaDatovelger = ({
   const suggestedEndDate = getEndDateFromTiltakListe(oppfolgingsplan.tiltakListe);
   return (
     <div>
-      {suggestedStartDate && suggestedEndDate && <Undertekst>{texts.suggestion}</Undertekst>}
+      {suggestedStartDate && suggestedEndDate && <Detail>{texts.suggestion}</Detail>}
       <div className="godkjennPlanSkjema__datovelger__rad">
         <GodkjennPlanSkjemaDatovelgerFelt
           felt={FELTER.fom}

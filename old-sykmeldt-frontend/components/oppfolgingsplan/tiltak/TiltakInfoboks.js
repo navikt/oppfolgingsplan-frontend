@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styled from 'styled-components';
-import Panel from 'nav-frontend-paneler';
 import {Knapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Panel} from "@navikt/ds-react";
 
 export const tekster = {
   tittel: 'Hva kan gjøre det lettere å jobbe?',
@@ -21,7 +21,7 @@ const TiltakInfoboks = ({ toggleSkjema, visTiltakSkjema }) => {
     blokk: !visTiltakSkjema,
   });
   return (
-    <Panel className="tiltakInfoboks" border>
+    <Panel className="tiltakInfoboks" border={true}>
       <h3 className={classNames}>{tekster.tittel}</h3>
       {!visTiltakSkjema && (
         <Wrapper>
