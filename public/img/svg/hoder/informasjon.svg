@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>infomation-circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Ferdige-AG" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="infomation-circle" stroke="#B7B1A9">
+            <g id="Group">
+                <circle id="Oval" stroke-linecap="round" cx="16" cy="16" r="15.3043478"></circle>
+                <path d="M11.826087,25.7391304 L20.173913,25.7391304 M13.2173913,13.2173913 L16,13.2173913 L16,25.0434783" id="Shape" stroke-linecap="round"></path>
+                <path d="M15.3043478,6.95652174 C14.9189565,6.95652174 14.6086957,7.26956522 14.6086957,7.65217391 C14.6086957,8.03756522 14.9189565,8.34782609 15.3043478,8.34782609 C15.6869565,8.34782609 16,8.03756522 16,7.65217391 C16,7.26956522 15.6869565,6.95652174 15.3043478,6.95652174 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

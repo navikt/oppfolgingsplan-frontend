@@ -1,0 +1,144 @@
+.stegnavigasjon {
+  position: relative;
+}
+
+.stegnavigasjon__trinn:after,
+.stegnavigasjon__trinnliste:before {
+  display: block;
+  content: "";
+  width: ~"calc(.75em - 2px)";
+  height: ~"calc(.75em - 2px)";
+  background: @bakgrunnGraa;
+  position: absolute;
+  border-radius: 1em;
+  border: 2px solid @navGra40;
+  top: -.50em / 2;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.stegnavigasjon__trinnliste {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  &:before {
+    z-index: 1;
+    background-color: @navBla;
+    border-color: @navBla;
+  }
+}
+
+.stegnavigasjon__trinn {
+  text-align: center;
+  display: none;
+  position: relative;
+  padding-top: 2em;
+
+  &:before {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    content: "";
+    background: @navGra40;
+  }
+}
+
+.stegnavigasjon__trinnliste--inaktiv .stegnavigasjon__lenke {
+  color: @navGra60;
+}
+
+.stegnavigasjon__lenke,
+.stegnavigasjon__trinn--aktivt .stegnavigasjon__lenke {
+  .typo-ingress-mixin();
+  color: @navMorkGra;
+}
+
+.stegnavigasjon__trinn a:hover,
+.stegnavigasjon__trinn a:active,
+.stegnavigasjon__trinn--aktivt .stegnavigasjon__lenke {
+  border-bottom: 3px solid @navBla;
+}
+
+.stegnavigasjon__trinn:last-child:before,
+.stegnavigasjon__trinn:first-child:before {
+  width: 50%
+}
+
+.stegnavigasjon__trinn:first-child:before {
+  right: 0;
+}
+
+.stegnavigasjon__trinn--aktivt {
+  display: block;
+  width: 100%;
+}
+
+.stegnavigasjon__bla {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: @navGra40;
+  border: 2px solid @navGra40;
+  background-image: url("../img/svg/arrow-up_hover.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1em 1em;
+  position: absolute;
+  top: -17px;
+  z-index: 4;
+
+  &:focus {
+    background-color: @navGra40;
+    box-shadow: 0 0 0 3px @fokusFarge;
+  }
+}
+
+.stegnavigasjon__bla--forrige {
+  left: 2em;
+  transform: rotate(-90deg);
+}
+
+.stegnavigasjon__bla--neste {
+  right: 2em;
+  transform: rotate(90deg);
+}
+
+@media (min-width: 30em) {
+
+  .stegnavigasjon__bla {
+    display: none;
+  }
+
+  .stegnavigasjon__trinn {
+    display: block;
+  }
+
+  .stegnavigasjon__trinn {
+    flex: 1;
+  }
+
+  .stegnavigasjon__trinnliste {
+
+    &:before {
+      .transition-mixin(.25s, left);
+    }
+
+    &[data-aktiv="1"]:before {
+      left: (100% / 3 / 2) * 1;
+    }
+
+    &[data-aktiv="2"]:before {
+      left: (100% / 3 / 2) * 3;
+    }
+
+    &[data-aktiv="3"]:before {
+      left: (100% / 3 / 2) * 5;
+    }
+
+  }
+}

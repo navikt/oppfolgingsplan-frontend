@@ -1,0 +1,53 @@
+.knapp--ikon {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 7px 5px 7px 0;
+  color: @navBla;
+  display: block;
+  @media (min-width: @screen-sm-min) {
+    display: inline-block;
+  }
+}
+
+.knapp--endre {
+  &:extend(.knapp--ikon);
+
+  &::before {
+    content: "";
+    background: url("../img/svg/endreTiltak--hover.svg") no-repeat center center;
+    padding: 1em 1em;
+  }
+
+  &:focus {
+    outline: 3px @fokusFarge solid;
+  }
+}
+
+.knapp--slett {
+  &:extend(.knapp--ikon);
+
+  &::before {
+    content: "";
+    background: url("../img/svg/slettTiltak--hover.svg") no-repeat center center;
+    padding: 1em 1em;
+  }
+
+  &:focus {
+    outline: 3px @fokusFarge solid;
+  }
+}
+
+.knapp--kommenter {
+  &:extend(.knapp--ikon);
+
+  &::before {
+    content: "";
+    background: url("../img/svg/bubbles.svg") no-repeat center center;
+    padding: 1em 1em;
+  }
+
+  &:focus {
+    outline: 3px @fokusFarge solid;
+  }
+}

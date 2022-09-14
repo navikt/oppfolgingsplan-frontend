@@ -1,0 +1,80 @@
+.skjema__sporsmal {
+  .typo-element-mixin();
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+label.skjema__sporsmal {
+  display: block;
+}
+
+.feiloppsummering__liste li {
+  margin-bottom: .25rem;
+}
+
+.skjema__feilomrade:focus {
+  outline: none;
+}
+
+.skjema__feilomrade--harFeil:focus {
+  outline: none;
+  box-shadow: 0 0 0 8px @pinkErrorBg, 0 0 0 11px @fokusFarge;
+}
+
+
+.skjema__input--inaktiv {
+  opacity: 0.5;
+}
+
+.skjema__checkbox-container {
+  padding-bottom: 0.7em;
+}
+
+.inputgruppe .panel {
+  margin-bottom: .5rem;
+}
+
+.inputgruppe--godkjennplan, .inputgruppe--sendgodkjennplan, .inputgruppe--samtykke {
+  & > div {
+    display: inline-block;
+  }
+}
+
+.inputgruppe--godkjennplan {
+  margin-top: 2em;
+  text-align: center;
+  @media (max-width: @screen-xs-max) {
+    margin-top: 1em;
+  }
+}
+
+.inputgruppe--sendgodkjennplan {
+  margin-top: 2em;
+  padding: 0 2em;
+  text-align: left;
+  @media (max-width: @screen-xs-max) {
+    margin-top: 1em;
+  }
+}
+
+.inputgruppe--samtykke {
+  text-align: left;
+}
+
+.lagrearbeidsoppgaveskjema__inputgruppe, .lagretiltakskjema__inputgruppe {
+  margin-bottom: 2em;
+}
+
+.lagretiltakskjema__inputgruppe p {
+  &:extend(.tekst--dynamisk);
+}
+
+.lagrearbeidsoppgaveskjema__inputgruppe {
+  textarea {
+    overflow: hidden;
+  }
+}
+
+.skjema__input-container {
+  padding-bottom: 0.7em;
+}

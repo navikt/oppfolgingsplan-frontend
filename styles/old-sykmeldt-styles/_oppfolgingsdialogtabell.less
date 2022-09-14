@@ -1,0 +1,44 @@
+.oppfolgingsdialogtabell {
+  width: 100%;
+  color: @navMorkGra;
+  .utvidbar__toggle {
+    color: inherit;
+    &:visited, &:hover, &:active, &:focus {
+      color: inherit;
+    }
+  }
+}
+.oppfolgingsdialogtabell__rad {
+  background: @white;
+  border: 1px solid @navGra20;
+  border-radius: 4px;
+  padding: 2em;
+  margin: 1em 0;
+}
+.oppfolgingsdialogtabell__rad:before,
+.oppfolgingsdialogtabell__rad:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.oppfolgingsdialogtabell__rad--element {
+  padding: 0;
+  margin-bottom: .325em;
+}
+.oppfolgingsdialogtabell__rad__utvidbar {
+  padding: @panelOppfoelgingPaddingMini;
+  @media (min-width: @screen-sm-min) {
+    padding: @panelOppfoelgingPadding;
+  }
+}
+.oppfolgingsdialogtabell__radoverskrift {
+  &:extend(.panel--oppfoelging);
+  font-weight: 600;
+  width: 100%;
+  word-wrap: break-word;
+}
+.tabellRadUtvidbar--erApen {
+  & > img {
+    transform: rotate(180deg);
+  }
+}

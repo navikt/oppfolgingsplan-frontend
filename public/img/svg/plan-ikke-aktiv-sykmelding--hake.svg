@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="80px" height="77px" viewBox="0 0 80 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="39.9372942" cy="38.1301137" rx="39.9372942" ry="38.1301137"></ellipse>
+        <polygon id="path-3" points="43.0416568 27.7947678 43.0416568 0.218175129 0 0.218175129 0 27.7947678 0 55.3713606 43.0416568 55.3713606"></polygon>
+        <polygon id="path-5" points="0 55.4109639 43.0416568 55.4109639 43.0416568 0.257542311 0 0.257542311"></polygon>
+    </defs>
+    <g id="Oppdatert-oversiktsside-Copy-13" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-259.000000, -766.000000)">
+        <g id="Group-2" transform="translate(259.000000, 766.000000)">
+            <g id="sendt_suksess_illustrasjon-copy-2">
+                <g id="Group-19">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#B7B1A9" xlink:href="#path-1"></use>
+                    <g id="Page-1" mask="url(#mask-2)">
+                        <g transform="translate(16.953642, 21.721854)">
+                            <g id="Group-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 0.039367)">
+                                <mask id="mask-4" fill="white">
+                                    <use xlink:href="#path-3"></use>
+                                </mask>
+                                <g id="Clip-2"></g>
+                                <path d="M0,9.40230243 L0,52.5849514 C0,54.1242082 1.25196869,55.3713606 2.79698495,55.3713606 L40.2462517,55.3713606 C41.790478,55.3713606 43.0416568,54.1242082 43.0416568,52.5849514 L43.0416568,3.00513539 C43.0416568,1.46587859 41.790478,0.217938926 40.2462517,0.217938926 L9.73376039,0.217938926 L0,9.40230243 Z" id="Fill-1" fill="#E4E4DB" mask="url(#mask-4)"></path>
+                            </g>
+                            <path d="M9.73391836,0.257542311 L9.73391836,6.653922 C9.73391836,8.19396615 8.48194967,9.44190581 6.93693341,9.44190581 L0.000157977122,9.44190581 L9.73391836,0.257542311 Z" id="Fill-4" stroke="none" fill="#FFFFFF" fill-rule="evenodd"></path>
+                            <mask id="mask-6" fill="white">
+                                <use xlink:href="#path-5"></use>
+                            </mask>
+                            <g id="Clip-7" stroke="none" fill="none"></g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <path d="M35.932682,55.3500467 L31.4588877,50.222219 C30.7762049,49.4386901 30.8650748,48.2564187 31.659855,47.582544 C32.4516055,46.9066756 33.65034,46.9953958 34.3340327,47.7789247 L37.242504,51.1124114 L45.5680029,39.7731734 C46.1820135,38.9368112 47.3666096,38.7494022 48.2159236,39.3564876 C49.0652376,39.9635729 49.2530764,41.133882 48.6390658,41.9712411 L38.905786,55.2264365 C38.5654544,55.6899746 38.0281952,55.9740786 37.4495306,55.9980031 C37.4242834,55.999 37.3990363,55.9999969 37.3737891,55.9999969 C36.8213816,56.0009937 36.2942212,55.7647388 35.932682,55.3500467 Z" id="Fill-20" fill="#403832"></path>
+        </g>
+    </g>
+</svg>

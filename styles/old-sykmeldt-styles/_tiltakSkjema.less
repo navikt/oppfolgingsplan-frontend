@@ -1,0 +1,43 @@
+.panel__tiltak {
+    &:extend(.panel--oppfoelging);
+    margin-bottom: .325em;
+}
+
+.tiltakSkjema {
+    &:extend(.panel);
+    .checkboks + label {
+        display: inline-block;
+    }
+}
+.tiltakSkjema__datovelger__rad {
+    width: 70%;
+    margin-bottom: 2em;
+    @media all and (max-width: @screen-xs-max) {
+        margin-bottom: 0;
+    }
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+.tiltakSkjema__datovelger {
+}
+.tiltakSkjema__datovelger__felt {
+    float: left;
+    width: 50%;
+    padding-right: 2em;
+    @media all and (max-width: @screen-xs-max) {
+        width: 100%;
+        margin-bottom: 1em;
+        padding-right: 0;
+        .datovelger__DayPicker {
+            display: none;
+        }
+
+        .datovelger__toggleDayPicker {
+            display: none;
+        }
+    }
+}

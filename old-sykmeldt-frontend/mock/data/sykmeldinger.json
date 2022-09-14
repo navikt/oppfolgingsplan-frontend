@@ -1,0 +1,93 @@
+[
+  {
+    "id": "460e8015-0a06-43e9-b53d-8870fe3dd18c",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-09-08",
+        "tom": "2018-10-05"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": "110110110",
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  },
+  {
+    "id": "e59ca01b-9722-4df6-a52f-bd14e8531015",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-10-01",
+        "tom": "2018-10-12"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": null,
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  },
+  {
+    "id": "4ee59626-fe82-4f18-835e-cb72b0697574",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-09-05",
+        "tom": "2018-10-03"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": "110110110",
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  },
+  {
+    "id": "cd223f13-8a79-4e25-bd28-50e88ab54be6",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-06-24",
+        "tom": "2018-08-02"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": null,
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  },
+  {
+    "id": "e9abeabb-7ac8-4513-9112-aeff1ae66829",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-08-23",
+        "tom": "2018-08-27"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": null,
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  },
+  {
+    "id": "0ba8ea3e-2bd1-4d03-b127-40a5535fcf93",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-10-09",
+        "tom": "2018-10-17"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": null,
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  },
+  {
+    "id": "525df5c6-53e1-4b4b-92b6-4c306b7911f7",
+    "sykmeldingsperioder": [
+      {
+        "fom": "2018-11-11",
+        "tom": "2019-02-03"
+      }
+    ],
+    "organisasjonsinformasjon": {
+      "orgnummer": "110110110",
+      "orgNavn": "Hogwarts School of Witchcraft and Wizardry"
+    }
+  }
+]

@@ -1,0 +1,52 @@
+.godkjennPlanSkjema {
+    .checkboks + label {
+        display: inline-block;
+    }
+}
+.godkjennPlanSkjema__datovelger__rad {
+    width: 100%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    @media all and (max-width: @screen-xs-max) {
+        margin-bottom: 0;
+    }
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+.godkjennPlanSkjema__datovelger {
+}
+.godkjennPlanSkjema__datovelger__felt {
+    float: left;
+    padding-right: 2em;
+    @media all and (max-width: @screen-xs-max) {
+        width: 100%;
+        margin-bottom: 1em;
+        padding-right: 0;
+        .datovelger__DayPicker {
+            display: none;
+        }
+
+        .datovelger__toggleDayPicker {
+            display: none;
+        }
+    }
+}
+
+.godkjennPlanLightboks {
+    p {
+        margin: 1.5em 0;
+    }
+
+    hr {
+        height: 0.01em;
+        margin: 1.5em 0;
+    }
+
+    .alertstripe {
+        margin-top: 1em;
+    }
+}

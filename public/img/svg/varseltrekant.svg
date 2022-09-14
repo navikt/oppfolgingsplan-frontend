@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Varsel trekant</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="VOL-3.-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Velge-leder" transform="translate(-337.000000, -716.000000)">
+            <g id="Varsel-trekant" transform="translate(337.000000, 716.000000)">
+                <g id="Group-6">
+                    <polygon id="Stroke-2" fill="#FDBC6D" points="15.6521739 15.6521739 0.347826087 15.6521739 8 0.347826087"></polygon>
+                    <path d="M8.34782609,13.2173913 C8.34782609,13.426087 8.20869565,13.5652174 8,13.5652174 C7.79130435,13.5652174 7.65217391,13.426087 7.65217391,13.2173913 C7.65217391,13.0086957 7.79130435,12.8695652 8,12.8695652 C8.20869565,12.8695652 8.34782609,13.0086957 8.34782609,13.2173913 Z" id="Stroke-4" stroke="#000000" stroke-linejoin="round"></path>
+                    <path d="M8,10.9911652 L8,5.7042087" id="Stroke-1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
