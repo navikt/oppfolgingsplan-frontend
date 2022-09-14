@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { OppfolgingsplanAvslattImage } from '@/common/images/imageComponents';
-import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   title: 'Lederen din har noen forslag',
@@ -19,13 +19,13 @@ const GodkjennPlanAvslaatt = ({ oppfolgingsplan, nullstillGodkjenning }) => {
           <p>{texts.paragraphInfo}</p>
         </div>
         <div className="knapperad">
-          <Hovedknapp
+          <Button variant={"primary"}
             onClick={() => {
               nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
             }}
           >
             {texts.buttonMakeChanges}
-          </Hovedknapp>
+          </Button>
         </div>
       </div>
     </OppfolgingsplanInnholdboks>

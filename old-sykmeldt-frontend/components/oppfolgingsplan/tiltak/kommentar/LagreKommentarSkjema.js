@@ -5,7 +5,7 @@ import { tekstfeltRegex } from '@/common/konstanter';
 import { kommentarReducerPt } from '../../../../propTypes/opproptypes';
 import TekstOmrade from '../../../skjema/TekstOmrade';
 import TiltakVarselFeil from '../TiltakVarselFeil';
-import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   kommentarBeskrivelse: {
@@ -53,9 +53,9 @@ export const LagreKommentarKnapper = ({ avbryt, spinner }) => {
   return (
     <div className="knapperad knapperad--justervenstre">
       <div className="knapperad__element">
-        <Hovedknapp disabled={spinner} spinner={spinner} htmlType="submit">
+        <Button variant={"primary"} disabled={spinner} loading={spinner}>
           {texts.lagreKommentarKnapper.buttonSave}
-        </Hovedknapp>
+        </Button>
       </div>
       <div className="knapperad__element">
         <button

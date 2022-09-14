@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
-import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   buttonAbort: 'Avbryt',
@@ -50,9 +50,9 @@ class ArbeidsoppgaveKnapper extends Component {
     return (
       <div className="knapperad knapperad--justervenstre">
         <div className="knapperad__element">
-          <Hovedknapp mini disabled={this.state.spinner} spinner={this.state.spinner} htmlType="submit">
+          <Button size={"small"} variant={"primary"} disabled={this.state.spinner} loading={this.state.spinner}>
             {submitButtonText}
-          </Hovedknapp>
+          </Button>
         </div>
         <div className="knapperad__element">
           <button

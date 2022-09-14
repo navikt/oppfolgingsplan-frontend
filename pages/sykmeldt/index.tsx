@@ -1,4 +1,11 @@
 import OppfolgingsdialogerSide
     from "../../old-sykmeldt-frontend/components/oppfolgingsdialoger/OppfolgingsdialogerSide";
+import {NextPage} from "next";
 
-export default <OppfolgingsdialogerSide />
+const Home: NextPage = () => {
+    return (
+        <OppfolgingsdialogerSide/>
+    );
+};
+
+export default Home

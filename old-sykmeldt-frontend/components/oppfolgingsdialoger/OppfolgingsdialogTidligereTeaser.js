@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import * as opProptypes from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '@/common/utils/oppfolgingsdialogUtils';
 import { hentPlanStatus } from '@/common/utils/teaserUtils';
-import {LenkepanelBase} from "@/common/old-designsystem/nav-frontend-lenkepanel";
 
 const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsdialog, rootUrlPlaner }) => {
   const planStatus = hentPlanStatus(oppfolgingsdialog);
   return (
-    <LenkepanelBase href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
+    <LinkPanel href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
       <div className="inngangspanel">
         <span className="oppfolgingsplanInnhold__ikon">
           <img alt="" src={planStatus.img} />
@@ -22,7 +21,7 @@ const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsdialog, rootUrlPlaner }) 
           <p className="mute inngangspanel__tekst">{planStatus.tekst}</p>
         </div>
       </div>
-    </LenkepanelBase>
+    </LinkPanel>
   );
 };
 OppfolgingsdialogTidligereTeaser.propTypes = {

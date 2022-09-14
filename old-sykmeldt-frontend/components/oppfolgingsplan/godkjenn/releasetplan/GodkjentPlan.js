@@ -10,7 +10,6 @@ import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 import {HakeGronnLysImage} from '@/common/images/imageComponents';
-import {Fareknapp} from "@/common/old-designsystem/nav-frontend-knapper";
 import {Modal} from "@navikt/ds-react";
 
 const texts = {
@@ -36,13 +35,13 @@ export const AvbrytPlanBekreftelse = ({oppfolgingsdialog, avbrytDialog}) => {
             <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
             <p>{texts.avbrytPlanBekreftelse.info}</p>
             <div className="knapperad">
-                <Fareknapp
+                <Button variant="danger" size="medium">
                     onClick={() => {
                         avbrytDialog(oppfolgingsdialog.id);
                     }}
                 >
                     {texts.avbrytPlanBekreftelse.button}
-                </Fareknapp>
+                </Button>
             </div>
         </div>
     );

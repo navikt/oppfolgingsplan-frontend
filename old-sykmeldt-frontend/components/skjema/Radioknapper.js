@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Radio } from 'nav-frontend-skjema';
 import { fieldPropTypes } from '../../propTypes';
 import Feilomrade from './Feilomrade';
+import {Radio} from "@navikt/ds-react";
 
 export const getId = (id) => {
   return id.split('.').join('-').split('[').join('-').split(']').join('-').split('--').join('-');
@@ -28,20 +28,20 @@ export const Radioknapp = ({
     label
   );
   return (
+      //Todo: Fix radio button
     <div>
       <Radio
-        className="skjema__input-container"
         id={getId(id)}
-        type="radio"
         {...input}
         disabled={disabled}
         checked={checked || input.value.toString() === value.toString()}
         value={value}
-        label={labelMedSekundaerlabel}
         onBlur={() => {
           input.onBlur();
         }}
-      />
+      >
+        {labelMedSekundaerlabel}
+      </Radio>
       {(input.value === value || disabled || visUndertekst) && children}
     </div>
   );

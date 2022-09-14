@@ -13,7 +13,7 @@ import {
 import { dinesykmeldingerReducerPt, fieldPropTypes, opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
 import Radioknapper from '../../skjema/Radioknapper';
 import { VarseltrekantImage } from '@/common/images/imageComponents';
-import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   arbeidsgiverSkjema: {
@@ -106,12 +106,11 @@ export const ArbeidsgiverSkjema = ({ arbeidsgivere, oppfolgingsdialoger, handleS
       </div>
       <div className="knapperad">
         <div className="knapperad__element">
-          <Hovedknapp
-            htmlType="submit"
+          <Button variant={"primary"}
             disabled={!erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver(oppfolgingsdialoger, arbeidsgivere)}
           >
             {texts.arbeidsgiverSkjema.buttonSubmit}
-          </Hovedknapp>
+          </Button>
         </div>
       </div>
     </form>

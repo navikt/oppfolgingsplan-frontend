@@ -8,7 +8,6 @@ import {
 } from '@/common/utils/oppfolgingsdialogUtils';
 import { hentPlanStatus } from '@/common/utils/teaserUtils';
 import {Tag} from "@navikt/ds-react";
-import {LenkepanelBase} from "@/common/old-designsystem/nav-frontend-lenkepanel";
 
 const texts = {
   etiketter: {
@@ -31,7 +30,7 @@ TilGodkjenningStatus.propTypes = {
 const OppfolgingsdialogTeaser = ({ oppfolgingsdialog, rootUrlPlaner }) => {
   const planStatus = hentPlanStatus(oppfolgingsdialog);
   return (
-    <LenkepanelBase href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
+    <LinkPanel href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
       <div className="inngangspanel">
         <span className="oppfolgingsplanInnhold__ikon">
           <img alt="" src={planStatus.img} />
@@ -50,7 +49,7 @@ const OppfolgingsdialogTeaser = ({ oppfolgingsdialog, rootUrlPlaner }) => {
           <TilGodkjenningStatus oppfolgingsplan={oppfolgingsdialog} />
         </div>
       </div>
-    </LenkepanelBase>
+    </LinkPanel>
   );
 };
 

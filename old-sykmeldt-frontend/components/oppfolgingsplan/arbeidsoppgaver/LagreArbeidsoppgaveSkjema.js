@@ -1,4 +1,3 @@
-import { Feiloppsummering } from 'nav-frontend-skjema';
 import connect from 'react-redux/lib/connect/connect';
 
 import React, { Component } from 'react';
@@ -14,7 +13,7 @@ import { KANGJENNOMFOERES, TILRETTELEGGING } from './arbeidsoppgavesvar';
 import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
-import {Panel} from "@navikt/ds-react";
+import {ErrorSummary, Panel} from "@navikt/ds-react";
 
 const texts = {
   infoVarsel: `
@@ -549,7 +548,16 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
           {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN && <InfoVarsel tekst={texts.infoVarsel} />}
           {oppdateringFeilet && <ArbeidsoppgaveVarselFeil tekst={varselTekst} />}
           {this.state.errorList.length > 0 && (
-            <Feiloppsummering tittel="For å gå videre må du rette opp følgende:" feil={this.state.errorList} />
+              <ErrorSummary
+                  size="medium"
+                  heading="For å gå videre må du rette opp følgende:"
+              >
+                {this.state.errorList.map(error => {
+                  return <ErrorSummary.Item href={error.skjemaelementId}>
+                    {error.feilmelding}
+                  </ErrorSummary.Item>
+                })}
+              </ErrorSummary>
           )}
           <ArbeidsoppgaveKnapper
             avbryt={this.avbryt}

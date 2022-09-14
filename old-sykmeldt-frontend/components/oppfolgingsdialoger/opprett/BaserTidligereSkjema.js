@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Radioknapper from '../../skjema/Radioknapper';
-import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   question: 'Ønsker du å basere den nye planen på den som gjaldt sist?',
@@ -22,7 +22,7 @@ export const BaserTidligereSkjemaComponent = ({ handleSubmit }) => {
         <input value={false} label={texts.answer.no} aria-labelledby="baserPaaTidligerePlan-overskrift" />
       </Field>
       <div className="knapperad">
-        <Hovedknapp>{texts.buttonSubmit}</Hovedknapp>
+        <Button variant={"primary"}>{texts.buttonSubmit}</Button>
       </div>
     </form>
   );

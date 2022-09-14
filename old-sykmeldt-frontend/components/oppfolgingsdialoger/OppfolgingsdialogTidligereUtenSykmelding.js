@@ -3,12 +3,12 @@ import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '@/common/utils/oppfolgingsdialogUtils';
 import { hentStatusUtenAktivSykmelding } from '@/common/utils/teaserUtils';
 import getContextRoot from '@/common/utils/getContextRoot';
-import {LenkepanelBase} from "@/common/old-designsystem/nav-frontend-lenkepanel";
+import {LinkPanel} from "@navikt/ds-react";
 
 const OppfolgingsdialogTidligereUtenSykmelding = ({ oppfolgingsdialog }) => {
   const planStatus = hentStatusUtenAktivSykmelding(oppfolgingsdialog);
   return (
-    <LenkepanelBase href={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
+    <LinkPanel href={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
       <div className="inngangspanel">
         <span className="oppfolgingsplanInnhold__ikon">
           <img alt="" src={`${getContextRoot()}/img/svg/${planStatus.img}`} />
@@ -22,7 +22,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({ oppfolgingsdialog }) => {
           <p className="mute inngangspanel__avsnitt" dangerouslySetInnerHTML={{ __html: planStatus.tekst }} />
         </div>
       </div>
-    </LenkepanelBase>
+    </LinkPanel>
   );
 };
 

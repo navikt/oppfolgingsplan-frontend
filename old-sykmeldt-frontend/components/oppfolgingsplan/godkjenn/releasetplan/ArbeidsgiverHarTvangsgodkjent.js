@@ -4,7 +4,7 @@ import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { VarseltrekantImage } from '@/common/images/imageComponents';
-import {Hovedknapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   title: 'Lederen din har laget en oppfølgingsplan',
@@ -21,7 +21,7 @@ const ArbeidsgiverHarTvangsgodkjent = ({ oppfolgingsdialog, markerMottattTvungen
 
         <div className="knapperad">
           <div className="knapperad__element">
-            <Hovedknapp onClick={markerMottattTvungenGodkjenning}>{texts.buttonConfirm}</Hovedknapp>
+            <Button variant={"primary"} onClick={markerMottattTvungenGodkjenning}>{texts.buttonConfirm}</Button>
           </div>
         </div>
       </div>

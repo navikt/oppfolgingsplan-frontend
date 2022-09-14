@@ -13,7 +13,7 @@ import OppfolgingsplanFilm from './OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan';
 import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
-import {Knapp} from "@/common/old-designsystem/nav-frontend-knapper";
+import {Button} from "@navikt/ds-react";
 
 const texts = {
   oppfolgingsdialogNyKnapp: {
@@ -33,13 +33,13 @@ const texts = {
 export const OppfolgingsdialogNyKnapp = ({ visOppfolgingsdialogOpprett }) => {
   return (
     <div className="oppfolgingsdialogNyDialog">
-      <Knapp
+      <Button variant={"secondary"} size={"medium"}
         onClick={() => {
           visOppfolgingsdialogOpprett(true);
         }}
       >
         {texts.oppfolgingsdialogNyKnapp.button}
-      </Knapp>
+      </Button>
     </div>
   );
 };

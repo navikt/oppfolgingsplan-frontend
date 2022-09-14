@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Textarea } from 'nav-frontend-skjema';
 import { fieldPropTypes } from '../../propTypes/fieldproptypes';
+import {Textarea} from "@navikt/ds-react";
 
 const Tekstomrade = (props) => {
   const { meta, input, id, maxLength, label } = props;
@@ -12,9 +12,9 @@ const Tekstomrade = (props) => {
     <Textarea
       maxLength={maxLength}
       id={id}
-      feil={feilmelding ? feilmelding.feilmelding : undefined}
+      error={feilmelding ? feilmelding.feilmelding : undefined}
       label={label}
-      {...input}
+      value={...input}
     />
   );
 };
