@@ -14,9 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./src",
     "paths": {
       "@/common/*": ["common/*"],
       "@/server/*": ["server/*"],
+      "@/types/*": ["types/*"],
       "@/pages/*": ["pages/*"],
       "@/fixtures/*": ["fixtures/*"],
     }
