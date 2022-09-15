@@ -27,6 +27,7 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
       utloggingsvarsel: true,
       level: "Level4",
     };
+
     const Decorator = await fetchDecoratorReact(decoratorParams);
 
     try {

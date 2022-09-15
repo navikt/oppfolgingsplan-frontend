@@ -20,14 +20,12 @@ import virksomhet from './virksomhet';
 
 import dineSykmeldinger from './dineSykmeldinger';
 import ledere from './ledere';
-import history from '../history';
 
 const reducers = {
   arbeidsforhold,
   arbeidsoppgaver,
   avbrytdialogReducer,
   dineSykmeldinger,
-  history,
   kommentar,
   kopierDialogReducer,
   navigasjontoggles,

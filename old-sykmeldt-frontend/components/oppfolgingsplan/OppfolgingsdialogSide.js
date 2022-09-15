@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import getContextRoot from '@/common/utils/getContextRoot';
-import history from '../../history';
 import Side from '../../sider/Side';
 import Feilmelding from '../Feilmelding';
 import { populerPlanFraState } from '@/common/utils/stateUtils';
@@ -45,6 +44,7 @@ import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 import { OppfolgingsdialogIkkeTilgangImage } from '@/common/images/imageComponents';
 import AppSpinner from "@/common/spinner/AppSpinner";
+import {withRouter} from "next/router";
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -102,7 +102,7 @@ export class Container extends Component {
       );
       if (nyOpprettetDialog) {
         dialogAvbruttOgNyOpprettetConnected(nyOpprettetDialog.id);
-        history.push(`${getContextRoot()}/oppfolgingsplaner/${nyOpprettetDialog.id}`);
+        this.props.router.push(`${getContextRoot()}/oppfolgingsplaner/${nyOpprettetDialog.id}`);
         window.location.hash = 'arbeidsoppgaver';
       }
     }
@@ -331,4 +331,4 @@ export default connect(mapStateToProps, {
   hentNaermesteLeder,
   delMedFastlege,
   delMedNavFunc,
-})(Container);
+})(withRouter(Container));

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import getContextRoot from '@/common/utils/getContextRoot';
 import { brodsmule as brodsmuleProptype } from '../propTypes';
 import { getSykefravaerUrl } from '@/common/utils/urlUtils';
 import { PersonImage } from '@/common/images/imageComponents';
+import Link from "next/link";
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
   const nySti = sti && sti.indexOf('/sykefravaer') > -1 ? getSykefravaerUrl() : sti;
@@ -15,7 +15,7 @@ const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
         {tittel}
       </a>
     ) : (
-      <Link className="js-smule brodsmuler__smule" to={root + nySti}>
+      <Link className="js-smule brodsmuler__smule" href={root + nySti}>
         {tittel}
       </Link>
     );

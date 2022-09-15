@@ -10,7 +10,7 @@ import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 import {HakeGronnLysImage} from '@/common/images/imageComponents';
-import {Modal} from "@navikt/ds-react";
+import {Button, Modal} from "@navikt/ds-react";
 
 const texts = {
     godkjentPlan: {
@@ -35,10 +35,10 @@ export const AvbrytPlanBekreftelse = ({oppfolgingsdialog, avbrytDialog}) => {
             <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
             <p>{texts.avbrytPlanBekreftelse.info}</p>
             <div className="knapperad">
-                <Button variant="danger" size="medium">
-                    onClick={() => {
-                        avbrytDialog(oppfolgingsdialog.id);
-                    }}
+                <Button variant="danger" size="medium"
+                        onClick={() => {
+                            avbrytDialog(oppfolgingsdialog.id);
+                        }}
                 >
                     {texts.avbrytPlanBekreftelse.button}
                 </Button>

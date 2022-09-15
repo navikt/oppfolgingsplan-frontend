@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import getContextRoot from '@/common/utils/getContextRoot';
@@ -14,6 +13,7 @@ import { dinesykmeldingerReducerPt, fieldPropTypes, opprettOppfolgingArbeidsgive
 import Radioknapper from '../../skjema/Radioknapper';
 import { VarseltrekantImage } from '@/common/images/imageComponents';
 import {Button} from "@navikt/ds-react";
+import Link from "next/link";
 
 const texts = {
   arbeidsgiverSkjema: {
@@ -39,7 +39,7 @@ export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }
       <div className="velgArbeidsgiverUndertekst">
         <span className="velgArbeidsgiverUndertekst__tekst">{texts.velgArbeidsgiverUndertekst.alreadyCreatedPlan}</span>
         <div className="velgArbeidsgiverUndertekst__lenke">
-          <Link className="lenke" to={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`}>
+          <Link className="lenke" href={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`}>
             Gå til planen
           </Link>
         </div>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
 import getContextRoot from '@/common/utils/getContextRoot';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 import { OppfolgingsdialogIngenlederImage } from '@/common/images/imageComponents';
+import Link from "next/link";
 
 const texts = {
   infoboks: {
@@ -27,7 +27,7 @@ const IngenledereInfoboks = () => {
         tekst={texts.infoboks.info}
       />
       <div className="knapperad">
-        <Link className="knapp" to={`${getContextRoot()}/oppfolgingsplaner`}>
+        <Link className="knapp" href={`${getContextRoot()}/oppfolgingsplaner`}>
           {texts.buttonBack}
         </Link>
       </div>

@@ -1,10 +1,10 @@
 import React, {ReactElement} from 'react';
 import Head from 'next/head'
-import Brodsmuler from '../components/Brodsmuler';
+// import Brodsmuler from '../components/Brodsmuler';
 
 interface SideProps {
     tittel: string;
-    brodsmuler: never;
+    brodsmuler: any;
     children: ReactElement;
 }
 
@@ -15,7 +15,7 @@ const Side = ({tittel, brodsmuler, children}: SideProps): ReactElement => {
                 <title>{tittel + (tittel.length > 0 ? ' - www.nav.no' : 'www.nav.no')}</title>
             </Head>
             <div className={'side__innhold side__innhold--begrenset'}>
-                <Brodsmuler brodsmuler={brodsmuler}/>
+                {/*<Brodsmuler brodsmuler={brodsmuler}/>*/}
                 {children}
             </div>
         </>
