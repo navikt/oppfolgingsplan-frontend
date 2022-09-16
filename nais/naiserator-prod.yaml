@@ -52,6 +52,10 @@ spec:
       value: https://www.nav.no/person/dittnav
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.prod-fss-pub.nais.io
+    - name: DINE_SYKMELDTE_ROOT
+      value: https://www.nav.no/arbeidsgiver/sykmeldte
+    - name: DITT_SYKEFRAVAER_ROOT
+      value: https://www.nav.no/syk/sykefravaer
   accessPolicy:
     outbound:
       external:

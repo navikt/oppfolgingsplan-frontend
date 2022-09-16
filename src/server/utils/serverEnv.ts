@@ -10,6 +10,8 @@ export interface IServerEnvironmentVariables {
   MOCK_BACKEND: string;
   IDPORTEN_CLIENT_ID: string;
   SYFOOPPFOLGINGSPLANSERVICE_HOST: string;
+  DITT_SYKEFRAVAER_ROOT: string;
+  DINE_SYKMELDTE_ROOT: string;
 }
 
 // @ts-ignore

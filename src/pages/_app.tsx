@@ -3,6 +3,9 @@ import type {AppProps} from 'next/app'
 import {QueryClient, QueryClientProvider} from "react-query";
 import {ReactQueryDevtools} from "react-query/devtools";
 import styled, {createGlobalStyle} from "styled-components";
+import {useAudience} from "@/common/hooks/routeHooks";
+import {BreadcrumbsAppenderSM} from "@/common/breadcrumbs/BreadcrumbsAppenderSM";
+import {BreadcrumbsAppenderAG} from "@/common/breadcrumbs/BreadcrumbsAppenderAG";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -34,6 +37,8 @@ const minutesToMillis = (minutes: number) => {
 };
 
 function MyApp({Component, pageProps}: AppProps) {
+    const { isAudienceSykmeldt } = useAudience();
+
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
@@ -47,11 +52,11 @@ function MyApp({Component, pageProps}: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
             <GlobalStyle />
-            {/*{isAudienceSykmeldt ? (*/}
-            {/*    <BreadcrumbsAppenderSM />*/}
-            {/*) : (*/}
-            {/*    <BreadcrumbsAppenderAG />*/}
-            {/*)}*/}
+            {isAudienceSykmeldt ? (
+                <BreadcrumbsAppenderSM />
+            ) : (
+                <BreadcrumbsAppenderAG />
+            )}
             <ContentWrapperStyled>
                 {/*<NotificationBar />*/}
                 <InnerContentWrapperStyled>
