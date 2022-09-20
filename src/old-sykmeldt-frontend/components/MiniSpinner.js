@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 const Spinner = styled.div`
   display: inline-flex;
-  margin: 0;
-  margin-left: 0.2rem;
+  margin: 0 0 0 0.2rem;
   width: 2rem;
   height: 2rem;
 `;
