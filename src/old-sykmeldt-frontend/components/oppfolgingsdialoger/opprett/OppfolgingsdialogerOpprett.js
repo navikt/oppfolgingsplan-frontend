@@ -60,13 +60,13 @@ class OppfolgingsdialogerOpprett extends Component {
     }
 
     render() {
-        const {arbeidsgivere, oppfolgingsdialoger, visOppfolgingsdialogOpprett} = this.props;
+        const {arbeidsgivere, oppfolgingsdialoger, visOppfolgingsdialogOpprett, setVisOppfolgingsdialogOpprett} = this.props;
         return (
             <Modal
                 open={visOppfolgingsdialogOpprett}
                 aria-label="Modal demo"
                 onClose={() => {
-                    visOppfolgingsdialogOpprett(false);
+                    setVisOppfolgingsdialogOpprett(false);
                 }}
             >
                 <Modal.Content>
@@ -101,6 +101,7 @@ OppfolgingsdialogerOpprett.propTypes = {
     arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     visOppfolgingsdialogOpprett: PropTypes.func,
+    setVisOppfolgingsdialogOpprett: PropTypes.func,
     opprett: PropTypes.func,
     kopier: PropTypes.func,
 };

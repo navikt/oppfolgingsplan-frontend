@@ -84,3 +84,17 @@ export const toDatePrettyPrint = (dato) => {
 
   return `${days}.${months}.${years}`;
 };
+
+export function createDateMonthsFromNow (months) {
+  const date = new Date()
+  date.setMonth(date.getMonth() + months)
+
+  return date
+}
+
+export function createDateMonthsAgo (months) {
+  const date = new Date()
+  date.setMonth(date.getMonth() - months)
+
+  return date
+}

@@ -7,21 +7,16 @@ import {
     harTidligereOppfolgingsdialoger,
     isEmpty,
 } from '@/common/utils/oppfolgingsdialogUtils';
-import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from '@/common/utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
-import {
-    useKopierOppfolgingsplanSM,
-    useOppfolgingsplanerSM
-} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
-import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
+import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',
@@ -37,10 +32,6 @@ interface Props {
 }
 
 const Oppfolgingsdialoger = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: Props) => {
-
-    const kopierOppfolgingsdialog = useKopierOppfolgingsplanSM(); //todo remove prop drilling
-
-    const opprettOppfolgingsdialog: any = undefined;
 
     let panel;
 
@@ -76,11 +67,9 @@ const Oppfolgingsdialoger = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: 
     } else {
         panel = (
             <OppfolgingsdialogerVisning
-                oppfolgingsdialoger={oppfolgingsplaner}
-                dinesykmeldinger={sykmeldinger}
-                naermesteLedere={narmesteLedere}
-                kopierOppfolgingsdialog={kopierOppfolgingsdialog}
-                opprettOppfolgingsdialog={opprettOppfolgingsdialog}
+                oppfolgingsplaner={oppfolgingsplaner}
+                sykmeldinger={sykmeldinger}
+                narmesteLedere={narmesteLedere}
             />
         );
     }

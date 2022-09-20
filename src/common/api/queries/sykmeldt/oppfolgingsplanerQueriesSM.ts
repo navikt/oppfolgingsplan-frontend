@@ -24,3 +24,12 @@ export const useKopierOppfolgingsplanSM = () => {
 
     return useMutation(postKopierOppfolgingsplanSM)
 }
+
+//todo fiks
+export const useOpprettOppfolgingsplanSM = () => {
+    const apiBasePath = useApiBasePath();
+
+    const postOpprettOppfolgingsplanSM = (virksomhetsnummer?: string) => post(`${apiBasePath}/oppfolgingsplaner/opprett/${virksomhetsnummer}`);
+
+    return useMutation(postOpprettOppfolgingsplanSM)
+}

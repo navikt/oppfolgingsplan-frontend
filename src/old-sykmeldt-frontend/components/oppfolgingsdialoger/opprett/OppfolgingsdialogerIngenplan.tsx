@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {opprettOppfolgingArbeidsgiverPt} from '../../../propTypes';
 import {erOppfolgingsplanOpprettbarDirekte} from '@/common/utils/oppfolgingsdialogUtils';
-import {oppfolgingsplanPt} from '../../../propTypes/opproptypes';
 import {OppfolgingsdialogTomImage} from '@/common/images/imageComponents';
 import {Button, Panel} from "@navikt/ds-react";
+import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 
 const texts = {
     tittel: 'Aktiv oppfølgingsplan',
@@ -22,8 +21,8 @@ export const OppfolgingsdialogerIngenplanKnapper = ({
                                                         arbeidsgivere,
                                                         oppfolgingsplaner,
                                                         opprett,
-                                                        visOppfolgingsdialogOpprett,
-                                                    }) => {
+                                                        setVisOppfolgingsdialogOpprett
+                                                    }: OppfolgingsdialogerIngenplanProps) => {
     return (
         <div className="knapperad knapperad--justervenstre">
             <div className="knapperad__element">
@@ -36,26 +35,34 @@ export const OppfolgingsdialogerIngenplanKnapper = ({
                         {texts.knapper.lagNy}
                     </Button>
                 ) : (
-                    <Hovedknapp
-                        onClick={() => {
-                            visOppfolgingsdialogOpprett(true);
-                        }}
+                    <Button variant={"primary"}
+                            onClick={() => {
+                                setVisOppfolgingsdialogOpprett(true);
+                            }}
                     >
                         {texts.knapper.lagNy}
-                    </Hovedknapp>
+                    </Button>
                 )}
             </div>
         </div>
     );
 };
-OppfolgingsdialogerIngenplanKnapper.propTypes = {
-    arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
-    oppfolgingsplaner: PropTypes.arrayOf(oppfolgingsplanPt),
-    opprett: PropTypes.func,
-    visOppfolgingsdialogOpprett: PropTypes.func,
-};
 
-const OppfolgingsdialogerIngenplan = ({arbeidsgivere, oppfolgingsplaner, opprett, visOppfolgingsdialogOpprett}) => {
+interface OppfolgingsdialogerIngenplanProps {
+    arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
+    oppfolgingsplaner: Oppfolgingsplan[],
+
+    opprett(virksomhetsnummer?: string | null): void;
+
+    setVisOppfolgingsdialogOpprett(set: boolean): void;
+}
+
+const OppfolgingsdialogerIngenplan = ({
+                                          arbeidsgivere,
+                                          oppfolgingsplaner,
+                                          opprett,
+                                          setVisOppfolgingsdialogOpprett
+                                      }: OppfolgingsdialogerIngenplanProps) => {
     return (
         <div className="oppfolgingsdialogerIngenplan">
             <header className="oppfolgingsdialogerIngenplan__header">
@@ -76,7 +83,7 @@ const OppfolgingsdialogerIngenplan = ({arbeidsgivere, oppfolgingsplaner, opprett
                                 arbeidsgivere={arbeidsgivere}
                                 oppfolgingsplaner={oppfolgingsplaner}
                                 opprett={opprett}
-                                visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
+                                setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
                             />
                         </div>
                     </div>
@@ -84,13 +91,6 @@ const OppfolgingsdialogerIngenplan = ({arbeidsgivere, oppfolgingsplaner, opprett
             </Panel>
         </div>
     );
-};
-
-OppfolgingsdialogerIngenplan.propTypes = {
-    arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
-    oppfolgingsplaner: PropTypes.arrayOf(oppfolgingsplanPt),
-    opprett: PropTypes.func,
-    visOppfolgingsdialogOpprett: PropTypes.func,
 };
 
 export default OppfolgingsdialogerIngenplan;
