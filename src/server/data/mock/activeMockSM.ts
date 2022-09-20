@@ -10,6 +10,10 @@ const activeMockSM = {
     oppfolgingsplaner: defaultOppfolgingsplanerMockData,
     sykmeldinger: defaultSykmeldingerMockData,
     narmesteLedere: defaultNarmesteLedereMockData,
+    tilgang: {
+        harTilgang: true,
+        ikkeTilgangGrunn: null
+    }
 }
 
 export default activeMockSM;

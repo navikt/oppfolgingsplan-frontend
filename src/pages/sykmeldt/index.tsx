@@ -9,6 +9,7 @@ import Feilmelding from "../../old-sykmeldt-frontend/components/Feilmelding";
 import OppfolgingsplanInfoboks from "../../old-sykmeldt-frontend/components/app/OppfolgingsplanInfoboks";
 import {OppfolgingsdialogIkkeTilgangImage} from "@/common/images/imageComponents";
 import Side from "../../old-sykmeldt-frontend/sider/Side";
+import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner - Oversikt',
@@ -24,6 +25,7 @@ const texts = {
 };
 
 const Home: NextPage = () => {
+    const tilgang = useTilgangSM();
     const oppfolgingsplaner = useOppfolgingsplanerSM();
     const sykmeldinger = useSykmeldingerSM();
     const narmesteLedere = useNarmesteLedereSM();
@@ -41,11 +43,11 @@ const Home: NextPage = () => {
             tittel={texts.pageTitle}
         >
             {(() => {
-                if (oppfolgingsplaner.isLoading || sykmeldinger.isLoading || narmesteLedere.isLoading) {
+                if (oppfolgingsplaner.isLoading || sykmeldinger.isLoading || narmesteLedere.isLoading || tilgang.isLoading) {
                     return <AppSpinner/>;
-                } else if (oppfolgingsplaner.isError || sykmeldinger.isError || narmesteLedere.isError) {
+                } else if (oppfolgingsplaner.isError || sykmeldinger.isError || narmesteLedere.isError || tilgang.isError) {
                     return <Feilmelding/>;
-                } else if (false) { //todo !tilgang.data.harTilgang
+                } else if (tilgang.data && !tilgang.data.harTilgang) {
                     return (
                         <OppfolgingsplanInfoboks
                             svgUrl={OppfolgingsdialogIkkeTilgangImage}
