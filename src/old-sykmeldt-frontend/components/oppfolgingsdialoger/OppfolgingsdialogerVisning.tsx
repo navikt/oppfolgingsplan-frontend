@@ -5,7 +5,6 @@ import {
     harTidligereOppfolgingsdialoger,
 } from '@/common/utils/oppfolgingsdialogUtils';
 import getContextRoot from '@/common/utils/getContextRoot';
-import OppfolgingsplanFilm from './OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan';
 import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
@@ -18,6 +17,7 @@ import {
     useOpprettOppfolgingsplanSM
 } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {finnArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
+import VideoPanel from "@/common/video/VideoPanel";
 
 const texts = {
     oppfolgingsdialogNyKnapp: {
@@ -107,7 +107,7 @@ const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLe
                     rootUrlPlaner={getContextRoot()}
                 />
             )}
-            <OppfolgingsplanFilm/>
+            <VideoPanel/>
         </div>
     );
 }

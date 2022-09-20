@@ -1,17 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const withLess = require("next-with-less");
 const { withSentryConfig } = require("@sentry/nextjs");
-
-const plugins = [
-  /* ...other plugins... */
-  [withLess, {
-    lessLoaderOptions: {
-      /* ... */
-    }
-  }]
-  /* ...other plugins... */
-];
 
 const basePath = "/syk/oppfolgingsplaner";
 
@@ -35,5 +24,4 @@ const sentryWebpackPluginOptions = {
 
 // Make sure adding Sentry options is the last code to run before exporting, to
 // ensure that your source maps include changes from all other Webpack plugins
-module.exports = withLess(moduleExports);
-// module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
+module.exports = moduleExports;
