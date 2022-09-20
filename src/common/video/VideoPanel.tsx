@@ -1,7 +1,7 @@
 import React from "react";
 import {getAsset} from "@/common/utils/getAssetPath";
 import styled from "styled-components";
-import {Heading} from "@navikt/ds-react";
+import {BodyLong, Heading, Link} from "@navikt/ds-react";
 
 const texts = {
     title: 'Om oppfølgingsplanen',
@@ -16,18 +16,6 @@ const texts = {
 const StyledLink = styled.a`
   padding-left: 0.5em;
 `;
-
-const TextLink = () => {
-    return (
-        <React.Fragment>
-            {texts.linkHeader}
-            <StyledLink className="lenke" target="_blank" rel="noopener noreferrer" href={texts.link}>
-                {texts.linkText}
-            </StyledLink>
-            .
-        </React.Fragment>
-    );
-};
 
 const HeaderStyled = styled(Heading)`
   margin-bottom: 1rem;
@@ -64,9 +52,11 @@ const VideoPanel = () => {
                     {texts.browserNotSupported}{" "}
                     <a href={getAsset("/video/film.mp4")}>{texts.navigateToMovie}</a>
                 </p>
-
-                <TextLink />
             </video>
+            <BodyLong>
+                {texts.linkHeader} <Link rel="noopener noreferrer" target="_blank"
+                                         href={texts.link}>{texts.linkText}</Link>.
+            </BodyLong>
         </Container>
     );
 };

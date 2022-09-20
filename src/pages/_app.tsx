@@ -20,7 +20,6 @@ const ContentWrapperStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--navds-global-color-gray-100);
 `;
 
 const InnerContentWrapperStyled = styled.div`

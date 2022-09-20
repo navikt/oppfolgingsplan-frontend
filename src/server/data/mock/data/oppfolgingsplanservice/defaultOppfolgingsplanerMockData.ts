@@ -28,7 +28,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-20T11:31:30.305',
                 sistEndretDato: '2020-02-20T11:31:30.305',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -38,7 +38,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -63,7 +63,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-20T11:31:30.318',
                 sistEndretDato: '2020-02-20T11:31:30.318',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -73,7 +73,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -98,7 +98,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-20T11:31:30.319',
                 sistEndretDato: '2020-02-20T11:31:30.319',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -108,7 +108,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -126,7 +126,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-20T11:31:30.322',
                 sistEndretDato: '2020-02-20T11:31:30.322',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -136,7 +136,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -165,7 +165,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                         opprettetTidspunkt: '2020-02-20T11:31:30.352',
                         sistEndretDato: '2020-02-20T11:31:30.352',
                         opprettetAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -175,7 +175,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                             stillinger: [],
                         },
                         sistEndretAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -189,7 +189,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'FORSLAG',
                 gjennomfoering: null,
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -199,7 +199,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -226,7 +226,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                         opprettetTidspunkt: '2020-02-20T11:31:30.376',
                         sistEndretDato: '2020-02-20T11:31:30.376',
                         opprettetAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -236,7 +236,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                             stillinger: [],
                         },
                         sistEndretAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -252,7 +252,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                         opprettetTidspunkt: '2020-02-20T11:31:30.378',
                         sistEndretDato: '2020-02-20T11:31:30.378',
                         opprettetAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '110110110110',
                             epost: null,
                             tlf: null,
@@ -262,7 +262,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                             stillinger: [],
                         },
                         sistEndretAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '110110110110',
                             epost: null,
                             tlf: null,
@@ -276,7 +276,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'AVTALT',
                 gjennomfoering: 'Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ',
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -286,7 +286,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -310,7 +310,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'IKKE_AKTUELT',
                 gjennomfoering: null,
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -320,7 +320,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -334,7 +334,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         avbruttPlanListe: [
             {
                 av: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -348,7 +348,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             },
             {
                 av: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -363,7 +363,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         ],
         arbeidsgiver: {
             naermesteLeder: {
-                navn: ' ',
+                navn: 'Labben',
                 fnr: null,
                 epost: null,
                 tlf: null,
@@ -379,7 +379,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
-            navn: ' ',
+            navn: 'Labben',
             fnr: '110110110110',
             epost: null,
             tlf: null,
@@ -389,7 +389,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             stillinger: [],
         },
         sistEndretAv: {
-            navn: ' ',
+            navn: 'Labben',
             fnr: '11011011011',
             epost: null,
             tlf: null,
@@ -423,7 +423,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             dokumentUuid: 'ceed5fe6-7149-4a77-9189-f8ef055ce5d2',
             avbruttPlan: {
                 av: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -453,7 +453,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-11T15:13:58.281',
                 sistEndretDato: '2020-02-11T15:13:58.281',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -463,7 +463,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -488,7 +488,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-11T14:57:37.708',
                 sistEndretDato: '2020-02-11T15:13:09.211',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -498,7 +498,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -524,7 +524,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'FORSLAG',
                 gjennomfoering: null,
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -534,7 +534,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -548,7 +548,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         avbruttPlanListe: [],
         arbeidsgiver: {
             naermesteLeder: {
-                navn: ' ',
+                navn: 'Labben',
                 fnr: null,
                 epost: null,
                 tlf: null,
@@ -572,7 +572,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
-            navn: ' ',
+            navn: 'Labben',
             fnr: '110110110110',
             epost: null,
             tlf: null,
@@ -590,7 +590,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             stillinger: [],
         },
         sistEndretAv: {
-            navn: ' ',
+            navn: 'Labben',
             fnr: '11011011011',
             epost: null,
             tlf: null,
@@ -624,7 +624,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             dokumentUuid: 'f054234f-e989-4d14-81a2-e8c1b1023e4b',
             avbruttPlan: {
                 av: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -654,7 +654,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-17T14:37:24.844',
                 sistEndretDato: '2020-02-17T14:37:24.844',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -664,7 +664,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -689,7 +689,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-17T09:15:03.094',
                 sistEndretDato: '2020-02-17T09:15:03.094',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -699,7 +699,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -724,7 +724,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-17T12:27:03.736',
                 sistEndretDato: '2020-02-17T12:27:22.623',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -734,7 +734,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -752,7 +752,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 opprettetDato: '2020-02-17T09:04:59.149',
                 sistEndretDato: '2020-02-17T09:04:59.149',
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -762,7 +762,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -791,7 +791,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                         opprettetTidspunkt: '2020-02-17T14:19:02.32',
                         sistEndretDato: '2020-02-17T14:19:02.32',
                         opprettetAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -801,7 +801,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                             stillinger: [],
                         },
                         sistEndretAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -815,7 +815,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'FORSLAG',
                 gjennomfoering: null,
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -825,7 +825,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '110110110110',
                     epost: null,
                     tlf: null,
@@ -852,7 +852,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                         opprettetTidspunkt: '2020-02-17T14:29:11.568',
                         sistEndretDato: '2020-02-17T14:29:11.568',
                         opprettetAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -862,7 +862,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                             stillinger: [],
                         },
                         sistEndretAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '11011011011',
                             epost: null,
                             tlf: null,
@@ -878,7 +878,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                         opprettetTidspunkt: '2020-02-17T14:30:24.019',
                         sistEndretDato: '2020-02-17T14:30:24.019',
                         opprettetAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '110110110110',
                             epost: null,
                             tlf: null,
@@ -888,7 +888,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                             stillinger: [],
                         },
                         sistEndretAv: {
-                            navn: ' ',
+                            navn: 'Labben',
                             fnr: '110110110110',
                             epost: null,
                             tlf: null,
@@ -902,7 +902,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'AVTALT',
                 gjennomfoering: 'Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ',
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -912,7 +912,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -936,7 +936,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 status: 'IKKE_AKTUELT',
                 gjennomfoering: null,
                 opprettetAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -946,7 +946,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                     stillinger: [],
                 },
                 sistEndretAv: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -960,7 +960,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         avbruttPlanListe: [
             {
                 av: {
-                    navn: ' ',
+                    navn: 'Labben',
                     fnr: '11011011011',
                     epost: null,
                     tlf: null,
@@ -975,7 +975,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         ],
         arbeidsgiver: {
             naermesteLeder: {
-                navn: ' ',
+                navn: 'Labben',
                 fnr: null,
                 epost: null,
                 tlf: null,
@@ -999,7 +999,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
-            navn: ' ',
+            navn: 'Labben',
             fnr: '110110110110',
             epost: null,
             tlf: null,
@@ -1017,7 +1017,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             stillinger: [],
         },
         sistEndretAv: {
-            navn: ' ',
+            navn: 'Labben',
             fnr: '11011011011',
             epost: null,
             tlf: null,

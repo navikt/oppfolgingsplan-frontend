@@ -12,7 +12,7 @@ export const defaultSykmeldingerMockData: Sykmelding[] = [
             },
         ],
         organisasjonsinformasjon: {
-            orgnummer: '123456781',
+            orgnummer: '110110110',
             orgNavn: 'Hogwarts School of Witchcraft and Wizardry',
         },
     },
