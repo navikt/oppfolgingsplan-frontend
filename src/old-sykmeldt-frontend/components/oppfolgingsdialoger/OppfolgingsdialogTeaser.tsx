@@ -7,6 +7,10 @@ import {
 import {hentPlanStatus} from '@/common/utils/teaserUtils';
 import {LinkPanel, Tag} from "@navikt/ds-react";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import Image from "next/image";
+import NextLink from "next/link";
+import styled from "styled-components";
+import {useLandingUrl} from "@/common/hooks/routeHooks";
 
 const texts = {
     etiketter: {
@@ -31,30 +35,47 @@ interface OppfolgingsdialogTeaserProps {
     rootUrlPlaner?: string
 }
 
-const OppfolgingsdialogTeaser = ({oppfolgingsplan, rootUrlPlaner}: OppfolgingsdialogTeaserProps) => {
+const LinkPanelContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  margin: 0 2em 0 0;
+  width: 4.5em;
+  height: 4.5em;
+`;
+
+const OppfolgingsdialogTeaser = ({oppfolgingsplan}: OppfolgingsdialogTeaserProps) => {
     const planStatus = hentPlanStatus(oppfolgingsplan);
+    const landingUrl = useLandingUrl();
+
     return (
-        <LinkPanel href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsplan.id}`} border>
-            <div className="inngangspanel">
-        <span className="oppfolgingsplanInnhold__ikon">
-          <img alt="" src={planStatus.img}/>
-        </span>
-                <div className="inngangspanel__innhold">
-                    <header className="inngangspanel__header">
-                        <h3 className="js-title" id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}>
-                            <span
-                                className="inngangspanel__tittel">{finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}</span>
-                        </h3>
-                    </header>
-                    {typeof planStatus.tekst === 'object' ? (
-                        <p className="inngangspanel__tekst" dangerouslySetInnerHTML={planStatus.tekst}/>
-                    ) : (
-                        <p className="inngangspanel__tekst" dangerouslySetInnerHTML={{__html: planStatus.tekst}}/>
-                    )}
-                    <TilGodkjenningStatus oppfolgingsplan={oppfolgingsplan}/>
-                </div>
-            </div>
-        </LinkPanel>
+        <NextLink href={`${landingUrl}/${oppfolgingsplan.id}`} passHref>
+            <LinkPanel border>
+                <LinkPanelContent>
+                    <ImageContainer>
+                        <Image alt="" src={planStatus.img}/>
+                    </ImageContainer>
+                    <div>
+                        <header>
+                            <h3 className="js-title" id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}>
+                                <span>{finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}</span>
+                            </h3>
+                        </header>
+                        {typeof planStatus.tekst === 'object' ? (
+                            <p dangerouslySetInnerHTML={planStatus.tekst}/>
+                        ) : (
+                            <p dangerouslySetInnerHTML={{__html: planStatus.tekst}}/>
+                        )}
+                        <TilGodkjenningStatus oppfolgingsplan={oppfolgingsplan}/>
+                    </div>
+                </LinkPanelContent>
+            </LinkPanel>
+        </NextLink>
     );
 };
 

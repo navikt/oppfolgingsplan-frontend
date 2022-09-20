@@ -29,8 +29,7 @@ const OppfolgingsdialogTeasere = ({
                 {!harTidligerOppfolgingsdialoger &&
                     oppfolgingsplaner.map((plan, idx) => {
                         return (
-                            <OppfolgingsdialogTeaser oppfolgingsplan={plan} key={idx}
-                                                     rootUrlPlaner={rootUrlPlaner}/>
+                            <OppfolgingsdialogTeaser oppfolgingsplan={plan} key={idx}/>
                         );
                     })}
                 {harTidligerOppfolgingsdialoger &&

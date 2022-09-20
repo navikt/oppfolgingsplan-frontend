@@ -9,7 +9,6 @@ import {
 } from '@/common/utils/oppfolgingsdialogUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
-import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
@@ -17,6 +16,7 @@ import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
 import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
+import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',
