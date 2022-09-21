@@ -1,7 +1,7 @@
 import React from 'react';
-import NavigasjonsTopp from './NavigasjonsTopp';
-import SideOverskrift from './SideOverskrift';
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {Heading} from "@navikt/ds-react";
+import {OppfolgingsplanStepper} from "@/common/stepper/OppfolgingsplanStepper";
 
 const textOverskrift = (arbeidsgiver: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -132,18 +132,16 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     return (
         <div>
             {/*{oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}*/}
-            <SideOverskrift tittel={textOverskrift(aktivPlan.virksomhet.navn)}/>
-            <NavigasjonsTopp
-                disabled={false}
-                navn={aktivPlan.virksomhet.navn}
-                settAktivtSteg={() => {
-                    console.log("b")
-                }}
-                steg={1}
-            />
-            <div id="oppfolgingsdialogpanel" className="blokk">
-                {/*{panel}*/}
-            </div>
+            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan.virksomhet.navn)}</Heading>
+            <OppfolgingsplanStepper activeStep={1}/>
+
+
+            {/*<Arbeidsoppgaver*/}
+            {/*              arbeidsoppgaver={arbeidsoppgaver}*/}
+            {/*              oppfolgingsdialog={aktivPlan}*/}
+            {/*              lagreArbeidsoppgave={() => console.log("todo lagre arbeidsoppgave")}*/}
+            {/*              slettArbeidsoppgave={() => console.log("todo slett arbeidsoppgave")}*/}
+            {/*            />*/}
             {/*{visLagreAdvarsel && <LagreAdvarselstripe steg={navigasjontoggles.steg} />}*/}
             {/*<NavigasjonsBunn*/}
             {/*  disabled={disableNavigation}*/}
@@ -155,42 +153,5 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
         </div>
     );
 }
-
-// Oppfolgingsdialog.propTypes = {
-//   avbrytdialogReducer: oppfolgingsplanProptypes.avbrytplanReducerPt,
-//   arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
-//   tiltak: oppfolgingsplanProptypes.tiltakReducerPt,
-//   oppfolgingsdialog: oppfolgingsplanProptypes.oppfolgingsplanPt,
-//   navigasjontoggles: oppfolgingsplanProptypes.navigasjonstogglesReducerPt,
-//   virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
-//   person: oppfolgingsplanProptypes.personReducerPt,
-//   naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
-//   kontaktinfo: oppfolgingsplanProptypes.kontaktinfoReducerPt,
-//   arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
-//   fastlegeDeling: oppfolgingsplanProptypes.delMedFastlegePt,
-//   oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-//   delmednav: oppfolgingsplanProptypes.delmednavPt,
-//   lagreKommentar: PropTypes.func,
-//   slettKommentar: PropTypes.func,
-//   delMedFastlege: PropTypes.func,
-//   delMedNavFunc: PropTypes.func,
-//   godkjennDialog: PropTypes.func,
-//   nullstillGodkjenning: PropTypes.func,
-//   giSamtykke: PropTypes.func,
-//   lagreArbeidsoppgave: PropTypes.func,
-//   slettArbeidsoppgave: PropTypes.func,
-//   lagreTiltak: PropTypes.func,
-//   slettTiltak: PropTypes.func,
-//   settAktivtSteg: PropTypes.func,
-//   avvisDialog: PropTypes.func,
-//   avbrytDialog: PropTypes.func,
-//   settDialog: PropTypes.func,
-//   hentVirksomhet: PropTypes.func,
-//   hentKontaktinfo: PropTypes.func,
-//   hentPerson: PropTypes.func,
-//   hentNaermesteLeder: PropTypes.func,
-//   hentArbeidsforhold: PropTypes.func,
-//   alleInputFormer: PropTypes.objectOf(PropTypes.any),
-// };
 
 export default Oppfolgingsplan;

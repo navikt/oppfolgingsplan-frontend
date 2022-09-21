@@ -1,5 +1,5 @@
 import {
-  aktivOppfolgingsplanBreadcrumbSM,
+  oppfolgingsplanBreadcrumbSM,
   landingBreadcrumbAG,
   landingBreadcrumbSM,
   motebehovBreadcrumbAG,
@@ -31,8 +31,10 @@ export function createBreadcrumbsSM(pathname: string) {
   switch (pathname) {
     case "/sykmeldt":
       return landingBreadcrumbSM();
-    case "/sykmeldt/[oppfolgingsdialogId]":
-      return aktivOppfolgingsplanBreadcrumbSM();
+    case "/sykmeldt/[oppfolgingsdialogId]/arbeidsoppgaver":
+    case "/sykmeldt/[oppfolgingsdialogId]/tiltak":
+    case "/sykmeldt/[oppfolgingsdialogId]/seplanen":
+      return oppfolgingsplanBreadcrumbSM();
     default:
       return [];
   }

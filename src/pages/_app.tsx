@@ -29,6 +29,7 @@ const InnerContentWrapperStyled = styled.div`
   flex-grow: 1;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: 1rem;
 `;
 
 const minutesToMillis = (minutes: number) => {

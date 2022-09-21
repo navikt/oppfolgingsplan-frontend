@@ -54,7 +54,7 @@ const OppfolgingsdialogTeaser = ({oppfolgingsplan}: OppfolgingsdialogTeaserProps
     const landingUrl = useLandingUrl();
 
     return (
-        <NextLink href={`${landingUrl}/${oppfolgingsplan.id}`} passHref>
+        <NextLink href={`${landingUrl}/${oppfolgingsplan.id}/arbeidsoppgaver`} passHref>
             <LinkPanel border>
                 <LinkPanelContent>
                     <ImageContainer>
