@@ -17,6 +17,12 @@ export const useOppfolgingsplanerSM = () => {
     );
 };
 
+export const useOppfolgingsplanSM = (id: number): Oppfolgingsplan | undefined => {
+    const allePlaner = useOppfolgingsplanerSM();
+
+    return allePlaner.data && allePlaner.data.find(plan => plan.id == id)
+};
+
 export const useKopierOppfolgingsplanSM = () => {
     const apiBasePath = useApiBasePath();
 

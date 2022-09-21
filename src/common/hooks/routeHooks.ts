@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import {ParsedUrlQuery} from "querystring";
 
 export type Audience = "Sykmeldt" | "Arbeidsgiver";
 
@@ -46,3 +47,12 @@ export const useApiBasePath = (): string => {
   }
 };
 
+interface IParams extends ParsedUrlQuery {
+  oppfolgingsdialogId: string;
+}
+
+export const useOppfolgingsplanRouteId = (): number => {
+  const router = useRouter();
+  const { oppfolgingsdialogId } = router.query as IParams;
+  return Number(oppfolgingsdialogId);
+}

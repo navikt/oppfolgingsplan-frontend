@@ -1,12 +1,10 @@
 import {
+  aktivOppfolgingsplanBreadcrumbSM,
   landingBreadcrumbAG,
   landingBreadcrumbSM,
   motebehovBreadcrumbAG,
-  motebehovBreadcrumbSM,
   moteinnkallingBreadcrumbAG,
-  moteinnkallingBreadcrumbSM,
   referatBreadcrumbAG,
-  referatBreadcrumbSM,
 } from "./breadcrumbPaths";
 
 export function createBreadcrumbsAG(
@@ -33,13 +31,8 @@ export function createBreadcrumbsSM(pathname: string) {
   switch (pathname) {
     case "/sykmeldt":
       return landingBreadcrumbSM();
-    case "/sykmeldt/referat/[brevuuid]":
-      return referatBreadcrumbSM();
-    case "/sykmeldt/moteinnkalling":
-      return moteinnkallingBreadcrumbSM();
-    case "/sykmeldt/motebehov/meld":
-    case "/sykmeldt/motebehov/svar":
-      return motebehovBreadcrumbSM();
+    case "/sykmeldt/[oppfolgingsdialogId]":
+      return aktivOppfolgingsplanBreadcrumbSM();
     default:
       return [];
   }

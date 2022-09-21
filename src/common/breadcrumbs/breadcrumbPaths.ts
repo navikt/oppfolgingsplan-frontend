@@ -20,12 +20,12 @@ export function landingBreadcrumbSM() {
   ];
 }
 
-export function referatBreadcrumbSM() {
+export function aktivOppfolgingsplanBreadcrumbSM() {
   return [
     ...landingBreadcrumbSM(),
     {
       url: `${basePath}/sykmeldt`, //url-field is not in use but the api requires a non-empty string
-      title: "Referat",
+      title: "Aktiv oppfølgingsplan",
     },
   ];
 }
