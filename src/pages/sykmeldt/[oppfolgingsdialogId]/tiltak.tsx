@@ -1,33 +1,20 @@
 import {NextPage} from "next";
-import {OppfolgingsplanStepper} from "@/common/stepper/OppfolgingsplanStepper";
 import React from "react";
 import {useOppfolgingsplanRouteId} from "@/common/hooks/routeHooks";
-import {useOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import AppSpinner from "@/common/spinner/AppSpinner";
-import {Heading} from "@navikt/ds-react";
-
-const textOverskrift = (arbeidsgiver: string) => {
-    return `Oppfølgingsplan hos ${arbeidsgiver}`;
-};
+import {useOppfolgingsplanerSM, useOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import {OppfolgingsplanPageSM, Page} from "@/common/pagewrappers/OppfolgingsplanPageSM";
 
 const Tiltak: NextPage = () => {
     const oppfolgingsdialogId = useOppfolgingsplanRouteId();
-    const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId)
-
-    //Todo fiks noe bra abstraksjon for lasting og feilhåndtering
-    if (!aktivPlan) {
-        return <AppSpinner/>
-    }
+    const oppfolgingsplaner = useOppfolgingsplanerSM()
+    const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId, oppfolgingsplaner.data)
 
     return (
-        <div>
-            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan.virksomhet.navn)}</Heading>
-
-            <OppfolgingsplanStepper activeStep={1}/>
-
-            <Heading spacing={true} level="2" size="medium">Tiltak</Heading>
-
-        </div>)
+        <OppfolgingsplanPageSM isLoading={oppfolgingsplaner.isLoading} isError={oppfolgingsplaner.isError}
+                               oppfolgingsplan={aktivPlan} page={Page.TILTAK}>
+            hei
+        </OppfolgingsplanPageSM>
+    )
 }
 
 export default Tiltak
