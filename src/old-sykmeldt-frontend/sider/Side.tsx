@@ -1,21 +1,24 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, ReactNode} from 'react';
 import Head from 'next/head'
-// import Brodsmuler from '../components/Brodsmuler';
+import AppSpinner from "@/common/spinner/AppSpinner";
 
 interface SideProps {
+    isLoading: boolean;
     tittel: string;
-    // brodsmuler: any;
-    children: ReactElement;
+    children: ReactNode;
 }
 
-const Side = ({tittel, children}: SideProps): ReactElement => {
+const Side = ({isLoading, tittel, children}: SideProps): ReactElement => {
+    if (isLoading) {
+        return <AppSpinner/>
+    }
+
     return (
         <>
             <Head>
                 <title>{tittel + (tittel.length > 0 ? ' - www.nav.no' : 'www.nav.no')}</title>
             </Head>
             <div className={'side__innhold side__innhold--begrenset'}>
-                {/*<Brodsmuler brodsmuler={brodsmuler}/>*/}
                 {children}
             </div>
         </>
