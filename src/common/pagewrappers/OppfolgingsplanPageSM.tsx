@@ -38,7 +38,7 @@ export enum Page {
     SEPLANEN = 3
 }
 
-const titleText = (page: Page) => {
+const headingText = (page: Page) => {
     switch (page) {
         case Page.ARBEIDSOPPGAVER:
             return "Arbeidsoppgaver"
@@ -49,7 +49,7 @@ const titleText = (page: Page) => {
     }
 }
 
-const headingText = (page: Page) => {
+const titleText = (page: Page) => {
     switch (page) {
         case Page.ARBEIDSOPPGAVER:
             return "Oppfølgingsplan - Arbeidsoppgaver"
