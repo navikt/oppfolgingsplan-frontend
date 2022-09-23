@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DatovelgerTiltak from '../../skjema/DatovelgerTiltak';
-import { restdatoTildato } from '@/common/utils/datoUtils';
+import { restdatoTildato } from '../../../../common/utils/datoUtils';
 import { tiltakPt } from '../../../propTypes/opproptypes';
 import { tiltakSkjemaFelterPt, tiltakSkjemaFeltPt } from '../../../propTypes/tiltakproptypes';
 

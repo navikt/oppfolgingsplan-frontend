@@ -1,7 +1,7 @@
-import {Heading} from "@navikt/ds-react";
+import {BodyLong, Heading} from "@navikt/ds-react";
 import {OppfolgingsplanStepper} from "@/common/stepper/OppfolgingsplanStepper";
 import React, {ReactElement, ReactNode} from "react";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {Oppfolgingsplan, Stilling} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
@@ -14,6 +14,10 @@ import Side from "../../old-sykmeldt-frontend/sider/Side";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
+};
+
+const textStilling = (stilling: Stilling) => {
+    return `Du jobber hos denne arbeidsgiveren som ${stilling.yrke.toLowerCase()} ${stilling.prosent} %`;
 };
 
 const texts = {
@@ -71,6 +75,7 @@ interface Props {
 export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan, children}: Props) => {
     const sykmeldinger = useSykmeldingerSM();
     const tilgang = useTilgangSM();
+    const stilling: Stilling | undefined = oppfolgingsplan && oppfolgingsplan.arbeidstaker.stillinger?.find(stilling => stilling.virksomhetsnummer == oppfolgingsplan.virksomhet.virksomhetsnummer)
 
     const erOppfolgingsdialogTilgjengelig =
         oppfolgingsplan && sykmeldinger.data &&
@@ -114,6 +119,8 @@ export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan
             <OppfolgingsplanStepper activeStep={page.valueOf()}/>
 
             <Heading spacing={true} level="2" size="medium">{headingText(page)}</Heading>
+
+            {stilling && <BodyLong spacing={true} size={"medium"}>{textStilling(stilling)}</BodyLong>}
 
             <Content/>
         </Side>

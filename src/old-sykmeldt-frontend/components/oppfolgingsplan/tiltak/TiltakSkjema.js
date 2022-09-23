@@ -11,14 +11,13 @@ import {
 import {konvertDatoTiltak, konvertDatoTiltakMedPunkt} from '@/common/utils/tiltakUtils';
 import {tiltakPt, tiltakReducerPt} from '../../../propTypes/opproptypes';
 import TekstFelt from '../../skjema/TekstFelt';
-import TekstOmrade from '../../skjema/TekstOmrade';
 import TiltakDatovelger from './TiltakDatovelger';
 import TiltakKnapper from './TiltakKnapper';
 import TiltakForeslaattAv from './TiltakForeslaattAv';
 import TiltakInfoVarsel from './TiltakInfoVarsel';
 import TiltakVarselFeil from './TiltakVarselFeil';
 import {tiltakSkjemaFeltPt} from '../../../propTypes/tiltakproptypes';
-import {ErrorSummary, Panel} from "@navikt/ds-react";
+import {ErrorSummary, Panel, Textarea} from "@navikt/ds-react";
 
 export const OPPRETT_TILTAK_NY = 'OPPRETT_TILTAK_NY';
 
@@ -106,7 +105,7 @@ export const TiltakBeskrivelse = ({felt, tiltak, fnr, isFormSubmitted, validate}
                 id={`${felt.navn}-input`}
                 aria-labelledby={felt.navn}
                 label={felt.tekst}
-                component={TekstOmrade}
+                component={<Textarea label={""}/>}
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
             />

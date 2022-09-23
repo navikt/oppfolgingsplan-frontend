@@ -59,7 +59,7 @@ export interface Evaluering {
 }
 
 export interface Stilling {
-    virksomhetsnummer: number;
+    virksomhetsnummer: string;
     yrke: string;
     prosent: number,
     fom: string;

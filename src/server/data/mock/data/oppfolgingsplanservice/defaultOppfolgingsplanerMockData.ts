@@ -386,7 +386,13 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             sistInnlogget: '2020-02-24T09:34:24.266',
             samtykke: null,
             evaluering: null,
-            stillinger: [],
+            stillinger: [{
+                virksomhetsnummer: "110110110",
+                yrke: "Soppkontrollør",
+                prosent: 80,
+                fom: '2000-02-11T15:34:53.787',
+                tom: '2040-02-11T15:34:53.787'
+            }],
         },
         sistEndretAv: {
             navn: 'Labben',
@@ -587,7 +593,13 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 bistand: false,
                 ingen: false,
             },
-            stillinger: [],
+            stillinger: [{
+                virksomhetsnummer: "110110110",
+                yrke: "Soppkontrollør",
+                prosent: 80,
+                fom: '2000-02-11T15:34:53.787',
+                tom: '2040-02-11T15:34:53.787'
+            }],
         },
         sistEndretAv: {
             navn: 'Labben',
@@ -1014,7 +1026,13 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
                 bistand: false,
                 ingen: false,
             },
-            stillinger: [],
+            stillinger: [{
+                virksomhetsnummer: "110110110",
+                yrke: "Soppkontrollør",
+                prosent: 80,
+                fom: '2000-02-11T15:34:53.787',
+                tom: '2040-02-11T15:34:53.787'
+            }],
         },
         sistEndretAv: {
             navn: 'Labben',
