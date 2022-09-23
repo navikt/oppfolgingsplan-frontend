@@ -56,7 +56,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: ./nais/naiserator-dev.yaml
+          RESOURCE: nais/naiserator-dev.yaml
 
   deploy-labs:
     if: github.ref == 'refs/heads/master'
@@ -69,7 +69,7 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: labs-gcp
-          RESOURCE: ./nais/naiserator-labs.yaml
+          RESOURCE: nais/naiserator-labs.yaml
 
   deploy-prod:
     if: github.ref == 'refs/heads/master'
@@ -82,4 +82,4 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: ./nais/naiserator-prod.yaml
+          RESOURCE: nais/naiserator-prod.yaml
