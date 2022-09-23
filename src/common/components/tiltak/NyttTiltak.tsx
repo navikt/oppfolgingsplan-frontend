@@ -3,11 +3,7 @@ import PlusIcon from "@/common/icons/PlusIcon";
 import {DatoVelger} from "@/common/components/datovelger/DatoVelger";
 import {useState} from "react";
 import styled from "styled-components";
-
-const TiltakPanel = styled(Panel)`
-  padding: 2rem;
-  margin-bottom: 1rem;
-`
+import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 
 const LightGreyPanel = styled(Panel)`
   background: #F7F7F7;
