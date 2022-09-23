@@ -5,6 +5,7 @@ import {Delete, DialogDots, Edit} from "@navikt/ds-icons";
 import styled from "styled-components";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {ReactElement} from "react";
+import {toDateMedMaanedNavn} from "@/common/utils/datoUtils";
 
 interface Props {
     oppfolgingsplan: Oppfolgingsplan
@@ -58,7 +59,8 @@ export const TiltakContent = ({oppfolgingsplan}: Props) => {
                         <Heading size={"medium"} level={"3"}>{tiltak.tiltaknavn}</Heading>
                     </HeadingWithLabel>
 
-                    <BodyShort>{tiltak.fom} - {tiltak.tom}</BodyShort>
+                    {tiltak.fom && tiltak.tom &&
+                        <BodyShort spacing={true}>{toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}</BodyShort>}
 
                     <Label>Beskrivelse</Label>
                     <BodyLong>{tiltak.beskrivelse}</BodyLong>
