@@ -9,9 +9,9 @@ interface Props {
 export const TiltakContent = ({oppfolgingsplan}: Props) => {
     return (
         <div>
-            <NyttTiltak/>
+            <NyttTiltak oppfolgingsplanId={oppfolgingsplan.id}/>
 
-            <LagredeTiltak tiltakListe={oppfolgingsplan.tiltakListe}/>
+            <LagredeTiltak arbeidstakerFnr={oppfolgingsplan.arbeidstaker.fnr} tiltakListe={oppfolgingsplan.tiltakListe}/>
         </div>
     )
 }

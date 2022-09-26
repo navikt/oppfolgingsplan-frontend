@@ -4,10 +4,11 @@ import {BodyLong, BodyShort, Button, Detail, Heading, Label, Tag} from "@navikt/
 import {toDateMedMaanedNavn} from "@/common/utils/datoUtils";
 import {Delete, DialogDots, Edit} from "@navikt/ds-icons";
 import styled from "styled-components";
-import {ReactElement, ReactNode} from "react";
+import {ReactElement} from "react";
 
 interface Props {
-    tiltakListe: Tiltak[] | null
+    arbeidstakerFnr?: string | null;
+    tiltakListe: Tiltak[] | null;
 }
 
 const HeadingWithLabel = styled.div`
@@ -44,10 +45,12 @@ const createStatusLabel = (statusText?: string | null): ReactElement | null => {
     return null
 }
 
-export const LagredeTiltak = ({tiltakListe}: Props): ReactElement | null => {
-    if (!tiltakListe) return null
+export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactElement | null => {
+    if (!tiltakListe || !arbeidstakerFnr) return null
 
     const alleTiltak = tiltakListe.map((tiltak, index) => {
+        const aktoerHarOpprettetElement = arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+
         return <TiltakPanel key={index} border={true}>
             <HeadingWithLabel>
                 {createStatusLabel(tiltak.status)}
@@ -59,13 +62,13 @@ export const LagredeTiltak = ({tiltakListe}: Props): ReactElement | null => {
                     spacing={true}>{toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}</BodyShort>}
 
             <Label>Beskrivelse</Label>
-            <BodyLong>{tiltak.beskrivelse}</BodyLong>
+            <BodyLong spacing={true}>{tiltak.beskrivelse}</BodyLong>
 
-            <Detail>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
+            <Detail spacing={true}>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
 
             <ButtonRow>
-                <Button variant={"tertiary"} icon={<Edit/>}>Endre</Button>
-                <Button variant={"tertiary"} icon={<Delete/>}>Slett</Button>
+                {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>}>Endre</Button>}
+                {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Delete/>}>Slett</Button>}
                 <Button variant={"tertiary"} icon={<DialogDots/>}>Kommenter</Button>
             </ButtonRow>
         </TiltakPanel>

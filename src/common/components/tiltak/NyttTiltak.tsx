@@ -4,6 +4,7 @@ import {DatoVelger} from "@/common/components/datovelger/DatoVelger";
 import {useState} from "react";
 import styled from "styled-components";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
+import {useLagreTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 
 const LightGreyPanel = styled(Panel)`
   background: #F7F7F7;
@@ -32,8 +33,13 @@ const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `
 
-export const NyttTiltak = () => {
+interface Props {
+    oppfolgingsplanId: number
+}
+
+export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
     const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false)
+    const lagreTiltak = useLagreTiltakSM();
 
     return (
         <TiltakPanel border={true}>
@@ -65,7 +71,7 @@ export const NyttTiltak = () => {
                 </DateRow>
 
                 <ButtonRow>
-                    <Button variant={"primary"}>Lagre</Button>
+                    <Button variant={"primary"} onClick={() => lagreTiltak.mutate(oppfolgingsplanId)}>Lagre</Button>
                     <Button variant={"tertiary"} onClick={() => setLeggerTilNyttTiltak(false)}>Avbryt</Button>
                 </ButtonRow>
             </LightGreyPanel>}
