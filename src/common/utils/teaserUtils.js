@@ -1,6 +1,6 @@
 import { STATUS } from '@/common/konstanter';
 import { finnSistEndretAvNavn } from './oppfolgingsdialogUtils';
-import { toDateMedMaanedNavn } from './datoUtils';
+import { toDateMedMaanedNavn } from './dateUtils';
 import {
   PlanGodkjentImage,
   PlanAvbruttImage,

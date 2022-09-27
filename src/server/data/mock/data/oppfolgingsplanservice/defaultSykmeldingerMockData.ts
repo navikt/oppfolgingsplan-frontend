@@ -1,5 +1,5 @@
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
-import {createDateMonthsAgo, createDateMonthsFromNow} from "@/common/utils/datoUtils";
+import {createDateMonthsAgo, createDateMonthsFromNow} from "@/common/utils/dateUtils";
 
 export const defaultSykmeldingerMockData: Sykmelding[] = [
     {

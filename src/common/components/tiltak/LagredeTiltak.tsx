@@ -1,10 +1,11 @@
 import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {BodyLong, BodyShort, Button, Detail, Heading, Label, Tag} from "@navikt/ds-react";
-import {toDateMedMaanedNavn} from "@/common/utils/datoUtils";
+import {toDateMedMaanedNavn} from "@/common/utils/dateUtils";
 import {Delete, DialogDots, Edit} from "@navikt/ds-icons";
 import styled from "styled-components";
 import {ReactElement} from "react";
+import {Dialog} from "@/common/components/dialog/Dialog";
 
 interface Props {
     arbeidstakerFnr?: string | null;
@@ -65,6 +66,8 @@ export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactEleme
             <BodyLong spacing={true}>{tiltak.beskrivelse}</BodyLong>
 
             <Detail spacing={true}>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
+
+            <Dialog kommentarer={tiltak.kommentarer} arbeidstakerFnr={arbeidstakerFnr}/>
 
             <ButtonRow>
                 {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>}>Endre</Button>}

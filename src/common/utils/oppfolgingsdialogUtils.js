@@ -1,6 +1,6 @@
 import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, STATUS } from '../konstanter';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from './sykmeldingUtils';
-import { erGyldigDatoIFortiden } from './datoUtils';
+import { erGyldigDatoIFortiden } from './dateUtils';
 
 export const hentGodkjenningsTidspunkt = (oppfolgingsplan) => {
   return oppfolgingsplan.godkjenninger.filter((godkjenning) => {

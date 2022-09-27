@@ -40,12 +40,11 @@ const Home: NextPage = () => {
 
     return (
         <Side
+            isLoading={oppfolgingsplaner.isLoading || sykmeldinger.isLoading || narmesteLedere.isLoading || tilgang.isLoading}
             tittel={texts.pageTitle}
         >
             {(() => {
-                if (oppfolgingsplaner.isLoading || sykmeldinger.isLoading || narmesteLedere.isLoading || tilgang.isLoading) {
-                    return <AppSpinner/>;
-                } else if (oppfolgingsplaner.isError || sykmeldinger.isError || narmesteLedere.isError || tilgang.isError) {
+                if (oppfolgingsplaner.isError || sykmeldinger.isError || narmesteLedere.isError || tilgang.isError) {
                     return <Feilmelding/>;
                 } else if (tilgang.data && !tilgang.data.harTilgang) {
                     return (

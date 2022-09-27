@@ -1,6 +1,6 @@
 import React from 'react';
 import {STATUS_TILTAK} from '@/common/konstanter';
-import {toDateMedMaanedNavn} from '@/common/utils/datoUtils';
+import {toDateMedMaanedNavn} from '@/common/utils/dateUtils';
 import TiltakInformasjonKnapper from './TiltakInformasjonKnapper';
 import {Tag} from "@navikt/ds-react";
 import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";

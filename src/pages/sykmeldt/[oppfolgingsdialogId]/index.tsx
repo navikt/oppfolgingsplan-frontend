@@ -1,5 +1,4 @@
 import {NextPage} from "next";
-import AppSpinner from "@/common/spinner/AppSpinner";
 import Feilmelding from "../../../old-sykmeldt-frontend/components/Feilmelding";
 import OppfolgingsplanInfoboks from "../../../old-sykmeldt-frontend/components/app/OppfolgingsplanInfoboks";
 import {OppfolgingsdialogIkkeTilgangImage} from "@/common/images/imageComponents";
@@ -51,12 +50,11 @@ const Page: NextPage = () => {
 
     return (
         <Side
+            isLoading={oppfolgingsplaner.isLoading || tilgang.isLoading}
             tittel={pageTitleSePlanen}
         >
             {(() => {
-                if (oppfolgingsplaner.isLoading || tilgang.isLoading) {
-                    return <AppSpinner/>;
-                } else if (oppfolgingsplaner.isError || tilgang.isError) {
+                if (oppfolgingsplaner.isError || tilgang.isError) {
                     return <Feilmelding/>;
                 } else if (!erOppfolgingsdialogTilgjengelig) {
                     return (
@@ -76,7 +74,7 @@ const Page: NextPage = () => {
                         />
                     );
                 }
-                return <Oppfolgingsdialog aktivPlan={aktivPlan} />;
+                return <Oppfolgingsdialog aktivPlan={aktivPlan}/>;
             })()}
         </Side>
     );

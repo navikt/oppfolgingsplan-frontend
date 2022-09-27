@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { restdatoTildato } from '@/common/utils/datoUtils';
+import { restdatoTildato } from '@/common/utils/dateUtils';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import {Accordion} from "@navikt/ds-react";
 

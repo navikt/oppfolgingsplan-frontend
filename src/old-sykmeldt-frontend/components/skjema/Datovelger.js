@@ -6,7 +6,7 @@ import MaskedInput from 'react-maskedinput';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
 import { fieldPropTypes } from '../../propTypes/fieldproptypes';
-import { toDatePrettyPrint } from '@/common/utils/datoUtils';
+import {toDatePrettyPrint} from "../../../common/utils/dateUtils";
 
 export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
 

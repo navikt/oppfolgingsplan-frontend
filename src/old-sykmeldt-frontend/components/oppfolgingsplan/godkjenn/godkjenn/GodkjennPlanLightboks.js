@@ -7,14 +7,14 @@ import {
     erGyldigDatoformat,
     fraInputdatoTilJSDato,
     sluttDatoSenereEnnStartDato,
-} from '@/common/utils/datoUtils';
-import {erIkkeOppfolgingsdialogUtfylt} from '@/common/utils/oppfolgingsdialogUtils';
+} from '@/common/utils/dateUtils';
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import {oppfolgingsplanPt} from '../../../../propTypes/opproptypes';
-import {getEndDateFromTiltakListe, getStartDateFromTiltakListe} from '@/common/utils/tiltakUtils';
 import ObligatoriskeFelterInfotekst from '../../ObligatoriskeFelterInfotekst';
 import {Button, ErrorSummary} from "@navikt/ds-react";
+import {erIkkeOppfolgingsdialogUtfylt} from "../../../../../common/utils/oppfolgingsdialogUtils";
+import {getEndDateFromTiltakListe, getStartDateFromTiltakListe} from "../../../../../common/utils/tiltakUtils";
 
 const texts = {
     title: 'Send til lederen din for godkjenning',

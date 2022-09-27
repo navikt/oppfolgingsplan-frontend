@@ -1,4 +1,4 @@
-import { restdatoTildato } from './datoUtils';
+import { restdatoTildato } from './dateUtils';
 
 const isDefined = (value) => {
   return value !== undefined;

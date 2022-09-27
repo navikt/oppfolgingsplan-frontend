@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { gyldighetstidspunktPt, oppfolgingsplanPt } from '../../../propTypes/opproptypes';
-import { toDateMedMaanedNavn } from '@/common/utils/datoUtils';
 import BildeTekstLinje from '../../app/BildeTekstLinje';
-import { BubbleImage, CalendarImage } from '@/common/images/imageComponents';
+import {BubbleImage, CalendarImage} from "../../../../common/images/imageComponents";
+import {toDateMedMaanedNavn} from "../../../../common/utils/dateUtils";
 
 const GodkjennPlanTidspunkt = ({ gyldighetstidspunkt }) => {
   return (

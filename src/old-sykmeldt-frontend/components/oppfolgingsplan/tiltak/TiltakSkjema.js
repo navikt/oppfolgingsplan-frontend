@@ -1,14 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Field, reduxForm, SubmissionError} from 'redux-form';
-import {STATUS_TILTAK, tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex,} from '@/common/konstanter';
-import {
-    erGyldigDato,
-    erGyldigDatoformat,
-    restdatoTildato,
-    sluttDatoSenereEnnStartDato,
-} from '@/common/utils/datoUtils';
-import {konvertDatoTiltak, konvertDatoTiltakMedPunkt} from '@/common/utils/tiltakUtils';
 import {tiltakPt, tiltakReducerPt} from '../../../propTypes/opproptypes';
 import TekstFelt from '../../skjema/TekstFelt';
 import TiltakDatovelger from './TiltakDatovelger';
@@ -18,6 +10,9 @@ import TiltakInfoVarsel from './TiltakInfoVarsel';
 import TiltakVarselFeil from './TiltakVarselFeil';
 import {tiltakSkjemaFeltPt} from '../../../propTypes/tiltakproptypes';
 import {ErrorSummary, Panel, Textarea} from "@navikt/ds-react";
+import {konvertDatoTiltak, konvertDatoTiltakMedPunkt} from "../../../../common/utils/tiltakUtils";
+import {tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex} from "../../../../common/konstanter";
+import {erGyldigDato, erGyldigDatoformat, sluttDatoSenereEnnStartDato} from "../../../../common/utils/dateUtils";
 
 export const OPPRETT_TILTAK_NY = 'OPPRETT_TILTAK_NY';
 
