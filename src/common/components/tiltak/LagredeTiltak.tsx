@@ -25,7 +25,7 @@ const ButtonRow = styled.div`
   flex-direction: row;
 `
 
-const visVarsel = (fnr: string, tiltak: Tiltak) => {
+const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
     return (
         tiltak &&
         !tiltak.gjennomfoering &&
@@ -36,6 +36,10 @@ const visVarsel = (fnr: string, tiltak: Tiltak) => {
 };
 
 export const SpacedAlert = styled(Alert)`
+  margin-bottom: 1rem;
+`
+
+export const SpacedDetail = styled(Detail)`
   margin-bottom: 1rem;
 `
 
@@ -86,9 +90,7 @@ export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactEleme
             </>
             }
 
-            <Detail spacing={true}>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
-
-            {visVarsel(arbeidstakerFnr, tiltak) &&
+            {manglerVurderingFraLeder(arbeidstakerFnr, tiltak) &&
                 <SpacedAlert variant={"warning"}>Dette tiltaket mangler en vurdering fra lederen din</SpacedAlert>}
 
             {tiltak.gjennomfoering && tiltak.status === STATUS_TILTAK.AVTALT && (
@@ -97,6 +99,8 @@ export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactEleme
                     <BodyLong spacing={true}>{tiltak.gjennomfoering}</BodyLong>
                 </>
             )}
+
+            <SpacedDetail>{`Foreslått av ${tiltak.opprettetAv.navn}`}</SpacedDetail>
 
             <Dialog tiltakId={tiltak.tiltakId} kommentarer={tiltak.kommentarer} aktorFnr={arbeidstakerFnr}/>
 
