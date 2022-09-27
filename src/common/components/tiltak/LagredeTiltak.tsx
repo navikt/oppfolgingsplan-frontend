@@ -1,11 +1,12 @@
 import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
-import {BodyLong, BodyShort, Button, Detail, Heading, Label, Tag} from "@navikt/ds-react";
+import {Alert, BodyLong, BodyShort, Button, Detail, Heading, Label, Tag} from "@navikt/ds-react";
 import {toDateMedMaanedNavn} from "@/common/utils/dateUtils";
 import {Delete, DialogDots, Edit} from "@navikt/ds-icons";
 import styled from "styled-components";
-import {ReactElement} from "react";
+import React, {ReactElement} from "react";
 import {Dialog} from "@/common/components/dialog/Dialog";
+import {STATUS_TILTAK} from "@/common/konstanter";
 
 interface Props {
     arbeidstakerFnr?: string | null;
@@ -22,6 +23,20 @@ const HeadingWithLabel = styled.div`
 const ButtonRow = styled.div`
   display: flex;
   flex-direction: row;
+`
+
+const visVarsel = (fnr: string, tiltak: Tiltak) => {
+    return (
+        tiltak &&
+        !tiltak.gjennomfoering &&
+        !tiltak.beskrivelseIkkeAktuelt &&
+        fnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
+        tiltak.sistEndretAv.fnr === fnr
+    );
+};
+
+export const SpacedAlert = styled(Alert)`
+  margin-bottom: 1rem;
 `
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
@@ -72,6 +87,16 @@ export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactEleme
             }
 
             <Detail spacing={true}>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
+
+            {visVarsel(arbeidstakerFnr, tiltak) &&
+                <SpacedAlert variant={"warning"}>Dette tiltaket mangler en vurdering fra lederen din</SpacedAlert>}
+
+            {tiltak.gjennomfoering && tiltak.status === STATUS_TILTAK.AVTALT && (
+                <>
+                    <Label>Oppfølging og gjennomføring</Label>
+                    <BodyLong spacing={true}>{tiltak.gjennomfoering}</BodyLong>
+                </>
+            )}
 
             <Dialog tiltakId={tiltak.tiltakId} kommentarer={tiltak.kommentarer} aktorFnr={arbeidstakerFnr}/>
 
