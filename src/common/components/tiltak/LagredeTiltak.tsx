@@ -45,19 +45,19 @@ export const SpacedDetail = styled(Detail)`
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
     switch (statusText) {
-        case "FORSLAG":
+        case STATUS_TILTAK.FORSLAG:
             return <Tag variant="warning" size="small">
                 Foreslått
             </Tag>
-        case "AVBRUTT":
+        case STATUS_TILTAK.AVBRUTT:
             return <Tag variant="info" size="small">
                 Avbrutt
             </Tag>
-        case "IKKE_AKTUELT":
+        case STATUS_TILTAK.IKKE_AKTUELT:
             return <Tag variant="error" size="small">
                 Ikke aktuelt
             </Tag>
-        case "AVTALT":
+        case STATUS_TILTAK.AVTALT:
             return <Tag variant="success" size="small">
                 Avtalt
             </Tag>
