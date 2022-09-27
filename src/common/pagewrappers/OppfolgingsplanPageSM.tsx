@@ -113,7 +113,7 @@ export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan
     }
 
     return (
-        <Side isLoading={isLoading} tittel={titleText(page)}>
+        <Side isLoading={isLoading || tilgang.isLoading || sykmeldinger.isLoading} tittel={titleText(page)}>
             <Heading spacing={true} level="1" size="large">{textOverskrift(oppfolgingsplan?.virksomhet?.navn)}</Heading>
 
             <OppfolgingsplanStepper activeStep={page.valueOf()}/>

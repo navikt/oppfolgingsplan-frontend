@@ -7,7 +7,7 @@ import {OppfolgingsplanPageSM, Page} from "@/common/pagewrappers/Oppfolgingsplan
 const Arbeidsoppgaver: NextPage = () => {
     const oppfolgingsdialogId = useOppfolgingsplanRouteId();
     const oppfolgingsplaner = useOppfolgingsplanerSM()
-    const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId, oppfolgingsplaner.data)
+    const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId)
 
     return (
         <OppfolgingsplanPageSM isLoading={oppfolgingsplaner.isLoading} isError={oppfolgingsplaner.isError}

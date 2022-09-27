@@ -73,7 +73,7 @@ export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactEleme
 
             <Detail spacing={true}>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
 
-            <Dialog kommentarer={tiltak.kommentarer} arbeidstakerFnr={arbeidstakerFnr}/>
+            <Dialog tiltakId={tiltak.tiltakId} kommentarer={tiltak.kommentarer} aktorFnr={arbeidstakerFnr}/>
 
             <ButtonRow>
                 {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>}>Endre</Button>}

@@ -1,12 +1,16 @@
 import {Kommentar} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {ReactElement} from "react";
 import styled from "styled-components";
-import {Chat} from "@navikt/ds-react";
+import {Button, Chat} from "@navikt/ds-react";
 import {hentAktoerNavnInitialer} from "@/common/utils/stringUtils";
 import {getFullDateFormat} from "@/common/utils/dateUtils";
+import {useSlettKommentarSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
+import {useOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import {useOppfolgingsplanRouteId} from "@/common/hooks/routeHooks";
 
 interface Props {
-    arbeidstakerFnr: string;
+    aktorFnr: string;
+    tiltakId: number;
     kommentarer?: Kommentar[] | null;
 }
 
@@ -14,22 +18,46 @@ const StyledChat = styled(Chat)`
   margin-bottom: 1rem;
 `
 
-export const Dialog = ({arbeidstakerFnr, kommentarer}: Props): ReactElement | null => {
-    if (!kommentarer) return null;
+const DialogContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const ButtonRightAligned = styled(Button)`
+  display: flex;
+  align-self: flex-end;
+`
+
+export const Dialog = ({aktorFnr, tiltakId, kommentarer}: Props): ReactElement | null => {
+    const slettKommentarMutation = useSlettKommentarSM();
+    const oppfolgingsdialogId = useOppfolgingsplanRouteId();
+    const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId)
+
+    if (!kommentarer || !aktivPlan) return null;
 
     const alleKommentarer = kommentarer.map((kommentar, index) => {
-        const isArbeidstakersKommentar = kommentar.opprettetAv.fnr == arbeidstakerFnr;
+        const isAktorsKommentar = kommentar.opprettetAv.fnr == aktorFnr;
 
         return <StyledChat
             key={index}
             avatar={hentAktoerNavnInitialer(kommentar.opprettetAv.navn)}
             name={kommentar.opprettetAv.navn}
             timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
-            avatarBgColor={isArbeidstakersKommentar ? "#ECF399" : "#E0D8E9"}
-            backgroundColor={isArbeidstakersKommentar ? "#F9FCCC" : "#EFECF4"}
-            position={isArbeidstakersKommentar ? "right" : "left"}
+            avatarBgColor={isAktorsKommentar ? "#ECF399" : "#E0D8E9"}
+            backgroundColor={isAktorsKommentar ? "#F9FCCC" : "#EFECF4"}
+            position={isAktorsKommentar ? "right" : "left"}
         >
-            <Chat.Bubble>{kommentar.tekst}</Chat.Bubble>
+            <Chat.Bubble>
+                <DialogContent>
+                    {kommentar.tekst}
+                    {isAktorsKommentar &&
+                        <ButtonRightAligned variant="tertiary" onClick={() => slettKommentarMutation.mutate({
+                            oppfolgingsplanId: aktivPlan.id,
+                            tiltakId: tiltakId,
+                            kommentarId: kommentar.id
+                        })}>Slett</ButtonRightAligned>}
+                </DialogContent>
+            </Chat.Bubble>
         </StyledChat>
     })
 
