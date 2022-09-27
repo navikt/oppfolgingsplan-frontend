@@ -65,6 +65,12 @@ export const LagredeTiltak = ({arbeidstakerFnr, tiltakListe}: Props): ReactEleme
             <Label>Beskrivelse</Label>
             <BodyLong spacing={true}>{tiltak.beskrivelse}</BodyLong>
 
+            {tiltak.status == "IKKE_AKTUELT" && tiltak.beskrivelseIkkeAktuelt && <>
+                <Label>Arbeidsgivers vurdering</Label>
+                <BodyLong spacing={true}>{tiltak.beskrivelseIkkeAktuelt}</BodyLong>
+            </>
+            }
+
             <Detail spacing={true}>{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
 
             <Dialog kommentarer={tiltak.kommentarer} arbeidstakerFnr={arbeidstakerFnr}/>
