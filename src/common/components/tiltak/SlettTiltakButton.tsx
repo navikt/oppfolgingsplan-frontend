@@ -4,7 +4,6 @@ import React, {useEffect, useState} from "react";
 import {ButtonRow} from "@/common/components/wrappers/ButtonRow";
 import styled from "styled-components";
 import {useSlettTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import {useRouter} from "next/router";
 
 const ModalContent = styled.div`
   padding: 2rem;

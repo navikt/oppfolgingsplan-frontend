@@ -11,6 +11,7 @@ import OppfolgingsplanInfoboks from "../../old-sykmeldt-frontend/components/app/
 import {OppfolgingsdialogIkkeTilgangImage} from "@/common/images/imageComponents";
 import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
 import Side from "../../old-sykmeldt-frontend/sider/Side";
+import {NavigationButtons} from "@/common/components/buttons/NavigationButtons";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -123,6 +124,8 @@ export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan
             {stilling && <BodyLong spacing={true} size={"medium"}>{textStilling(stilling)}</BodyLong>}
 
             <Content/>
+
+            <NavigationButtons activeStep={page.valueOf()}/>
         </Side>
     )
 }
