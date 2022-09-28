@@ -18,13 +18,18 @@ interface SlettTiltakProps {
 
 export const useSlettTiltakSM = () => {
     const apiBasePath = useApiBasePath();
+    const queryClient = useQueryClient();
 
     const slettTiltakSM = ({
                                oppfolgingsplanId,
                                tiltakId
                            }: SlettTiltakProps) => post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`);
 
-    return useMutation(slettTiltakSM)
+    return useMutation(slettTiltakSM, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(OPPFOLGINGSPLANER_SM);
+        }
+    })
 }
 
 interface SlettKommentarProps {

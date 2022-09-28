@@ -11,7 +11,7 @@ export const TiltakContent = ({oppfolgingsplan}: Props) => {
         <div>
             <NyttTiltak oppfolgingsplanId={oppfolgingsplan.id}/>
 
-            <LagredeTiltak arbeidstakerFnr={oppfolgingsplan.arbeidstaker.fnr} tiltakListe={oppfolgingsplan.tiltakListe}/>
+            <LagredeTiltak oppfolgingsplan={oppfolgingsplan}/>
         </div>
     )
 }

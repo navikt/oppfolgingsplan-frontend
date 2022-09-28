@@ -21,7 +21,7 @@ const texts = {
   },
   tiltakInformasjon: {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
-    tiltakVarselVurdering: 'Dette tiltaket mangler en vurdering fra lederen din',
+    tiltakVarselVurdering: 'Dette tiltaket mangler vurdering fra lederen din',
   },
 };
 
