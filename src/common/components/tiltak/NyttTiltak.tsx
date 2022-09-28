@@ -1,14 +1,11 @@
-import {Alert, BodyLong, Button, Heading, Panel, Textarea, TextField} from "@navikt/ds-react";
+import {Alert, BodyLong, Button, Heading, Textarea, TextField} from "@navikt/ds-react";
 import PlusIcon from "@/common/icons/PlusIcon";
 import {DatoVelger} from "@/common/components/datovelger/DatoVelger";
 import {useState} from "react";
 import styled from "styled-components";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {useLagreTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-
-const LightGreyPanel = styled(Panel)`
-  background: #F7F7F7;
-`
+import {LightGreyPanel} from "@/common/components/wrappers/LightGreyPanel";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
