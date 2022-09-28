@@ -1,5 +1,5 @@
 import { Issuer } from "openid-client";
-import serverEnv from "@/common/utils/serverEnv";
+import serverEnv from "@/server/utils/serverEnv";
 
 let _issuer: Issuer;
 

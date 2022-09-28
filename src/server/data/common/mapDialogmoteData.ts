@@ -1,4 +1,4 @@
-import { mapReferater } from "@/server/data/common/mapReferater";
+/*import { mapReferater } from "@/server/data/common/mapReferater";
 import { mapMotebehov } from "@/server/data/common/mapMotebehov";
 import { SykmeldtDTO } from "@/server/service/schema/sykmeldtSchema";
 import { MotebehovDTO } from "@/server/service/schema/motebehovSchema";
@@ -27,4 +27,6 @@ export const mapDialogmoteData = (
     referater: mapReferater(brevArraySorted),
     sykmeldt: sykmeldt,
   };
-};
+}; */
+
+export {}

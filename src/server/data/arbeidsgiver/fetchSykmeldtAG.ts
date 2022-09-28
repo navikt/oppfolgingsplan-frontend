@@ -1,4 +1,4 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
+/*import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend, isOpplaering } from "@/common/publicEnv";
 import { NextApiResponseAG } from "@/server/data/types/next/NextApiResponseAG";
 import activeMockAG from "@/server/data/mock/activeMockAG";
@@ -41,4 +41,6 @@ export const fetchSykmeldtAG = async (
   }
 
   next();
-};
+};*/
+
+export {}

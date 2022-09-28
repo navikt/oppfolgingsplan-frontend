@@ -1,4 +1,4 @@
-import { infoUrls } from "@/common/constants/InfoUrls";
+/*import { infoUrls } from "@/common/constants/InfoUrls";
 import { BrevDTO } from "@/server/service/schema/brevSchema";
 import { Referat } from "types/shared/brev";
 
@@ -24,3 +24,6 @@ export const mapReferater = (brev?: BrevDTO[]): Referat[] => {
       })) || []
   );
 };
+*/
+
+export {}
