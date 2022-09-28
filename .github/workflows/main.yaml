@@ -15,7 +15,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "16.14.2"
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -71,15 +71,15 @@ jobs:
           CLUSTER: labs-gcp
           RESOURCE: nais/naiserator-labs.yaml
 
-  deploy-prod:
-    if: github.ref == 'refs/heads/master'
-    name: Deploy to prod-gcp
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
-          RESOURCE: nais/naiserator-prod.yaml
+#  deploy-prod:
+#    if: github.ref == 'refs/heads/master'
+#    name: Deploy to prod-gcp
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: nais/deploy/actions/deploy@v1
+#        env:
+#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+#          CLUSTER: prod-gcp
+#          RESOURCE: nais/naiserator-prod.yaml

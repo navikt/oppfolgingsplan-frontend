@@ -13,13 +13,13 @@ spec:
     cpuThresholdPercentage: 90
   port: 8080
   liveness:
-    path: /isAlive
+    path: syk/oppfolgingsplaner/api/isAlive
     initialDelay: 20
     timeout: 5
     periodSeconds: 5
     failureThreshold: 30
   readiness:
-    path: /isReady
+    path: syk/oppfolgingsplaner/api/isReady
     initialDelay: 20
     periodSeconds: 5
     timeout: 5
@@ -46,6 +46,8 @@ spec:
       value: https://www.nav.no/person/dittnav
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
+    - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
+      value: syfooppfolgingsplanservice
     - name: DINE_SYKMELDTE_ROOT
       value: https://www.nav.no/arbeidsgiver/sykmeldte
     - name: DITT_SYKEFRAVAER_ROOT

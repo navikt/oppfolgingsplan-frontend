@@ -1,4 +1,4 @@
-import {
+/*import {
   MotebehovDataDTO,
   MotebehovDTO,
 } from "@/server/service/schema/motebehovSchema";
@@ -32,4 +32,6 @@ export const mapMotebehov = (
   }
 
   return undefined;
-};
+}; */
+
+export {}

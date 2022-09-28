@@ -1,6 +1,6 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
+/*import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { NextApiResponse } from "next";
-import serverEnv from "@/common/utils/serverEnv";
+import serverEnv from "@/server/utils/serverEnv";
 import { isDevelopment, isMockBackend, isOpplaering } from "@/common/publicEnv";
 import { pdfMock } from "@/server/data/mock/brev/pdfMock";
 import { get, post } from "@/common/api/axios/axios";
@@ -96,3 +96,5 @@ export const postBrevSvarAG = async (
 
   next();
 };
+*/
+export {}

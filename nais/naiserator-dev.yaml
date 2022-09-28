@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: oppfolgingsplaner-frontend
+  name: oppfolgingsplan-frontend
   namespace: team-esyfo
   labels:
     team: team-esyfo
@@ -52,11 +52,22 @@ spec:
       value: https://www.dev.nav.no/person/dittnav
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
+    - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
+      value: dev-fss:team-esyfo:syfooppfolgingsplanservice
     - name: DINE_SYKMELDTE_ROOT
       value: https://www-gcp.dev.nav.no/arbeidsgiver/sykmeldte
     - name: DITT_SYKEFRAVAER_ROOT
       value: https://www-gcp.dev.nav.no/syk/sykefravaer
+    - name: OPPLAERING
+      value: "false"
+    - name: MOCK_BACKEND
+      value: "false"
+    - name: ENVIRONMENT
+      value: "test"
+    - name: NPM_CONFIG_CACHE
+      value: /tmp
   accessPolicy:
     outbound:
       external:
+        - host: dekoratoren.dev.nav.no
         - host: syfooppfolgingsplanservice.dev-fss-pub.nais.io

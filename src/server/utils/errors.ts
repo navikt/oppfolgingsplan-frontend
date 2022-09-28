@@ -3,7 +3,7 @@ import {
   schemaParsingError,
 } from "@/common/api/axios/errors";
 import { ZodError } from "zod";
-import {Audience} from "@/common/api/hooks/routeHooks";
+import {Audience } from "@/common/hooks/routeHooks";
 
 export function handleSchemaParsingError(
   audience: Audience,

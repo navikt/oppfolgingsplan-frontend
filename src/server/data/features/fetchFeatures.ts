@@ -1,4 +1,4 @@
-import { IAuthenticatedRequest } from "@/server/api/IAuthenticatedRequest";
+/*import { IAuthenticatedRequest } from "@/server/api/IAuthenticatedRequest";
 import { get } from "@/common/api/axios/axios";
 import serverEnv from "@/server/utils/serverEnv";
 import { isMockBackend } from "@/common/publicEnv";
@@ -32,3 +32,6 @@ export const fetchFeatures = async (
 
   next();
 };
+*/
+
+export {}

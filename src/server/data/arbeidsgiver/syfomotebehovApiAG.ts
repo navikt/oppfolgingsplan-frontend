@@ -1,3 +1,4 @@
+/*
 import { IAuthenticatedRequest } from "@/server/api/IAuthenticatedRequest";
 import { NextApiResponse } from "next";
 import { isMockBackend } from "@/common/publicEnv";
@@ -32,3 +33,5 @@ export const postMotebehovAG = async (
 
   next();
 };
+ */
+export {}
