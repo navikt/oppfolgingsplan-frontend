@@ -1,7 +1,9 @@
 import { get } from "@/common/api/axios/axios";
 import serverEnv from "@/server/utils/serverEnv"
-import {narmesteLedereSchema, Sykmelding} from "@/server/service/schema/oppfolgingsplanSchema";
+import { OppfolgingsplanSchema} from "@/server/service/schema/oppfolgingsplanSchema";
 import {array} from "zod";
+import {narmesteLedereSchema} from "@/server/service/schema/narmestelederSchema";
+import {Sykmelding} from "@/server/service/schema/sykmeldingSchema";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
     return narmesteLedereSchema.safeParse(
@@ -14,6 +16,14 @@ export async function getNarmesteLedere(accessToken: string, fnr: string) {
 export async function getSykmeldingerSM(accessToken: string) {
     return array(Sykmelding).safeParse(
         await get(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/sykmeldinger`, {
+            accessToken,
+        })
+    );
+}
+
+export async function getOppfolgingsplanerSM(accessToken: string) {
+    return array(OppfolgingsplanSchema).safeParse(
+        await get(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, {
             accessToken,
         })
     );
