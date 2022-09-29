@@ -4,8 +4,8 @@ import {NextApiResponse} from "next";
 import {getTokenX} from "@/server/auth/tokenx";
 import serverEnv from "@/server/utils/serverEnv";
 import serverLogger from "@/server/utils/serverLogger";
-import {postOpprettOppfolgingsplan} from "@/server/service/oppfolgingsplanService";
 import {RSOpprettOppfoelgingsdialog} from "@/types/oppfolgingsplanservice/RSOpprettOppfoelgingsdialog";
+import {post} from "@/common/api/axios/axios";
 
 export const postOpprettOppfolgingsplanSM = async (
     req: IAuthenticatedRequest,
@@ -13,6 +13,8 @@ export const postOpprettOppfolgingsplanSM = async (
     next: () => void
 ) => {
     const opprettOppfolgingsplanData: RSOpprettOppfoelgingsdialog = req.body;
+
+    serverLogger.info("Sending oppfolgingsplandata", opprettOppfolgingsplanData);
 
     if (isMockBackend) {
         return next();
@@ -28,7 +30,11 @@ export const postOpprettOppfolgingsplanSM = async (
         serverLogger.info("Exchanging SM tokenx ok");
 
 
-        await postOpprettOppfolgingsplan(oppfolgingsplanTokenX, opprettOppfolgingsplanData);
+        // await postOpprettOppfolgingsplan(oppfolgingsplanTokenX, opprettOppfolgingsplanData);
+
+        await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, {
+            opprettOppfolgingsplanData
+        }, {accessToken: oppfolgingsplanTokenX, personIdent: opprettOppfolgingsplanData.sykmeldtFnr})
     }
 
     next();
