@@ -1,6 +1,6 @@
 import {NextApiResponse} from "next";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 export interface NextApiResponseOppfolgingsplanSM extends NextApiResponse {
-    oppfolgingsplaner: Oppfolgingsplan[];
+    oppfolgingsplaner: OppfolgingsplanDTO[];
 }
