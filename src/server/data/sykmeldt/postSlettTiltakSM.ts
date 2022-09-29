@@ -1,7 +1,6 @@
 import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
 import {isMockBackend} from "@/common/publicEnv";
 import {NextApiResponse} from "next";
-import activeMockSM from "@/server/data/mock/activeMockSM";
 
 export const postSlettTiltakSM = async (
     req: IAuthenticatedRequest,
@@ -9,13 +8,13 @@ export const postSlettTiltakSM = async (
     next: () => void
 ) => {
     if (isMockBackend) {
-        const {oppfolgingsplanId, tiltakId} = req.query;
+        // const {oppfolgingsplanId, tiltakId} = req.query;
+        //
+        // const aktivPlan = activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))
+        // const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!)
+        // const filteredTiltakListe = aktivPlan!!.tiltakListe.filter(tiltak => tiltak.tiltakId != Number(tiltakId))
 
-        const aktivPlan = activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))
-        const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!)
-        const filteredTiltakListe = aktivPlan!!.tiltakListe.filter(tiltak => tiltak.tiltakId != Number(tiltakId))
-
-        activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
+        // activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
 
         return next();
     } else {
