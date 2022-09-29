@@ -2,14 +2,14 @@ import {boolean, z, object, string, number, array} from "zod";
 import {narmesteLederSchema} from "@/server/service/schema/narmestelederSchema";
 
 export const VirksomhetSchema = object({
-      virksomhetsnummer: string(),
-      navn: string()
+      virksomhetsnummer: string().nullable(),
+      navn: string().nullable()
 })
 
 export const GyldighetstidspunktSchema = object({
-      fom: string(),
-      tom: string(),
-      evalueres: string()
+      fom: string().nullable(),
+      tom: string().nullable(),
+      evalueres: string().nullable()
 })
 
 export const EvalueringSchema = object({
@@ -23,11 +23,11 @@ export const EvalueringSchema = object({
 })
 
 export const StillingSchema = object({
-      virksomhetsnummer: string(),
-      yrke: string(),
-      prosent: number(),
-      fom: string(),
-      tom: string(),
+      virksomhetsnummer: string().nullable(),
+      yrke: string().nullable(),
+      prosent: number().nullable(),
+      fom: string().nullable(),
+      tom: string().nullable(),
 })
 
 export const PersonSchema = object({
@@ -64,8 +64,8 @@ export const GodkjenningSchema = object({
       godkjentAv: PersonSchema,
       beskrivelse: string(),
       godkjenningsTidspunkt: string(),
-      gyldighetstidspunkt: GyldighetstidspunktSchema,
-      delMedNav: boolean()
+      gyldighetstidspunkt: GyldighetstidspunktSchema.nullable(),
+      delMedNav: boolean().nullable()
 })
 
 export const KommentarSchema = object({
@@ -115,7 +115,7 @@ export const ArbeidsoppgaveSchema = object({
 })
 
 export const ArbeidsgiverSchema = object({
-      naermesteLeder: narmesteLederSchema,
+      naermesteLeder: narmesteLederSchema.nullable(),
       forrigeNaermesteLeder: narmesteLederSchema.nullable()
 })
 
@@ -124,14 +124,14 @@ export const OppfolgingsplanSchema = object({
       sistEndretDato: string(),
       opprettetDato: string(),
       status: string(),
-      virksomhet: VirksomhetSchema,
+      virksomhet: VirksomhetSchema.nullable(),
       godkjentPlan: GodkjentPlanSchema.nullable(),
-      godkjenninger: array(GodkjenningSchema),
-      arbeidsoppgaveListe: array(ArbeidsoppgaveSchema),
-      tiltakListe: array(TiltakSchema),
-      avbruttPlanListe: array(AvbruttplanSchema),
-      arbeidsgiver: ArbeidsgiverSchema,
-      arbeidstaker: PersonSchema,
+      godkjenninger: array(GodkjenningSchema).nullable(),
+      arbeidsoppgaveListe: array(ArbeidsoppgaveSchema).nullable(),
+      tiltakListe: array(TiltakSchema).nullable(),
+      avbruttPlanListe: array(AvbruttplanSchema).nullable(),
+      arbeidsgiver: ArbeidsgiverSchema.nullable(),
+      arbeidstaker: PersonSchema.nullable(),
       sistEndretAv: PersonSchema,
 })
 

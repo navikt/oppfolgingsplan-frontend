@@ -31,7 +31,6 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
 }
 
 export async function postOpprettOppfolgingsplan(accessToken: string, opprettOppfolgingsplanData: RSOpprettOppfoelgingsdialog): Promise<void> {
-    return await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, {
-        opprettOppfolgingsplanData
-    }, {accessToken})
+    return await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
+        opprettOppfolgingsplanData, {accessToken})
 }
