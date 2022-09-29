@@ -14,8 +14,6 @@ export const postOpprettOppfolgingsplanSM = async (
 ) => {
     const opprettOppfolgingsplanData: RSOpprettOppfoelgingsdialog = req.body;
 
-    serverLogger.info(`Sending oppfolgingsplandata fnr: ${opprettOppfolgingsplanData.sykmeldtFnr} virksomhetsnummer: ${opprettOppfolgingsplanData.virksomhetsnummer}`);
-
     if (isMockBackend) {
         return next();
     } else {
@@ -31,7 +29,6 @@ export const postOpprettOppfolgingsplanSM = async (
 
         await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, opprettOppfolgingsplanData, {
             accessToken: oppfolgingsplanTokenX,
-            personIdent: opprettOppfolgingsplanData.sykmeldtFnr
         })
     }
 
