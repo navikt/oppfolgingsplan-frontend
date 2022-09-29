@@ -7,8 +7,8 @@ import {fetchNarmesteLedereSM} from "@/server/data/sykmeldt/fetchNarmesteLedereS
 import {
     NextApiResponseNarmesteLedereSM
 } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import {NarmesteLedereDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 import {fetchSykmeldingerSM} from "@/server/data/sykmeldt/fetchSykmeldingerSM";
+import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
 
 const handler = nc<NextApiRequest, NextApiResponse<NarmesteLedereDTO>>(ncOptions)
     .use(getIdportenToken)
