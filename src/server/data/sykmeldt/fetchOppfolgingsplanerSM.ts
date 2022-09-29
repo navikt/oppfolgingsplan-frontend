@@ -1,11 +1,13 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
+import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
+import {isMockBackend} from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
-import {NextApiResponseOppfolgingsplanSM} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import {
+    NextApiResponseOppfolgingsplanSM
+} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import {getTokenX} from "@/server/auth/tokenx";
 import serverEnv from "@/server/utils/serverEnv";
 import serverLogger from "@/server/utils/serverLogger";
-import {getOppfolgingsplanerSM, getSykmeldingerSM} from "@/server/service/oppfolgingsplanService";
+import {getOppfolgingsplanerSM} from "@/server/service/oppfolgingsplanService";
 import {handleSchemaParsingError} from "@/server/utils/errors";
 
 export const fetchOppfolgingsplanerSM = async (
