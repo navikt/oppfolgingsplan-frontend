@@ -1,9 +1,12 @@
 import React from 'react';
 import {erOppfolgingsplanOpprettbarDirekte} from '@/common/utils/oppfolgingsdialogUtils';
 import {OppfolgingsdialogTomImage} from '@/common/images/imageComponents';
-import {Button, Panel} from "@navikt/ds-react";
+import {BodyLong, Button, Heading, Panel} from "@navikt/ds-react";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
+import {useOpprettOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import Image from "next/image";
+import styled from "styled-components";
 
 const texts = {
     tittel: 'Aktiv oppfølgingsplan',
@@ -17,42 +20,21 @@ const texts = {
     },
 };
 
-export const OppfolgingsdialogerIngenplanKnapper = ({
-                                                        arbeidsgivere,
-                                                        oppfolgingsplaner,
-                                                        opprett,
-                                                        setVisOppfolgingsdialogOpprett
-                                                    }: OppfolgingsdialogerIngenplanProps) => {
-    return (
-        <div className="knapperad knapperad--justervenstre">
-            <div className="knapperad__element">
-                {erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner) ? (
-                    <Button variant={"primary"}
-                            onClick={() => {
-                                opprett(arbeidsgivere[0].virksomhetsnummer);
-                            }}
-                    >
-                        {texts.knapper.lagNy}
-                    </Button>
-                ) : (
-                    <Button variant={"primary"}
-                            onClick={() => {
-                                setVisOppfolgingsdialogOpprett(true);
-                            }}
-                    >
-                        {texts.knapper.lagNy}
-                    </Button>
-                )}
-            </div>
-        </div>
-    );
-};
+const PanelContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+`;
+
+const ImageContainer = styled.div`
+  width: 12rem;
+`;
 
 interface OppfolgingsdialogerIngenplanProps {
     arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
     oppfolgingsplaner: Oppfolgingsplan[],
-
-    opprett(virksomhetsnummer?: string | null): void;
 
     setVisOppfolgingsdialogOpprett(set: boolean): void;
 }
@@ -60,34 +42,50 @@ interface OppfolgingsdialogerIngenplanProps {
 const OppfolgingsdialogerIngenplan = ({
                                           arbeidsgivere,
                                           oppfolgingsplaner,
-                                          opprett,
                                           setVisOppfolgingsdialogOpprett
                                       }: OppfolgingsdialogerIngenplanProps) => {
+
+    const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
+
     return (
-        <div className="oppfolgingsdialogerIngenplan">
-            <header className="oppfolgingsdialogerIngenplan__header">
-                <h2>{texts.tittel}</h2>
-            </header>
+        <div>
+            <Heading spacing={true} size={"medium"} level={"2"}>
+                {texts.tittel}
+            </Heading>
+
             <Panel border={true}>
-                <div className="oppfolgingsdialogerIngenplan__blokk">
-                    <img alt="" src={OppfolgingsdialogTomImage}/>
-                    <div className="inngangspanel__innhold">
-                        <header className="inngangspanel__header">
-                            <h3 className="js-title">
-                                <span className="inngangspanel__tittel">{texts.inngangspanel.tittel}</span>
-                            </h3>
-                        </header>
+                <PanelContent>
+                    <ImageContainer>
+                        <Image alt="" src={OppfolgingsdialogTomImage}/>
+                    </ImageContainer>
+
+                    <div>
+                        <Heading spacing={true} size={"small"} level={"3"}>{texts.inngangspanel.tittel}</Heading>
+
                         <div>
-                            <p className="oppfolgingsdialoger__start_tekst">{texts.inngangspanel.paragraph}</p>
-                            <OppfolgingsdialogerIngenplanKnapper
-                                arbeidsgivere={arbeidsgivere}
-                                oppfolgingsplaner={oppfolgingsplaner}
-                                opprett={opprett}
-                                setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
-                            />
+                            <BodyLong spacing={true}>{texts.inngangspanel.paragraph}</BodyLong>
+                            <div>
+                                {erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner) ? (
+                                    <Button variant={"primary"}
+                                            onClick={() => {
+                                                opprettOppfolgingsplan.mutate(arbeidsgivere[0].virksomhetsnummer);
+                                            }}
+                                    >
+                                        {texts.knapper.lagNy}
+                                    </Button>
+                                ) : (
+                                    <Button variant={"primary"}
+                                            onClick={() => {
+                                                setVisOppfolgingsdialogOpprett(true);
+                                            }}
+                                    >
+                                        {texts.knapper.lagNy}
+                                    </Button>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </PanelContent>
             </Panel>
         </div>
     );

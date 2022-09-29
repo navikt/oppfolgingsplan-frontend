@@ -7,9 +7,7 @@ import {
     harTidligereOppfolgingsdialoger,
     isEmpty,
 } from '@/common/utils/oppfolgingsdialogUtils';
-import IngenledereInfoboks from './IngenledereInfoboks';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
-import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
@@ -17,6 +15,8 @@ import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTyp
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
 import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
+import {IngenLedereInfoBoks} from "@/common/components/infoboks/IngenLedereInfoBoks";
+import {Alert} from "@navikt/ds-react";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',
@@ -33,57 +33,59 @@ interface Props {
 
 const Oppfolgingsdialoger = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: Props) => {
 
-    let panel;
-
     const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(
         oppfolgingsplaner
     );
 
-    if (
-        erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(
-            oppfolgingsplaner,
-            sykmeldinger,
-            narmesteLedere
-        )
-    ) {
-        panel = <IngenledereInfoboks/>;
-    } else if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
-        panel = (
-            <div>
-                <div className="blokk--l">
-                    <OppfolgingsdialogUtenGyldigSykmelding
-                        sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(sykmeldinger)}
-                    />
-                </div>
+    const Content = () => {
+        if (
+            erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(
+                oppfolgingsplaner,
+                sykmeldinger,
+                narmesteLedere
+            )
+        ) {
+            return <IngenLedereInfoBoks/>
+        } else if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
+            return (
+                <div>
+                    <div>
+                        <OppfolgingsdialogUtenGyldigSykmelding
+                            sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(sykmeldinger)}
+                        />
+                    </div>
 
-                {!isEmpty(oppfolgingsplaner) && harTidligereOppfolgingsdialoger(oppfolgingsplaner) && (
-                    <OppfolgingsdialogerUtenAktivSykmelding
-                        oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsplaner)}
-                        tittel={texts.noActiveSykmelding.titleTidligerePlaner}
-                    />
-                )}
-            </div>
-        );
-    } else {
-        panel = (
-            <OppfolgingsdialogerVisning
-                oppfolgingsplaner={oppfolgingsplaner}
-                sykmeldinger={sykmeldinger}
-                narmesteLedere={narmesteLedere}
-            />
-        );
+                    {!isEmpty(oppfolgingsplaner) && harTidligereOppfolgingsdialoger(oppfolgingsplaner) && (
+                        <OppfolgingsdialogerUtenAktivSykmelding
+                            oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsplaner)}
+                            tittel={texts.noActiveSykmelding.titleTidligerePlaner}
+                        />
+                    )}
+                </div>
+            );
+        } else {
+            return (
+                <OppfolgingsdialogerVisning
+                    oppfolgingsplaner={oppfolgingsplaner}
+                    sykmeldinger={sykmeldinger}
+                    narmesteLedere={narmesteLedere}
+                />
+            );
+        }
     }
+
+
     return (
         <div>
             {dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && (
-                <AvbruttPlanNotifikasjonBoksAdvarsel
-                    motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn}
-                />
+                <Alert variant={"info"}>`${dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn} har startet
+                    en ny oppfølgingsplan. Den gamle er arkivert.`</Alert>
             )}
             <Sidetopp tittel={texts.pageTitle}/>
+
             <OppfolgingsdialogerInfoPersonvern/>
 
-            {panel}
+            <Content/>
         </div>
     );
 }

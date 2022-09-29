@@ -1,30 +1,33 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";;
+import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
+import {isMockBackend} from "@/common/publicEnv";
 import {NextApiResponse} from "next";
+import {getTokenX} from "@/server/auth/tokenx";
+import serverEnv from "@/server/utils/serverEnv";
+import serverLogger from "@/server/utils/serverLogger";
+import {postOpprettOppfolgingsplan} from "@/server/service/oppfolgingsplanService";
 
 export const postOpprettOppfolgingsplanSM = async (
     req: IAuthenticatedRequest,
     res: NextApiResponse,
     next: () => void
 ) => {
+    const {virksomhet} = req.query;
+
     if (isMockBackend) {
-        const { virksomhet } = req.query;
         return next();
     } else {
-        // const token = req.idportenToken;
-        // const motebehovTokenX = await getTokenX(
-        //     token,
-        //     serverEnv.SYFOMOTEBEHOV_CLIENT_ID
-        // );
-        //
-        // const svar: MotebehovSvarRequest = req.body;
-        // await post(
-        //     `${serverEnv.SYFOMOTEBEHOV_HOST}/syfomotebehov/api/v3/arbeidstaker/motebehov`,
-        //     svar,
-        //     {
-        //         accessToken: motebehovTokenX,
-        //     }
-        // );
+        const token = req.idportenToken;
+
+        const oppfolgingsplanTokenXPromise = getTokenX(
+            token,
+            serverEnv.SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
+        );
+
+        const [oppfolgingsplanTokenX] = await Promise.all([oppfolgingsplanTokenXPromise]);
+        serverLogger.info("Exchanging SM tokenx ok");
+
+
+        await postOpprettOppfolgingsplan(oppfolgingsplanTokenX, String(virksomhet));
     }
 
     next();

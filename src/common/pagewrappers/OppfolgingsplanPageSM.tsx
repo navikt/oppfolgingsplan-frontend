@@ -10,8 +10,8 @@ import {
 import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
 import Side from "../../old-sykmeldt-frontend/sider/Side";
 import {NavigationButtons} from "@/common/components/buttons/NavigationButtons";
-import {AdresseSperreInfoBoks} from "@/common/components/ikketilgang/AdresseSperreInfoBoks";
-import {IkkeTilgangTilPlan} from "@/common/components/ikketilgang/IkkeTilgangTilPlan";
+import {IkkeTilgangTilPlanInfoBoks} from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
+import {AdresseSperreInfoBoks} from "@/common/components/infoboks/AdresseSperreInfoBoks";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -75,7 +75,7 @@ export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan
 
         if (!erOppfolgingsdialogTilgjengelig) {
             return (
-                <IkkeTilgangTilPlan/>
+                <IkkeTilgangTilPlanInfoBoks/>
             )
         }
 

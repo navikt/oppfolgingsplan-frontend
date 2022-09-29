@@ -12,10 +12,7 @@ import {Button} from "@navikt/ds-react";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
-import {
-    useKopierOppfolgingsplanSM,
-    useOpprettOppfolgingsplanSM
-} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import {useKopierOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {finnArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import VideoPanel from "@/common/video/VideoPanel";
 
@@ -42,7 +39,6 @@ interface Props {
 
 const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: Props) => {
     const kopierOppfolgingsdialog = useKopierOppfolgingsplanSM(); //todo remove prop drilling
-    const opprettOppfolgingsdialog = useOpprettOppfolgingsplanSM();
 
     const [visOppfolgingsdialogOpprett, setVisOppfolgingsdialogOpprett] = useState(false)
 
@@ -58,21 +54,17 @@ const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLe
                 <OppfolgingsdialogerOpprett
                     oppfolgingsdialoger={oppfolgingsplaner}
                     arbeidsgivere={arbeidsgivereForSykmeldinger}
-                    opprett={opprettOppfolgingsdialog}
                     kopier={kopierOppfolgingsdialog}
                     visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                     setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
                 />
             )}
             {(oppfolgingsplaner.length === 0 || !(aktiveOppfolgingsplaner.length > 0)) && (
-                <div className="blokk--l">
-                    <OppfolgingsdialogerIngenplan
-                        arbeidsgivere={arbeidsgivereForSykmeldinger}
-                        oppfolgingsplaner={oppfolgingsplaner}
-                        setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
-                        opprett={(virksomhetsnummer: string) => opprettOppfolgingsdialog.mutate(virksomhetsnummer)}
-                    />
-                </div>
+            <OppfolgingsdialogerIngenplan
+                arbeidsgivere={arbeidsgivereForSykmeldinger}
+                oppfolgingsplaner={oppfolgingsplaner}
+                setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
+            />
             )}
             {aktiveOppfolgingsplaner.length > 0 && (
                 <div>

@@ -1,4 +1,4 @@
-import { get } from "@/common/api/axios/axios";
+import { get, post } from "@/common/api/axios/axios";
 import serverEnv from "@/server/utils/serverEnv"
 import { OppfolgingsplanSchema} from "@/server/service/schema/oppfolgingsplanSchema";
 import {array} from "zod";
@@ -27,4 +27,10 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
             accessToken,
         })
     );
+}
+
+export async function postOpprettOppfolgingsplan(accessToken: string, virksomhet: string): Promise<void> {
+    return await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, {
+        virksomhet: virksomhet,
+    }, {accessToken})
 }
