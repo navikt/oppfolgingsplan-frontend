@@ -2,12 +2,12 @@ import {array, boolean, object, string, z} from "zod";
 
 export const narmesteLederSchema = object(
     {
-        virksomhetsnummer: string().nullable(),
-        erAktiv: boolean().nullable(),
-        aktivFom: string().nullable(),
+        virksomhetsnummer: string(),
+        erAktiv: boolean(),
+        aktivFom: string(),
         aktivTom: string().nullable(),
-        navn: string().nullable(),
-        fnr: string().nullable(),
+        navn: string(),
+        fnr: string(),
         epost: string().nullable(),
         tlf: string().nullable(),
         sistInnlogget: string().nullable(),
