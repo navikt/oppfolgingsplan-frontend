@@ -60,11 +60,11 @@ const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLe
                 />
             )}
             {(oppfolgingsplaner.length === 0 || !(aktiveOppfolgingsplaner.length > 0)) && (
-            <OppfolgingsdialogerIngenplan
-                arbeidsgivere={arbeidsgivereForSykmeldinger}
-                oppfolgingsplaner={oppfolgingsplaner}
-                setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
-            />
+                <OppfolgingsdialogerIngenplan
+                    arbeidsgivere={arbeidsgivereForSykmeldinger}
+                    oppfolgingsplaner={oppfolgingsplaner}
+                    setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
+                />
             )}
             {aktiveOppfolgingsplaner.length > 0 && (
                 <div>

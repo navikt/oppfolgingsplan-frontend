@@ -3,6 +3,7 @@ import {get, post} from "@/common/api/axios/axios";
 import {ApiErrorException} from "@/common/api/axios/errors";
 import {useApiBasePath} from "@/common/hooks/routeHooks";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {RSOpprettOppfoelgingsdialog} from "@/types/oppfolgingsplanservice/RSOpprettOppfoelgingsdialog";
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
 
@@ -30,11 +31,10 @@ export const useKopierOppfolgingsplanSM = () => {
     return useMutation(postKopierOppfolgingsplanSM)
 }
 
-//todo fiks
 export const useOpprettOppfolgingsplanSM = () => {
     const apiBasePath = useApiBasePath();
 
-    const postOpprettOppfolgingsplanSM = (virksomhetsnummer?: string) => post(`${apiBasePath}/oppfolgingsplaner/opprett/${virksomhetsnummer}`);
+    const postOpprettOppfolgingsplanSM = (data: RSOpprettOppfoelgingsdialog) => post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
 
     return useMutation(postOpprettOppfolgingsplanSM)
 }

@@ -7,6 +7,7 @@ import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtil
 import {useOpprettOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import Image from "next/image";
 import styled from "styled-components";
+import {useSykmeldtFnr} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 
 const texts = {
     tittel: 'Aktiv oppfølgingsplan',
@@ -46,6 +47,7 @@ const OppfolgingsdialogerIngenplan = ({
                                       }: OppfolgingsdialogerIngenplanProps) => {
 
     const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
+    const sykmeldtFnr = useSykmeldtFnr();
 
     return (
         <div>
@@ -68,7 +70,10 @@ const OppfolgingsdialogerIngenplan = ({
                                 {erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner) ? (
                                     <Button variant={"primary"}
                                             onClick={() => {
-                                                opprettOppfolgingsplan.mutate(arbeidsgivere[0].virksomhetsnummer);
+                                                opprettOppfolgingsplan.mutate({
+                                                    sykmeldtFnr: sykmeldtFnr!!,
+                                                    virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer
+                                                });
                                             }}
                                     >
                                         {texts.knapper.lagNy}

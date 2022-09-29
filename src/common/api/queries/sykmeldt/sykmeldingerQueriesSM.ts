@@ -16,3 +16,14 @@ export const useSykmeldingerSM = () => {
         fetchSykmeldinger
     );
 };
+
+export const useSykmeldtFnr = (): string | null => {
+    const sykmeldinger = useSykmeldingerSM();
+
+    if (sykmeldinger.data) {
+        const sykmelding = sykmeldinger.data.find(sykmelding => sykmelding.fnr);
+        return sykmelding?.fnr || null
+    }
+
+    return null;
+};

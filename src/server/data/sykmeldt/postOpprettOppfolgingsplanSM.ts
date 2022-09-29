@@ -5,13 +5,14 @@ import {getTokenX} from "@/server/auth/tokenx";
 import serverEnv from "@/server/utils/serverEnv";
 import serverLogger from "@/server/utils/serverLogger";
 import {postOpprettOppfolgingsplan} from "@/server/service/oppfolgingsplanService";
+import {RSOpprettOppfoelgingsdialog} from "@/types/oppfolgingsplanservice/RSOpprettOppfoelgingsdialog";
 
 export const postOpprettOppfolgingsplanSM = async (
     req: IAuthenticatedRequest,
     res: NextApiResponse,
     next: () => void
 ) => {
-    const {virksomhet} = req.query;
+    const opprettOppfolgingsplanData: RSOpprettOppfoelgingsdialog = req.body;
 
     if (isMockBackend) {
         return next();
@@ -27,7 +28,7 @@ export const postOpprettOppfolgingsplanSM = async (
         serverLogger.info("Exchanging SM tokenx ok");
 
 
-        await postOpprettOppfolgingsplan(oppfolgingsplanTokenX, String(virksomhet));
+        await postOpprettOppfolgingsplan(oppfolgingsplanTokenX, opprettOppfolgingsplanData);
     }
 
     next();

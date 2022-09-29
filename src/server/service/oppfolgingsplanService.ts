@@ -1,9 +1,10 @@
-import { get, post } from "@/common/api/axios/axios";
+import {get, post} from "@/common/api/axios/axios";
 import serverEnv from "@/server/utils/serverEnv"
-import { OppfolgingsplanSchema} from "@/server/service/schema/oppfolgingsplanSchema";
+import {OppfolgingsplanSchema} from "@/server/service/schema/oppfolgingsplanSchema";
 import {array} from "zod";
 import {narmesteLedereSchema} from "@/server/service/schema/narmestelederSchema";
 import {Sykmelding} from "@/server/service/schema/sykmeldingSchema";
+import {RSOpprettOppfoelgingsdialog} from "@/types/oppfolgingsplanservice/RSOpprettOppfoelgingsdialog";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
     return narmesteLedereSchema.safeParse(
@@ -29,8 +30,8 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
     );
 }
 
-export async function postOpprettOppfolgingsplan(accessToken: string, virksomhet: string): Promise<void> {
+export async function postOpprettOppfolgingsplan(accessToken: string, opprettOppfolgingsplanData: RSOpprettOppfoelgingsdialog): Promise<void> {
     return await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, {
-        virksomhet: virksomhet,
+        opprettOppfolgingsplanData
     }, {accessToken})
 }
