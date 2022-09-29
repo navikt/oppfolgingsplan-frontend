@@ -29,12 +29,10 @@ export const postOpprettOppfolgingsplanSM = async (
         const [oppfolgingsplanTokenX] = await Promise.all([oppfolgingsplanTokenXPromise]);
         serverLogger.info("Exchanging SM tokenx ok");
 
-
-        // await postOpprettOppfolgingsplan(oppfolgingsplanTokenX, opprettOppfolgingsplanData);
-
-        await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, {
-            opprettOppfolgingsplanData
-        }, {accessToken: oppfolgingsplanTokenX, personIdent: opprettOppfolgingsplanData.sykmeldtFnr})
+        await post(`${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`, opprettOppfolgingsplanData, {
+            accessToken: oppfolgingsplanTokenX,
+            personIdent: opprettOppfolgingsplanData.sykmeldtFnr
+        })
     }
 
     next();
