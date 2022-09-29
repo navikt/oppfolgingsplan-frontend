@@ -4,23 +4,16 @@ import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueri
 import {useNarmesteLedereSM} from "@/common/api/queries/sykmeldt/narmesteLedereQueriesSM";
 import Oppfolgingsdialoger from "../../old-sykmeldt-frontend/components/oppfolgingsdialoger/Oppfolgingsdialoger";
 import React from "react";
-import AppSpinner from "@/common/spinner/AppSpinner";
 import Feilmelding from "../../old-sykmeldt-frontend/components/Feilmelding";
-import OppfolgingsplanInfoboks from "../../old-sykmeldt-frontend/components/app/OppfolgingsplanInfoboks";
-import {OppfolgingsdialogIkkeTilgangImage} from "@/common/images/imageComponents";
 import Side from "../../old-sykmeldt-frontend/sider/Side";
 import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
+import {AdresseSperreInfoBoks} from "@/common/components/ikketilgang/AdresseSperreInfoBoks";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner - Oversikt',
     brodsmuler: {
         dittSykefravaer: 'Ditt sykefravær',
         dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
-    },
-    infoboksNoAccess: {
-        title: 'Du har ikke tilgang til oppfølgingsplanen',
-        info:
-            'Du er registrert med en adressesperre og har av sikkerhetsgrunner derfor ikke tilgang til oppfølgingsplanen digitalt.',
     },
 };
 
@@ -48,12 +41,7 @@ const Home: NextPage = () => {
                     return <Feilmelding/>;
                 } else if (tilgang.data && !tilgang.data.harTilgang) {
                     return (
-                        <OppfolgingsplanInfoboks
-                            svgUrl={OppfolgingsdialogIkkeTilgangImage}
-                            svgAlt=""
-                            tittel={texts.infoboksNoAccess.title}
-                            tekst={texts.infoboksNoAccess.info}
-                        />
+                        <AdresseSperreInfoBoks/>
                     );
                 }
                 return <Content/>;

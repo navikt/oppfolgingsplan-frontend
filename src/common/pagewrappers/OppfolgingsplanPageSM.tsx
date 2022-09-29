@@ -7,11 +7,11 @@ import {
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
     erOppfolgingsdialogTidligere
 } from "@/common/utils/oppfolgingsdialogUtils";
-import OppfolgingsplanInfoboks from "../../old-sykmeldt-frontend/components/app/OppfolgingsplanInfoboks";
-import {OppfolgingsdialogIkkeTilgangImage} from "@/common/images/imageComponents";
 import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
 import Side from "../../old-sykmeldt-frontend/sider/Side";
 import {NavigationButtons} from "@/common/components/buttons/NavigationButtons";
+import {AdresseSperreInfoBoks} from "@/common/components/ikketilgang/AdresseSperreInfoBoks";
+import {IkkeTilgangTilPlan} from "@/common/components/ikketilgang/IkkeTilgangTilPlan";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -20,22 +20,6 @@ const textOverskrift = (arbeidsgiver?: string) => {
 const textStilling = (stilling: Stilling) => {
     return `Du jobber hos denne arbeidsgiveren som ${stilling.yrke.toLowerCase()} ${stilling.prosent} %`;
 };
-
-const texts = {
-    brodsmuler: {
-        dittSykefravaer: 'Ditt sykefravær',
-        dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
-        dinOppfolgingsplan: 'Oppfølgingsplan',
-    },
-    infoboksNotAvailable: {
-        title: 'Du har ikke tilgang til oppfølgingsplanen',
-    },
-    infoboksNoAccess: {
-        title: 'Du har ikke tilgang til oppfølgingsplanen',
-        text:
-            'Du er registrert med en adressesperre og har av sikkerhetsgrunner derfor ikke tilgang til oppfølgingsplanen digitalt.',
-    },
-}
 
 export enum Page {
     ARBEIDSOPPGAVER = 1,
@@ -91,22 +75,13 @@ export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan
 
         if (!erOppfolgingsdialogTilgjengelig) {
             return (
-                <OppfolgingsplanInfoboks
-                    svgUrl={OppfolgingsdialogIkkeTilgangImage}
-                    svgAlt=""
-                    tittel={texts.infoboksNotAvailable.title}
-                />
+                <IkkeTilgangTilPlan/>
             )
         }
 
         if (tilgang.data && !tilgang.data.harTilgang) {
             return (
-                <OppfolgingsplanInfoboks
-                    svgUrl={OppfolgingsdialogIkkeTilgangImage}
-                    svgAlt=""
-                    tittel={texts.infoboksNoAccess.title}
-                    tekst={texts.infoboksNoAccess.text}
-                />
+                <AdresseSperreInfoBoks/>
             )
         }
 
