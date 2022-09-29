@@ -13,7 +13,7 @@ export const ncOptions: Options<NextApiRequest, NextApiResponse> = {
     req: NextApiRequest,
     res: NextApiResponse
   ) => {
-    serverLogger.error("API request failed", err);
+    serverLogger.error(`API request failed: ${err.error.type} - ${err.error.message}`, err.error);
 
     if (err.error) {
       switch (err.error.type) {
