@@ -8,10 +8,10 @@ import {
     erOppfolgingsdialogTidligere
 } from "@/common/utils/oppfolgingsdialogUtils";
 import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
-import Side from "../../old-sykmeldt-frontend/sider/Side";
 import {NavigationButtons} from "@/common/components/buttons/NavigationButtons";
 import {IkkeTilgangTilPlanInfoBoks} from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
 import {AdresseSperreInfoBoks} from "@/common/components/infoboks/AdresseSperreInfoBoks";
+import Side from "@/common/components/wrappers/Side";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;

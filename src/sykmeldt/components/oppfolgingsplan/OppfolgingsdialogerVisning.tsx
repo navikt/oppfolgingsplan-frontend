@@ -5,16 +5,15 @@ import {
     harTidligereOppfolgingsdialoger,
 } from '@/common/utils/oppfolgingsdialogUtils';
 import getContextRoot from '@/common/utils/getContextRoot';
-import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
-import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan';
 import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
 import {Button} from "@navikt/ds-react";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
-import {useKopierOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {finnArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import VideoPanel from "@/common/video/VideoPanel";
+import OppfolgingsdialogerOpprett from "./opprett/OppfolgingsdialogerOpprett";
+import OppfolgingsdialogerIngenplan from "./opprett/OppfolgingsdialogerIngenplan";
 
 const texts = {
     oppfolgingsdialogNyKnapp: {
@@ -38,8 +37,6 @@ interface Props {
 }
 
 const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: Props) => {
-    const kopierOppfolgingsdialog = useKopierOppfolgingsplanSM(); //todo remove prop drilling
-
     const [visOppfolgingsdialogOpprett, setVisOppfolgingsdialogOpprett] = useState(false)
 
     const aktiveOppfolgingsplaner: Oppfolgingsplan[] = finnAktiveOppfolgingsdialoger(oppfolgingsplaner, sykmeldinger);
@@ -52,9 +49,8 @@ const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLe
         <div>
             {visOppfolgingsdialogOpprett && (
                 <OppfolgingsdialogerOpprett
-                    oppfolgingsdialoger={oppfolgingsplaner}
+                    oppfolgingsplaner={oppfolgingsplaner}
                     arbeidsgivere={arbeidsgivereForSykmeldinger}
-                    kopier={kopierOppfolgingsdialog}
                     visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                     setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
                 />

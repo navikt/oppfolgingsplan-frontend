@@ -1,5 +1,4 @@
 import React from 'react';
-import Sidetopp from '../Sidetopp';
 import {
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
@@ -7,22 +6,19 @@ import {
     harTidligereOppfolgingsdialoger,
     isEmpty,
 } from '@/common/utils/oppfolgingsdialogUtils';
-import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
-import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
-import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
 import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
-import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
 import {IngenLedereInfoBoks} from "@/common/components/infoboks/IngenLedereInfoBoks";
-import {Alert} from "@navikt/ds-react";
+import {Alert, Heading} from "@navikt/ds-react";
+import OppfolgingsdialogerVisning from "./OppfolgingsdialogerVisning";
+import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
+import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
+import OppfolgingsdialogUtenGyldigSykmelding from "./OppfolgingsdialogUtenGyldigSykmelding";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',
-    noActiveSykmelding: {
-        titleTidligerePlaner: 'Tidligere oppfølgingsplaner',
-    },
 };
 
 interface Props {
@@ -57,8 +53,7 @@ const Oppfolgingsdialoger = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: 
 
                     {!isEmpty(oppfolgingsplaner) && harTidligereOppfolgingsdialoger(oppfolgingsplaner) && (
                         <OppfolgingsdialogerUtenAktivSykmelding
-                            oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsplaner)}
-                            tittel={texts.noActiveSykmelding.titleTidligerePlaner}
+                            oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsdialoger(oppfolgingsplaner)}
                         />
                     )}
                 </div>
@@ -81,7 +76,8 @@ const Oppfolgingsdialoger = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: 
                 <Alert variant={"info"}>`${dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn} har startet
                     en ny oppfølgingsplan. Den gamle er arkivert.`</Alert>
             )}
-            <Sidetopp tittel={texts.pageTitle}/>
+
+            <Heading spacing={true} size={"large"} level={"1"}>{texts.pageTitle}</Heading>
 
             <OppfolgingsdialogerInfoPersonvern/>
 

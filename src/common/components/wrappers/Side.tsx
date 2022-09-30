@@ -18,7 +18,7 @@ const Side = ({isLoading, tittel, children}: SideProps): ReactElement => {
             <Head>
                 <title>{tittel + (tittel.length > 0 ? ' - www.nav.no' : 'www.nav.no')}</title>
             </Head>
-            <div className={'side__innhold side__innhold--begrenset'}>
+            <div>
                 {children}
             </div>
         </>
