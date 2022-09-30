@@ -1,7 +1,7 @@
 import React from 'react';
 import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {Heading} from "@navikt/ds-react";
-import {OppfolgingsplanStepper} from "@/common/stepper/OppfolgingsplanStepper";
+import {OppfolgingsplanStepper} from "@/common/components/stepper/OppfolgingsplanStepper";
 
 const textOverskrift = (arbeidsgiver: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;

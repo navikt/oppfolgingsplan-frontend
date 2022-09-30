@@ -11,7 +11,7 @@ import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTyp
 import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
 import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
 import {finnArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
-import VideoPanel from "@/common/video/VideoPanel";
+import VideoPanel from "@/common/components/video/VideoPanel";
 import OppfolgingsdialogerOpprett from "./opprett/OppfolgingsdialogerOpprett";
 import OppfolgingsdialogerIngenplan from "./opprett/OppfolgingsdialogerIngenplan";
 

@@ -1,5 +1,5 @@
 import {Alert, BodyLong, Button, Heading, Textarea, TextField} from "@navikt/ds-react";
-import PlusIcon from "@/common/icons/PlusIcon";
+import PlusIcon from "@/common/components/icons/PlusIcon";
 import {DatoVelger} from "@/common/components/datovelger/DatoVelger";
 import {useState} from "react";
 import styled from "styled-components";

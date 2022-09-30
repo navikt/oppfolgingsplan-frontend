@@ -1,6 +1,6 @@
 import React, {ReactElement, ReactNode} from 'react';
 import Head from 'next/head'
-import AppSpinner from "@/common/spinner/AppSpinner";
+import AppSpinner from "@/common/components/spinner/AppSpinner";
 
 interface SideProps {
     isLoading: boolean;

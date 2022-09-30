@@ -1,5 +1,4 @@
 import {BodyLong, Heading} from "@navikt/ds-react";
-import {OppfolgingsplanStepper} from "@/common/stepper/OppfolgingsplanStepper";
 import React, {ReactElement, ReactNode} from "react";
 import {Oppfolgingsplan, Stilling} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
@@ -12,6 +11,7 @@ import {NavigationButtons} from "@/common/components/buttons/NavigationButtons";
 import {IkkeTilgangTilPlanInfoBoks} from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
 import {AdresseSperreInfoBoks} from "@/common/components/infoboks/AdresseSperreInfoBoks";
 import Side from "@/common/components/wrappers/Side";
+import {OppfolgingsplanStepper} from "@/common/components/stepper/OppfolgingsplanStepper";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
