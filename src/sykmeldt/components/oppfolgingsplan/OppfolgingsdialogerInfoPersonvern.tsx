@@ -21,7 +21,7 @@ const IngressMarginTop = styled(Ingress)`
 
 const OppfolgingsdialogerInfoPersonvern = () => {
     return (
-        <div className="oppfolgingsdialogerInfoPersonvern">
+        <div>
             <Ingress>{texts.paragraphInfo}</Ingress>
             <IngressMarginTop>{texts.readMore.title}</IngressMarginTop>
             <ul>

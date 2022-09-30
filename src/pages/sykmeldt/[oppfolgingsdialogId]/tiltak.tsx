@@ -3,7 +3,8 @@ import React from "react";
 import {useOppfolgingsplanRouteId} from "@/common/hooks/routeHooks";
 import {useOppfolgingsplanerSM, useOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {OppfolgingsplanPageSM, Page} from "@/common/components/wrappers/OppfolgingsplanPageSM";
-import {TiltakContent} from "../../../sykmeldt/components/tiltak/tiltakContent";
+import {NyttTiltak} from "@/common/components/tiltak/NyttTiltak";
+import {LagredeTiltak} from "@/common/components/tiltak/LagredeTiltak";
 
 const Tiltak: NextPage = () => {
     const oppfolgingsdialogId = useOppfolgingsplanRouteId();
@@ -13,7 +14,13 @@ const Tiltak: NextPage = () => {
     return (
         <OppfolgingsplanPageSM isLoading={oppfolgingsplaner.isLoading} isError={oppfolgingsplaner.isError}
                                oppfolgingsplan={aktivPlan} page={Page.TILTAK}>
-            {aktivPlan && <TiltakContent oppfolgingsplan={aktivPlan}/>}
+            {aktivPlan && (
+                <div>
+                    <NyttTiltak oppfolgingsplanId={aktivPlan.id}/>
+
+                    <LagredeTiltak oppfolgingsplan={aktivPlan}/>
+                </div>
+            )}
         </OppfolgingsplanPageSM>
     )
 }
