@@ -13,10 +13,6 @@ const texts = {
     navigateToMovie: "Gå direkte til filmen!",
 };
 
-const StyledLink = styled.a`
-  padding-left: 0.5em;
-`;
-
 const HeaderStyled = styled(Heading)`
   margin-bottom: 1rem;
   display: flex;
