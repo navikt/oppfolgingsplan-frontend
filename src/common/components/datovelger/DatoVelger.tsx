@@ -1,4 +1,4 @@
-import React, {forwardRef, useRef, useState} from 'react';
+import React, {forwardRef, useRef} from 'react';
 import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import nb from 'date-fns/locale/nb';
@@ -9,7 +9,11 @@ import styled from "styled-components";
 registerLocale('nb', nb);
 
 interface Props {
-    label: string
+    selectedDate: Date | null;
+
+    onChange(newDate: Date | null): void;
+
+    label: string;
 }
 
 const SpacedTextField = styled(TextField)`
@@ -26,17 +30,16 @@ const CustomDateInput = forwardRef((props: any, ref: any) => (
     />
 ));
 
-export const DatoVelger = ({label}: Props) => {
-    const [startDate, setStartDate] = useState<Date | null>();
+export const DatoVelger = ({selectedDate, onChange, label}: Props) => {
     const refCustomInput = useRef();
 
     return (
         <DatePicker
             locale="nb"
             dateFormat="dd.MM.yyyy"
-            selected={startDate}
+            selected={selectedDate}
             customInput={<CustomDateInput ref={refCustomInput} label={label}/>}
-            onChange={(newDate) => setStartDate(newDate)}
+            onChange={(newDate) => onChange(newDate)}
         />
     );
 }

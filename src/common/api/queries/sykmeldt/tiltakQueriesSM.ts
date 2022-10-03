@@ -6,7 +6,7 @@ import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 
 interface LagreTiltakProps {
     oppfolgingsplanId: number;
-    tiltak: Tiltak;
+    tiltak: Partial<Tiltak>;
 }
 
 export const useLagreTiltakSM = () => {

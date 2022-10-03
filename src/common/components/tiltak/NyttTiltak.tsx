@@ -6,6 +6,8 @@ import styled from "styled-components";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {useLagreTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import {LightGreyPanel} from "@/common/components/wrappers/LightGreyPanel";
+import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import Feilmelding from "@/common/components/error/Feilmelding";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -30,13 +32,43 @@ const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `
 
+const Wrapper = styled.div`
+  margin-bottom: 1rem;
+`
+
 interface Props {
     oppfolgingsplanId: number
 }
 
 export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
-    const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false)
     const lagreTiltak = useLagreTiltakSM();
+    const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false)
+    const [tiltakNavn, setTiltakNavn] = useState<string>("")
+    const [beskrivelse, setBeskrivelse] = useState<string>("")
+    const [fom, setFom] = useState<Date | null>(null);
+    const [tom, setTom] = useState<Date | null>(null);
+
+    const nyttTiltakInformasjon: Partial<Tiltak> = {
+        tiltaknavn: tiltakNavn,
+        beskrivelse: beskrivelse,
+        fom: fom,
+        tom: tom
+    }
+
+    const resetStateAndClose = () => {
+        setTiltakNavn("");
+        setBeskrivelse("");
+        setFom(null);
+        setTom(null);
+        setLeggerTilNyttTiltak(false);
+    }
+
+    const ErrorMessage = () => {
+        if (lagreTiltak.isError) {
+            return <Wrapper><Feilmelding/></Wrapper>
+        }
+        return null;
+    }
 
     return (
         <TiltakPanel border={true}>
@@ -49,11 +81,13 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
                     et nytt tiltak</Button>}
 
             {leggerTilNyttTiltak && <LightGreyPanel border={true}>
-                <OverskriftTextField label={"Overskrift (obligatorisk)"} maxLength={80}/>
+                <OverskriftTextField label={"Overskrift (obligatorisk)"} maxLength={80} value={tiltakNavn}
+                                     onChange={(e) => setTiltakNavn(e.target.value)}/>
 
                 <OverskriftTextarea label={"Beskriv hva som skal skje (obligatorisk)"}
                                     description={"Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."}
-                                    maxLength={600}/>
+                                    maxLength={600} value={beskrivelse}
+                                    onChange={(e) => setBeskrivelse(e.target.value)}/>
 
                 <SpacedAlert variant={"info"}>
                     Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du ikke gi sensitive opplysninger,
@@ -62,16 +96,24 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
                 </SpacedAlert>
 
                 <DateRow>
-                    <DatoVelger label={"Startdato (obligatorisk)"}/>
+                    <DatoVelger label={"Startdato (obligatorisk)"} selectedDate={fom} onChange={setFom}/>
 
-                    <DatoVelger label={"Sluttdato (obligatorisk)"}/>
+                    <DatoVelger label={"Sluttdato (obligatorisk)"} selectedDate={tom} onChange={setTom}/>
                 </DateRow>
 
+                <ErrorMessage/>
+
                 <ButtonRow>
-                    <Button variant={"primary"} onClick={() => console.log("todo" +
-                        "")}>Lagre</Button>
-                    {/*<Button variant={"primary"} onClick={() => lagreTiltak.mutate(oppfolgingsplanId)}>Lagre</Button>*/}
-                    <Button variant={"tertiary"} onClick={() => setLeggerTilNyttTiltak(false)}>Avbryt</Button>
+                    <Button variant={"primary"} onClick={() => {
+                        lagreTiltak.mutate({
+                            oppfolgingsplanId: oppfolgingsplanId,
+                            tiltak: nyttTiltakInformasjon
+                        });
+                        if (lagreTiltak.isSuccess) {
+                            resetStateAndClose();
+                        }
+                    }}>Lagre</Button>
+                    <Button variant={"tertiary"} onClick={() => resetStateAndClose()}>Avbryt</Button>
                 </ButtonRow>
             </LightGreyPanel>}
         </TiltakPanel>

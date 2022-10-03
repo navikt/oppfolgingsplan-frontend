@@ -12,10 +12,8 @@ const Feilmelding = ({
                      }: Props) => {
     return (
         <Alert variant="error">
-            <div>
-                <Heading size={"large"} level={"2"}>{title}</Heading>
-                <BodyLong>{description}</BodyLong>
-            </div>
+            <Heading size={"medium"} level={"2"}>{title}</Heading>
+            <BodyLong>{description}</BodyLong>
         </Alert>
     )
 };

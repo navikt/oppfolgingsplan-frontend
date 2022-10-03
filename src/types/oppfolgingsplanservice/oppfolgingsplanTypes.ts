@@ -99,8 +99,8 @@ export interface Tiltak {
     tiltakId: number;
     tiltaknavn: string;
     knyttetTilArbeidsoppgaveId?: number | null;
-    fom?: string | null;
-    tom?: string | null;
+    fom?: Date | null;
+    tom?: Date | null;
     beskrivelse?: string | null;
     beskrivelseIkkeAktuelt?: string | null;
     opprettetDato: string;
