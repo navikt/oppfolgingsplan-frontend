@@ -2,11 +2,17 @@ import {useApiBasePath} from "@/common/hooks/routeHooks";
 import {post} from "@/common/api/axios/axios";
 import {useMutation, useQueryClient} from "react-query";
 import {OPPFOLGINGSPLANER_SM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+
+interface LagreTiltakProps {
+    oppfolgingsplanId: number;
+    tiltak: Tiltak;
+}
 
 export const useLagreTiltakSM = () => {
     const apiBasePath = useApiBasePath();
 
-    const request = (oppfolgingsplanId: number) => post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`);
+    const request = ({oppfolgingsplanId, tiltak}: LagreTiltakProps) => post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`, tiltak);
 
     return useMutation(request)
 }

@@ -68,7 +68,9 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
                 </DateRow>
 
                 <ButtonRow>
-                    <Button variant={"primary"} onClick={() => lagreTiltak.mutate(oppfolgingsplanId)}>Lagre</Button>
+                    <Button variant={"primary"} onClick={() => console.log("todo" +
+                        "")}>Lagre</Button>
+                    {/*<Button variant={"primary"} onClick={() => lagreTiltak.mutate(oppfolgingsplanId)}>Lagre</Button>*/}
                     <Button variant={"tertiary"} onClick={() => setLeggerTilNyttTiltak(false)}>Avbryt</Button>
                 </ButtonRow>
             </LightGreyPanel>}
