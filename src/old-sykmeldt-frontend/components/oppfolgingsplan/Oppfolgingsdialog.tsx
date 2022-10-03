@@ -12,14 +12,6 @@ export const tekster = {
     lagreTiltakAdvarselTekst: 'Du har ulagrede tiltak. Vil du fortsette?',
 };
 
-// const skalViseSamtykke = (oppfolgingsplan: Oppfolgingsplan) => {
-//   return (
-//     harNaermesteLeder(oppfolgingsplan) &&
-//     utenSamtykke(oppfolgingsplan) &&
-//     (inneholderGodkjentPlan(oppfolgingsplan) || inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan))
-//   );
-// };
-//
 // const skalViseLagreAdvarsel = (inputFormer) => {
 //   return inputFormer !== undefined && Object.keys(inputFormer).length > 0;
 // };
@@ -56,10 +48,7 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     // let disableNavigation = false;
     // let skalViseAvsluttOgLagre = false;
     // let visLagreAdvarsel = false;
-    // if (skalViseSamtykke(oppfolgingsdialog)) {
-    //   disableNavigation = true;
-    //   panel = <Samtykke sendSamtykke={giSamtykke} oppfolgingsdialog={oppfolgingsdialog} />;
-    // } else if (
+    // if (
     //   harNaermesteLeder(oppfolgingsdialog) &&
     //   inneholderGodkjenninger(oppfolgingsdialog) &&
     //   !erAvvistAvArbeidstaker(oppfolgingsdialog)
@@ -79,7 +68,6 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     //   panel = (
     //     <ReleasetPlanAT
     //       oppfolgingsdialog={oppfolgingsdialog}
-    //       giSamtykke={giSamtykke}
     //       avbrytDialog={avbrytDialog}
     //       delMedNavFunc={delMedNavFunc}
     //       delmednav={delmednav}

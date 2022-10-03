@@ -19,7 +19,6 @@ import PlanIkkeAktivSykmeldingImage from '../../../public/img/svg/plan-ikke-akti
 import PlanMottattIgjenImage from '../../../public/img/svg/plan-mottatt-igjen.svg';
 import PlanMottattImage from '../../../public/img/svg/plan-mottatt.svg';
 import ReportProblemCircleImage from '../../../public/img/svg/report-problem-circle.svg';
-import SamtykkeIllustrasjonImage from '../../../public/img/svg/samtykke-illustrasjon.svg';
 import TiltakOnboardingImage from '../../../public/img/svg/tiltak-onboarding.svg';
 import VarseltrekantImage from '../../../public/img/svg/varseltrekant.svg';
 import OppfolgingsdialogIkkeAktivSykmeldingImage from '../../../public/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg';
@@ -49,7 +48,6 @@ export {
   PlanMottattIgjenImage,
   PlanMottattImage,
   ReportProblemCircleImage,
-  SamtykkeIllustrasjonImage,
   TiltakOnboardingImage,
   VarseltrekantImage,
   OppfolgingsdialogIkkeTilgangImage,

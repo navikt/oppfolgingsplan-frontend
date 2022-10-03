@@ -11,7 +11,6 @@ import naermesteLederSagas from './oppfolgingsplan/naermestelederSagas';
 import nullstillGodkjenningSagas from './oppfolgingsplan/nullstillGodkjenningSagas';
 import oppfolgingsdialogerSagas from './oppfolgingsplan/oppfolgingsdialogerSagas';
 import personSagas from './oppfolgingsplan/personSagas';
-import samtykkeSagas from './oppfolgingsplan/samtykkeSagas';
 import settDialogSagas from './oppfolgingsplan/settDialogSagas';
 import tilgangSagas from './oppfolgingsplan/tilgangSagas';
 import tiltakSagas from './oppfolgingsplan/tiltakSagas';
@@ -24,7 +23,6 @@ export default function* rootSaga() {
   yield all([
     arbeidsforholdSagas(),
     dineSykmeldingerSagas(),
-    samtykkeSagas(),
     avbrytdialogSagas(),
     oppfolgingsdialogerSagas(),
     delMedFastlegeSagas(),

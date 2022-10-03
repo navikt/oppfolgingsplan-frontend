@@ -5,7 +5,6 @@ import { KOMMENTAR_LAGRET, KOMMENTAR_SLETTET } from '../actions/oppfolgingsplan/
 import { NULLSTILT_GODKJENNING } from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
 import { DELT_MED_NAV } from '../actions/oppfolgingsplan/delmednav_actions';
 import { DELT_MED_FASTLEGE } from '../actions/oppfolgingsplan/delMedFastlege_actions';
-import { SAMTYKKE_GITT } from '../actions/oppfolgingsplan/samtykke_actions';
 import { finnNyesteGodkjenning, skalDeleMedNav } from '../../common/utils/oppfolgingsdialogUtils';
 import { toGjennomfoering } from '../../common/utils/arbeidsoppgaveUtils';
 
@@ -33,13 +32,9 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
         if (dialog.id === Number(action.id)) {
           return Object.assign({}, dialog, {
             godkjenninger: [],
-            arbeidstaker: Object.assign({}, dialog.arbeidstaker, {
-              samtykke: null,
-            }),
+            arbeidstaker: Object.assign({}, dialog.arbeidstaker),
             arbeidsgiver: Object.assign({}, dialog.arbeidsgiver, {
-              naermesteLeder: Object.assign({}, dialog.arbeidsgiver.naermesteLeder, {
-                samtykke: null,
-              }),
+              naermesteLeder: Object.assign({}, dialog.arbeidsgiver.naermesteLeder),
             }),
           });
         }
@@ -394,26 +389,6 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
       });
     }
     case actions.DIALOG_AVVIST: {
-      const data = state.data.map((oppfolgingsdialog) => {
-        if (Number(action.id) === oppfolgingsdialog.id) {
-          return Object.assign({}, oppfolgingsdialog, {
-            godkjenninger: [
-              { godkjent: false, godkjenningsTidspunkt: new Date(), godkjentAv: oppfolgingsdialog.arbeidstaker },
-            ],
-            sistEndretAv: oppfolgingsdialog.arbeidstaker,
-            sistEndretDato: new Date(),
-            arbeidstaker: Object.assign({}, oppfolgingsdialog.arbeidstaker, {
-              samtykke: null,
-            }),
-            arbeidsgiver: Object.assign({}, oppfolgingsdialog.arbeidsgiver, {
-              naermesteLeder: Object.assign({}, oppfolgingsdialog.arbeidsgiver.naermesteLeder, {
-                samtykke: null,
-              }),
-            }),
-          });
-        }
-        return oppfolgingsdialog;
-      });
       return Object.assign({}, state, {
         data,
         avviser: false,
@@ -426,21 +401,6 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
         godkjenner: false,
         avvist: false,
         avvisFeilet: true,
-      });
-    }
-    case SAMTYKKE_GITT: {
-      const data = state.data.map((oppfolgingsdialog) => {
-        if (Number(action.id) === oppfolgingsdialog.id) {
-          return Object.assign({}, oppfolgingsdialog, {
-            arbeidstaker: Object.assign({}, oppfolgingsdialog.arbeidstaker, {
-              samtykke: action.samtykke,
-            }),
-          });
-        }
-        return oppfolgingsdialog;
-      });
-      return Object.assign({}, state, {
-        data,
       });
     }
     default:
