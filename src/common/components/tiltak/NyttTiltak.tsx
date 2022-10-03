@@ -109,9 +109,7 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
                             oppfolgingsplanId: oppfolgingsplanId,
                             tiltak: nyttTiltakInformasjon
                         });
-                        if (lagreTiltak.isSuccess) {
-                            resetStateAndClose();
-                        }
+                        resetStateAndClose();
                     }}>Lagre</Button>
                     <Button variant={"tertiary"} onClick={() => resetStateAndClose()}>Avbryt</Button>
                 </ButtonRow>
