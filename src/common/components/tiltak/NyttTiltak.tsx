@@ -51,8 +51,8 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
     const nyttTiltakInformasjon: Partial<Tiltak> = {
         tiltaknavn: tiltakNavn,
         beskrivelse: beskrivelse,
-        fom: fom,
-        tom: tom
+        fom: fom?.toJSON(),
+        tom: tom?.toJSON()
     }
 
     const resetStateAndClose = () => {
