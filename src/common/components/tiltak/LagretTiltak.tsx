@@ -11,6 +11,7 @@ import React, {ReactElement, useState} from "react";
 import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import styled from "styled-components";
 import {useLagreKommentarSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
+import {EditerTiltak} from "@/common/components/tiltak/EditerTiltak";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
     switch (statusText) {
@@ -69,9 +70,14 @@ interface Props {
 export const LagretTiltak = ({arbeidstakerFnr, tiltak, oppfolgingsplanId}: Props) => {
     const aktoerHarOpprettetElement = arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
     const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
+    const [editererTiltak, setEditererTiltak] = useState(false);
     const lagreKommentarMutation = useLagreKommentarSM();
     const fnr = arbeidstakerFnr
     const tiltakId = tiltak.tiltakId;
+
+    if (editererTiltak) {
+        return <EditerTiltak oppfolgingsplanId={oppfolgingsplanId} tiltak={tiltak} doneEditing={() => setEditererTiltak(false)}/>
+    }
 
     return (
         <TiltakPanel border={true}>
@@ -121,7 +127,7 @@ export const LagretTiltak = ({arbeidstakerFnr, tiltak, oppfolgingsplanId}: Props
             } avbryt={() => setDisplayNyKommentar(false)}/>}
 
             {!displayNyKommentar && <ButtonRow>
-                {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>}>Endre</Button>}
+                {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>} onClick={() => setEditererTiltak(true)}>Endre</Button>}
                 {aktoerHarOpprettetElement &&
                     <SlettTiltakButton oppfolgingsplanId={oppfolgingsplanId} tiltakId={tiltak.tiltakId}/>}
                 <Button variant={"tertiary"} icon={<DialogDots/>}
