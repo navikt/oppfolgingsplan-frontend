@@ -2,11 +2,11 @@ import { Alert, Button, Textarea, TextField } from "@navikt/ds-react";
 import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
 import { DatoVelger } from "@/common/components/datovelger/DatoVelger";
 import styled from "styled-components";
-import { TiltakPanel } from "@/common/components/tiltak/TiltakPanel";
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { FormErrorSummary } from "@/common/components/error/FormErrorSummary";
+import {SpacedPanel} from "@/common/components/wrappers/SpacedPanel";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -66,7 +66,7 @@ export const TiltakForm = ({
   return (
     <FormProvider {...formFunctions}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TiltakPanel border={true}>
+        <SpacedPanel border={true}>
           <TiltakFormHeading />
 
           <LightGreyPanel border={true}>
@@ -139,7 +139,7 @@ export const TiltakForm = ({
               </Button>
             </ButtonRow>
           </LightGreyPanel>
-        </TiltakPanel>
+        </SpacedPanel>
       </form>
     </FormProvider>
   );

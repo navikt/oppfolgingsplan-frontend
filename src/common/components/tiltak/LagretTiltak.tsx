@@ -15,12 +15,12 @@ import { NyKommentar } from "@/common/components/tiltak/NyKommentar";
 import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
 import { DialogDots, Edit } from "@navikt/ds-icons";
 import { SlettTiltakButton } from "@/common/components/tiltak/SlettTiltakButton";
-import { TiltakPanel } from "@/common/components/tiltak/TiltakPanel";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { useLagreKommentarSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import { EditerTiltak } from "@/common/components/tiltak/EditerTiltak";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
+import {SpacedPanel} from "@/common/components/wrappers/SpacedPanel";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -107,7 +107,7 @@ export const LagretTiltak = ({
   }
 
   return (
-    <TiltakPanel border={true}>
+    <SpacedPanel border={true}>
       <HeadingWithLabel>
         {createStatusLabel(tiltak.status)}
         <Heading size={"medium"} level={"3"}>
@@ -194,6 +194,6 @@ export const LagretTiltak = ({
           </Button>
         </ButtonRow>
       )}
-    </TiltakPanel>
+    </SpacedPanel>
   );
 };

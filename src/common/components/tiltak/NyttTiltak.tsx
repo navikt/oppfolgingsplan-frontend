@@ -1,11 +1,11 @@
 import { Button } from "@navikt/ds-react";
 import PlusIcon from "@/common/components/icons/PlusIcon";
 import { useState } from "react";
-import { TiltakPanel } from "@/common/components/tiltak/TiltakPanel";
 import { useLagreTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import { TiltakFormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
+import {SpacedPanel} from "@/common/components/wrappers/SpacedPanel";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -30,7 +30,7 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
 
   if (!leggerTilNyttTiltak) {
     return (
-      <TiltakPanel border={true}>
+      <SpacedPanel border={true}>
         <TiltakFormHeading />
 
         {!leggerTilNyttTiltak && (
@@ -42,7 +42,7 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
             Legg til et nytt tiltak
           </Button>
         )}
-      </TiltakPanel>
+      </SpacedPanel>
     );
   }
 
