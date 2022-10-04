@@ -68,10 +68,10 @@ export async function createOppfolgingsplanSM(
 
 export async function deleteTiltakCommentSM(
   accessToken: string,
-  tiltakId: string
+  kommentarId: string
 ) {
   return await post(
-    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/kommentar/actions/${tiltakId}/slett`,
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/kommentar/actions/${kommentarId}/slett`,
     {},
     { accessToken }
   );
@@ -93,7 +93,7 @@ export async function saveTiltakCommentSM(
 
 export async function deleteTiltakSM(accessToken: string, tiltakId: string) {
   return await post(
-    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}`,
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/slett`,
     {},
     { accessToken }
   );
