@@ -1,16 +1,16 @@
-import { STATUS } from '@/common/konstanter';
-import { finnSistEndretAvNavn } from './oppfolgingsdialogUtils';
-import { toDateMedMaanedNavn } from './dateUtils';
+import { STATUS } from "@/common/konstanter";
+import { finnSistEndretAvNavn } from "./oppfolgingsdialogUtils";
+import { toDateMedMaanedNavn } from "./dateUtils";
 import {
   PlanGodkjentImage,
   PlanAvbruttImage,
   OppfolgingsdialogTomImage,
   PlanIkkeAktivSykmeldingImage,
-} from '@/common/images/imageComponents';
+} from "@/common/images/imageComponents";
 
 const texts = {
   hentPlanStatus: {
-    avbrutt: 'Avbrutt',
+    avbrutt: "Avbrutt",
   },
 };
 
@@ -23,8 +23,8 @@ const textStatusUnderArbeid = (date, personName) => {
 
 export const hentPlanStatus = (oppfolgingsdialog) => {
   const status = {
-    tekst: '',
-    img: '',
+    tekst: "",
+    img: "",
   };
   switch (oppfolgingsdialog.status) {
     case STATUS.UTDATERT:
@@ -32,7 +32,9 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         oppfolgingsdialog &&
         oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt &&
         // eslint-disable-next-line max-len
-        `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
+        `${toDateMedMaanedNavn(
+          oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
+        )} - ${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
         )}`;
       status.img = PlanGodkjentImage;
@@ -53,7 +55,9 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         oppfolgingsdialog &&
         oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt &&
         // eslint-disable-next-line max-len
-        `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
+        `${toDateMedMaanedNavn(
+          oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
+        )} - ${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
         )}`;
       status.img = PlanGodkjentImage;
@@ -63,7 +67,9 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         oppfolgingsdialog &&
         oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt &&
         // eslint-disable-next-line max-len
-        `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
+        `${toDateMedMaanedNavn(
+          oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
+        )} - ${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
         )}`;
       status.img = PlanGodkjentImage;
@@ -75,11 +81,15 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
 export const hentStatusUtenAktivSykmelding = (oppfolgingsdialog) => {
   return {
     tekst:
-      oppfolgingsdialog && oppfolgingsdialog.godkjentPlan && oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt
-        ? `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
+      oppfolgingsdialog &&
+      oppfolgingsdialog.godkjentPlan &&
+      oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt
+        ? `${toDateMedMaanedNavn(
+            oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
+          )} - ${toDateMedMaanedNavn(
             oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
           )}`
-        : '',
+        : "",
     img: PlanIkkeAktivSykmeldingImage,
   };
 };

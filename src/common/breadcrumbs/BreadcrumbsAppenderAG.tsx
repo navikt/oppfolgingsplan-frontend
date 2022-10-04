@@ -17,7 +17,6 @@ export const BreadcrumbsAppenderAG = (): ReactElement => {
   //   }
   // }, [sykmeldtName, narmestelederId, pathname]);
 
-
   //Todo
   return <></>;
 };

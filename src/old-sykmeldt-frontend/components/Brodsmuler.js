@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import getContextRoot from '@/common/utils/getContextRoot';
-import { brodsmule as brodsmuleProptype } from '../propTypes';
-import { getSykefravaerUrl } from '@/common/utils/urlUtils';
-import { PersonImage } from '@/common/images/imageComponents';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import getContextRoot from "@/common/utils/getContextRoot";
+import { brodsmule as brodsmuleProptype } from "../propTypes";
+import { getSykefravaerUrl } from "@/common/utils/urlUtils";
+import { PersonImage } from "@/common/images/imageComponents";
 import Link from "next/link";
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
-  const nySti = sti && sti.indexOf('/sykefravaer') > -1 ? getSykefravaerUrl() : sti;
-  const root = sti && sti.indexOf('/sykefravaer') > -1 ? '' : getContextRoot();
+  const nySti =
+    sti && sti.indexOf("/sykefravaer") > -1 ? getSykefravaerUrl() : sti;
+  const root = sti && sti.indexOf("/sykefravaer") > -1 ? "" : getContextRoot();
   const link =
-    root === '' ? (
+    root === "" ? (
       <a className="js-smule js-smule-a brodsmuler__smule" href={nySti}>
         {tittel}
       </a>
@@ -22,7 +23,8 @@ const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
   if (sisteSmule) {
     return (
       <span className="js-smuletekst">
-        <span className="vekk">Du er her:</span> <span className="brodsmule">{tittel}</span>
+        <span className="vekk">Du er her:</span>{" "}
+        <span className="brodsmule">{tittel}</span>
       </span>
     );
   } else if (erKlikkbar) {
@@ -80,7 +82,10 @@ class Brodsmuler extends Component {
   getSynligeBrodsmuler() {
     const { brodsmuler } = this.props;
     if (this.visCollapsed()) {
-      return [brodsmuler[brodsmuler.length - 2], brodsmuler[brodsmuler.length - 1]];
+      return [
+        brodsmuler[brodsmuler.length - 2],
+        brodsmuler[brodsmuler.length - 1],
+      ];
     }
     return brodsmuler;
   }
@@ -102,10 +107,15 @@ class Brodsmuler extends Component {
       <nav className="brodsmuler" aria-label="Du er her: ">
         <img src={PersonImage} alt="" className="brodsmuler__ikon" />
         <div className="brodsmuler__smuler">
-          <a href={process.env.DITTNAV_URL} className="js-smule brodsmuler__smule">
+          <a
+            href={process.env.DITTNAV_URL}
+            className="js-smule brodsmuler__smule"
+          >
             Ditt NAV
           </a>
-          {brodsmuler.length > 0 && <span className="brodsmule__skille"> / </span>}
+          {brodsmuler.length > 0 && (
+            <span className="brodsmule__skille"> / </span>
+          )}
           {this.visCollapsed() && (
             <ToggleLink
               onClick={(e) => {

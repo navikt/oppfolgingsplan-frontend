@@ -2,7 +2,7 @@ import {
   DELER_MED_FASTLEGE,
   DELT_MED_FASTLEGE,
   DEL_MED_FASTLEGE_FEILET,
-} from '../actions/oppfolgingsplan/delMedFastlege_actions';
+} from "../actions/oppfolgingsplan/delMedFastlege_actions";
 
 const initiellState = {
   sender: false,

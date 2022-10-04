@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Alert } from "@navikt/ds-react";
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
 
 const texts = {
   description:
-    'Ups, her mangler det litt før du kan sende planen. Den må inneholde minst én oppgave og ett tiltak. Kanskje lederen din kan hjelpe til?',
-  linkArbeidsoppgave: 'Legg til en arbeidsoppgave',
-  linkTiltak: 'Legg til et tiltak',
+    "Ups, her mangler det litt før du kan sende planen. Den må inneholde minst én oppgave og ett tiltak. Kanskje lederen din kan hjelpe til?",
+  linkArbeidsoppgave: "Legg til en arbeidsoppgave",
+  linkTiltak: "Legg til et tiltak",
 };
 
 const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {

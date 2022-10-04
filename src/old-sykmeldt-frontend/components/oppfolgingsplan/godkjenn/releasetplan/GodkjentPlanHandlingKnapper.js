@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { erGyldigDatoIFortiden } from '@/common/utils/datoUtils';
-import { STATUS } from '@/common/konstanter';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
+import { erGyldigDatoIFortiden } from "@/common/utils/datoUtils";
+import { STATUS } from "@/common/konstanter";
 
 const texts = {
-  buttonEndre: 'Gjør endringer',
-  buttonDownload: 'Last ned',
+  buttonEndre: "Gjør endringer",
+  buttonDownload: "Last ned",
 };
 
 export const ButtonDownload = ({ oppfolgingsplan }) => {
@@ -30,7 +30,7 @@ class GodkjentPlanHandlingKnapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visning: '',
+      visning: "",
     };
     this.toggleVisning = this.toggleVisning.bind(this);
   }
@@ -38,7 +38,7 @@ class GodkjentPlanHandlingKnapper extends Component {
   toggleVisning(visning) {
     if (this.state.visning === visning) {
       this.setState({
-        visning: '',
+        visning: "",
       });
     } else {
       this.setState({
@@ -52,7 +52,9 @@ class GodkjentPlanHandlingKnapper extends Component {
     return (
       <div>
         <ul className="godkjentPlanKnapper">
-          {!erGyldigDatoIFortiden(oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom) &&
+          {!erGyldigDatoIFortiden(
+            oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
+          ) &&
             oppfolgingsplan.status !== STATUS.AVBRUTT && (
               <li>
                 <div className="godkjentPlanKnapper__knapp godkjentPlanKnapper__knapp--endre">

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const texts = {
-  buttonDelete: 'Slett',
+  buttonDelete: "Slett",
 };
 
 const ButtonDeleteIcon = ({ click, text = texts.buttonDelete }) => {

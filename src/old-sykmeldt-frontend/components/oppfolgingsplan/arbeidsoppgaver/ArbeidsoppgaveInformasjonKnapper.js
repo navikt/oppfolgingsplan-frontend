@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
-import MiniSpinner from '../../MiniSpinner';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { arbeidsoppgavePt } from "../../../propTypes/opproptypes";
+import MiniSpinner from "../../MiniSpinner";
 
 const texts = {
-  buttonDelete: 'Slett',
-  buttonEdit: 'Endre',
-  buttonVurdering: 'Gi din vurdering',
+  buttonDelete: "Slett",
+  buttonEdit: "Endre",
+  buttonVurdering: "Gi din vurdering",
 };
 
 const ArbeidsoppgaveButtonsRow = styled.div`
@@ -16,9 +16,16 @@ const ArbeidsoppgaveButtonsRow = styled.div`
   padding-top: 1em;
 `;
 
-const ArbeidsoppgaveInformasjonKnapper = ({ arbeidsoppgave, fnr, lagreSkjema, visLagreSkjema, sendSlett }) => {
+const ArbeidsoppgaveInformasjonKnapper = ({
+  arbeidsoppgave,
+  fnr,
+  lagreSkjema,
+  visLagreSkjema,
+  sendSlett,
+}) => {
   const elementId = arbeidsoppgave.arbeidsoppgaveId;
-  const aktoerHarOpprettetElement = fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
+  const aktoerHarOpprettetElement =
+    fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
 
   const [sletter, setSletter] = useState(false);
   return (
@@ -27,13 +34,19 @@ const ArbeidsoppgaveInformasjonKnapper = ({ arbeidsoppgave, fnr, lagreSkjema, vi
         {!lagreSkjema && (
           <button
             type="button"
-            className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard knapp--mini'}`}
+            className={`${
+              arbeidsoppgave.gjennomfoering
+                ? "knapp--endre"
+                : "knapp knapp--standard knapp--mini"
+            }`}
             aria-pressed={visLagreSkjema}
             onClick={(event) => {
               visLagreSkjema(event);
             }}
           >
-            {arbeidsoppgave.gjennomfoering ? texts.buttonEdit : texts.buttonVurdering}
+            {arbeidsoppgave.gjennomfoering
+              ? texts.buttonEdit
+              : texts.buttonVurdering}
           </button>
         )}
       </div>

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feilomrade from './Feilomrade';
-import Checkbox from './Checkbox';
-import { fieldPropTypes } from '../../propTypes/fieldproptypes';
+import React from "react";
+import PropTypes from "prop-types";
+import Feilomrade from "./Feilomrade";
+import Checkbox from "./Checkbox";
+import { fieldPropTypes } from "../../propTypes/fieldproptypes";
 
 const CheckboxSelvstendig = ({ input, meta, label, id }) => {
   return (

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Spinner = styled.div`
   display: inline-flex;
@@ -9,7 +9,9 @@ const Spinner = styled.div`
 `;
 
 const MiniSpinner = () => {
-  return <Spinner className="app-spinner" aria-label="Vent litt mens siden laster" />;
+  return (
+    <Spinner className="app-spinner" aria-label="Vent litt mens siden laster" />
+  );
 };
 
 export default MiniSpinner;

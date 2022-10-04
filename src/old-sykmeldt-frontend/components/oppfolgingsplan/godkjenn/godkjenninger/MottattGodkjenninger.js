@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import GodkjennPlanAvslaatt from './GodkjennPlanAvslaatt';
-import GodkjennPlanAvslaattOgGodkjent from './GodkjennPlanAvslaattOgGodkjent';
-import GodkjennPlanMottatt from './GodkjennPlanMottatt';
+import React from "react";
+import PropTypes from "prop-types";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
+import GodkjennPlanAvslaatt from "./GodkjennPlanAvslaatt";
+import GodkjennPlanAvslaattOgGodkjent from "./GodkjennPlanAvslaattOgGodkjent";
+import GodkjennPlanMottatt from "./GodkjennPlanMottatt";
 
 const harMangeGodkjenninger = (godkjenninger) => {
   return godkjenninger.length > 1;
@@ -39,7 +39,12 @@ const MottattGodkjenninger = ({
       />
     );
   }
-  return <GodkjennPlanAvslaatt nullstillGodkjenning={nullstillGodkjenning} oppfolgingsplan={oppfolgingsplan} />;
+  return (
+    <GodkjennPlanAvslaatt
+      nullstillGodkjenning={nullstillGodkjenning}
+      oppfolgingsplan={oppfolgingsplan}
+    />
+  );
 };
 
 MottattGodkjenninger.propTypes = {

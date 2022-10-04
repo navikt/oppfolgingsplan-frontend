@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import * as actions from '../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
-import { post } from '../../api/axios';
+import { call, put, takeEvery } from "redux-saga/effects";
+import * as actions from "../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions";
+import { post } from "../../api/axios";
 
 export function* kopierOppfolgingsdialog(action) {
   try {
@@ -14,5 +14,8 @@ export function* kopierOppfolgingsdialog(action) {
 }
 
 export default function* kopierOppfolgingsdialogSagas() {
-  yield takeEvery(actions.KOPIER_OPPFOLGINGSDIALOG_FORESPURT, kopierOppfolgingsdialog);
+  yield takeEvery(
+    actions.KOPIER_OPPFOLGINGSDIALOG_FORESPURT,
+    kopierOppfolgingsdialog
+  );
 }

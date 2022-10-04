@@ -1,12 +1,24 @@
-import * as actions from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
-import { ARBEIDSOPPGAVE_LAGRET, ARBEIDSOPPGAVE_SLETTET } from '../actions/oppfolgingsplan/arbeidsoppgave_actions';
-import { TILTAK_LAGRET, TILTAK_SLETTET } from '../actions/oppfolgingsplan/tiltak_actions';
-import { KOMMENTAR_LAGRET, KOMMENTAR_SLETTET } from '../actions/oppfolgingsplan/kommentar_actions';
-import { NULLSTILT_GODKJENNING } from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
-import { DELT_MED_NAV } from '../actions/oppfolgingsplan/delmednav_actions';
-import { DELT_MED_FASTLEGE } from '../actions/oppfolgingsplan/delMedFastlege_actions';
-import { finnNyesteGodkjenning, skalDeleMedNav } from '../../common/utils/oppfolgingsdialogUtils';
-import { toGjennomfoering } from '../../common/utils/arbeidsoppgaveUtils';
+import * as actions from "../actions/oppfolgingsplan/oppfolgingsdialog_actions";
+import {
+  ARBEIDSOPPGAVE_LAGRET,
+  ARBEIDSOPPGAVE_SLETTET,
+} from "../actions/oppfolgingsplan/arbeidsoppgave_actions";
+import {
+  TILTAK_LAGRET,
+  TILTAK_SLETTET,
+} from "../actions/oppfolgingsplan/tiltak_actions";
+import {
+  KOMMENTAR_LAGRET,
+  KOMMENTAR_SLETTET,
+} from "../actions/oppfolgingsplan/kommentar_actions";
+import { NULLSTILT_GODKJENNING } from "../actions/oppfolgingsplan/nullstillGodkjenning_actions";
+import { DELT_MED_NAV } from "../actions/oppfolgingsplan/delmednav_actions";
+import { DELT_MED_FASTLEGE } from "../actions/oppfolgingsplan/delMedFastlege_actions";
+import {
+  finnNyesteGodkjenning,
+  skalDeleMedNav,
+} from "../../common/utils/oppfolgingsdialogUtils";
+import { toGjennomfoering } from "../../common/utils/arbeidsoppgaveUtils";
 
 const initiellState = {
   henter: false,
@@ -34,7 +46,10 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             godkjenninger: [],
             arbeidstaker: Object.assign({}, dialog.arbeidstaker),
             arbeidsgiver: Object.assign({}, dialog.arbeidsgiver, {
-              naermesteLeder: Object.assign({}, dialog.arbeidsgiver.naermesteLeder),
+              naermesteLeder: Object.assign(
+                {},
+                dialog.arbeidsgiver.naermesteLeder
+              ),
             }),
           });
         }
@@ -133,7 +148,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
           ) {
             return Object.assign({}, oppfolgingsdialog, {
               godkjenninger: [],
-              status: 'AKTIV',
+              status: "AKTIV",
               godkjentPlan: {
                 opprettetTidspunkt: new Date(),
                 gyldighetstidspunkt: {
@@ -142,7 +157,12 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
                   evalueres: action.gyldighetstidspunkt.evalueres,
                 },
                 deltMedNAV: skalDeleMedNav(action.delMedNav, oppfolgingsdialog),
-                deltMedNAVTidspunkt: skalDeleMedNav(action.delMedNav, oppfolgingsdialog) ? new Date() : null,
+                deltMedNAVTidspunkt: skalDeleMedNav(
+                  action.delMedNav,
+                  oppfolgingsdialog
+                )
+                  ? new Date()
+                  : null,
               },
             });
           }
@@ -203,13 +223,21 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
               gjennomfoering: toGjennomfoering(action.arbeidsoppgave),
             });
             return Object.assign({}, oppfolgingsdialog, {
-              arbeidsoppgaveListe: [...oppfolgingsdialog.arbeidsoppgaveListe, nyArbeidsoppgave],
+              arbeidsoppgaveListe: [
+                ...oppfolgingsdialog.arbeidsoppgaveListe,
+                nyArbeidsoppgave,
+              ],
               sistEndretAv: oppfolgingsdialog.arbeidstaker,
               sistEndretDato: new Date(),
             });
           }
-          const arbeidsoppgaveListe = [...oppfolgingsdialog.arbeidsoppgaveListe].map((arbeidsoppgave) => {
-            if (Number(action.arbeidsoppgave.arbeidsoppgaveId) === arbeidsoppgave.arbeidsoppgaveId) {
+          const arbeidsoppgaveListe = [
+            ...oppfolgingsdialog.arbeidsoppgaveListe,
+          ].map((arbeidsoppgave) => {
+            if (
+              Number(action.arbeidsoppgave.arbeidsoppgaveId) ===
+              arbeidsoppgave.arbeidsoppgaveId
+            ) {
               return Object.assign({}, arbeidsoppgave, {
                 sistEndretAv: oppfolgingsdialog.arbeidstaker,
                 sistEndretDato: new Date(),
@@ -259,22 +287,24 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
               sistEndretDato: new Date(),
             });
           }
-          const tiltakListe = [...oppfolgingsdialog.tiltakListe].map((tiltak) => {
-            if (Number(action.tiltak.tiltakId) === tiltak.tiltakId) {
-              return Object.assign({}, tiltak, {
-                sistEndretAv: oppfolgingsdialog.arbeidstaker,
-                sistEndretDato: new Date(),
-                tiltaknavn: action.tiltak.tiltaknavn,
-                beskrivelse: action.tiltak.beskrivelse,
-                beskrivelseIkkeAktuelt: action.tiltak.beskrivelseIkkeAktuelt,
-                gjennomfoering: action.tiltak.gjennomfoering,
-                status: action.tiltak.status,
-                fom: action.tiltak.fom,
-                tom: action.tiltak.tom,
-              });
+          const tiltakListe = [...oppfolgingsdialog.tiltakListe].map(
+            (tiltak) => {
+              if (Number(action.tiltak.tiltakId) === tiltak.tiltakId) {
+                return Object.assign({}, tiltak, {
+                  sistEndretAv: oppfolgingsdialog.arbeidstaker,
+                  sistEndretDato: new Date(),
+                  tiltaknavn: action.tiltak.tiltaknavn,
+                  beskrivelse: action.tiltak.beskrivelse,
+                  beskrivelseIkkeAktuelt: action.tiltak.beskrivelseIkkeAktuelt,
+                  gjennomfoering: action.tiltak.gjennomfoering,
+                  status: action.tiltak.status,
+                  fom: action.tiltak.fom,
+                  tom: action.tiltak.tom,
+                });
+              }
+              return tiltak;
             }
-            return tiltak;
-          });
+          );
           return Object.assign({}, oppfolgingsdialog, {
             tiltakListe,
             sistEndretAv: oppfolgingsdialog.arbeidstaker,
@@ -310,9 +340,12 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
     case ARBEIDSOPPGAVE_SLETTET: {
       const data = state.data.map((oppfolgingsdialog) => {
         if (oppfolgingsdialog.id === Number(action.id)) {
-          const arbeidsoppgaveListe = oppfolgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
-            return action.arbeidsoppgaveId !== arbeidsoppgave.arbeidsoppgaveId;
-          });
+          const arbeidsoppgaveListe =
+            oppfolgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+              return (
+                action.arbeidsoppgaveId !== arbeidsoppgave.arbeidsoppgaveId
+              );
+            });
           return Object.assign({}, oppfolgingsdialog, {
             arbeidsoppgaveListe,
             sistEndretAv: oppfolgingsdialog.arbeidstaker,
@@ -329,25 +362,27 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
     case KOMMENTAR_LAGRET: {
       const data = state.data.map((oppfolgingsdialog) => {
         if (oppfolgingsdialog.id === Number(action.id)) {
-          const tiltakListe = [...oppfolgingsdialog.tiltakListe].map((tiltak) => {
-            if (tiltak.tiltakId === Number(action.tiltakId)) {
-              if (!action.kommentar.kommentarId) {
-                const nyKommentar = Object.assign({}, action.kommentar, {
-                  id: action.data,
-                  tekst: action.kommentar.tekst,
-                  opprettetTidspunkt: new Date(),
-                  opprettetAv: oppfolgingsdialog.arbeidstaker,
-                  sistEndretAv: oppfolgingsdialog.arbeidstaker,
-                });
-                return Object.assign({}, tiltak, {
-                  kommentarer: [nyKommentar, ...tiltak.kommentarer],
-                  sistEndretAv: oppfolgingsdialog.arbeidstaker,
-                  sistEndretDato: new Date(),
-                });
+          const tiltakListe = [...oppfolgingsdialog.tiltakListe].map(
+            (tiltak) => {
+              if (tiltak.tiltakId === Number(action.tiltakId)) {
+                if (!action.kommentar.kommentarId) {
+                  const nyKommentar = Object.assign({}, action.kommentar, {
+                    id: action.data,
+                    tekst: action.kommentar.tekst,
+                    opprettetTidspunkt: new Date(),
+                    opprettetAv: oppfolgingsdialog.arbeidstaker,
+                    sistEndretAv: oppfolgingsdialog.arbeidstaker,
+                  });
+                  return Object.assign({}, tiltak, {
+                    kommentarer: [nyKommentar, ...tiltak.kommentarer],
+                    sistEndretAv: oppfolgingsdialog.arbeidstaker,
+                    sistEndretDato: new Date(),
+                  });
+                }
               }
+              return tiltak;
             }
-            return tiltak;
-          });
+          );
           return Object.assign({}, oppfolgingsdialog, {
             tiltakListe,
             sistEndretAv: oppfolgingsdialog.arbeidstaker,
@@ -363,19 +398,23 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
     case KOMMENTAR_SLETTET: {
       const data = state.data.map((oppfolgingsdialog) => {
         if (oppfolgingsdialog.id === Number(action.id)) {
-          const tiltakListe = [...oppfolgingsdialog.tiltakListe].map((tiltak) => {
-            if (tiltak.tiltakId === Number(action.tiltakId)) {
-              const kommentarer = [...tiltak.kommentarer].filter((kommentar) => {
-                return action.kommentarId !== kommentar.id;
-              });
-              return Object.assign({}, tiltak, {
-                kommentarer,
-                sistEndretAv: oppfolgingsdialog.arbeidstaker,
-                sistEndretDato: new Date(),
-              });
+          const tiltakListe = [...oppfolgingsdialog.tiltakListe].map(
+            (tiltak) => {
+              if (tiltak.tiltakId === Number(action.tiltakId)) {
+                const kommentarer = [...tiltak.kommentarer].filter(
+                  (kommentar) => {
+                    return action.kommentarId !== kommentar.id;
+                  }
+                );
+                return Object.assign({}, tiltak, {
+                  kommentarer,
+                  sistEndretAv: oppfolgingsdialog.arbeidstaker,
+                  sistEndretDato: new Date(),
+                });
+              }
+              return tiltak;
             }
-            return tiltak;
-          });
+          );
           return Object.assign({}, oppfolgingsdialog, {
             tiltakListe,
             sistEndretAv: oppfolgingsdialog.arbeidstaker,

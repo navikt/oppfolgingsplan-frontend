@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import { Alert } from "@navikt/ds-react";
 
 const texts = {
-  title: 'Hva skjer nå?',
+  title: "Hva skjer nå?",
   info: {
     paragraph1: `
             Innen fire uker skal fastlegen din få se planen. Du og lederen din kan dele den med både legen og NAV når dere er blitt enige.
         `,
-    paragraph2: 'OBS: NAV kan ikke se planen før dere har delt den.',
+    paragraph2: "OBS: NAV kan ikke se planen før dere har delt den.",
   },
 };
 

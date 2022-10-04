@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { get, post } from '../../api/axios';
-import * as actions from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { call, put, takeEvery } from "redux-saga/effects";
+import { get, post } from "../../api/axios";
+import * as actions from "../../actions/oppfolgingsplan/oppfolgingsdialog_actions";
 
 export function* hentSykmeldtOppfolginger() {
   try {
@@ -40,7 +40,9 @@ export function* godkjennDialogSaga(action) {
       : `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/godkjennsist?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
 
     const data = yield call(post, url, action.gyldighetstidspunkt);
-    yield put(actions.dialogGodkjent(action.id, action.status, data, action.delMedNav));
+    yield put(
+      actions.dialogGodkjent(action.id, action.status, data, action.delMedNav)
+    );
   } catch (e) {
     if (e.code === 409) {
       window.location.reload();
@@ -64,6 +66,12 @@ export function* avvisDialogSaga(action) {
 export default function* oppfolgingsdialogerSagas() {
   yield takeEvery(actions.GODKJENN_DIALOG_FORESPURT, godkjennDialogSaga);
   yield takeEvery(actions.AVVIS_DIALOG_FORESPURT, avvisDialogSaga);
-  yield takeEvery(actions.HENT_OPPFOLGINGSDIALOGER_FORESPURT, hentSykmeldtOppfolginger);
-  yield takeEvery(actions.OPPRETT_OPPFOLGINGSDIALOG_FORESPURT, opprettOppfolgingsdialog);
+  yield takeEvery(
+    actions.HENT_OPPFOLGINGSDIALOGER_FORESPURT,
+    hentSykmeldtOppfolginger
+  );
+  yield takeEvery(
+    actions.OPPRETT_OPPFOLGINGSDIALOG_FORESPURT,
+    opprettOppfolgingsdialog
+  );
 }

@@ -1,29 +1,39 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import DayPicker, { DateUtils, LocaleUtils } from 'react-day-picker';
-import { erGyldigDato, erGyldigDatoformat } from '@/common/utils/datoUtils';
-import { fieldPropTypes } from '../../propTypes/fieldproptypes';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import DayPicker, { DateUtils, LocaleUtils } from "react-day-picker";
+import { erGyldigDato, erGyldigDatoformat } from "@/common/utils/datoUtils";
+import { fieldPropTypes } from "../../propTypes/fieldproptypes";
 
 export const MONTHS = [
-  'januar',
-  'februar',
-  'mars',
-  'april',
-  'mai',
-  'juni',
-  'juli',
-  'august',
-  'september',
-  'oktober',
-  'november',
-  'desember',
+  "januar",
+  "februar",
+  "mars",
+  "april",
+  "mai",
+  "juni",
+  "juli",
+  "august",
+  "september",
+  "oktober",
+  "november",
+  "desember",
 ];
-export const WEEKDAYS_LONG = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
-export const WEEKDAYS_SHORT = ['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør'];
+export const WEEKDAYS_LONG = [
+  "søndag",
+  "mandag",
+  "tirsdag",
+  "onsdag",
+  "torsdag",
+  "fredag",
+  "lørdag",
+];
+export const WEEKDAYS_SHORT = ["søn", "man", "tir", "ons", "tor", "fre", "lør"];
 
 export const formatDay = (date) => {
   // aria-label på dager
-  return `${WEEKDAYS_LONG[date.getDay()]} ${date.getDate()}. ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  return `${WEEKDAYS_LONG[date.getDay()]} ${date.getDate()}. ${
+    MONTHS[date.getMonth()]
+  } ${date.getFullYear()}`;
 };
 
 const localeUtils = Object.assign({}, LocaleUtils, {
@@ -36,7 +46,12 @@ const pad = (nr) => {
 
 export const Caption = ({ date }) => {
   return (
-    <div className="DayPicker-Caption" role="heading" aria-live="assertive" aria-atomic="true">
+    <div
+      className="DayPicker-Caption"
+      role="heading"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
       {`${MONTHS[date.getMonth()]} ${date.getFullYear()}`}
     </div>
   );
@@ -46,8 +61,13 @@ Caption.propTypes = {
   date: PropTypes.instanceOf(Date),
 };
 
-export const NavBar = ({ onNextClick, onPreviousClick, showPreviousButton, showNextButton }) => {
-  const className = 'DayPicker-NavButton';
+export const NavBar = ({
+  onNextClick,
+  onPreviousClick,
+  showPreviousButton,
+  showNextButton,
+}) => {
+  const className = "DayPicker-NavButton";
   return (
     <div role="toolbar">
       <button
@@ -92,11 +112,11 @@ class DayPickerComponent extends Component {
     lukk = () => {
       this.props.lukk();
     };
-    document.addEventListener('click', lukk);
+    document.addEventListener("click", lukk);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', lukk);
+    document.removeEventListener("click", lukk);
   }
 
   getDateFromValue() {
@@ -105,7 +125,7 @@ class DayPickerComponent extends Component {
     if (!erGyldigDatoformat(v) || !erGyldigDato(v)) {
       return undefined;
     }
-    const d = input.value.split('.');
+    const d = input.value.split(".");
     return new Date(`${d[2]}-${d[1]}-${d[0]}`);
   }
 
@@ -126,7 +146,9 @@ class DayPickerComponent extends Component {
 
   erDeaktivertDag(day) {
     const { tidligsteFom, senesteTom } = this.props;
-    const _day = new Date(`${day.getFullYear()}-${pad(day.getMonth() + 1)}-${pad(day.getDate())}`);
+    const _day = new Date(
+      `${day.getFullYear()}-${pad(day.getMonth() + 1)}-${pad(day.getDate())}`
+    );
     return _day < tidligsteFom || _day > senesteTom;
   }
 

@@ -1,29 +1,30 @@
-import {useApiBasePath} from "@/common/hooks/routeHooks";
-import {get} from "@/common/api/axios/axios";
-import {useQuery} from "react-query";
-import {ApiErrorException} from "@/common/api/axios/errors";
-import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
+import { useApiBasePath } from "@/common/hooks/routeHooks";
+import { get } from "@/common/api/axios/axios";
+import { useQuery } from "react-query";
+import { ApiErrorException } from "@/common/api/axios/errors";
+import { SykmeldingDTO } from "@/server/service/schema/sykmeldingSchema";
 
 export const SYKMELDINGER_SM = "sykmeldinger-sykmeldt";
 
 export const useSykmeldingerSM = () => {
-    const apiBasePath = useApiBasePath();
+  const apiBasePath = useApiBasePath();
 
-    const fetchSykmeldinger = () => get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`);
+  const fetchSykmeldinger = () =>
+    get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`);
 
-    return useQuery<SykmeldingDTO[], ApiErrorException>(
-        SYKMELDINGER_SM,
-        fetchSykmeldinger
-    );
+  return useQuery<SykmeldingDTO[], ApiErrorException>(
+    SYKMELDINGER_SM,
+    fetchSykmeldinger
+  );
 };
 
 export const useSykmeldtFnr = (): string | null => {
-    const sykmeldinger = useSykmeldingerSM();
+  const sykmeldinger = useSykmeldingerSM();
 
-    if (sykmeldinger.data) {
-        const sykmelding = sykmeldinger.data.find(sykmelding => sykmelding.fnr);
-        return sykmelding?.fnr || null
-    }
+  if (sykmeldinger.data) {
+    const sykmelding = sykmeldinger.data.find((sykmelding) => sykmelding.fnr);
+    return sykmelding?.fnr || null;
+  }
 
-    return null;
+  return null;
 };

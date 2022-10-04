@@ -1,7 +1,7 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { post } from '../../api/axios';
-import * as actions from '../../actions/oppfolgingsplan/tiltak_actions';
-import { input2RSTiltak } from '../../../common/utils/tiltakUtils';
+import { call, put, takeEvery } from "redux-saga/effects";
+import { post } from "../../api/axios";
+import * as actions from "../../actions/oppfolgingsplan/tiltak_actions";
+import { input2RSTiltak } from "../../../common/utils/tiltakUtils";
 
 export function* lagreTiltak(action) {
   try {

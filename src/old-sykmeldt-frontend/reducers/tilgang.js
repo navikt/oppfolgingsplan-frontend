@@ -3,7 +3,7 @@ import {
   SJEKKET_TILGANG,
   SJEKK_TILGANG_FEILET,
   SJEKK_TILGANG_403,
-} from '../actions/oppfolgingsplan/sjekkTilgang_actions';
+} from "../actions/oppfolgingsplan/sjekkTilgang_actions";
 
 const initiellState = {
   data: {},

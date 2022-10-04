@@ -1,5 +1,5 @@
-import * as actions from '../actions/oppfolgingsplan/person_actions';
-import { HENTER_OPPFOLGINGSDIALOGER } from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import * as actions from "../actions/oppfolgingsplan/person_actions";
+import { HENTER_OPPFOLGINGSDIALOGER } from "../actions/oppfolgingsplan/oppfolgingsdialog_actions";
 
 const initiellState = {
   henter: [],

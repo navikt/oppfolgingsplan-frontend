@@ -1,8 +1,8 @@
-import React from 'react';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { toDateMedMaanedNavn } from '@/common/utils/datoUtils';
-import BildeTekstLinje from '../../../app/BildeTekstLinje';
-import { CalendarImage } from '@/common/images/imageComponents';
+import React from "react";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
+import { toDateMedMaanedNavn } from "@/common/utils/datoUtils";
+import BildeTekstLinje from "../../../app/BildeTekstLinje";
+import { CalendarImage } from "@/common/images/imageComponents";
 
 const textOppfolgingsplanDuration = (dateFrom, dateTo) => {
   return `Planens varighet: ${dateFrom} – ${dateTo}`;
@@ -15,8 +15,12 @@ const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsplan }) => {
         imgUrl={CalendarImage}
         imgAlt=""
         tekst={textOppfolgingsplanDuration(
-          toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.fom),
-          toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.avbruttPlan.tidspunkt)
+          toDateMedMaanedNavn(
+            oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.fom
+          ),
+          toDateMedMaanedNavn(
+            oppfolgingsplan.godkjentPlan.avbruttPlan.tidspunkt
+          )
         )}
       />
     </div>

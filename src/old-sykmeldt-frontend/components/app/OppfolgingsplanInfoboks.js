@@ -1,8 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Panel} from "@navikt/ds-react";
+import React from "react";
+import PropTypes from "prop-types";
+import { Panel } from "@navikt/ds-react";
 
-const OppfolgingsplanInfoboks = ({ svgUrl, svgAlt, tittel, tekst, children }) => {
+const OppfolgingsplanInfoboks = ({
+  svgUrl,
+  svgAlt,
+  tittel,
+  tekst,
+  children,
+}) => {
   return (
     <Panel border={true}>
       <div className="illustrertTittel">

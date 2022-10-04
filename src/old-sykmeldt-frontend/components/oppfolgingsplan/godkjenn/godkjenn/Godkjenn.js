@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import GodkjennPlanOversiktInformasjon from './GodkjennPlanOversiktInformasjon';
-import ReviderEllerGodkjennPlan from './ReviderEllerGodkjennPlan';
-import GodkjennPlanLightboks from './GodkjennPlanLightboks';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
+import GodkjennPlanOversiktInformasjon from "./GodkjennPlanOversiktInformasjon";
+import ReviderEllerGodkjennPlan from "./ReviderEllerGodkjennPlan";
+import GodkjennPlanLightboks from "./GodkjennPlanLightboks";
 
 class Godkjenn extends Component {
   constructor(props) {
@@ -19,8 +19,8 @@ class Godkjenn extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    window.location.hash = 'godkjenn';
-    window.sessionStorage.setItem('hash', 'godkjenn');
+    window.location.hash = "godkjenn";
+    window.sessionStorage.setItem("hash", "godkjenn");
   }
 
   componentDidMount() {
@@ -41,14 +41,21 @@ class Godkjenn extends Component {
 
   sendGodkjennPlan(gyldighetstidspunkt, status, delMedNav) {
     const { oppfolgingsdialog } = this.props;
-    this.props.godkjennPlan(oppfolgingsdialog.id, gyldighetstidspunkt, status, delMedNav);
+    this.props.godkjennPlan(
+      oppfolgingsdialog.id,
+      gyldighetstidspunkt,
+      status,
+      delMedNav
+    );
   }
 
   render() {
     const { oppfolgingsdialog, settAktivtSteg, rootUrl } = this.props;
     return (
       <div ref={this.formRef} className="godkjennPlanOversikt">
-        <GodkjennPlanOversiktInformasjon oppfolgingsdialog={oppfolgingsdialog} />
+        <GodkjennPlanOversiktInformasjon
+          oppfolgingsdialog={oppfolgingsdialog}
+        />
         {!this.state.visGodkjenPlanSkjema && (
           <ReviderEllerGodkjennPlan
             oppfolgingsdialog={oppfolgingsdialog}
