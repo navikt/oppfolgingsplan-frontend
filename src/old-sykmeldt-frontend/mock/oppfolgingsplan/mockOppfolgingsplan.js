@@ -1,9 +1,9 @@
-const defaultOppfolgingsplaner = require('./defaultOppfolgingsplaner');
-const dateUtil = require('../util/dateUtil');
+const defaultOppfolgingsplaner = require("./defaultOppfolgingsplaner");
+const dateUtil = require("../util/dateUtil");
 
-const TYPE_DEFAULT = 'default';
-const TYPE_GODKJENNING_RECEIVED = 'godkjenningReceived';
-const TYPE_GODKJENT = 'godkjent';
+const TYPE_DEFAULT = "default";
+const TYPE_GODKJENNING_RECEIVED = "godkjenningReceived";
+const TYPE_GODKJENT = "godkjent";
 
 function getOppfolgingsplanGodkjenningReceived(oppfolgingsplan) {
   const today = new Date();
@@ -15,7 +15,10 @@ function getOppfolgingsplanGodkjenningReceived(oppfolgingsplan) {
         godkjenningsTidspunkt: new Date(),
         godkjentAv: {
           ...oppfolgingsplan.arbeidsgiver.naermesteLeder,
-          fnr: oppfolgingsplan.arbeidstaker.fnr.slice(0, oppfolgingsplan.arbeidstaker.fnr.length - 1),
+          fnr: oppfolgingsplan.arbeidstaker.fnr.slice(
+            0,
+            oppfolgingsplan.arbeidstaker.fnr.length - 1
+          ),
         },
         gyldighetstidspunkt: {
           fom: dateUtil.leggTilDagerPaDato(today, -7).toJSON(),
@@ -44,14 +47,14 @@ function getOppfolgingsplanGodkjent(oppfolgingsplan) {
       deltMedNAV: false,
       deltMedFastlegeTidspunkt: null,
       deltMedFastlege: false,
-      dokumentUuid: '12345678-1234-1234-1234-123456789abc',
+      dokumentUuid: "12345678-1234-1234-1234-123456789abc",
       avbruttPlan: null,
     },
     avbruttPlanListe: [
       {
         av: {
-          navn: ' ',
-          fnr: '23106822999',
+          navn: " ",
+          fnr: "23106822999",
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -59,7 +62,7 @@ function getOppfolgingsplanGodkjent(oppfolgingsplan) {
           evaluering: null,
           stillinger: [],
         },
-        tidspunkt: '2019-12-13T15:30:01.679',
+        tidspunkt: "2019-12-13T15:30:01.679",
         id: 3203,
       },
     ],
@@ -67,7 +70,8 @@ function getOppfolgingsplanGodkjent(oppfolgingsplan) {
 }
 
 function getOppfolgingsplaner(type) {
-  const oppfolgingsplaner = defaultOppfolgingsplaner.getDefaultOppfolgingsplaner() || [];
+  const oppfolgingsplaner =
+    defaultOppfolgingsplaner.getDefaultOppfolgingsplaner() || [];
   if (oppfolgingsplaner.length === 0) {
     return [];
   }

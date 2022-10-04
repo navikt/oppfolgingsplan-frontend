@@ -1,19 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
-import getContextRoot from '@/common/utils/getContextRoot';
-import MottattGodkjenninger from './MottattGodkjenninger';
-import GodkjennPlanSendt from './GodkjennPlanSendt';
+import React from "react";
+import PropTypes from "prop-types";
+import { oppfolgingsplanPt } from "@/propTypes/opproptypes";
+import getContextRoot from "@/common/utils/getContextRoot";
+import MottattGodkjenninger from "./MottattGodkjenninger";
+import GodkjennPlanSendt from "./GodkjennPlanSendt";
 
 const harMottattGodkjenninger = (oppfolgingsdialog) => {
   const godkjenninger = oppfolgingsdialog.godkjenninger;
   const aktoer = oppfolgingsdialog.arbeidstaker;
-  return godkjenninger.length > 0 && godkjenninger[0].godkjentAv.fnr && godkjenninger[0].godkjentAv.fnr !== aktoer.fnr;
+  return (
+    godkjenninger.length > 0 &&
+    godkjenninger[0].godkjentAv.fnr &&
+    godkjenninger[0].godkjentAv.fnr !== aktoer.fnr
+  );
 };
 
-const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrlPlaner }) => {
-  window.location.hash = 'godkjenn';
-  window.sessionStorage.setItem('hash', 'godkjenn');
+const Godkjenninger = ({
+  oppfolgingsdialog,
+  godkjennPlan,
+  nullstillGodkjenning,
+  avvisDialog,
+  rootUrlPlaner,
+}) => {
+  window.location.hash = "godkjenn";
+  window.sessionStorage.setItem("hash", "godkjenn");
 
   if (harMottattGodkjenninger(oppfolgingsdialog)) {
     return (

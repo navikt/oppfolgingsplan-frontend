@@ -1,3 +1,3 @@
-const activeMockAG = {}
+const activeMockAG = {};
 
 export default activeMockAG;

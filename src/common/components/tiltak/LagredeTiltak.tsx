@@ -1,21 +1,28 @@
-import React, {ReactElement} from "react";
-import {LagretTiltak} from "@/common/components/tiltak/LagretTiltak";
-import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
+import React, { ReactElement } from "react";
+import { LagretTiltak } from "@/common/components/tiltak/LagretTiltak";
+import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
-    oppfolgingsplan: OppfolgingsplanDTO
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
+export const LagredeTiltak = ({
+  oppfolgingsplan,
+}: Props): ReactElement | null => {
+  const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
 
-export const LagredeTiltak = ({oppfolgingsplan}: Props): ReactElement | null => {
-    const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
+  if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null;
 
-    if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null
+  const alleTiltak = oppfolgingsplan.tiltakListe.map((tiltak, index) => {
+    return (
+      <LagretTiltak
+        key={index}
+        arbeidstakerFnr={arbeidstakerFnr}
+        tiltak={tiltak}
+        oppfolgingsplanId={oppfolgingsplan.id}
+      />
+    );
+  });
 
-    const alleTiltak = oppfolgingsplan.tiltakListe.map((tiltak, index) => {
-        return <LagretTiltak key={index} arbeidstakerFnr={arbeidstakerFnr} tiltak={tiltak}
-                             oppfolgingsplanId={oppfolgingsplan.id}/>
-    })
-
-    return <>{alleTiltak}</>
-}
+  return <>{alleTiltak}</>;
+};

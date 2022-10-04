@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
-import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
-import ArbeidsoppgaveOverskrift from './ArbeidsoppgaveOverskrift';
-import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
-import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import {
+  arbeidsoppgavePt,
+  arbeidsoppgaverReducerPt,
+} from "../../../propTypes/opproptypes";
+import ArbeidsoppgaveInformasjon from "./ArbeidsoppgaveInformasjon";
+import ArbeidsoppgaveOverskrift from "./ArbeidsoppgaveOverskrift";
+import LagreArbeidsoppgaveSkjema from "./LagreArbeidsoppgaveSkjema";
+import ArbeidsoppgaveVarselFeil from "./ArbeidsoppgaveVarselFeil";
 
 const texts = {
-  updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+  updateError:
+    "En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.",
 };
 
 const ArbeidsoppgaveVarselFeilStyled = styled.div`
@@ -23,7 +27,7 @@ class Arbeidsoppgave extends Component {
       visLagreSkjema: false,
       visLagringFeilet: false,
       visSlettingFeilet: false,
-      varselTekst: '',
+      varselTekst: "",
     };
     this.visLagreSkjema = this.visLagreSkjema.bind(this);
     this.visElementInformasjon = this.visElementInformasjon.bind(this);
@@ -33,12 +37,17 @@ class Arbeidsoppgave extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.element.arbeidsoppgaveId === nextProps.arbeidsoppgaverReducer.feiletOppgaveId) {
+    if (
+      this.props.element.arbeidsoppgaveId ===
+      nextProps.arbeidsoppgaverReducer.feiletOppgaveId
+    ) {
       if (
         ((nextProps.arbeidsoppgaverReducer.lagringFeilet &&
-          nextProps.arbeidsoppgaverReducer.lagringFeilet !== this.props.arbeidsoppgaverReducer.lagringFeilet) ||
+          nextProps.arbeidsoppgaverReducer.lagringFeilet !==
+            this.props.arbeidsoppgaverReducer.lagringFeilet) ||
           (nextProps.arbeidsoppgaverReducer.slettingFeilet &&
-            nextProps.arbeidsoppgaverReducer.slettingFeilet !== this.props.arbeidsoppgaverReducer.slettingFeilet)) &&
+            nextProps.arbeidsoppgaverReducer.slettingFeilet !==
+              this.props.arbeidsoppgaverReducer.slettingFeilet)) &&
         nextProps.arbeidsoppgaverReducer.feiletOppgaveId > 0
       ) {
         if (nextProps.arbeidsoppgaverReducer.slettingFeilet) {
@@ -54,13 +63,19 @@ class Arbeidsoppgave extends Component {
           !nextProps.arbeidsoppgaverReducer.lagringFeilet &&
           !nextProps.arbeidsoppgaverReducer.slettingFeilet
         ) {
-          this.visFeil(false, false, '');
+          this.visFeil(false, false, "");
         }
-      } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-        this.visFeil(false, false, '');
+      } else if (
+        !nextProps.arbeidsoppgaverReducer.lagringFeilet &&
+        !nextProps.arbeidsoppgaverReducer.slettingFeilet
+      ) {
+        this.visFeil(false, false, "");
       }
-    } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-      this.visFeil(false, false, '');
+    } else if (
+      !nextProps.arbeidsoppgaverReducer.lagringFeilet &&
+      !nextProps.arbeidsoppgaverReducer.slettingFeilet
+    ) {
+      this.visFeil(false, false, "");
     }
   }
 
@@ -117,7 +132,9 @@ class Arbeidsoppgave extends Component {
                 sendSlett={this.sendSlett}
               />
             </div>
-            {!this.state.visLagreSkjema && <ArbeidsoppgaveInformasjon element={element} />}
+            {!this.state.visLagreSkjema && (
+              <ArbeidsoppgaveInformasjon element={element} />
+            )}
             {this.state.visLagreSkjema && (
               <LagreArbeidsoppgaveSkjema
                 sendLagre={this.sendLagre}
@@ -154,7 +171,7 @@ Arbeidsoppgave.propTypes = {
 };
 
 Arbeidsoppgave.defaultProps = {
-  Overskrift: 'H3',
+  Overskrift: "H3",
 };
 
 export const mapStateToProps = (state) => {
@@ -163,6 +180,8 @@ export const mapStateToProps = (state) => {
   };
 };
 
-const ArbeidsoppgaveContainer = connect(mapStateToProps, null, null, { pure: false })(Arbeidsoppgave);
+const ArbeidsoppgaveContainer = connect(mapStateToProps, null, null, {
+  pure: false,
+})(Arbeidsoppgave);
 
 export default ArbeidsoppgaveContainer;

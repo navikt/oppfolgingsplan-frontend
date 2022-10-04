@@ -1,6 +1,9 @@
-import * as actions from '../actions/oppfolgingsplan/kommentar_actions';
-import { LAGRER_TILTAK, SLETTER_TILTAK } from '../actions/oppfolgingsplan/tiltak_actions';
-import { SETT_AKTIVT_STEG } from '../actions/oppfolgingsplan/toggle_actions';
+import * as actions from "../actions/oppfolgingsplan/kommentar_actions";
+import {
+  LAGRER_TILTAK,
+  SLETTER_TILTAK,
+} from "../actions/oppfolgingsplan/tiltak_actions";
+import { SETT_AKTIVT_STEG } from "../actions/oppfolgingsplan/toggle_actions";
 
 const initiellState = {
   slettet: false,

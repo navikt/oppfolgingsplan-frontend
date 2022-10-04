@@ -1,17 +1,17 @@
-import React from 'react';
-import {Button} from "@navikt/ds-react";
+import React from "react";
+import { Button } from "@navikt/ds-react";
 
 const texts = {
-  question: 'Ønsker du å basere den nye planen på den som gjaldt sist?',
+  question: "Ønsker du å basere den nye planen på den som gjaldt sist?",
   answer: {
-    yes: 'Ja, ta utgangspunkt i den tidligere planen',
-    no: 'Nei, start en ny plan der vi ikke har fylt ut noe',
+    yes: "Ja, ta utgangspunkt i den tidligere planen",
+    no: "Nei, start en ny plan der vi ikke har fylt ut noe",
   },
-  buttonSubmit: 'Start',
+  buttonSubmit: "Start",
 };
 
 interface Props {
-    onSubmit(values: any): void
+  onSubmit(values: any): void;
 }
 
 export const BaserTidligereSkjema = ({ onSubmit }: Props) => {

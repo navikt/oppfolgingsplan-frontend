@@ -12,7 +12,7 @@ export function scrollTo(el, duration = 500, callback) {
   if (!el) {
     return;
   }
-  if (typeof el === 'number') {
+  if (typeof el === "number") {
     end = parseInt(el, 10);
   } else {
     end = getTop(el, start);
@@ -32,7 +32,7 @@ export function scrollTo(el, duration = 500, callback) {
     window.scroll(0, position(start, end, elapsed, duration));
 
     if (elapsed > duration) {
-      if (typeof callback === 'function') {
+      if (typeof callback === "function") {
         callback(el);
       }
     } else {

@@ -1,5 +1,5 @@
-import * as actiontyper from '../actions/actiontyper';
-import { toDate } from '../../common/utils/datoUtils';
+import * as actiontyper from "../actions/actiontyper";
+import { toDate } from "../../common/utils/datoUtils";
 
 const initiellState = {
   henter: false,

@@ -1,4 +1,4 @@
-import { restdatoTildato } from './dateUtils';
+import { restdatoTildato } from "./dateUtils";
 
 export const getStartDateFromTiltakListe = (tiltakList) => {
   const tiltakSortedByStartDate = tiltakList
@@ -8,7 +8,10 @@ export const getStartDateFromTiltakListe = (tiltakList) => {
     .sort((t1, t2) => {
       return new Date(t1.fom) - new Date(t2.fom);
     });
-  return tiltakSortedByStartDate[0] && restdatoTildato(tiltakSortedByStartDate[0].fom);
+  return (
+    tiltakSortedByStartDate[0] &&
+    restdatoTildato(tiltakSortedByStartDate[0].fom)
+  );
 };
 
 export const getEndDateFromTiltakListe = (tiltakList) => {
@@ -19,5 +22,7 @@ export const getEndDateFromTiltakListe = (tiltakList) => {
     .sort((t1, t2) => {
       return new Date(t2.tom) - new Date(t1.tom);
     });
-  return tiltakSortedByEndDate[0] && restdatoTildato(tiltakSortedByEndDate[0].tom);
+  return (
+    tiltakSortedByEndDate[0] && restdatoTildato(tiltakSortedByEndDate[0].tom)
+  );
 };

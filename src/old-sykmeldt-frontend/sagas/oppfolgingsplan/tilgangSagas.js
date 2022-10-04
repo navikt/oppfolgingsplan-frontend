@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { get } from '../../api/axios';
-import * as actions from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { call, put, takeEvery } from "redux-saga/effects";
+import { get } from "../../api/axios";
+import * as actions from "../../actions/oppfolgingsplan/sjekkTilgang_actions";
 
 export function* sjekkerTilgang() {
   try {

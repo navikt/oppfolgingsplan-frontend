@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { post } from '../../api/axios';
-import * as actions from '../../actions/oppfolgingsplan/delMedFastlege_actions';
+import { call, put, takeEvery } from "redux-saga/effects";
+import { post } from "../../api/axios";
+import * as actions from "../../actions/oppfolgingsplan/delMedFastlege_actions";
 
 export function* delMedFastlege(action) {
   try {

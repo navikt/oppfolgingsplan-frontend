@@ -1,9 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
-import Arbeidsoppgave from './Arbeidsoppgave';
+import React from "react";
+import PropTypes from "prop-types";
+import { arbeidsoppgavePt } from "../../../propTypes/opproptypes";
+import Arbeidsoppgave from "./Arbeidsoppgave";
 
-const ArbeidsoppgaverListe = ({ liste, sendLagre, sendSlett, fnr, rootUrlImg, feilMelding, visFeilMelding }) => {
+const ArbeidsoppgaverListe = ({
+  liste,
+  sendLagre,
+  sendSlett,
+  fnr,
+  rootUrlImg,
+  feilMelding,
+  visFeilMelding,
+}) => {
   return (
     <div className="oppfolgingsdialogtabell">
       {liste.map((element) => {

@@ -1,5 +1,5 @@
-import * as actions from '../actions/oppfolgingsplan/kontaktinfo_actions';
-import { HENTER_OPPFOLGINGSDIALOGER } from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import * as actions from "../actions/oppfolgingsplan/kontaktinfo_actions";
+import { HENTER_OPPFOLGINGSDIALOGER } from "../actions/oppfolgingsplan/oppfolgingsdialog_actions";
 
 const initiellState = {
   henter: [],
@@ -23,7 +23,10 @@ const kontaktinfo = (state = initiellState, action = {}) => {
         henter: state.henter.filter((henter) => {
           return henter !== action.fnr;
         }),
-        data: state.data.concat({ fnr: action.fnr, kontaktinfo: action.kontaktinfo }),
+        data: state.data.concat({
+          fnr: action.fnr,
+          kontaktinfo: action.kontaktinfo,
+        }),
         hentet: state.hentet.concat(action.fnr),
         hentingFeilet: state.hentingFeilet.filter((hentingFeilet) => {
           return hentingFeilet.fnr !== action.fnr;

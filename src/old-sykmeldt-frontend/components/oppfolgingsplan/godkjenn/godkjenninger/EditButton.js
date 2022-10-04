@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
 
 const texts = {
-  buttonDecline: 'Gå inn i planen for å gjøre endringer',
+  buttonDecline: "Gå inn i planen for å gjøre endringer",
 };
 
 const StyledButton = styled.button`
@@ -21,7 +21,7 @@ export const EditButton = ({ oppfolgingsdialog, avvisDialog }) => {
     <StyledButton
       onClick={() => {
         avvisDialog(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
-        window.location.hash = 'arbeidsoppgaver';
+        window.location.hash = "arbeidsoppgaver";
       }}
     >
       {texts.buttonDecline}

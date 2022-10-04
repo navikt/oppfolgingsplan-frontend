@@ -1,4 +1,4 @@
-import * as actions from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
+import * as actions from "../actions/oppfolgingsplan/nullstillGodkjenning_actions";
 
 const initiellState = {
   sender: false,

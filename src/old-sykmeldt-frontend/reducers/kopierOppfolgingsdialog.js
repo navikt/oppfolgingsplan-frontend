@@ -2,7 +2,7 @@ import {
   KOPIERER_OPPFOLGINGSDIALOG,
   OPPFOLGINGSDIALOG_KOPIERT,
   KOPIER_OPPFOLGINGSDIALOG_FEILET,
-} from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+} from "../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions";
 
 const initiellState = {
   sender: false,

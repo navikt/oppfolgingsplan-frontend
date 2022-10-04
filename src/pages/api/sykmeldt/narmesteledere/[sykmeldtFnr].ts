@@ -1,19 +1,19 @@
-import {NextApiRequest, NextApiResponse} from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import {ncOptions} from "@/server/utils/ncOptions";
-import {withSentry} from "@sentry/nextjs";
+import { ncOptions } from "@/server/utils/ncOptions";
+import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "@/server/auth/idporten/idportenToken";
-import {fetchNarmesteLedereSM} from "@/server/data/sykmeldt/fetchNarmesteLedereSM";
-import {
-    NextApiResponseNarmesteLedereSM
-} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
+import { fetchNarmesteLedereSM } from "@/server/data/sykmeldt/fetchNarmesteLedereSM";
+import { NextApiResponseNarmesteLedereSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
+import { NarmesteLedereDTO } from "@/server/service/schema/narmestelederSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse<NarmesteLedereDTO>>(ncOptions)
-    .use(getIdportenToken)
-    .use(fetchNarmesteLedereSM)
-    .get(async (req: NextApiRequest, res: NextApiResponseNarmesteLedereSM) => {
-        res.status(200).json(res.narmesteLedere);
-    });
+const handler = nc<NextApiRequest, NextApiResponse<NarmesteLedereDTO>>(
+  ncOptions
+)
+  .use(getIdportenToken)
+  .use(fetchNarmesteLedereSM)
+  .get(async (req: NextApiRequest, res: NextApiResponseNarmesteLedereSM) => {
+    res.status(200).json(res.narmesteLedere);
+  });
 
 export default withSentry(handler);

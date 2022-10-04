@@ -9,15 +9,15 @@ const SpinnerContainer = styled.div`
 `;
 
 const AppSpinner = (): ReactElement => {
-    return (
-        <SpinnerContainer>
-            <Loader
-                variant="neutral"
-                size="2xlarge"
-                title="Vent litt mens siden laster"
-            />
-        </SpinnerContainer>
-    );
+  return (
+    <SpinnerContainer>
+      <Loader
+        variant="neutral"
+        size="2xlarge"
+        title="Vent litt mens siden laster"
+      />
+    </SpinnerContainer>
+  );
 };
 
 export default AppSpinner;

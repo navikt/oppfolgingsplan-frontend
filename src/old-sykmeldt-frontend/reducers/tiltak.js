@@ -5,14 +5,14 @@ import {
   SLETTER_TILTAK,
   TILTAK_SLETTET,
   SLETT_TILTAK_FEILET,
-} from '../actions/oppfolgingsplan/tiltak_actions';
+} from "../actions/oppfolgingsplan/tiltak_actions";
 import {
   KOMMENTAR_LAGRET,
   KOMMENTAR_SLETTET,
   LAGRER_KOMMENTAR,
   SLETTER_KOMMENTAR,
-} from '../actions/oppfolgingsplan/kommentar_actions';
-import { SETT_AKTIVT_STEG } from '../actions/oppfolgingsplan/toggle_actions';
+} from "../actions/oppfolgingsplan/kommentar_actions";
+import { SETT_AKTIVT_STEG } from "../actions/oppfolgingsplan/toggle_actions";
 
 const initiellState = {
   slettet: false,

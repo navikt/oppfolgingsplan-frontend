@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feilmelding from './Feilmelding';
-import { fieldPropTypes } from '../../propTypes/fieldproptypes';
+import React from "react";
+import PropTypes from "prop-types";
+import Feilmelding from "./Feilmelding";
+import { fieldPropTypes } from "../../propTypes/fieldproptypes";
 
 const Tekstfelt = (props) => {
   const { className, id, input, meta } = props;
@@ -10,10 +10,10 @@ const Tekstfelt = (props) => {
       <input
         autoComplete="off"
         placeholder={props.placeholder}
-        type={props.type || 'text'}
+        type={props.type || "text"}
         id={id}
         className={`skjemaelement__input ${className}${
-          meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''
+          meta.touched && meta.error ? " skjemaelement__input--harFeil" : ""
         }`}
         {...input}
         value={input.value}

@@ -1,22 +1,20 @@
-import {useApiBasePath} from "@/common/hooks/routeHooks";
-import {get} from "@/common/api/axios/axios";
-import {useQuery} from "react-query";
-import {ApiErrorException} from "@/common/api/axios/errors";
-import {TilgangDTO} from "@/server/service/schema/tilgangSchema";
-import {useSykmeldtFnr} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { useApiBasePath } from "@/common/hooks/routeHooks";
+import { get } from "@/common/api/axios/axios";
+import { useQuery } from "react-query";
+import { ApiErrorException } from "@/common/api/axios/errors";
+import { TilgangDTO } from "@/server/service/schema/tilgangSchema";
+import { useSykmeldtFnr } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 
 export const TILGANG_SM = "tilgang-sykmeldt";
 
 export const useTilgangSM = () => {
-    const apiBasePath = useApiBasePath();
-    const sykmeldtFnr = useSykmeldtFnr()
+  const apiBasePath = useApiBasePath();
+  const sykmeldtFnr = useSykmeldtFnr();
 
-    const fetchTilgang = () => get<TilgangDTO>(`${apiBasePath}/tilgang/${sykmeldtFnr}`);
+  const fetchTilgang = () =>
+    get<TilgangDTO>(`${apiBasePath}/tilgang/${sykmeldtFnr}`);
 
-    return useQuery<TilgangDTO, ApiErrorException>(
-        TILGANG_SM,
-        fetchTilgang, {
-            enabled: !!sykmeldtFnr
-        }
-    );
+  return useQuery<TilgangDTO, ApiErrorException>(TILGANG_SM, fetchTilgang, {
+    enabled: !!sykmeldtFnr,
+  });
 };

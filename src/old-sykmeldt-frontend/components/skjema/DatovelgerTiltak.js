@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Field, formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
-import MaskedInput from 'react-maskedinput';
-import Feilmelding from './Feilmelding';
-import DayPickerComponent from './DayPicker';
-import { fieldPropTypes } from '../../propTypes/fieldproptypes';
-import { toDatePrettyPrint } from '@/common/utils/datoUtils';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Field, formValueSelector } from "redux-form";
+import { connect } from "react-redux";
+import MaskedInput from "react-maskedinput";
+import Feilmelding from "./Feilmelding";
+import DayPickerComponent from "./DayPicker";
+import { fieldPropTypes } from "../../propTypes/fieldproptypes";
+import { toDatePrettyPrint } from "@/common/utils/datoUtils";
 
-export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
+export const DATOVELGERFELT_SKJEMA = "DATOVELGERFELT_SKJEMA";
 
 export class DatoField extends Component {
   constructor(props) {
     super(props);
     this.state = {
       erApen: false,
-      dato: props.dato ? props.dato : '',
+      dato: props.dato ? props.dato : "",
     };
     this.setRef = this.setRef.bind(this);
   }
@@ -93,7 +93,9 @@ export class DatoField extends Component {
               placeholder="dd.mm.åååå"
               id={id}
               className={`skjemaelement__input datovelger__input${
-                meta.touched && meta.error ? ' skjemaelement__input--harFeil' : ''
+                meta.touched && meta.error
+                  ? " skjemaelement__input--harFeil"
+                  : ""
               }`}
               {...maskedinput}
             />
@@ -112,7 +114,7 @@ export class DatoField extends Component {
               }}
               aria-pressed={this.erApen}
             >
-              {this.state.erApen ? 'Skjul datovelger' : 'Vis datovelger'}
+              {this.state.erApen ? "Skjul datovelger" : "Vis datovelger"}
             </button>
           </div>
           {this.state.erApen && (

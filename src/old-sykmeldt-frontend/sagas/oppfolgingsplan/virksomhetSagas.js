@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import * as actions from '../../actions/oppfolgingsplan/virksomhet_actions';
-import { get } from '../../api/axios';
+import { call, put, takeEvery } from "redux-saga/effects";
+import * as actions from "../../actions/oppfolgingsplan/virksomhet_actions";
+import { get } from "../../api/axios";
 
 export function* hentVirksomhetSaga(action) {
   try {

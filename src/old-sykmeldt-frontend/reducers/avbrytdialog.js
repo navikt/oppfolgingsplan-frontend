@@ -1,4 +1,4 @@
-import * as actions from '../actions/oppfolgingsplan/avbrytdialog_actions';
+import * as actions from "../actions/oppfolgingsplan/avbrytdialog_actions";
 
 const initiellState = {
   sender: false,

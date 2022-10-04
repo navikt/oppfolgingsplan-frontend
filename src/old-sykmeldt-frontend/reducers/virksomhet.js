@@ -1,5 +1,5 @@
-import * as actions from '../actions/oppfolgingsplan/virksomhet_actions';
-import { HENTER_OPPFOLGINGSDIALOGER } from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import * as actions from "../actions/oppfolgingsplan/virksomhet_actions";
+import { HENTER_OPPFOLGINGSDIALOGER } from "../actions/oppfolgingsplan/oppfolgingsdialog_actions";
 
 const initiellState = {
   henter: [],
@@ -27,7 +27,10 @@ const virksomhet = (state = initiellState, action = {}) => {
         hentingFeilet: state.hentingFeilet.filter((hentingFeilet) => {
           return hentingFeilet.virksomhetsnummer !== action.virksomhetsnummer;
         }),
-        data: state.data.concat({ virksomhetsnummer: action.virksomhetsnummer, navn: action.virksomhet.navn }),
+        data: state.data.concat({
+          virksomhetsnummer: action.virksomhetsnummer,
+          navn: action.virksomhet.navn,
+        }),
       });
     }
     case actions.HENT_VIRKSOMHET_FEILET: {
