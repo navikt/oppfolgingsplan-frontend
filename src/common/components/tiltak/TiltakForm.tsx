@@ -52,7 +52,7 @@ export const TiltakForm = ({
                                onCancel
                            }: Props) => {
     const formFunctions = useForm<FormValues>();
-    const {handleSubmit, register, control} = formFunctions
+    const {handleSubmit, register, formState: {errors}} = formFunctions
 
     return (
         <FormProvider {...formFunctions} >
@@ -62,11 +62,19 @@ export const TiltakForm = ({
 
                     <LightGreyPanel border={true}>
                         <OverskriftTextField label={"Overskrift (obligatorisk)"}
-                                             maxLength={80}  {...register("overskrift", {required: true})}/>
+                                             error={errors.overskrift?.message}
+                                             maxLength={80}  {...register("overskrift", {
+                            required: "Du må gi en overskrift av tiltaket",
+                            maxLength: 80
+                        })}/>
 
                         <OverskriftTextarea label={"Beskriv hva som skal skje (obligatorisk)"}
+                                            error={errors.beskrivelse?.message}
                                             description={"Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."}
-                                            maxLength={600} {...register("beskrivelse", {required: true})}/>
+                                            maxLength={600} {...register("beskrivelse", {
+                            required: "Du må gi en beskrivelse av tiltaket",
+                            maxLength: 600
+                        })}/>
 
                         <SpacedAlert variant={"info"}>
                             Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du ikke gi sensitive
@@ -76,9 +84,9 @@ export const TiltakForm = ({
                         </SpacedAlert>
 
                         <DateRow>
-                            <DatoVelger name="fom" label={"Startdato (obligatorisk)"}/>
+                            <DatoVelger name="fom" label={"Startdato (obligatorisk)"} error={errors.fom?.message}/>
 
-                            <DatoVelger name="tom" label={"Sluttdato (obligatorisk)"}/>
+                            <DatoVelger name="tom" label={"Sluttdato (obligatorisk)"} error={errors.tom?.message}/>
                         </DateRow>
 
 

@@ -10,8 +10,8 @@ registerLocale('nb', nb);
 
 interface Props {
     name: string;
-
     label: string;
+    error?: string;
 }
 
 const SpacedTextField = styled(TextField)`
@@ -19,7 +19,7 @@ const SpacedTextField = styled(TextField)`
   width: 12rem;
 `
 
-export const DatoVelger = ({label, name}: Props) => {
+export const DatoVelger = ({label, name, error}: Props) => {
     const {control} = useFormContext();
 
     return (
@@ -38,6 +38,7 @@ export const DatoVelger = ({label, name}: Props) => {
                     selected={value}
                     customInput={<SpacedTextField
                         label={label}
+                        error={error}
                         ref={ref}
                         hideLabel={false}
                         placeholder="DD.MM.ÅÅÅÅ"
