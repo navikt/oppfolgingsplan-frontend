@@ -21,21 +21,19 @@ export const EditerTiltak = ({
       ...tiltak,
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,
-      fom: data.fom?.toJSON() ?? null,
-      tom: data.tom?.toJSON() ?? null,
+      fom: data.fom?.toJSON() ?? "",
+      tom: data.tom?.toJSON() ?? "",
     };
   };
 
   return (
     <TiltakForm
-        defaultFormValues={
-          {
-            overskrift: tiltak.tiltaknavn,
-            beskrivelse: tiltak.beskrivelse!!,
-            fom: new Date(tiltak.fom!!),
-            tom: new Date(tiltak.tom!!),
-          }
-        }
+      defaultFormValues={{
+        overskrift: tiltak.tiltaknavn,
+        beskrivelse: tiltak.beskrivelse!!,
+        fom: new Date(tiltak.fom!!),
+        tom: new Date(tiltak.tom!!),
+      }}
       onSubmit={(data) => {
         lagreTiltak.mutate({
           oppfolgingsplanId: oppfolgingsplanId,

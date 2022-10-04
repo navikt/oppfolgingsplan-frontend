@@ -124,7 +124,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         arbeidsoppgaveId: 6409,
         arbeidsoppgavenavn: "Undervisning ",
         erVurdertAvSykmeldt: false,
-        gjennomfoering: null,
+        gjennomfoering: {
+          kanGjennomfoeres: "KAN_IKKE",
+          paaAnnetSted: null,
+          medMerTid: null,
+          medHjelp: null,
+          kanBeskrivelse: null,
+          kanIkkeBeskrivelse: "Blir for krevende ",
+        },
         opprettetDato: "2020-02-20T11:31:30.322",
         sistEndretDato: "2020-02-20T11:31:30.322",
         sistEndretAv: {
@@ -158,7 +165,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         tom: "2020-02-21",
         beskrivelse:
           "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
-        beskrivelseIkkeAktuelt: null,
+        beskrivelseIkkeAktuelt:
+          "Skolen har ikke ressurser til å kunne tilby dette. ",
         opprettetDato: "2020-02-20T11:31:30.338",
         sistEndretDato: "2020-02-20T11:31:30.338",
         kommentarer: [
@@ -190,7 +198,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           },
         ],
         status: "FORSLAG",
-        gjennomfoering: null,
+        gjennomfoering:
+          "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: "Labben Rekemester",
           fnr: "110110110110",
@@ -219,7 +228,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         fom: "2020-02-10",
         tom: "2020-02-21",
         beskrivelse: "Undervise i ett fag for å unngå overbelastning ",
-        beskrivelseIkkeAktuelt: null,
+        beskrivelseIkkeAktuelt:
+          "Skolen har ikke ressurser til å kunne tilby dette. ",
         opprettetDato: "2020-02-20T11:31:30.373",
         sistEndretDato: "2020-02-20T11:31:30.373",
         kommentarer: [
@@ -330,8 +340,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         tiltakId: 4854,
         tiltaknavn: "Assistent i klasserommet ",
         knyttetTilArbeidsoppgaveId: null,
-        fom: null,
-        tom: null,
+        fom: "2020-02-20T11:31:30.38",
+        tom: "2020-04-20T11:31:30.38",
         beskrivelse: "Assistent til å bistå i undervisningen.",
         beskrivelseIkkeAktuelt:
           "Skolen har ikke ressurser til å kunne tilby dette. ",
@@ -339,7 +349,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         sistEndretDato: "2020-02-20T11:31:30.38",
         kommentarer: [],
         status: "IKKE_AKTUELT",
-        gjennomfoering: null,
+        gjennomfoering:
+          "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
           fnr: defaultNarmesteLedereMockData[0].fnr,
@@ -405,7 +416,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         aktivFom: "2020-02-24T08:57:46.747",
         aktivTom: null,
       },
-      forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
       navn: "Labben Rekemester",
@@ -453,9 +463,9 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         evalueres: "2020-02-28",
       },
       tvungenGodkjenning: false,
-      deltMedNAVTidspunkt: null,
+      deltMedNAVTidspunkt: "2020-02-11T15:34:52.311",
       deltMedNAV: false,
-      deltMedFastlegeTidspunkt: null,
+      deltMedFastlegeTidspunkt: "2020-02-11T15:34:52.311",
       deltMedFastlege: false,
       dokumentUuid: "ceed5fe6-7149-4a77-9189-f8ef055ce5d2",
       avbruttPlan: {
@@ -554,12 +564,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         fom: "2020-02-11",
         tom: "2020-02-23",
         beskrivelse: "Et stort tiltak",
-        beskrivelseIkkeAktuelt: null,
+        beskrivelseIkkeAktuelt:
+          "Skolen har ikke ressurser til å kunne tilby dette. ",
         opprettetDato: "2020-02-11T15:23:36.122",
         sistEndretDato: "2020-02-11T15:23:36.122",
         kommentarer: [],
         status: "FORSLAG",
-        gjennomfoering: null,
+        gjennomfoering:
+          "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: "Labben Rekemester",
           fnr: "110110110110",
@@ -596,7 +608,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         aktivFom: "2000-02-12T15:24:54.295",
         aktivTom: null,
       },
-      forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
       navn: "Labben Rekemester",
@@ -609,7 +620,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         effekt: null,
         hvorfor: null,
         videre: null,
-        interneaktiviteter: "njet",
+        interneaktiviteter: false,
         ekstratid: false,
         bistand: false,
         ingen: false,
@@ -654,7 +665,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       tvungenGodkjenning: true,
       deltMedNAVTidspunkt: "2020-02-20T10:46:04.732",
       deltMedNAV: true,
-      deltMedFastlegeTidspunkt: null,
+      deltMedFastlegeTidspunkt: "2020-02-20T10:46:04.732",
       deltMedFastlege: false,
       dokumentUuid: "f054234f-e989-4d14-81a2-e8c1b1023e4b",
       avbruttPlan: {
@@ -784,7 +795,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         arbeidsoppgaveId: 6389,
         arbeidsoppgavenavn: "Undervisning ",
         erVurdertAvSykmeldt: false,
-        gjennomfoering: null,
+        gjennomfoering: {
+          kanGjennomfoeres: "KAN_IKKE",
+          paaAnnetSted: null,
+          medMerTid: null,
+          medHjelp: null,
+          kanBeskrivelse: null,
+          kanIkkeBeskrivelse: "Blir for krevende ",
+        },
         opprettetDato: "2020-02-17T09:04:59.149",
         sistEndretDato: "2020-02-17T09:04:59.149",
         sistEndretAv: {
@@ -818,7 +836,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         tom: "2020-02-21",
         beskrivelse:
           "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
-        beskrivelseIkkeAktuelt: null,
+        beskrivelseIkkeAktuelt:
+          "Skolen har ikke ressurser til å kunne tilby dette. ",
         opprettetDato: "2020-02-17T12:53:54.245",
         sistEndretDato: "2020-02-17T12:53:54.245",
         kommentarer: [
@@ -850,7 +869,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           },
         ],
         status: "FORSLAG",
-        gjennomfoering: null,
+        gjennomfoering:
+          "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: "Labben Rekemester",
           fnr: "110110110110",
@@ -879,7 +899,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         fom: "2020-02-10",
         tom: "2020-02-21",
         beskrivelse: "Undervise i ett fag for å unngå overbelastning ",
-        beskrivelseIkkeAktuelt: null,
+        beskrivelseIkkeAktuelt:
+          "Skolen har ikke ressurser til å kunne tilby dette. ",
         opprettetDato: "2020-02-17T14:28:54.574",
         sistEndretDato: "2020-02-17T14:28:54.574",
         kommentarer: [
@@ -964,8 +985,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         tiltakId: 4843,
         tiltaknavn: "Assistent i klasserommet ",
         knyttetTilArbeidsoppgaveId: null,
-        fom: null,
-        tom: null,
+        fom: "2020-02-20T11:31:30.38",
+        tom: "2020-04-20T11:31:30.38",
         beskrivelse: "Assistent til å bistå i undervisningen.",
         beskrivelseIkkeAktuelt:
           "Skolen har ikke ressurser til å kunne tilby dette. ",
@@ -973,7 +994,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         sistEndretDato: "2020-02-17T14:32:51.421",
         kommentarer: [],
         status: "IKKE_AKTUELT",
-        gjennomfoering: null,
+        gjennomfoering:
+          "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
           fnr: defaultNarmesteLedereMockData[0].fnr,
@@ -1025,7 +1047,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         aktivFom: "2010-02-20T11:31:31.356",
         aktivTom: null,
       },
-      forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
       navn: "Labben Rekemester",
@@ -1038,7 +1059,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         effekt: null,
         hvorfor: null,
         videre: null,
-        interneaktiviteter: "njet",
+        interneaktiviteter: false,
         ekstratid: false,
         bistand: false,
         ingen: false,
