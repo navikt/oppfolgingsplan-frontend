@@ -4,8 +4,9 @@ import {useState} from "react";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {useLagreTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
-import {TiltakForm} from "@/common/components/tiltak/TiltakForm";
+import {FormValues, TiltakForm} from "@/common/components/tiltak/TiltakForm";
 import {TiltakFormHeading} from "@/common/components/tiltak/TiltakFormHeading";
+import {useForm} from "react-hook-form";
 
 interface Props {
     oppfolgingsplanId: number
@@ -14,23 +15,20 @@ interface Props {
 export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
     const lagreTiltak = useLagreTiltakSM();
     const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false)
-    const [tiltakNavn, setTiltakNavn] = useState<string>("")
-    const [beskrivelse, setBeskrivelse] = useState<string>("")
-    const [fom, setFom] = useState<Date | null>(null);
-    const [tom, setTom] = useState<Date | null>(null);
 
-    const nyttTiltakInformasjon: Partial<Tiltak> = {
-        tiltaknavn: tiltakNavn,
-        beskrivelse: beskrivelse,
-        fom: fom?.toJSON(),
-        tom: tom?.toJSON()
+    const {register, handleSubmit, setValue, watch, formState: {errors}} = useForm();
+
+    const nyttTiltakInformasjon = (data: FormValues): Partial<Tiltak> => {
+        console.log(data)
+        return {
+            tiltaknavn: data.overskrift,
+            beskrivelse: data.beskrivelse,
+            fom: data.fom?.toJSON(),
+            tom: data.tom?.toJSON()
+        }
     }
 
     const resetStateAndClose = () => {
-        setTiltakNavn("");
-        setBeskrivelse("");
-        setFom(null);
-        setTom(null);
         setLeggerTilNyttTiltak(false);
     }
 
@@ -48,19 +46,10 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
     }
 
     return <TiltakForm
-        tiltakNavn={tiltakNavn}
-        setTiltakNavn={setTiltakNavn}
-        beskrivelse={beskrivelse}
-        setBeskrivelse={setBeskrivelse}
-        fom={fom}
-        setFom={setFom}
-        tom={tom}
-        setTom={setTom}
-        displayError={lagreTiltak.isError}
-        onSave={() => {
+        onSubmit={(data) => {
             lagreTiltak.mutate({
                 oppfolgingsplanId: oppfolgingsplanId,
-                tiltak: nyttTiltakInformasjon
+                tiltak: nyttTiltakInformasjon(data)
             });
             resetStateAndClose();
         }}

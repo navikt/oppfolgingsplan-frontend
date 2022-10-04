@@ -4,16 +4,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import nb from 'date-fns/locale/nb';
 import {TextField} from "@navikt/ds-react";
 import styled from "styled-components";
-
+import {ControllerRenderProps} from "react-hook-form/dist/types/controller";
+import {FormValues} from "@/common/components/tiltak/TiltakForm";
 
 registerLocale('nb', nb);
 
 interface Props {
-    selectedDate: Date | null;
-
     onChange(newDate: Date | null): void;
 
     label: string;
+
+    field: ControllerRenderProps<FormValues, any>;
 }
 
 const SpacedTextField = styled(TextField)`
@@ -30,16 +31,16 @@ const CustomDateInput = forwardRef((props: any, ref: any) => (
     />
 ));
 
-export const DatoVelger = ({selectedDate, onChange, label}: Props) => {
+export const DatoVelger = ({onChange, label, field}: Props) => {
     const refCustomInput = useRef();
 
     return (
         <DatePicker
             locale="nb"
             dateFormat="dd.MM.yyyy"
-            selected={selectedDate}
-            customInput={<CustomDateInput ref={refCustomInput} label={label}/>}
-            onChange={(newDate) => onChange(newDate)}
+            selected={field.value}
+            customInput={<CustomDateInput {...field} ref={refCustomInput} label={label}/>}
+            onChange={onChange}
         />
     );
 }

@@ -3,8 +3,9 @@ import {LightGreyPanel} from "@/common/components/wrappers/LightGreyPanel";
 import {DatoVelger} from "@/common/components/datovelger/DatoVelger";
 import styled from "styled-components";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
-import Feilmelding from "@/common/components/error/Feilmelding";
 import {TiltakFormHeading} from "@/common/components/tiltak/TiltakFormHeading";
+import {Controller, useForm} from "react-hook-form";
+import React from "react";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -33,75 +34,72 @@ const Wrapper = styled.div`
   margin-bottom: 1rem;
 `
 
-interface Props {
-    tiltakNavn: string;
-
-    setTiltakNavn(newName: string): void;
-
+export type FormValues = {
+    overskrift: string;
     beskrivelse: string;
-
-    setBeskrivelse(newName: string): void;
-
     fom: Date | null;
-
-    setFom(newDate: Date | null): void;
-
     tom: Date | null;
+};
 
-    setTom(newDate: Date | null): void;
-
-    displayError: boolean;
-
-    onSave(): void;
+interface Props {
+    onSubmit(data: FormValues): void;
 
     onCancel(): void;
 }
 
 export const TiltakForm = ({
-                               tiltakNavn,
-                               setTiltakNavn,
-                               beskrivelse,
-                               setBeskrivelse,
-                               fom,
-                               setFom,
-                               tom,
-                               setTom,
-                               displayError,
-                               onSave,
+                               onSubmit,
                                onCancel
                            }: Props) => {
+    const {register, handleSubmit, setValue, watch, control, formState: {errors}} = useForm<FormValues>();
+
     return (
-        <TiltakPanel border={true}>
-            <TiltakFormHeading/>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <TiltakPanel border={true}>
+                <TiltakFormHeading/>
 
-            <LightGreyPanel border={true}>
-                <OverskriftTextField label={"Overskrift (obligatorisk)"} maxLength={80} value={tiltakNavn}
-                                     onChange={(e) => setTiltakNavn(e.target.value)}/>
+                <LightGreyPanel border={true}>
+                    <OverskriftTextField label={"Overskrift (obligatorisk)"}
+                                         maxLength={80}  {...register("overskrift", {required: true})}/>
 
-                <OverskriftTextarea label={"Beskriv hva som skal skje (obligatorisk)"}
-                                    description={"Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."}
-                                    maxLength={600} value={beskrivelse}
-                                    onChange={(e) => setBeskrivelse(e.target.value)}/>
+                    <OverskriftTextarea label={"Beskriv hva som skal skje (obligatorisk)"}
+                                        description={"Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."}
+                                        maxLength={600} {...register("beskrivelse")}/>
 
-                <SpacedAlert variant={"info"}>
-                    Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du ikke gi sensitive opplysninger,
-                    som for eksempel sykdomsdiagnose. Du må ikke si mer enn det som er helt nødvendig for at
-                    arbeidsgiveren din og NAV kan følge deg opp
-                </SpacedAlert>
+                    <SpacedAlert variant={"info"}>
+                        Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du ikke gi sensitive
+                        opplysninger,
+                        som for eksempel sykdomsdiagnose. Du må ikke si mer enn det som er helt nødvendig for at
+                        arbeidsgiveren din og NAV kan følge deg opp
+                    </SpacedAlert>
 
-                <DateRow>
-                    <DatoVelger label={"Startdato (obligatorisk)"} selectedDate={fom} onChange={setFom}/>
+                    <DateRow>
+                        <Controller
+                            name={"fom"}
+                            control={control}
+                            rules={{required: true}}
+                            render={({field}) => <DatoVelger label={"Startdato (obligatorisk)"} field={field}
+                                                             onChange={(date => setValue("fom", date))}/>}
+                        />
 
-                    <DatoVelger label={"Sluttdato (obligatorisk)"} selectedDate={tom} onChange={setTom}/>
-                </DateRow>
+                        <Controller
+                            name={"tom"}
+                            control={control}
+                            rules={{required: true}}
+                            render={({field}) => <DatoVelger label={"Sluttdato (obligatorisk)"} field={field}
+                                                             onChange={(date => setValue("tom", date))}/>}
+                        />
+                    </DateRow>
 
-                {displayError && <Wrapper><Feilmelding/></Wrapper>}
 
-                <ButtonRow>
-                    <Button variant={"primary"} onClick={onSave}>Lagre</Button>
-                    <Button variant={"tertiary"} onClick={onCancel}>Avbryt</Button>
-                </ButtonRow>
-            </LightGreyPanel>
-        </TiltakPanel>
+                    {/*{false && <Wrapper><Feilmelding/></Wrapper>}*/}
+
+                    <ButtonRow>
+                        <Button variant={"primary"} type={"submit"}>Lagre</Button>
+                        <Button variant={"tertiary"} onClick={onCancel}>Avbryt</Button>
+                    </ButtonRow>
+                </LightGreyPanel>
+            </TiltakPanel>
+        </form>
     )
 }
