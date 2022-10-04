@@ -5,9 +5,9 @@ import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "@/server/auth/idporten/idportenToken";
 import { NextApiResponseTilgangSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
 import { fetchTilgangSM } from "@/server/data/sykmeldt/fetchTilgangSM";
-import { TilgangDTO } from "@/server/service/schema/tilgangSchema";
+import { Tilgang } from "../../../../schema/tilgangSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse<TilgangDTO>>(ncOptions)
+const handler = nc<NextApiRequest, NextApiResponse<Tilgang>>(ncOptions)
   .use(getIdportenToken)
   .use(fetchTilgangSM)
   .get(async (req: NextApiRequest, res: NextApiResponseTilgangSM) => {

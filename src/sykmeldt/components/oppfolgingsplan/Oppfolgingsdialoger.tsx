@@ -7,9 +7,9 @@ import {
   harTidligereOppfolgingsdialoger,
   isEmpty,
 } from "@/common/utils/oppfolgingsdialogUtils";
-import { SykmeldingDTO } from "@/server/service/schema/sykmeldingSchema";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
-import { NarmesteLedereDTO } from "@/server/service/schema/narmestelederSchema";
+import { Sykmelding } from "../../../schema/sykmeldingSchema";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import {
   sykmeldtHarGyldigSykmelding,
   sykmeldtHarIngenSendteSykmeldinger,
@@ -25,9 +25,9 @@ const texts = {
 };
 
 interface Props {
-  oppfolgingsplaner: OppfolgingsplanDTO[];
-  sykmeldinger: SykmeldingDTO[];
-  narmesteLedere: NarmesteLedereDTO;
+  oppfolgingsplaner: Oppfolgingsplan[];
+  sykmeldinger: Sykmelding[];
+  narmesteLedere: NarmesteLeder[];
 }
 
 const Oppfolgingsdialoger = ({

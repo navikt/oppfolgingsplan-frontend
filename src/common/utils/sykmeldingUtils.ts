@@ -1,10 +1,10 @@
 import { erSykmeldingGyldigForOppfolgingMedGrensedato } from "./oppfolgingsdialogUtils";
-import { SykmeldingDTO } from "@/server/service/schema/sykmeldingSchema";
-import { NarmesteLedereDTO } from "@/server/service/schema/narmestelederSchema";
+import { Sykmelding } from "../../schema/sykmeldingSchema";
+import { NarmesteLeder } from "../../schema/narmestelederSchema";
 
 export const sykmeldtHarNaermestelederHosArbeidsgiver = (
   virksomhetsnummer: string,
-  naermesteLedere: NarmesteLedereDTO
+  naermesteLedere: NarmesteLeder[]
 ) => {
   return (
     naermesteLedere.filter((leder) => {
@@ -15,7 +15,7 @@ export const sykmeldtHarNaermestelederHosArbeidsgiver = (
 
 export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (
   virksomhetsnummer: string,
-  naermesteLedere: NarmesteLedereDTO
+  naermesteLedere: NarmesteLeder[]
 ) => {
   const naermesteLeder = naermesteLedere.filter((leder) => {
     return virksomhetsnummer === leder.virksomhetsnummer && leder.erAktiv;
@@ -24,12 +24,12 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (
 };
 
 export const sykmeldtHarIngenSendteSykmeldinger = (
-  sykmeldinger: SykmeldingDTO[]
+  sykmeldinger: Sykmelding[]
 ) => {
   return sykmeldinger.length === 0;
 };
 
-export const sykmeldtHarGyldigSykmelding = (sykmeldinger: SykmeldingDTO[]) => {
+export const sykmeldtHarGyldigSykmelding = (sykmeldinger: Sykmelding[]) => {
   const tomGrenseDato = new Date();
   return (
     sykmeldinger
@@ -53,8 +53,8 @@ export interface ArbeidsgivereForGyldigeSykmeldinger {
 }
 
 export const finnArbeidsgivereForGyldigeSykmeldinger = (
-  sykmeldinger: SykmeldingDTO[],
-  naermesteLedere: NarmesteLedereDTO
+  sykmeldinger: Sykmelding[],
+  naermesteLedere: NarmesteLeder[]
 ): ArbeidsgivereForGyldigeSykmeldinger[] => {
   const dagensDato = new Date();
   return sykmeldinger

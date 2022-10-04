@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 import { LagretTiltak } from "@/common/components/tiltak/LagretTiltak";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
 }
 
 export const LagredeTiltak = ({

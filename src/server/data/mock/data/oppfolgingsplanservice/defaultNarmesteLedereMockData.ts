@@ -1,6 +1,6 @@
-import { NarmesteLedereDTO } from "@/server/service/schema/narmestelederSchema";
+import { NarmesteLeder } from "../../../../../schema/narmestelederSchema";
 
-export const defaultNarmesteLedereMockData: NarmesteLedereDTO = [
+export const defaultNarmesteLedereMockData: NarmesteLeder[] = [
   {
     navn: "Albus Dumbledore",
     fnr: "11011011011",

@@ -1,7 +1,7 @@
 import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
-export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
+export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
   {
     id: 3455,
     sistEndretDato: "2020-02-20T11:31:29.837",

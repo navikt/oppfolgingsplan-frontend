@@ -1,7 +1,7 @@
 import React from "react";
 import { Heading } from "@navikt/ds-react";
 import { OppfolgingsplanStepper } from "@/common/components/stepper/OppfolgingsplanStepper";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 const textOverskrift = (arbeidsgiver: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -34,7 +34,7 @@ export const tekster = {
 // };
 
 interface Props {
-  aktivPlan: OppfolgingsplanDTO;
+  aktivPlan: Oppfolgingsplan;
 }
 
 const Oppfolgingsplan = ({ aktivPlan }: Props) => {

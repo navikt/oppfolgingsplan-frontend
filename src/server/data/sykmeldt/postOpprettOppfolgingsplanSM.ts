@@ -4,14 +4,14 @@ import serverLogger from "@/server/utils/serverLogger";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import { createOppfolgingsplanSM } from "@/server/service/oppfolgingsplanService";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { OpprettOppfoelgingsdialogDTO } from "@/server/service/schema/opprettOppfoelgingsdialogSchema";
+import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 
 export const postOpprettOppfolgingsplanSM = async (
   req: IAuthenticatedRequest,
   res: NextApiResponse,
   next: () => void
 ) => {
-  const opprettOppfolgingsplanData: OpprettOppfoelgingsdialogDTO = req.body;
+  const opprettOppfolgingsplanData: OpprettOppfoelgingsdialog = req.body;
 
   if (isMockBackend) {
     return next();

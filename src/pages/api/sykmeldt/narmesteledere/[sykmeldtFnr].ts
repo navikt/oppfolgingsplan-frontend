@@ -5,11 +5,9 @@ import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "@/server/auth/idporten/idportenToken";
 import { fetchNarmesteLedereSM } from "@/server/data/sykmeldt/fetchNarmesteLedereSM";
 import { NextApiResponseNarmesteLedereSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import { NarmesteLedereDTO } from "@/server/service/schema/narmestelederSchema";
+import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse<NarmesteLedereDTO>>(
-  ncOptions
-)
+const handler = nc<NextApiRequest, NextApiResponse<NarmesteLeder[]>>(ncOptions)
   .use(getIdportenToken)
   .use(fetchNarmesteLedereSM)
   .get(async (req: NextApiRequest, res: NextApiResponseNarmesteLedereSM) => {

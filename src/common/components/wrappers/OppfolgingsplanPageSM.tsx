@@ -1,9 +1,9 @@
 import { BodyLong, Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
 import {
-  OppfolgingsplanDTO,
-  StillingDTO,
-} from "@/server/service/schema/oppfolgingsplanSchema";
+  Oppfolgingsplan,
+  Stilling,
+} from "../../../schema/oppfolgingsplanSchema";
 import { useSykmeldingerSM } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
   erOppfolgingsdialogKnyttetTilGyldigSykmelding,
@@ -20,7 +20,7 @@ const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
 };
 
-const textStilling = (stilling: StillingDTO) => {
+const textStilling = (stilling: Stilling) => {
   return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${
     stilling.prosent
   } %`;
@@ -58,7 +58,7 @@ interface Props {
   isLoading: boolean;
   isError: boolean;
   page: Page;
-  oppfolgingsplan?: OppfolgingsplanDTO;
+  oppfolgingsplan?: Oppfolgingsplan;
   children: ReactNode;
 }
 
@@ -71,7 +71,7 @@ export const OppfolgingsplanPageSM = ({
 }: Props) => {
   const sykmeldinger = useSykmeldingerSM();
   const tilgang = useTilgangSM();
-  const stilling: StillingDTO | undefined =
+  const stilling: Stilling | undefined =
     oppfolgingsplan &&
     oppfolgingsplan.arbeidstaker.stillinger?.find(
       (stilling) =>

@@ -4,14 +4,14 @@ import { NextApiResponse } from "next";
 import { handleQueryParamError } from "@/server/utils/errors";
 import { saveTiltak } from "@/server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { TiltakDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 
 export const postLagreTiltakSM = async (
   req: IAuthenticatedRequest,
   res: NextApiResponse,
   next: () => void
 ) => {
-  const tiltak: TiltakDTO = req.body;
+  const tiltak: Tiltak = req.body;
   const { oppfolgingsplanId } = req.query;
 
   if (typeof oppfolgingsplanId !== "string") {

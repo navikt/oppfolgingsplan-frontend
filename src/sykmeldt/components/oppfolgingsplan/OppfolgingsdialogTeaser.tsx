@@ -10,7 +10,7 @@ import Image from "next/image";
 import NextLink from "next/link";
 import styled from "styled-components";
 import { useLandingUrl } from "@/common/hooks/routeHooks";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 const texts = {
   etiketter: {
@@ -19,7 +19,7 @@ const texts = {
 };
 
 interface TilGodkjenningStatusProps {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
 }
 
 export const TilGodkjenningStatus = ({
@@ -39,7 +39,7 @@ export const TilGodkjenningStatus = ({
 };
 
 interface OppfolgingsdialogTeaserProps {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
   rootUrlPlaner?: string;
 }
 

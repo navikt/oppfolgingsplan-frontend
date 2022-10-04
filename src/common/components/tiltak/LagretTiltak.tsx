@@ -20,7 +20,7 @@ import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { useLagreKommentarSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import { EditerTiltak } from "@/common/components/tiltak/EditerTiltak";
-import { TiltakDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -67,7 +67,7 @@ export const SpacedDetail = styled(Detail)`
   margin-bottom: 1rem;
 `;
 
-const manglerVurderingFraLeder = (fnr: string, tiltak: TiltakDTO) => {
+const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
   return (
     tiltak &&
     !tiltak.gjennomfoering &&
@@ -79,7 +79,7 @@ const manglerVurderingFraLeder = (fnr: string, tiltak: TiltakDTO) => {
 
 interface Props {
   arbeidstakerFnr: string;
-  tiltak: TiltakDTO;
+  tiltak: Tiltak;
   oppfolgingsplanId: number;
 }
 
