@@ -1,10 +1,4 @@
-import {
-  Alert,
-  Button,
-  ErrorSummary,
-  Textarea,
-  TextField,
-} from "@navikt/ds-react";
+import { Alert, Button, Textarea, TextField } from "@navikt/ds-react";
 import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
 import { DatoVelger } from "@/common/components/datovelger/DatoVelger";
 import styled from "styled-components";
@@ -12,6 +6,7 @@ import { TiltakPanel } from "@/common/components/tiltak/TiltakPanel";
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
+import { FormErrorSummary } from "@/common/components/error/FormErrorSummary";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -36,10 +31,6 @@ const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `;
 
-const Wrapper = styled.div`
-  margin-bottom: 1rem;
-`;
-
 export type FormValues = {
   overskrift: string;
   beskrivelse: string;
@@ -62,7 +53,6 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
     register,
     formState: { errors },
   } = formFunctions;
-  const errorCount = Object.keys(errors).length;
 
   return (
     <FormProvider {...formFunctions}>
@@ -71,23 +61,10 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
           <TiltakFormHeading />
 
           <LightGreyPanel border={true}>
-            {errorCount > 0 && (
-              <ErrorSummary
-                heading={`Du har ${errorCount} feil som må rettes opp i`}
-                ref={errorRef}
-              >
-                {Object.values(errors).map((err, index) => (
-                  <ErrorSummary.Item
-                    key={index}
-                    href={"errors.overskrift.ref?.value"}
-                  >
-                    {err.message}
-                  </ErrorSummary.Item>
-                ))}
-              </ErrorSummary>
-            )}
+            <FormErrorSummary errors={errors} ref={errorRef} />
 
             <OverskriftTextField
+              id="overskrift"
               label={"Overskrift (obligatorisk)"}
               error={errors.overskrift?.message}
               maxLength={80}
@@ -98,6 +75,7 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
             />
 
             <OverskriftTextarea
+              id="beskrivelse"
               label={"Beskriv hva som skal skje (obligatorisk)"}
               error={errors.beskrivelse?.message}
               description={
@@ -136,7 +114,7 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
                 variant={"primary"}
                 type={"submit"}
                 onClick={() => {
-                  if (errorCount > 0) {
+                  if (Object.keys(errors).length > 0) {
                     errorRef.current.focus();
                   }
                 }}

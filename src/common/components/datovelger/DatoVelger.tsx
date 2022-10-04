@@ -29,6 +29,9 @@ export const DatoVelger = ({ label, name, error }: Props) => {
       name={name}
       render={({ field: { onChange, onBlur, name, value, ref } }) => (
         <ReactDatePicker
+          id={name}
+          locale="nb"
+          dateFormat="dd.MM.yyyy"
           ref={(elem: any) => {
             elem && ref(elem.input);
           }}
@@ -40,11 +43,11 @@ export const DatoVelger = ({ label, name, error }: Props) => {
             <SpacedTextField
               label={label}
               error={error}
-              ref={ref}
               hideLabel={false}
               placeholder="DD.MM.ÅÅÅÅ"
             />
           }
+          autoFocus={false}
         />
       )}
     />
