@@ -8,9 +8,9 @@ import {
 import {VarseltrekantImage} from '@/common/images/imageComponents';
 import {Button} from "@navikt/ds-react";
 import Link from "next/link";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import Image from "next/image";
+import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
 
 const texts = {
     arbeidsgiverSkjema: {
@@ -27,7 +27,7 @@ const texts = {
 const OPPFOLGINGSKJEMANAVN = 'OPPRETT_DIALOG';
 
 interface ArbeidsgiverUndertekstProps {
-    oppfolgingsplaner: Oppfolgingsplan[];
+    oppfolgingsplaner: OppfolgingsplanDTO[];
     arbeidsgiver: ArbeidsgivereForGyldigeSykmeldinger;
 }
 
@@ -87,7 +87,7 @@ export const VelgArbeidsgiverUndertekst = ({oppfolgingsplaner, arbeidsgiver}: Ar
 
 interface ArbeidsgiverSkjemaProps {
     arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-    oppfolgingsplaner: Oppfolgingsplan[];
+    oppfolgingsplaner: OppfolgingsplanDTO[];
 
     handleSubmit(values: any): void;
 }

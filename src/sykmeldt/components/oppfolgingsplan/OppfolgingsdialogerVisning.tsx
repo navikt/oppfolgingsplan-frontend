@@ -7,9 +7,9 @@ import {
 import getContextRoot from '@/common/utils/getContextRoot';
 import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
 import {Button} from "@navikt/ds-react";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
-import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
-import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
+import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
+import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
 import {finnArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import VideoPanel from "@/common/components/video/VideoPanel";
 import OppfolgingsdialogerOpprett from "./opprett/OppfolgingsdialogerOpprett";
@@ -31,15 +31,15 @@ const texts = {
 };
 
 interface Props {
-    oppfolgingsplaner: Oppfolgingsplan[];
-    sykmeldinger: Sykmelding[];
-    narmesteLedere: NarmesteLeder[]
+    oppfolgingsplaner: OppfolgingsplanDTO[];
+    sykmeldinger: SykmeldingDTO[];
+    narmesteLedere: NarmesteLedereDTO
 }
 
 const OppfolgingsdialogerVisning = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: Props) => {
     const [visOppfolgingsdialogOpprett, setVisOppfolgingsdialogOpprett] = useState(false)
 
-    const aktiveOppfolgingsplaner: Oppfolgingsplan[] = finnAktiveOppfolgingsdialoger(oppfolgingsplaner, sykmeldinger);
+    const aktiveOppfolgingsplaner: OppfolgingsplanDTO[] = finnAktiveOppfolgingsdialoger(oppfolgingsplaner, sykmeldinger);
 
     const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(
         sykmeldinger,

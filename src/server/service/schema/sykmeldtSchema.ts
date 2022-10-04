@@ -1,10 +1,11 @@
 import { boolean, z, object, string } from "zod";
 
-export const sykmeldtSchema = object({
+export const SykmeldtSchema = object({
   narmestelederId: string(),
   orgnummer: string(),
   fnr: string(),
   navn: string().nullish(),
   aktivSykmelding: boolean().nullish(),
 });
-export type SykmeldtDTO = z.infer<typeof sykmeldtSchema>;
+
+export type SykmeldtDTO = z.infer<typeof SykmeldtSchema>;

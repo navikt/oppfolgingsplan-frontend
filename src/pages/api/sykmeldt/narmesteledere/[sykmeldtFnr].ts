@@ -7,12 +7,10 @@ import {fetchNarmesteLedereSM} from "@/server/data/sykmeldt/fetchNarmesteLedereS
 import {
     NextApiResponseNarmesteLedereSM
 } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import {fetchSykmeldingerSM} from "@/server/data/sykmeldt/fetchSykmeldingerSM";
 import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
 
 const handler = nc<NextApiRequest, NextApiResponse<NarmesteLedereDTO>>(ncOptions)
     .use(getIdportenToken)
-    .use(fetchSykmeldingerSM)
     .use(fetchNarmesteLedereSM)
     .get(async (req: NextApiRequest, res: NextApiResponseNarmesteLedereSM) => {
         res.status(200).json(res.narmesteLedere);

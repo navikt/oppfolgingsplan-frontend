@@ -3,10 +3,10 @@ import PlusIcon from "@/common/components/icons/PlusIcon";
 import {useState} from "react";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {useLagreTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {FormValues, TiltakForm} from "@/common/components/tiltak/TiltakForm";
 import {TiltakFormHeading} from "@/common/components/tiltak/TiltakFormHeading";
 import {useForm} from "react-hook-form";
+import {TiltakDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
     oppfolgingsplanId: number
@@ -18,7 +18,7 @@ export const NyttTiltak = ({oppfolgingsplanId}: Props) => {
 
     const {register, handleSubmit, setValue, watch, formState: {errors}} = useForm();
 
-    const nyttTiltakInformasjon = (data: FormValues): Partial<Tiltak> => {
+    const nyttTiltakInformasjon = (data: FormValues): Partial<TiltakDTO> => {
         console.log(data)
         return {
             tiltaknavn: data.overskrift,

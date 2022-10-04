@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import ArbeidsgiverSkjemaForm from './ArbeidsgiverSkjema';
 import BaserTidligereSkjema from './BaserTidligereSkjema';
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {Modal} from "@navikt/ds-react";
 import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import Feilmelding from "@/common/components/error/Feilmelding";
+import {OppfolgingsplanDTO} from '@/server/service/schema/oppfolgingsplanSchema';
 
 const texts = {
     errorNoLeader: {
@@ -18,7 +18,7 @@ const texts = {
 };
 
 interface Props {
-    oppfolgingsplaner: Oppfolgingsplan[];
+    oppfolgingsplaner: OppfolgingsplanDTO[];
     arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
     visOppfolgingsdialogOpprett: boolean;
 

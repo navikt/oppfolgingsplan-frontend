@@ -1,12 +1,26 @@
+import {NextApiResponse} from "next";
 import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
 import {isMockBackend} from "@/common/publicEnv";
-import {NextApiResponse} from "next";
+import serverLogger from "@/server/utils/serverLogger";
+import {deleteTiltakSM} from "@/server/service/oppfolgingsplanService";
+import {getOppfolgingsplanTokenX} from "@/server/utils/tokenX";
+import {handleQueryParamError} from "@/server/utils/errors";
 
 export const postSlettTiltakSM = async (
     req: IAuthenticatedRequest,
     res: NextApiResponse,
     next: () => void
 ) => {
+    const {oppfolgingsplanId, tiltakId} = req.query;
+
+    if (typeof oppfolgingsplanId !== 'string') {
+        return handleQueryParamError(oppfolgingsplanId)
+    }
+
+    if (typeof tiltakId !== 'string') {
+        return handleQueryParamError(tiltakId)
+    }
+
     if (isMockBackend) {
         // const {oppfolgingsplanId, tiltakId} = req.query;
         //
@@ -16,22 +30,11 @@ export const postSlettTiltakSM = async (
 
         // activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
 
-        return next();
+        next();
     } else {
-        // const token = req.idportenToken;
-        // const motebehovTokenX = await getTokenX(
-        //     token,
-        //     serverEnv.SYFOMOTEBEHOV_CLIENT_ID
-        // );
-        //
-        // const svar: MotebehovSvarRequest = req.body;
-        // await post(
-        //     `${serverEnv.SYFOMOTEBEHOV_HOST}/syfomotebehov/api/v3/arbeidstaker/motebehov`,
-        //     svar,
-        //     {
-        //         accessToken: motebehovTokenX,
-        //     }
-        // );
+        const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+        await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);
+        serverLogger.info(`Attempting to delete tiltak with id: ${tiltakId}`);
     }
 
     next();

@@ -2,12 +2,12 @@ import React from 'react';
 import {erOppfolgingsplanOpprettbarDirekte} from '@/common/utils/oppfolgingsdialogUtils';
 import {OppfolgingsdialogTomImage} from '@/common/images/imageComponents';
 import {BodyLong, Button, Heading, Panel} from "@navikt/ds-react";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import {useOpprettOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import Image from "next/image";
 import styled from "styled-components";
 import {useSykmeldtFnr} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const texts = {
     tittel: 'Aktiv oppfølgingsplan',
@@ -35,7 +35,7 @@ const ImageContainer = styled.div`
 
 interface OppfolgingsdialogerIngenplanProps {
     arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-    oppfolgingsplaner: Oppfolgingsplan[],
+    oppfolgingsplaner: OppfolgingsplanDTO[],
 
     setVisOppfolgingsdialogOpprett(set: boolean): void;
 }

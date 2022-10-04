@@ -2,23 +2,24 @@ import {useMutation, useQuery} from "react-query";
 import {get, post} from "@/common/api/axios/axios";
 import {ApiErrorException} from "@/common/api/axios/errors";
 import {useApiBasePath} from "@/common/hooks/routeHooks";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
-import {RSOpprettOppfoelgingsdialog} from "@/types/oppfolgingsplanservice/RSOpprettOppfoelgingsdialog";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
+import {OpprettOppfoelgingsdialogDTO} from "@/server/service/schema/opprettOppfoelgingsdialogSchema";
+
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
 
 export const useOppfolgingsplanerSM = () => {
     const apiBasePath = useApiBasePath();
 
-    const fetchOppfolgingsplaner = () => get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`);
+    const fetchOppfolgingsplaner = () => get<OppfolgingsplanDTO[]>(`${apiBasePath}/oppfolgingsplaner`);
 
-    return useQuery<Oppfolgingsplan[], ApiErrorException>(
+    return useQuery<OppfolgingsplanDTO[], ApiErrorException>(
         OPPFOLGINGSPLANER_SM,
         fetchOppfolgingsplaner
     );
 };
 
-export const useOppfolgingsplanSM = (id: number): Oppfolgingsplan | undefined => {
+export const useOppfolgingsplanSM = (id: number): OppfolgingsplanDTO | undefined => {
     const allePlaner = useOppfolgingsplanerSM()
     return allePlaner.data && allePlaner.data.find(plan => plan.id == id)
 };
@@ -34,7 +35,7 @@ export const useKopierOppfolgingsplanSM = () => {
 export const useOpprettOppfolgingsplanSM = () => {
     const apiBasePath = useApiBasePath();
 
-    const postOpprettOppfolgingsplanSM = (data: RSOpprettOppfoelgingsdialog) => post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
+    const postOpprettOppfolgingsplanSM = (data: OpprettOppfoelgingsdialogDTO) => post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
 
     return useMutation(postOpprettOppfolgingsplanSM)
 }

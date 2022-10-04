@@ -1,10 +1,10 @@
 import {useLagreTiltakSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {FormValues, TiltakForm} from "@/common/components/tiltak/TiltakForm";
+import {TiltakDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
     oppfolgingsplanId: number,
-    tiltak: Tiltak,
+    tiltak: TiltakDTO,
 
     doneEditing(): void
 }
@@ -12,13 +12,13 @@ interface Props {
 export const EditerTiltak = ({oppfolgingsplanId, tiltak, doneEditing}: Props) => {
     const lagreTiltak = useLagreTiltakSM();
 
-    const tiltakInformasjon = (data: FormValues): Tiltak => {
+    const tiltakInformasjon = (data: FormValues): TiltakDTO => {
         return {
             ...tiltak,
             tiltaknavn: data.overskrift,
             beskrivelse: data.beskrivelse,
-            fom: data.fom?.toJSON(),
-            tom: data.tom?.toJSON()
+            fom: data.fom?.toJSON() ?? null,
+            tom: data.tom?.toJSON() ?? null
         }
     }
 

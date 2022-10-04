@@ -1,10 +1,10 @@
 import React from 'react';
 import OppfolgingsdialogTeaser from './OppfolgingsdialogTeaser';
 import OppfolgingsdialogTidligereTeaser from './OppfolgingsdialogTidligereTeaser';
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
-    oppfolgingsplaner: Oppfolgingsplan[];
+    oppfolgingsplaner: OppfolgingsplanDTO[];
     className?: string;
     tittel: string;
     id?: string;

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {Heading} from "@navikt/ds-react";
 import {OppfolgingsplanStepper} from "@/common/components/stepper/OppfolgingsplanStepper";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const textOverskrift = (arbeidsgiver: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -33,7 +33,7 @@ export const tekster = {
 // };
 
 interface Props {
-    aktivPlan: Oppfolgingsplan
+    aktivPlan: OppfolgingsplanDTO
 }
 
 const Oppfolgingsplan = ({aktivPlan}: Props) => {
@@ -120,7 +120,7 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     return (
         <div>
             {/*{oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}*/}
-            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan.virksomhet.navn)}</Heading>
+            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}</Heading>
             <OppfolgingsplanStepper activeStep={1}/>
 
 

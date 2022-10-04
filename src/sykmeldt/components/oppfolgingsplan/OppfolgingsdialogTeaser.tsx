@@ -6,11 +6,11 @@ import {
 } from '@/common/utils/oppfolgingsdialogUtils';
 import {hentPlanStatus} from '@/common/utils/teaserUtils';
 import {LinkPanel, Tag} from "@navikt/ds-react";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import Image from "next/image";
 import NextLink from "next/link";
 import styled from "styled-components";
 import {useLandingUrl} from "@/common/hooks/routeHooks";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const texts = {
     etiketter: {
@@ -19,7 +19,7 @@ const texts = {
 };
 
 interface TilGodkjenningStatusProps {
-    oppfolgingsplan: Oppfolgingsplan
+    oppfolgingsplan: OppfolgingsplanDTO
 }
 
 export const TilGodkjenningStatus = ({oppfolgingsplan}: TilGodkjenningStatusProps) => {
@@ -31,7 +31,7 @@ export const TilGodkjenningStatus = ({oppfolgingsplan}: TilGodkjenningStatusProp
 };
 
 interface OppfolgingsdialogTeaserProps {
-    oppfolgingsplan: Oppfolgingsplan;
+    oppfolgingsplan: OppfolgingsplanDTO;
     rootUrlPlaner?: string
 }
 

@@ -1,6 +1,6 @@
 import {BodyLong, Heading} from "@navikt/ds-react";
 import React, {ReactElement, ReactNode} from "react";
-import {Oppfolgingsplan, Stilling} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {OppfolgingsplanDTO, StillingDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
@@ -17,8 +17,8 @@ const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
 };
 
-const textStilling = (stilling: Stilling) => {
-    return `Du jobber hos denne arbeidsgiveren som ${stilling.yrke.toLowerCase()} ${stilling.prosent} %`;
+const textStilling = (stilling: StillingDTO) => {
+    return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${stilling.prosent} %`;
 };
 
 export enum Page {
@@ -53,14 +53,14 @@ interface Props {
     isLoading: boolean,
     isError: boolean,
     page: Page,
-    oppfolgingsplan?: Oppfolgingsplan,
+    oppfolgingsplan?: OppfolgingsplanDTO,
     children: ReactNode,
 }
 
 export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan, children}: Props) => {
     const sykmeldinger = useSykmeldingerSM();
     const tilgang = useTilgangSM();
-    const stilling: Stilling | undefined = oppfolgingsplan && oppfolgingsplan.arbeidstaker.stillinger?.find(stilling => stilling.virksomhetsnummer == oppfolgingsplan.virksomhet.virksomhetsnummer)
+    const stilling: StillingDTO | undefined = oppfolgingsplan && oppfolgingsplan.arbeidstaker.stillinger?.find(stilling => stilling.virksomhetsnummer == oppfolgingsplan?.virksomhet?.virksomhetsnummer)
 
     const erOppfolgingsdialogTilgjengelig =
         oppfolgingsplan && sykmeldinger.data &&
@@ -90,7 +90,7 @@ export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan
 
     return (
         <Side isLoading={isLoading || tilgang.isLoading || sykmeldinger.isLoading} tittel={titleText(page)}>
-            <Heading spacing={true} level="1" size="large">{textOverskrift(oppfolgingsplan?.virksomhet?.navn)}</Heading>
+            <Heading spacing={true} level="1" size="large">{textOverskrift(oppfolgingsplan?.virksomhet?.navn ?? "")}</Heading>
 
             <OppfolgingsplanStepper activeStep={page.valueOf()}/>
 

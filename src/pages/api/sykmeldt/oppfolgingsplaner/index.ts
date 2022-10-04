@@ -7,9 +7,9 @@ import {fetchOppfolgingsplanerSM} from "@/server/data/sykmeldt/fetchOppfolgingsp
 import {
     NextApiResponseOppfolgingsplanSM
 } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(ncOptions)
+const handler = nc<NextApiRequest, NextApiResponse<OppfolgingsplanDTO[]>>(ncOptions)
     .use(getIdportenToken)
     .use(fetchOppfolgingsplanerSM)
     .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {

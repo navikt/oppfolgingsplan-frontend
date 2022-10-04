@@ -2,11 +2,11 @@ import {useApiBasePath} from "@/common/hooks/routeHooks";
 import {post} from "@/common/api/axios/axios";
 import {useMutation, useQueryClient} from "react-query";
 import {OPPFOLGINGSPLANER_SM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
+import {TiltakDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface LagreTiltakProps {
     oppfolgingsplanId: number;
-    tiltak: Partial<Tiltak>;
+    tiltak: Partial<TiltakDTO>;
 }
 
 export const useLagreTiltakSM = () => {

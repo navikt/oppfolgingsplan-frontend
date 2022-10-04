@@ -1,11 +1,11 @@
 import React from 'react';
 import {finnOppfolgingsdialogMotpartNavn} from '@/common/utils/oppfolgingsdialogUtils';
 import {hentPlanStatus} from '@/common/utils/teaserUtils';
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {LinkPanel} from "@navikt/ds-react";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
-    oppfolgingsplan: Oppfolgingsplan;
+    oppfolgingsplan: OppfolgingsplanDTO;
     rootUrlPlaner?: string
 }
 

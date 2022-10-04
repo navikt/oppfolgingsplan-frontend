@@ -8,10 +8,10 @@ import {DialogDots, Edit} from "@navikt/ds-icons";
 import {SlettTiltakButton} from "@/common/components/tiltak/SlettTiltakButton";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import React, {ReactElement, useState} from "react";
-import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import styled from "styled-components";
 import {useLagreKommentarSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import {EditerTiltak} from "@/common/components/tiltak/EditerTiltak";
+import {TiltakDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
     switch (statusText) {
@@ -51,7 +51,7 @@ export const SpacedDetail = styled(Detail)`
 `
 
 
-const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
+const manglerVurderingFraLeder = (fnr: string, tiltak: TiltakDTO) => {
     return (
         tiltak &&
         !tiltak.gjennomfoering &&
@@ -63,7 +63,7 @@ const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
 
 interface Props {
     arbeidstakerFnr: string;
-    tiltak: Tiltak;
+    tiltak: TiltakDTO;
     oppfolgingsplanId: number;
 }
 

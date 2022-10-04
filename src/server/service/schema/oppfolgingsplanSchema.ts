@@ -1,4 +1,4 @@
-import {array, boolean, number, object, string, z} from "zod";
+import {boolean, z, object, string, number, array} from "zod";
 import {narmesteLederSchema} from "@/server/service/schema/narmestelederSchema";
 
 export const VirksomhetSchema = object({
@@ -41,6 +41,15 @@ export const PersonSchema = object({
     stillinger: array(StillingSchema).nullable()
 })
 
+export const KommentarSchema = object({
+      id: number(),
+      tekst: string(),
+      opprettetTidspunkt: string(),
+      sistEndretDato: string(),
+      opprettetAv: PersonSchema,
+      sistEndretAv: PersonSchema,
+})
+
 export const AvbruttplanSchema = object({
     av: PersonSchema,
     tidspunkt: string(),
@@ -66,15 +75,6 @@ export const GodkjenningSchema = object({
     godkjenningsTidspunkt: string(),
     gyldighetstidspunkt: GyldighetstidspunktSchema.nullable(),
     delMedNav: boolean().nullable()
-})
-
-export const KommentarSchema = object({
-    id: number(),
-    tekst: string(),
-    opprettetTidspunkt: string(),
-    sistEndretDato: string(),
-    opprettetAv: PersonSchema,
-    sistEndretAv: PersonSchema,
 })
 
 export const TiltakSchema = object({
@@ -131,8 +131,20 @@ export const OppfolgingsplanSchema = object({
     tiltakListe: array(TiltakSchema).nullable(),
     avbruttPlanListe: array(AvbruttplanSchema).nullable(),
     arbeidsgiver: ArbeidsgiverSchema.nullable(),
-    arbeidstaker: PersonSchema.nullable(),
+    arbeidstaker: PersonSchema,
     sistEndretAv: PersonSchema,
 })
 
-export type OppfolgingsplanDTO = z.infer<typeof OppfolgingsplanSchema>;
+export type OppfolgingsplanDTO = z.infer<typeof OppfolgingsplanSchema>
+export type GodkjenningDTO = z.infer<typeof GodkjenningSchema>
+export type ArbeidsgiverDTO = z.infer<typeof ArbeidsgiverSchema>
+export type ArbeidsoppgaveDTO = z.infer<typeof ArbeidsoppgaveSchema>
+export type GjennomforingDTO = z.infer<typeof GjennomforingSchema>
+export type TiltakDTO = z.infer<typeof TiltakSchema>
+export type GodkjentPlanDTO = z.infer<typeof GodkjentPlanSchema>
+export type AvbruttplanDTO = z.infer<typeof AvbruttplanSchema>
+export type StillingDTO = z.infer<typeof StillingSchema>
+export type EvalueringDTO = z.infer<typeof EvalueringSchema>
+export type GyldighetstidspunktDTO = z.infer<typeof GyldighetstidspunktSchema>
+export type VirksomhetDTO = z.infer<typeof VirksomhetSchema>
+export type KommentarDTO = z.infer<typeof KommentarSchema>;

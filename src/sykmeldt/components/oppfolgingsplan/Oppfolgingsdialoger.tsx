@@ -1,4 +1,5 @@
 import React from 'react';
+import {Alert, Heading} from "@navikt/ds-react";
 import {
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
@@ -6,12 +7,11 @@ import {
     harTidligereOppfolgingsdialoger,
     isEmpty,
 } from '@/common/utils/oppfolgingsdialogUtils';
-import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
-import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
+import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
+import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
 import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import {IngenLedereInfoBoks} from "@/common/components/infoboks/IngenLedereInfoBoks";
-import {Alert, Heading} from "@navikt/ds-react";
 import OppfolgingsdialogerVisning from "./OppfolgingsdialogerVisning";
 import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
 import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
@@ -22,9 +22,9 @@ const texts = {
 };
 
 interface Props {
-    oppfolgingsplaner: Oppfolgingsplan[];
-    sykmeldinger: Sykmelding[];
-    narmesteLedere: NarmesteLeder[];
+    oppfolgingsplaner: OppfolgingsplanDTO[];
+    sykmeldinger: SykmeldingDTO[];
+    narmesteLedere: NarmesteLedereDTO;
 }
 
 const Oppfolgingsdialoger = ({oppfolgingsplaner, sykmeldinger, narmesteLedere}: Props) => {

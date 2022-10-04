@@ -1,5 +1,5 @@
 import {
-  ApiErrorException,
+  ApiErrorException, generalError,
   schemaParsingError,
 } from "@/common/api/axios/errors";
 import { ZodError } from "zod";
@@ -18,3 +18,8 @@ export function handleSchemaParsingError(
     )
   );
 }
+
+export const handleQueryParamError = (...params: (string | string[] | undefined)[]) =>
+    generalError(
+        new Error(`Malformed query params: ${JSON.stringify(params)}`)
+    )

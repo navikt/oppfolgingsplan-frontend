@@ -3,11 +3,11 @@ import nc from "next-connect";
 import {ncOptions} from "@/server/utils/ncOptions";
 import {withSentry} from "@sentry/nextjs";
 import getIdportenToken from "@/server/auth/idporten/idportenToken";
-import {Tilgang} from "@/types/oppfolgingsplanservice/tilgangType";
 import {NextApiResponseTilgangSM} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
 import {fetchTilgangSM} from "@/server/data/sykmeldt/fetchTilgangSM";
+import {TilgangDTO} from "@/server/service/schema/tilgangSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse<Tilgang>>(ncOptions)
+const handler = nc<NextApiRequest, NextApiResponse<TilgangDTO>>(ncOptions)
     .use(getIdportenToken)
     .use(fetchTilgangSM)
     .get(async (req: NextApiRequest, res: NextApiResponseTilgangSM) => {

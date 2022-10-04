@@ -1,42 +1,34 @@
-import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
 import {isMockBackend} from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
 import {
     NextApiResponseNarmesteLedereSM
 } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import {getTokenX} from "@/server/auth/tokenx";
-import serverEnv from "@/server/utils/serverEnv";
-import serverLogger from "@/server/utils/serverLogger";
-import {handleSchemaParsingError} from "@/server/utils/errors";
+import {handleQueryParamError, handleSchemaParsingError} from "@/server/utils/errors";
 import {getNarmesteLedere} from "@/server/service/oppfolgingsplanService";
-import {NextApiResponseSykmeldingerSM} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseSykmeldingerSM";
+import {getOppfolgingsplanTokenX} from "@/server/utils/tokenX";
+import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
 
 export const fetchNarmesteLedereSM = async (
     req: IAuthenticatedRequest,
-    res: NextApiResponseNarmesteLedereSM & NextApiResponseSykmeldingerSM,
+    res: NextApiResponseNarmesteLedereSM,
     next: () => void
 ) => {
+    const { sykmeldtFnr } = req.query;
+
+    if (typeof sykmeldtFnr !== 'string') {
+        return handleQueryParamError(sykmeldtFnr);
+    }
+
     if (isMockBackend) {
         res.narmesteLedere = activeMockSM.narmesteLedere
     } else {
-        const token = req.idportenToken;
+        const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+        const narmesteLedereResponse = await getNarmesteLedere(oppfolgingsplanTokenX, sykmeldtFnr);
 
-        const oppfolgingsplanTokenXPromise = getTokenX(
-            token,
-            serverEnv.SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
-        );
-
-        const [oppfolgingsplanTokenX] = await Promise.all([oppfolgingsplanTokenXPromise]);
-        serverLogger.info("Exchanging SM tokenx ok");
-
-        const narmesteLederePromise = getNarmesteLedere(oppfolgingsplanTokenX, res?.sykmeldinger?.pop()?.fnr ?? "");
-        const [narmesteLedereRes] = await Promise.all([narmesteLederePromise]);
-        serverLogger.info("Fetching DM data SM ok");
-
-        if (narmesteLedereRes.success) {
-            res.narmesteLedere = narmesteLedereRes.data;
+        if (narmesteLedereResponse.success) {
+            res.narmesteLedere = narmesteLedereResponse.data;
         } else {
-            handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", narmesteLedereRes.error);
+            handleSchemaParsingError("Sykmeldt", "NarmesteLedere", narmesteLedereResponse.error);
         }
     }
 
