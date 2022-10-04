@@ -1,5 +1,6 @@
 import {BodyLong, Heading} from "@navikt/ds-react";
 import React, {ReactElement, ReactNode} from "react";
+import {OppfolgingsplanDTO, StillingDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
@@ -11,7 +12,6 @@ import {IkkeTilgangTilPlanInfoBoks} from "@/common/components/infoboks/IkkeTilga
 import {AdresseSperreInfoBoks} from "@/common/components/infoboks/AdresseSperreInfoBoks";
 import Side from "@/common/components/wrappers/Side";
 import {OppfolgingsplanStepper} from "@/common/components/stepper/OppfolgingsplanStepper";
-import {OppfolgingsplanDTO, StillingDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const textOverskrift = (arbeidsgiver?: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -60,7 +60,7 @@ interface Props {
 export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan, children}: Props) => {
     const sykmeldinger = useSykmeldingerSM();
     const tilgang = useTilgangSM();
-    const stilling: StillingDTO | undefined = oppfolgingsplan && oppfolgingsplan?.arbeidstaker?.stillinger?.find(stilling => stilling.virksomhetsnummer == oppfolgingsplan?.virksomhet?.virksomhetsnummer)
+    const stilling: StillingDTO | undefined = oppfolgingsplan && oppfolgingsplan.arbeidstaker.stillinger?.find(stilling => stilling.virksomhetsnummer == oppfolgingsplan?.virksomhet?.virksomhetsnummer)
 
     const erOppfolgingsdialogTilgjengelig =
         oppfolgingsplan && sykmeldinger.data &&

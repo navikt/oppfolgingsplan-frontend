@@ -1,7 +1,7 @@
 import React from 'react';
 import OppfolgingsdialogTidligereUtenSykmelding from "./OppfolgingsdialogTidligereUtenSykmelding";
 import {Heading} from "@navikt/ds-react";
-import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
+import {OppfolgingsplanDTO} from '@/server/service/schema/oppfolgingsplanSchema';
 
 interface Props {
     oppfolgingsplanerUtenAktivSykmelding: OppfolgingsplanDTO[]

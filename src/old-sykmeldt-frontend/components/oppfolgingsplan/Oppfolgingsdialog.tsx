@@ -120,7 +120,7 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     return (
         <div>
             {/*{oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}*/}
-            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan.virksomhet?.navn ?? "")}</Heading>
+            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}</Heading>
             <OppfolgingsplanStepper activeStep={1}/>
 
 

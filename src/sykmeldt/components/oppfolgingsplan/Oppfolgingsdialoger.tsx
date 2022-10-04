@@ -7,15 +7,15 @@ import {
     harTidligereOppfolgingsdialoger,
     isEmpty,
 } from '@/common/utils/oppfolgingsdialogUtils';
-import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
-import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
-import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
-import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
-import {IngenLedereInfoBoks} from "@/common/components/infoboks/IngenLedereInfoBoks";
-import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
 import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
 import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
+import {sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger} from "@/common/utils/sykmeldingUtils";
+import {IngenLedereInfoBoks} from "@/common/components/infoboks/IngenLedereInfoBoks";
+import OppfolgingsdialogerVisning from "./OppfolgingsdialogerVisning";
+import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
+import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
+import OppfolgingsdialogUtenGyldigSykmelding from "./OppfolgingsdialogUtenGyldigSykmelding";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',

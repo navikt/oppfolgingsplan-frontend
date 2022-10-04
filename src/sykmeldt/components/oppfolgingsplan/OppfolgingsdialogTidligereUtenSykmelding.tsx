@@ -3,9 +3,9 @@ import {finnOppfolgingsdialogMotpartNavn} from '@/common/utils/oppfolgingsdialog
 import {hentStatusUtenAktivSykmelding} from '@/common/utils/teaserUtils';
 import getContextRoot from '@/common/utils/getContextRoot';
 import {BodyLong, Heading, LinkPanel} from "@navikt/ds-react";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 import Image from "next/image";
 import {PlanIkkeAktivSykmeldingImage} from "@/common/images/imageComponents";
-import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
     oppfolgingsplanUtenAktivSykmelding: OppfolgingsplanDTO

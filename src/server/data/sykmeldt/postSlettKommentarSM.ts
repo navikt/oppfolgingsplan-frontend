@@ -37,8 +37,6 @@ export const postSlettKommentarSM = async (
         // activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))!!.tiltakListe.find(tiltak => tiltak.tiltakId == Number(tiltakId))!!.kommentarer = kommentarer
         //
         // console.log(activeMockSM.oppfolgingsplaner[0].tiltakListe[1].kommentarer)
-
-        next();
     } else {
         const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
         await deleteTiltakCommentSM(oppfolgingsplanTokenX, kommentarId);

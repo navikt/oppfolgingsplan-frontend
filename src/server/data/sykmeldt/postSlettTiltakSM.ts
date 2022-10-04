@@ -29,6 +29,8 @@ export const postSlettTiltakSM = async (
         // const filteredTiltakListe = aktivPlan!!.tiltakListe.filter(tiltak => tiltak.tiltakId != Number(tiltakId))
 
         // activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
+
+        next();
     } else {
         const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
         await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);

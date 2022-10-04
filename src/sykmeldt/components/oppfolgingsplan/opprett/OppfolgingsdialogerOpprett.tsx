@@ -4,7 +4,7 @@ import BaserTidligereSkjema from './BaserTidligereSkjema';
 import {Modal} from "@navikt/ds-react";
 import {ArbeidsgivereForGyldigeSykmeldinger} from "@/common/utils/sykmeldingUtils";
 import Feilmelding from "@/common/components/error/Feilmelding";
-import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
+import {OppfolgingsplanDTO} from '@/server/service/schema/oppfolgingsplanSchema';
 
 const texts = {
     errorNoLeader: {
@@ -48,12 +48,12 @@ const OppfolgingsdialogerOpprett = ({
 
     const opprett = (values: any) => {
         // if (values.baserPaaTidligerePlan === 'true') {
-        //     const oppfolgingsplan.ts = finnNyesteTidligereOppfolgingsdialogMedVirksomhet(
+        //     const oppfolgingsplan = finnNyesteTidligereOppfolgingsdialogMedVirksomhet(
         //         this.props.oppfolgingsdialoger,
         //         this.state.virksomhetsnummer
         //     );
-        //     if (oppfolgingsplan.ts) {
-        //         this.props.kopier.mutate(oppfolgingsplan.ts.id);
+        //     if (oppfolgingsplan) {
+        //         this.props.kopier.mutate(oppfolgingsplan.id);
         //     } else {
         //         this.setState({
         //             side: 0,

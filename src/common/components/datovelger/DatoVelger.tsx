@@ -1,19 +1,17 @@
-import React, {forwardRef, useRef} from 'react';
-import DatePicker, {registerLocale} from "react-datepicker";
+import React from 'react';
+import ReactDatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import nb from 'date-fns/locale/nb';
 import {TextField} from "@navikt/ds-react";
 import styled from "styled-components";
-
+import {Controller, useFormContext} from "react-hook-form";
 
 registerLocale('nb', nb);
 
 interface Props {
-    selectedDate: Date | null;
-
-    onChange(newDate: Date | null): void;
-
+    name: string;
     label: string;
+    error?: string;
 }
 
 const SpacedTextField = styled(TextField)`
@@ -21,25 +19,32 @@ const SpacedTextField = styled(TextField)`
   width: 12rem;
 `
 
-const CustomDateInput = forwardRef((props: any, ref: any) => (
-    <SpacedTextField
-        ref={ref}
-        hideLabel={false}
-        placeholder="DD.MM.ÅÅÅÅ"
-        {...props}
-    />
-));
-
-export const DatoVelger = ({selectedDate, onChange, label}: Props) => {
-    const refCustomInput = useRef();
+export const DatoVelger = ({label, name, error}: Props) => {
+    const {control} = useFormContext();
 
     return (
-        <DatePicker
-            locale="nb"
-            dateFormat="dd.MM.yyyy"
-            selected={selectedDate}
-            customInput={<CustomDateInput ref={refCustomInput} label={label}/>}
-            onChange={(newDate) => onChange(newDate)}
+        <Controller
+            control={control}
+            rules={{required: 'Dato er påkrevd'}}
+            name={name}
+            render={({field: {onChange, onBlur, name, value, ref}}) => (
+                <ReactDatePicker
+                    ref={(elem: any) => {
+                        elem && ref(elem.input);
+                    }}
+                    name={name}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    selected={value}
+                    customInput={<SpacedTextField
+                        label={label}
+                        error={error}
+                        ref={ref}
+                        hideLabel={false}
+                        placeholder="DD.MM.ÅÅÅÅ"
+                    />}
+                />
+            )}
         />
     );
 }
