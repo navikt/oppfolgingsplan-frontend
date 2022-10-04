@@ -3,7 +3,7 @@ import React from "react";
 import {useOppfolgingsplanBasePath} from "@/common/hooks/routeHooks";
 import Link from "next/link";
 import {ButtonRow} from "@/common/components/wrappers/ButtonRow";
-import {Page} from "@/common/pagewrappers/OppfolgingsplanPageSM";
+import {Page} from "@/common/components/wrappers/OppfolgingsplanPageSM";
 
 const getPreviousHref = (basePath: string, activeStep: number) => {
     if (activeStep == Page.TILTAK.valueOf()) {

@@ -2,16 +2,16 @@ import {useApiBasePath} from "@/common/hooks/routeHooks";
 import {get} from "@/common/api/axios/axios";
 import {useQuery} from "react-query";
 import {ApiErrorException} from "@/common/api/axios/errors";
-import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
+import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
 
 export const SYKMELDINGER_SM = "sykmeldinger-sykmeldt";
 
 export const useSykmeldingerSM = () => {
     const apiBasePath = useApiBasePath();
 
-    const fetchSykmeldinger = () => get<Sykmelding[]>(`${apiBasePath}/sykmeldinger`);
+    const fetchSykmeldinger = () => get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`);
 
-    return useQuery<Sykmelding[], ApiErrorException>(
+    return useQuery<SykmeldingDTO[], ApiErrorException>(
         SYKMELDINGER_SM,
         fetchSykmeldinger
     );

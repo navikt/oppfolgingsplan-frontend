@@ -2,12 +2,12 @@ import {NextPage} from "next";
 import {useOppfolgingsplanerSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {useNarmesteLedereSM} from "@/common/api/queries/sykmeldt/narmesteLedereQueriesSM";
-import Oppfolgingsdialoger from "../../old-sykmeldt-frontend/components/oppfolgingsdialoger/Oppfolgingsdialoger";
 import React from "react";
-import Feilmelding from "../../old-sykmeldt-frontend/components/Feilmelding";
-import Side from "../../old-sykmeldt-frontend/sider/Side";
 import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
 import {AdresseSperreInfoBoks} from "@/common/components/infoboks/AdresseSperreInfoBoks";
+import Side from "@/common/components/wrappers/Side";
+import Oppfolgingsdialoger from "../../sykmeldt/components/oppfolgingsplan/Oppfolgingsdialoger";
+import Feilmelding from "@/common/components/error/Feilmelding";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner - Oversikt',

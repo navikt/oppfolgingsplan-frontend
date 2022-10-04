@@ -1,14 +1,14 @@
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import React, {ReactElement} from "react";
 import {LagretTiltak} from "@/common/components/tiltak/LagretTiltak";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
-    oppfolgingsplan: Oppfolgingsplan
+    oppfolgingsplan: OppfolgingsplanDTO
 }
 
 
 export const LagredeTiltak = ({oppfolgingsplan}: Props): ReactElement | null => {
-    const arbeidstakerFnr = oppfolgingsplan.arbeidstaker.fnr;
+    const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
 
     if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null
 

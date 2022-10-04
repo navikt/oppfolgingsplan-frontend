@@ -13,7 +13,6 @@ import naermesteleder from './naermesteleder';
 import nullstill from './nullstillGodkjenning';
 import person from './person';
 import nyNaermesteLeder from './nyNaermesteLeder';
-import samtykke from './samtykke';
 import tilgang from './tilgang';
 import tiltak from './tiltak';
 import virksomhet from './virksomhet';
@@ -32,7 +31,6 @@ const reducers = {
   nullstill,
   nyNaermesteLeder,
   oppfolgingsdialoger,
-  samtykke,
   fastlegeDeling,
   delmednav,
   tilgang,

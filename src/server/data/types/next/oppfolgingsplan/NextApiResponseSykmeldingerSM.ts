@@ -1,6 +1,6 @@
 import {NextApiResponse} from "next";
-import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
+import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
 
 export interface NextApiResponseSykmeldingerSM extends NextApiResponse {
-    sykmeldinger: Sykmelding[];
+    sykmeldinger: SykmeldingDTO[];
 }

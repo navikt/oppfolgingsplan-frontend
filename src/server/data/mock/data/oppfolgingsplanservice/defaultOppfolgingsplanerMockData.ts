@@ -1,9 +1,9 @@
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {
     defaultNarmesteLedereMockData
 } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
-export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
+export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     {
         id: 3455,
         sistEndretDato: '2020-02-20T11:31:29.837',
@@ -393,16 +393,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         arbeidsgiver: {
             naermesteLeder: {
                 navn: 'Labben Rekemester',
-                fnr: null,
+                fnr: "20405060718",
                 epost: null,
                 tlf: null,
                 sistInnlogget: '2020-02-24T08:57:46.747',
                 samtykke: null,
-                evaluering: null,
-                stillinger: [],
-                virksomhetsnummer: null,
+                virksomhetsnummer: "123",
                 erAktiv: false,
-                aktivFom: null,
+                aktivFom: '2020-02-24T08:57:46.747',
                 aktivTom: null,
             },
             forrigeNaermesteLeder: null,
@@ -584,24 +582,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         arbeidsgiver: {
             naermesteLeder: {
                 navn: 'Labben Rekemester',
-                fnr: null,
+                fnr: "20405060718",
                 epost: null,
                 tlf: null,
                 sistInnlogget: '2020-02-12T15:24:54.295',
                 samtykke: true,
-                evaluering: {
-                    effekt: null,
-                    hvorfor: null,
-                    videre: null,
-                    interneaktiviteter: "njet",
-                    ekstratid: false,
-                    bistand: false,
-                    ingen: false,
-                },
-                stillinger: [],
-                virksomhetsnummer: null,
+                virksomhetsnummer: "123",
                 erAktiv: false,
-                aktivFom: null,
+                aktivFom: '2000-02-12T15:24:54.295',
                 aktivTom: null,
             },
             forrigeNaermesteLeder: null,
@@ -1017,24 +1005,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         arbeidsgiver: {
             naermesteLeder: {
                 navn: defaultNarmesteLedereMockData[0].navn,
-                fnr: null,
+                fnr: "20405060718",
                 epost: null,
                 tlf: null,
                 sistInnlogget: '2020-02-20T11:31:31.356',
                 samtykke: true,
-                evaluering: {
-                    effekt: null,
-                    hvorfor: null,
-                    videre: null,
-                    interneaktiviteter: "njet",
-                    ekstratid: false,
-                    bistand: false,
-                    ingen: false,
-                },
-                stillinger: [],
-                virksomhetsnummer: null,
+                virksomhetsnummer: "123",
                 erAktiv: false,
-                aktivFom: null,
+                aktivFom: '2010-02-20T11:31:31.356',
                 aktivTom: null,
             },
             forrigeNaermesteLeder: null,

@@ -1,4 +1,3 @@
-import {Kommentar} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {ReactElement} from "react";
 import styled from "styled-components";
 import {Button, Chat} from "@navikt/ds-react";
@@ -7,11 +6,12 @@ import {getFullDateFormat} from "@/common/utils/dateUtils";
 import {useSlettKommentarSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import {useOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {useOppfolgingsplanRouteId} from "@/common/hooks/routeHooks";
+import {KommentarDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 interface Props {
     aktorFnr: string;
     tiltakId: number;
-    kommentarer?: Kommentar[] | null;
+    kommentarer?: KommentarDTO[] | null;
 }
 
 const StyledChat = styled(Chat)`

@@ -2,51 +2,32 @@ import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
 import {NextApiResponseTilgangSM} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
+import {getOppfolgingsplanTokenX} from "@/server/utils/tokenX";
+import {handleQueryParamError, handleSchemaParsingError} from "@/server/utils/errors";
+import {getTilgangSM} from "@/server/service/oppfolgingsplanService";
 
 export const fetchTilgangSM = async (
     req: IAuthenticatedRequest,
     res: NextApiResponseTilgangSM,
     next: () => void
 ) => {
+    const { sykmeldtFnr } = req.query;
+
+    if (typeof sykmeldtFnr !== 'string') {
+        return handleQueryParamError(sykmeldtFnr);
+    }
+
     if (isMockBackend) {
         res.tilgang = activeMockSM.tilgang
     } else {
-        // const token = req.idportenToken;
-        // const motebehovTokenXPromise = getTokenX(
-        //     token,
-        //     serverEnv.SYFOMOTEBEHOV_CLIENT_ID
-        // );
-        // const isDialogmoteTokenXPromise = getTokenX(
-        //     token,
-        //     serverEnv.ISDIALOGMOTE_CLIENT_ID
-        // );
-        // const [motebehovTokenX, isDialogmoteTokenX] = await Promise.all([
-        //     motebehovTokenXPromise,
-        //     isDialogmoteTokenXPromise,
-        // ]);
-        // serverLogger.info("Exchanging SM tokenx ok");
-        //
-        // const motebehovPromise = getMotebehovSM(motebehovTokenX);
-        // const isDialogmotePromise = getBrevSM(isDialogmoteTokenX);
-        //
-        // const [motebehovRes, isDialogmoteRes] = await Promise.all([
-        //     motebehovPromise,
-        //     isDialogmotePromise,
-        // ]);
-        // serverLogger.info("Fetching DM data SM ok");
-        //
-        // if (motebehovRes.success && isDialogmoteRes.success) {
-        //     res.motebehov = motebehovRes.data;
-        //     res.brevArray = isDialogmoteRes.data;
-        // } else if (!motebehovRes.success) {
-        //     handleSchemaParsingError("Sykmeldt", "Motebehov", motebehovRes.error);
-        // } else if (!isDialogmoteRes.success) {
-        //     handleSchemaParsingError(
-        //         "Sykmeldt",
-        //         "IsDialogmote",
-        //         isDialogmoteRes.error
-        //     );
-        // }
+        const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+        const tilgangResponse = await getTilgangSM(oppfolgingsplanTokenX, sykmeldtFnr);
+
+        if (tilgangResponse.success) {
+            res.tilgang = tilgangResponse.data;
+        } else {
+            handleSchemaParsingError("Sykmeldt", "Tilgang", tilgangResponse.error);
+        }
     }
 
     next();

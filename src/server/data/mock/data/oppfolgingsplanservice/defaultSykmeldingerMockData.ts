@@ -1,7 +1,7 @@
-import {Sykmelding} from "@/types/oppfolgingsplanservice/sykmeldingType";
 import {createDateMonthsAgo, createDateMonthsFromNow} from "@/common/utils/dateUtils";
+import {SykmeldingDTO} from "@/server/service/schema/sykmeldingSchema";
 
-export const defaultSykmeldingerMockData: Sykmelding[] = [
+export const defaultSykmeldingerMockData: SykmeldingDTO[] = [
     {
         id: 'b341e1af-6a0d-4740-b8d9-eb3c5551fbc2',
         fnr: '12345678910',

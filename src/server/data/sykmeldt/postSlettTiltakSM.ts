@@ -1,38 +1,38 @@
+import {NextApiResponse} from "next";
 import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
 import {isMockBackend} from "@/common/publicEnv";
-import {NextApiResponse} from "next";
-import activeMockSM from "@/server/data/mock/activeMockSM";
+import serverLogger from "@/server/utils/serverLogger";
+import {deleteTiltakSM} from "@/server/service/oppfolgingsplanService";
+import {getOppfolgingsplanTokenX} from "@/server/utils/tokenX";
+import {handleQueryParamError} from "@/server/utils/errors";
 
 export const postSlettTiltakSM = async (
     req: IAuthenticatedRequest,
     res: NextApiResponse,
     next: () => void
 ) => {
+    const {oppfolgingsplanId, tiltakId} = req.query;
+
+    if (typeof oppfolgingsplanId !== 'string') {
+        return handleQueryParamError(oppfolgingsplanId)
+    }
+
+    if (typeof tiltakId !== 'string') {
+        return handleQueryParamError(tiltakId)
+    }
+
     if (isMockBackend) {
-        const {oppfolgingsplanId, tiltakId} = req.query;
-
-        const aktivPlan = activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))
-        const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!)
-        const filteredTiltakListe = aktivPlan!!.tiltakListe.filter(tiltak => tiltak.tiltakId != Number(tiltakId))
-
-        activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
-
-        return next();
-    } else {
-        // const token = req.idportenToken;
-        // const motebehovTokenX = await getTokenX(
-        //     token,
-        //     serverEnv.SYFOMOTEBEHOV_CLIENT_ID
-        // );
+        // const {oppfolgingsplanId, tiltakId} = req.query;
         //
-        // const svar: MotebehovSvarRequest = req.body;
-        // await post(
-        //     `${serverEnv.SYFOMOTEBEHOV_HOST}/syfomotebehov/api/v3/arbeidstaker/motebehov`,
-        //     svar,
-        //     {
-        //         accessToken: motebehovTokenX,
-        //     }
-        // );
+        // const aktivPlan = activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))
+        // const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!)
+        // const filteredTiltakListe = aktivPlan!!.tiltakListe.filter(tiltak => tiltak.tiltakId != Number(tiltakId))
+
+        // activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
+    } else {
+        const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+        await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);
+        serverLogger.info(`Attempting to delete tiltak with id: ${tiltakId}`);
     }
 
     next();

@@ -1,6 +1,6 @@
 import {NextApiResponse} from "next";
-import {Tilgang} from "@/types/oppfolgingsplanservice/tilgangType";
+import {TilgangDTO} from "@/server/service/schema/tilgangSchema";
 
 export interface NextApiResponseTilgangSM extends NextApiResponse {
-    tilgang: Tilgang;
+    tilgang: TilgangDTO;
 }

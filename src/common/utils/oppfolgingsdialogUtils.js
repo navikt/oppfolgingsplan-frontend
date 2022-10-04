@@ -38,10 +38,6 @@ export const inneholderGodkjentPlan = (oppfolgingsdialog) => {
   return oppfolgingsdialog.godkjentPlan;
 };
 
-export const utenSamtykke = (oppfoelgingsdialog) => {
-  return oppfoelgingsdialog.arbeidstaker.samtykke === null;
-};
-
 export function getOppfolgingsdialog(oppfolgingsdialoger, id) {
   return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
     return oppfolgingsdialog.id.toString() === id.toString();

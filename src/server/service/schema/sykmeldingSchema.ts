@@ -1,23 +1,23 @@
-import { boolean, z, object, string, array } from "zod";
+import { z, object, string, array } from "zod";
 
-export const Sykmeldingsperiode = object({
+export const SykmeldingsperiodeSchema = object({
       fom: string(),
       tom: string(),
 })
 
-export const Organisasjonsinformasjon  = object({
+export const OrganisasjonsinformasjonSchema  = object({
       orgnummer: string(),
       orgNavn: string()
 })
 
-export const Sykmelding = object({
+export const SykmeldingSchema = object({
       id: string(),
       fnr: string(),
-      sykmeldingsperioder: array(Sykmeldingsperiode),
-      organisasjonsinformasjon: Organisasjonsinformasjon
+      sykmeldingsperioder: array(SykmeldingsperiodeSchema),
+      organisasjonsinformasjon: OrganisasjonsinformasjonSchema
 })
 
-export type OrganisasjonsinformasjonDTO = z.infer<typeof Organisasjonsinformasjon>;
-export type SykmeldingsperiodeDTO = z.infer<typeof Sykmeldingsperiode>;
-export type SykmeldingDTO = z.infer<typeof Sykmelding>;
+export type OrganisasjonsinformasjonDTO = z.infer<typeof OrganisasjonsinformasjonSchema>;
+export type SykmeldingsperiodeDTO = z.infer<typeof SykmeldingsperiodeSchema>;
+export type SykmeldingDTO = z.infer<typeof SykmeldingSchema>;
 

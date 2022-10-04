@@ -1,12 +1,10 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
+import {IAuthenticatedRequest} from "../../api/IAuthenticatedRequest";
+import {isMockBackend} from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
 import {NextApiResponseOppfolgingsplanSM} from "@/server/data/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
-import {getTokenX} from "@/server/auth/tokenx";
-import serverEnv from "@/server/utils/serverEnv";
-import serverLogger from "@/server/utils/serverLogger";
-import {getOppfolgingsplanerSM, getSykmeldingerSM} from "@/server/service/oppfolgingsplanService";
+import {getOppfolgingsplanerSM} from "@/server/service/oppfolgingsplanService";
 import {handleSchemaParsingError} from "@/server/utils/errors";
+import {getOppfolgingsplanTokenX} from "@/server/utils/tokenX";
 
 export const fetchOppfolgingsplanerSM = async (
     req: IAuthenticatedRequest,
@@ -16,21 +14,13 @@ export const fetchOppfolgingsplanerSM = async (
     if (isMockBackend) {
         res.oppfolgingsplaner = activeMockSM.oppfolgingsplaner
     } else {
-        const token = req.idportenToken;
+        const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+        const oppfolgingsplanerResponse = await getOppfolgingsplanerSM(oppfolgingsplanTokenX);
 
-        const oppfolgingsplanTokenX = await getTokenX(
-            token,
-            serverEnv.SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
-        );
-        serverLogger.info("Exchanging SM tokenx ok");
-
-        const oppfolgingsplanerRes = await getOppfolgingsplanerSM(oppfolgingsplanTokenX);
-        serverLogger.info("Fetching DM data SM ok");
-
-        if (oppfolgingsplanerRes.success) {
-            res.oppfolgingsplaner = oppfolgingsplanerRes.data;
+        if (oppfolgingsplanerResponse.success) {
+            res.oppfolgingsplaner = oppfolgingsplanerResponse.data;
         } else {
-            handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", oppfolgingsplanerRes.error);
+            handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", oppfolgingsplanerResponse.error);
         }
     }
 

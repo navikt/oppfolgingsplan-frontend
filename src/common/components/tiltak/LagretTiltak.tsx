@@ -8,9 +8,10 @@ import {DialogDots, Edit} from "@navikt/ds-icons";
 import {SlettTiltakButton} from "@/common/components/tiltak/SlettTiltakButton";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import React, {ReactElement, useState} from "react";
-import {Tiltak} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import styled from "styled-components";
 import {useLagreKommentarSM} from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
+import {EditerTiltak} from "@/common/components/tiltak/EditerTiltak";
+import {TiltakDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
     switch (statusText) {
@@ -50,7 +51,7 @@ export const SpacedDetail = styled(Detail)`
 `
 
 
-const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
+const manglerVurderingFraLeder = (fnr: string, tiltak: TiltakDTO) => {
     return (
         tiltak &&
         !tiltak.gjennomfoering &&
@@ -62,16 +63,21 @@ const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
 
 interface Props {
     arbeidstakerFnr: string;
-    tiltak: Tiltak;
+    tiltak: TiltakDTO;
     oppfolgingsplanId: number;
 }
 
 export const LagretTiltak = ({arbeidstakerFnr, tiltak, oppfolgingsplanId}: Props) => {
     const aktoerHarOpprettetElement = arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
     const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
+    const [editererTiltak, setEditererTiltak] = useState(false);
     const lagreKommentarMutation = useLagreKommentarSM();
     const fnr = arbeidstakerFnr
     const tiltakId = tiltak.tiltakId;
+
+    if (editererTiltak) {
+        return <EditerTiltak oppfolgingsplanId={oppfolgingsplanId} tiltak={tiltak} doneEditing={() => setEditererTiltak(false)}/>
+    }
 
     return (
         <TiltakPanel border={true}>
@@ -121,7 +127,7 @@ export const LagretTiltak = ({arbeidstakerFnr, tiltak, oppfolgingsplanId}: Props
             } avbryt={() => setDisplayNyKommentar(false)}/>}
 
             {!displayNyKommentar && <ButtonRow>
-                {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>}>Endre</Button>}
+                {aktoerHarOpprettetElement && <Button variant={"tertiary"} icon={<Edit/>} onClick={() => setEditererTiltak(true)}>Endre</Button>}
                 {aktoerHarOpprettetElement &&
                     <SlettTiltakButton oppfolgingsplanId={oppfolgingsplanId} tiltakId={tiltak.tiltakId}/>}
                 <Button variant={"tertiary"} icon={<DialogDots/>}

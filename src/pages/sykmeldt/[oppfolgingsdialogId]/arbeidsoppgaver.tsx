@@ -2,7 +2,7 @@ import {NextPage} from "next";
 import React from "react";
 import {useOppfolgingsplanerSM, useOppfolgingsplanSM} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {useOppfolgingsplanRouteId} from "@/common/hooks/routeHooks";
-import {OppfolgingsplanPageSM, Page} from "@/common/pagewrappers/OppfolgingsplanPageSM";
+import {OppfolgingsplanPageSM, Page} from "@/common/components/wrappers/OppfolgingsplanPageSM";
 
 const Arbeidsoppgaver: NextPage = () => {
     const oppfolgingsdialogId = useOppfolgingsplanRouteId();

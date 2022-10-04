@@ -1,6 +1,6 @@
 import {NextApiResponse} from "next";
-import {NarmesteLeder} from "@/types/oppfolgingsplanservice/NarmesteLederType";
+import {NarmesteLedereDTO} from "@/server/service/schema/narmestelederSchema";
 
 export interface NextApiResponseNarmesteLedereSM extends NextApiResponse {
-    narmesteLedere: NarmesteLeder[];
+    narmesteLedere: NarmesteLedereDTO;
 }

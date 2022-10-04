@@ -1,7 +1,7 @@
 import React from 'react';
-import {Oppfolgingsplan} from "@/types/oppfolgingsplanservice/oppfolgingsplanTypes";
 import {Heading} from "@navikt/ds-react";
-import {OppfolgingsplanStepper} from "@/common/stepper/OppfolgingsplanStepper";
+import {OppfolgingsplanStepper} from "@/common/components/stepper/OppfolgingsplanStepper";
+import {OppfolgingsplanDTO} from "@/server/service/schema/oppfolgingsplanSchema";
 
 const textOverskrift = (arbeidsgiver: string) => {
     return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -12,14 +12,6 @@ export const tekster = {
     lagreTiltakAdvarselTekst: 'Du har ulagrede tiltak. Vil du fortsette?',
 };
 
-// const skalViseSamtykke = (oppfolgingsplan: Oppfolgingsplan) => {
-//   return (
-//     harNaermesteLeder(oppfolgingsplan) &&
-//     utenSamtykke(oppfolgingsplan) &&
-//     (inneholderGodkjentPlan(oppfolgingsplan) || inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan))
-//   );
-// };
-//
 // const skalViseLagreAdvarsel = (inputFormer) => {
 //   return inputFormer !== undefined && Object.keys(inputFormer).length > 0;
 // };
@@ -41,7 +33,7 @@ export const tekster = {
 // };
 
 interface Props {
-    aktivPlan: Oppfolgingsplan
+    aktivPlan: OppfolgingsplanDTO
 }
 
 const Oppfolgingsplan = ({aktivPlan}: Props) => {
@@ -56,10 +48,7 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     // let disableNavigation = false;
     // let skalViseAvsluttOgLagre = false;
     // let visLagreAdvarsel = false;
-    // if (skalViseSamtykke(oppfolgingsdialog)) {
-    //   disableNavigation = true;
-    //   panel = <Samtykke sendSamtykke={giSamtykke} oppfolgingsdialog={oppfolgingsdialog} />;
-    // } else if (
+    // if (
     //   harNaermesteLeder(oppfolgingsdialog) &&
     //   inneholderGodkjenninger(oppfolgingsdialog) &&
     //   !erAvvistAvArbeidstaker(oppfolgingsdialog)
@@ -79,7 +68,6 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     //   panel = (
     //     <ReleasetPlanAT
     //       oppfolgingsdialog={oppfolgingsdialog}
-    //       giSamtykke={giSamtykke}
     //       avbrytDialog={avbrytDialog}
     //       delMedNavFunc={delMedNavFunc}
     //       delmednav={delmednav}
@@ -132,7 +120,7 @@ const Oppfolgingsplan = ({aktivPlan}: Props) => {
     return (
         <div>
             {/*{oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}*/}
-            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan.virksomhet.navn)}</Heading>
+            <Heading spacing={true} level="1" size="large">{textOverskrift(aktivPlan.virksomhet?.navn ?? "")}</Heading>
             <OppfolgingsplanStepper activeStep={1}/>
 
 
