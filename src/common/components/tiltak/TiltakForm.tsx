@@ -31,7 +31,7 @@ const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `;
 
-export type FormValues = {
+export type TiltakFormValues = {
   overskrift: string;
   beskrivelse: string;
   fom: Date | null;
@@ -39,11 +39,11 @@ export type FormValues = {
 };
 
 interface Props {
-  onSubmit(data: FormValues): void;
+  onSubmit(data: TiltakFormValues): void;
 
   onCancel(): void;
 
-  defaultFormValues?: FormValues;
+  defaultFormValues?: TiltakFormValues;
 }
 
 export const TiltakForm = ({
@@ -53,12 +53,15 @@ export const TiltakForm = ({
 }: Props) => {
   const errorRef = useRef<any>(null);
 
-  const formFunctions = useForm<FormValues>();
+  const formFunctions = useForm<TiltakFormValues>();
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = formFunctions;
+
+  const beskrivelseValue = watch("beskrivelse")
 
   return (
     <FormProvider {...formFunctions}>
@@ -85,7 +88,6 @@ export const TiltakForm = ({
               id="beskrivelse"
               label={"Beskriv hva som skal skje (obligatorisk)"}
               error={errors.beskrivelse?.message}
-              defaultValue={defaultFormValues?.beskrivelse}
               description={
                 "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
               }
@@ -94,6 +96,7 @@ export const TiltakForm = ({
                 required: "Du må gi en beskrivelse av tiltaket",
                 maxLength: 600,
               })}
+              value={beskrivelseValue}
             />
 
             <SpacedAlert variant={"info"}>
@@ -109,6 +112,7 @@ export const TiltakForm = ({
                 label={"Startdato (obligatorisk)"}
                 defaultValue={defaultFormValues?.fom}
                 error={errors.fom?.message}
+                errorMessage={"Du må velge startdato"}
               />
 
               <DatoVelger
@@ -116,6 +120,7 @@ export const TiltakForm = ({
                 label={"Sluttdato (obligatorisk)"}
                 defaultValue={defaultFormValues?.tom}
                 error={errors.tom?.message}
+                errorMessage={"Du må velge sluttdato"}
               />
             </DateRow>
 
@@ -124,9 +129,7 @@ export const TiltakForm = ({
                 variant={"primary"}
                 type={"submit"}
                 onClick={() => {
-                  if (Object.keys(errors).length > 0) {
-                    errorRef.current.focus();
-                  }
+                  errorRef.current && errorRef.current.focus();
                 }}
               >
                 Lagre

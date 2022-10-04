@@ -3,7 +3,7 @@ import PlusIcon from "@/common/components/icons/PlusIcon";
 import { useState } from "react";
 import { TiltakPanel } from "@/common/components/tiltak/TiltakPanel";
 import { useLagreTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import { FormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
+import { TiltakFormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 
@@ -15,7 +15,7 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
   const lagreTiltak = useLagreTiltakSM();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
-  const nyttTiltakInformasjon = (data: FormValues): Partial<Tiltak> => {
+  const nyttTiltakInformasjon = (data: TiltakFormValues): Partial<Tiltak> => {
     return {
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,

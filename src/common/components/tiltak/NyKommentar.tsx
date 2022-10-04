@@ -1,8 +1,9 @@
 import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import { BodyLong, Button, Textarea } from "@navikt/ds-react";
 import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
 const SpacedTextarea = styled(Textarea)`
   padding-bottom: 2rem;
@@ -13,35 +14,52 @@ interface Props {
   avbryt(): void;
 }
 
+type KommentarFormValues = {
+  kommentar: string;
+};
+
 export const NyKommentar = ({ lagre, avbryt }: Props): ReactElement | null => {
-  const [kommentar, setKommentar] = useState("");
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<KommentarFormValues>();
+
+  const kommentar = watch("kommentar");
 
   return (
-    <LightGreyPanel border={true}>
-      <BodyLong spacing>
-        Kommentarer er laget for å hjelpe deg og arbeidsgiveren din med å
-        utarbeide en god plan sammen. Kommentarene vil derfor ikke vises i den
-        ferdige oppfølgingsplanen dere kan dele med fastlegen eller NAV.
-      </BodyLong>
+    <form onSubmit={handleSubmit(() => lagre(kommentar))}>
+      <LightGreyPanel border={true}>
+        <BodyLong spacing>
+          Kommentarer er laget for å hjelpe deg og arbeidsgiveren din med å
+          utarbeide en god plan sammen. Kommentarene vil derfor ikke vises i den
+          ferdige oppfølgingsplanen dere kan dele med fastlegen eller NAV.
+        </BodyLong>
 
-      <SpacedTextarea
-        value={kommentar}
-        onChange={(e) => setKommentar(e.target.value)}
-        maxLength={1000}
-        label={"Kommenter (obligatorisk)"}
-        description={
-          "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-        }
-      />
+        <SpacedTextarea
+          maxLength={1000}
+          error={errors.kommentar?.message}
+          label={"Kommenter (obligatorisk)"}
+          description={
+            "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+          }
+          {...register("kommentar", {
+            required: "Du må legge inn en kommentar",
+            maxLength: 1000,
+          })}
+          value={kommentar}
+        />
 
-      <ButtonRow>
-        <Button variant={"primary"} onClick={() => lagre(kommentar)}>
-          Lagre
-        </Button>
-        <Button variant={"tertiary"} onClick={avbryt}>
-          Avbryt
-        </Button>
-      </ButtonRow>
-    </LightGreyPanel>
+        <ButtonRow>
+          <Button variant={"primary"} type={"submit"}>
+            Lagre
+          </Button>
+          <Button variant={"tertiary"} onClick={avbryt}>
+            Avbryt
+          </Button>
+        </ButtonRow>
+      </LightGreyPanel>
+    </form>
   );
 };
