@@ -1,7 +1,7 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
-import { NextApiResponseTilgangSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
+import { NextApiResponseTilgangSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import {
   handleQueryParamError,
@@ -24,6 +24,7 @@ export const fetchTilgangSM = async (
     res.tilgang = activeMockSM.tilgang;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+
     const tilgangResponse = await getTilgangSM(
       oppfolgingsplanTokenX,
       sykmeldtFnr

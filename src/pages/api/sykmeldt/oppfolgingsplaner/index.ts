@@ -4,7 +4,7 @@ import { ncOptions } from "@/server/utils/ncOptions";
 import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "@/server/auth/idporten/idportenToken";
 import { fetchOppfolgingsplanerSM } from "@/server/data/sykmeldt/fetchOppfolgingsplanerSM";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 
 const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(

@@ -1,7 +1,7 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import { getOppfolgingsplanerSM } from "@/server/service/oppfolgingsplanService";
 import { handleSchemaParsingError } from "@/server/utils/errors";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
@@ -15,6 +15,7 @@ export const fetchOppfolgingsplanerSM = async (
     res.oppfolgingsplaner = activeMockSM.oppfolgingsplaner;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+
     const oppfolgingsplanerResponse = await getOppfolgingsplanerSM(
       oppfolgingsplanTokenX
     );

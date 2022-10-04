@@ -11,18 +11,19 @@ export const postLagreKommentarSM = async (
   res: NextApiResponse,
   next: () => void
 ) => {
+  const { tiltakId } = req.query;
   const body: Kommentar = req.body;
-  const { kommentarId } = req.query;
 
-  if (typeof kommentarId !== "string") {
-    return handleQueryParamError(kommentarId);
+  if (typeof tiltakId !== "string") {
+    return handleQueryParamError(tiltakId);
   }
 
   if (isMockBackend) {
     return next();
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
-    await saveTiltakCommentSM(oppfolgingsplanTokenX, kommentarId, body);
+
+    await saveTiltakCommentSM(oppfolgingsplanTokenX, tiltakId, body);
   }
 
   next();

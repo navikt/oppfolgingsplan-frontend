@@ -17,6 +17,7 @@ export const postOpprettOppfolgingsplanSM = async (
     return next();
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+
     await createOppfolgingsplanSM(
       oppfolgingsplanTokenX,
       opprettOppfolgingsplanData

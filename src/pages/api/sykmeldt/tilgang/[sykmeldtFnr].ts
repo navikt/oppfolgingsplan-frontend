@@ -3,7 +3,7 @@ import nc from "next-connect";
 import { ncOptions } from "@/server/utils/ncOptions";
 import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "@/server/auth/idporten/idportenToken";
-import { NextApiResponseTilgangSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
+import { NextApiResponseTilgangSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
 import { fetchTilgangSM } from "@/server/data/sykmeldt/fetchTilgangSM";
 import { Tilgang } from "../../../../schema/tilgangSchema";
 

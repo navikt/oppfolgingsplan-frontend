@@ -1,13 +1,13 @@
 import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
-import { NextApiResponseNarmesteLedereSM } from "@/server/data/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
+import { NextApiResponseNarmesteLedereSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
+import { getNarmesteLedere } from "@/server/service/oppfolgingsplanService";
+import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
+import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import {
   handleQueryParamError,
   handleSchemaParsingError,
 } from "@/server/utils/errors";
-import { getNarmesteLedere } from "@/server/service/oppfolgingsplanService";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 
 export const fetchNarmesteLedereSM = async (
   req: IAuthenticatedRequest,
@@ -24,6 +24,7 @@ export const fetchNarmesteLedereSM = async (
     res.narmesteLedere = activeMockSM.narmesteLedere;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+
     const narmesteLedereResponse = await getNarmesteLedere(
       oppfolgingsplanTokenX,
       sykmeldtFnr

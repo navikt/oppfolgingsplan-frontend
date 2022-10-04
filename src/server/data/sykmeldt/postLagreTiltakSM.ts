@@ -22,6 +22,7 @@ export const postLagreTiltakSM = async (
     return next();
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+
     await saveTiltak(oppfolgingsplanTokenX, oppfolgingsplanId, tiltak);
   }
 

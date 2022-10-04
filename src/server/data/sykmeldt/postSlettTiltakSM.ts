@@ -33,6 +33,7 @@ export const postSlettTiltakSM = async (
     next();
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+
     await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);
     serverLogger.info(`Attempting to delete tiltak with id: ${tiltakId}`);
   }
