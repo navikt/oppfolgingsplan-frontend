@@ -1,11 +1,11 @@
-import {Alert, Button, Textarea, TextField} from "@navikt/ds-react";
+import {Alert, Button, ErrorSummary, Textarea, TextField} from "@navikt/ds-react";
 import {LightGreyPanel} from "@/common/components/wrappers/LightGreyPanel";
 import {DatoVelger} from "@/common/components/datovelger/DatoVelger";
 import styled from "styled-components";
 import {TiltakPanel} from "@/common/components/tiltak/TiltakPanel";
 import {TiltakFormHeading} from "@/common/components/tiltak/TiltakFormHeading";
 import {FormProvider, useForm} from "react-hook-form";
-import React from "react";
+import React, {useRef} from "react";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -51,8 +51,12 @@ export const TiltakForm = ({
                                onSubmit,
                                onCancel
                            }: Props) => {
+
+    const errorRef = useRef<any>(null);
+
     const formFunctions = useForm<FormValues>();
     const {handleSubmit, register, formState: {errors}} = formFunctions
+    const errorCount = Object.keys(errors).length;
 
     return (
         <FormProvider {...formFunctions} >
@@ -61,6 +65,15 @@ export const TiltakForm = ({
                     <TiltakFormHeading/>
 
                     <LightGreyPanel border={true}>
+
+                        {errorCount > 0 && <ErrorSummary heading={`Du har ${errorCount} feil som må rettes opp i`} ref={errorRef}>
+                            {Object.values(errors).map((err, index) => (
+                                <ErrorSummary.Item key={index} href={"errors.overskrift.ref?.value"}>
+                                    {err.message}
+                                </ErrorSummary.Item>
+                            ))}
+                        </ErrorSummary>}
+
                         <OverskriftTextField label={"Overskrift (obligatorisk)"}
                                              error={errors.overskrift?.message}
                                              maxLength={80}  {...register("overskrift", {
@@ -89,13 +102,15 @@ export const TiltakForm = ({
                             <DatoVelger name="tom" label={"Sluttdato (obligatorisk)"} error={errors.tom?.message}/>
                         </DateRow>
 
-
-                        {/*{false && <Wrapper><Feilmelding/></Wrapper>}*/}
-
                         <ButtonRow>
-                            <Button variant={"primary"} type={"submit"}>Lagre</Button>
+                            <Button variant={"primary"} type={"submit"} onClick={() => {
+                                if (errorCount > 0) {
+                                    errorRef.current.focus();
+                                }
+                            }}>Lagre</Button>
                             <Button variant={"tertiary"} onClick={onCancel}>Avbryt</Button>
                         </ButtonRow>
+
                     </LightGreyPanel>
                 </TiltakPanel>
             </form>
