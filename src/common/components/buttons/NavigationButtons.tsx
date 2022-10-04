@@ -1,6 +1,6 @@
 import { Button } from "@navikt/ds-react";
 import React from "react";
-import { useOppfolgingsplanBasePath } from "@/common/hooks/routeHooks";
+import {useLandingUrl, useOppfolgingsplanBasePath} from "@/common/hooks/routeHooks";
 import Link from "next/link";
 import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
 import { Page } from "@/common/components/wrappers/OppfolgingsplanPageSM";
@@ -30,6 +30,7 @@ interface Props {
 }
 
 export const NavigationButtons = ({ activeStep }: Props) => {
+  const landingUrl = useLandingUrl();
   const basePath = useOppfolgingsplanBasePath();
   const previousPage = getPreviousHref(basePath, activeStep);
   const nextPage = getNextHref(basePath, activeStep);
@@ -48,7 +49,9 @@ export const NavigationButtons = ({ activeStep }: Props) => {
         </Link>
       )}
 
-      <Button variant={"tertiary"}>Fortsett senere</Button>
+      <Link href={landingUrl} passHref={true}>
+        <Button variant={"tertiary"}>Fortsett senere</Button>
+      </Link>
     </ButtonRow>
   );
 };
