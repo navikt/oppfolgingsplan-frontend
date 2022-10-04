@@ -1,5 +1,7 @@
 export const finnUnikeElementer = (liste) => {
-  return new Set(Array.from(new Set(liste.map(JSON.stringify))).map(JSON.parse));
+  return new Set(
+    Array.from(new Set(liste.map(JSON.stringify))).map(JSON.parse)
+  );
 };
 
 export const henterEllerHarHentetLedere = (ledere) => {
@@ -11,18 +13,28 @@ export const henterEllerHarHentetTilgang = (tilgang) => {
 };
 
 export const henterEllerHarHentetOppfolgingsplaner = (oppfolgingsplaner) => {
-  return oppfolgingsplaner.henter || oppfolgingsplaner.hentet || oppfolgingsplaner.hentingFeilet;
+  return (
+    oppfolgingsplaner.henter ||
+    oppfolgingsplaner.hentet ||
+    oppfolgingsplaner.hentingFeilet
+  );
 };
 
 export const oppfolgingsplanHarBlittAvbrutt = (avbrytplan, nesteAvbrytplan) => {
   return avbrytplan.sender && nesteAvbrytplan.sendt;
 };
 
-export const oppfolgingsplanHarBlittOpprettet = (oppfolgingsplaner, nesteOppfolgingsplaner) => {
+export const oppfolgingsplanHarBlittOpprettet = (
+  oppfolgingsplaner,
+  nesteOppfolgingsplaner
+) => {
   return oppfolgingsplaner.oppretter && nesteOppfolgingsplaner.opprettet;
 };
 
-export const henterEllerHarHentetVirksomhet = (virksomhetsnummer, virksomhet) => {
+export const henterEllerHarHentetVirksomhet = (
+  virksomhetsnummer,
+  virksomhet
+) => {
   return (
     virksomhet.henter.filter((henter) => {
       return henter === virksomhetsnummer;
@@ -52,29 +64,49 @@ export const henterEllerHarHentetKontaktinfo = (fnr, kontaktinfo) => {
   );
 };
 
-export const henterEllerHarHentetNaermesteLeder = (fnr, virksomhetsnummer, naermesteleder) => {
+export const henterEllerHarHentetNaermesteLeder = (
+  fnr,
+  virksomhetsnummer,
+  naermesteleder
+) => {
   return (
     naermesteleder.henter.filter((henter) => {
-      return henter.virksomhetsnummer === virksomhetsnummer && henter.fnr === fnr;
+      return (
+        henter.virksomhetsnummer === virksomhetsnummer && henter.fnr === fnr
+      );
     }).length > 0 ||
     naermesteleder.hentet.filter((hentet) => {
-      return hentet.virksomhetsnummer === virksomhetsnummer && hentet.fnr === fnr;
+      return (
+        hentet.virksomhetsnummer === virksomhetsnummer && hentet.fnr === fnr
+      );
     }).length > 0
   );
 };
 
-export const henterEllerHarHentetArbeidsforhold = (fnr, virksomhetsnummer, arbeidsforhold) => {
+export const henterEllerHarHentetArbeidsforhold = (
+  fnr,
+  virksomhetsnummer,
+  arbeidsforhold
+) => {
   return (
     arbeidsforhold.henter.filter((henter) => {
-      return henter.virksomhetsnummer === virksomhetsnummer && henter.fnr === fnr;
+      return (
+        henter.virksomhetsnummer === virksomhetsnummer && henter.fnr === fnr
+      );
     }).length > 0 ||
     arbeidsforhold.hentet.filter((hentet) => {
-      return hentet.virksomhetsnummer === virksomhetsnummer && hentet.fnr === fnr;
+      return (
+        hentet.virksomhetsnummer === virksomhetsnummer && hentet.fnr === fnr
+      );
     }).length > 0
   );
 };
 
-export const finnOgHentVirksomheterSomMangler = (oppfolgingsdialoger, virksomhet, hentVirksomhet) => {
+export const finnOgHentVirksomheterSomMangler = (
+  oppfolgingsdialoger,
+  virksomhet,
+  hentVirksomhet
+) => {
   const virksomhetsnummerSet = new Set();
   oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
     if (oppfolgingsdialog.virksomhet) {
@@ -89,7 +121,11 @@ export const finnOgHentVirksomheterSomMangler = (oppfolgingsdialoger, virksomhet
   });
 };
 
-export const finnOgHentPersonerSomMangler = (oppfolgingsplaner, person, hentPerson) => {
+export const finnOgHentPersonerSomMangler = (
+  oppfolgingsplaner,
+  person,
+  hentPerson
+) => {
   const fnrSet = new Set();
   oppfolgingsplaner.forEach((oppfolgingsplan) => {
     fnrSet.add(oppfolgingsplan.arbeidstaker.fnr);
@@ -101,7 +137,11 @@ export const finnOgHentPersonerSomMangler = (oppfolgingsplaner, person, hentPers
   });
 };
 
-export const finnOgHentKontaktinfoSomMangler = (oppfolgingsdialoger, kontaktinfo, hentKontaktinfo) => {
+export const finnOgHentKontaktinfoSomMangler = (
+  oppfolgingsdialoger,
+  kontaktinfo,
+  hentKontaktinfo
+) => {
   const kontaktinfoSet = new Set();
   oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
     kontaktinfoSet.add(oppfolgingsdialog.arbeidstaker.fnr);
@@ -114,7 +154,11 @@ export const finnOgHentKontaktinfoSomMangler = (oppfolgingsdialoger, kontaktinfo
   });
 };
 
-export const finnOgHentArbeidsforholdSomMangler = (oppfolgingsdialoger, arbeidsforhold, hentArbeidsforhold) => {
+export const finnOgHentArbeidsforholdSomMangler = (
+  oppfolgingsdialoger,
+  arbeidsforhold,
+  hentArbeidsforhold
+) => {
   const arbeidsforholdListe = [];
   oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
     arbeidsforholdListe.push({
@@ -132,12 +176,20 @@ export const finnOgHentArbeidsforholdSomMangler = (oppfolgingsdialoger, arbeidsf
         arbeidsforhold
       )
     ) {
-      hentArbeidsforhold(uniktArbeidsforhold.fnr, uniktArbeidsforhold.virksomhetsnummer, uniktArbeidsforhold.fom);
+      hentArbeidsforhold(
+        uniktArbeidsforhold.fnr,
+        uniktArbeidsforhold.virksomhetsnummer,
+        uniktArbeidsforhold.fom
+      );
     }
   });
 };
 
-export const finnOgHentNaermesteLedereListeSomMangler = (dinesykmeldinger, naermesteLedere, hentLedere) => {
+export const finnOgHentNaermesteLedereListeSomMangler = (
+  dinesykmeldinger,
+  naermesteLedere,
+  hentLedere
+) => {
   if (!henterEllerHarHentetLedere(naermesteLedere)) {
     const sykmelding = dinesykmeldinger.data[0];
     if (sykmelding) {
@@ -146,7 +198,11 @@ export const finnOgHentNaermesteLedereListeSomMangler = (dinesykmeldinger, naerm
   }
 };
 
-export const finnOgHentNaermesteLedereSomMangler = (oppfolgingsdialoger, naermesteleder, hentNaermesteLeder) => {
+export const finnOgHentNaermesteLedereSomMangler = (
+  oppfolgingsdialoger,
+  naermesteleder,
+  hentNaermesteLeder
+) => {
   const naermesteLedereForFnrHosVirksomhet = [];
   oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
     naermesteLedereForFnrHosVirksomhet.push({
@@ -154,16 +210,23 @@ export const finnOgHentNaermesteLedereSomMangler = (oppfolgingsdialoger, naermes
       virksomhetsnummer: oppfolgingsdialog.virksomhet.virksomhetsnummer,
     });
   });
-  const naermesteLedereForFnrHosVirksomhetSet = finnUnikeElementer(naermesteLedereForFnrHosVirksomhet);
-  naermesteLedereForFnrHosVirksomhetSet.forEach((naermesteLederForFnrHosVirksomhet) => {
-    if (
-      !henterEllerHarHentetNaermesteLeder(
-        naermesteLederForFnrHosVirksomhet.fnr,
-        naermesteLederForFnrHosVirksomhet.virksomhetsnummer,
-        naermesteleder
-      )
-    ) {
-      hentNaermesteLeder(naermesteLederForFnrHosVirksomhet.fnr, naermesteLederForFnrHosVirksomhet.virksomhetsnummer);
+  const naermesteLedereForFnrHosVirksomhetSet = finnUnikeElementer(
+    naermesteLedereForFnrHosVirksomhet
+  );
+  naermesteLedereForFnrHosVirksomhetSet.forEach(
+    (naermesteLederForFnrHosVirksomhet) => {
+      if (
+        !henterEllerHarHentetNaermesteLeder(
+          naermesteLederForFnrHosVirksomhet.fnr,
+          naermesteLederForFnrHosVirksomhet.virksomhetsnummer,
+          naermesteleder
+        )
+      ) {
+        hentNaermesteLeder(
+          naermesteLederForFnrHosVirksomhet.fnr,
+          naermesteLederForFnrHosVirksomhet.virksomhetsnummer
+        );
+      }
     }
-  });
+  );
 };

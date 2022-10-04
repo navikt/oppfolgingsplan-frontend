@@ -1,8 +1,8 @@
-export const HENT_NAERMESTELEDER_FORESPURT = 'HENT_NAERMESTELEDER_FORESPURT';
-export const HENTER_NAERMESTELEDER = 'HENTER_NAERMESTELEDER';
-export const NAERMESTELEDER_HENTET = 'NAERMESTELEDER_HENTET';
-export const HENT_NAERMESTELEDER_FEILET = 'HENT_NAERMESTELEDER_FEILET';
-export const INGEN_NAERMESTELEDER = 'INGEN_NAERMESTELEDER';
+export const HENT_NAERMESTELEDER_FORESPURT = "HENT_NAERMESTELEDER_FORESPURT";
+export const HENTER_NAERMESTELEDER = "HENTER_NAERMESTELEDER";
+export const NAERMESTELEDER_HENTET = "NAERMESTELEDER_HENTET";
+export const HENT_NAERMESTELEDER_FEILET = "HENT_NAERMESTELEDER_FEILET";
+export const INGEN_NAERMESTELEDER = "INGEN_NAERMESTELEDER";
 
 export const hentNaermesteLeder = (fnr, virksomhetsnummer) => {
   return {
@@ -20,7 +20,11 @@ export const henterNaermesteLeder = (fnr, virksomhetsnummer) => {
   };
 };
 
-export const naermesteLederHentet = (naermesteLeder, fnr, virksomhetsnummer) => {
+export const naermesteLederHentet = (
+  naermesteLeder,
+  fnr,
+  virksomhetsnummer
+) => {
   return {
     type: NAERMESTELEDER_HENTET,
     naermesteLeder,

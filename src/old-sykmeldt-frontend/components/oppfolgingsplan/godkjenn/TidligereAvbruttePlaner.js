@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { restdatoTildato } from '@/common/utils/dateUtils';
-import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
-import {Accordion} from "@navikt/ds-react";
+import React from "react";
+import PropTypes from "prop-types";
+import { restdatoTildato } from "@/common/utils/dateUtils";
+import { oppfolgingsplanPt } from "../../../propTypes/opproptypes";
+import { Accordion } from "@navikt/ds-react";
 
 const texts = {
-  title: 'Se tidligere utgaver av denne planen',
+  title: "Se tidligere utgaver av denne planen",
 };
 
 const textLink = (date) => {
@@ -13,28 +13,32 @@ const textLink = (date) => {
 };
 
 const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
-  if (oppfolgingsdialog.avbruttPlanListe && oppfolgingsdialog.avbruttPlanListe.length > 0) {
+  if (
+    oppfolgingsdialog.avbruttPlanListe &&
+    oppfolgingsdialog.avbruttPlanListe.length > 0
+  ) {
     return (
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>
-              {texts.title}
-            </Accordion.Header>
-            <Accordion.Content>
-              <ul>
-                {oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
-                  return (
-                      <li key={idx}>
-                        <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}>
-                          {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
-                        </a>
-                      </li>
-                  );
-                })}
-              </ul>
-            </Accordion.Content>
-          </Accordion.Item>
-        </Accordion>
+      <Accordion>
+        <Accordion.Item>
+          <Accordion.Header>{texts.title}</Accordion.Header>
+          <Accordion.Content>
+            <ul>
+              {oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
+                return (
+                  <li key={idx}>
+                    <a
+                      className="lenke"
+                      href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}
+                    >
+                      {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
     );
   }
   return null;

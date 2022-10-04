@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {Alert, Button, GuidePanel} from "@navikt/ds-react";
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { erArbeidstakerEgenLeder, erIkkeOppfolgingsdialogUtfylt } from '@/common/utils/oppfolgingsdialogUtils';
-import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
-import VeilederAvatar from '../../../app/VeilederAvatar';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Alert, Button, GuidePanel } from "@navikt/ds-react";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
+import {
+  erArbeidstakerEgenLeder,
+  erIkkeOppfolgingsdialogUtfylt,
+} from "@/common/utils/oppfolgingsdialogUtils";
+import IkkeUtfyltPlanFeilmelding from "./IkkeUtfyltPlanFeilmelding";
+import VeilederAvatar from "../../../app/VeilederAvatar";
 
 const texts = {
-  veileder: 'Er du ferdig med denne planen og ønsker å sende den til arbeidsgiveren din for godkjenning?',
-  buttonGodkjenn: 'Jeg er ferdig',
+  veileder:
+    "Er du ferdig med denne planen og ønsker å sende den til arbeidsgiveren din for godkjenning?",
+  buttonGodkjenn: "Jeg er ferdig",
   arbeidstakerLeaderSamePerson: {
-    info: 'Fordi du er din egen leder, må du logge inn som arbeidsgiver for å fullføre planen.',
+    info: "Fordi du er din egen leder, må du logge inn som arbeidsgiver for å fullføre planen.",
   },
 };
 
@@ -60,11 +64,18 @@ class ReviderEllerGodkjennPlan extends Component {
             </Alert>
           ) : (
             <React.Fragment>
-              <GuidePanel illustration={<VeilederAvatar />}>{texts.veileder}</GuidePanel>
+              <GuidePanel illustration={<VeilederAvatar />}>
+                {texts.veileder}
+              </GuidePanel>
               {this.state.visIkkeUtfyltFeilmelding && (
-                <IkkeUtfyltPlanFeilmelding oppfolgingsdialog={oppfolgingsdialog} settAktivtSteg={settAktivtSteg} />
+                <IkkeUtfyltPlanFeilmelding
+                  oppfolgingsdialog={oppfolgingsdialog}
+                  settAktivtSteg={settAktivtSteg}
+                />
               )}
-              <ReviderEllerGodkjennPlanKnapperad godkjennPlan={this.godkjennPlan} />
+              <ReviderEllerGodkjennPlanKnapperad
+                godkjennPlan={this.godkjennPlan}
+              />
             </React.Fragment>
           )}
         </div>

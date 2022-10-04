@@ -1,11 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { fieldPropTypes } from '../../propTypes';
-import Feilomrade from './Feilomrade';
-import {Radio} from "@navikt/ds-react";
+import React from "react";
+import PropTypes from "prop-types";
+import { fieldPropTypes } from "../../propTypes";
+import Feilomrade from "./Feilomrade";
+import { Radio } from "@navikt/ds-react";
 
 export const getId = (id) => {
-  return id.split('.').join('-').split('[').join('-').split(']').join('-').split('--').join('-');
+  return id
+    .split(".")
+    .join("-")
+    .split("[")
+    .join("-")
+    .split("]")
+    .join("-")
+    .split("--")
+    .join("-");
 };
 
 export const Radioknapp = ({
@@ -28,7 +36,7 @@ export const Radioknapp = ({
     label
   );
   return (
-      //Todo: Fix radio button
+    //Todo: Fix radio button
     <div>
       <Radio
         id={getId(id)}
@@ -63,7 +71,7 @@ const Radioknapper = ({
   input,
   meta,
   spoersmal,
-  Overskrift = 'h3',
+  Overskrift = "h3",
   children = [],
   horisontal = false,
   hjelpetekst,
@@ -72,12 +80,16 @@ const Radioknapper = ({
 }) => {
   return (
     <Feilomrade {...meta} id={input.name}>
-      <div className={`${hjelpetekst ? 'medHjelpetekst' : ''}`}>
+      <div className={`${hjelpetekst ? "medHjelpetekst" : ""}`}>
         <Overskrift className="skjema__sporsmal">{spoersmal}</Overskrift>
         {hjelpetekst}
       </div>
       {hjelpelinje}
-      <div className={horisontal ? 'inputgruppe inputgruppe--horisontal' : 'inputgruppe'}>
+      <div
+        className={
+          horisontal ? "inputgruppe inputgruppe--horisontal" : "inputgruppe"
+        }
+      >
         {children.map((radioknapp, index) => {
           return (
             <Radioknapp

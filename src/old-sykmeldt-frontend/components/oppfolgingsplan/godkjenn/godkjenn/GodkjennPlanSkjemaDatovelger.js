@@ -1,31 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { datovelgerFeltPt } from '../../../../propTypes/tiltakproptypes';
-import Datovelger from '../../../skjema/Datovelger';
-import { getEndDateFromTiltakListe, getStartDateFromTiltakListe } from '@/common/utils/tiltakUtils';
-import {Detail} from "@navikt/ds-react";
+import React from "react";
+import PropTypes from "prop-types";
+import { oppfolgingsplanPt } from "../../../../propTypes/opproptypes";
+import { datovelgerFeltPt } from "../../../../propTypes/tiltakproptypes";
+import Datovelger from "../../../skjema/Datovelger";
+import {
+  getEndDateFromTiltakListe,
+  getStartDateFromTiltakListe,
+} from "@/common/utils/tiltakUtils";
+import { Detail } from "@navikt/ds-react";
 
 const texts = {
   felter: {
-    fom: 'Fra og med',
-    tom: 'Til og med',
-    evalueringinnen: 'Evalueres innen',
+    fom: "Fra og med",
+    tom: "Til og med",
+    evalueringinnen: "Evalueres innen",
   },
-  suggestion: 'Vi har foreslått datoer basert på tiltakene dere har skrevet:',
+  suggestion: "Vi har foreslått datoer basert på tiltakene dere har skrevet:",
 };
 
 export const FELTER = {
   fom: {
-    navn: 'startdato',
+    navn: "startdato",
     tekst: texts.felter.fom,
   },
   tom: {
-    navn: 'sluttdato',
+    navn: "sluttdato",
     tekst: texts.felter.tom,
   },
   evalueringinnen: {
-    navn: 'evalueringsdato',
+    navn: "evalueringsdato",
     tekst: texts.felter.evalueringinnen,
   },
 };
@@ -59,11 +62,17 @@ const GodkjennPlanSkjemaDatovelger = ({
   validateSluttDato,
   validateEvalueringsdatoDato,
 }) => {
-  const suggestedStartDate = getStartDateFromTiltakListe(oppfolgingsplan.tiltakListe);
-  const suggestedEndDate = getEndDateFromTiltakListe(oppfolgingsplan.tiltakListe);
+  const suggestedStartDate = getStartDateFromTiltakListe(
+    oppfolgingsplan.tiltakListe
+  );
+  const suggestedEndDate = getEndDateFromTiltakListe(
+    oppfolgingsplan.tiltakListe
+  );
   return (
     <div>
-      {suggestedStartDate && suggestedEndDate && <Detail>{texts.suggestion}</Detail>}
+      {suggestedStartDate && suggestedEndDate && (
+        <Detail>{texts.suggestion}</Detail>
+      )}
       <div className="godkjennPlanSkjema__datovelger__rad">
         <GodkjennPlanSkjemaDatovelgerFelt
           felt={FELTER.fom}

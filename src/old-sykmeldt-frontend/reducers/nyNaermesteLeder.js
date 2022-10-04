@@ -1,4 +1,4 @@
-import { BEKREFT_NY_NAERMESTELEDER } from '../actions/oppfolgingsplan/nyNaermesteleder_actions';
+import { BEKREFT_NY_NAERMESTELEDER } from "../actions/oppfolgingsplan/nyNaermesteleder_actions";
 
 const initiellState = {
   bekreftet: false,

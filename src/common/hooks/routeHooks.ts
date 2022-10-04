@@ -1,65 +1,65 @@
-import {useRouter} from "next/router";
-import {ParsedUrlQuery} from "querystring";
+import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 
 export type Audience = "Sykmeldt" | "Arbeidsgiver";
 
 export interface IUseAudience {
-    audience: Audience;
-    isAudienceSykmeldt: boolean;
+  audience: Audience;
+  isAudienceSykmeldt: boolean;
 }
 
 export const useAudience = (): IUseAudience => {
-    const router = useRouter();
+  const router = useRouter();
 
-    const isSykmeldt = router.pathname.startsWith("/sykmeldt");
+  const isSykmeldt = router.pathname.startsWith("/sykmeldt");
 
-    return isSykmeldt
-        ? {
-            audience: "Sykmeldt",
-            isAudienceSykmeldt: true,
-        }
-        : {
-            audience: "Arbeidsgiver",
-            isAudienceSykmeldt: false,
-        };
+  return isSykmeldt
+    ? {
+        audience: "Sykmeldt",
+        isAudienceSykmeldt: true,
+      }
+    : {
+        audience: "Arbeidsgiver",
+        isAudienceSykmeldt: false,
+      };
 };
 
 export const useLandingUrl = (): string => {
-    const router = useRouter();
-    const {isAudienceSykmeldt} = useAudience();
-    const {narmestelederid} = router.query;
+  const router = useRouter();
+  const { isAudienceSykmeldt } = useAudience();
+  const { narmestelederid } = router.query;
 
-    if (isAudienceSykmeldt) {
-        return "/sykmeldt";
-    } else {
-        return `/arbeidsgiver/${narmestelederid}`;
-    }
+  if (isAudienceSykmeldt) {
+    return "/sykmeldt";
+  } else {
+    return `/arbeidsgiver/${narmestelederid}`;
+  }
 };
 
 export const useApiBasePath = (): string => {
-    const router = useRouter();
-    const {isAudienceSykmeldt} = useAudience();
+  const router = useRouter();
+  const { isAudienceSykmeldt } = useAudience();
 
-    if (isAudienceSykmeldt) {
-        return `${router.basePath}/api/sykmeldt`;
-    } else {
-        return `${router.basePath}/api/arbeidsgiver`;
-    }
+  if (isAudienceSykmeldt) {
+    return `${router.basePath}/api/sykmeldt`;
+  } else {
+    return `${router.basePath}/api/arbeidsgiver`;
+  }
 };
 
 interface IParams extends ParsedUrlQuery {
-    oppfolgingsdialogId: string;
+  oppfolgingsdialogId: string;
 }
 
 export const useOppfolgingsplanRouteId = (): number => {
-    const router = useRouter();
-    const {oppfolgingsdialogId} = router.query as IParams;
-    return Number(oppfolgingsdialogId);
-}
+  const router = useRouter();
+  const { oppfolgingsdialogId } = router.query as IParams;
+  return Number(oppfolgingsdialogId);
+};
 
 export const useOppfolgingsplanBasePath = (): string => {
-    const landingUrl = useLandingUrl();
-    const oppfolgingsplanRouteId = useOppfolgingsplanRouteId();
+  const landingUrl = useLandingUrl();
+  const oppfolgingsplanRouteId = useOppfolgingsplanRouteId();
 
-    return `${landingUrl}/${oppfolgingsplanRouteId}`
-}
+  return `${landingUrl}/${oppfolgingsplanRouteId}`;
+};

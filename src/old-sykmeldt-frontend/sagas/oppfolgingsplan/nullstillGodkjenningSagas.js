@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { post } from '../../api/axios';
-import * as actions from '../../actions/oppfolgingsplan/nullstillGodkjenning_actions';
+import { call, put, takeEvery } from "redux-saga/effects";
+import { post } from "../../api/axios";
+import * as actions from "../../actions/oppfolgingsplan/nullstillGodkjenning_actions";
 
 export function* nullstillGodkjenning(action) {
   try {
@@ -14,5 +14,8 @@ export function* nullstillGodkjenning(action) {
 }
 
 export default function* nullstillGodkjenningSagas() {
-  yield takeEvery(actions.NULLSTILL_GODKJENNING_FORESPURT, nullstillGodkjenning);
+  yield takeEvery(
+    actions.NULLSTILL_GODKJENNING_FORESPURT,
+    nullstillGodkjenning
+  );
 }

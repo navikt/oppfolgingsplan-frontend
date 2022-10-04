@@ -1,106 +1,133 @@
-import {BodyLong, Heading} from "@navikt/ds-react";
-import React, {ReactElement, ReactNode} from "react";
-import {OppfolgingsplanDTO, StillingDTO} from "@/server/service/schema/oppfolgingsplanSchema";
-import {useSykmeldingerSM} from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { BodyLong, Heading } from "@navikt/ds-react";
+import React, { ReactElement, ReactNode } from "react";
 import {
-    erOppfolgingsdialogKnyttetTilGyldigSykmelding,
-    erOppfolgingsdialogTidligere
+  OppfolgingsplanDTO,
+  StillingDTO,
+} from "@/server/service/schema/oppfolgingsplanSchema";
+import { useSykmeldingerSM } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
+import {
+  erOppfolgingsdialogKnyttetTilGyldigSykmelding,
+  erOppfolgingsdialogTidligere,
 } from "@/common/utils/oppfolgingsdialogUtils";
-import {useTilgangSM} from "@/common/api/queries/sykmeldt/tilgangQueries";
-import {NavigationButtons} from "@/common/components/buttons/NavigationButtons";
-import {IkkeTilgangTilPlanInfoBoks} from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
-import {AdresseSperreInfoBoks} from "@/common/components/infoboks/AdresseSperreInfoBoks";
+import { useTilgangSM } from "@/common/api/queries/sykmeldt/tilgangQueries";
+import { NavigationButtons } from "@/common/components/buttons/NavigationButtons";
+import { IkkeTilgangTilPlanInfoBoks } from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
+import { AdresseSperreInfoBoks } from "@/common/components/infoboks/AdresseSperreInfoBoks";
 import Side from "@/common/components/wrappers/Side";
-import {OppfolgingsplanStepper} from "@/common/components/stepper/OppfolgingsplanStepper";
+import { OppfolgingsplanStepper } from "@/common/components/stepper/OppfolgingsplanStepper";
 
 const textOverskrift = (arbeidsgiver?: string) => {
-    return `Oppfølgingsplan hos ${arbeidsgiver}`;
+  return `Oppfølgingsplan hos ${arbeidsgiver}`;
 };
 
 const textStilling = (stilling: StillingDTO) => {
-    return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${stilling.prosent} %`;
+  return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${
+    stilling.prosent
+  } %`;
 };
 
 export enum Page {
-    ARBEIDSOPPGAVER = 1,
-    TILTAK = 2,
-    SEPLANEN = 3
+  ARBEIDSOPPGAVER = 1,
+  TILTAK = 2,
+  SEPLANEN = 3,
 }
 
 const headingText = (page: Page) => {
-    switch (page) {
-        case Page.ARBEIDSOPPGAVER:
-            return "Arbeidsoppgaver"
-        case Page.TILTAK:
-            return "Tiltak"
-        case Page.SEPLANEN:
-            return "Se planen"
-    }
-}
+  switch (page) {
+    case Page.ARBEIDSOPPGAVER:
+      return "Arbeidsoppgaver";
+    case Page.TILTAK:
+      return "Tiltak";
+    case Page.SEPLANEN:
+      return "Se planen";
+  }
+};
 
 const titleText = (page: Page) => {
-    switch (page) {
-        case Page.ARBEIDSOPPGAVER:
-            return "Oppfølgingsplan - Arbeidsoppgaver"
-        case Page.TILTAK:
-            return "Oppfølgingsplan - Tiltak"
-        case Page.SEPLANEN:
-            return "Oppfølgingsplan - Se planen"
-    }
-}
+  switch (page) {
+    case Page.ARBEIDSOPPGAVER:
+      return "Oppfølgingsplan - Arbeidsoppgaver";
+    case Page.TILTAK:
+      return "Oppfølgingsplan - Tiltak";
+    case Page.SEPLANEN:
+      return "Oppfølgingsplan - Se planen";
+  }
+};
 
 interface Props {
-    isLoading: boolean,
-    isError: boolean,
-    page: Page,
-    oppfolgingsplan?: OppfolgingsplanDTO,
-    children: ReactNode,
+  isLoading: boolean;
+  isError: boolean;
+  page: Page;
+  oppfolgingsplan?: OppfolgingsplanDTO;
+  children: ReactNode;
 }
 
-export const OppfolgingsplanPageSM = ({isLoading, isError, page, oppfolgingsplan, children}: Props) => {
-    const sykmeldinger = useSykmeldingerSM();
-    const tilgang = useTilgangSM();
-    const stilling: StillingDTO | undefined = oppfolgingsplan && oppfolgingsplan.arbeidstaker.stillinger?.find(stilling => stilling.virksomhetsnummer == oppfolgingsplan?.virksomhet?.virksomhetsnummer)
+export const OppfolgingsplanPageSM = ({
+  isLoading,
+  isError,
+  page,
+  oppfolgingsplan,
+  children,
+}: Props) => {
+  const sykmeldinger = useSykmeldingerSM();
+  const tilgang = useTilgangSM();
+  const stilling: StillingDTO | undefined =
+    oppfolgingsplan &&
+    oppfolgingsplan.arbeidstaker.stillinger?.find(
+      (stilling) =>
+        stilling.virksomhetsnummer ==
+        oppfolgingsplan?.virksomhet?.virksomhetsnummer
+    );
 
-    const erOppfolgingsdialogTilgjengelig =
-        oppfolgingsplan && sykmeldinger.data &&
-        (erOppfolgingsdialogTidligere(oppfolgingsplan) ||
-            erOppfolgingsdialogKnyttetTilGyldigSykmelding(oppfolgingsplan, sykmeldinger.data));
+  const erOppfolgingsdialogTilgjengelig =
+    oppfolgingsplan &&
+    sykmeldinger.data &&
+    (erOppfolgingsdialogTidligere(oppfolgingsplan) ||
+      erOppfolgingsdialogKnyttetTilGyldigSykmelding(
+        oppfolgingsplan,
+        sykmeldinger.data
+      ));
 
-
-    const Content = (): ReactElement => {
-        if (isError) {
-            return <div>todo feil feil</div>
-        }
-
-        if (!erOppfolgingsdialogTilgjengelig) {
-            return (
-                <IkkeTilgangTilPlanInfoBoks/>
-            )
-        }
-
-        if (tilgang.data && !tilgang.data.harTilgang) {
-            return (
-                <AdresseSperreInfoBoks/>
-            )
-        }
-
-        return <>{children}</>
+  const Content = (): ReactElement => {
+    if (isError) {
+      return <div>todo feil feil</div>;
     }
 
-    return (
-        <Side isLoading={isLoading || tilgang.isLoading || sykmeldinger.isLoading} tittel={titleText(page)}>
-            <Heading spacing={true} level="1" size="large">{textOverskrift(oppfolgingsplan?.virksomhet?.navn ?? "")}</Heading>
+    if (!erOppfolgingsdialogTilgjengelig) {
+      return <IkkeTilgangTilPlanInfoBoks />;
+    }
 
-            <OppfolgingsplanStepper activeStep={page.valueOf()}/>
+    if (tilgang.data && !tilgang.data.harTilgang) {
+      return <AdresseSperreInfoBoks />;
+    }
 
-            <Heading spacing={true} level="2" size="medium">{headingText(page)}</Heading>
+    return <>{children}</>;
+  };
 
-            {stilling && <BodyLong spacing={true} size={"medium"}>{textStilling(stilling)}</BodyLong>}
+  return (
+    <Side
+      isLoading={isLoading || tilgang.isLoading || sykmeldinger.isLoading}
+      tittel={titleText(page)}
+    >
+      <Heading spacing={true} level="1" size="large">
+        {textOverskrift(oppfolgingsplan?.virksomhet?.navn ?? "")}
+      </Heading>
 
-            <Content/>
+      <OppfolgingsplanStepper activeStep={page.valueOf()} />
 
-            <NavigationButtons activeStep={page.valueOf()}/>
-        </Side>
-    )
-}
+      <Heading spacing={true} level="2" size="medium">
+        {headingText(page)}
+      </Heading>
+
+      {stilling && (
+        <BodyLong spacing={true} size={"medium"}>
+          {textStilling(stilling)}
+        </BodyLong>
+      )}
+
+      <Content />
+
+      <NavigationButtons activeStep={page.valueOf()} />
+    </Side>
+  );
+};

@@ -6,7 +6,7 @@ const finnNavn = (fnr, state) => {
       })
       .map((person) => {
         return person.navn;
-      })[0] || ''
+      })[0] || ""
   );
 };
 
@@ -46,14 +46,17 @@ const finnVirksomhetsnavn = (virksomhetsnummer, state) => {
       })
       .map((virksomhet) => {
         return virksomhet.navn;
-      })[0] || ''
+      })[0] || ""
   );
 };
 
 const finnArbeidsforhold = (fnr, virksomhetsnummer, opprettetDato, state) => {
   const arbeidsforhold =
     state.arbeidsforhold.data.filter((_arbeidsforhold) => {
-      return _arbeidsforhold.virksomhetsnummer === virksomhetsnummer && _arbeidsforhold.fnr === fnr;
+      return (
+        _arbeidsforhold.virksomhetsnummer === virksomhetsnummer &&
+        _arbeidsforhold.fnr === fnr
+      );
     })[0] || null;
   if (!arbeidsforhold) {
     return [];
@@ -66,13 +69,19 @@ const finnArbeidsforhold = (fnr, virksomhetsnummer, opprettetDato, state) => {
       return stilling;
     })
     .filter((stilling) => {
-      return stilling.fom < new Date(opprettetDato) && (!stilling.tom || stilling.tom < new Date(opprettetDato));
+      return (
+        stilling.fom < new Date(opprettetDato) &&
+        (!stilling.tom || stilling.tom < new Date(opprettetDato))
+      );
     });
 };
 
 export const populerPlanFraState = (_oppfolgingsplan, state) => {
   const oppfolgingsplan = _oppfolgingsplan;
-  oppfolgingsplan.arbeidstaker.navn = finnNavn(oppfolgingsplan.arbeidstaker.fnr, state);
+  oppfolgingsplan.arbeidstaker.navn = finnNavn(
+    oppfolgingsplan.arbeidstaker.fnr,
+    state
+  );
   const kontaktinfo = finnKontaktinfo(oppfolgingsplan.arbeidstaker.fnr, state);
   oppfolgingsplan.arbeidstaker.epost = kontaktinfo.epost;
   oppfolgingsplan.arbeidstaker.tlf = kontaktinfo.tlf;
@@ -84,25 +93,45 @@ export const populerPlanFraState = (_oppfolgingsplan, state) => {
     oppfolgingsplan.opprettetDato,
     state
   );
-  oppfolgingsplan.virksomhet.navn = finnVirksomhetsnavn(oppfolgingsplan.virksomhet.virksomhetsnummer, state);
+  oppfolgingsplan.virksomhet.navn = finnVirksomhetsnavn(
+    oppfolgingsplan.virksomhet.virksomhetsnummer,
+    state
+  );
   const naermesteleder = finnNaermesteLeder(
     oppfolgingsplan.arbeidstaker.fnr,
     oppfolgingsplan.virksomhet.virksomhetsnummer,
     state
   );
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.virksomhetsnummer = naermesteleder && naermesteleder.virksomhetsnummer;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.epost = naermesteleder && naermesteleder.epost;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.navn = naermesteleder && naermesteleder.navn;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr = naermesteleder && naermesteleder.fnr;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.tlf = naermesteleder && naermesteleder.tlf;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.erAktiv = naermesteleder && naermesteleder.erAktiv;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivFom = naermesteleder && naermesteleder.aktivFom;
-  oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivTom = naermesteleder && naermesteleder.aktivTom;
-  oppfolgingsplan.sistEndretAv.navn = finnNavn(oppfolgingsplan.sistEndretAv.fnr, state);
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.virksomhetsnummer =
+    naermesteleder && naermesteleder.virksomhetsnummer;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.epost =
+    naermesteleder && naermesteleder.epost;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.navn =
+    naermesteleder && naermesteleder.navn;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr =
+    naermesteleder && naermesteleder.fnr;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.tlf =
+    naermesteleder && naermesteleder.tlf;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.erAktiv =
+    naermesteleder && naermesteleder.erAktiv;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivFom =
+    naermesteleder && naermesteleder.aktivFom;
+  oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivTom =
+    naermesteleder && naermesteleder.aktivTom;
+  oppfolgingsplan.sistEndretAv.navn = finnNavn(
+    oppfolgingsplan.sistEndretAv.fnr,
+    state
+  );
   oppfolgingsplan.arbeidsoppgaveListe.map((_arbeidsoppgave) => {
     const arbeidsoppgave = _arbeidsoppgave;
-    arbeidsoppgave.opprettetAv.navn = finnNavn(arbeidsoppgave.opprettetAv.fnr, state);
-    arbeidsoppgave.sistEndretAv.navn = finnNavn(arbeidsoppgave.sistEndretAv.fnr, state);
+    arbeidsoppgave.opprettetAv.navn = finnNavn(
+      arbeidsoppgave.opprettetAv.fnr,
+      state
+    );
+    arbeidsoppgave.sistEndretAv.navn = finnNavn(
+      arbeidsoppgave.sistEndretAv.fnr,
+      state
+    );
     return arbeidsoppgave;
   });
   oppfolgingsplan.tiltakListe.map((_tiltak) => {

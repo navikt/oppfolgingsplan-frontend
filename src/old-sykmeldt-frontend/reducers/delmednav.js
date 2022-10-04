@@ -1,4 +1,4 @@
-import * as actions from '../actions/oppfolgingsplan/delmednav_actions';
+import * as actions from "../actions/oppfolgingsplan/delmednav_actions";
 
 const initiellState = {
   sender: false,

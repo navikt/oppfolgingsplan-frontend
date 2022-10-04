@@ -1,4 +1,4 @@
-import { SETT_AKTIVT_STEG } from '../actions/oppfolgingsplan/toggle_actions';
+import { SETT_AKTIVT_STEG } from "../actions/oppfolgingsplan/toggle_actions";
 
 const initiellState = {
   steg: 1,

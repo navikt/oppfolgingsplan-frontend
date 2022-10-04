@@ -1,39 +1,45 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
-import { arbeidsoppgaverReducerPt, oppfolgingsplanPt } from '../../../propTypes/opproptypes';
-import getContextRoot from '@/common/utils/getContextRoot';
-import { capitalizeFirstLetter } from '@/common/utils/textUtils';
-import { isEmpty } from '@/common/utils/oppfolgingsdialogUtils';
-import { sorterArbeidsoppgaverEtterOpprettet } from '@/common/utils/arbeidsoppgaveUtils';
-import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
-import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
-import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
-import LeggTilElementKnapper from '../LeggTilElementKnapper';
-import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
-import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
-import StegTittel from '../StegTittel';
-import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
-import { scrollTo } from '@/common/utils/browserUtils';
-import { ArbeidsoppgaveOnboardingImage } from '@/common/images/imageComponents';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { findDOMNode } from "react-dom";
+import {
+  arbeidsoppgaverReducerPt,
+  oppfolgingsplanPt,
+} from "../../../propTypes/opproptypes";
+import getContextRoot from "@/common/utils/getContextRoot";
+import { capitalizeFirstLetter } from "@/common/utils/textUtils";
+import { isEmpty } from "@/common/utils/oppfolgingsdialogUtils";
+import { sorterArbeidsoppgaverEtterOpprettet } from "@/common/utils/arbeidsoppgaveUtils";
+import OppfolgingsplanInfoboks from "../../app/OppfolgingsplanInfoboks";
+import ArbeidsoppgaverInfoboks from "./ArbeidsoppgaverInfoboks";
+import NotifikasjonBoksVurderingOppgave from "./NotifikasjonBoksVurderingOppgave";
+import LeggTilElementKnapper from "../LeggTilElementKnapper";
+import LagreArbeidsoppgaveSkjema from "./LagreArbeidsoppgaveSkjema";
+import ArbeidsoppgaverListe from "./ArbeidsoppgaverListe";
+import StegTittel from "../StegTittel";
+import ObligatoriskeFelterInfotekst from "../ObligatoriskeFelterInfotekst";
+import { scrollTo } from "@/common/utils/browserUtils";
+import { ArbeidsoppgaveOnboardingImage } from "@/common/images/imageComponents";
 
 const texts = {
-  tittel: 'Arbeidsoppgaver',
-  updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+  tittel: "Arbeidsoppgaver",
+  updateError:
+    "En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.",
   infoboks: {
-    title: 'Hva er oppgavene dine på denne arbeidsplassen?',
+    title: "Hva er oppgavene dine på denne arbeidsplassen?",
     info: `
             Du starter med å lage en oversikt over arbeidsoppgavene dine. 
             Samtidig tar du stilling til om du kan gjøre noen av dem mens du er sykmeldt.
         `,
   },
   arbeidsoppgaverInfoboksStilling: {
-    title: 'Legg til arbeidsoppgaver',
+    title: "Legg til arbeidsoppgaver",
   },
 };
 
 const textStilling = (stilling) => {
-  return `Du jobber hos denne arbeidsgiveren som ${stilling.yrke.toLowerCase()} ${stilling.prosent} %`;
+  return `Du jobber hos denne arbeidsgiveren som ${stilling.yrke.toLowerCase()} ${
+    stilling.prosent
+  } %`;
 };
 
 export const ArbeidsoppgaverInfoboksStilling = ({
@@ -72,12 +78,13 @@ class Arbeidsoppgaver extends Component {
       oppdatertArbeidsoppgave: false,
       visArbeidsoppgaveSkjema: false,
       lagreNyOppgaveFeilet: false,
-      varselTekst: '',
+      varselTekst: "",
       oppdaterOppgaveFeilet: false,
     };
     this.sendLagreArbeidsoppgave = this.sendLagreArbeidsoppgave.bind(this);
     this.sendSlettArbeidsoppgave = this.sendSlettArbeidsoppgave.bind(this);
-    this.toggleArbeidsoppgaveSkjema = this.toggleArbeidsoppgaveSkjema.bind(this);
+    this.toggleArbeidsoppgaveSkjema =
+      this.toggleArbeidsoppgaveSkjema.bind(this);
     this.scrollToForm = this.scrollToForm.bind(this);
     this.visFeilMelding = this.visFeilMelding.bind(this);
     this.skjulSkjema = this.skjulSkjema.bind(this);
@@ -85,8 +92,8 @@ class Arbeidsoppgaver extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    window.location.hash = 'arbeidsoppgaver';
-    window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
+    window.location.hash = "arbeidsoppgaver";
+    window.sessionStorage.setItem("hash", "arbeidsoppgaver");
   }
 
   componentDidMount() {
@@ -101,7 +108,8 @@ class Arbeidsoppgaver extends Component {
     if (
       !nextProps.arbeidsoppgaver.feiletOppgaveId &&
       nextProps.arbeidsoppgaver.lagringFeilet &&
-      this.props.arbeidsoppgaver.lagringFeilet !== nextProps.arbeidsoppgaver.lagringFeilet
+      this.props.arbeidsoppgaver.lagringFeilet !==
+        nextProps.arbeidsoppgaver.lagringFeilet
     ) {
       this.setState({
         lagreNyOppgaveFeilet: true,
@@ -112,7 +120,11 @@ class Arbeidsoppgaver extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!prevState.visArbeidsoppgaveSkjema && this.state.visArbeidsoppgaveSkjema && this.lagreSkjema) {
+    if (
+      !prevState.visArbeidsoppgaveSkjema &&
+      this.state.visArbeidsoppgaveSkjema &&
+      this.lagreSkjema
+    ) {
       this.scrollToForm();
     }
   }
@@ -147,7 +159,10 @@ class Arbeidsoppgaver extends Component {
   }
 
   sendSlettArbeidsoppgave(arbeidsoppgaveId) {
-    this.props.slettArbeidsoppgave(this.props.oppfolgingsdialog.id, arbeidsoppgaveId);
+    this.props.slettArbeidsoppgave(
+      this.props.oppfolgingsdialog.id,
+      arbeidsoppgaveId
+    );
   }
 
   toggleArbeidsoppgaveSkjema() {
@@ -171,9 +186,10 @@ class Arbeidsoppgaver extends Component {
 
   render() {
     const { oppfolgingsdialog, arbeidsoppgaver } = this.props;
-    const antallIkkeVurdererteArbOppgaver = oppfolgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
-      return !arbeidsoppgave.gjennomfoering;
-    }).length;
+    const antallIkkeVurdererteArbOppgaver =
+      oppfolgingsdialog.arbeidsoppgaveListe.filter((arbeidsoppgave) => {
+        return !arbeidsoppgave.gjennomfoering;
+      }).length;
     return (() => {
       return (
         <div>
@@ -239,7 +255,9 @@ class Arbeidsoppgaver extends Component {
                 />
               )}
               <ArbeidsoppgaverListe
-                liste={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
+                liste={sorterArbeidsoppgaverEtterOpprettet(
+                  oppfolgingsdialog.arbeidsoppgaveListe
+                )}
                 sendLagre={this.sendLagreArbeidsoppgave}
                 sendSlett={this.sendSlettArbeidsoppgave}
                 fnr={oppfolgingsdialog.arbeidstaker.fnr}

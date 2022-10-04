@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Transition } from 'react-transition-group';
-import { HakeGronnImage } from '@/common/images/imageComponents';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { Transition } from "react-transition-group";
+import { HakeGronnImage } from "@/common/images/imageComponents";
 
-const opacityStates = { entering: '0', entered: '1', exiting: '1', exited: '0' };
+const opacityStates = {
+  entering: "0",
+  entered: "1",
+  exiting: "1",
+  exited: "0",
+};
 const fadeDuration = 1000;
 const fadeOutDelay = 4000;
 

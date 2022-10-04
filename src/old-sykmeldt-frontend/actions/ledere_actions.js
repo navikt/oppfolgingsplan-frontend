@@ -1,4 +1,4 @@
-import * as actiontyper from './actiontyper';
+import * as actiontyper from "./actiontyper";
 
 export const hentLedere = (fodselsnummer) => {
   return {
