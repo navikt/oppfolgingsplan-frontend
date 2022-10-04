@@ -2,10 +2,13 @@ import { Button } from "@navikt/ds-react";
 import PlusIcon from "@/common/components/icons/PlusIcon";
 import { useState } from "react";
 import { useLagreTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import { TiltakFormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
+import {
+  TiltakForm,
+  TiltakFormValues,
+} from "@/common/components/tiltak/TiltakForm";
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
-import {SpacedPanel} from "@/common/components/wrappers/SpacedPanel";
+import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -47,15 +50,18 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
   }
 
   return (
-    <TiltakForm
-      onSubmit={(data) => {
-        lagreTiltak.mutate({
-          oppfolgingsplanId: oppfolgingsplanId,
-          tiltak: nyttTiltakInformasjon(data),
-        });
-        resetStateAndClose();
-      }}
-      onCancel={resetStateAndClose}
-    />
+    <SpacedPanel border={true}>
+      <TiltakFormHeading />
+      <TiltakForm
+        onSubmit={(data) => {
+          lagreTiltak.mutate({
+            oppfolgingsplanId: oppfolgingsplanId,
+            tiltak: nyttTiltakInformasjon(data),
+          });
+          resetStateAndClose();
+        }}
+        onCancel={resetStateAndClose}
+      />
+    </SpacedPanel>
   );
 };

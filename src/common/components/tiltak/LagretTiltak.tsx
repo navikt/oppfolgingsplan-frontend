@@ -96,16 +96,6 @@ export const LagretTiltak = ({
   const fnr = arbeidstakerFnr;
   const tiltakId = tiltak.tiltakId;
 
-  if (editererTiltak) {
-    return (
-      <EditerTiltak
-        oppfolgingsplanId={oppfolgingsplanId}
-        tiltak={tiltak}
-        doneEditing={() => setEditererTiltak(false)}
-      />
-    );
-  }
-
   return (
     <SpacedPanel border={true}>
       <HeadingWithLabel>
@@ -168,7 +158,13 @@ export const LagretTiltak = ({
         />
       )}
 
-      {!displayNyKommentar && (
+      {editererTiltak && <EditerTiltak
+          oppfolgingsplanId={oppfolgingsplanId}
+          tiltak={tiltak}
+          doneEditing={() => setEditererTiltak(false)}
+      />}
+
+      {!displayNyKommentar && !editererTiltak && (
         <ButtonRow>
           {aktoerHarOpprettetElement && (
             <Button
