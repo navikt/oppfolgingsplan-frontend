@@ -5,7 +5,6 @@ import { TiltakPanel } from "@/common/components/tiltak/TiltakPanel";
 import { useLagreTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import { FormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
-import { useForm } from "react-hook-form";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
@@ -16,16 +15,7 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
   const lagreTiltak = useLagreTiltakSM();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm();
-
   const nyttTiltakInformasjon = (data: FormValues): Partial<Tiltak> => {
-    console.log(data);
     return {
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,

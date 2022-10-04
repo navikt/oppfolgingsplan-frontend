@@ -42,9 +42,15 @@ interface Props {
   onSubmit(data: FormValues): void;
 
   onCancel(): void;
+
+  defaultFormValues?: FormValues;
 }
 
-export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
+export const TiltakForm = ({
+  onSubmit,
+  onCancel,
+  defaultFormValues,
+}: Props) => {
   const errorRef = useRef<any>(null);
 
   const formFunctions = useForm<FormValues>();
@@ -67,6 +73,7 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
               id="overskrift"
               label={"Overskrift (obligatorisk)"}
               error={errors.overskrift?.message}
+              defaultValue={defaultFormValues?.overskrift}
               maxLength={80}
               {...register("overskrift", {
                 required: "Du må gi en overskrift av tiltaket",
@@ -78,6 +85,7 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
               id="beskrivelse"
               label={"Beskriv hva som skal skje (obligatorisk)"}
               error={errors.beskrivelse?.message}
+              defaultValue={defaultFormValues?.beskrivelse}
               description={
                 "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
               }
@@ -99,12 +107,14 @@ export const TiltakForm = ({ onSubmit, onCancel }: Props) => {
               <DatoVelger
                 name="fom"
                 label={"Startdato (obligatorisk)"}
+                defaultValue={defaultFormValues?.fom}
                 error={errors.fom?.message}
               />
 
               <DatoVelger
                 name="tom"
                 label={"Sluttdato (obligatorisk)"}
+                defaultValue={defaultFormValues?.tom}
                 error={errors.tom?.message}
               />
             </DateRow>

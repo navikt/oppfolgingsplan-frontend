@@ -11,6 +11,7 @@ registerLocale("nb", nb);
 interface Props {
   name: string;
   label: string;
+  defaultValue?: Date | null;
   error?: string;
 }
 
@@ -19,7 +20,7 @@ const SpacedTextField = styled(TextField)`
   width: 12rem;
 `;
 
-export const DatoVelger = ({ label, name, error }: Props) => {
+export const DatoVelger = ({ label, name, defaultValue, error }: Props) => {
   const { control } = useFormContext();
 
   return (
@@ -27,6 +28,7 @@ export const DatoVelger = ({ label, name, error }: Props) => {
       control={control}
       rules={{ required: "Dato er påkrevd" }}
       name={name}
+      defaultValue={defaultValue}
       render={({ field: { onChange, onBlur, name, value, ref } }) => (
         <ReactDatePicker
           id={name}

@@ -28,6 +28,14 @@ export const EditerTiltak = ({
 
   return (
     <TiltakForm
+        defaultFormValues={
+          {
+            overskrift: tiltak.tiltaknavn,
+            beskrivelse: tiltak.beskrivelse!!,
+            fom: new Date(tiltak.fom!!),
+            tom: new Date(tiltak.tom!!),
+          }
+        }
       onSubmit={(data) => {
         lagreTiltak.mutate({
           oppfolgingsplanId: oppfolgingsplanId,
