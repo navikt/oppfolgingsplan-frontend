@@ -6,12 +6,12 @@ import { getFullDateFormat } from "@/common/utils/dateUtils";
 import { useSlettKommentarSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
-import { KommentarDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Kommentar } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   aktorFnr: string;
   tiltakId: number;
-  kommentarer?: KommentarDTO[] | null;
+  kommentarer?: Kommentar[] | null;
 }
 
 const StyledChat = styled(Chat)`

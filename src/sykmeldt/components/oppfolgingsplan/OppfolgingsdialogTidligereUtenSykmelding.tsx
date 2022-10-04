@@ -3,12 +3,12 @@ import { finnOppfolgingsdialogMotpartNavn } from "@/common/utils/oppfolgingsdial
 import { hentStatusUtenAktivSykmelding } from "@/common/utils/teaserUtils";
 import getContextRoot from "@/common/utils/getContextRoot";
 import { BodyLong, Heading, LinkPanel } from "@navikt/ds-react";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import Image from "next/image";
 import { PlanIkkeAktivSykmeldingImage } from "@/common/images/imageComponents";
 
 interface Props {
-  oppfolgingsplanUtenAktivSykmelding: OppfolgingsplanDTO;
+  oppfolgingsplanUtenAktivSykmelding: Oppfolgingsplan;
 }
 
 const OppfolgingsdialogTidligereUtenSykmelding = ({

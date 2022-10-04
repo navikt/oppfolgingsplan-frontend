@@ -1,8 +1,8 @@
 import { z, object, boolean, string } from "zod";
 
-export const TilgangSchema = object({
+export const tilgangSchema = object({
   harTilgang: boolean(),
   ikkeTilgangGrunn: string().nullable(),
 });
 
-export type TilgangDTO = z.infer<typeof TilgangSchema>;
+export type Tilgang = z.infer<typeof tilgangSchema>;

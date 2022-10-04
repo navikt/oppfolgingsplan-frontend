@@ -7,7 +7,7 @@ import { useOpprettOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfo
 import Image from "next/image";
 import styled from "styled-components";
 import { useSykmeldtFnr } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 
 const texts = {
   tittel: "Aktiv oppfølgingsplan",
@@ -35,7 +35,7 @@ const ImageContainer = styled.div`
 
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
 
   setVisOppfolgingsdialogOpprett(set: boolean): void;
 }

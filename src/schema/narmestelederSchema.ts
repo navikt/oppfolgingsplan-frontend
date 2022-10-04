@@ -13,7 +13,4 @@ export const narmesteLederSchema = object({
   samtykke: boolean().nullable(),
 });
 
-export const narmesteLedereSchema = array(narmesteLederSchema);
-
-export type NarmesteLederDTO = z.infer<typeof narmesteLederSchema>;
-export type NarmesteLedereDTO = z.infer<typeof narmesteLedereSchema>;
+export type NarmesteLeder = z.infer<typeof narmesteLederSchema>;

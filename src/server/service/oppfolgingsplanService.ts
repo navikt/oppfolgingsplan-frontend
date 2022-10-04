@@ -1,18 +1,18 @@
 import { array } from "zod";
 import { get, post } from "@/common/api/axios/axios";
 import serverEnv from "@/server/utils/serverEnv";
-import { TilgangSchema } from "@/server/service/schema/tilgangSchema";
-import { SykmeldingSchema } from "@/server/service/schema/sykmeldingSchema";
-import { narmesteLedereSchema } from "@/server/service/schema/narmestelederSchema";
+import { tilgangSchema } from "../../schema/tilgangSchema";
+import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
+import { narmesteLederSchema } from "../../schema/narmestelederSchema";
 import {
-  KommentarDTO,
-  OppfolgingsplanSchema,
-  TiltakDTO,
-} from "@/server/service/schema/oppfolgingsplanSchema";
-import { OpprettOppfoelgingsdialogDTO } from "@/server/service/schema/opprettOppfoelgingsdialogSchema";
+  Kommentar,
+  oppfolgingsplanSchema,
+  Tiltak,
+} from "../../schema/oppfolgingsplanSchema";
+import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
-  return narmesteLedereSchema.safeParse(
+  return array(narmesteLederSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/narmesteledere/${fnr}`,
       {
@@ -23,7 +23,7 @@ export async function getNarmesteLedere(accessToken: string, fnr: string) {
 }
 
 export async function getSykmeldingerSM(accessToken: string) {
-  return array(SykmeldingSchema).safeParse(
+  return array(sykmeldingSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/sykmeldinger`,
       {
@@ -34,7 +34,7 @@ export async function getSykmeldingerSM(accessToken: string) {
 }
 
 export async function getOppfolgingsplanerSM(accessToken: string) {
-  return array(OppfolgingsplanSchema).safeParse(
+  return array(oppfolgingsplanSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
       {
@@ -45,7 +45,7 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
 }
 
 export async function getTilgangSM(accessToken: string, fnr: string) {
-  return TilgangSchema.safeParse(
+  return tilgangSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tilgang?fnr=${fnr}`,
       { accessToken }
@@ -55,7 +55,7 @@ export async function getTilgangSM(accessToken: string, fnr: string) {
 
 export async function createOppfolgingsplanSM(
   accessToken: string,
-  opprettOppfolgingsplanData: OpprettOppfoelgingsdialogDTO
+  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
@@ -80,7 +80,7 @@ export async function deleteTiltakCommentSM(
 export async function saveTiltakCommentSM(
   accessToken: string,
   tiltakId: string,
-  kommentar: KommentarDTO
+  kommentar: Kommentar
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/lagreKommentar`,
@@ -102,7 +102,7 @@ export async function deleteTiltakSM(accessToken: string, tiltakId: string) {
 export async function saveTiltak(
   accessToken: string,
   oppfolgingsplanId: string,
-  tiltak: TiltakDTO
+  tiltak: Tiltak
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreTiltak`,

@@ -10,7 +10,7 @@ import { Button } from "@navikt/ds-react";
 import Link from "next/link";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";
 import Image from "next/image";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 
 const texts = {
   arbeidsgiverSkjema: {
@@ -29,7 +29,7 @@ const texts = {
 const OPPFOLGINGSKJEMANAVN = "OPPRETT_DIALOG";
 
 interface ArbeidsgiverUndertekstProps {
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
   arbeidsgiver: ArbeidsgivereForGyldigeSykmeldinger;
 }
 
@@ -103,7 +103,7 @@ export const VelgArbeidsgiverUndertekst = ({
 
 interface ArbeidsgiverSkjemaProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
 
   handleSubmit(values: any): void;
 }

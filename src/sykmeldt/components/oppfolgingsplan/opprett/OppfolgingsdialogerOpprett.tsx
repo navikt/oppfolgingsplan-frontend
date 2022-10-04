@@ -4,7 +4,7 @@ import BaserTidligereSkjema from "./BaserTidligereSkjema";
 import { Modal } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";
 import Feilmelding from "@/common/components/error/Feilmelding";
-import { OppfolgingsplanDTO } from "@/server/service/schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 
 const texts = {
   errorNoLeader: {
@@ -19,7 +19,7 @@ const texts = {
 };
 
 interface Props {
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   visOppfolgingsdialogOpprett: boolean;
 
