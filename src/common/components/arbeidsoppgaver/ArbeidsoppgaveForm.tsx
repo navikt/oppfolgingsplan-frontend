@@ -51,6 +51,7 @@ export const ArbeidsoppgaveForm = ({
     handleSubmit,
     register,
     watch,
+    resetField,
     formState: { errors },
   } = formFunctions;
 
@@ -84,7 +85,12 @@ export const ArbeidsoppgaveForm = ({
               <StyledRadioGroup
                 legend="Kan oppgaven gjennomføres i sykeperioden? (obligatorisk)"
                 onBlur={onBlur}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChange(e);
+                  resetField("kanBeskrivelse");
+                  resetField("kanIkkeBeskrivelse");
+                  resetField("tilrettelegging");
+                }}
                 ref={ref}
                 value={value}
               >
