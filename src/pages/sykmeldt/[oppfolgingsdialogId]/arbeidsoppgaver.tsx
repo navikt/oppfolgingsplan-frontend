@@ -9,22 +9,14 @@ import {
   OppfolgingsplanPageSM,
   Page,
 } from "@/common/components/wrappers/OppfolgingsplanPageSM";
-import { BodyLong, Button, Heading, Textarea } from "@navikt/ds-react";
+import { BodyLong, Button, Heading } from "@navikt/ds-react";
 import PlusIcon from "@/common/components/icons/PlusIcon";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
-import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
-import styled from "styled-components";
-import {useForm} from "react-hook-form";
-import {ButtonRow} from "@/common/components/wrappers/ButtonRow";
-
-const StyledTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
-
-export type OppgaveFormValues = {
-    navn: string;
-    kanGjennomfores: string;
-};
+import { useForm } from "react-hook-form";
+import {
+  ArbeidsoppgaveForm,
+  OppgaveFormValues,
+} from "@/common/components/arbeidsoppgaver/ArbeidsoppgaveForm";
 
 const Arbeidsoppgaver: NextPage = () => {
   const oppfolgingsdialogId = useOppfolgingsplanRouteId();
@@ -32,16 +24,9 @@ const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
 
-    const {
-        handleSubmit,
-        register,
-        watch,
-        formState: { errors },
-    } = useForm<OppgaveFormValues>();
+  const { handleSubmit } = useForm<OppgaveFormValues>();
 
-    const navnValue = watch("navn");
-
-    return (
+  return (
     <OppfolgingsplanPageSM
       isLoading={oppfolgingsplaner.isLoading}
       isError={oppfolgingsplaner.isError}
@@ -72,33 +57,17 @@ const Arbeidsoppgaver: NextPage = () => {
             )}
 
             {leggerTilOppgave && (
-              <LightGreyPanel border={true}>
-                <StyledTextarea
-                  id="beskrivArbeidsoppgaven"
-                  label={"Navn på arbeidsoppgaven (obligatorisk)"}
-                  error={errors.navn?.message}
-                  description={"Beskriv arbeidsoppgaven med noen få ord"}
-                  maxLength={100}
-                  {...register("navn", {
-                    required: "Du må gi et navn på oppgaven",
-                    maxLength: 100,
-                  })}
-                  // defaultValue={defaultFormValues?.beskrivelse}
-                  // value={navnValue}
-                />
-
-                  <ButtonRow>
-                      <Button
-                          variant={"primary"}
-                          type={"submit"}
-                      >
-                          Lagre
-                      </Button>
-                      <Button variant={"tertiary"} onClick={() => setLeggerTilOppgave(false)}>
-                          Avbryt
-                      </Button>
-                  </ButtonRow>
-              </LightGreyPanel>
+              <ArbeidsoppgaveForm
+                onSubmit={(data) => {
+                  // lagreOppgave.mutate({
+                  //     oppfolgingsplanId: oppfolgingsplanId,
+                  //     oppgave: toOppgave(data),
+                  // });
+                  console.log(data);
+                  setLeggerTilOppgave(false);
+                }}
+                onCancel={() => setLeggerTilOppgave(false)}
+              />
             )}
           </SpacedPanel>
         </form>

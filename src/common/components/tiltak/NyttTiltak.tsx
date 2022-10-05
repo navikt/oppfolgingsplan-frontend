@@ -27,10 +27,6 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
     };
   };
 
-  const resetStateAndClose = () => {
-    setLeggerTilNyttTiltak(false);
-  };
-
   if (!leggerTilNyttTiltak) {
     return (
       <SpacedPanel border={true}>
@@ -58,9 +54,9 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
             oppfolgingsplanId: oppfolgingsplanId,
             tiltak: nyttTiltakInformasjon(data),
           });
-          resetStateAndClose();
+          setLeggerTilNyttTiltak(false);
         }}
-        onCancel={resetStateAndClose}
+        onCancel={() => setLeggerTilNyttTiltak(false)}
       />
     </SpacedPanel>
   );
