@@ -12,19 +12,13 @@ import {
 import { BodyLong, Button, Heading } from "@navikt/ds-react";
 import PlusIcon from "@/common/components/icons/PlusIcon";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
-import { useForm } from "react-hook-form";
-import {
-  ArbeidsoppgaveForm,
-  OppgaveFormValues,
-} from "@/common/components/arbeidsoppgaver/ArbeidsoppgaveForm";
+import { ArbeidsoppgaveForm } from "@/common/components/arbeidsoppgaver/ArbeidsoppgaveForm";
 
 const Arbeidsoppgaver: NextPage = () => {
   const oppfolgingsdialogId = useOppfolgingsplanRouteId();
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
-
-  const { handleSubmit } = useForm<OppgaveFormValues>();
 
   return (
     <OppfolgingsplanPageSM
@@ -34,43 +28,41 @@ const Arbeidsoppgaver: NextPage = () => {
       page={Page.ARBEIDSOPPGAVER}
     >
       {aktivPlan && (
-        <form onSubmit={handleSubmit((formData) => console.log(formData))}>
-          <SpacedPanel border={true}>
-            <>
-              <Heading spacing size="medium" level="3">
-                Beskriv en arbeidsoppgave
-              </Heading>
-              <BodyLong spacing size="medium">
-                Legg til én arbeidsoppgave per type oppgave du utfører i din
-                stilling, slik at dere kan vurdere hver oppgave separat.
-              </BodyLong>
-            </>
+        <SpacedPanel border={true}>
+          <>
+            <Heading spacing size="medium" level="3">
+              Beskriv en arbeidsoppgave
+            </Heading>
+            <BodyLong spacing size="medium">
+              Legg til én arbeidsoppgave per type oppgave du utfører i din
+              stilling, slik at dere kan vurdere hver oppgave separat.
+            </BodyLong>
+          </>
 
-            {!leggerTilOppgave && (
-              <Button
-                variant={"secondary"}
-                icon={<PlusIcon />}
-                onClick={() => setLeggerTilOppgave(true)}
-              >
-                Legg til ny arbeidsoppgave
-              </Button>
-            )}
+          {!leggerTilOppgave && (
+            <Button
+              variant={"secondary"}
+              icon={<PlusIcon />}
+              onClick={() => setLeggerTilOppgave(true)}
+            >
+              Legg til ny arbeidsoppgave
+            </Button>
+          )}
 
-            {leggerTilOppgave && (
-              <ArbeidsoppgaveForm
-                onSubmit={(data) => {
-                  // lagreOppgave.mutate({
-                  //     oppfolgingsplanId: oppfolgingsplanId,
-                  //     oppgave: toOppgave(data),
-                  // });
-                  console.log(data);
-                  setLeggerTilOppgave(false);
-                }}
-                onCancel={() => setLeggerTilOppgave(false)}
-              />
-            )}
-          </SpacedPanel>
-        </form>
+          {leggerTilOppgave && (
+            <ArbeidsoppgaveForm
+              onSubmit={(data) => {
+                // lagreOppgave.mutate({
+                //     oppfolgingsplanId: oppfolgingsplanId,
+                //     oppgave: toOppgave(data),
+                // });
+                console.log(data);
+                setLeggerTilOppgave(false);
+              }}
+              onCancel={() => setLeggerTilOppgave(false)}
+            />
+          )}
+        </SpacedPanel>
       )}
     </OppfolgingsplanPageSM>
   );
