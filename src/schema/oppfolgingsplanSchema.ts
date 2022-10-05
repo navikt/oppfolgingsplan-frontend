@@ -116,7 +116,6 @@ export const arbeidsoppgaveSchema = object({
 
 export const arbeidsgiverSchema = object({
   naermesteLeder: narmesteLederSchema.nullable(),
-  forrigeNaermesteLeder: narmesteLederSchema.nullable(),
 });
 
 export const oppfolgingsplanSchema = object({

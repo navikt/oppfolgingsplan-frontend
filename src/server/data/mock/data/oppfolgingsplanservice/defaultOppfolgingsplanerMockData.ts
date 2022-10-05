@@ -405,7 +405,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         aktivFom: "2020-02-24T08:57:46.747",
         aktivTom: null,
       },
-      forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
       navn: "Labben Rekemester",
@@ -596,7 +595,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         aktivFom: "2000-02-12T15:24:54.295",
         aktivTom: null,
       },
-      forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
       navn: "Labben Rekemester",
@@ -1025,7 +1023,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         aktivFom: "2010-02-20T11:31:31.356",
         aktivTom: null,
       },
-      forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
       navn: "Labben Rekemester",

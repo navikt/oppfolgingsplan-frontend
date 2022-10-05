@@ -380,7 +380,6 @@ function getDefaultOppfolgingsplaner() {
           aktivFom: null,
           aktivTom: null,
         },
-        forrigeNaermesteLeder: null,
       },
       arbeidstaker: {
         navn: " ",
@@ -574,7 +573,6 @@ function getDefaultOppfolgingsplaner() {
           aktivFom: null,
           aktivTom: null,
         },
-        forrigeNaermesteLeder: null,
       },
       arbeidstaker: {
         navn: " ",
@@ -1006,7 +1004,6 @@ function getDefaultOppfolgingsplaner() {
           aktivFom: null,
           aktivTom: null,
         },
-        forrigeNaermesteLeder: null,
       },
       arbeidstaker: {
         navn: " ",
