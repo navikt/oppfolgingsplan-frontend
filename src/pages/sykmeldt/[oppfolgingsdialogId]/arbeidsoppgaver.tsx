@@ -14,6 +14,7 @@ import PlusIcon from "@/common/components/icons/PlusIcon";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
 import { ArbeidsoppgaveForm } from "@/common/components/arbeidsoppgaver/ArbeidsoppgaveForm";
 import { useLagreArbeidsoppgaveSM } from "@/common/api/queries/sykmeldt/oppgaveQueriesSM";
+import { TILRETTELEGGING } from "@/common/konstanter";
 
 const Arbeidsoppgaver: NextPage = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
@@ -54,18 +55,23 @@ const Arbeidsoppgaver: NextPage = () => {
           {leggerTilOppgave && (
             <ArbeidsoppgaveForm
               onSubmit={(data) => {
-                //todo legg til riktige greier her for nullverdiene
                 lagreOppgaveMutation.mutate({
                   oppfolgingsplanId: oppfolgingsplanId,
                   oppgave: {
                     arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
                     gjennomfoering: {
                       kanGjennomfoeres: data.kanGjennomfores,
-                      paaAnnetSted: null,
-                      medMerTid: null,
-                      medHjelp: null,
-                      kanBeskrivelse: null,
-                      kanIkkeBeskrivelse: null,
+                      paaAnnetSted: data.tilrettelegging.includes(
+                        TILRETTELEGGING.PAA_ANNET_STED
+                      ),
+                      medMerTid: data.tilrettelegging.includes(
+                        TILRETTELEGGING.MED_MER_TID
+                      ),
+                      medHjelp: data.tilrettelegging.includes(
+                        TILRETTELEGGING.MED_HJELP
+                      ),
+                      kanBeskrivelse: data.kanBeskrivelse,
+                      kanIkkeBeskrivelse: data.kanIkkeBeskrivelse,
                     },
                   },
                 });

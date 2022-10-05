@@ -1,14 +1,24 @@
-import { Button, Radio, RadioGroup, Textarea } from "@navikt/ds-react";
+import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Radio,
+  RadioGroup,
+  Textarea,
+} from "@navikt/ds-react";
 import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
 import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import styled from "styled-components";
-import {KANGJENNOMFOERES} from "@/common/konstanter";
+import { KANGJENNOMFOERES, TILRETTELEGGING } from "@/common/konstanter";
 
 export type OppgaveFormValues = {
   navnPaaArbeidsoppgaven: string;
   kanGjennomfores: string;
+  tilrettelegging: string[];
+  kanBeskrivelse: string;
+  kanIkkeBeskrivelse: string;
 };
 
 const StyledTextarea = styled(Textarea)`
@@ -16,6 +26,10 @@ const StyledTextarea = styled(Textarea)`
 `;
 
 const StyledRadioGroup = styled(RadioGroup)`
+  margin-bottom: 2rem;
+`;
+
+const StyledCheckboxGroup = styled(CheckboxGroup)`
   margin-bottom: 2rem;
 `;
 
@@ -41,6 +55,7 @@ export const ArbeidsoppgaveForm = ({
   } = formFunctions;
 
   const navnValue = watch("navnPaaArbeidsoppgaven");
+  const kanBeskrivelseValue = watch("kanBeskrivelse");
   const kanGjennomforesValue = watch("kanGjennomfores");
 
   return (
@@ -68,8 +83,8 @@ export const ArbeidsoppgaveForm = ({
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <StyledRadioGroup
                 legend="Kan oppgaven gjennomføres i sykeperioden? (obligatorisk)"
-                onBlur={onBlur} // notify when input is touched
-                onChange={onChange} // send value to hook form
+                onBlur={onBlur}
+                onChange={onChange}
                 ref={ref}
                 value={value}
               >
@@ -86,8 +101,58 @@ export const ArbeidsoppgaveForm = ({
             )}
           />
 
-          {kanGjennomforesValue == KANGJENNOMFOERES.TILRETTELEGGING && <div>tilrettelegging todo</div>}
-          {kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE && <div>kan ikke todo</div>}
+          {kanGjennomforesValue == KANGJENNOMFOERES.TILRETTELEGGING && (
+            <div>
+              <Controller
+                name="tilrettelegging"
+                rules={{
+                  required:
+                    "Du må velge hva som skal til for å gjennomføre oppgaven",
+                }}
+                defaultValue={null}
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <StyledCheckboxGroup
+                    legend="Hva skal til for å gjennomføre oppgaven? (obligatorisk)"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    ref={ref}
+                    value={value}
+                  >
+                    <Checkbox value={TILRETTELEGGING.PAA_ANNET_STED}>
+                      Arbeide fra et annet sted
+                    </Checkbox>
+                    <Checkbox value={TILRETTELEGGING.MED_MER_TID}>
+                      Mer gitt tid
+                    </Checkbox>
+                    <Checkbox value={TILRETTELEGGING.MED_HJELP}>
+                      Med hjelp/hjelpemidler
+                    </Checkbox>
+                  </StyledCheckboxGroup>
+                )}
+              />
+
+              <StyledTextarea
+                id="kanBeskrivelse"
+                label={"Beskrivelse (obligatorisk)"}
+                error={errors.kanBeskrivelse?.message}
+                description={
+                  "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+                }
+                maxLength={1000}
+                {...register("kanBeskrivelse", {
+                  required:
+                    "Du må gi en beskrivelse av hva som skal til for å gjennomføre oppgaven",
+                  maxLength: 1000,
+                })}
+                defaultValue={defaultFormValues?.kanBeskrivelse}
+                value={kanBeskrivelseValue}
+              />
+            </div>
+          )}
+
+          {kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE && (
+            <div>kan ikke todo</div>
+          )}
 
           <ButtonRow>
             <Button variant={"primary"} type={"submit"}>
