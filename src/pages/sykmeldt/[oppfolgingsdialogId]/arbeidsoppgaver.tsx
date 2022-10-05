@@ -13,12 +13,14 @@ import { BodyLong, Button, Heading } from "@navikt/ds-react";
 import PlusIcon from "@/common/components/icons/PlusIcon";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
 import { ArbeidsoppgaveForm } from "@/common/components/arbeidsoppgaver/ArbeidsoppgaveForm";
+import { useLagreArbeidsoppgaveSM } from "@/common/api/queries/sykmeldt/oppgaveQueriesSM";
 
 const Arbeidsoppgaver: NextPage = () => {
-  const oppfolgingsdialogId = useOppfolgingsplanRouteId();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const oppfolgingsplaner = useOppfolgingsplanerSM();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
+  const aktivPlan = useOppfolgingsplanSM(oppfolgingsplanId);
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
+  const lagreOppgaveMutation = useLagreArbeidsoppgaveSM();
 
   return (
     <OppfolgingsplanPageSM
@@ -52,11 +54,21 @@ const Arbeidsoppgaver: NextPage = () => {
           {leggerTilOppgave && (
             <ArbeidsoppgaveForm
               onSubmit={(data) => {
-                // lagreOppgave.mutate({
-                //     oppfolgingsplanId: oppfolgingsplanId,
-                //     oppgave: toOppgave(data),
-                // });
-                console.log(data);
+                //todo legg til riktige greier her for nullverdiene
+                lagreOppgaveMutation.mutate({
+                  oppfolgingsplanId: oppfolgingsplanId,
+                  oppgave: {
+                    arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
+                    gjennomfoering: {
+                      kanGjennomfoeres: data.kanGjennomfores,
+                      paaAnnetSted: null,
+                      medMerTid: null,
+                      medHjelp: null,
+                      kanBeskrivelse: null,
+                      kanIkkeBeskrivelse: null,
+                    },
+                  },
+                });
                 setLeggerTilOppgave(false);
               }}
               onCancel={() => setLeggerTilOppgave(false)}

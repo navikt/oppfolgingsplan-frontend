@@ -5,9 +5,10 @@ import { tilgangSchema } from "../../schema/tilgangSchema";
 import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
 import { narmesteLederSchema } from "../../schema/narmestelederSchema";
 import {
-  Kommentar,
-  oppfolgingsplanSchema,
-  Tiltak,
+    Arbeidsoppgave,
+    Kommentar,
+    oppfolgingsplanSchema,
+    Tiltak,
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
 
@@ -111,4 +112,18 @@ export async function saveTiltak(
       accessToken: accessToken,
     }
   );
+}
+
+export async function saveOppgave(
+    accessToken: string,
+    oppfolgingsplanId: string,
+    oppgave: Arbeidsoppgave
+) {
+    return await post(
+        `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreArbeidsoppgave`,
+        oppgave,
+        {
+            accessToken: accessToken,
+        }
+    );
 }
