@@ -61,15 +61,21 @@ const Arbeidsoppgaver: NextPage = () => {
                     arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
                     gjennomfoering: {
                       kanGjennomfoeres: data.kanGjennomfores,
-                      paaAnnetSted: data.tilrettelegging.includes(
-                        TILRETTELEGGING.PAA_ANNET_STED
-                      ),
-                      medMerTid: data.tilrettelegging.includes(
-                        TILRETTELEGGING.MED_MER_TID
-                      ),
-                      medHjelp: data.tilrettelegging.includes(
-                        TILRETTELEGGING.MED_HJELP
-                      ),
+                      paaAnnetSted: data.tilrettelegging
+                        ? data.tilrettelegging.includes(
+                            TILRETTELEGGING.PAA_ANNET_STED
+                          )
+                        : false,
+                      medMerTid: data.tilrettelegging
+                        ? data.tilrettelegging.includes(
+                            TILRETTELEGGING.MED_MER_TID
+                          )
+                        : false,
+                      medHjelp: data.tilrettelegging
+                        ? data.tilrettelegging.includes(
+                            TILRETTELEGGING.MED_HJELP
+                          )
+                        : false,
                       kanBeskrivelse: data.kanBeskrivelse,
                       kanIkkeBeskrivelse: data.kanIkkeBeskrivelse,
                     },

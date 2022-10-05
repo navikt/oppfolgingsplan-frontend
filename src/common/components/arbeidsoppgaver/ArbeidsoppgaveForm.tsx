@@ -16,7 +16,7 @@ import { KANGJENNOMFOERES, TILRETTELEGGING } from "@/common/konstanter";
 export type OppgaveFormValues = {
   navnPaaArbeidsoppgaven: string;
   kanGjennomfores: string;
-  tilrettelegging: string[];
+  tilrettelegging?: string[];
   kanBeskrivelse: string;
   kanIkkeBeskrivelse: string;
 };
@@ -57,6 +57,7 @@ export const ArbeidsoppgaveForm = ({
 
   const navnValue = watch("navnPaaArbeidsoppgaven");
   const kanBeskrivelseValue = watch("kanBeskrivelse");
+  const kanIkkeBeskrivelseValue = watch("kanIkkeBeskrivelse");
   const kanGjennomforesValue = watch("kanGjennomfores");
 
   return (
@@ -91,6 +92,7 @@ export const ArbeidsoppgaveForm = ({
                   resetField("kanIkkeBeskrivelse");
                   resetField("tilrettelegging");
                 }}
+                error={errors.kanGjennomfores?.message}
                 ref={ref}
                 value={value}
               >
@@ -111,16 +113,13 @@ export const ArbeidsoppgaveForm = ({
             <div>
               <Controller
                 name="tilrettelegging"
-                rules={{
-                  required:
-                    "Du må velge hva som skal til for å gjennomføre oppgaven",
-                }}
                 defaultValue={null}
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <StyledCheckboxGroup
-                    legend="Hva skal til for å gjennomføre oppgaven? (obligatorisk)"
+                    legend="Hva skal til for å gjennomføre oppgaven?"
                     onBlur={onBlur}
                     onChange={onChange}
+                    error={errors.tilrettelegging?.message}
                     ref={ref}
                     value={value}
                   >
@@ -138,26 +137,41 @@ export const ArbeidsoppgaveForm = ({
               />
 
               <StyledTextarea
-                id="kanBeskrivelse"
-                label={"Beskrivelse (obligatorisk)"}
-                error={errors.kanBeskrivelse?.message}
-                description={
-                  "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-                }
-                maxLength={1000}
-                {...register("kanBeskrivelse", {
-                  required:
-                    "Du må gi en beskrivelse av hva som skal til for å gjennomføre oppgaven",
-                  maxLength: 1000,
-                })}
-                defaultValue={defaultFormValues?.kanBeskrivelse}
-                value={kanBeskrivelseValue}
+                  id="kanBeskrivelse"
+                  label={"Beskrivelse (obligatorisk)"}
+                  error={errors.kanBeskrivelse?.message}
+                  description={
+                    "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+                  }
+                  maxLength={1000}
+                  {...register("kanBeskrivelse", {
+                    required:
+                        "Du må gi en beskrivelse av hva som skal til for å gjennomføre oppgaven",
+                    maxLength: 1000,
+                  })}
+                  defaultValue={defaultFormValues?.kanBeskrivelse}
+                  value={kanBeskrivelseValue}
               />
             </div>
           )}
 
           {kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE && (
-            <div>kan ikke todo</div>
+              <StyledTextarea
+                  id="kanIkkeBeskrivelse"
+                  label={"Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"}
+                  error={errors.kanBeskrivelse?.message}
+                  description={
+                    "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+                  }
+                  maxLength={1000}
+                  {...register("kanIkkeBeskrivelse", {
+                    required:
+                        "Du må gi en beskrivelse av hvorfor du ikke kan gjennomføre oppgaven",
+                    maxLength: 1000,
+                  })}
+                  defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
+                  value={kanIkkeBeskrivelseValue}
+              />
           )}
 
           <ButtonRow>
