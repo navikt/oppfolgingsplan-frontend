@@ -5,10 +5,11 @@ import { tilgangSchema } from "../../schema/tilgangSchema";
 import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
 import { narmesteLederSchema } from "../../schema/narmestelederSchema";
 import {
-    Arbeidsoppgave,
-    Kommentar,
-    oppfolgingsplanSchema,
-    Tiltak,
+  Arbeidsoppgave,
+  Kommentar,
+  oppfolgingsplanSchema,
+  Tiltak,
+  virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
 
@@ -27,6 +28,20 @@ export async function getSykmeldingerSM(accessToken: string) {
   return array(sykmeldingSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/sykmeldinger`,
+      {
+        accessToken,
+      }
+    )
+  );
+}
+
+export async function getVirksomhetSM(
+  accessToken: string,
+  virksomhetsnummer: string
+) {
+  return virksomhetSchema.safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/virksomhet/${virksomhetsnummer}`,
       {
         accessToken,
       }
@@ -115,15 +130,15 @@ export async function saveTiltak(
 }
 
 export async function saveOppgave(
-    accessToken: string,
-    oppfolgingsplanId: string,
-    oppgave: Arbeidsoppgave
+  accessToken: string,
+  oppfolgingsplanId: string,
+  oppgave: Arbeidsoppgave
 ) {
-    return await post(
-        `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreArbeidsoppgave`,
-        oppgave,
-        {
-            accessToken: accessToken,
-        }
-    );
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreArbeidsoppgave`,
+    oppgave,
+    {
+      accessToken: accessToken,
+    }
+  );
 }
