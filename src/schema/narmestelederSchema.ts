@@ -1,4 +1,4 @@
-import { array, boolean, object, string, z } from "zod";
+import {  boolean, object, string, z } from "zod";
 
 export const narmesteLederSchema = object({
   virksomhetsnummer: string(),
