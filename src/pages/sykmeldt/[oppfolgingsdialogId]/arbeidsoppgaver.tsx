@@ -1,9 +1,6 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
-import {
-  useOppfolgingsplanerSM,
-  useOppfolgingsplanSM,
-} from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
 import {
   OppfolgingsplanPageSM,
@@ -18,18 +15,12 @@ import { TILRETTELEGGING } from "@/common/konstanter";
 
 const Arbeidsoppgaver: NextPage = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const oppfolgingsplaner = useOppfolgingsplanerSM();
   const aktivPlan = useOppfolgingsplanSM(oppfolgingsplanId);
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
   const lagreOppgaveMutation = useLagreArbeidsoppgaveSM();
 
   return (
-    <OppfolgingsplanPageSM
-      isLoading={oppfolgingsplaner.isLoading}
-      isError={oppfolgingsplaner.isError}
-      oppfolgingsplan={aktivPlan}
-      page={Page.ARBEIDSOPPGAVER}
-    >
+    <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
       {aktivPlan && (
         <SpacedPanel border={true}>
           <>

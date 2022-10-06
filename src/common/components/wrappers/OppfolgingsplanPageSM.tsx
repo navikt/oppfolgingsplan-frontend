@@ -9,12 +9,12 @@ import {
   erOppfolgingsdialogKnyttetTilGyldigSykmelding,
   erOppfolgingsdialogTidligere,
 } from "@/common/utils/oppfolgingsdialogUtils";
-import { useTilgangSM } from "@/common/api/queries/sykmeldt/tilgangQueries";
 import { NavigationButtons } from "@/common/components/buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
-import { AdresseSperreInfoBoks } from "@/common/components/infoboks/AdresseSperreInfoBoks";
 import Side from "@/common/components/wrappers/Side";
 import { OppfolgingsplanStepper } from "@/common/components/stepper/OppfolgingsplanStepper";
+import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
+import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -55,50 +55,35 @@ const titleText = (page: Page) => {
 };
 
 interface Props {
-  isLoading: boolean;
-  isError: boolean;
   page: Page;
   oppfolgingsplan?: Oppfolgingsplan;
   children: ReactNode;
 }
 
-export const OppfolgingsplanPageSM = ({
-  isLoading,
-  isError,
-  page,
-  oppfolgingsplan,
-  children,
-}: Props) => {
+export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const aktivPlan = useOppfolgingsplanSM(oppfolgingsplanId);
+
   const sykmeldinger = useSykmeldingerSM();
-  const tilgang = useTilgangSM();
   const stilling: Stilling | undefined =
-    oppfolgingsplan &&
-    oppfolgingsplan.arbeidstaker.stillinger?.find(
+    aktivPlan &&
+    aktivPlan.arbeidstaker.stillinger?.find(
       (stilling) =>
-        stilling.virksomhetsnummer ==
-        oppfolgingsplan?.virksomhet?.virksomhetsnummer
+        stilling.virksomhetsnummer == aktivPlan?.virksomhet?.virksomhetsnummer
     );
 
   const erOppfolgingsdialogTilgjengelig =
-    oppfolgingsplan &&
+    aktivPlan &&
     sykmeldinger.data &&
-    (erOppfolgingsdialogTidligere(oppfolgingsplan) ||
+    (erOppfolgingsdialogTidligere(aktivPlan) ||
       erOppfolgingsdialogKnyttetTilGyldigSykmelding(
-        oppfolgingsplan,
+        aktivPlan,
         sykmeldinger.data
       ));
 
   const Content = (): ReactElement => {
-    if (isError) {
-      return <div>todo feil feil</div>;
-    }
-
     if (!erOppfolgingsdialogTilgjengelig) {
       return <IkkeTilgangTilPlanInfoBoks />;
-    }
-
-    if (tilgang.data && !tilgang.data.harTilgang) {
-      return <AdresseSperreInfoBoks />;
     }
 
     return <>{children}</>;
@@ -106,13 +91,9 @@ export const OppfolgingsplanPageSM = ({
 
   return (
     <Side
-      isLoading={isLoading || tilgang.isLoading || sykmeldinger.isLoading}
-      tittel={titleText(page)}
+      title={titleText(page)}
+      heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}
     >
-      <Heading spacing={true} level="1" size="large">
-        {textOverskrift(oppfolgingsplan?.virksomhet?.navn ?? "")}
-      </Heading>
-
       <OppfolgingsplanStepper activeStep={page.valueOf()} />
 
       <Heading spacing={true} level="2" size="medium">
