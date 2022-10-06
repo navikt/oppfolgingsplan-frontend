@@ -2,22 +2,22 @@ import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import {
-  handleQueryParamError,
-  handleSchemaParsingError,
-} from "@/server/utils/errors";
+import { handleSchemaParsingError } from "@/server/utils/errors";
 import { getPersonSM } from "@/server/service/oppfolgingsplanService";
-import { NextApiResponsePersonSM } from "@/server/types/next/oppfolgingsplan/NextApiResponsePersonSM";
+import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import { generalError } from "@/common/api/axios/errors";
 
 export const fetchPersonSM = async (
   req: IAuthenticatedRequest,
-  res: NextApiResponsePersonSM,
+  res: NextApiResponseOppfolgingsplanSM,
   next: () => void
 ) => {
-  const { sykmeldtFnr } = req.query;
+  const sykmeldtFnr = res.oppfolgingsplaner.find(
+    (plan) => plan.arbeidstaker.fnr
+  )?.arbeidstaker.fnr;
 
-  if (typeof sykmeldtFnr !== "string") {
-    return handleQueryParamError(sykmeldtFnr);
+  if (!sykmeldtFnr) {
+    return generalError(new Error(`No FNR found in oppfolgingsplan`));
   }
 
   if (isMockBackend) {
