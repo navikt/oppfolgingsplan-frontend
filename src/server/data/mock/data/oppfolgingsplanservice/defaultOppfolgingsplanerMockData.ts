@@ -9,7 +9,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     status: "UNDER_ARBEID",
     virksomhet: {
       virksomhetsnummer: "110110110",
-      navn: "Labben Rekemester",
+      navn: "",
     },
     godkjentPlan: null,
     godkjenninger: [],
