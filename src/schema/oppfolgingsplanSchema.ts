@@ -16,7 +16,7 @@ export const evalueringSchema = object({
   effekt: string().nullable(),
   hvorfor: string().nullable(),
   videre: string().nullable(),
-  interneaktiviteter: string().nullable(),
+  interneaktiviteter: boolean().nullable(),
   ekstratid: boolean().nullable(),
   bistand: boolean().nullable(),
   ingen: boolean().nullable(),
