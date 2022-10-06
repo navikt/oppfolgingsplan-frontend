@@ -12,7 +12,7 @@ const Feilmelding = ({
 }: Props) => {
   return (
     <Alert variant="error">
-      <Heading size={"medium"} level={"2"}>
+      <Heading spacing={true} size={"medium"} level={"2"}>
         {title}
       </Heading>
       <BodyLong>{description}</BodyLong>

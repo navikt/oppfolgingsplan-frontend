@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import {
   finnAktiveOppfolgingsdialoger,
+  finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
   finnTidligereOppfolgingsdialoger,
   harTidligereOppfolgingsdialoger,
 } from "@/common/utils/oppfolgingsdialogUtils";
 import getContextRoot from "@/common/utils/getContextRoot";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
-import { Button } from "@navikt/ds-react";
+import { Alert, Button } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";
-import VideoPanel from "@/common/components/video/VideoPanel";
 import OppfolgingsdialogerOpprett from "./opprett/OppfolgingsdialogerOpprett";
 import OppfolgingsdialogerIngenplan from "./opprett/OppfolgingsdialogerIngenplan";
 
@@ -51,8 +51,20 @@ const OppfolgingsdialogerVisning = ({
     sykmeldinger,
     narmesteLedere
   );
+
+  const dialogerAvbruttAvMotpartSidenSistInnlogging =
+    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsplaner);
+
   return (
     <div>
+      {dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && (
+        <Alert variant={"info"}>
+          `$
+          {dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn} har
+          startet en ny oppfølgingsplan. Den gamle er arkivert.`
+        </Alert>
+      )}
+
       {visOppfolgingsdialogOpprett && (
         <OppfolgingsdialogerOpprett
           oppfolgingsplaner={oppfolgingsplaner}
@@ -107,7 +119,6 @@ const OppfolgingsdialogerVisning = ({
           rootUrlPlaner={getContextRoot()}
         />
       )}
-      <VideoPanel />
     </div>
   );
 };
