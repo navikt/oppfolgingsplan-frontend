@@ -7,12 +7,14 @@ import { fetchOppfolgingsplanerSM } from "@/server/data/sykmeldt/fetchOppfolging
 import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { fetchPersonSM } from "@/server/data/sykmeldt/fetchPersonSM";
+import { fetchVirksomhetSM } from "@/server/data/sykmeldt/fetchVirksomhetSM";
 
 const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   ncOptions
 )
   .use(getIdportenToken)
   .use(fetchOppfolgingsplanerSM)
+  .use(fetchVirksomhetSM)
   .use(fetchPersonSM)
   .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
@@ -22,7 +24,16 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
           sistEndretDato: oppfolgingsplan.sistEndretDato,
           opprettetDato: oppfolgingsplan.opprettetDato,
           status: oppfolgingsplan.status,
-          virksomhet: oppfolgingsplan.virksomhet,
+          virksomhet: {
+            virksomhetsnummer:
+              oppfolgingsplan.virksomhet?.virksomhetsnummer || null,
+            navn:
+              res.virksomhet.find(
+                (v) =>
+                  v.virksomhetsnummer ==
+                  oppfolgingsplan.virksomhet?.virksomhetsnummer
+              )?.navn || null,
+          },
           godkjentPlan: oppfolgingsplan.godkjentPlan,
           godkjenninger: oppfolgingsplan.godkjenninger,
           arbeidsoppgaveListe: oppfolgingsplan.arbeidsoppgaveListe,

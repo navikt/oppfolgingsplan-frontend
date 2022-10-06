@@ -10,7 +10,6 @@ import Feilmelding from "@/common/components/error/Feilmelding";
 import { AdresseSperreInfoBoks } from "@/common/components/infoboks/AdresseSperreInfoBoks";
 import VideoPanel from "@/common/components/video/VideoPanel";
 import { useTilgangSM } from "@/common/api/queries/sykmeldt/tilgangQueriesSM";
-import { useVirksomheterSM } from "@/common/api/queries/sykmeldt/virksomhetQueriesSM";
 
 const texts = {
   error: {
@@ -41,15 +40,13 @@ const Side = ({
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
-  const virksomheter = useVirksomheterSM();
 
   const SideContent = (): ReactElement => {
     if (
       oppfolgingsplaner.isError ||
       sykmeldinger.isError ||
       narmesteLedere.isError ||
-      tilgang.isError ||
-      virksomheter.filter((v) => v.isError).length > 0
+      tilgang.isError
     ) {
       return (
         <Feilmelding
@@ -69,8 +66,7 @@ const Side = ({
     tilgang.isLoading ||
     oppfolgingsplaner.isLoading ||
     sykmeldinger.isLoading ||
-    narmesteLedere.isLoading ||
-    virksomheter.filter((v) => v.isLoading).length > 0
+    narmesteLedere.isLoading
   ) {
     return <AppSpinner />;
   }

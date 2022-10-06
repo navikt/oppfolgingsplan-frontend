@@ -8,5 +8,5 @@ import {
 export interface NextApiResponseOppfolgingsplanSM extends NextApiResponse {
   person: Person;
   oppfolgingsplaner: Oppfolgingsplan[];
-  virksomhet: Virksomhet;
+  virksomhet: Virksomhet[];
 }
