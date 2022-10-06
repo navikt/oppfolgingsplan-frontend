@@ -8,6 +8,7 @@ import {
   Arbeidsoppgave,
   Kommentar,
   oppfolgingsplanSchema,
+  personSchema,
   Tiltak,
   virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
@@ -64,6 +65,15 @@ export async function getTilgangSM(accessToken: string, fnr: string) {
   return tilgangSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tilgang?fnr=${fnr}`,
+      { accessToken }
+    )
+  );
+}
+
+export async function getPersonSM(accessToken: string, fnr: string) {
+  return personSchema.safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person?fnr=${fnr}`,
       { accessToken }
     )
   );

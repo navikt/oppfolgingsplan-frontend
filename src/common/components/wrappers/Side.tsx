@@ -11,6 +11,7 @@ import { AdresseSperreInfoBoks } from "@/common/components/infoboks/AdresseSperr
 import VideoPanel from "@/common/components/video/VideoPanel";
 import { useTilgangSM } from "@/common/api/queries/sykmeldt/tilgangQueriesSM";
 import { useVirksomheterSM } from "@/common/api/queries/sykmeldt/virksomhetQueriesSM";
+import { usePersoninfoSM } from "@/common/api/queries/sykmeldt/personQueries";
 
 const texts = {
   error: {
@@ -42,6 +43,7 @@ const Side = ({
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
   const virksomheter = useVirksomheterSM();
+  const person = usePersoninfoSM();
 
   const SideContent = (): ReactElement => {
     if (
@@ -49,7 +51,8 @@ const Side = ({
       sykmeldinger.isError ||
       narmesteLedere.isError ||
       tilgang.isError ||
-      virksomheter.isError
+      virksomheter.filter((v) => v.isError).length > 0 ||
+      person.isError
     ) {
       return (
         <Feilmelding
@@ -70,7 +73,8 @@ const Side = ({
     oppfolgingsplaner.isLoading ||
     sykmeldinger.isLoading ||
     narmesteLedere.isLoading ||
-    virksomheter.isLoading
+    virksomheter.filter((v) => v.isLoading).length > 0 ||
+    person.isLoading
   ) {
     return <AppSpinner />;
   }

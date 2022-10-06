@@ -147,3 +147,4 @@ export type Evaluering = z.infer<typeof evalueringSchema>;
 export type Gyldighetstidspunkt = z.infer<typeof gyldighetstidspunktSchema>;
 export type Virksomhet = z.infer<typeof virksomhetSchema>;
 export type Kommentar = z.infer<typeof kommentarSchema>;
+export type Person = z.infer<typeof personSchema>;
