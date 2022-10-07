@@ -32,13 +32,13 @@ export const stillingSchema = object({
 
 export const personSchema = object({
   navn: string(),
-  fnr: string().nullable(),
-  epost: string().nullable(),
-  tlf: string().nullable(),
-  sistInnlogget: string().nullable(),
-  samtykke: boolean().nullable(),
-  evaluering: evalueringSchema.nullable(),
-  stillinger: array(stillingSchema).nullable(),
+  fnr: string().nullable().optional(),
+  epost: string().nullable().optional(),
+  tlf: string().nullable().optional(),
+  sistInnlogget: string().nullable().optional(),
+  samtykke: boolean().nullable().optional(),
+  evaluering: evalueringSchema.nullable().optional(),
+  stillinger: array(stillingSchema).nullable().optional(),
 });
 
 export const kommentarSchema = object({
