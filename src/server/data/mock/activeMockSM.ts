@@ -6,6 +6,7 @@ import {
   otherVirksomhetMockData,
 } from "@/server/data/mock/data/oppfolgingsplanservice/defaultVirksomhetMockData";
 import { defaultPersonMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultPersonMockData";
+import { defaultKontaktinfoMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultKontaktinfoMockData";
 
 const activeMockSM = {
   oppfolgingsplaner: defaultOppfolgingsplanerMockData,
@@ -13,6 +14,7 @@ const activeMockSM = {
   virksomhet: [defaultVirksomhetMockData, otherVirksomhetMockData],
   narmesteLedere: defaultNarmesteLedereMockData,
   person: defaultPersonMockData,
+  kontaktinfo: defaultKontaktinfoMockData,
   tilgang: {
     harTilgang: true,
     ikkeTilgangGrunn: null,

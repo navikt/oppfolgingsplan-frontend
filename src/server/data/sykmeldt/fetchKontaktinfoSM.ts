@@ -3,11 +3,11 @@ import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import { handleSchemaParsingError } from "@/server/utils/errors";
-import { getPersonSM } from "@/server/service/oppfolgingsplanService";
+import { getKontaktinfoSM } from "@/server/service/oppfolgingsplanService";
 import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import { generalError } from "@/common/api/axios/errors";
 
-export const fetchPersonSM = async (
+export const fetchKontaktinfoSM = async (
   req: IAuthenticatedRequest,
   res: NextApiResponseOppfolgingsplanSM,
   next: () => void
@@ -20,16 +20,16 @@ export const fetchPersonSM = async (
   }
 
   if (isMockBackend) {
-    res.person = activeMockSM.person;
+    res.kontaktinfo = activeMockSM.kontaktinfo;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
 
-    const response = await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);
+    const response = await getKontaktinfoSM(oppfolgingsplanTokenX, sykmeldtFnr);
 
     if (response.success) {
-      res.person = response.data;
+      res.kontaktinfo = response.data;
     } else {
-      handleSchemaParsingError("Sykmeldt", "Person", response.error);
+      handleSchemaParsingError("Sykmeldt", "Kontaktinfo", response.error);
     }
   }
 

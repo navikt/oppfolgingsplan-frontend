@@ -8,6 +8,7 @@ import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolging
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { fetchPersonSM } from "@/server/data/sykmeldt/fetchPersonSM";
 import { fetchVirksomhetSM } from "@/server/data/sykmeldt/fetchVirksomhetSM";
+import { fetchKontaktinfoSM } from "@/server/data/sykmeldt/fetchKontaktinfoSM";
 
 const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   ncOptions
@@ -16,6 +17,7 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   .use(fetchOppfolgingsplanerSM)
   .use(fetchVirksomhetSM)
   .use(fetchPersonSM)
+  .use(fetchKontaktinfoSM)
   .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
       (oppfolgingsplan) => {
@@ -43,6 +45,8 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
           arbeidstaker: {
             ...oppfolgingsplan.arbeidstaker,
             navn: res.person.navn,
+            epost: res.kontaktinfo.epost,
+            tlf: res.kontaktinfo.tlf,
           },
           sistEndretAv: oppfolgingsplan.sistEndretAv,
         };

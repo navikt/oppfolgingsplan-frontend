@@ -13,6 +13,7 @@ import {
   virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
+import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
   return array(narmesteLederSchema).safeParse(
@@ -74,6 +75,15 @@ export async function getPersonSM(accessToken: string, fnr: string) {
   return personSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person/${fnr}`,
+      { accessToken }
+    )
+  );
+}
+
+export async function getKontaktinfoSM(accessToken: string, fnr: string) {
+  return kontaktinfoSchema.safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/kontaktinfo/${fnr}`,
       { accessToken }
     )
   );
