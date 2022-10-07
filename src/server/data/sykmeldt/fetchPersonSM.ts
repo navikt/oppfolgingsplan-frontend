@@ -6,15 +6,17 @@ import { handleSchemaParsingError } from "@/server/utils/errors";
 import { getPersonSM } from "@/server/service/oppfolgingsplanService";
 import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import { generalError } from "@/common/api/axios/errors";
+import serverLogger from "@/server/utils/serverLogger";
 
 export const fetchPersonSM = async (
   req: IAuthenticatedRequest,
   res: NextApiResponseOppfolgingsplanSM,
   next: () => void
 ) => {
-  const sykmeldtFnr = res.oppfolgingsplaner.find(
-    (plan) => plan.arbeidstaker.fnr
-  )?.arbeidstaker.fnr;
+  const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
+    .fnr;
+
+  serverLogger.info(`Fetch person sykmeldt fnr: ${sykmeldtFnr}`);
 
   if (!sykmeldtFnr) {
     return generalError(new Error(`No FNR found in oppfolgingsplan`));
@@ -25,15 +27,14 @@ export const fetchPersonSM = async (
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
 
-    const tilgangResponse = await getPersonSM(
-      oppfolgingsplanTokenX,
-      sykmeldtFnr
-    );
+    const response = await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);
 
-    if (tilgangResponse.success) {
-      res.person = tilgangResponse.data;
+    serverLogger.info(`Fetch person etter response`);
+
+    if (response.success) {
+      res.person = response.data;
     } else {
-      handleSchemaParsingError("Sykmeldt", "Person", tilgangResponse.error);
+      handleSchemaParsingError("Sykmeldt", "Person", response.error);
     }
   }
 

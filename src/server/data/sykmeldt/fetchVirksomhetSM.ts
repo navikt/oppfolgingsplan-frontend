@@ -75,12 +75,14 @@ export const fetchVirksomhetSM = async (
     serverLogger.info("Hent oppfølgingsplaner: etter virksomhetpromises");
 
     Promise.all(virksomhetPromises).then((results) => {
-      serverLogger.info("Hent oppfølgingsplaner: promise results", results);
+      serverLogger.info(`Hent oppfølgingsplaner: promise results ${results}`);
       res.virksomhet = results;
     });
   }
 
-  serverLogger.info("Hent oppfølgingsplaner: res.virksomet", res.virksomhet);
+  serverLogger.info(
+    `Hent oppfølgingsplaner: res.virksomet antall ${res.virksomhet.length}`
+  );
 
   next();
 };
