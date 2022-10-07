@@ -44,16 +44,12 @@ export const fetchVirksomhetSM = async (
   if (isMockBackend) {
     res.virksomhet = activeMockSM.virksomhet;
   } else {
-    serverLogger.info("Hent oppfølgingsplaner: virksomhet start");
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
     const alleVirksomhetsnummer = findAllVirksomhetsnummer(
       res.oppfolgingsplaner
     );
 
-    serverLogger.info(
-      "Hent oppfølgingsplaner: Virksomhet alle virksomhetsnummer",
-      alleVirksomhetsnummer
-    );
+    serverLogger.info(alleVirksomhetsnummer);
 
     if (!alleVirksomhetsnummer) {
       serverLogger.info("Hent oppfølgingsplaner: ingen virksomhetsnummer");
@@ -72,13 +68,7 @@ export const fetchVirksomhetSM = async (
       }
     });
 
-    serverLogger.info("Hent oppfølgingsplaner: etter virksomhetpromises");
-
-    const virksomheter = await Promise.all(virksomhetPromises);
-
-    serverLogger.info("Hentet virksomheter");
-
-    res.virksomhet = virksomheter;
+    res.virksomhet = await Promise.all(virksomhetPromises);
   }
 
   next();

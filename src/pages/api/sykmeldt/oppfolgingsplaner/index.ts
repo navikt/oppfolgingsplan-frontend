@@ -8,7 +8,6 @@ import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolging
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { fetchPersonSM } from "@/server/data/sykmeldt/fetchPersonSM";
 import { fetchVirksomhetSM } from "@/server/data/sykmeldt/fetchVirksomhetSM";
-import serverLogger from "@/server/utils/serverLogger";
 
 const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   ncOptions
@@ -18,8 +17,6 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   .use(fetchVirksomhetSM)
   .use(fetchPersonSM)
   .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
-    serverLogger.info("Hent oppfølgingsplaner: Mapping");
-
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
       (oppfolgingsplan) => {
         return {
