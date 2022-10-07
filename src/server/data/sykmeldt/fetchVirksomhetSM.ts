@@ -9,6 +9,7 @@ import {
   Oppfolgingsplan,
   Virksomhet,
 } from "../../../schema/oppfolgingsplanSchema";
+import serverLogger from "@/server/utils/serverLogger";
 
 const findAllVirksomhetsnummer = (oppfolgingsplaner: Oppfolgingsplan[]) => {
   const virksomhetsNummer = oppfolgingsplaner
@@ -43,12 +44,19 @@ export const fetchVirksomhetSM = async (
   if (isMockBackend) {
     res.virksomhet = activeMockSM.virksomhet;
   } else {
+    serverLogger.info("Hent oppfølgingsplaner: virksomhet start");
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
     const alleVirksomhetsnummer = findAllVirksomhetsnummer(
       res.oppfolgingsplaner
     );
 
+    serverLogger.info(
+      "Hent oppfølgingsplaner: Virksomhet alle virksomhetsnummer",
+      alleVirksomhetsnummer
+    );
+
     if (!alleVirksomhetsnummer) {
+      serverLogger.info("Hent oppfølgingsplaner: ingen virksomhetsnummer");
       return next();
     }
 
@@ -64,7 +72,14 @@ export const fetchVirksomhetSM = async (
       }
     });
 
+    serverLogger.info("Hent oppfølgingsplaner: etter virksomhetpromises");
+
     const [virksomheter] = await Promise.all(virksomhetPromises);
+
+    serverLogger.info(
+      "Hent oppfølgingsplaner: hentede virksomheter",
+      virksomheter
+    );
 
     res.virksomhet = virksomheter;
   }
