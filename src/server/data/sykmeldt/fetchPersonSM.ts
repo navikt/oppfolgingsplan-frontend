@@ -16,8 +16,6 @@ export const fetchPersonSM = async (
   const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
     .fnr;
 
-  serverLogger.info(`Fetch person sykmeldt fnr: ${sykmeldtFnr}`);
-
   if (!sykmeldtFnr) {
     return generalError(new Error(`No FNR found in oppfolgingsplan`));
   }

@@ -73,7 +73,7 @@ export async function getTilgangSM(accessToken: string, fnr: string) {
 export async function getPersonSM(accessToken: string, fnr: string) {
   return personSchema.safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person?fnr=${fnr}`,
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person/${fnr}`,
       { accessToken }
     )
   );
