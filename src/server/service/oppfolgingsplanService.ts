@@ -14,6 +14,7 @@ import {
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
 import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
+import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
   return array(narmesteLederSchema).safeParse(
@@ -44,6 +45,22 @@ export async function getVirksomhetSM(
   return virksomhetSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/virksomhet/${virksomhetsnummer}`,
+      {
+        accessToken,
+      }
+    )
+  );
+}
+
+export async function getArbeidsforholdSM(
+  accessToken: string,
+  fnr: string,
+  virksomhetsnummer: string,
+  fom: string
+) {
+  return arbeidsforholdSchema.safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/arbeidsforhold?fnr=${fnr}&virksomhetsnummer=${virksomhetsnummer}&fom=${fom}`,
       {
         accessToken,
       }

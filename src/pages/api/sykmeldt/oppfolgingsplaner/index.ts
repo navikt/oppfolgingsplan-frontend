@@ -9,6 +9,7 @@ import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { fetchPersonSM } from "@/server/data/sykmeldt/fetchPersonSM";
 import { fetchVirksomhetSM } from "@/server/data/sykmeldt/fetchVirksomhetSM";
 import { fetchKontaktinfoSM } from "@/server/data/sykmeldt/fetchKontaktinfoSM";
+import { fetchArbeidsforholdSM } from "@/server/data/sykmeldt/fetchArbeidsforholdSM";
 
 const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   ncOptions
@@ -18,6 +19,7 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   .use(fetchVirksomhetSM)
   .use(fetchPersonSM)
   .use(fetchKontaktinfoSM)
+  .use(fetchArbeidsforholdSM)
   .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
       (oppfolgingsplan) => {
@@ -47,6 +49,19 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
             navn: res.person.navn,
             epost: res.kontaktinfo.epost,
             tlf: res.kontaktinfo.tlf,
+            stillinger: res.stillinger
+              .filter(
+                (stilling) =>
+                  stilling.virksomhetsnummer ==
+                  oppfolgingsplan.virksomhet?.virksomhetsnummer
+              )
+              .filter((stilling) => {
+                return (
+                  !!stilling.fom &&
+                  new Date(stilling.fom) <
+                    new Date(oppfolgingsplan.opprettetDato)
+                );
+              }),
           },
           sistEndretAv: oppfolgingsplan.sistEndretAv,
         };
