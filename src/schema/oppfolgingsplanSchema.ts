@@ -89,7 +89,7 @@ export const tiltakSchema = object({
   sistEndretDato: string(),
   kommentarer: array(kommentarSchema).nullable(),
   status: string().nullable(),
-  gjennomfoering: string().nullable(),
+  gjennomfoering: string().nullish(),
   opprettetAv: personSchema,
   sistEndretAv: personSchema,
 });
