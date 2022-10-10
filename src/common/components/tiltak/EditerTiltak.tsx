@@ -1,6 +1,10 @@
 import { useLagreTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import { TiltakFormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
+import {
+  TiltakFormValues,
+  TiltakForm,
+} from "@/common/components/tiltak/TiltakForm";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
+import { STATUS_TILTAK } from "@/common/konstanter";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -23,19 +27,18 @@ export const EditerTiltak = ({
       beskrivelse: data.beskrivelse,
       fom: data.fom?.toJSON() ?? null,
       tom: data.tom?.toJSON() ?? null,
+      status: STATUS_TILTAK.FORSLAG,
     };
   };
 
   return (
     <TiltakForm
-        defaultFormValues={
-          {
-            overskrift: tiltak.tiltaknavn,
-            beskrivelse: tiltak.beskrivelse!!,
-            fom: new Date(tiltak.fom!!),
-            tom: new Date(tiltak.tom!!),
-          }
-        }
+      defaultFormValues={{
+        overskrift: tiltak.tiltaknavn,
+        beskrivelse: tiltak.beskrivelse!!,
+        fom: new Date(tiltak.fom!!),
+        tom: new Date(tiltak.tom!!),
+      }}
       onSubmit={(data) => {
         lagreTiltak.mutate({
           oppfolgingsplanId: oppfolgingsplanId,

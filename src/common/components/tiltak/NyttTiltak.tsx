@@ -9,6 +9,7 @@ import {
 import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
+import { STATUS_TILTAK } from "@/common/konstanter";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -24,6 +25,7 @@ export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
       beskrivelse: data.beskrivelse,
       fom: data.fom?.toJSON(),
       tom: data.tom?.toJSON(),
+      status: STATUS_TILTAK.FORSLAG,
     };
   };
 
