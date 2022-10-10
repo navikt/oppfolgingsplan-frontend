@@ -14,11 +14,7 @@ export const sykmeldingSchema = object({
   id: string(),
   fnr: string(),
   sykmeldingsperioder: array(sykmeldingsperiodeSchema),
-  organisasjonsinformasjon: organisasjonsinformasjonSchema,
+  organisasjonsinformasjon: organisasjonsinformasjonSchema.nullable(),
 });
 
-export type Sykmeldingsperiode = z.infer<typeof sykmeldingsperiodeSchema>;
 export type Sykmelding = z.infer<typeof sykmeldingSchema>;
-export type organisasjonsinformasjon = z.infer<
-  typeof organisasjonsinformasjonSchema
->;

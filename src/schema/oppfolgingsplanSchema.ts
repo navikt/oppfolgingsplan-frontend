@@ -1,5 +1,4 @@
 import { boolean, z, object, string, number, array } from "zod";
-import { narmesteLederSchema } from "./narmestelederSchema";
 
 export const virksomhetSchema = object({
   virksomhetsnummer: string(),
@@ -114,8 +113,22 @@ export const arbeidsoppgaveSchema = object({
   opprettetAv: personSchema,
 });
 
+export const oppfolgingsplanNarmesteLederSchema = object({
+  virksomhetsnummer: string().nullable(),
+  erAktiv: boolean(),
+  aktivFom: string().nullable(),
+  aktivTom: string().nullable(),
+  navn: string(),
+  fnr: string().nullable(),
+  epost: string().nullable(),
+  tlf: string().nullable(),
+  sistInnlogget: string().nullable(),
+  samtykke: boolean().nullable(),
+  evaluering: evalueringSchema.nullable(),
+});
+
 export const arbeidsgiverSchema = object({
-  naermesteLeder: narmesteLederSchema,
+  naermesteLeder: oppfolgingsplanNarmesteLederSchema,
 });
 
 export const oppfolgingsplanSchema = object({
@@ -135,15 +148,6 @@ export const oppfolgingsplanSchema = object({
 });
 
 export type Oppfolgingsplan = z.infer<typeof oppfolgingsplanSchema>;
-export type Godkjenning = z.infer<typeof godkjenningSchema>;
-export type Arbeidsgiver = z.infer<typeof arbeidsgiverSchema>;
-export type Arbeidsoppgave = z.infer<typeof arbeidsoppgaveSchema>;
-export type Gjennomforing = z.infer<typeof gjennomforingSchema>;
 export type Tiltak = z.infer<typeof tiltakSchema>;
-export type GodkjentPlan = z.infer<typeof godkjentPlanSchema>;
-export type Avbruttplan = z.infer<typeof avbruttplanSchema>;
 export type Stilling = z.infer<typeof stillingSchema>;
-export type Evaluering = z.infer<typeof evalueringSchema>;
-export type Gyldighetstidspunkt = z.infer<typeof gyldighetstidspunktSchema>;
-export type Virksomhet = z.infer<typeof virksomhetSchema>;
 export type Kommentar = z.infer<typeof kommentarSchema>;
