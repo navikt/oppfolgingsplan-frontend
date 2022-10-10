@@ -20,19 +20,19 @@ import OppfolgingsdialogUtenGyldigSykmelding from "./OppfolgingsdialogUtenGyldig
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
   sykmeldinger: Sykmelding[];
-  narmesteLedere: NarmesteLeder[];
 }
 
-const OppfolgingsplanContent = ({
-  oppfolgingsplaner,
-  sykmeldinger,
-  narmesteLedere,
-}: Props) => {
+const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
+  //todo improve
+  const narmesteledere: NarmesteLeder[] | null = oppfolgingsplaner
+    .filter((plan) => plan.arbeidsgiver && plan.arbeidsgiver.naermesteLeder)
+    .map((plan) => plan.arbeidsgiver!!.naermesteLeder!!);
+
   if (
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
-      narmesteLedere
+      narmesteledere
     )
   ) {
     return <IngenLedereInfoBoks />;
@@ -60,7 +60,7 @@ const OppfolgingsplanContent = ({
       <OppfolgingsdialogerVisning
         oppfolgingsplaner={oppfolgingsplaner}
         sykmeldinger={sykmeldinger}
-        narmesteLedere={narmesteLedere}
+        narmesteLedere={narmesteledere}
       />
     );
   }

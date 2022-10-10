@@ -3,7 +3,6 @@ import Head from "next/head";
 import AppSpinner from "@/common/components/spinner/AppSpinner";
 import { useOppfolgingsplanerSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
-import { useNarmesteLedereSM } from "@/common/api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { Heading } from "@navikt/ds-react";
 import OppfolgingsdialogerInfoPersonvern from "../../../sykmeldt/components/oppfolgingsplan/OppfolgingsdialogerInfoPersonvern";
 import Feilmelding from "@/common/components/error/Feilmelding";
@@ -39,15 +38,9 @@ const Side = ({
   const tilgang = useTilgangSM();
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
-  const narmesteLedere = useNarmesteLedereSM();
 
   const SideContent = (): ReactElement => {
-    if (
-      oppfolgingsplaner.isError ||
-      sykmeldinger.isError ||
-      narmesteLedere.isError ||
-      tilgang.isError
-    ) {
+    if (oppfolgingsplaner.isError || sykmeldinger.isError || tilgang.isError) {
       return (
         <Feilmelding
           title={texts.error.title}
@@ -65,8 +58,7 @@ const Side = ({
     isLoading ||
     tilgang.isLoading ||
     oppfolgingsplaner.isLoading ||
-    sykmeldinger.isLoading ||
-    narmesteLedere.isLoading
+    sykmeldinger.isLoading
   ) {
     return <AppSpinner />;
   }
