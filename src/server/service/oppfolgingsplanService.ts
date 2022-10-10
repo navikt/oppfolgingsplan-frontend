@@ -58,7 +58,7 @@ export async function getArbeidsforholdSM(
   virksomhetsnummer: string,
   fom: string
 ) {
-  return arbeidsforholdSchema.safeParse(
+  return array(arbeidsforholdSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/arbeidsforhold?fnr=${fnr}&virksomhetsnummer=${virksomhetsnummer}&fom=${fom}`,
       {
