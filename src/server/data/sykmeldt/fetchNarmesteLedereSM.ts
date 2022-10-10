@@ -1,33 +1,26 @@
 import { isMockBackend } from "@/common/publicEnv";
 import activeMockSM from "@/server/data/mock/activeMockSM";
-import { NextApiResponseNarmesteLedereSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
 import { getNarmesteLedere } from "@/server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import {
-  handleQueryParamError,
-  handleSchemaParsingError,
-} from "@/server/utils/errors";
+import { handleSchemaParsingError } from "@/server/utils/errors";
+import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 
 export const fetchNarmesteLedereSM = async (
   req: IAuthenticatedRequest,
-  res: NextApiResponseNarmesteLedereSM,
+  res: NextApiResponseOppfolgingsplanSM,
   next: () => void
 ) => {
-  const { sykmeldtFnr } = req.query;
-
-  if (typeof sykmeldtFnr !== "string") {
-    return handleQueryParamError(sykmeldtFnr);
-  }
-
   if (isMockBackend) {
     res.narmesteLedere = activeMockSM.narmesteLedere;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
+      .fnr;
 
     const narmesteLedereResponse = await getNarmesteLedere(
       oppfolgingsplanTokenX,
-      sykmeldtFnr
+      sykmeldtFnr!!
     );
 
     if (narmesteLedereResponse.success) {

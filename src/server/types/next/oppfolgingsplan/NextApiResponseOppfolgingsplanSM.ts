@@ -6,6 +6,7 @@ import {
   Virksomhet,
 } from "../../../../schema/oppfolgingsplanSchema";
 import { Kontaktinfo } from "../../../../schema/kontaktinfoSchema";
+import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
 
 export interface NextApiResponseOppfolgingsplanSM extends NextApiResponse {
   person: Person;
@@ -13,4 +14,5 @@ export interface NextApiResponseOppfolgingsplanSM extends NextApiResponse {
   virksomhet: Virksomhet[];
   kontaktinfo: Kontaktinfo;
   stillinger: Stilling[];
+  narmesteLedere: NarmesteLeder[];
 }
