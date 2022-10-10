@@ -1,4 +1,4 @@
-import { boolean, z, object, string, number, array } from "zod";
+import { array, boolean, number, object, string, z } from "zod";
 import { narmesteLederSchema } from "./narmestelederSchema";
 
 export const virksomhetSchema = object({
@@ -84,7 +84,7 @@ export const tiltakSchema = object({
   fom: string().nullable(),
   tom: string().nullable(),
   beskrivelse: string().nullable(),
-  beskrivelseIkkeAktuelt: string().nullable(),
+  beskrivelseIkkeAktuelt: string().nullish(),
   opprettetDato: string(),
   sistEndretDato: string(),
   kommentarer: array(kommentarSchema).nullable(),
