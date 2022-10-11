@@ -11,6 +11,7 @@ import KryssRoedImage from "../../../public/img/svg/kryss-roed.svg";
 import MedicalBoxImage from "../../../public/img/svg/medical-box.svg";
 import NavLogoImage from "../../../public/img/svg/nav-logo.svg";
 import OppfolgingsdialogTomImage from "../../../public/img/svg/oppfolgingsdialog-tom.svg";
+import OppfolgingsdialogUnderArbeidImage from "../../../public/img/svg/oppfolgingsdialog-under-arbeid.svg";
 import OppfolgingsplanAvslattImage from "../../../public/img/svg/oppfolgingsplan-avslaatt.svg";
 import PersonImage from "../../../public/img/svg/person.svg";
 import PlanAvbruttImage from "../../../public/img/svg/plan-avbrutt.svg";
@@ -52,4 +53,5 @@ export {
   VarseltrekantImage,
   OppfolgingsdialogIkkeTilgangImage,
   OppfolgingsdialogIngenlederImage,
+  OppfolgingsdialogUnderArbeidImage,
 };

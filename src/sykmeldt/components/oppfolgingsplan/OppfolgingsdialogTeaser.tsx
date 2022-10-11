@@ -29,11 +29,7 @@ export const TilGodkjenningStatus = ({
     inneholderGodkjenninger(oppfolgingsplan) &&
     !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan)
   ) {
-    return (
-      <Tag variant={"warning"} size={"small"}>
-        {texts.etiketter.tilGodkjenning}
-      </Tag>
-    );
+    return <StyledSubTitle>{texts.etiketter.tilGodkjenning}</StyledSubTitle>;
   }
   return null;
 };
@@ -52,9 +48,24 @@ const LinkPanelContent = styled.div`
 
 const ImageContainer = styled.div`
   display: flex;
-  margin: 0 2em 0 0;
+  margin: 0;
   width: 4.5em;
   height: 4.5em;
+`;
+
+const StyledTitle = styled.h3`
+  margin: 0;
+`;
+
+const StyledSubTitle = styled.h4`
+  margin: 0.25rem 0;
+`;
+
+const StyledSmallText = styled.p`
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.004em;
 `;
 
 const OppfolgingsdialogTeaser = ({
@@ -75,19 +86,23 @@ const OppfolgingsdialogTeaser = ({
           </ImageContainer>
           <div>
             <header>
-              <h3
+              <StyledTitle
                 className="js-title"
                 id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}
               >
-                <span>{finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}</span>
-              </h3>
+                <span>
+                  {finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}kfjg
+                </span>
+              </StyledTitle>
             </header>
-            {typeof planStatus.tekst === "object" ? (
-              <p dangerouslySetInnerHTML={planStatus.tekst} />
-            ) : (
-              <p dangerouslySetInnerHTML={{ __html: planStatus.tekst }} />
-            )}
             <TilGodkjenningStatus oppfolgingsplan={oppfolgingsplan} />
+            {typeof planStatus.tekst === "object" ? (
+              <StyledSmallText dangerouslySetInnerHTML={planStatus.tekst} />
+            ) : (
+              <StyledSmallText
+                dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
+              />
+            )}
           </div>
         </LinkPanelContent>
       </LinkPanel>

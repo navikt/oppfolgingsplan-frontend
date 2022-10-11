@@ -15,7 +15,7 @@ export const useLagreArbeidsoppgaveSM = () => {
   const request = ({ oppfolgingsplanId, oppgave }: LagreOppgaveProps) =>
     post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
-        oppgave
+      oppgave
     );
 
   return useMutation(request);
@@ -30,7 +30,10 @@ export const useSlettOppgaveSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
 
-  const request = ({ oppfolgingsplanId, arbeidsoppgaveId }: SlettOppgaveProps) =>
+  const request = ({
+    oppfolgingsplanId,
+    arbeidsoppgaveId,
+  }: SlettOppgaveProps) =>
     post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
     );
@@ -41,6 +44,3 @@ export const useSlettOppgaveSM = () => {
     },
   });
 };
-
-
-

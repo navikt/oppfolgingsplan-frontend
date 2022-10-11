@@ -7,7 +7,7 @@ import {
 } from "@/server/data/mock/data/oppfolgingsplanservice/defaultVirksomhetMockData";
 import { defaultPersonMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultPersonMockData";
 import { defaultKontaktinfoMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultKontaktinfoMockData";
-import {defaultStillingerMockData} from "@/server/data/mock/data/oppfolgingsplanservice/defaultStillingerMockData";
+import { defaultStillingerMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultStillingerMockData";
 
 const activeMockSM = {
   oppfolgingsplaner: defaultOppfolgingsplanerMockData,

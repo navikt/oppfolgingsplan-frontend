@@ -20,7 +20,7 @@ import styled from "styled-components";
 import { useLagreKommentarSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 import { EditerTiltak } from "@/common/components/tiltak/EditerTiltak";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
-import {SpacedPanel} from "@/common/components/wrappers/SpacedPanel";
+import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -158,11 +158,13 @@ export const LagretTiltak = ({
         />
       )}
 
-      {editererTiltak && <EditerTiltak
+      {editererTiltak && (
+        <EditerTiltak
           oppfolgingsplanId={oppfolgingsplanId}
           tiltak={tiltak}
           doneEditing={() => setEditererTiltak(false)}
-      />}
+        />
+      )}
 
       {!displayNyKommentar && !editererTiltak && (
         <ButtonRow>

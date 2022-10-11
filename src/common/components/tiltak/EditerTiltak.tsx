@@ -1,5 +1,8 @@
 import { useLagreTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import { TiltakFormValues, TiltakForm } from "@/common/components/tiltak/TiltakForm";
+import {
+  TiltakFormValues,
+  TiltakForm,
+} from "@/common/components/tiltak/TiltakForm";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
@@ -28,14 +31,12 @@ export const EditerTiltak = ({
 
   return (
     <TiltakForm
-        defaultFormValues={
-          {
-            overskrift: tiltak.tiltaknavn,
-            beskrivelse: tiltak.beskrivelse!!,
-            fom: new Date(tiltak.fom!!),
-            tom: new Date(tiltak.tom!!),
-          }
-        }
+      defaultFormValues={{
+        overskrift: tiltak.tiltaknavn,
+        beskrivelse: tiltak.beskrivelse!!,
+        fom: new Date(tiltak.fom!!),
+        tom: new Date(tiltak.tom!!),
+      }}
       onSubmit={(data) => {
         lagreTiltak.mutate({
           oppfolgingsplanId: oppfolgingsplanId,

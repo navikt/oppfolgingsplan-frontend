@@ -1,6 +1,8 @@
 import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
+const enableTilGodkjenningMock = false;
+
 export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
   {
     id: 3455,
@@ -12,7 +14,27 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       navn: "",
     },
     godkjentPlan: null,
-    godkjenninger: [],
+    godkjenninger: enableTilGodkjenningMock
+      ? [
+          {
+            godkjent: false,
+            godkjentAv: {
+              navn: "Labben Rekemester",
+              fnr: "110110110110",
+              epost: null,
+              tlf: null,
+              sistInnlogget: null,
+              samtykke: null,
+              evaluering: null,
+              stillinger: [],
+            },
+            beskrivelse: "Beskrivelse",
+            godkjenningsTidspunkt: "2022-10-10T10:46:06.041",
+            gyldighetstidspunkt: null,
+            delMedNav: false,
+          },
+        ]
+      : [],
     arbeidsoppgaveListe: [
       {
         arbeidsoppgaveId: 6406,

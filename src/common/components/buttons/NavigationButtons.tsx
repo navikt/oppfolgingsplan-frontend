@@ -1,6 +1,9 @@
 import { Button } from "@navikt/ds-react";
 import React from "react";
-import {useLandingUrl, useOppfolgingsplanBasePath} from "@/common/hooks/routeHooks";
+import {
+  useLandingUrl,
+  useOppfolgingsplanBasePath,
+} from "@/common/hooks/routeHooks";
 import Link from "next/link";
 import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
 import { Page } from "@/common/components/wrappers/OppfolgingsplanPageSM";

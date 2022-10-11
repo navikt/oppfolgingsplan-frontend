@@ -137,41 +137,43 @@ export const ArbeidsoppgaveForm = ({
               />
 
               <StyledTextarea
-                  id="kanBeskrivelse"
-                  label={"Beskrivelse (obligatorisk)"}
-                  error={errors.kanBeskrivelse?.message}
-                  description={
-                    "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-                  }
-                  maxLength={1000}
-                  {...register("kanBeskrivelse", {
-                    required:
-                        "Du må gi en beskrivelse av hva som skal til for å gjennomføre oppgaven",
-                    maxLength: 1000,
-                  })}
-                  defaultValue={defaultFormValues?.kanBeskrivelse}
-                  value={kanBeskrivelseValue}
+                id="kanBeskrivelse"
+                label={"Beskrivelse (obligatorisk)"}
+                error={errors.kanBeskrivelse?.message}
+                description={
+                  "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+                }
+                maxLength={1000}
+                {...register("kanBeskrivelse", {
+                  required:
+                    "Du må gi en beskrivelse av hva som skal til for å gjennomføre oppgaven",
+                  maxLength: 1000,
+                })}
+                defaultValue={defaultFormValues?.kanBeskrivelse}
+                value={kanBeskrivelseValue}
               />
             </div>
           )}
 
           {kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE && (
-              <StyledTextarea
-                  id="kanIkkeBeskrivelse"
-                  label={"Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"}
-                  error={errors.kanBeskrivelse?.message}
-                  description={
-                    "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-                  }
-                  maxLength={1000}
-                  {...register("kanIkkeBeskrivelse", {
-                    required:
-                        "Du må gi en beskrivelse av hvorfor du ikke kan gjennomføre oppgaven",
-                    maxLength: 1000,
-                  })}
-                  defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
-                  value={kanIkkeBeskrivelseValue}
-              />
+            <StyledTextarea
+              id="kanIkkeBeskrivelse"
+              label={
+                "Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"
+              }
+              error={errors.kanBeskrivelse?.message}
+              description={
+                "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+              }
+              maxLength={1000}
+              {...register("kanIkkeBeskrivelse", {
+                required:
+                  "Du må gi en beskrivelse av hvorfor du ikke kan gjennomføre oppgaven",
+                maxLength: 1000,
+              })}
+              defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
+              value={kanIkkeBeskrivelseValue}
+            />
           )}
 
           <ButtonRow>
