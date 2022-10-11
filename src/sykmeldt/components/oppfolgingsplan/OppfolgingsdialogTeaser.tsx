@@ -1,4 +1,7 @@
 import React from "react";
+import NextLink from "next/link";
+import Image from "next/image";
+import styled from "styled-components";
 import {
   finnOppfolgingsdialogMotpartNavn,
   inneholderGodkjenninger,
@@ -6,32 +9,14 @@ import {
 } from "@/common/utils/oppfolgingsdialogUtils";
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
 import { LinkPanel, Tag } from "@navikt/ds-react";
-import Image from "next/image";
-import NextLink from "next/link";
-import styled from "styled-components";
-import { useLandingUrl } from "@/common/hooks/routeHooks";
+import {
+  useLandingUrl,
+  useOppfolgingsplanUrl,
+} from "@/common/hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 const texts = {
-  etiketter: {
-    tilGodkjenning: "Til godkjenning",
-  },
-};
-
-interface TilGodkjenningStatusProps {
-  oppfolgingsplan: Oppfolgingsplan;
-}
-
-export const TilGodkjenningStatus = ({
-  oppfolgingsplan,
-}: TilGodkjenningStatusProps) => {
-  if (
-    inneholderGodkjenninger(oppfolgingsplan) &&
-    !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan)
-  ) {
-    return <StyledSubTitle>{texts.etiketter.tilGodkjenning}</StyledSubTitle>;
-  }
-  return null;
+  tilGodkjenning: "Til godkjenning",
 };
 
 interface OppfolgingsdialogTeaserProps {
@@ -72,11 +57,24 @@ const OppfolgingsdialogTeaser = ({
   oppfolgingsplan,
 }: OppfolgingsdialogTeaserProps) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
-  const landingUrl = useLandingUrl();
 
+  const newOppfolgingsplanUrl = useOppfolgingsplanUrl(
+    oppfolgingsplan.id,
+    "arbeidsoppgaver"
+  );
+  const approveOppfolgingsplanUrl = useOppfolgingsplanUrl(
+    oppfolgingsplan.id,
+    "godkjenning"
+  );
+
+  const pendingApproval =
+    inneholderGodkjenninger(oppfolgingsplan) &&
+    !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan);
+
+  console.log("Oppfolgingsplan: ", oppfolgingsplan);
   return (
     <NextLink
-      href={`${landingUrl}/${oppfolgingsplan.id}/arbeidsoppgaver`}
+      href={pendingApproval ? approveOppfolgingsplanUrl : newOppfolgingsplanUrl}
       passHref
     >
       <LinkPanel border>
@@ -93,7 +91,9 @@ const OppfolgingsdialogTeaser = ({
                 <span>{finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}</span>
               </StyledTitle>
             </header>
-            <TilGodkjenningStatus oppfolgingsplan={oppfolgingsplan} />
+            {pendingApproval && (
+              <StyledSubTitle>{texts.tilGodkjenning}</StyledSubTitle>
+            )}
             {typeof planStatus.tekst === "object" ? (
               <StyledSmallText dangerouslySetInnerHTML={planStatus.tekst} />
             ) : (
