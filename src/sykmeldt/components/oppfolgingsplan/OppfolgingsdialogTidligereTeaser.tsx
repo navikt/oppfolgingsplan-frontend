@@ -14,6 +14,7 @@ const OppfolgingsdialogTidligereTeaser = ({
   rootUrlPlaner,
 }: Props) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
+
   return (
     <LinkPanel
       href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsplan.id}`}

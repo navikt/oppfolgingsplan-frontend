@@ -5,6 +5,7 @@ import {
   PlanGodkjentImage,
   PlanAvbruttImage,
   OppfolgingsdialogTomImage,
+  OppfolgingsdialogUnderArbeidImage,
   PlanIkkeAktivSykmeldingImage,
 } from "@/common/images/imageComponents";
 
@@ -26,6 +27,7 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
     tekst: "",
     img: "",
   };
+
   switch (oppfolgingsdialog.status) {
     case STATUS.UTDATERT:
       status.tekst =
@@ -48,7 +50,7 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         toDateMedMaanedNavn(oppfolgingsdialog.sistEndretDato),
         finnSistEndretAvNavn(oppfolgingsdialog)
       );
-      status.img = OppfolgingsdialogTomImage;
+      status.img = OppfolgingsdialogUnderArbeidImage;
       break;
     case STATUS.AKTIV:
       status.tekst =

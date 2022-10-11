@@ -21,7 +21,13 @@ const SpacedTextField = styled(TextField)`
   width: 12rem;
 `;
 
-export const DatoVelger = ({ label, name, defaultValue, error, errorMessage }: Props) => {
+export const DatoVelger = ({
+  label,
+  name,
+  defaultValue,
+  error,
+  errorMessage,
+}: Props) => {
   const { control } = useFormContext();
 
   return (

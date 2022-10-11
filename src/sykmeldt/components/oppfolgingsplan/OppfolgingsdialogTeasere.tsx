@@ -4,9 +4,9 @@ import OppfolgingsdialogTidligereTeaser from "./OppfolgingsdialogTidligereTeaser
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
+  tittel: string;
   oppfolgingsplaner: Oppfolgingsplan[];
   className?: string;
-  tittel: string;
   id?: string;
   rootUrlPlaner?: string;
   harTidligerOppfolgingsdialoger?: boolean;
