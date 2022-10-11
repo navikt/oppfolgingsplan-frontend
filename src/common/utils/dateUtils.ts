@@ -30,11 +30,16 @@ export const erGyldigDatoIFortiden = (dato: string) => {
   return oppgittDato.getTime() < dagensDatoStart.getTime();
 };
 
-export const toDateMedMaanedNavn = (dato: string) => {
-  const nyDato = new Date(dato);
+export const toDateMedMaanedNavn = (dato: string | null) => {
+  const nyDato = new Date(dato!!);
   const dag = nyDato.getDate();
   const maaned = maanedListe[nyDato.getMonth()];
   const aar = nyDato.getFullYear();
+
+  if (!dag && !maaned && !aar) {
+    return "";
+  }
+
   return `${dag}. ${maaned} ${aar}`;
 };
 

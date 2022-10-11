@@ -25,6 +25,7 @@ import VarseltrekantImage from "../../../public/img/svg/varseltrekant.svg";
 import OppfolgingsdialogIkkeAktivSykmeldingImage from "../../../public/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg";
 import OppfolgingsdialogIkkeTilgangImage from "../../../public/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg";
 import OppfolgingsdialogIngenlederImage from "../../../public/img/svg/oppfolgingsdialog-ingenleder.svg";
+import StjerneImage from "../../../public/img/svg/stjerne.svg";
 
 export {
   AdvarselImage,
@@ -54,4 +55,5 @@ export {
   OppfolgingsdialogIkkeTilgangImage,
   OppfolgingsdialogIngenlederImage,
   OppfolgingsdialogUnderArbeidImage,
+  StjerneImage,
 };

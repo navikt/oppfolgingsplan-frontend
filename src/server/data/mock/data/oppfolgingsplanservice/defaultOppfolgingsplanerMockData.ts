@@ -1,7 +1,7 @@
 import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
-const enableTilGodkjenningMock = false;
+const enableTilGodkjenningMock = true;
 
 export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
   {
@@ -30,7 +30,11 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
             },
             beskrivelse: "Beskrivelse",
             godkjenningsTidspunkt: "2022-10-10T10:46:06.041",
-            gyldighetstidspunkt: null,
+            gyldighetstidspunkt: {
+              fom: "2022-10-20T10:46:06.041",
+              tom: "2022-10-29T10:46:06.041",
+              evalueres: "2022-11-01T10:46:06.041",
+            },
             delMedNav: false,
           },
         ]
