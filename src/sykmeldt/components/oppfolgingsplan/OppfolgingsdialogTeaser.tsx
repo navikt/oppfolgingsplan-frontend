@@ -90,9 +90,7 @@ const OppfolgingsdialogTeaser = ({
                 className="js-title"
                 id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}
               >
-                <span>
-                  {finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}kfjg
-                </span>
+                <span>{finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}</span>
               </StyledTitle>
             </header>
             <TilGodkjenningStatus oppfolgingsplan={oppfolgingsplan} />
