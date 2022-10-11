@@ -17,7 +17,7 @@ const Tiltak: NextPage = () => {
     <OppfolgingsplanPageSM page={Page.TILTAK}>
       {aktivPlan && (
         <div>
-          <NyttTiltak oppfolgingsplanId={aktivPlan.id} />
+          <NyttTiltak />
 
           <LagredeTiltak oppfolgingsplan={aktivPlan} />
         </div>

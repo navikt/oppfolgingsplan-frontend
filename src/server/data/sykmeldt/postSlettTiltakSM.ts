@@ -5,6 +5,7 @@ import serverLogger from "@/server/utils/serverLogger";
 import { deleteTiltakSM } from "@/server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import { handleQueryParamError } from "@/server/utils/errors";
+import activeMockSM from "@/server/data/mock/activeMockSM";
 
 export const postSlettTiltakSM = async (
   req: IAuthenticatedRequest,
@@ -22,15 +23,18 @@ export const postSlettTiltakSM = async (
   }
 
   if (isMockBackend) {
-    // const {oppfolgingsplanId, tiltakId} = req.query;
-    //
-    // const aktivPlan = activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))
-    // const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!)
-    // const filteredTiltakListe = aktivPlan!!.tiltakListe.filter(tiltak => tiltak.tiltakId != Number(tiltakId))
+    const { oppfolgingsplanId, tiltakId } = req.query;
 
-    // activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe = filteredTiltakListe
+    const aktivPlan = activeMockSM.oppfolgingsplaner.find(
+      (plan) => plan.id == Number(oppfolgingsplanId)
+    );
+    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!);
+    const filteredTiltakListe = aktivPlan!!.tiltakListe!!.filter(
+      (tiltak) => tiltak.tiltakId != Number(tiltakId)
+    );
 
-    next();
+    activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
+      filteredTiltakListe;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
 

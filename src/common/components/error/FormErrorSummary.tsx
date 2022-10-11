@@ -35,3 +35,5 @@ export const FormErrorSummary = React.forwardRef(
     );
   }
 );
+
+FormErrorSummary.displayName = "FormErrorSummary";

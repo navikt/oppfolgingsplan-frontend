@@ -3,6 +3,7 @@ import { finnOppfolgingsdialogMotpartNavn } from "@/common/utils/oppfolgingsdial
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
 import { LinkPanel } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import Image from "next/image";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -22,7 +23,7 @@ const OppfolgingsdialogTidligereTeaser = ({
     >
       <div className="inngangspanel">
         <span className="oppfolgingsplanInnhold__ikon">
-          <img alt="" src={planStatus.img} />
+          <Image alt={planStatus.tekst} src={planStatus.img} />
         </span>
         <div className="inngangspanel__innhold">
           <header className="inngangspanel__header">

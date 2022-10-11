@@ -10,12 +10,10 @@ import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading"
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
 import { STATUS_TILTAK } from "@/common/konstanter";
+import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
 
-interface Props {
-  oppfolgingsplanId: number;
-}
-
-export const NyttTiltak = ({ oppfolgingsplanId }: Props) => {
+export const NyttTiltak = () => {
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const lagreTiltak = useLagreTiltakSM();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
