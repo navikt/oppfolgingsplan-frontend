@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
-import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {
   OppfolgingsplanPageSM,
   Page,
@@ -10,8 +9,7 @@ import { NyttTiltak } from "@/common/components/tiltak/NyttTiltak";
 import { LagredeTiltak } from "@/common/components/tiltak/LagredeTiltak";
 
 const Tiltak: NextPage = () => {
-  const oppfolgingsdialogId = useOppfolgingsplanRouteId();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
+  const aktivPlan = useAktivPlanSM();
 
   return (
     <OppfolgingsplanPageSM page={Page.TILTAK}>

@@ -1,24 +1,25 @@
-import { useApiBasePath } from "@/common/hooks/routeHooks";
+import {
+  useApiBasePath,
+  useOppfolgingsplanRouteId,
+} from "@/common/hooks/routeHooks";
 import { post } from "@/common/api/axios/axios";
-import { useMutation, useQueryClient } from "react-query";
 import { OPPFOLGINGSPLANER_SM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Arbeidsoppgave } from "../../../../schema/oppfolgingsplanSchema";
-
-interface LagreOppgaveProps {
-  oppfolgingsplanId: number;
-  oppgave: Partial<Arbeidsoppgave>;
-}
+import { useSWRConfig } from "swr";
 
 export const useLagreArbeidsoppgaveSM = () => {
   const apiBasePath = useApiBasePath();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({ oppfolgingsplanId, oppgave }: LagreOppgaveProps) =>
-    post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
-      oppgave
+  return (oppgave: Partial<Arbeidsoppgave>) =>
+    mutate(
+      OPPFOLGINGSPLANER_SM,
+      post(
+        `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
+        oppgave
+      )
     );
-
-  return useMutation(request);
 };
 
 interface SlettOppgaveProps {
@@ -28,7 +29,7 @@ interface SlettOppgaveProps {
 
 export const useSlettOppgaveSM = () => {
   const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
+  const { mutate } = useSWRConfig();
 
   const request = ({
     oppfolgingsplanId,
@@ -38,9 +39,5 @@ export const useSlettOppgaveSM = () => {
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
     );
 
-  return useMutation(request, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(OPPFOLGINGSPLANER_SM);
-    },
-  });
+  return mutate(OPPFOLGINGSPLANER_SM, request);
 };

@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
-import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
+import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {
   OppfolgingsplanPageSM,
   Page,
@@ -14,10 +13,9 @@ import { useLagreArbeidsoppgaveSM } from "@/common/api/queries/sykmeldt/oppgaveQ
 import { TILRETTELEGGING } from "@/common/konstanter";
 
 const Arbeidsoppgaver: NextPage = () => {
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsplanId);
+  const aktivPlan = useAktivPlanSM();
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
-  const lagreOppgaveMutation = useLagreArbeidsoppgaveSM();
+  const lagreOppgave = useLagreArbeidsoppgaveSM();
 
   return (
     <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
@@ -46,30 +44,25 @@ const Arbeidsoppgaver: NextPage = () => {
           {leggerTilOppgave && (
             <ArbeidsoppgaveForm
               onSubmit={(data) => {
-                lagreOppgaveMutation.mutate({
-                  oppfolgingsplanId: oppfolgingsplanId,
-                  oppgave: {
-                    arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
-                    gjennomfoering: {
-                      kanGjennomfoeres: data.kanGjennomfores,
-                      paaAnnetSted: data.tilrettelegging
-                        ? data.tilrettelegging.includes(
-                            TILRETTELEGGING.PAA_ANNET_STED
-                          )
-                        : false,
-                      medMerTid: data.tilrettelegging
-                        ? data.tilrettelegging.includes(
-                            TILRETTELEGGING.MED_MER_TID
-                          )
-                        : false,
-                      medHjelp: data.tilrettelegging
-                        ? data.tilrettelegging.includes(
-                            TILRETTELEGGING.MED_HJELP
-                          )
-                        : false,
-                      kanBeskrivelse: data.kanBeskrivelse,
-                      kanIkkeBeskrivelse: data.kanIkkeBeskrivelse,
-                    },
+                lagreOppgave({
+                  arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
+                  gjennomfoering: {
+                    kanGjennomfoeres: data.kanGjennomfores,
+                    paaAnnetSted: data.tilrettelegging
+                      ? data.tilrettelegging.includes(
+                          TILRETTELEGGING.PAA_ANNET_STED
+                        )
+                      : false,
+                    medMerTid: data.tilrettelegging
+                      ? data.tilrettelegging.includes(
+                          TILRETTELEGGING.MED_MER_TID
+                        )
+                      : false,
+                    medHjelp: data.tilrettelegging
+                      ? data.tilrettelegging.includes(TILRETTELEGGING.MED_HJELP)
+                      : false,
+                    kanBeskrivelse: data.kanBeskrivelse,
+                    kanIkkeBeskrivelse: data.kanIkkeBeskrivelse,
                   },
                 });
                 setLeggerTilOppgave(false);

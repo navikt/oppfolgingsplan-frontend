@@ -1,9 +1,8 @@
 import { useApiBasePath } from "@/common/hooks/routeHooks";
 import { get } from "@/common/api/axios/axios";
-import { useQuery } from "react-query";
-import { ApiErrorException } from "@/common/api/axios/errors";
 import { Tilgang } from "../../../../schema/tilgangSchema";
 import { useSykmeldtFnr } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
+import useSWRImmutable from "swr/immutable";
 
 export const TILGANG_SM = "tilgang-sykmeldt";
 
@@ -14,7 +13,14 @@ export const useTilgangSM = () => {
   const fetchTilgang = () =>
     get<Tilgang>(`${apiBasePath}/tilgang/${sykmeldtFnr}`);
 
-  return useQuery<Tilgang, ApiErrorException>(TILGANG_SM, fetchTilgang, {
-    enabled: !!sykmeldtFnr,
-  });
+  const { data, error } = useSWRImmutable(
+    !!sykmeldtFnr ? TILGANG_SM : null,
+    fetchTilgang
+  );
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
 };

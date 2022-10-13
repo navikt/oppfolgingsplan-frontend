@@ -10,10 +10,8 @@ import { TiltakFormHeading } from "@/common/components/tiltak/TiltakFormHeading"
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
 import { STATUS_TILTAK } from "@/common/konstanter";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
 
 export const NyttTiltak = () => {
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const lagreTiltak = useLagreTiltakSM();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
@@ -50,10 +48,7 @@ export const NyttTiltak = () => {
       <TiltakFormHeading />
       <TiltakForm
         onSubmit={(data) => {
-          lagreTiltak.mutate({
-            oppfolgingsplanId: oppfolgingsplanId,
-            tiltak: nyttTiltakInformasjon(data),
-          });
+          lagreTiltak(nyttTiltakInformasjon(data));
           setLeggerTilNyttTiltak(false);
         }}
         onCancel={() => setLeggerTilNyttTiltak(false)}

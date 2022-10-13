@@ -1,13 +1,11 @@
 import { NextPage } from "next";
 import React from "react";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
-import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import Side from "@/common/components/wrappers/Side";
 import { OppfolgingsdialogerGodkjenn } from "../../../sykmeldt/components/oppfolgingsplan/godkjenn/OppfolgingsdialogerGodkjenn";
 
 const Godkjenning: NextPage = () => {
-  const oppfolgingsdialogId = useOppfolgingsplanRouteId();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
+  const aktivPlan = useAktivPlanSM();
 
   return (
     <Side

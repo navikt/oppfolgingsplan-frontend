@@ -7,17 +7,12 @@ import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { STATUS_TILTAK } from "@/common/konstanter";
 
 interface Props {
-  oppfolgingsplanId: number;
   tiltak: Tiltak;
 
   doneEditing(): void;
 }
 
-export const EditerTiltak = ({
-  oppfolgingsplanId,
-  tiltak,
-  doneEditing,
-}: Props) => {
+export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
   const lagreTiltak = useLagreTiltakSM();
 
   const tiltakInformasjon = (data: TiltakFormValues): Tiltak => {
@@ -40,10 +35,7 @@ export const EditerTiltak = ({
         tom: new Date(tiltak.tom!!),
       }}
       onSubmit={(data) => {
-        lagreTiltak.mutate({
-          oppfolgingsplanId: oppfolgingsplanId,
-          tiltak: tiltakInformasjon(data),
-        });
+        lagreTiltak(tiltakInformasjon(data));
         doneEditing();
       }}
       onCancel={doneEditing}
