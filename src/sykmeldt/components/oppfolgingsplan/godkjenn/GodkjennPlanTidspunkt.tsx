@@ -25,7 +25,7 @@ export const GodkjennPlanTidspunkt = ({
   oppfolgingsdialog,
 }: Props) => {
   const gyldighetstidspunkt =
-    oppfolgingsdialog.godkjenninger?.[0]?.gyldighetstidspunkt;
+    oppfolgingsdialog?.godkjenninger?.[0]?.gyldighetstidspunkt;
 
   if (!gyldighetstidspunkt) {
     return null;

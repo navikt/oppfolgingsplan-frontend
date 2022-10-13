@@ -1,7 +1,7 @@
 import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
-const enableTilGodkjenningMock = true;
+const enableTilGodkjenningMock = false;
 
 export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
   {
@@ -48,7 +48,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           kanGjennomfoeres: "TILRETTELEGGING",
           paaAnnetSted: true,
           medMerTid: true,
-          medHjelp: false,
+          medHjelp: true,
           kanBeskrivelse:
             "Trenger mer tid til de faste oppgavene og kan utføre noen av disse hjemmefra. ",
           kanIkkeBeskrivelse: null,
@@ -420,14 +420,14 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     arbeidsgiver: {
       naermesteLeder: {
-        navn: "Labben Rekemester",
-        fnr: "20405060718",
-        epost: null,
-        tlf: null,
+        navn: "Albus Dumbledore",
+        fnr: "11011011011",
+        epost: "albus@hogwarts.ac.uk",
+        tlf: "110",
         sistInnlogget: "2020-02-24T08:57:46.747",
         samtykke: null,
-        virksomhetsnummer: "123",
-        erAktiv: false,
+        virksomhetsnummer: "110110110",
+        erAktiv: true,
         aktivFom: "2020-02-24T08:57:46.747",
         aktivTom: null,
       },

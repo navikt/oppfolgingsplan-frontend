@@ -10,6 +10,7 @@ import { useLandingUrl } from "@/common/hooks/routeHooks";
 import { restdatoTildato } from "@/common/utils/dateUtils";
 import { TidligereOppfolgingsplaner } from "./TidligereOppfolgingsplaner";
 import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
+import { SePlan } from "./SePlan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -32,7 +33,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
         oppfolgingsdialog={oppfolgingsplan}
       />
       <div>
-        <Button variant="tertiary">Se plan</Button>
+        <SePlan oppfolgingsplan={oppfolgingsplan} />
         <Button variant="tertiary">Gjør endringer</Button>
       </div>
       <TidligereOppfolgingsplaner
