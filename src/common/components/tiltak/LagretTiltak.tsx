@@ -80,19 +80,14 @@ const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
 interface Props {
   arbeidstakerFnr: string;
   tiltak: Tiltak;
-  oppfolgingsplanId: number;
 }
 
-export const LagretTiltak = ({
-  arbeidstakerFnr,
-  tiltak,
-  oppfolgingsplanId,
-}: Props) => {
+export const LagretTiltak = ({ arbeidstakerFnr, tiltak }: Props) => {
   const aktoerHarOpprettetElement =
     arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
   const [editererTiltak, setEditererTiltak] = useState(false);
-  const lagreKommentarMutation = useLagreKommentarSM();
+  const lagreKommentar = useLagreKommentarSM();
   const fnr = arbeidstakerFnr;
   const tiltakId = tiltak.tiltakId;
 
@@ -146,8 +141,7 @@ export const LagretTiltak = ({
       {displayNyKommentar && (
         <NyKommentar
           lagre={(kommentar: string) => {
-            lagreKommentarMutation.mutate({
-              oppfolgingsplanId,
+            lagreKommentar({
               tiltakId,
               fnr,
               kommentar,
@@ -160,7 +154,6 @@ export const LagretTiltak = ({
 
       {editererTiltak && (
         <EditerTiltak
-          oppfolgingsplanId={oppfolgingsplanId}
           tiltak={tiltak}
           doneEditing={() => setEditererTiltak(false)}
         />
@@ -178,10 +171,7 @@ export const LagretTiltak = ({
             </Button>
           )}
           {aktoerHarOpprettetElement && (
-            <SlettTiltakButton
-              oppfolgingsplanId={oppfolgingsplanId}
-              tiltakId={tiltak.tiltakId}
-            />
+            <SlettTiltakButton tiltakId={tiltak.tiltakId} />
           )}
           <Button
             variant={"tertiary"}

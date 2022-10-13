@@ -1,9 +1,12 @@
-import { useMutation, useQuery } from "react-query";
 import { get, post } from "@/common/api/axios/axios";
-import { ApiErrorException } from "@/common/api/axios/errors";
-import { useApiBasePath } from "@/common/hooks/routeHooks";
+import {
+  useApiBasePath,
+  useOppfolgingsplanRouteId,
+} from "@/common/hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../../../schema/opprettOppfoelgingsdialogSchema";
+import { useSWRConfig } from "swr";
+import useSWRImmutable from "swr/immutable";
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
 
@@ -13,33 +16,45 @@ export const useOppfolgingsplanerSM = () => {
   const fetchOppfolgingsplaner = () =>
     get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`);
 
-  return useQuery<Oppfolgingsplan[], ApiErrorException>(
+  const { data, error, mutate } = useSWRImmutable(
     OPPFOLGINGSPLANER_SM,
     fetchOppfolgingsplaner
   );
+
+  return {
+    data,
+    isLoading: !error && !data,
+    isError: error,
+    mutate,
+  };
 };
 
-export const useOppfolgingsplanSM = (
-  id: number
-): Oppfolgingsplan | undefined => {
+export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
+  const id = useOppfolgingsplanRouteId();
   const allePlaner = useOppfolgingsplanerSM();
-  return allePlaner.data && allePlaner.data.find((plan) => plan.id == id);
+
+  if (!allePlaner.isLoading && !allePlaner.isError) {
+    return allePlaner.data!!.find((plan) => plan.id == id);
+  }
+
+  return undefined;
 };
 
-export const useKopierOppfolgingsplanSM = () => {
-  const apiBasePath = useApiBasePath();
-
-  const postKopierOppfolgingsplanSM = (id: number) =>
-    post(`${apiBasePath}/oppfolgingsplaner/kopier/${id}`);
-
-  return useMutation(postKopierOppfolgingsplanSM);
-};
+// export const useKopierOppfolgingsplanSM = () => {
+//   const apiBasePath = useApiBasePath();
+//
+//   const postKopierOppfolgingsplanSM = (id: number) =>
+//     post(`${apiBasePath}/oppfolgingsplaner/kopier/${id}`);
+//
+//   return useMutation(postKopierOppfolgingsplanSM);
+// };
 
 export const useOpprettOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
+  const { mutate } = useSWRConfig();
 
-  const postOpprettOppfolgingsplanSM = (data: OpprettOppfoelgingsdialog) =>
-    post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
-
-  return useMutation(postOpprettOppfolgingsplanSM);
+  return async (data: OpprettOppfoelgingsdialog) => {
+    await post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };

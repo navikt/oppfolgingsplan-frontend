@@ -77,7 +77,7 @@ const OppfolgingsdialogerIngenplan = ({
                   <Button
                     variant={"primary"}
                     onClick={() => {
-                      opprettOppfolgingsplan.mutate({
+                      opprettOppfolgingsplan({
                         sykmeldtFnr: sykmeldtFnr!!,
                         virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer,
                       });

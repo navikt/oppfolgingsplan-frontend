@@ -57,7 +57,7 @@ const Side = ({
   if (
     isLoading ||
     tilgang.isLoading ||
-    oppfolgingsplaner.isLoading ||
+    // oppfolgingsplaner.isLoading ||
     sykmeldinger.isLoading
   ) {
     return <AppSpinner />;

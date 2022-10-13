@@ -14,13 +14,12 @@ const HeadingWithExtraSpacing = styled(Heading)`
 `;
 
 interface Props {
-  oppfolgingsplanId: number;
   tiltakId: number;
 }
 
-export const SlettTiltakButton = ({ oppfolgingsplanId, tiltakId }: Props) => {
+export const SlettTiltakButton = ({ tiltakId }: Props) => {
   const [modelOpen, setModalOpen] = useState(false);
-  const slettTiltakMutation = useSlettTiltakSM();
+  const slettTiltak = useSlettTiltakSM();
 
   useEffect(() => {
     if (Modal.setAppElement) {
@@ -45,7 +44,7 @@ export const SlettTiltakButton = ({ oppfolgingsplanId, tiltakId }: Props) => {
               <Button
                 variant={"danger"}
                 onClick={() => {
-                  slettTiltakMutation.mutate({ oppfolgingsplanId, tiltakId });
+                  slettTiltak(tiltakId);
                   setModalOpen(false);
                 }}
               >

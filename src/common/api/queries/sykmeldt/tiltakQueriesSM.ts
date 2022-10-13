@@ -1,49 +1,40 @@
-import { useApiBasePath } from "@/common/hooks/routeHooks";
+import {
+  useApiBasePath,
+  useOppfolgingsplanRouteId,
+} from "@/common/hooks/routeHooks";
 import { post } from "@/common/api/axios/axios";
-import { useMutation, useQueryClient } from "react-query";
 import { OPPFOLGINGSPLANER_SM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Tiltak } from "../../../../schema/oppfolgingsplanSchema";
-
-interface LagreTiltakProps {
-  oppfolgingsplanId: number;
-  tiltak: Partial<Tiltak>;
-}
+import { useSWRConfig } from "swr";
 
 export const useLagreTiltakSM = () => {
   const apiBasePath = useApiBasePath();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({ oppfolgingsplanId, tiltak }: LagreTiltakProps) =>
-    post(
+  return async (tiltak: Partial<Tiltak>) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
       tiltak
     );
-
-  return useMutation(request);
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
-
-interface SlettTiltakProps {
-  oppfolgingsplanId: number;
-  tiltakId: number;
-}
 
 export const useSlettTiltakSM = () => {
   const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({ oppfolgingsplanId, tiltakId }: SlettTiltakProps) =>
-    post(
+  return async (tiltakId: number) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
     );
-
-  return useMutation(request, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(OPPFOLGINGSPLANER_SM);
-    },
-  });
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
 
 interface LagreKommentarProps {
-  oppfolgingsplanId: number;
   tiltakId: number;
   fnr: string;
   kommentar: string;
@@ -51,51 +42,35 @@ interface LagreKommentarProps {
 
 export const useLagreKommentarSM = () => {
   const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({
-    oppfolgingsplanId,
-    tiltakId,
-    fnr,
-    kommentar,
-  }: LagreKommentarProps) =>
-    post(
+  return async ({ tiltakId, fnr, kommentar }: LagreKommentarProps) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       {
         fnr: fnr,
         kommentar: kommentar,
       }
     );
-
-  return useMutation(request, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(OPPFOLGINGSPLANER_SM);
-    },
-  });
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
 
 interface SlettKommentarProps {
-  oppfolgingsplanId: number;
   tiltakId: number;
   kommentarId: number;
 }
 
 export const useSlettKommentarSM = () => {
   const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({
-    oppfolgingsplanId,
-    tiltakId,
-    kommentarId,
-  }: SlettKommentarProps) =>
-    post(
+  return async ({ tiltakId, kommentarId }: SlettKommentarProps) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     );
-
-  return useMutation(request, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(OPPFOLGINGSPLANER_SM);
-    },
-  });
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };

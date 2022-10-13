@@ -13,8 +13,7 @@ import { NavigationButtons } from "@/common/components/buttons/NavigationButtons
 import { IkkeTilgangTilPlanInfoBoks } from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
 import Side from "@/common/components/wrappers/Side";
 import { OppfolgingsplanStepper } from "@/common/components/stepper/OppfolgingsplanStepper";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
-import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -61,8 +60,7 @@ interface Props {
 }
 
 export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsplanId);
+  const aktivPlan = useAktivPlanSM();
 
   const sykmeldinger = useSykmeldingerSM();
   const stilling: Stilling | undefined =

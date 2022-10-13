@@ -4,8 +4,7 @@ import { Button, Chat } from "@navikt/ds-react";
 import { hentAktoerNavnInitialer } from "@/common/utils/stringUtils";
 import { getFullDateFormat } from "@/common/utils/dateUtils";
 import { useSlettKommentarSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
-import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
+import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
@@ -33,9 +32,8 @@ export const Dialog = ({
   tiltakId,
   kommentarer,
 }: Props): ReactElement | null => {
-  const slettKommentarMutation = useSlettKommentarSM();
-  const oppfolgingsdialogId = useOppfolgingsplanRouteId();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
+  const slettKommentar = useSlettKommentarSM();
+  const aktivPlan = useAktivPlanSM();
 
   if (!kommentarer || !aktivPlan) return null;
 
@@ -59,8 +57,7 @@ export const Dialog = ({
               <ButtonRightAligned
                 variant="tertiary"
                 onClick={() =>
-                  slettKommentarMutation.mutate({
-                    oppfolgingsplanId: aktivPlan.id,
+                  slettKommentar({
                     tiltakId: tiltakId,
                     kommentarId: kommentar.id,
                   })

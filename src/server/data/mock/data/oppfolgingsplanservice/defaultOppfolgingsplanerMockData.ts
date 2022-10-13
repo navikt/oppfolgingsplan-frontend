@@ -1,7 +1,7 @@
 import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
-const enableTilGodkjenningMock = true;
+const enableTilGodkjenningMock = false;
 
 export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
   {

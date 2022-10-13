@@ -1,46 +1,35 @@
-import { useApiBasePath } from "@/common/hooks/routeHooks";
+import {
+  useApiBasePath,
+  useOppfolgingsplanRouteId,
+} from "@/common/hooks/routeHooks";
 import { post } from "@/common/api/axios/axios";
-import { useMutation, useQueryClient } from "react-query";
 import { OPPFOLGINGSPLANER_SM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Arbeidsoppgave } from "../../../../schema/oppfolgingsplanSchema";
-
-interface LagreOppgaveProps {
-  oppfolgingsplanId: number;
-  oppgave: Partial<Arbeidsoppgave>;
-}
+import { useSWRConfig } from "swr";
 
 export const useLagreArbeidsoppgaveSM = () => {
   const apiBasePath = useApiBasePath();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({ oppfolgingsplanId, oppgave }: LagreOppgaveProps) =>
-    post(
+  return async (oppgave: Partial<Arbeidsoppgave>) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
       oppgave
     );
-
-  return useMutation(request);
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
-
-interface SlettOppgaveProps {
-  oppfolgingsplanId: number;
-  arbeidsoppgaveId: number;
-}
 
 export const useSlettOppgaveSM = () => {
   const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+  const { mutate } = useSWRConfig();
 
-  const request = ({
-    oppfolgingsplanId,
-    arbeidsoppgaveId,
-  }: SlettOppgaveProps) =>
-    post(
+  return async (arbeidsoppgaveId: number) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
     );
-
-  return useMutation(request, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(OPPFOLGINGSPLANER_SM);
-    },
-  });
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };

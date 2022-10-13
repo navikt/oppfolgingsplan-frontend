@@ -19,7 +19,6 @@ export const LagredeTiltak = ({
         key={index}
         arbeidstakerFnr={arbeidstakerFnr}
         tiltak={tiltak}
-        oppfolgingsplanId={oppfolgingsplan.id}
       />
     );
   });
