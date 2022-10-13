@@ -12,11 +12,13 @@ export const useLagreArbeidsoppgaveSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return async (oppgave: Partial<Arbeidsoppgave>) =>
+  return async (oppgave: Partial<Arbeidsoppgave>) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
       oppgave
-    ).then(await mutate(OPPFOLGINGSPLANER_SM));
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
 
 export const useSlettOppgaveSM = () => {
@@ -24,8 +26,10 @@ export const useSlettOppgaveSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return async (arbeidsoppgaveId: number) =>
+  return async (arbeidsoppgaveId: number) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
-    ).then(await mutate(OPPFOLGINGSPLANER_SM));
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };

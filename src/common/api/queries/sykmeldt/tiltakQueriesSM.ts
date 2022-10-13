@@ -12,11 +12,13 @@ export const useLagreTiltakSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return async (tiltak: Partial<Tiltak>) =>
+  return async (tiltak: Partial<Tiltak>) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
       tiltak
-    ).then(await mutate(OPPFOLGINGSPLANER_SM));
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
 
 export const useSlettTiltakSM = () => {
@@ -24,10 +26,12 @@ export const useSlettTiltakSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return async (tiltakId: number) =>
+  return async (tiltakId: number) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
-    ).then(await mutate(OPPFOLGINGSPLANER_SM));
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
 
 interface LagreKommentarProps {
@@ -41,14 +45,16 @@ export const useLagreKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return async ({ tiltakId, fnr, kommentar }: LagreKommentarProps) =>
+  return async ({ tiltakId, fnr, kommentar }: LagreKommentarProps) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       {
         fnr: fnr,
         kommentar: kommentar,
       }
-    ).then(await mutate(OPPFOLGINGSPLANER_SM));
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
 
 interface SlettKommentarProps {
@@ -61,8 +67,10 @@ export const useSlettKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return async ({ tiltakId, kommentarId }: SlettKommentarProps) =>
+  return async ({ tiltakId, kommentarId }: SlettKommentarProps) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
-    ).then(await mutate(OPPFOLGINGSPLANER_SM));
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
 };
