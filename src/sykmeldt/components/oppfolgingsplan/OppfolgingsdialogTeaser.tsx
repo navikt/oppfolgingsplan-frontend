@@ -8,11 +8,8 @@ import {
   inneholderGodkjenningerAvArbeidstaker,
 } from "@/common/utils/oppfolgingsdialogUtils";
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
-import { LinkPanel, Tag } from "@navikt/ds-react";
-import {
-  useLandingUrl,
-  useOppfolgingsplanUrl,
-} from "@/common/hooks/routeHooks";
+import { LinkPanel } from "@navikt/ds-react";
+import { useOppfolgingsplanUrl } from "@/common/hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 const texts = {
@@ -71,7 +68,6 @@ const OppfolgingsdialogTeaser = ({
     inneholderGodkjenninger(oppfolgingsplan) &&
     !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan);
 
-  console.log("Oppfolgingsplan: ", oppfolgingsplan);
   return (
     <NextLink
       href={pendingApproval ? approveOppfolgingsplanUrl : newOppfolgingsplanUrl}
