@@ -54,7 +54,7 @@ export const useOpprettOppfolgingsplanSM = () => {
   const { mutate } = useSWRConfig();
 
   return async (data: OpprettOppfoelgingsdialog) =>
-    post(`${apiBasePath}/oppfolgingsplaner/opprett`, data).then(
+    await post(`${apiBasePath}/oppfolgingsplaner/opprett`, data).then(
       await mutate(OPPFOLGINGSPLANER_SM)
     );
 };

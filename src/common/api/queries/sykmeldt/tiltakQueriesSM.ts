@@ -13,7 +13,7 @@ export const useLagreTiltakSM = () => {
   const { mutate } = useSWRConfig();
 
   return async (tiltak: Partial<Tiltak>) =>
-    post(
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
       tiltak
     ).then(await mutate(OPPFOLGINGSPLANER_SM));
@@ -25,7 +25,7 @@ export const useSlettTiltakSM = () => {
   const { mutate } = useSWRConfig();
 
   return async (tiltakId: number) =>
-    post(
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
     ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };
@@ -42,7 +42,7 @@ export const useLagreKommentarSM = () => {
   const { mutate } = useSWRConfig();
 
   return async ({ tiltakId, fnr, kommentar }: LagreKommentarProps) =>
-    post(
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       {
         fnr: fnr,
@@ -62,7 +62,7 @@ export const useSlettKommentarSM = () => {
   const { mutate } = useSWRConfig();
 
   return async ({ tiltakId, kommentarId }: SlettKommentarProps) =>
-    post(
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };

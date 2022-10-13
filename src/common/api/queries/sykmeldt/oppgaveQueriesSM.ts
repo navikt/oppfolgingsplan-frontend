@@ -13,7 +13,7 @@ export const useLagreArbeidsoppgaveSM = () => {
   const { mutate } = useSWRConfig();
 
   return async (oppgave: Partial<Arbeidsoppgave>) =>
-    post(
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
       oppgave
     ).then(await mutate(OPPFOLGINGSPLANER_SM));
@@ -25,7 +25,7 @@ export const useSlettOppgaveSM = () => {
   const { mutate } = useSWRConfig();
 
   return async (arbeidsoppgaveId: number) =>
-    post(
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
     ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };
