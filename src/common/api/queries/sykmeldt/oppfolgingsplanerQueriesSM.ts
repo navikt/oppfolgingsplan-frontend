@@ -16,15 +16,16 @@ export const useOppfolgingsplanerSM = () => {
   const fetchOppfolgingsplaner = () =>
     get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`);
 
-  const { data, error } = useSWRImmutable(
+  const { data, error, mutate } = useSWRImmutable(
     OPPFOLGINGSPLANER_SM,
     fetchOppfolgingsplaner
   );
 
   return {
-    data: data,
+    data,
     isLoading: !error && !data,
     isError: error,
+    mutate,
   };
 };
 
@@ -52,9 +53,8 @@ export const useOpprettOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const { mutate } = useSWRConfig();
 
-  return (data: OpprettOppfoelgingsdialog) =>
-    mutate(
-      OPPFOLGINGSPLANER_SM,
-      post(`${apiBasePath}/oppfolgingsplaner/opprett`, data)
+  return async (data: OpprettOppfoelgingsdialog) =>
+    post(`${apiBasePath}/oppfolgingsplaner/opprett`, data).then(
+      await mutate(OPPFOLGINGSPLANER_SM)
     );
 };

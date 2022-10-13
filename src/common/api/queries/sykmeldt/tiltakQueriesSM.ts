@@ -12,14 +12,11 @@ export const useLagreTiltakSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return (tiltak: Partial<Tiltak>) =>
-    mutate(
-      OPPFOLGINGSPLANER_SM,
-      post(
-        `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
-        tiltak
-      )
-    );
+  return async (tiltak: Partial<Tiltak>) =>
+    post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
+      tiltak
+    ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };
 
 export const useSlettTiltakSM = () => {
@@ -27,13 +24,10 @@ export const useSlettTiltakSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return (tiltakId: number) =>
-    mutate(
-      OPPFOLGINGSPLANER_SM,
-      post(
-        `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
-      )
-    );
+  return async (tiltakId: number) =>
+    post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
+    ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };
 
 interface LagreKommentarProps {
@@ -47,17 +41,14 @@ export const useLagreKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return ({ tiltakId, fnr, kommentar }: LagreKommentarProps) =>
-    mutate(
-      OPPFOLGINGSPLANER_SM,
-      post(
-        `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
-        {
-          fnr: fnr,
-          kommentar: kommentar,
-        }
-      )
-    );
+  return async ({ tiltakId, fnr, kommentar }: LagreKommentarProps) =>
+    post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
+      {
+        fnr: fnr,
+        kommentar: kommentar,
+      }
+    ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };
 
 interface SlettKommentarProps {
@@ -70,11 +61,8 @@ export const useSlettKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const { mutate } = useSWRConfig();
 
-  return ({ tiltakId, kommentarId }: SlettKommentarProps) =>
-    mutate(
-      OPPFOLGINGSPLANER_SM,
-      post(
-        `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
-      )
-    );
+  return async ({ tiltakId, kommentarId }: SlettKommentarProps) =>
+    post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
+    ).then(await mutate(OPPFOLGINGSPLANER_SM));
 };
