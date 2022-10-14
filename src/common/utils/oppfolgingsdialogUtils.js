@@ -5,31 +5,6 @@ import {
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "./sykmeldingUtils";
 import { erGyldigDatoIFortiden } from "./dateUtils";
 
-export const hentGodkjenningsTidspunkt = (oppfolgingsplan) => {
-  return oppfolgingsplan.godkjenninger.filter((godkjenning) => {
-    return godkjenning.godkjent === true;
-  })[0].gyldighetstidspunkt;
-};
-
-export const finnNyesteGodkjenning = (godkjenninger) => {
-  return godkjenninger.sort((g1, g2) => {
-    return (
-      new Date(g2.godkjenningsTidspunkt) - new Date(g1.godkjenningsTidspunkt)
-    );
-  })[0];
-};
-
-export const harNaermesteLeder = (oppfolgingsdialog) => {
-  return oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
-};
-
-export const erIkkeOppfolgingsdialogUtfylt = (oppfolgingsplan) => {
-  return (
-    oppfolgingsplan.arbeidsoppgaveListe.length === 0 ||
-    oppfolgingsplan.tiltakListe.length === 0
-  );
-};
-
 export const inneholderGodkjenninger = (oppfolgingsdialog) => {
   return oppfolgingsdialog.godkjenninger.length > 0;
 };
@@ -42,16 +17,6 @@ export const inneholderGodkjenningerAvArbeidstaker = (oppfolgingsdialog) => {
       oppfolgingsdialog.arbeidstaker.fnr
   );
 };
-
-export const inneholderGodkjentPlan = (oppfolgingsdialog) => {
-  return oppfolgingsdialog.godkjentPlan;
-};
-
-export function getOppfolgingsdialog(oppfolgingsdialoger, id) {
-  return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
-    return oppfolgingsdialog.id.toString() === id.toString();
-  })[0];
-}
 
 export const erSykmeldingGyldigForOppfolgingMedGrensedato = (
   sykmelding,
@@ -162,19 +127,6 @@ export const finnBrukersSisteInnlogging = (oppfolgingsplaner) => {
   return new Date(Math.max.apply(null, innlogginger));
 };
 
-export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (
-  oppfolgingsdialoger,
-  virksomhetsnummer
-) => {
-  return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).filter(
-    (oppfolgingsdialog) => {
-      return (
-        oppfolgingsdialog.virksomhet.virksomhetsnummer === virksomhetsnummer
-      );
-    }
-  )[0];
-};
-
 export const erAktivOppfolgingsdialogOpprettetMedArbeidsgiver = (
   oppfolgingsdialoger,
   virksomhetsnummer
@@ -238,52 +190,6 @@ export const erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere = (
   );
 };
 
-export const isEmpty = (array) => {
-  return array.length === 0;
-};
-
-const idAlleredeFunnet = (planer, id) => {
-  return (
-    planer.filter((plan) => {
-      return plan.id === id;
-    }).length > 0
-  );
-};
-
-export const oppgaverOppfoelgingsdialoger = (
-  oppfolgingsdialoger,
-  sykmeldinger
-) => {
-  const oppfolgingdialogerKnyttetTilGyldigSykmelding =
-    oppfolgingsdialoger.filter((plan) => {
-      return erOppfolgingsdialogKnyttetTilGyldigSykmelding(plan, sykmeldinger);
-    });
-  const avventendeGodkjenninger =
-    oppfolgingdialogerKnyttetTilGyldigSykmelding.filter((plan) => {
-      return (
-        plan.godkjenninger.length > 0 &&
-        plan.arbeidstaker.fnr !==
-          finnNyesteGodkjenning(plan.godkjenninger).godkjentAv.fnr &&
-        finnNyesteGodkjenning(plan.godkjenninger).godkjent
-      );
-    });
-  const nyePlaner = oppfolgingdialogerKnyttetTilGyldigSykmelding.filter(
-    (plan) => {
-      return (
-        plan.arbeidstaker.sistInnlogget === null &&
-        plan.status === STATUS.UNDER_ARBEID &&
-        plan.sistEndretAv.fnr !== plan.arbeidstaker.fnr &&
-        !idAlleredeFunnet(avventendeGodkjenninger, plan.id)
-      );
-    }
-  );
-
-  return {
-    nyePlaner,
-    avventendeGodkjenninger,
-  };
-};
-
 export const erOppfolgingsplanOpprettbarDirekte = (
   arbeidsgivere,
   oppfolgingsplaner
@@ -292,19 +198,6 @@ export const erOppfolgingsplanOpprettbarDirekte = (
     arbeidsgivere.length === 1 &&
     !harTidligereOppfolgingsdialoger(oppfolgingsplaner)
   );
-};
-
-export const finnNyesteTidligereOppfolgingsdialogMedVirksomhet = (
-  oppfolgingsdialoger,
-  virksomhetsnummer
-) => {
-  return finnTidligereOppfolgingsdialoger(oppfolgingsdialoger).filter(
-    (oppfolgingdialog) => {
-      return (
-        oppfolgingdialog.virksomhet.virksomhetsnummer === virksomhetsnummer
-      );
-    }
-  )[0];
 };
 
 export const finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging = (
@@ -341,22 +234,4 @@ export const finnOppfolgingsdialogMotpartNavn = (oppfolgingsdialog) => {
 
 export const finnSistEndretAvNavn = (oppfolgingsplan) => {
   return oppfolgingsplan.sistEndretAv.navn;
-};
-
-export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
-  return (
-    delMedNav ||
-    oppfolgingsdialog.godkjenninger.find((godkjenning) => {
-      return godkjenning.delMedNav;
-    })
-  );
-};
-
-export const erArbeidstakerEgenLeder = (oppfolgingsdialog) => {
-  return (
-    oppfolgingsdialog.arbeidstaker &&
-    oppfolgingsdialog.arbeidsgiver.naermesteLeder &&
-    oppfolgingsdialog.arbeidstaker.fnr ===
-      oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr
-  );
 };

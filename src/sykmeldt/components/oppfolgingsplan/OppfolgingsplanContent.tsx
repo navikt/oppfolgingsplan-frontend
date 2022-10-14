@@ -3,7 +3,6 @@ import {
   erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
   finnTidligereOppfolgingsdialoger,
   harTidligereOppfolgingsdialoger,
-  isEmpty,
 } from "@/common/utils/oppfolgingsdialogUtils";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
@@ -45,7 +44,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
           )}
         />
 
-        {!isEmpty(oppfolgingsplaner) &&
+        {oppfolgingsplaner &&
           harTidligereOppfolgingsdialoger(oppfolgingsplaner) && (
             <OppfolgingsdialogerUtenAktivSykmelding
               oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsdialoger(
