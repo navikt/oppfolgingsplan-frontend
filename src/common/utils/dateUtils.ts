@@ -6,7 +6,7 @@ export const erGyldigDatoIFortiden = (dato: string) => {
   return oppgittDato.getTime() < dagensDatoStart.getTime();
 };
 
-export const toDateMedMaanedNavn = (dato: string | null) => {
+export const toDateMedMaanedNavn = (dato?: string | null) => {
   const nyDato = new Date(dato!!);
   const dag = nyDato.getDate();
   const maaned = maanedListe[nyDato.getMonth()];

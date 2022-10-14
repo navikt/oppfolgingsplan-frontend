@@ -7,9 +7,9 @@ export const virksomhetSchema = object({
 });
 
 export const gyldighetstidspunktSchema = object({
-  fom: string().nullable(),
-  tom: string().nullable(),
-  evalueres: string().nullable(),
+  fom: string().nullish(),
+  tom: string().nullish(),
+  evalueres: string().nullish(),
 });
 
 export const evalueringSchema = object({
