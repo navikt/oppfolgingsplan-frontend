@@ -5,7 +5,7 @@ import {
   PlussOransje,
   VarseltrekantImage,
 } from "@/common/images/imageComponents";
-import { KanGjennomforesType } from "./ArbeidsoppgaverPanel";
+import { KanGjennomforesType } from "./ArbeidsoppgaveList";
 import { Heading, Detail, Label, BodyLong } from "@navikt/ds-react";
 import { texts } from "@/common/components/oversikt/texts";
 import { Card } from "@/common/components/card/Card";
@@ -56,22 +56,22 @@ export const ArbeidsoppgaveCards = ({
               {(arbeidsoppgave?.gjennomfoering?.paaAnnetSted ||
                 arbeidsoppgave?.gjennomfoering?.medMerTid) && (
                 <div>
-                  <Label>{texts.arbeidsoppgaverPanel.labels.hvaSkalTil}</Label>
+                  <Label>{texts.arbeidsoppgaveList.labels.hvaSkalTil}</Label>
                   <ul>
                     {arbeidsoppgave?.gjennomfoering?.paaAnnetSted && (
-                      <li>{texts.arbeidsoppgaverPanel.labels.sted}</li>
+                      <li>{texts.arbeidsoppgaveList.labels.sted}</li>
                     )}
                     {arbeidsoppgave?.gjennomfoering?.medMerTid && (
-                      <li>{texts.arbeidsoppgaverPanel.labels.tid}</li>
+                      <li>{texts.arbeidsoppgaveList.labels.tid}</li>
                     )}
                     {arbeidsoppgave?.gjennomfoering?.medHjelp && (
-                      <li>{texts.arbeidsoppgaverPanel.labels.hjelp}</li>
+                      <li>{texts.arbeidsoppgaveList.labels.hjelp}</li>
                     )}
                   </ul>
                   {arbeidsoppgave?.gjennomfoering?.kanBeskrivelse && (
                     <div>
                       <Label>
-                        {texts.arbeidsoppgaverPanel.labels.beskrivelse}
+                        {texts.arbeidsoppgaveList.labels.beskrivelse}
                       </Label>
                       <BodyLong spacing={true}>
                         {arbeidsoppgave?.gjennomfoering?.kanBeskrivelse}
@@ -85,13 +85,13 @@ export const ArbeidsoppgaveCards = ({
           {type === "KAN_IKKE" &&
             arbeidsoppgave?.gjennomfoering?.kanIkkeBeskrivelse && (
               <div>
-                <Label>{texts.arbeidsoppgaverPanel.labels.hvaStarIVeien}</Label>
+                <Label>{texts.arbeidsoppgaveList.labels.hvaStarIVeien}</Label>
                 <BodyLong spacing={true}>
                   {arbeidsoppgave?.gjennomfoering?.kanIkkeBeskrivelse}
                 </BodyLong>
               </div>
             )}
-          <Detail>{`${texts.arbeidsoppgaverPanel.labels.lagtTilAv} ${arbeidsoppgave.opprettetAv.navn}`}</Detail>
+          <Detail>{`${texts.arbeidsoppgaveList.labels.lagtTilAv} ${arbeidsoppgave.opprettetAv.navn}`}</Detail>
         </Card>
       ))}
     </div>

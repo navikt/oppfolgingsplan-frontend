@@ -1,5 +1,10 @@
 export const texts = {
-  sykmeldtInfoPanel: {
+  oppfolgingsplanOversikt: {
+    title: "Oppfølgingsplan",
+    mellom: "mellom",
+    og: "og",
+  },
+  sykmeldtInfo: {
     title: "Den sykmeldtes kontaktinformasjon",
     labels: {
       name: "Navn:",
@@ -8,7 +13,7 @@ export const texts = {
       email: "Epost:",
     },
   },
-  arbeidsgiverInfoPanel: {
+  arbeidsgiverInfo: {
     title: "Arbeidsgivers kontaktinformasjon",
     labels: {
       virksomhetsnavn: "Bedriftens navn:",
@@ -21,13 +26,13 @@ export const texts = {
       },
     },
   },
-  arbeidsoppgaverPanel: {
+  arbeidsoppgaveList: {
     title: "Arbeidsoppgaver",
-    cardTitles: {
-      kan: "Arbeidsoppgaver som kan gjøres",
-      tilrettelegging: "Arbeidsoppgaver som kan gjøres med tilrettelegging",
-      kanIkke: "Arbeidsoppgaver som ikke kan gjøres",
-      ikkeVurdert: "Arbeidsoppgaver som ikke er blitt vurdert",
+    cards: {
+      kan: "ArbeidsoppgaveList som kan gjøres",
+      tilrettelegging: "ArbeidsoppgaveList som kan gjøres med tilrettelegging",
+      kanIkke: "ArbeidsoppgaveList som ikke kan gjøres",
+      ikkeVurdert: "ArbeidsoppgaveList som ikke er blitt vurdert",
     },
     labels: {
       hvaSkalTil: "Hva skal til for å gjennomføre oppgaven?",

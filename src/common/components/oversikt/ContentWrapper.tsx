@@ -9,6 +9,6 @@ const StyledWrapper = styled.div`
   margin: 3rem 0;
 `;
 
-export const PanelWrapper = ({ children }: Props) => {
+export const ContentWrapper = ({ children }: Props) => {
   return <StyledWrapper>{children}</StyledWrapper>;
 };

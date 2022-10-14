@@ -1,4 +1,4 @@
-import { PanelWrapper } from "../PanelWrapper";
+import { ContentWrapper } from "../ContentWrapper";
 import {
   Arbeidsoppgave,
   Oppfolgingsplan,
@@ -18,7 +18,7 @@ interface Props {
   oppfolgingsplan: Oppfolgingsplan;
 }
 
-export const ArbeidsoppgaverPanel = ({ oppfolgingsplan }: Props) => {
+export const ArbeidsoppgaveList = ({ oppfolgingsplan }: Props) => {
   const arbeidsoppgaver = sorterArbeidsoppgaverEtterOpprettet(
     oppfolgingsplan?.arbeidsoppgaveListe
   );
@@ -41,32 +41,32 @@ export const ArbeidsoppgaverPanel = ({ oppfolgingsplan }: Props) => {
   );
 
   return (
-    <PanelWrapper>
+    <ContentWrapper>
       <Heading level="3" size="medium">
-        {texts.arbeidsoppgaverPanel.title}
+        {texts.arbeidsoppgaveList.title}
       </Heading>
       {arbeidsoppgaverKanGjennomfoeres.length && (
         <ArbeidsoppgaveCards
           arbeidsoppgaver={arbeidsoppgaverKanGjennomfoeres}
           type={"KAN"}
-          title={texts.arbeidsoppgaverPanel.cardTitles.kan}
+          title={texts.arbeidsoppgaveList.cards.kan}
         />
       )}
       <ArbeidsoppgaveCards
         arbeidsoppgaver={arbeidsoppgaverMedTilrettelegging}
         type={"TILRETTELEGGING"}
-        title={texts.arbeidsoppgaverPanel.cardTitles.tilrettelegging}
+        title={texts.arbeidsoppgaveList.cards.tilrettelegging}
       />
       <ArbeidsoppgaveCards
         arbeidsoppgaver={arbeidsoppgaverKanIkkeGjennomfoeres}
         type={"KAN_IKKE"}
-        title={texts.arbeidsoppgaverPanel.cardTitles.kanIkke}
+        title={texts.arbeidsoppgaveList.cards.kanIkke}
       />
       <ArbeidsoppgaveCards
         arbeidsoppgaver={arbeidsoppgaverIkkeVurdert}
         type={"IKKE_VURDERT"}
-        title={texts.arbeidsoppgaverPanel.cardTitles.ikkeVurdert}
+        title={texts.arbeidsoppgaveList.cards.ikkeVurdert}
       />
-    </PanelWrapper>
+    </ContentWrapper>
   );
 };

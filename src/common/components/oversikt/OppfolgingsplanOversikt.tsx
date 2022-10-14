@@ -1,7 +1,10 @@
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { SykmeldtInfoPanel } from "@/common/components/oversikt/SykmeldtInfoPanel";
-import { ArbeidsgiverInfoPanel } from "./ArbeidsgiverInfoPanel";
-import { ArbeidsoppgaverPanel } from "./arbeidsoppgaver/ArbeidsoppgaverPanel";
+import { ArbeidstakerInfo } from "@/common/components/oversikt/ArbeidstakerInfo";
+import { ArbeidsgiverInfo } from "./ArbeidsgiverInfo";
+import { ArbeidsoppgaveList } from "./arbeidsoppgaver/ArbeidsoppgaveList";
+import { BodyShort, Heading } from "@navikt/ds-react";
+import { texts } from "@/common/components/oversikt/texts";
+import { TiltakList } from "@/common/components/oversikt/tiltak/TiltakList";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -12,19 +15,26 @@ export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
     return null;
   }
 
+  const atNavn = oppfolgingsplan?.arbeidstaker.navn;
+  const agNavn = oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn;
+
   return (
     <div>
-      <h1>Oppfølgingsplan</h1>
-      <p>{`Mellom ${oppfolgingsplan?.arbeidstaker.navn ?? ""} og ${
-        oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn ?? ""
-      }`}</p>
-
-      <SykmeldtInfoPanel arbeidstaker={oppfolgingsplan?.arbeidstaker} />
-      <ArbeidsgiverInfoPanel
+      <Heading level="2" size="large">
+        {texts.oppfolgingsplanOversikt.title}
+      </Heading>
+      {atNavn && agNavn && (
+        <BodyShort>
+          {`${texts.oppfolgingsplanOversikt.mellom} ${atNavn} ${texts.oppfolgingsplanOversikt.og} ${agNavn}`}
+        </BodyShort>
+      )}
+      <ArbeidstakerInfo arbeidstaker={oppfolgingsplan?.arbeidstaker} />
+      <ArbeidsgiverInfo
         narmesteLeder={oppfolgingsplan?.arbeidsgiver?.naermesteLeder}
         virksomhet={oppfolgingsplan?.virksomhet}
       />
-      <ArbeidsoppgaverPanel oppfolgingsplan={oppfolgingsplan} />
+      <ArbeidsoppgaveList oppfolgingsplan={oppfolgingsplan} />
+      <TiltakList />
     </div>
   );
 };

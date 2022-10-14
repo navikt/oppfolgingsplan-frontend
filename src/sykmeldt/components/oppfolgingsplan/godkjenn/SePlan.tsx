@@ -1,4 +1,4 @@
-import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
+import { Button, Modal } from "@navikt/ds-react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
@@ -22,7 +22,7 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
       </Button>
       <Modal
         open={open}
-        aria-label="Modal demo"
+        aria-label="Oppfolgingsplan oversikt"
         onClose={() => setOpen((x) => !x)}
         aria-labelledby="modal-heading"
       >
