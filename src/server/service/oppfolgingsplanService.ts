@@ -71,7 +71,7 @@ export async function getArbeidsforholdSM(
 export async function getOppfolgingsplanerSM(accessToken: string) {
   return array(oppfolgingsplanSchema).safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/arbeidstaker/oppfolgingsplaner`,
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
       {
         accessToken,
       }
