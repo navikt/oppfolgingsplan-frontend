@@ -1,0 +1,1 @@
+export const DS_COLOR_FEEDBACK_WARNING_ICON = "#D47B00";
