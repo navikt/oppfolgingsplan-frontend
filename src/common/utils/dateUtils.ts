@@ -24,57 +24,6 @@ export const restdatoTildato = (dato: string) => {
   return datum.split("-").reverse().join(".");
 };
 
-const parsedato = (dato: string) => {
-  const datoSplit = dato.split(".");
-  let ar = datoSplit[2];
-  if (ar.length === 2) {
-    ar = `20${ar}`;
-  }
-  return `${ar}-${datoSplit[1]}-${datoSplit[0]}`;
-};
-
-export const fraInputdatoTilJSDato = (inputDato: string) => {
-  const d = parsedato(inputDato);
-  return new Date(d);
-};
-
-export const sluttDatoSenereEnnStartDato = (start: string, slutt: string) => {
-  const startDato = fraInputdatoTilJSDato(start);
-  const sluttDato = fraInputdatoTilJSDato(slutt);
-  return startDato.getTime() < sluttDato.getTime();
-};
-
-export const toDate = (dato: string) => {
-  if (typeof dato === "undefined" || dato === null) {
-    return null;
-  } else if (dato.includes("T") && !dato.includes("Z")) {
-    return new Date(`${dato}Z`);
-  }
-  return new Date(dato);
-};
-
-export const toDatePrettyPrint = (dato: string) => {
-  if (typeof dato === "undefined" || dato === null) {
-    return null;
-  }
-
-  const _dato = toDate(dato);
-
-  if (!_dato) return "";
-
-  const days =
-    _dato.getUTCDate() < 10
-      ? `0${_dato.getUTCDate()}`
-      : `${_dato.getUTCDate()}`;
-  const months =
-    _dato.getUTCMonth() + 1 < 10
-      ? `0${_dato.getUTCMonth() + 1}`
-      : `${_dato.getUTCMonth() + 1}`;
-  const years = _dato.getUTCFullYear();
-
-  return `${days}.${months}.${years}`;
-};
-
 export function createDateMonthsFromNow(months: number) {
   const date = new Date();
   date.setMonth(date.getMonth() + months);
