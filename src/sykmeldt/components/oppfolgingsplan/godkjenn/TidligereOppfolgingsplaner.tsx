@@ -1,8 +1,7 @@
 import { Accordion } from "@navikt/ds-react";
 import { Avbruttplan } from "../../../../schema/oppfolgingsplanSchema";
-import Link from "next/link";
 import { restdatoTildato } from "@/common/utils/dateUtils";
-import { useLandingUrl } from "@/common/hooks/routeHooks";
+import { useApiBasePath } from "@/common/hooks/routeHooks";
 import styled from "styled-components";
 
 interface Props {
@@ -16,7 +15,7 @@ const Container = styled.div`
 export const TidligereOppfolgingsplaner = ({
   avbruttOppfolgingsplaner,
 }: Props) => {
-  const landingPage = useLandingUrl();
+  const apiBasePath = useApiBasePath();
 
   return (
     <Container>
@@ -28,9 +27,13 @@ export const TidligereOppfolgingsplaner = ({
           <Accordion.Content>
             {avbruttOppfolgingsplaner.map((plan: Avbruttplan, idx: number) => (
               <div key={`avbrutt-plan-${idx}`}>
-                <Link href={`${landingPage}/${plan.id}/arbeidsoppgaver`}>
+                <a
+                  href={`${apiBasePath}/oppfolgingsplaner/${plan.id}/pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {`Oppfølgingsplan endret ${restdatoTildato(plan.tidspunkt)}`}
-                </Link>
+                </a>
               </div>
             ))}
           </Accordion.Content>
