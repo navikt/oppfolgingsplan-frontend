@@ -4,13 +4,11 @@ import {
   OppfolgingsplanPageSM,
   Page,
 } from "@/common/components/wrappers/OppfolgingsplanPageSM";
-import { useOppfolgingsplanRouteId } from "@/common/hooks/routeHooks";
-import { useOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { OppfolgingsplanOversikt } from "@/common/components/oversikt/OppfolgingsplanOversikt";
 
 const Seplanen: NextPage = () => {
-  const oppfolgingsdialogId = useOppfolgingsplanRouteId();
-  const aktivPlan = useOppfolgingsplanSM(oppfolgingsdialogId);
+  const aktivPlan = useAktivPlanSM();
 
   return (
     <OppfolgingsplanPageSM page={Page.SEPLANEN}>
