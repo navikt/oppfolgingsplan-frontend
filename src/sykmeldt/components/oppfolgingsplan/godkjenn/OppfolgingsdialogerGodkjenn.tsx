@@ -1,15 +1,12 @@
-import { Button, Accordion, Checkbox } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import { GodkjennPlanTidspunkt } from "./GodkjennPlanTidspunkt";
-import {
-  Avbruttplan,
-  Oppfolgingsplan,
-} from "../../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import styled from "styled-components";
 import Link from "next/link";
 import { useLandingUrl } from "@/common/hooks/routeHooks";
-import { restdatoTildato } from "@/common/utils/dateUtils";
 import { TidligereOppfolgingsplaner } from "./TidligereOppfolgingsplaner";
 import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
+import { SePlan } from "./SePlan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -25,14 +22,14 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
   return (
     <Container>
       <p>
-        Heidi Pettersen har sendt deg en ny oppfølgingsplan for godkjenning.
+        {`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
       </p>
       <GodkjennPlanTidspunkt
         avvisDialog={() => {}}
         oppfolgingsdialog={oppfolgingsplan}
       />
       <div>
-        <Button variant="tertiary">Se plan</Button>
+        <SePlan oppfolgingsplan={oppfolgingsplan} />
         <Button variant="tertiary">Gjør endringer</Button>
       </div>
       <TidligereOppfolgingsplaner

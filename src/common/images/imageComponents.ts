@@ -26,6 +26,7 @@ import OppfolgingsdialogIkkeAktivSykmeldingImage from "../../../public/img/svg/o
 import OppfolgingsdialogIkkeTilgangImage from "../../../public/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg";
 import OppfolgingsdialogIngenlederImage from "../../../public/img/svg/oppfolgingsdialog-ingenleder.svg";
 import StjerneImage from "../../../public/img/svg/stjerne.svg";
+import PlussOransje from "../../../public/img/svg/pluss-oransje.svg";
 
 export {
   AdvarselImage,
@@ -56,4 +57,5 @@ export {
   OppfolgingsdialogIngenlederImage,
   OppfolgingsdialogUnderArbeidImage,
   StjerneImage,
+  PlussOransje,
 };

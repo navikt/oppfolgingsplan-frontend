@@ -14,3 +14,11 @@ export const hentAktoerNavnInitialer = (aktoerNavn: string) => {
   }
   return initialer;
 };
+
+export const capitalizeFirstLetter = (val: string) => {
+  return val.charAt(0).toUpperCase() + val.slice(1);
+};
+
+export const addSpaceAfterEverySixthCharacter = (value: string): string => {
+  return value.replace(/(.{6})/g, "$1 ");
+};
