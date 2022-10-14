@@ -6,9 +6,9 @@ import {
 } from "../../../schema/oppfolgingsplanSchema";
 import { useSykmeldingerSM } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
-  erOppfolgingsdialogKnyttetTilGyldigSykmelding,
-  erOppfolgingsdialogTidligere,
-} from "@/common/utils/oppfolgingsdialogUtils";
+  erOppfolgingsplanKnyttetTilGyldigSykmelding,
+  erOppfolgingsplanTidligere,
+} from "@/common/utils/oppfolgingplanUtils";
 import { NavigationButtons } from "@/common/components/buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "@/common/components/infoboks/IkkeTilgangTilPlanInfoBoks";
 import Side from "@/common/components/wrappers/Side";
@@ -73,8 +73,8 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&
     sykmeldinger.data &&
-    (erOppfolgingsdialogTidligere(aktivPlan) ||
-      erOppfolgingsdialogKnyttetTilGyldigSykmelding(
+    (erOppfolgingsplanTidligere(aktivPlan) ||
+      erOppfolgingsplanKnyttetTilGyldigSykmelding(
         aktivPlan,
         sykmeldinger.data
       ));

@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
-  finnTidligereOppfolgingsdialoger,
-  harTidligereOppfolgingsdialoger,
-} from "@/common/utils/oppfolgingsdialogUtils";
+  erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere,
+  finnTidligereOppfolgingsplaner,
+  harTidligereOppfolgingsplaner,
+} from "@/common/utils/oppfolgingplanUtils";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
@@ -14,7 +14,7 @@ import {
 import { IngenLedereInfoBoks } from "@/common/components/infoboks/IngenLedereInfoBoks";
 import OppfolgingsdialogerVisning from "./OppfolgingsdialogerVisning";
 import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
-import OppfolgingsdialogUtenGyldigSykmelding from "./OppfolgingsdialogUtenGyldigSykmelding";
+import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -28,7 +28,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
     .map((plan) => plan.arbeidsgiver!!.naermesteLeder!!);
 
   if (
-    erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(
+    erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
       narmesteledere
@@ -38,16 +38,16 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
   } else if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
     return (
       <div>
-        <OppfolgingsdialogUtenGyldigSykmelding
+        <OppfolgingsplanUtenGyldigSykmelding
           sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(
             sykmeldinger
           )}
         />
 
         {oppfolgingsplaner &&
-          harTidligereOppfolgingsdialoger(oppfolgingsplaner) && (
+          harTidligereOppfolgingsplaner(oppfolgingsplaner) && (
             <OppfolgingsdialogerUtenAktivSykmelding
-              oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsdialoger(
+              oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsplaner(
                 oppfolgingsplaner
               )}
             />

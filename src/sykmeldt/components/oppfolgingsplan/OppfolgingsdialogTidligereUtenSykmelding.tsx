@@ -1,5 +1,4 @@
 import React from "react";
-import { finnOppfolgingsdialogMotpartNavn } from "@/common/utils/oppfolgingsdialogUtils";
 import { hentStatusUtenAktivSykmelding } from "@/common/utils/teaserUtils";
 import getContextRoot from "@/common/utils/getContextRoot";
 import { BodyLong, Heading, LinkPanel } from "@navikt/ds-react";
@@ -28,7 +27,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
       <Image alt="" src={PlanIkkeAktivSykmeldingImage} />
       <div>
         <Heading size={"medium"} level={"3"}>
-          {finnOppfolgingsdialogMotpartNavn(oppfolgingsplanUtenAktivSykmelding)}
+          {oppfolgingsplanUtenAktivSykmelding.virksomhet?.navn}
         </Heading>
         <BodyLong>{planStatus.tekst}</BodyLong>
       </div>

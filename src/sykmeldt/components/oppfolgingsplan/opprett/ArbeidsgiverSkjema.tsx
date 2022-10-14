@@ -1,10 +1,10 @@
 import React from "react";
 import getContextRoot from "@/common/utils/getContextRoot";
 import {
-  erAktivOppfolgingsdialogOpprettetMedArbeidsgiver,
-  erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver,
-  hentAktivOppfolgingsdialogOpprettetMedArbeidsgiver,
-} from "@/common/utils/oppfolgingsdialogUtils";
+  erAktivOppfolgingsplanOpprettetMedArbeidsgiver,
+  erOppfolgingsplanOpprettbarMedMinstEnArbeidsgiver,
+  hentAktivOppfolgingsplanOpprettetMedArbeidsgiver,
+} from "@/common/utils/oppfolgingplanUtils";
 import { VarseltrekantImage } from "@/common/images/imageComponents";
 import { Button } from "@navikt/ds-react";
 import Link from "next/link";
@@ -26,8 +26,6 @@ const texts = {
   },
 };
 
-const OPPFOLGINGSKJEMANAVN = "OPPRETT_DIALOG";
-
 interface ArbeidsgiverUndertekstProps {
   oppfolgingsplaner: Oppfolgingsplan[];
   arbeidsgiver: ArbeidsgivereForGyldigeSykmeldinger;
@@ -38,16 +36,15 @@ export const VelgArbeidsgiverUndertekst = ({
   arbeidsgiver,
 }: ArbeidsgiverUndertekstProps) => {
   if (
-    erAktivOppfolgingsdialogOpprettetMedArbeidsgiver(
+    erAktivOppfolgingsplanOpprettetMedArbeidsgiver(
       oppfolgingsplaner,
       arbeidsgiver.virksomhetsnummer
     )
   ) {
-    const oppfolgingsdialog =
-      hentAktivOppfolgingsdialogOpprettetMedArbeidsgiver(
-        oppfolgingsplaner,
-        arbeidsgiver.virksomhetsnummer
-      );
+    const oppfolgingsdialog = hentAktivOppfolgingsplanOpprettetMedArbeidsgiver(
+      oppfolgingsplaner,
+      arbeidsgiver.virksomhetsnummer
+    );
     return (
       <div>
         <span>{texts.velgArbeidsgiverUndertekst.alreadyCreatedPlan}</span>
@@ -129,7 +126,7 @@ export const ArbeidsgiverSkjema = ({
           <Button
             variant={"primary"}
             disabled={
-              !erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver(
+              !erOppfolgingsplanOpprettbarMedMinstEnArbeidsgiver(
                 oppfolgingsplaner,
                 arbeidsgivere
               )

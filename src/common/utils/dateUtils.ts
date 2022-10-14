@@ -52,3 +52,7 @@ export const getFullDateFormat = (date: string | number | Date) => {
   };
   return dateObject.toLocaleString("nb-NO", options);
 };
+
+export const getTime = (date?: string | null): number => {
+  return date ? new Date(date).getTime() : 0;
+};

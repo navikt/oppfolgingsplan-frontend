@@ -3,10 +3,9 @@ import NextLink from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import {
-  finnOppfolgingsdialogMotpartNavn,
   inneholderGodkjenninger,
   inneholderGodkjenningerAvArbeidstaker,
-} from "@/common/utils/oppfolgingsdialogUtils";
+} from "@/common/utils/oppfolgingplanUtils";
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
 import { LinkPanel } from "@navikt/ds-react";
 import { useOppfolgingsplanUrl } from "@/common/hooks/routeHooks";
@@ -84,7 +83,7 @@ const OppfolgingsdialogTeaser = ({
                 className="js-title"
                 id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}
               >
-                <span>{finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}</span>
+                <span>{oppfolgingsplan.virksomhet?.navn}</span>
               </StyledTitle>
             </header>
             {pendingApproval && (

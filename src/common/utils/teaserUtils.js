@@ -1,11 +1,9 @@
 import { STATUS } from "@/common/konstanter";
-import { finnSistEndretAvNavn } from "./oppfolgingsdialogUtils";
 import { toDateMedMaanedNavn } from "./dateUtils";
 import {
-  PlanGodkjentImage,
-  PlanAvbruttImage,
-  OppfolgingsdialogTomImage,
   OppfolgingsdialogUnderArbeidImage,
+  PlanAvbruttImage,
+  PlanGodkjentImage,
   PlanIkkeAktivSykmeldingImage,
 } from "@/common/images/imageComponents";
 
@@ -48,7 +46,7 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
     case STATUS.UNDER_ARBEID:
       status.tekst = textStatusUnderArbeid(
         toDateMedMaanedNavn(oppfolgingsdialog.sistEndretDato),
-        finnSistEndretAvNavn(oppfolgingsdialog)
+        oppfolgingsdialog.sistEndretAv.navn
       );
       status.img = OppfolgingsdialogUnderArbeidImage;
       break;

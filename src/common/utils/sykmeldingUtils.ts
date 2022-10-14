@@ -1,4 +1,4 @@
-import { erSykmeldingGyldigForOppfolgingMedGrensedato } from "./oppfolgingsdialogUtils";
+import { erSykmeldingGyldigForOppfolgingMedGrensedato } from "./oppfolgingplanUtils";
 import { Sykmelding } from "../../schema/sykmeldingSchema";
 import { NarmesteLeder } from "../../schema/narmestelederSchema";
 

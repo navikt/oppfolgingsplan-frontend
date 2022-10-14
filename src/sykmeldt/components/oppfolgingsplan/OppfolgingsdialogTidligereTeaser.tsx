@@ -1,5 +1,4 @@
 import React from "react";
-import { finnOppfolgingsdialogMotpartNavn } from "@/common/utils/oppfolgingsdialogUtils";
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
 import { LinkPanel } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
@@ -32,7 +31,7 @@ const OppfolgingsdialogTidligereTeaser = ({
               id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}
             >
               <span className="inngangspanel__tittel">
-                {finnOppfolgingsdialogMotpartNavn(oppfolgingsplan)}
+                {oppfolgingsplan.virksomhet?.navn}
               </span>
             </h3>
           </header>

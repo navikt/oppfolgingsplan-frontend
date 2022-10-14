@@ -1,5 +1,5 @@
 import React from "react";
-import { erOppfolgingsplanOpprettbarDirekte } from "@/common/utils/oppfolgingsdialogUtils";
+import { erOppfolgingsplanOpprettbarDirekte } from "@/common/utils/oppfolgingplanUtils";
 import { OppfolgingsdialogTomImage } from "@/common/images/imageComponents";
 import { BodyLong, Button, Heading, Panel } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  finnAktiveOppfolgingsdialoger,
-  finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
-  finnTidligereOppfolgingsdialoger,
-  harTidligereOppfolgingsdialoger,
-} from "@/common/utils/oppfolgingsdialogUtils";
+  finnAktiveOppfolgingsplaner,
+  finnGodkjenteplanerAvbruttAvMotpartSidenSistInnlogging,
+  finnTidligereOppfolgingsplaner,
+  harTidligereOppfolgingsplaner,
+} from "@/common/utils/oppfolgingplanUtils";
 import getContextRoot from "@/common/utils/getContextRoot";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
 import { Alert, Button } from "@navikt/ds-react";
@@ -45,7 +45,7 @@ const OppfolgingsdialogerVisning = ({
     useState(false);
 
   const aktiveOppfolgingsplaner: Oppfolgingsplan[] =
-    finnAktiveOppfolgingsdialoger(oppfolgingsplaner, sykmeldinger);
+    finnAktiveOppfolgingsplaner(oppfolgingsplaner, sykmeldinger);
 
   const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(
     sykmeldinger,
@@ -53,10 +53,11 @@ const OppfolgingsdialogerVisning = ({
   );
 
   const dialogerAvbruttAvMotpartSidenSistInnlogging =
-    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsplaner);
+    finnGodkjenteplanerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsplaner);
 
   return (
     <div>
+      {/*TODO se på dette greiene her*/}
       {dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && (
         <Alert variant={"info"}>
           `$
@@ -108,11 +109,9 @@ const OppfolgingsdialogerVisning = ({
           />
         </div>
       )}
-      {harTidligereOppfolgingsdialoger(oppfolgingsplaner) && (
+      {harTidligereOppfolgingsplaner(oppfolgingsplaner) && (
         <OppfolgingsdialogTeasere
-          oppfolgingsplaner={finnTidligereOppfolgingsdialoger(
-            oppfolgingsplaner
-          )}
+          oppfolgingsplaner={finnTidligereOppfolgingsplaner(oppfolgingsplaner)}
           harTidligerOppfolgingsdialoger
           tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
           id="OppfolgingsdialogTeasereAT"
