@@ -10,8 +10,7 @@ import React, {useState} from "react";
 import {Arbeidsoppgave} from "../../../schema/oppfolgingsplanSchema";
 
 export const NyArbeidsoppgave = () => {
-    const oppfolgingsplanId = useOppfolgingsplanRouteId();
-    const lagreOppgaveMutation = useLagreArbeidsoppgaveSM();
+    const lagreOppgave = useLagreArbeidsoppgaveSM();
     const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
 
     const nyArbeidsoppgaveInformasjon = (data: OppgaveFormValues): Partial<Arbeidsoppgave> => {
@@ -60,10 +59,7 @@ export const NyArbeidsoppgave = () => {
             <ArbeidsoppgaveFormHeading/>
             <ArbeidsoppgaveForm
                 onSubmit={(data) => {
-                    lagreOppgaveMutation.mutate({
-                        oppfolgingsplanId: oppfolgingsplanId,
-                        oppgave: nyArbeidsoppgaveInformasjon(data),
-                    });
+                    lagreOppgave(nyArbeidsoppgaveInformasjon(data));
                     setLeggerTilOppgave(false);
                 }}
                 onCancel={() => setLeggerTilOppgave(false)}
