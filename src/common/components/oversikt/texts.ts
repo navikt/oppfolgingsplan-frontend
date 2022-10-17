@@ -29,10 +29,10 @@ export const texts = {
   arbeidsoppgaveList: {
     title: "Arbeidsoppgaver",
     cards: {
-      kan: "ArbeidsoppgaveList som kan gjøres",
-      tilrettelegging: "ArbeidsoppgaveList som kan gjøres med tilrettelegging",
-      kanIkke: "ArbeidsoppgaveList som ikke kan gjøres",
-      ikkeVurdert: "ArbeidsoppgaveList som ikke er blitt vurdert",
+      kan: "Kan gjennomføres som normalt",
+      tilrettelegging: "Kan gjennomføres med tilrettelegging",
+      kanIkke: "Kan ikke gjennomføres",
+      ikkeVurdert: "Ikke vurdert",
     },
     labels: {
       hvaSkalTil: "Hva skal til for å gjennomføre oppgaven?",

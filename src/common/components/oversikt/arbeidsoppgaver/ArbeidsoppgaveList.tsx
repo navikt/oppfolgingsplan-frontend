@@ -1,72 +1,46 @@
-import { ContentWrapper } from "../ContentWrapper";
-import {
-  Arbeidsoppgave,
-  Oppfolgingsplan,
-} from "../../../../schema/oppfolgingsplanSchema";
-import { ArbeidsoppgaveCards } from "./ArbeidsoppgaveCards";
-import { sorterArbeidsoppgaverEtterOpprettet } from "../../../utils/arbeidsoppgaveUtils";
-import { texts } from "../texts";
-import { Heading } from "@navikt/ds-react";
-
-export type KanGjennomforesType =
-  | "KAN"
-  | "KAN_IKKE"
-  | "TILRETTELEGGING"
-  | "IKKE_VURDERT";
+import {ArbeidsoppgaveCard} from "@/common/components/arbeidsoppgaver/ArbeidsoppgaveCard";
+import {KANGJENNOMFOERES} from "@/common/konstanter";
+import {Heading} from "@navikt/ds-react";
+import {Arbeidsoppgave,} from "../../../../schema/oppfolgingsplanSchema";
+import {ContentWrapper} from "../ContentWrapper";
+import {texts} from "../texts";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+    arbeidsoppgaver: Arbeidsoppgave[];
 }
 
-export const ArbeidsoppgaveList = ({ oppfolgingsplan }: Props) => {
-  const arbeidsoppgaver = sorterArbeidsoppgaverEtterOpprettet(
-    oppfolgingsplan?.arbeidsoppgaveListe
-  );
+export const ArbeidsoppgaveList = ({arbeidsoppgaver}: Props) => {
 
-  console.log(arbeidsoppgaver);
+    const sorterArbeidsoppgaverEtterTypeOgOpprettet = (arbeidsoppgaver: Arbeidsoppgave[]) => {
+        const order = [KANGJENNOMFOERES.KAN, KANGJENNOMFOERES.TILRETTELEGGING, KANGJENNOMFOERES.KAN_IKKE, KANGJENNOMFOERES.IKKE_VURDERT, undefined]
+        return arbeidsoppgaver.sort((a, b) => {
+            if (order.indexOf(b.gjennomfoering?.kanGjennomfoeres!) < order.indexOf(a.gjennomfoering?.kanGjennomfoeres!)) return 1;
+            if (order.indexOf(b.gjennomfoering?.kanGjennomfoeres!) > order.indexOf(a.gjennomfoering?.kanGjennomfoeres!)) return -1;
+            else {
+                return b.arbeidsoppgaveId - a.arbeidsoppgaveId;
+            }
+        });
+    };
 
-  const getFilteredOppgaver = (filter: KanGjennomforesType) =>
-    arbeidsoppgaver.filter(
-      (arbeidsoppgave: Arbeidsoppgave) =>
-        arbeidsoppgave.gjennomfoering &&
-        arbeidsoppgave.gjennomfoering.kanGjennomfoeres === filter
+    const sortedArbeidsoppgaver = sorterArbeidsoppgaverEtterTypeOgOpprettet(
+        arbeidsoppgaver
     );
 
-  const arbeidsoppgaverKanGjennomfoeres = getFilteredOppgaver("KAN");
-  const arbeidsoppgaverMedTilrettelegging =
-    getFilteredOppgaver("TILRETTELEGGING");
-  const arbeidsoppgaverKanIkkeGjennomfoeres = getFilteredOppgaver("KAN_IKKE");
-  const arbeidsoppgaverIkkeVurdert = arbeidsoppgaver.filter(
-    (arbeidsoppgave: Arbeidsoppgave) => !arbeidsoppgave.gjennomfoering
-  );
-
-  return (
-    <ContentWrapper>
-      <Heading level="3" size="medium">
-        {texts.arbeidsoppgaveList.title}
-      </Heading>
-      {arbeidsoppgaverKanGjennomfoeres.length && (
-        <ArbeidsoppgaveCards
-          arbeidsoppgaver={arbeidsoppgaverKanGjennomfoeres}
-          type={"KAN"}
-          title={texts.arbeidsoppgaveList.cards.kan}
-        />
-      )}
-      <ArbeidsoppgaveCards
-        arbeidsoppgaver={arbeidsoppgaverMedTilrettelegging}
-        type={"TILRETTELEGGING"}
-        title={texts.arbeidsoppgaveList.cards.tilrettelegging}
-      />
-      <ArbeidsoppgaveCards
-        arbeidsoppgaver={arbeidsoppgaverKanIkkeGjennomfoeres}
-        type={"KAN_IKKE"}
-        title={texts.arbeidsoppgaveList.cards.kanIkke}
-      />
-      <ArbeidsoppgaveCards
-        arbeidsoppgaver={arbeidsoppgaverIkkeVurdert}
-        type={"IKKE_VURDERT"}
-        title={texts.arbeidsoppgaveList.cards.ikkeVurdert}
-      />
-    </ContentWrapper>
-  );
+    return (
+        <ContentWrapper>
+            <Heading level="3" size="medium">
+                {texts.arbeidsoppgaveList.title}
+            </Heading>
+            {sortedArbeidsoppgaver.length && (
+                <div>
+                    {arbeidsoppgaver.map((arbeidsoppgave: Arbeidsoppgave, idx: number) => (
+                        <ArbeidsoppgaveCard
+                            arbeidsoppgave={arbeidsoppgave}
+                            key={`arbeidsoppgaver-list-${idx}`}
+                        />
+                    ))}
+                </div>
+            )}
+        </ContentWrapper>
+    );
 };
