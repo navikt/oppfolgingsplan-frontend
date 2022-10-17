@@ -1,0 +1,30 @@
+import {CustomAlertWithoutIcon} from "@/common/components/arbeidsoppgaver/CustomAlertWithoutIcon";
+import {texts} from "@/common/components/oversikt/texts";
+import {useAudience} from "@/common/hooks/routeHooks";
+import styled from "styled-components";
+
+interface Props {
+    show: Boolean;
+}
+
+const Space = styled.div`
+  margin-bottom: 1rem;
+`;
+
+export const VurderingFraSykmeldt = ({show}: Props) => {
+
+    const {isAudienceSykmeldt} = useAudience();
+
+    return show ? (
+        <Space>
+            <CustomAlertWithoutIcon>
+                {isAudienceSykmeldt &&
+                    texts.arbeidsoppgaveList.vurdering.giArbeidsgiverVurdering
+                }
+                {!isAudienceSykmeldt &&
+                    texts.arbeidsoppgaveList.vurdering.narSykmeldtHarVurdert
+                }
+            </CustomAlertWithoutIcon>
+        </Space>
+    ) : null;
+}

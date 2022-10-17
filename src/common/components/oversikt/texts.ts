@@ -43,5 +43,14 @@ export const texts = {
       hjelp: "Med hjelp/hjelpemiddel",
       lagtTilAv: "Lagt til av",
     },
+    buttons: {
+      giDinVurdering: "Gi din vurdering",
+      endre: "Endre",
+      slett: "Slett",
+    },
+    vurdering : {
+      giArbeidsgiverVurdering: "Gi arbeidsgiveren din en vurdering på om du kan gjennomføre denne arbeidsoppgaven og hva som kan hjelpe deg",
+      narSykmeldtHarVurdert: "Når den sykmeldte har gjort en vurdering på om denne arbeidsoppgaven kan gjennomføres vil dette bli synlig her.",
+    }
   },
 };

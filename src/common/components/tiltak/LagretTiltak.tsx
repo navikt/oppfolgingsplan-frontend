@@ -3,7 +3,6 @@ import {
   BodyLong,
   BodyShort,
   Button,
-  Detail,
   Heading,
   Label,
   Tag,
@@ -21,6 +20,7 @@ import { useLagreKommentarSM } from "@/common/api/queries/sykmeldt/tiltakQueries
 import { EditerTiltak } from "@/common/components/tiltak/EditerTiltak";
 import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { SpacedPanel } from "@/common/components/wrappers/SpacedPanel";
+import { SpacedDetail } from "@/common/components/SpacedDetail";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -60,10 +60,6 @@ const HeadingWithLabel = styled.div`
 `;
 
 export const SpacedAlert = styled(Alert)`
-  margin-bottom: 1rem;
-`;
-
-export const SpacedDetail = styled(Detail)`
   margin-bottom: 1rem;
 `;
 
