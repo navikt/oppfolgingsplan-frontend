@@ -12,7 +12,10 @@ const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
   .get(
     async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanPdfSM) => {
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", 'inline; filename="brev.pdf"');
+      res.setHeader(
+        "Content-Disposition",
+        'inline; filename="oppfolgingsplan.pdf"'
+      );
       res.end(res.pdf);
     }
   );

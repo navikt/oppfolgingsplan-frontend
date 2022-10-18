@@ -1,4 +1,4 @@
-import { Accordion } from "@navikt/ds-react";
+import { Accordion, Link } from "@navikt/ds-react";
 import { Avbruttplan } from "../../../../schema/oppfolgingsplanSchema";
 import { restdatoTildato } from "@/common/utils/dateUtils";
 import { useApiBasePath } from "@/common/hooks/routeHooks";
@@ -27,13 +27,13 @@ export const TidligereOppfolgingsplaner = ({
           <Accordion.Content>
             {avbruttOppfolgingsplaner.map((plan: Avbruttplan, idx: number) => (
               <div key={`avbrutt-plan-${idx}`}>
-                <a
+                <Link
                   href={`${apiBasePath}/oppfolgingsplaner/${plan.id}/pdf`}
                   target="_blank"
                   rel="noreferrer"
                 >
                   {`Oppfølgingsplan endret ${restdatoTildato(plan.tidspunkt)}`}
-                </a>
+                </Link>
               </div>
             ))}
           </Accordion.Content>
