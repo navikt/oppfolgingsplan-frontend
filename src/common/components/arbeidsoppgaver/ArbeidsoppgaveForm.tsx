@@ -39,12 +39,14 @@ interface Props {
   onCancel(): void;
 
   defaultFormValues?: OppgaveFormValues;
+  navnIsEditable?: Boolean;
 }
 
 export const ArbeidsoppgaveForm = ({
   onSubmit,
   onCancel,
   defaultFormValues,
+  navnIsEditable = true,
 }: Props) => {
   const formFunctions = useForm<OppgaveFormValues>();
   const {
@@ -64,19 +66,21 @@ export const ArbeidsoppgaveForm = ({
     <FormProvider {...formFunctions}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <LightGreyPanel border={true}>
-          <StyledTextarea
-            id="beskrivArbeidsoppgaven"
-            label={"Navn på arbeidsoppgaven (obligatorisk)"}
-            error={errors.navnPaaArbeidsoppgaven?.message}
-            description={"Beskriv arbeidsoppgaven med noen få ord"}
-            maxLength={100}
-            {...register("navnPaaArbeidsoppgaven", {
-              required: "Du må gi et navn på oppgaven",
-              maxLength: 100,
-            })}
-            defaultValue={defaultFormValues?.navnPaaArbeidsoppgaven}
-            value={navnValue}
-          />
+          {navnIsEditable && (
+            <StyledTextarea
+              id="beskrivArbeidsoppgaven"
+              label={"Navn på arbeidsoppgaven (obligatorisk)"}
+              error={errors.navnPaaArbeidsoppgaven?.message}
+              description={"Beskriv arbeidsoppgaven med noen få ord"}
+              maxLength={100}
+              {...register("navnPaaArbeidsoppgaven", {
+                required: "Du må gi et navn på oppgaven",
+                maxLength: 100,
+              })}
+              defaultValue={defaultFormValues?.navnPaaArbeidsoppgaven}
+              value={navnValue}
+            />
+          )}
 
           <Controller
             name="kanGjennomfores"

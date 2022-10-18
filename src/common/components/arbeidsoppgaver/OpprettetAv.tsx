@@ -1,5 +1,5 @@
 import {texts} from "@/common/components/oversikt/texts";
-import {Detail} from "@navikt/ds-react";
+import {SpacedDetail} from "@/common/components/SpacedDetail";
 
 interface Props {
     opprettetAv: string;
@@ -9,6 +9,6 @@ export const OpprettetAv = ({
                                           opprettetAv
                                       }: Props) => {
     return (
-        <Detail>{`${texts.arbeidsoppgaveList.labels.lagtTilAv} ${opprettetAv}`}</Detail>
+        <SpacedDetail>{`${texts.arbeidsoppgaveList.labels.lagtTilAv} ${opprettetAv}`}</SpacedDetail>
     )
 }
