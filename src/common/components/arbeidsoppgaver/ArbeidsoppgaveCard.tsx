@@ -35,6 +35,11 @@ export const ArbeidsoppgaveCard = ({
     const aktoerHarOpprettetElement =
         arbeidstakerFnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
 
+    const EditerArbeidsoppgaveForm = ()  => <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+    const EndreKnapp = () => <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
+    const SlettKnapp = () => <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+    const VurderKnapp = () => <VurderButton show={isAudienceSykmeldt} onClick={() => setEditererArbeidsoppgave(true)}/>
+
     return (
         <>
             {type === KANGJENNOMFOERES.KAN && (
@@ -47,10 +52,10 @@ export const ArbeidsoppgaveCard = ({
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
                     {!readonly &&
                         <>
-                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <EditerArbeidsoppgaveForm/>
                             <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
-                                <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
-                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                                <EndreKnapp/>
+                                <SlettKnapp/>
                             </ArbeidsoppgaveKnapper>
                         </>
                     }
@@ -67,10 +72,10 @@ export const ArbeidsoppgaveCard = ({
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
                     {!readonly &&
                         <>
-                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <EditerArbeidsoppgaveForm/>
                             <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
-                                <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
-                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                                <EndreKnapp/>
+                                <SlettKnapp/>
                             </ArbeidsoppgaveKnapper>
                         </>
                     }
@@ -87,10 +92,10 @@ export const ArbeidsoppgaveCard = ({
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
                     {!readonly &&
                         <>
-                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <EditerArbeidsoppgaveForm/>
                             <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
-                                <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
-                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                                <EndreKnapp/>
+                                <SlettKnapp/>
                             </ArbeidsoppgaveKnapper>
                         </>
                     }
@@ -107,10 +112,10 @@ export const ArbeidsoppgaveCard = ({
                     {!readonly &&
                         <>
                             <VurderingFraSykmeldt/>
-                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <EditerArbeidsoppgaveForm/>
                             <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
-                                <VurderButton show={isAudienceSykmeldt} onClick={() => setEditererArbeidsoppgave(true)}/>
-                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                                <VurderKnapp/>
+                                <SlettKnapp/>
                             </ArbeidsoppgaveKnapper>
                         </>
                     }
