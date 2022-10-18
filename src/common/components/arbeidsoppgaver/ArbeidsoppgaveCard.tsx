@@ -45,12 +45,15 @@ export const ArbeidsoppgaveCard = ({
                     </CardHeader>
                     <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn}/>
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
-
-                    <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
-                    <ArbeidsoppgaveKnapper show={!readonly && !editererArbeidsoppgave}>
-                        <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
-                        <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
-                    </ArbeidsoppgaveKnapper>
+                    {!readonly &&
+                        <>
+                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
+                                <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
+                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                            </ArbeidsoppgaveKnapper>
+                        </>
+                    }
                 </Card>
             )}
             {type === KANGJENNOMFOERES.TILRETTELEGGING && (
@@ -62,12 +65,15 @@ export const ArbeidsoppgaveCard = ({
                     <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn}/>
                     <TilretteleggingsBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering!}/>
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
-
-                    <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
-                    <ArbeidsoppgaveKnapper show={!readonly && !editererArbeidsoppgave}>
-                        <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
-                        <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
-                    </ArbeidsoppgaveKnapper>
+                    {!readonly &&
+                        <>
+                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
+                                <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
+                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                            </ArbeidsoppgaveKnapper>
+                        </>
+                    }
                 </Card>
             )}
             {type === KANGJENNOMFOERES.KAN_IKKE && (
@@ -79,12 +85,15 @@ export const ArbeidsoppgaveCard = ({
                     <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn}/>
                     <KanIkkeBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering!}/>
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
-
-                    <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
-                    <ArbeidsoppgaveKnapper show={!readonly && !editererArbeidsoppgave}>
-                        <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
-                        <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
-                    </ArbeidsoppgaveKnapper>
+                    {!readonly &&
+                        <>
+                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
+                                <EndreButton show={aktoerHarOpprettetElement} onClick={() => setEditererArbeidsoppgave(true)}/>
+                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                            </ArbeidsoppgaveKnapper>
+                        </>
+                    }
                 </Card>
             )}
             {type === KANGJENNOMFOERES.IKKE_VURDERT || !type && (
@@ -95,14 +104,16 @@ export const ArbeidsoppgaveCard = ({
                     </CardHeader>
                     <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn}/>
                     <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn}/>
-
-                    <VurderingFraSykmeldt show={!readonly}/>
-                    <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
-                    <ArbeidsoppgaveKnapper show={!readonly && !editererArbeidsoppgave}>
-                        <VurderButton show={isAudienceSykmeldt} onClick={() => setEditererArbeidsoppgave(true)}/>
-                        <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
-                    </ArbeidsoppgaveKnapper>
-
+                    {!readonly &&
+                        <>
+                            <VurderingFraSykmeldt/>
+                            <EditerArbeidsoppgave show={editererArbeidsoppgave} arbeidsoppgave={arbeidsoppgave} doneEditing={() => setEditererArbeidsoppgave(false)}/>
+                            <ArbeidsoppgaveKnapper show={!editererArbeidsoppgave}>
+                                <VurderButton show={isAudienceSykmeldt} onClick={() => setEditererArbeidsoppgave(true)}/>
+                                <SlettButton show={aktoerHarOpprettetElement} arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}/>
+                            </ArbeidsoppgaveKnapper>
+                        </>
+                    }
                 </Card>
             )}
         </>

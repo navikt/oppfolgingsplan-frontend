@@ -3,19 +3,15 @@ import {texts} from "@/common/components/oversikt/texts";
 import {useAudience} from "@/common/hooks/routeHooks";
 import styled from "styled-components";
 
-interface Props {
-    show: Boolean;
-}
-
 const Space = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const VurderingFraSykmeldt = ({show}: Props) => {
+export const VurderingFraSykmeldt = () => {
 
     const {isAudienceSykmeldt} = useAudience();
 
-    return show ? (
+    return (
         <Space>
             <CustomAlertWithoutIcon>
                 {isAudienceSykmeldt &&
@@ -26,5 +22,5 @@ export const VurderingFraSykmeldt = ({show}: Props) => {
                 }
             </CustomAlertWithoutIcon>
         </Space>
-    ) : null;
+    )
 }
