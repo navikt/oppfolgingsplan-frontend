@@ -1,16 +1,11 @@
-import {ButtonRow} from "@/common/components/wrappers/ButtonRow";
-import {ReactNode} from "react";
+import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
+import { ReactNode } from "react";
 
 interface Props {
-    show: Boolean;
-    children: ReactNode;
+  show: Boolean;
+  children: ReactNode;
 }
 
 export const ArbeidsoppgaveKnapper = ({ show, children }: Props) => {
-
-    return show ? (
-        <ButtonRow>
-            {children}
-        </ButtonRow>
-    ) : null
-}
+  return show ? <ButtonRow>{children}</ButtonRow> : null;
+};
