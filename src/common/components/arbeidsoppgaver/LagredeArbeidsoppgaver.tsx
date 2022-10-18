@@ -17,16 +17,14 @@ export const LagredeArbeidsoppgaver = ({
 
   return (
     <>
-      <div>
-        {arbeidsoppgaver.map((arbeidsoppgave: Arbeidsoppgave, idx: number) => (
-          <ArbeidsoppgaveCard
-            arbeidstakerFnr={arbeidstakerFnr}
-            arbeidsoppgave={arbeidsoppgave}
-            readonly={false}
-            key={`arbeidsoppgaver-list-${idx}`}
-          />
-        ))}
-      </div>
+      {arbeidsoppgaver.map((arbeidsoppgave: Arbeidsoppgave, idx: number) => (
+        <ArbeidsoppgaveCard
+          arbeidstakerFnr={arbeidstakerFnr}
+          arbeidsoppgave={arbeidsoppgave}
+          readonly={false}
+          key={`arbeidsoppgaver-list-${idx}`}
+        />
+      ))}
     </>
   );
 };
