@@ -16,6 +16,7 @@ export const OppfolgingsplanOversikt = ({oppfolgingsplan}: Props) => {
     }
 
     const atNavn = oppfolgingsplan?.arbeidstaker.navn;
+    const atFnr = oppfolgingsplan?.arbeidstaker.fnr
     const agNavn = oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn;
 
     return (
@@ -33,8 +34,8 @@ export const OppfolgingsplanOversikt = ({oppfolgingsplan}: Props) => {
                 narmesteLeder={oppfolgingsplan?.arbeidsgiver?.naermesteLeder}
                 virksomhet={oppfolgingsplan?.virksomhet}
             />
-            {oppfolgingsplan.arbeidsoppgaveListe &&
-                <ArbeidsoppgaveList arbeidsoppgaver={oppfolgingsplan.arbeidsoppgaveListe}/>
+            {oppfolgingsplan.arbeidsoppgaveListe && atFnr &&
+                <ArbeidsoppgaveList arbeidstakerFnr={atFnr} arbeidsoppgaver={oppfolgingsplan.arbeidsoppgaveListe}/>
             }
             <TiltakList/>
         </div>

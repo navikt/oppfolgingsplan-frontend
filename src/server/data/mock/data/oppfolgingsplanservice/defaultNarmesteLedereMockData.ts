@@ -3,7 +3,7 @@ import { NarmesteLeder } from "../../../../../schema/narmestelederSchema";
 export const defaultNarmesteLedereMockData: NarmesteLeder[] = [
   {
     navn: "Albus Dumbledore",
-    fnr: "110110110110",
+    fnr: "11011011011",
     epost: "albus@hogwarts.ac.uk",
     tlf: "110",
     sistInnlogget: null,

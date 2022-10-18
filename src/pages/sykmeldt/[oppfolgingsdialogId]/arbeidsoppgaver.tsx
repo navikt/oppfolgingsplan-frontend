@@ -8,13 +8,16 @@ import React from "react";
 const Arbeidsoppgaver: NextPage = () => {
     const aktivPlan = useAktivPlanSM();
 
+    const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
+    if (!arbeidstakerFnr) return null;
+
     return (
         <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
             {aktivPlan && (
                 <div>
                     <NyArbeidsoppgave/>
                     {aktivPlan.arbeidsoppgaveListe &&
-                        <LagredeArbeidsoppgaver arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}/>
+                        <LagredeArbeidsoppgaver arbeidstakerFnr={arbeidstakerFnr} arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}/>
                     }
                 </div>
             )}

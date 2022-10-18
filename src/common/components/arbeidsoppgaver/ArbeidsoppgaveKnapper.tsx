@@ -6,7 +6,7 @@ interface Props {
     children: ReactNode;
 }
 
-export const Knapperad = ({ show, children }: Props) => {
+export const ArbeidsoppgaveKnapper = ({ show, children }: Props) => {
 
     return show ? (
         <ButtonRow>

@@ -6,10 +6,11 @@ import {ContentWrapper} from "../ContentWrapper";
 import {texts} from "../texts";
 
 interface Props {
+    arbeidstakerFnr: string;
     arbeidsoppgaver: Arbeidsoppgave[];
 }
 
-export const ArbeidsoppgaveList = ({arbeidsoppgaver}: Props) => {
+export const ArbeidsoppgaveList = ({arbeidstakerFnr, arbeidsoppgaver}: Props) => {
 
     const sorterArbeidsoppgaverEtterTypeOgOpprettet = (arbeidsoppgaver: Arbeidsoppgave[]) => {
         const order = [KANGJENNOMFOERES.KAN, KANGJENNOMFOERES.TILRETTELEGGING, KANGJENNOMFOERES.KAN_IKKE, KANGJENNOMFOERES.IKKE_VURDERT, undefined]
@@ -35,7 +36,9 @@ export const ArbeidsoppgaveList = ({arbeidsoppgaver}: Props) => {
                 <div>
                     {arbeidsoppgaver.map((arbeidsoppgave: Arbeidsoppgave, idx: number) => (
                         <ArbeidsoppgaveCard
+                            arbeidstakerFnr={arbeidstakerFnr}
                             arbeidsoppgave={arbeidsoppgave}
+                            readonly={true}
                             key={`arbeidsoppgaver-list-${idx}`}
                         />
                     ))}
