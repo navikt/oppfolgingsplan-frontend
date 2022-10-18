@@ -15,8 +15,6 @@ const Godkjenning: NextPage = () => {
       <OppfolgingsdialogerGodkjenn oppfolgingsplan={aktivPlan!!} />
     </Side>
   );
-
-  // return <OppfolgingsdialogerGodkjenn oppfolgingsplan={aktivPlan!!} />
 };
 
 export default Godkjenning;

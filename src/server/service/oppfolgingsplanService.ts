@@ -179,3 +179,13 @@ export async function saveOppgave(
     }
   );
 }
+
+export async function getPdf(accessToken: string, oppfolgingsplanId: string) {
+  return await get(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/dokument/${oppfolgingsplanId}/ekstern`,
+    {
+      accessToken: accessToken,
+      responseType: "arraybuffer",
+    }
+  );
+}
