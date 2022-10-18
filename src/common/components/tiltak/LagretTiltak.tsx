@@ -11,7 +11,7 @@ import { toDateMedMaanedNavn } from "@/common/utils/dateUtils";
 import { STATUS_TILTAK } from "@/common/konstanter";
 import { Dialog } from "@/common/components/dialog/Dialog";
 import { NyKommentar } from "@/common/components/tiltak/NyKommentar";
-import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
+import { Row } from "@/common/components/wrappers/Row";
 import { DialogDots, Edit } from "@navikt/ds-icons";
 import { SlettTiltakButton } from "@/common/components/tiltak/SlettTiltakButton";
 import React, { ReactElement, useState } from "react";
@@ -156,7 +156,7 @@ export const LagretTiltak = ({ arbeidstakerFnr, tiltak }: Props) => {
       )}
 
       {!displayNyKommentar && !editererTiltak && (
-        <ButtonRow>
+        <Row>
           {aktoerHarOpprettetElement && (
             <Button
               variant={"tertiary"}
@@ -176,7 +176,7 @@ export const LagretTiltak = ({ arbeidstakerFnr, tiltak }: Props) => {
           >
             Kommenter
           </Button>
-        </ButtonRow>
+        </Row>
       )}
     </SpacedPanel>
   );

@@ -13,4 +13,16 @@ export const defaultNarmesteLedereMockData: NarmesteLeder[] = [
     aktivFom: "2018-10-18T12:00:00+02:00",
     aktivTom: null,
   },
+  {
+    navn: "Mester Kreda",
+    fnr: "212110115111",
+    epost: "m@k.no",
+    tlf: "110",
+    sistInnlogget: null,
+    samtykke: null,
+    virksomhetsnummer: "123456789",
+    erAktiv: true,
+    aktivFom: "2018-10-18T12:00:00+02:00",
+    aktivTom: null,
+  },
 ];

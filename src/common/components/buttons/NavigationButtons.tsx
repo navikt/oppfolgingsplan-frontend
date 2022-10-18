@@ -5,7 +5,7 @@ import {
   useOppfolgingsplanBasePath,
 } from "@/common/hooks/routeHooks";
 import Link from "next/link";
-import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
+import { Row } from "@/common/components/wrappers/Row";
 import { Page } from "@/common/components/wrappers/OppfolgingsplanPageSM";
 
 const getPreviousHref = (basePath: string, activeStep: number) => {
@@ -39,7 +39,7 @@ export const NavigationButtons = ({ activeStep }: Props) => {
   const nextPage = getNextHref(basePath, activeStep);
 
   return (
-    <ButtonRow marginTop={"2rem"} marginBottom={"2rem"}>
+    <Row marginTop={"2rem"} marginBottom={"2rem"}>
       {previousPage && (
         <Link href={previousPage} passHref={true}>
           <Button variant={"secondary"}>Forrige steg</Button>
@@ -55,6 +55,6 @@ export const NavigationButtons = ({ activeStep }: Props) => {
       <Link href={landingUrl} passHref={true}>
         <Button variant={"tertiary"}>Fortsett senere</Button>
       </Link>
-    </ButtonRow>
+    </Row>
   );
 };

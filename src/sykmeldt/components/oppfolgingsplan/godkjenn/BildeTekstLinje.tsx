@@ -22,16 +22,15 @@ const ImageContainer = styled.div`
 `;
 
 interface Props {
-  imgAlt: string;
   imgUrl: string;
   tekst: string | React.ReactNode;
 }
 
-export const BildeTekstLinje = ({ imgAlt, imgUrl, tekst }: Props) => {
+export const BildeTekstLinje = ({ imgUrl, tekst }: Props) => {
   return (
     <StyledWrapper>
       <ImageContainer>
-        <Image alt={imgAlt} src={imgUrl} />
+        <Image alt={""} src={imgUrl} />
       </ImageContainer>
       <StyledText>{tekst}</StyledText>
     </StyledWrapper>

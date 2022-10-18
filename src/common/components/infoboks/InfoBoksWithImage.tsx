@@ -30,7 +30,7 @@ export const InfoBoksWithImage = ({
   return (
     <StyledPanel border={true}>
       <PanelContent>
-        <Image src={imageSrc} alt={heading} />
+        <Image src={imageSrc} alt={""} />
         <Heading size={"medium"} level={"2"}>
           {heading}
         </Heading>

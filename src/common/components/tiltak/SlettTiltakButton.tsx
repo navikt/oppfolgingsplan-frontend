@@ -1,7 +1,7 @@
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import { Delete } from "@navikt/ds-icons";
 import React, { useEffect, useState } from "react";
-import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
+import { Row } from "@/common/components/wrappers/Row";
 import styled from "styled-components";
 import { useSlettTiltakSM } from "@/common/api/queries/sykmeldt/tiltakQueriesSM";
 
@@ -40,7 +40,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
               Er du sikker på at du vil slette tiltaket?
             </HeadingWithExtraSpacing>
 
-            <ButtonRow>
+            <Row>
               <Button
                 variant={"danger"}
                 onClick={() => {
@@ -53,7 +53,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
               <Button variant={"tertiary"} onClick={() => setModalOpen(false)}>
                 Avbryt
               </Button>
-            </ButtonRow>
+            </Row>
           </ModalContent>
         </Modal.Content>
       </Modal>

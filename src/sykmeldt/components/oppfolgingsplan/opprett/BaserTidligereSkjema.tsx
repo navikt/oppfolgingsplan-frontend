@@ -1,5 +1,7 @@
-import React from "react";
-import { Button } from "@navikt/ds-react";
+import React, { ReactElement, useState } from "react";
+import { Button, Radio, RadioGroup } from "@navikt/ds-react";
+import { Row } from "@/common/components/wrappers/Row";
+import styled from "styled-components";
 
 const texts = {
   question: "Ønsker du å basere den nye planen på den som gjaldt sist?",
@@ -10,22 +12,46 @@ const texts = {
   buttonSubmit: "Start",
 };
 
+const SpacedRadioGroup = styled(RadioGroup)`
+  margin-bottom: 1rem;
+`;
+
 interface Props {
-  onSubmit(values: any): void;
+  onSubmit(value: boolean): void;
+
+  handleClose(): void;
 }
 
-export const BaserTidligereSkjema = ({ onSubmit }: Props) => {
+export const BaserTidligereSkjema = ({
+  onSubmit,
+  handleClose,
+}: Props): ReactElement => {
+  const [baserTidligere, setBaserTidligere] = useState(false);
+
   return (
-    <form onSubmit={onSubmit}>
-      <label>{texts.question}</label>
-      {/*<Field name="baserPaaTidligerePlan" component={Radioknapper}>*/}
-      {/*  <input value label={texts.answer.yes} aria-labelledby="baserPaaTidligerePlan-overskrift" />*/}
-      {/*  <input value={false} label={texts.answer.no} aria-labelledby="baserPaaTidligerePlan-overskrift" />*/}
-      {/*</Field>*/}
-      <div className="knapperad">
-        <Button variant={"primary"}>{texts.buttonSubmit}</Button>
-      </div>
-    </form>
+    <>
+      <SpacedRadioGroup
+        legend={texts.question}
+        onChange={(val: boolean) => setBaserTidligere(val)}
+        value={baserTidligere}
+      >
+        <Radio value={true}>{texts.answer.yes}</Radio>
+        <Radio value={false}>{texts.answer.no}</Radio>
+      </SpacedRadioGroup>
+
+      <Row>
+        <Button
+          variant={"primary"}
+          type={"button"}
+          onClick={() => onSubmit(baserTidligere)}
+        >
+          {texts.buttonSubmit}
+        </Button>
+        <Button variant={"tertiary"} onClick={handleClose}>
+          Avbryt
+        </Button>
+      </Row>
+    </>
   );
 };
 

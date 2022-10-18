@@ -119,6 +119,17 @@ export async function createOppfolgingsplanSM(
   );
 }
 
+export async function kopierOppfolgingsplanSM(
+  accessToken: string,
+  oppfolgingsplanIdToCopy: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanIdToCopy}`,
+    {},
+    { accessToken }
+  );
+}
+
 export async function deleteTiltakCommentSM(
   accessToken: string,
   kommentarId: string

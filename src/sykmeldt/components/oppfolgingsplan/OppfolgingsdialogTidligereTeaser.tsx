@@ -1,44 +1,26 @@
 import React from "react";
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
-import { LinkPanel } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import Image from "next/image";
+import { useLandingUrl } from "@/common/hooks/routeHooks";
+import { OppfolgingsplanCard } from "@/common/components/oversikt/OppfolgingsplanCard";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
-  rootUrlPlaner?: string;
 }
 
-const OppfolgingsdialogTidligereTeaser = ({
-  oppfolgingsplan,
-  rootUrlPlaner,
-}: Props) => {
+const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsplan }: Props) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
+  const landingUrl = useLandingUrl();
+  const virksomhetsnavn =
+    oppfolgingsplan.virksomhet?.navn || "Mangler navn på virksomhet";
 
   return (
-    <LinkPanel
-      href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsplan.id}`}
-      border
-    >
-      <div className="inngangspanel">
-        <span className="oppfolgingsplanInnhold__ikon">
-          <Image alt={planStatus.tekst} src={planStatus.img} />
-        </span>
-        <div className="inngangspanel__innhold">
-          <header className="inngangspanel__header">
-            <h3
-              className="js-title"
-              id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}
-            >
-              <span className="inngangspanel__tittel">
-                {oppfolgingsplan.virksomhet?.navn}
-              </span>
-            </h3>
-          </header>
-          <p className="mute inngangspanel__tekst">{planStatus.tekst}</p>
-        </div>
-      </div>
-    </LinkPanel>
+    <OppfolgingsplanCard
+      href={`${landingUrl}/${oppfolgingsplan.id}/arbeidsoppgaver`}
+      title={virksomhetsnavn}
+      description={planStatus.tekst}
+      image={planStatus.img}
+    />
   );
 };
 

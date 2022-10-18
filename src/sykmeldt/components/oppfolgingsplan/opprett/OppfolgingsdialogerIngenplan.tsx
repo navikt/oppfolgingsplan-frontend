@@ -1,13 +1,12 @@
 import React from "react";
 import { erOppfolgingsplanOpprettbarDirekte } from "@/common/utils/oppfolgingplanUtils";
 import { OppfolgingsdialogTomImage } from "@/common/images/imageComponents";
-import { BodyLong, Button, Heading, Panel } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";
 import { useOpprettOppfolgingsplanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import Image from "next/image";
-import styled from "styled-components";
 import { useSykmeldtFnr } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanCard } from "@/common/components/oversikt/OppfolgingsplanCard";
 
 const texts = {
   tittel: "Aktiv oppfølgingsplan",
@@ -21,86 +20,46 @@ const texts = {
   },
 };
 
-const PanelContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-`;
-
-const ImageContainer = styled.div`
-  width: 12rem;
-`;
-
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   oppfolgingsplaner: Oppfolgingsplan[];
 
-  setVisOppfolgingsdialogOpprett(set: boolean): void;
+  setVisOpprettingModal(set: boolean): void;
 }
 
 const OppfolgingsdialogerIngenplan = ({
   arbeidsgivere,
   oppfolgingsplaner,
-  setVisOppfolgingsdialogOpprett,
+  setVisOpprettingModal,
 }: OppfolgingsdialogerIngenplanProps) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
   const sykmeldtFnr = useSykmeldtFnr();
 
   return (
-    <div>
-      <Heading spacing={true} size={"medium"} level={"2"}>
-        {texts.tittel}
-      </Heading>
-
-      <Panel border={true}>
-        <PanelContent>
-          <ImageContainer>
-            <Image alt="" src={OppfolgingsdialogTomImage} />
-          </ImageContainer>
-
-          <div>
-            <Heading spacing={true} size={"small"} level={"3"}>
-              {texts.inngangspanel.tittel}
-            </Heading>
-
-            <div>
-              <BodyLong spacing={true}>
-                {texts.inngangspanel.paragraph}
-              </BodyLong>
-              <div>
-                {erOppfolgingsplanOpprettbarDirekte(
-                  arbeidsgivere,
-                  oppfolgingsplaner
-                ) ? (
-                  <Button
-                    variant={"primary"}
-                    onClick={() => {
-                      opprettOppfolgingsplan({
-                        sykmeldtFnr: sykmeldtFnr!!,
-                        virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer,
-                      });
-                    }}
-                  >
-                    {texts.knapper.lagNy}
-                  </Button>
-                ) : (
-                  <Button
-                    variant={"primary"}
-                    onClick={() => {
-                      setVisOppfolgingsdialogOpprett(true);
-                    }}
-                  >
-                    {texts.knapper.lagNy}
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
-        </PanelContent>
-      </Panel>
-    </div>
+    <OppfolgingsplanCard
+      legend={texts.tittel}
+      title={texts.inngangspanel.tittel}
+      description={texts.inngangspanel.paragraph}
+      image={OppfolgingsdialogTomImage}
+    >
+      <Button
+        variant={"primary"}
+        onClick={() => {
+          if (
+            erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner)
+          ) {
+            opprettOppfolgingsplan({
+              sykmeldtFnr: sykmeldtFnr!!,
+              virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer,
+            });
+          } else {
+            setVisOpprettingModal(true);
+          }
+        }}
+      >
+        {texts.knapper.lagNy}
+      </Button>
+    </OppfolgingsplanCard>
   );
 };
 

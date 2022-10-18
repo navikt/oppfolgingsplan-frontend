@@ -1,15 +1,13 @@
 import React from "react";
-import NextLink from "next/link";
-import Image from "next/image";
 import styled from "styled-components";
 import {
   inneholderGodkjenninger,
   inneholderGodkjenningerAvArbeidstaker,
 } from "@/common/utils/oppfolgingplanUtils";
 import { hentPlanStatus } from "@/common/utils/teaserUtils";
-import { LinkPanel } from "@navikt/ds-react";
 import { useOppfolgingsplanUrl } from "@/common/hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanCard } from "@/common/components/oversikt/OppfolgingsplanCard";
 
 const texts = {
   tilGodkjenning: "Til godkjenning",
@@ -19,28 +17,6 @@ interface OppfolgingsdialogTeaserProps {
   oppfolgingsplan: Oppfolgingsplan;
   rootUrlPlaner?: string;
 }
-
-const LinkPanelContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  margin: 0;
-  width: 4.5em;
-  height: 4.5em;
-`;
-
-const StyledTitle = styled.h3`
-  margin: 0;
-`;
-
-const StyledSubTitle = styled.h4`
-  margin: 0.25rem 0;
-`;
 
 const StyledSmallText = styled.p`
   margin: 0;
@@ -53,6 +29,9 @@ const OppfolgingsdialogTeaser = ({
   oppfolgingsplan,
 }: OppfolgingsdialogTeaserProps) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
+
+  const virksomhetsnavn =
+    oppfolgingsplan.virksomhet?.navn || "Mangler navn på virksomhet";
 
   const newOppfolgingsplanUrl = useOppfolgingsplanUrl(
     oppfolgingsplan.id,
@@ -68,38 +47,20 @@ const OppfolgingsdialogTeaser = ({
     !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan);
 
   return (
-    <NextLink
+    <OppfolgingsplanCard
       href={pendingApproval ? approveOppfolgingsplanUrl : newOppfolgingsplanUrl}
-      passHref
+      title={virksomhetsnavn}
+      subtitle={pendingApproval ? texts.tilGodkjenning : ""}
+      image={planStatus.img}
     >
-      <LinkPanel border>
-        <LinkPanelContent>
-          <ImageContainer>
-            <Image alt="" src={planStatus.img} />
-          </ImageContainer>
-          <div>
-            <header>
-              <StyledTitle
-                className="js-title"
-                id={`oppfolgingsdialog-header-${oppfolgingsplan.id}`}
-              >
-                <span>{oppfolgingsplan.virksomhet?.navn}</span>
-              </StyledTitle>
-            </header>
-            {pendingApproval && (
-              <StyledSubTitle>{texts.tilGodkjenning}</StyledSubTitle>
-            )}
-            {typeof planStatus.tekst === "object" ? (
-              <StyledSmallText dangerouslySetInnerHTML={planStatus.tekst} />
-            ) : (
-              <StyledSmallText
-                dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
-              />
-            )}
-          </div>
-        </LinkPanelContent>
-      </LinkPanel>
-    </NextLink>
+      {typeof planStatus.tekst === "object" ? (
+        <StyledSmallText dangerouslySetInnerHTML={planStatus.tekst} />
+      ) : (
+        <StyledSmallText
+          dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
+        />
+      )}
+    </OppfolgingsplanCard>
   );
 };
 

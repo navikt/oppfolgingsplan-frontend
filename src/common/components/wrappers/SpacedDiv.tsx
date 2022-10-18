@@ -5,10 +5,7 @@ interface Props {
   marginBottom?: string;
 }
 
-export const ButtonRow = styled.div<Props>`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+export const SpacedDiv = styled.div<Props>`
   margin-top: ${(p) => p.marginTop || 0};
-  margin-bottom: ${(p) => p.marginBottom || 0};
+  margin-bottom: ${(p) => p.marginBottom || "2rem"};
 `;

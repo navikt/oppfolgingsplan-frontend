@@ -1,7 +1,7 @@
 import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
 import { ReactElement } from "react";
 import { BodyLong, Button, Textarea } from "@navikt/ds-react";
-import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
+import { Row } from "@/common/components/wrappers/Row";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
@@ -51,14 +51,14 @@ export const NyKommentar = ({ lagre, avbryt }: Props): ReactElement | null => {
           value={kommentar}
         />
 
-        <ButtonRow>
+        <Row>
           <Button variant={"primary"} type={"submit"}>
             Lagre
           </Button>
           <Button variant={"tertiary"} onClick={avbryt}>
             Avbryt
           </Button>
-        </ButtonRow>
+        </Row>
       </LightGreyPanel>
     </form>
   );

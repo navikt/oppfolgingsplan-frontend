@@ -2,6 +2,7 @@ import React from "react";
 import { getAsset } from "@/common/utils/getAssetPath";
 import styled from "styled-components";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
+import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 
 const texts = {
   title: "Om oppfølgingsplanen",
@@ -19,14 +20,9 @@ const HeaderStyled = styled(Heading)`
   gap: 1rem;
 `;
 
-const Container = styled.div`
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-`;
-
 const VideoPanel = () => {
   return (
-    <Container>
+    <SpacedDiv>
       <HeaderStyled level="2">{texts.title}</HeaderStyled>
       <video
         width="100%"
@@ -54,7 +50,7 @@ const VideoPanel = () => {
         </Link>
         .
       </BodyLong>
-    </Container>
+    </SpacedDiv>
   );
 };
 

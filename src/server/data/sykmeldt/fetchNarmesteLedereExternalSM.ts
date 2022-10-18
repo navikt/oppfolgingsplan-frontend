@@ -3,12 +3,15 @@ import activeMockSM from "@/server/data/mock/activeMockSM";
 import { getNarmesteLedere } from "@/server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { handleSchemaParsingError } from "@/server/utils/errors";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import {
+  handleQueryParamError,
+  handleSchemaParsingError,
+} from "@/server/utils/errors";
+import { NextApiResponseNarmesteLedereSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
 
-export const fetchNarmesteLedereSM = async (
+export const fetchNarmesteLedereExternalSM = async (
   req: IAuthenticatedRequest,
-  res: NextApiResponseOppfolgingsplanSM,
+  res: NextApiResponseNarmesteLedereSM,
   next: () => void
 ) => {
   if (isMockBackend) {
@@ -16,8 +19,11 @@ export const fetchNarmesteLedereSM = async (
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
 
-    const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
-      .fnr;
+    const { sykmeldtFnr } = req.query;
+
+    if (typeof sykmeldtFnr !== "string") {
+      return handleQueryParamError(sykmeldtFnr);
+    }
 
     const narmesteLedereResponse = await getNarmesteLedere(
       oppfolgingsplanTokenX,

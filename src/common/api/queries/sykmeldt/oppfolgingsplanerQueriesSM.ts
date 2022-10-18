@@ -40,14 +40,17 @@ export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
   return undefined;
 };
 
-// export const useKopierOppfolgingsplanSM = () => {
-//   const apiBasePath = useApiBasePath();
-//
-//   const postKopierOppfolgingsplanSM = (id: number) =>
-//     post(`${apiBasePath}/oppfolgingsplaner/kopier/${id}`);
-//
-//   return useMutation(postKopierOppfolgingsplanSM);
-// };
+export const useKopierOppfolgingsplanSM = () => {
+  const apiBasePath = useApiBasePath();
+  const { mutate } = useSWRConfig();
+
+  return async (oppfolgingsplanIdToCopy: number) => {
+    await post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanIdToCopy}/kopier`
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
+};
 
 export const useOpprettOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
