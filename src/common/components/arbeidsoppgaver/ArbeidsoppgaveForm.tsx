@@ -7,7 +7,7 @@ import {
   Textarea,
 } from "@navikt/ds-react";
 import { LightGreyPanel } from "@/common/components/wrappers/LightGreyPanel";
-import { ButtonRow } from "@/common/components/wrappers/ButtonRow";
+import { Row } from "@/common/components/wrappers/Row";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import styled from "styled-components";
@@ -180,14 +180,14 @@ export const ArbeidsoppgaveForm = ({
             />
           )}
 
-          <ButtonRow>
+          <Row>
             <Button variant={"primary"} type={"submit"}>
               Lagre
             </Button>
             <Button variant={"tertiary"} onClick={onCancel}>
               Avbryt
             </Button>
-          </ButtonRow>
+          </Row>
         </LightGreyPanel>
       </form>
     </FormProvider>

@@ -243,3 +243,22 @@ export const finnGodkjenteplanerAvbruttAvMotpartSidenSistInnlogging = (
       );
     });
 };
+
+export const finnNyesteTidligereOppfolgingsplanMedVirksomhet = (
+  oppfolgingsplaner: Oppfolgingsplan[],
+  virksomhetsnummer: string
+) => {
+  return finnTidligereOppfolgingsdialoger(oppfolgingsplaner).filter((plan) => {
+    return plan.virksomhet?.virksomhetsnummer === virksomhetsnummer;
+  })[0];
+};
+
+export const finnTidligereOppfolgingsdialoger = (
+  oppfolgingsplaner: Oppfolgingsplan[]
+) => {
+  return sorterOppfolgingsplanerEtterSluttdato(
+    oppfolgingsplaner.filter((oppfolgingsdialog) => {
+      return erOppfolgingsplanTidligere(oppfolgingsdialog);
+    })
+  );
+};

@@ -24,8 +24,8 @@ export const defaultSykmeldingerMockData: Sykmelding[] = [
     fnr: "12345678910",
     sykmeldingsperioder: [
       {
-        fom: new Date("2017-04-15").toString(),
-        tom: new Date("2017-04-25").toString(),
+        fom: createDateMonthsAgo(4).toString(),
+        tom: createDateMonthsFromNow(4).toString(),
       },
     ],
     organisasjonsinformasjon: {

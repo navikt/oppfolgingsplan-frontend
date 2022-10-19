@@ -1,16 +1,16 @@
-import React from "react";
-import getContextRoot from "@/common/utils/getContextRoot";
+import React, { useState } from "react";
 import {
   erAktivOppfolgingsplanOpprettetMedArbeidsgiver,
-  erOppfolgingsplanOpprettbarMedMinstEnArbeidsgiver,
+  erOppfolgingsplanOpprettbarMedArbeidsgiver,
   hentAktivOppfolgingsplanOpprettetMedArbeidsgiver,
 } from "@/common/utils/oppfolgingplanUtils";
-import { VarseltrekantImage } from "@/common/images/imageComponents";
-import { Button } from "@navikt/ds-react";
+import { Alert, BodyShort, Button, Heading, Select } from "@navikt/ds-react";
 import Link from "next/link";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";
-import Image from "next/image";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
+import { useLandingUrl } from "@/common/hooks/routeHooks";
+import styled from "styled-components";
+import { Row } from "@/common/components/wrappers/Row";
 
 const texts = {
   arbeidsgiverSkjema: {
@@ -19,12 +19,20 @@ const texts = {
   },
   velgArbeidsgiverUndertekst: {
     alreadyCreatedPlan:
-      "Du har allerede en oppfølgingsplan med denne arbeidsgiveren",
+      "Du har allerede en oppfølgingsplan med denne arbeidsgiveren.",
     noLeader:
       "Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn.",
     leader: "Nærmeste leder er ",
   },
 };
+
+const SpacedDiv = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const SpacedSelect = styled(Select)`
+  margin-bottom: 1rem;
+`;
 
 interface ArbeidsgiverUndertekstProps {
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -35,6 +43,8 @@ export const VelgArbeidsgiverUndertekst = ({
   oppfolgingsplaner,
   arbeidsgiver,
 }: ArbeidsgiverUndertekstProps) => {
+  const landingUrl = useLandingUrl();
+
   if (
     erAktivOppfolgingsplanOpprettetMedArbeidsgiver(
       oppfolgingsplaner,
@@ -46,97 +56,104 @@ export const VelgArbeidsgiverUndertekst = ({
       arbeidsgiver.virksomhetsnummer
     );
     return (
-      <div>
-        <span>{texts.velgArbeidsgiverUndertekst.alreadyCreatedPlan}</span>
-        <div>
-          <Link
-            className="lenke"
-            href={`${getContextRoot()}/oppfolgingsplaner/${
-              oppfolgingsdialog.id
-            }`}
-          >
-            Gå til planen
-          </Link>
-        </div>
-      </div>
+      <Alert variant="info">
+        <div>{texts.velgArbeidsgiverUndertekst.alreadyCreatedPlan}</div>
+        <Link
+          className="lenke"
+          href={`${landingUrl}/${oppfolgingsdialog.id}/arbeidsoppgaver`}
+        >
+          Gå til planen
+        </Link>
+      </Alert>
     );
   } else if (!arbeidsgiver.harNaermesteLeder) {
     return (
-      <div>
-        <Image src={VarseltrekantImage} alt="" />
-        <span>{texts.velgArbeidsgiverUndertekst.noLeader}</span>
-      </div>
+      <Alert variant="warning">
+        {texts.velgArbeidsgiverUndertekst.noLeader}
+      </Alert>
     );
   } else if (arbeidsgiver.naermesteLeder) {
     return (
-      <div>
-        <span>
-          {`${texts.velgArbeidsgiverUndertekst.leader}${arbeidsgiver.naermesteLeder}`}
-        </span>
-      </div>
+      <BodyShort size={"small"} spacing>
+        {`${texts.velgArbeidsgiverUndertekst.leader}${arbeidsgiver.naermesteLeder}`}
+      </BodyShort>
     );
   }
   return null;
 };
 
-// export const VelgArbeidsgiverRadioKnapper = ({ input, meta, oppfolgingsdialoger, arbeidsgivere }) => {
-//   return (
-//     <Radioknapper input={input} meta={meta} visUndertekst>
-//       {arbeidsgivere.map((arbeidsgiver, index) => {
-//         return (
-//           <i
-//             key={index}
-//             value={arbeidsgiver.virksomhetsnummer}
-//             label={arbeidsgiver.navn}
-//             disabled={!erOppfolgingsdialogOpprettbarMedArbeidsgiver(oppfolgingsdialoger, arbeidsgiver)}
-//           >
-//             <VelgArbeidsgiverUndertekst oppfolgingsdialoger={oppfolgingsdialoger} arbeidsgiver={arbeidsgiver} />
-//           </i>
-//         );
-//       })}
-//     </Radioknapper>
-//   );
-// };
-
 interface ArbeidsgiverSkjemaProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   oppfolgingsplaner: Oppfolgingsplan[];
 
-  handleSubmit(values: any): void;
+  handleClose(): void;
+
+  handleSubmit(virksomhetsnummer: string): void;
 }
 
 export const ArbeidsgiverSkjema = ({
   arbeidsgivere,
   oppfolgingsplaner,
+  handleClose,
   handleSubmit,
 }: ArbeidsgiverSkjemaProps) => {
+  const [selectedVirksomhetsnummer, setSelectedVirksomhetsnummer] = useState<
+    string | null
+  >(null);
+
+  const selectedArbeidsgiver = arbeidsgivere.find(
+    (ag) => ag.virksomhetsnummer == selectedVirksomhetsnummer
+  );
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>{texts.arbeidsgiverSkjema.question}</label>
-      <div className="inputgruppe velgarbeidsgiver__inputgruppe">
-        {/*<Field*/}
-        {/*  name="arbeidsgiver"*/}
-        {/*  component={VelgArbeidsgiverRadioKnapper}*/}
-        {/*  oppfolgingsdialoger={oppfolgingsplaner}*/}
-        {/*  arbeidsgivere={arbeidsgivere}*/}
-        {/*/>*/}
-      </div>
-      <div>
-        <div>
-          <Button
-            variant={"primary"}
-            disabled={
-              !erOppfolgingsplanOpprettbarMedMinstEnArbeidsgiver(
-                oppfolgingsplaner,
-                arbeidsgivere
-              )
-            }
-          >
-            {texts.arbeidsgiverSkjema.buttonSubmit}
-          </Button>
-        </div>
-      </div>
-    </form>
+    <>
+      <Heading spacing size={"medium"} level={"2"}>
+        {texts.arbeidsgiverSkjema.question}
+      </Heading>
+
+      <SpacedSelect
+        label={texts.arbeidsgiverSkjema.question}
+        hideLabel={true}
+        onChange={(e) => setSelectedVirksomhetsnummer(e.target.value)}
+      >
+        <option value="">Velg arbeidsgiver</option>
+        {arbeidsgivere.map((arbeidsgiver, index) => {
+          return (
+            <option key={index} value={arbeidsgiver.virksomhetsnummer}>
+              {arbeidsgiver.navn}
+            </option>
+          );
+        })}
+      </SpacedSelect>
+
+      {selectedVirksomhetsnummer && (
+        <SpacedDiv>
+          <VelgArbeidsgiverUndertekst
+            oppfolgingsplaner={oppfolgingsplaner}
+            arbeidsgiver={selectedArbeidsgiver!!}
+          />
+        </SpacedDiv>
+      )}
+
+      <Row>
+        <Button
+          variant={"primary"}
+          disabled={
+            !selectedVirksomhetsnummer ||
+            !erOppfolgingsplanOpprettbarMedArbeidsgiver(
+              oppfolgingsplaner,
+              selectedArbeidsgiver!!
+            )
+          }
+          onClick={() => handleSubmit(selectedVirksomhetsnummer!!)}
+        >
+          {texts.arbeidsgiverSkjema.buttonSubmit}
+        </Button>
+        <Button variant={"tertiary"} onClick={handleClose}>
+          Avbryt
+        </Button>
+      </Row>
+    </>
   );
 };
 

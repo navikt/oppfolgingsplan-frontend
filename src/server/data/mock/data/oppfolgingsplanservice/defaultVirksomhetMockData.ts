@@ -6,6 +6,6 @@ export const defaultVirksomhetMockData: Virksomhet = {
 };
 
 export const otherVirksomhetMockData: Virksomhet = {
-  virksomhetsnummer: "325236436",
-  navn: "Krabbefiske Inc",
+  virksomhetsnummer: "123456789",
+  navn: "Skogen Barnehave",
 };

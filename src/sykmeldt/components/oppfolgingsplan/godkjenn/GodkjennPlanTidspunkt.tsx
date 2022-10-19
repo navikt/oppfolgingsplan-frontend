@@ -1,13 +1,6 @@
-import {
-  Gyldighetstidspunkt,
-  Oppfolgingsplan,
-} from "../../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { BildeTekstLinje } from "./BildeTekstLinje";
-import {
-  BubbleImage,
-  CalendarImage,
-  StjerneImage,
-} from "@/common/images/imageComponents";
+import { CalendarImage, StjerneImage } from "@/common/images/imageComponents";
 import { toDateMedMaanedNavn } from "@/common/utils/dateUtils";
 import styled from "styled-components";
 
@@ -35,14 +28,12 @@ export const GodkjennPlanTidspunkt = ({
     <Container>
       <BildeTekstLinje
         imgUrl={CalendarImage}
-        imgAlt=""
         tekst={`Planens varighet: ${toDateMedMaanedNavn(
           gyldighetstidspunkt?.fom
         )} - ${toDateMedMaanedNavn(gyldighetstidspunkt?.tom)}`}
       />
       <BildeTekstLinje
         imgUrl={StjerneImage}
-        imgAlt=""
         tekst={`Planen evalueres: ${toDateMedMaanedNavn(
           gyldighetstidspunkt?.evalueres
         )}`}

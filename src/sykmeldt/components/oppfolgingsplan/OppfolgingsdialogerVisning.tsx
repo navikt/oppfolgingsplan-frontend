@@ -5,15 +5,15 @@ import {
   finnTidligereOppfolgingsplaner,
   harTidligereOppfolgingsplaner,
 } from "@/common/utils/oppfolgingplanUtils";
-import getContextRoot from "@/common/utils/getContextRoot";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
 import { Alert, Button } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "@/common/utils/sykmeldingUtils";
-import OppfolgingsdialogerOpprett from "./opprett/OppfolgingsdialogerOpprett";
+import OpprettOppfolgingsplanModal from "./opprett/OpprettOppfolgingsplanModal";
 import OppfolgingsdialogerIngenplan from "./opprett/OppfolgingsdialogerIngenplan";
+import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 
 const texts = {
   oppfolgingsdialogNyKnapp: {
@@ -41,8 +41,7 @@ const OppfolgingsdialogerVisning = ({
   sykmeldinger,
   narmesteLedere,
 }: Props) => {
-  const [visOppfolgingsdialogOpprett, setVisOppfolgingsdialogOpprett] =
-    useState(false);
+  const [visOpprettingModal, setVisOpprettingModal] = useState(false);
 
   const aktiveOppfolgingsplaner: Oppfolgingsplan[] =
     finnAktiveOppfolgingsplaner(oppfolgingsplaner, sykmeldinger);
@@ -66,36 +65,34 @@ const OppfolgingsdialogerVisning = ({
         </Alert>
       )}
 
-      {visOppfolgingsdialogOpprett && (
-        <OppfolgingsdialogerOpprett
-          oppfolgingsplaner={oppfolgingsplaner}
-          arbeidsgivere={arbeidsgivereForSykmeldinger}
-          visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
-          setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
-        />
-      )}
-      {(oppfolgingsplaner.length === 0 ||
-        !(aktiveOppfolgingsplaner.length > 0)) && (
+      <OpprettOppfolgingsplanModal
+        oppfolgingsplaner={oppfolgingsplaner}
+        arbeidsgivere={arbeidsgivereForSykmeldinger}
+        visOpprettingModal={visOpprettingModal}
+        setVisOpprettingModal={setVisOpprettingModal}
+      />
+
+      {aktiveOppfolgingsplaner.length === 0 && (
         <OppfolgingsdialogerIngenplan
           arbeidsgivere={arbeidsgivereForSykmeldinger}
           oppfolgingsplaner={oppfolgingsplaner}
-          setVisOppfolgingsdialogOpprett={setVisOppfolgingsdialogOpprett}
+          setVisOpprettingModal={setVisOpprettingModal}
         />
       )}
       {aktiveOppfolgingsplaner.length > 0 && (
         <div>
           {arbeidsgivereForSykmeldinger.length > 1 && (
-            <div className="oppfolgingsdialogNyDialog">
+            <SpacedDiv marginTop={"1rem"}>
               <Button
                 variant={"secondary"}
                 size={"medium"}
                 onClick={() => {
-                  setVisOppfolgingsdialogOpprett(true);
+                  setVisOpprettingModal(true);
                 }}
               >
                 {texts.oppfolgingsdialogNyKnapp.button}
               </Button>
-            </div>
+            </SpacedDiv>
           )}
           <OppfolgingsdialogTeasere
             oppfolgingsplaner={aktiveOppfolgingsplaner}
@@ -105,7 +102,6 @@ const OppfolgingsdialogerVisning = ({
                     .titleMultiplePlaner
                 : texts.oppfolgingsdialogerVisning.teaserAktive.titleSinglePlan
             }
-            rootUrlPlaner={getContextRoot()}
           />
         </div>
       )}
@@ -114,8 +110,6 @@ const OppfolgingsdialogerVisning = ({
           oppfolgingsplaner={finnTidligereOppfolgingsplaner(oppfolgingsplaner)}
           harTidligerOppfolgingsdialoger
           tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
-          id="OppfolgingsdialogTeasereAT"
-          rootUrlPlaner={getContextRoot()}
         />
       )}
     </div>

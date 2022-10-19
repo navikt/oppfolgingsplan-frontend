@@ -2,29 +2,27 @@ import React from "react";
 import OppfolgingsdialogTeaser from "./OppfolgingsdialogTeaser";
 import OppfolgingsdialogTidligereTeaser from "./OppfolgingsdialogTidligereTeaser";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { Heading } from "@navikt/ds-react";
 
 interface Props {
   tittel: string;
   oppfolgingsplaner: Oppfolgingsplan[];
   className?: string;
-  id?: string;
-  rootUrlPlaner?: string;
   harTidligerOppfolgingsdialoger?: boolean;
 }
 
 const OppfolgingsdialogTeasere = ({
   oppfolgingsplaner,
   tittel = "",
-  id,
-  rootUrlPlaner,
   harTidligerOppfolgingsdialoger,
 }: Props) => {
   return (
     <div>
-      <header>
-        <h2>{tittel}</h2>
-      </header>
-      <div id={id}>
+      <Heading spacing={true} size={"medium"} level={"2"}>
+        {tittel}
+      </Heading>
+
+      <div>
         {!harTidligerOppfolgingsdialoger &&
           oppfolgingsplaner.map((plan, idx) => {
             return <OppfolgingsdialogTeaser oppfolgingsplan={plan} key={idx} />;
@@ -35,7 +33,6 @@ const OppfolgingsdialogTeasere = ({
               <OppfolgingsdialogTidligereTeaser
                 oppfolgingsplan={plan}
                 key={idx}
-                rootUrlPlaner={rootUrlPlaner}
               />
             );
           })}

@@ -43,7 +43,7 @@ export const personSchema = object({
 
 export const kommentarSchema = object({
   id: number(),
-  tekst: string(),
+  tekst: string().nullish(),
   opprettetTidspunkt: string(),
   sistEndretDato: string(),
   opprettetAv: personSchema,

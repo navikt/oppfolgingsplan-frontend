@@ -1,4 +1,5 @@
 import { maanedListe } from "../konstanter";
+const MILLISEKUNDER_PER_DAG = 86400000;
 
 export const erGyldigDatoIFortiden = (dato: string) => {
   const oppgittDato = new Date(dato);
@@ -56,3 +57,9 @@ export const getFullDateFormat = (date: string | number | Date) => {
 export const getTime = (date?: string | null): number => {
   return date ? new Date(date).getTime() : 0;
 };
+
+export function leggTilDagerPaDato(date: Date, days: number) {
+  const nyDato = new Date(date);
+  nyDato.setTime(nyDato.getTime() + days * MILLISEKUNDER_PER_DAG);
+  return new Date(nyDato);
+}

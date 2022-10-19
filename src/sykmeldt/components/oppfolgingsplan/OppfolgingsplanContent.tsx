@@ -6,7 +6,6 @@ import {
 } from "@/common/utils/oppfolgingplanUtils";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import {
   sykmeldtHarGyldigSykmelding,
   sykmeldtHarIngenSendteSykmeldinger,
@@ -15,6 +14,7 @@ import { IngenLedereInfoBoks } from "@/common/components/infoboks/IngenLedereInf
 import OppfolgingsdialogerVisning from "./OppfolgingsdialogerVisning";
 import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
 import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
+import { useNarmesteLedereSM } from "@/common/api/queries/sykmeldt/narmesteLedereQueriesSM";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -22,16 +22,13 @@ interface Props {
 }
 
 const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
-  //todo improve
-  const narmesteledere: NarmesteLeder[] | null = oppfolgingsplaner
-    .filter((plan) => plan.arbeidsgiver && plan.arbeidsgiver.naermesteLeder)
-    .map((plan) => plan.arbeidsgiver!!.naermesteLeder!!);
+  const narmesteledere = useNarmesteLedereSM();
 
   if (
     erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
-      narmesteledere
+      narmesteledere.data!!
     )
   ) {
     return <IngenLedereInfoBoks />;
@@ -59,7 +56,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
       <OppfolgingsdialogerVisning
         oppfolgingsplaner={oppfolgingsplaner}
         sykmeldinger={sykmeldinger}
-        narmesteLedere={narmesteledere}
+        narmesteLedere={narmesteledere.data!!}
       />
     );
   }
