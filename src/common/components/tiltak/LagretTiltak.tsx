@@ -76,9 +76,14 @@ const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
 interface Props {
   arbeidstakerFnr: string;
   tiltak: Tiltak;
+  readonly?: Boolean;
 }
 
-export const LagretTiltak = ({ arbeidstakerFnr, tiltak }: Props) => {
+export const LagretTiltak = ({
+  arbeidstakerFnr,
+  tiltak,
+  readonly = true,
+}: Props) => {
   const aktoerHarOpprettetElement =
     arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
@@ -112,7 +117,7 @@ export const LagretTiltak = ({ arbeidstakerFnr, tiltak }: Props) => {
         </>
       )}
 
-      {manglerVurderingFraLeder(arbeidstakerFnr, tiltak) && (
+      {!readonly && manglerVurderingFraLeder(arbeidstakerFnr, tiltak) && (
         <SpacedAlert variant={"warning"}>
           Dette tiltaket mangler vurdering fra lederen din
         </SpacedAlert>
@@ -127,56 +132,60 @@ export const LagretTiltak = ({ arbeidstakerFnr, tiltak }: Props) => {
 
       <SpacedDetail>{`Foreslått av ${tiltak.opprettetAv.navn}`}</SpacedDetail>
 
-      <Dialog
-        tiltakId={tiltak.tiltakId}
-        kommentarer={tiltak.kommentarer}
-        aktorFnr={arbeidstakerFnr}
-      />
+      {!readonly && (
+        <>
+          <Dialog
+            tiltakId={tiltak.tiltakId}
+            kommentarer={tiltak.kommentarer}
+            aktorFnr={arbeidstakerFnr}
+          />
 
-      {/*Todo: Finn ut hvorfor den må reassigne tiltakid og fnr*/}
-      {displayNyKommentar && (
-        <NyKommentar
-          lagre={(kommentar: string) => {
-            lagreKommentar({
-              tiltakId,
-              fnr,
-              kommentar,
-            });
-            setDisplayNyKommentar(false);
-          }}
-          avbryt={() => setDisplayNyKommentar(false)}
-        />
-      )}
-
-      {editererTiltak && (
-        <EditerTiltak
-          tiltak={tiltak}
-          doneEditing={() => setEditererTiltak(false)}
-        />
-      )}
-
-      {!displayNyKommentar && !editererTiltak && (
-        <Row>
-          {aktoerHarOpprettetElement && (
-            <Button
-              variant={"tertiary"}
-              icon={<Edit />}
-              onClick={() => setEditererTiltak(true)}
-            >
-              Endre
-            </Button>
+          {/*Todo: Finn ut hvorfor den må reassigne tiltakid og fnr*/}
+          {displayNyKommentar && (
+            <NyKommentar
+              lagre={(kommentar: string) => {
+                lagreKommentar({
+                  tiltakId,
+                  fnr,
+                  kommentar,
+                });
+                setDisplayNyKommentar(false);
+              }}
+              avbryt={() => setDisplayNyKommentar(false)}
+            />
           )}
-          {aktoerHarOpprettetElement && (
-            <SlettTiltakButton tiltakId={tiltak.tiltakId} />
+
+          {editererTiltak && (
+            <EditerTiltak
+              tiltak={tiltak}
+              doneEditing={() => setEditererTiltak(false)}
+            />
           )}
-          <Button
-            variant={"tertiary"}
-            icon={<DialogDots />}
-            onClick={() => setDisplayNyKommentar(true)}
-          >
-            Kommenter
-          </Button>
-        </Row>
+
+          {!displayNyKommentar && !editererTiltak && (
+            <Row>
+              {aktoerHarOpprettetElement && (
+                <Button
+                  variant={"tertiary"}
+                  icon={<Edit />}
+                  onClick={() => setEditererTiltak(true)}
+                >
+                  Endre
+                </Button>
+              )}
+              {aktoerHarOpprettetElement && (
+                <SlettTiltakButton tiltakId={tiltak.tiltakId} />
+              )}
+              <Button
+                variant={"tertiary"}
+                icon={<DialogDots />}
+                onClick={() => setDisplayNyKommentar(true)}
+              >
+                Kommenter
+              </Button>
+            </Row>
+          )}
+        </>
       )}
     </SpacedPanel>
   );
