@@ -5,6 +5,7 @@ import { ArbeidsoppgaveList } from "./arbeidsoppgaver/ArbeidsoppgaveList";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { texts } from "@/common/components/oversikt/texts";
 import { TiltakList } from "@/common/components/oversikt/tiltak/TiltakList";
+import { SendTilGodkjenning } from "../../../sykmeldt/components/oppfolgingsplan/sendTilGodkjenning/SendTilGodkjenning";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -43,6 +44,8 @@ export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
       {oppfolgingsplan.tiltakListe && (
         <TiltakList oppfolgingsplan={oppfolgingsplan} />
       )}
+
+      <SendTilGodkjenning oppfolgingsplan={oppfolgingsplan} />
     </div>
   );
 };

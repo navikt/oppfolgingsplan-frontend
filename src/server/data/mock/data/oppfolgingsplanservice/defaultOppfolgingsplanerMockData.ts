@@ -182,8 +182,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         tiltakId: 4852,
         tiltaknavn: "Hjemmekontor ",
         knyttetTilArbeidsoppgaveId: null,
-        fom: "2020-02-10",
-        tom: "2020-02-21",
+        fom: "2021-04-15",
+        tom: "2022-07-26",
         beskrivelse:
           "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
         beskrivelseIkkeAktuelt: null,

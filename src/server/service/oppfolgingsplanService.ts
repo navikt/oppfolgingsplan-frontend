@@ -15,6 +15,7 @@ import {
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
 import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
 import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
+import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
   return array(narmesteLederSchema).safeParse(
@@ -124,8 +125,20 @@ export async function kopierOppfolgingsplanSM(
   oppfolgingsplanIdToCopy: string
 ) {
   return await post(
-    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanIdToCopy}`,
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanIdToCopy}/kopier`,
     {},
+    { accessToken }
+  );
+}
+
+export async function godkjennOppfolgingsplanSM(
+  accessToken: string,
+  oppfolgingsplanId: string,
+  data: GodkjennPlanData
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=makrell&aktoer=arbeidstaker&delmednav=${data.delmednav}`,
+    data.gyldighetstidspunkt,
     { accessToken }
   );
 }

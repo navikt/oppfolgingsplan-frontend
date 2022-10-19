@@ -1,12 +1,12 @@
 import { NextApiResponse } from "next";
 import { isMockBackend } from "@/common/publicEnv";
 import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { kopierOppfolgingsplanSM } from "@/server/service/oppfolgingsplanService";
+import { godkjennOppfolgingsplanSM } from "@/server/service/oppfolgingsplanService";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { handleQueryParamError } from "@/server/utils/errors";
-import {data} from "browserslist";
+import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 
-export const postKopierOppfolgingsplanSM = async (
+export const postGodkjennOppfolgingsplanSM = async (
   req: IAuthenticatedRequest,
   res: NextApiResponse,
   next: () => void
@@ -22,7 +22,9 @@ export const postKopierOppfolgingsplanSM = async (
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
 
-    await kopierOppfolgingsplanSM(
+    const data: GodkjennPlanData = req.body;
+
+    await godkjennOppfolgingsplanSM(
       oppfolgingsplanTokenX,
       oppfolgingsplanId,
       data
