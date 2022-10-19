@@ -19,6 +19,7 @@ export const LagredeTiltak = ({
         key={index}
         arbeidstakerFnr={arbeidstakerFnr}
         tiltak={tiltak}
+        readonly={false}
       />
     );
   });
