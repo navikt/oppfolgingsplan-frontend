@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { FormErrorSummary } from "@/common/components/error/FormErrorSummary";
+import { Row } from "@/common/components/wrappers/Row";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -18,11 +19,6 @@ const DateRow = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
-`;
-
-const ButtonRow = styled.div`
-  display: flex;
-  flex-direction: row;
 `;
 
 const SpacedAlert = styled(Alert)`
@@ -120,7 +116,7 @@ export const TiltakForm = ({
             />
           </DateRow>
 
-          <ButtonRow>
+          <Row>
             <Button
               variant={"primary"}
               type={"submit"}
@@ -133,7 +129,7 @@ export const TiltakForm = ({
             <Button variant={"tertiary"} onClick={onCancel}>
               Avbryt
             </Button>
-          </ButtonRow>
+          </Row>
         </LightGreyPanel>
       </form>
     </FormProvider>
