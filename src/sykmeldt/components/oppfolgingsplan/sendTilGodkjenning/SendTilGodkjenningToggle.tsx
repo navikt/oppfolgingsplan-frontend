@@ -43,7 +43,22 @@ export const SendTilGodkjenningToggle = ({
   return (
     <div>
       <SpacedGuidePanel>
-        Er du ferdig med denne planen og ønsker å sende den til godkjenning?
+        <SpacedDiv marginBottom={"1rem"}>
+          Er du ferdig med denne planen og ønsker å sende den til godkjenning?
+        </SpacedDiv>
+        <Button
+          variant={"primary"}
+          type={"button"}
+          onClick={() => {
+            if (tiltakListe?.length && arbeidsoppgaveListe?.length) {
+              visInnsendingsSkjema();
+            } else {
+              setDisplayMissingInfoMessage(true);
+            }
+          }}
+        >
+          Jeg er ferdig
+        </Button>
       </SpacedGuidePanel>
 
       {displayMissingInfoMessage && (
@@ -65,20 +80,6 @@ export const SendTilGodkjenningToggle = ({
           )}
         </SpacedAlert>
       )}
-
-      <Button
-        variant={"primary"}
-        type={"button"}
-        onClick={() => {
-          if (tiltakListe?.length && arbeidsoppgaveListe?.length) {
-            visInnsendingsSkjema();
-          } else {
-            setDisplayMissingInfoMessage(true);
-          }
-        }}
-      >
-        Jeg er ferdig
-      </Button>
     </div>
   );
 };

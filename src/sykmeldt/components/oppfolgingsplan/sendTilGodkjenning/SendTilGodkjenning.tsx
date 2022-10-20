@@ -4,14 +4,16 @@ import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
 import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan?: Oppfolgingsplan;
 }
 
 export const SendTilGodkjenning = ({
   oppfolgingsplan,
-}: Props): ReactElement => {
+}: Props): ReactElement | null => {
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
     useState(false);
+
+  if (!oppfolgingsplan) return null;
 
   if (!visOppfolgingsplanSkjema) {
     return (
