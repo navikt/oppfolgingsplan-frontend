@@ -60,4 +60,7 @@ export const texts = {
       erDuSikker: "Er du sikker på at du vil slette arbeidsoppgaven?",
     },
   },
+  tiltakList: {
+    title: "Tiltak",
+  },
 };

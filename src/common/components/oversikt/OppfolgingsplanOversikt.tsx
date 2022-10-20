@@ -40,7 +40,9 @@ export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
           arbeidsoppgaver={oppfolgingsplan.arbeidsoppgaveListe}
         />
       )}
-      <TiltakList />
+      {oppfolgingsplan.tiltakListe && (
+        <TiltakList oppfolgingsplan={oppfolgingsplan} />
+      )}
     </div>
   );
 };
