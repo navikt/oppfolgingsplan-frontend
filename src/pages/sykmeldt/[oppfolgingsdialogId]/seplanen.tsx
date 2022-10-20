@@ -6,6 +6,7 @@ import {
 } from "@/common/components/wrappers/OppfolgingsplanPageSM";
 import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { OppfolgingsplanOversikt } from "@/common/components/oversikt/OppfolgingsplanOversikt";
+import { SendTilGodkjenning } from "../../../sykmeldt/components/oppfolgingsplan/sendTilGodkjenning/SendTilGodkjenning";
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
@@ -13,6 +14,7 @@ const Seplanen: NextPage = () => {
   return (
     <OppfolgingsplanPageSM page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
+      <SendTilGodkjenning oppfolgingsplan={aktivPlan} />
     </OppfolgingsplanPageSM>
   );
 };
