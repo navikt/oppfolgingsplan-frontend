@@ -17,11 +17,11 @@ import { fetchNarmesteLedereSM } from "@/server/data/sykmeldt/fetchNarmesteLeder
 import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
 
 const findNarmesteLeder = (
-  fnr: string,
-  virksomhetsnummer: string,
-  narmesteLedere: NarmesteLeder[]
+  fnr?: string,
+  virksomhetsnummer?: string | null,
+  narmesteLedere?: NarmesteLeder[]
 ): NarmesteLeder | undefined => {
-  return narmesteLedere.find(
+  return narmesteLedere?.find(
     (leder) =>
       leder.fnr == fnr &&
       leder.virksomhetsnummer == virksomhetsnummer &&
@@ -59,8 +59,12 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
       (oppfolgingsplan) => {
         const aktivNarmesteLeder = findNarmesteLeder(
-          res.person.fnr!!,
-          oppfolgingsplan.virksomhet?.virksomhetsnummer!!,
+          res.narmesteLedere.find(
+            (leder) =>
+              leder.virksomhetsnummer ==
+              oppfolgingsplan.virksomhet?.virksomhetsnummer
+          )?.fnr,
+          oppfolgingsplan.virksomhet?.virksomhetsnummer,
           res.narmesteLedere
         );
 

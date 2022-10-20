@@ -2,11 +2,14 @@ import { get, post } from "@/common/api/axios/axios";
 import {
   useApiBasePath,
   useOppfolgingsplanRouteId,
+  useOppfolgingsplanUrl,
 } from "@/common/hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../../../schema/opprettOppfoelgingsdialogSchema";
 import { useSWRConfig } from "swr";
 import useSWRImmutable from "swr/immutable";
+import { GodkjennPlanData } from "../../../../schema/godkjennPlanSchema";
+import { useRouter } from "next/router";
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
 
@@ -49,6 +52,25 @@ export const useKopierOppfolgingsplanSM = () => {
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanIdToCopy}/kopier`
     );
     await mutate(OPPFOLGINGSPLANER_SM);
+  };
+};
+
+export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
+  const apiBasePath = useApiBasePath();
+  const { mutate } = useSWRConfig();
+  const godkjentPlanUrl = useOppfolgingsplanUrl(
+    oppfolgingsplanId,
+    "godkjenning"
+  );
+  const router = useRouter();
+
+  return async (data: GodkjennPlanData) => {
+    await post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
+      data
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+    await router.push(godkjentPlanUrl);
   };
 };
 

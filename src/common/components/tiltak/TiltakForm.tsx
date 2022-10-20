@@ -103,16 +103,16 @@ export const TiltakForm = ({
               name="fom"
               label={"Startdato (obligatorisk)"}
               defaultValue={defaultFormValues?.fom}
-              error={errors.fom?.message}
-              errorMessage={"Du må velge startdato"}
+              errorMessageToDisplay={errors.fom?.message}
+              requiredErrorMessage={"Du må velge startdato"}
             />
 
             <DatoVelger
               name="tom"
               label={"Sluttdato (obligatorisk)"}
               defaultValue={defaultFormValues?.tom}
-              error={errors.tom?.message}
-              errorMessage={"Du må velge sluttdato"}
+              errorMessageToDisplay={errors.tom?.message}
+              requiredErrorMessage={"Du må velge sluttdato"}
             />
           </DateRow>
 

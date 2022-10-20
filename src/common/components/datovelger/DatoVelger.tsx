@@ -5,6 +5,8 @@ import nb from "date-fns/locale/nb";
 import { TextField } from "@navikt/ds-react";
 import styled from "styled-components";
 import { Controller, useFormContext } from "react-hook-form";
+import { FieldPathValue } from "react-hook-form/dist/types/path";
+import { Validate } from "react-hook-form/dist/types/validator";
 
 registerLocale("nb", nb);
 
@@ -12,8 +14,11 @@ interface Props {
   name: string;
   label: string;
   defaultValue?: Date | null;
-  error?: string;
-  errorMessage: string;
+  errorMessageToDisplay?: string;
+  requiredErrorMessage: string;
+  validate?:
+    | Validate<FieldPathValue<any, any>>
+    | Record<string, Validate<FieldPathValue<any, any>>>;
 }
 
 const SpacedTextField = styled(TextField)`
@@ -25,15 +30,16 @@ export const DatoVelger = ({
   label,
   name,
   defaultValue,
-  error,
-  errorMessage,
+  errorMessageToDisplay,
+  requiredErrorMessage,
+  validate,
 }: Props) => {
   const { control } = useFormContext();
 
   return (
     <Controller
       control={control}
-      rules={{ required: errorMessage }}
+      rules={{ required: requiredErrorMessage, validate: validate }}
       name={name}
       defaultValue={defaultValue}
       render={({ field: { onChange, onBlur, name, value, ref } }) => (
@@ -51,7 +57,7 @@ export const DatoVelger = ({
           customInput={
             <SpacedTextField
               label={label}
-              error={error}
+              error={errorMessageToDisplay}
               hideLabel={false}
               placeholder="DD.MM.ÅÅÅÅ"
             />
