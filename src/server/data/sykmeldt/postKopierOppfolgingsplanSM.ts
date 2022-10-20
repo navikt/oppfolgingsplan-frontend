@@ -4,7 +4,6 @@ import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
 import { kopierOppfolgingsplanSM } from "@/server/service/oppfolgingsplanService";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { handleQueryParamError } from "@/server/utils/errors";
-import {data} from "browserslist";
 
 export const postKopierOppfolgingsplanSM = async (
   req: IAuthenticatedRequest,
@@ -22,11 +21,7 @@ export const postKopierOppfolgingsplanSM = async (
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
 
-    await kopierOppfolgingsplanSM(
-      oppfolgingsplanTokenX,
-      oppfolgingsplanId,
-      data
-    );
+    await kopierOppfolgingsplanSM(oppfolgingsplanTokenX, oppfolgingsplanId);
   }
 
   next();
