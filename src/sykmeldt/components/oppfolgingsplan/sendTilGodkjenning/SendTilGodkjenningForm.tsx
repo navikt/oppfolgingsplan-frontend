@@ -166,8 +166,10 @@ export const SendTilGodkjenningForm = ({
           <SpacedDiv>
             <CheckboxGroup legend="Samtykke og deling" hideLegend>
               <Checkbox value={"true"} {...register("delMedNAV")}>
-                Jeg vil dele planen med NAV når Kjetil Hansen har godkjent den
-                (valgfritt)
+                Jeg vil dele planen med NAV når{" "}
+                {oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn ||
+                  "lederen min"}{" "}
+                har godkjent den (valgfritt)
               </Checkbox>
               <Checkbox
                 value={"true"}
