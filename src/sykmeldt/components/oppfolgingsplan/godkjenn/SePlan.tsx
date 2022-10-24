@@ -1,3 +1,4 @@
+import { FileContent } from "@navikt/ds-icons";
 import { Button, Modal } from "@navikt/ds-react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -17,7 +18,11 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
 
   return (
     <span>
-      <Button variant="tertiary" onClick={() => setOpen(true)}>
+      <Button
+        icon={<FileContent />}
+        variant="tertiary"
+        onClick={() => setOpen(true)}
+      >
         Se plan
       </Button>
       <Modal
