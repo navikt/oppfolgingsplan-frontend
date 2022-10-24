@@ -18,7 +18,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
   const pageToDisplay = statusPageToDisplay(oppfolgingsplan);
 
   switch (pageToDisplay) {
-    case "GODKJENTPLANSENDT": {
+    case "GODKJENNPLANSENDT": {
       return <div>TODO GODKJENTPLANSENDT</div>;
     }
     case "GODKJENNPLANAVSLATTOGGODKJENT": {

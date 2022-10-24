@@ -80,7 +80,7 @@ const skalViseMeldingOmTvangsGodkjenning = (
 };
 
 export type StatusPageToDisplay =
-  | "GODKJENTPLANSENDT"
+  | "GODKJENNPLANSENDT"
   | "GODKJENNPLANAVSLATTOGGODKJENT"
   | "MOTTATTGODKJENNING"
   | "GODKJENNPLANAVSLATT"
@@ -97,7 +97,7 @@ export const statusPageToDisplay = (
   //Til-godkjenning sider
   if (erPlanTilGodkjenning(oppfolgingsplan)) {
     if (!harMottattGodkjenninger(oppfolgingsplan)) {
-      return "GODKJENTPLANSENDT";
+      return "GODKJENNPLANSENDT";
     }
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
       return "GODKJENNPLANAVSLATTOGGODKJENT";
@@ -133,7 +133,7 @@ export const getStatusPageTitleAndHeading = (
   oppfolgingsplan?: Oppfolgingsplan
 ): TitleAndHeading => {
   switch (statusPageToDisplay(oppfolgingsplan)) {
-    case "GODKJENTPLANSENDT": {
+    case "GODKJENNPLANSENDT": {
       return {
         title: `Status på oppfølgingsplan`,
         heading: `Sendt til godkjenning`,
