@@ -1,6 +1,6 @@
 import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
-import { GjorEndringerKnapp } from "./GjorEndringerKnapp";
+import { AvbrytPlanKnapp } from "./AvbrytPlanKnapp";
 import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "./GodkjennPlanTidspunkter";
 import { SePlan } from "./SePlan";
@@ -20,7 +20,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
       <GodkjennPlanTidspunkter oppfolgingsplan={oppfolgingsplan} />
       <div>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
-        <GjorEndringerKnapp oppfolgingsplanId={oppfolgingsplan.id} />
+        <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </div>
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}

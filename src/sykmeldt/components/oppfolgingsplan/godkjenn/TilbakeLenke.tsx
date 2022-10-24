@@ -1,12 +1,13 @@
 import { useLandingUrl } from "@/common/hooks/routeHooks";
-import Link from "next/link";
+import { Link } from "@navikt/ds-react";
+import NextLink from "next/link";
 
 export const TilbakeLenke = () => {
   const landingPage = useLandingUrl();
 
   return (
-    <div>
-      <Link href={landingPage}>Tilbake til oppfølgingsplaner</Link>
-    </div>
+    <NextLink href={landingPage} passHref={true}>
+      <Link>Tilbake til oppfølgingsplaner</Link>
+    </NextLink>
   );
 };

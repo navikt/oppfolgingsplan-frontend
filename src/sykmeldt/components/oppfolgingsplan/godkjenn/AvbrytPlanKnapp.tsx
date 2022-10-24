@@ -7,7 +7,7 @@ interface Props {
   oppfolgingsplanId: number;
 }
 
-export const GjorEndringerKnapp = ({ oppfolgingsplanId }: Props) => {
+export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
   const [visBekreftelse, setVisBekreftelse] = useState(false);
   const avbrytDialog = useAvbrytOppfolgingsplanSM();
 
