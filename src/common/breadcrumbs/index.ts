@@ -34,7 +34,7 @@ export function createBreadcrumbsSM(pathname: string) {
     case "/sykmeldt/[oppfolgingsdialogId]/arbeidsoppgaver":
     case "/sykmeldt/[oppfolgingsdialogId]/tiltak":
     case "/sykmeldt/[oppfolgingsdialogId]/seplanen":
-    case "/sykmeldt/[oppfolgingsdialogId]/godkjenning":
+    case "/sykmeldt/[oppfolgingsdialogId]":
       return oppfolgingsplanBreadcrumbSM();
     default:
       return [];

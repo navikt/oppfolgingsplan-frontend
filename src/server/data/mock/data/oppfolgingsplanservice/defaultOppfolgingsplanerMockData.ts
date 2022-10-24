@@ -2,7 +2,7 @@ import { leggTilDagerPaDato } from "@/common/utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
-const enableTilGodkjenningMock = false;
+const enableTilGodkjenningMock = true;
 const today = new Date();
 
 export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
@@ -21,8 +21,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           {
             godkjent: false,
             godkjentAv: {
-              navn: "Labben Rekemester",
-              fnr: "110110110110",
+              navn: "Albus Dumbledore",
+              fnr: "11011011011",
               epost: null,
               tlf: null,
               sistInnlogget: null,

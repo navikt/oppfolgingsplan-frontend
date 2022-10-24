@@ -14,7 +14,7 @@ export const useNarmesteLedereSM = () => {
     get<NarmesteLeder[]>(`${apiBasePath}/narmesteledere/${sykmeldtFnr}`);
 
   const { data, error } = useSWRImmutable(
-    NARMESTELEDERE_SM,
+    !!sykmeldtFnr ? NARMESTELEDERE_SM : null,
     fetchNarmesteLedere
   );
 
