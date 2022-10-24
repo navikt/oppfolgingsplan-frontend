@@ -30,11 +30,7 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
 
   return (
     <SpacedDiv>
-      <StatusHeader
-        svgUrl={HakeGronnLysImage}
-        tittel={"Oppfølgingsplanen"}
-        mediumIcon={true}
-      />
+      <StatusHeader svgUrl={HakeGronnLysImage} tittel={"Oppfølgingsplanen"} />
 
       {godkjentPlan.tvungenGodkjenning ? (
         <ForcedApprovedOppfolgingsplan

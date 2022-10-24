@@ -1,6 +1,7 @@
 import { Heading } from "@navikt/ds-react";
 import Image from "next/image";
 import styled from "styled-components";
+import { ImageContainer } from "@/common/components/wrappers/ImageContainer";
 
 const CenteredContainer = styled.div`
   margin-top: 1rem;
@@ -18,35 +19,16 @@ const Strek = styled.hr`
 
 interface Props {
   svgUrl: string;
-  liteikon?: Boolean;
-  mediumIcon?: Boolean;
   tittel: string;
 }
 
-export const StatusHeader = ({
-  svgUrl,
-  tittel,
-  liteikon,
-  mediumIcon,
-}: Props) => {
-  const iconSize = () => {
-    if (liteikon) {
-      return 30;
-    } else if (mediumIcon) {
-      return 60;
-    } else {
-      return 120;
-    }
-  };
+export const StatusHeader = ({ svgUrl, tittel }: Props) => {
   return (
     <CenteredContainer>
-      <Image
-        src={svgUrl}
-        alt={""}
-        layout={"fixed"}
-        height={iconSize()}
-        width={iconSize()}
-      />
+      <ImageContainer width={"5rem"}>
+        <Image src={svgUrl} alt={""} layout={"responsive"} />
+      </ImageContainer>
+
       <Heading size={"medium"}>{tittel}</Heading>
       <Strek />
     </CenteredContainer>

@@ -8,7 +8,7 @@ interface Props {
 export const BothApprovedOppfolgingsplan = ({ narmesteLeder }: Props) => {
   return (
     <BodyShort spacing>
-      Denne versjonen av planen er godkjent av ${narmesteLeder.navn} og deg.
+      Denne versjonen av planen er godkjent av {narmesteLeder.navn} og deg.
     </BodyShort>
   );
 };
