@@ -80,9 +80,9 @@ const skalViseMeldingOmTvangsGodkjenning = (
 };
 
 export type StatusPageToDisplay =
-  | "GODKJENNPLANSENDT"
-  | "GODKJENNPLANAVSLATTOGGODKJENT"
-  | "MOTTATTGODKJENNING"
+  | "SENDTPLANTILGODKJENNING"
+  | "MOTTATTFLEREGODKJENNINGER"
+  | "MOTTATTPLANTILGODKJENNING"
   | "GODKJENNPLANAVSLATT"
   | "TVANGSGODKJENT"
   | "GODKJENTPLANAVBRUTT"
@@ -97,12 +97,12 @@ export const statusPageToDisplay = (
   //Til-godkjenning sider
   if (erPlanTilGodkjenning(oppfolgingsplan)) {
     if (!harMottattGodkjenninger(oppfolgingsplan)) {
-      return "GODKJENNPLANSENDT";
+      return "SENDTPLANTILGODKJENNING";
     }
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
-      return "GODKJENNPLANAVSLATTOGGODKJENT";
+      return "MOTTATTFLEREGODKJENNINGER";
     } else if (erForsteGodkjenningGodkjent(oppfolgingsplan)) {
-      return "MOTTATTGODKJENNING";
+      return "MOTTATTPLANTILGODKJENNING";
     } else {
       return "GODKJENNPLANAVSLATT";
     }
@@ -133,19 +133,19 @@ export const getStatusPageTitleAndHeading = (
   oppfolgingsplan?: Oppfolgingsplan
 ): TitleAndHeading => {
   switch (statusPageToDisplay(oppfolgingsplan)) {
-    case "GODKJENNPLANSENDT": {
+    case "SENDTPLANTILGODKJENNING": {
       return {
         title: `Status på oppfølgingsplan`,
         heading: `Sendt til godkjenning`,
       };
     }
-    case "GODKJENNPLANAVSLATTOGGODKJENT": {
+    case "MOTTATTFLEREGODKJENNINGER": {
       return {
         title: `Status på oppfølgingsplan`,
         heading: `Mottatt endring`,
       };
     }
-    case "MOTTATTGODKJENNING": {
+    case "MOTTATTPLANTILGODKJENNING": {
       return {
         title: `Godkjenn ${oppfolgingsplan?.virksomhet?.navn}`,
         heading: `Du har mottatt en ny plan for ${oppfolgingsplan?.virksomhet?.navn}`,

@@ -18,13 +18,13 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
   const pageToDisplay = statusPageToDisplay(oppfolgingsplan);
 
   switch (pageToDisplay) {
-    case "GODKJENNPLANSENDT": {
+    case "SENDTPLANTILGODKJENNING": {
       return <div>TODO GODKJENTPLANSENDT</div>;
     }
-    case "GODKJENNPLANAVSLATTOGGODKJENT": {
+    case "MOTTATTFLEREGODKJENNINGER": {
       return <div>TODO GODKJENNPLANAVSLATTOGGODKJENT</div>;
     }
-    case "MOTTATTGODKJENNING": {
+    case "MOTTATTPLANTILGODKJENNING": {
       return <OppfolgingsdialogerGodkjenn oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENNPLANAVSLATT": {
