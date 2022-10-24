@@ -17,11 +17,7 @@ export const OppfolgingsplanStepper = ({ activeStep }: Props) => {
   const basePath = useOppfolgingsplanBasePath();
 
   return (
-    <StepperWithSpacing
-      aria-labelledby="stepper-heading"
-      activeStep={activeStep}
-      orientation="horizontal"
-    >
+    <StepperWithSpacing activeStep={activeStep} orientation="horizontal">
       <Link href={`${basePath}/arbeidsoppgaver`} passHref={true}>
         <Stepper.Step unsafe_index={0}>Arbeidsoppgaver</Stepper.Step>
       </Link>
