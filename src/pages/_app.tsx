@@ -44,7 +44,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ContentWrapperStyled>
         {/*<NotificationBar />*/}
         <InnerContentWrapperStyled>
-          <Component {...pageProps} />
+          <main role="main">
+            <Component {...pageProps} />
+          </main>
         </InnerContentWrapperStyled>
       </ContentWrapperStyled>
     </>
