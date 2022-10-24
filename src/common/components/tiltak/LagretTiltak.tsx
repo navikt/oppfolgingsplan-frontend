@@ -96,7 +96,7 @@ export const LagretTiltak = ({
     <SpacedPanel border={true}>
       <HeadingWithLabel>
         {createStatusLabel(tiltak.status)}
-        <Heading size={"medium"} level={"3"}>
+        <Heading size={"medium"} level={"4"}>
           {tiltak.tiltaknavn}
         </Heading>
       </HeadingWithLabel>
