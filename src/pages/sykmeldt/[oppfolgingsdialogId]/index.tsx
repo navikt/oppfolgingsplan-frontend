@@ -24,7 +24,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
     case "MOTTATTFLEREGODKJENNINGER": {
       return <div>TODO GODKJENNPLANAVSLATTOGGODKJENT</div>;
     }
-    case "MOTTATTPLANTILGODKJENNING": {
+    case "GODKJENNPLANMOTTATT": {
       return <OppfolgingsdialogerGodkjenn oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENNPLANAVSLATT": {

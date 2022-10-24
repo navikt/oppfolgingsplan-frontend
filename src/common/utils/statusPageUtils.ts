@@ -82,7 +82,7 @@ const skalViseMeldingOmTvangsGodkjenning = (
 export type StatusPageToDisplay =
   | "SENDTPLANTILGODKJENNING"
   | "MOTTATTFLEREGODKJENNINGER"
-  | "MOTTATTPLANTILGODKJENNING"
+  | "GODKJENNPLANMOTTATT"
   | "GODKJENNPLANAVSLATT"
   | "TVANGSGODKJENT"
   | "GODKJENTPLANAVBRUTT"
@@ -102,7 +102,7 @@ export const statusPageToDisplay = (
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
       return "MOTTATTFLEREGODKJENNINGER";
     } else if (erForsteGodkjenningGodkjent(oppfolgingsplan)) {
-      return "MOTTATTPLANTILGODKJENNING";
+      return "GODKJENNPLANMOTTATT";
     } else {
       return "GODKJENNPLANAVSLATT";
     }
@@ -145,7 +145,7 @@ export const getStatusPageTitleAndHeading = (
         heading: `Mottatt endring`,
       };
     }
-    case "MOTTATTPLANTILGODKJENNING": {
+    case "GODKJENNPLANMOTTATT": {
       return {
         title: `Godkjenn ${oppfolgingsplan?.virksomhet?.navn}`,
         heading: `Du har mottatt en ny plan for ${oppfolgingsplan?.virksomhet?.navn}`,
