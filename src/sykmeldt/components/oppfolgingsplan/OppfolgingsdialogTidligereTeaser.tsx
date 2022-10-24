@@ -1,8 +1,8 @@
-import React from "react";
-import { hentPlanStatus } from "@/common/utils/teaserUtils";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { useLandingUrl } from "@/common/hooks/routeHooks";
 import { OppfolgingsplanCard } from "@/common/components/oversikt/OppfolgingsplanCard";
+import { useOppfolgingsplanUrl } from "@/common/hooks/routeHooks";
+import { hentPlanStatus } from "@/common/utils/teaserUtils";
+import React from "react";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -10,13 +10,17 @@ interface Props {
 
 const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsplan }: Props) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
-  const landingUrl = useLandingUrl();
   const virksomhetsnavn =
     oppfolgingsplan.virksomhet?.navn || "Mangler navn på virksomhet";
 
+  const oppfolgingsplanUrl = useOppfolgingsplanUrl(
+    oppfolgingsplan.id,
+    "status"
+  );
+
   return (
     <OppfolgingsplanCard
-      href={`${landingUrl}/${oppfolgingsplan.id}/arbeidsoppgaver`}
+      href={oppfolgingsplanUrl}
       title={virksomhetsnavn}
       description={planStatus.tekst}
       image={planStatus.img}
