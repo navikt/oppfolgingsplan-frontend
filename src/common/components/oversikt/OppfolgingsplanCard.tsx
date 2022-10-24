@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { ReactNode } from "react";
 import { OppfolgingsplanPanel } from "@/common/components/oversikt/OppfolgingsplanPanel";
 import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
+import { ImageContainer } from "@/common/components/wrappers/ImageContainer";
 
 const PanelContent = styled.div`
   display: flex;
@@ -11,10 +12,6 @@ const PanelContent = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2rem;
-`;
-
-const ImageContainer = styled.div`
-  width: 5rem;
 `;
 
 interface Props {
@@ -47,14 +44,8 @@ export const OppfolgingsplanCard = ({
 
       <OppfolgingsplanPanel href={href}>
         <PanelContent>
-          <ImageContainer>
-            <Image
-              alt={""}
-              src={image}
-              layout={"fixed"}
-              height={80}
-              width={80}
-            />
+          <ImageContainer width={"4rem"}>
+            <Image alt={""} src={image} layout={"responsive"} />
           </ImageContainer>
 
           <div>
