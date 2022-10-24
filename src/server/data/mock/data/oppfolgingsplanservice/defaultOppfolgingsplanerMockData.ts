@@ -467,7 +467,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     id: 6456,
     sistEndretDato: "2020-02-20T11:31:29.837",
     opprettetDato: "2020-02-20",
-    status: "UNDER_ARBEID",
+    status: "AKTIV",
     virksomhet: {
       virksomhetsnummer: "123456789",
       navn: "",
