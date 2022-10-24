@@ -6,6 +6,7 @@ import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { AvbrytPlanKnapp } from "../godkjenn/AvbrytPlanKnapp";
 import { SePlan } from "../godkjenn/SePlan";
 import { TidligereOppfolgingsplaner } from "../godkjenn/TidligereOppfolgingsplaner";
+import { TilbakeLenke } from "../godkjenn/TilbakeLenke";
 import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
 import { DelMedFastlegeKnapp } from "./DelMedFastlegeKnapp";
 import { DelMedNavKnapp } from "./DelMedNavKnapp";
@@ -66,6 +67,8 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
+
+      <TilbakeLenke />
     </SpacedDiv>
   );
 };
