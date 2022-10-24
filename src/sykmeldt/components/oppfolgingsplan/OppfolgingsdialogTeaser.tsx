@@ -39,7 +39,7 @@ const OppfolgingsdialogTeaser = ({
   );
   const approveOppfolgingsplanUrl = useOppfolgingsplanUrl(
     oppfolgingsplan.id,
-    "godkjenning"
+    "status"
   );
 
   const pendingApproval =

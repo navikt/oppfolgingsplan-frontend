@@ -92,10 +92,7 @@ export const useDelOppfolgingsplanMedFastlegeSM = () => {
 export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
   const apiBasePath = useApiBasePath();
   const { mutate } = useSWRConfig();
-  const godkjentPlanUrl = useOppfolgingsplanUrl(
-    oppfolgingsplanId,
-    "godkjenning"
-  );
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
   const router = useRouter();
 
   return async (data: GodkjennPlanData) => {
@@ -104,7 +101,7 @@ export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
       data
     );
     await mutate(OPPFOLGINGSPLANER_SM);
-    await router.push(godkjentPlanUrl);
+    await router.push(statusUrl);
   };
 };
 

@@ -66,14 +66,15 @@ export const useOppfolgingsplanBasePath = (): string => {
 
 export const useOppfolgingsplanUrl = (
   oppfolgingsplanId: number,
-  page: "arbeidsoppgaver" | "tiltak" | "seplanen" | "godkjenning"
+  page: "arbeidsoppgaver" | "tiltak" | "seplanen" | "status"
 ) => {
   const landingPage = useLandingUrl();
   switch (page) {
+    case "status":
+      return `${landingPage}/${oppfolgingsplanId}`;
     case "arbeidsoppgaver":
     case "tiltak":
     case "seplanen":
-    case "godkjenning":
       return `${landingPage}/${oppfolgingsplanId}/${page}`;
     default:
       return landingPage;
