@@ -131,6 +131,39 @@ export async function kopierOppfolgingsplanSM(
   );
 }
 
+export async function avbrytOppfolgingsplanSM(
+  accessToken: string,
+  oppfolgingsplanId: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/avbryt`,
+    {},
+    { accessToken }
+  );
+}
+
+export async function delMedNavSM(
+  accessToken: string,
+  oppfolgingsplanId: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/delmednav`,
+    {},
+    { accessToken }
+  );
+}
+
+export async function delMedFastlegeSM(
+  accessToken: string,
+  oppfolgingsplanId: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/delmedfastlege`,
+    {},
+    { accessToken }
+  );
+}
+
 export async function godkjennOppfolgingsplanSM(
   accessToken: string,
   oppfolgingsplanId: string,
