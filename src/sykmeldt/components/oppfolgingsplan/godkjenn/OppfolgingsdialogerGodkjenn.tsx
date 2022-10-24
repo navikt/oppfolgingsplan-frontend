@@ -1,44 +1,32 @@
-import { Button } from "@navikt/ds-react";
-import { GodkjennPlanTidspunkt } from "./GodkjennPlanTidspunkt";
+import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
-import styled from "styled-components";
-import Link from "next/link";
-import { useLandingUrl } from "@/common/hooks/routeHooks";
-import { TidligereOppfolgingsplaner } from "./TidligereOppfolgingsplaner";
+import { GjorEndringerKnapp } from "./GjorEndringerKnapp";
 import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
+import { GodkjennPlanTidspunkter } from "./GodkjennPlanTidspunkter";
 import { SePlan } from "./SePlan";
+import { TidligereOppfolgingsplaner } from "./TidligereOppfolgingsplaner";
+import { TilbakeLenke } from "./TilbakeLenke";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
 }
 
-const Container = styled.div`
-  margin: 0 0 3rem 0;
-`;
-
 export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
-  const landingPage = useLandingUrl();
-
   return (
-    <Container>
+    <SpacedDiv>
       <p>
         {`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
       </p>
-      <GodkjennPlanTidspunkt
-        avvisDialog={() => {}}
-        oppfolgingsdialog={oppfolgingsplan}
-      />
+      <GodkjennPlanTidspunkter oppfolgingsplan={oppfolgingsplan} />
       <div>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
-        <Button variant="tertiary">Gjør endringer</Button>
+        <GjorEndringerKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </div>
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
       <GodkjennOppfolgingsplan />
-      <div>
-        <Link href={landingPage}>Tilbake til oppfølgingsplaner</Link>
-      </div>
-    </Container>
+      <TilbakeLenke />
+    </SpacedDiv>
   );
 };
