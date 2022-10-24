@@ -55,6 +55,40 @@ export const useKopierOppfolgingsplanSM = () => {
   };
 };
 
+export const useAvbrytOppfolgingsplanSM = () => {
+  const apiBasePath = useApiBasePath();
+  const { mutate } = useSWRConfig();
+
+  return async (oppfolgingsplanId: number) => {
+    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
+};
+
+export const useDelOppfolgingsplanMedNavSM = () => {
+  const apiBasePath = useApiBasePath();
+  const { mutate } = useSWRConfig();
+
+  return async (oppfolgingsplanId: number) => {
+    await post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/delmednav`
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
+};
+
+export const useDelOppfolgingsplanMedFastlegeSM = () => {
+  const apiBasePath = useApiBasePath();
+  const { mutate } = useSWRConfig();
+
+  return async (oppfolgingsplanId: number) => {
+    await post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/delmedfastlege`
+    );
+    await mutate(OPPFOLGINGSPLANER_SM);
+  };
+};
+
 export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
   const apiBasePath = useApiBasePath();
   const { mutate } = useSWRConfig();
