@@ -3,6 +3,7 @@ import { Row } from "@/common/components/wrappers/Row";
 import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 import { HakeGronnLysImage } from "@/common/images/imageComponents";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
+import { AvbrytPlanKnapp } from "../godkjenn/AvbrytPlanKnapp";
 import { SePlan } from "../godkjenn/SePlan";
 import { TidligereOppfolgingsplaner } from "../godkjenn/TidligereOppfolgingsplaner";
 import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
@@ -52,6 +53,7 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
       <Row marginBottom={"2rem"}>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <LastNed oppfolgingsplanId={oppfolgingsplan.id} />
+        <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>
 
       <Row marginBottom={"2rem"}>
