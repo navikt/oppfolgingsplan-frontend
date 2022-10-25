@@ -467,21 +467,21 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     id: 6456,
     sistEndretDato: "2020-02-20T11:31:29.837",
     opprettetDato: "2020-02-20",
-    status: "UTDATERT",
+    status: "AKTIV",
     virksomhet: {
-      virksomhetsnummer: "110110110",
+      virksomhetsnummer: "123456789",
       navn: "",
     },
     godkjentPlan: {
       opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
       gyldighetstidspunkt: {
-        // fom: leggTilDagerPaDato(today, -7).toJSON(),
-        // tom: leggTilDagerPaDato(today, 7).toJSON(),
-        fom: "2019-05-10T11:31:29.837",
-        tom: "2019-07-15T11:31:29.837",
+        fom: leggTilDagerPaDato(today, -7).toJSON(),
+        tom: leggTilDagerPaDato(today, 7).toJSON(),
+        // fom: "2019-05-10T11:31:29.837",
+        // tom: "2019-07-15T11:31:29.837",
         evalueres: leggTilDagerPaDato(today, 14).toJSON(),
       },
-      tvungenGodkjenning: true,
+      tvungenGodkjenning: false,
       deltMedNAVTidspunkt: null,
       deltMedNAV: false,
       deltMedFastlegeTidspunkt: null,
@@ -491,7 +491,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     },
     godkjenninger: [
       {
-        godkjent: true,
+        godkjent: false,
         godkjentAv: {
           navn: "Labben Rekemester",
           fnr: "110110110110",

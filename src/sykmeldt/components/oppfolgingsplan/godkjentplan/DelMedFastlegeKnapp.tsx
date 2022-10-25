@@ -9,7 +9,7 @@ export const DelMedFastlegeKnapp = ({ oppfolgingsplanId }: Props) => {
   const delOppfolgingsplanMedFastlege = useDelOppfolgingsplanMedFastlegeSM();
   return (
     <Button onClick={() => delOppfolgingsplanMedFastlege(oppfolgingsplanId)}>
-      Del med NAV
+      Del med fastlege
     </Button>
   );
 };

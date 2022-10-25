@@ -8,6 +8,7 @@ import {
   getStatusPageTitleAndHeading,
   statusPageToDisplay,
 } from "@/common/utils/statusPageUtils";
+import { GodkjentPlan } from "../../../sykmeldt/components/oppfolgingsplan/godkjentplan/GodkjentPlan";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -37,7 +38,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
       return <div>TODO GODKJENTPLANAVBRUTT</div>;
     }
     case "GODKJENTPLAN": {
-      return <div>TODO GODKJENTPLAN</div>;
+      return <GodkjentPlan oppfolgingsplan={oppfolgingsplan} />;
     }
     default: {
       return <div>TODO INGEN GODKJENNING ELLER GODKJENT</div>;

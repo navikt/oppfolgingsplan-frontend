@@ -8,6 +8,7 @@ import { hentPlanStatus } from "@/common/utils/teaserUtils";
 import { useOppfolgingsplanUrl } from "@/common/hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsplanCard } from "@/common/components/oversikt/OppfolgingsplanCard";
+import { statusPageToDisplay } from "@/common/utils/statusPageUtils";
 
 const texts = {
   tilGodkjenning: "Til godkjenning",
@@ -37,18 +38,19 @@ const OppfolgingsdialogTeaser = ({
     oppfolgingsplan.id,
     "arbeidsoppgaver"
   );
-  const approveOppfolgingsplanUrl = useOppfolgingsplanUrl(
-    oppfolgingsplan.id,
-    "status"
-  );
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplan.id, "status");
+
+  const linkToEditPage =
+    statusPageToDisplay(oppfolgingsplan) == "INGENPLANTILGODKJENNING";
 
   const pendingApproval =
     inneholderGodkjenninger(oppfolgingsplan) &&
-    !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan);
+    !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan) &&
+    !oppfolgingsplan.godkjentPlan;
 
   return (
     <OppfolgingsplanCard
-      href={pendingApproval ? approveOppfolgingsplanUrl : newOppfolgingsplanUrl}
+      href={linkToEditPage ? newOppfolgingsplanUrl : statusUrl}
       title={virksomhetsnavn}
       subtitle={pendingApproval ? texts.tilGodkjenning : ""}
       image={planStatus.img}
