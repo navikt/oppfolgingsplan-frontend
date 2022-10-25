@@ -1,3 +1,4 @@
+import { Heading } from "@navikt/ds-react";
 import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
 import { DelMedFastlegeKnapp } from "./DelMedFastlegeKnapp";
 import { DelMedNavKnapp } from "./DelMedNavKnapp";
@@ -6,7 +7,6 @@ import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
 import {Oppfolgingsplan} from "../../../schema/oppfolgingsplanSchema";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import {StatusHeader} from "../../blocks/wrappers/old/StatusHeader";
 import {HakeGronnLysImage} from "../../blocks/images/imageComponents";
 import {GodkjennPlanTidspunkter} from "../GodkjennPlanTidspunkter";
 import { Row } from "components/blocks/wrappers/Row";
@@ -33,7 +33,11 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
 
   return (
     <SpacedDiv>
-      <StatusHeader svgUrl={HakeGronnLysImage} tittel={"Oppfølgingsplanen"} />
+      <SpacedDiv marginTop={"2rem"}>
+        <Heading size={"medium"} level={"2"} spacing>
+          Godkjent plan for {oppfolgingsplan.virksomhet?.navn}
+        </Heading>
+      </SpacedDiv>
 
       {godkjentPlan.tvungenGodkjenning ? (
         <ForcedApprovedOppfolgingsplan
@@ -59,6 +63,10 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
         <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>
 
+      <TidligereOppfolgingsplaner
+        avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
+      />
+
       <Row marginBottom={"2rem"}>
         {!oppfolgingsplan.godkjentPlan.deltMedNAV && (
           <DelMedNavKnapp oppfolgingsplanId={oppfolgingsplan.id} />
@@ -69,10 +77,6 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
       </Row>
 
       <HvaSkjerNa />
-
-      <TidligereOppfolgingsplaner
-        avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
-      />
 
       <TilbakeLenke />
     </SpacedDiv>

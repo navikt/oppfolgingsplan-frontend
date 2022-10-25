@@ -1,6 +1,6 @@
 import { BildeTekstLinje } from "./BildeTekstLinje";
 import {Gyldighetstidspunkt} from "../../schema/oppfolgingsplanSchema";
-import {BubbleImage, CalendarImage} from "../blocks/images/imageComponents";
+import {CalendarImage, StjerneImage} from "../blocks/images/imageComponents";
 import {toDateMedMaanedNavn} from "../../utils/dateUtils";
 
 interface Props {
@@ -17,7 +17,7 @@ export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {
         )} - ${toDateMedMaanedNavn(gyldighetstidspunkt.tom)}`}
       />
       <BildeTekstLinje
-        imgUrl={BubbleImage}
+        imgUrl={StjerneImage}
         tekst={`Planen evalueres: ${toDateMedMaanedNavn(
           gyldighetstidspunkt.evalueres
         )}`}
