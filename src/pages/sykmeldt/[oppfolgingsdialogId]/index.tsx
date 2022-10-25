@@ -9,6 +9,7 @@ import {
   statusPageToDisplay,
 } from "@/common/utils/statusPageUtils";
 import { GodkjentPlan } from "../../../sykmeldt/components/oppfolgingsplan/godkjentplan/GodkjentPlan";
+import { IngenPlanTilGodkjenning } from "../../../sykmeldt/components/oppfolgingsplan/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -38,7 +39,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
       return <GodkjentPlan oppfolgingsplan={oppfolgingsplan} />;
     }
     default: {
-      return <div>TODO INGEN GODKJENNING ELLER GODKJENT</div>;
+      return <IngenPlanTilGodkjenning />;
     }
   }
 };
