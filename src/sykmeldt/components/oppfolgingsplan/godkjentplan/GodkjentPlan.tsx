@@ -4,6 +4,7 @@ import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 import { HakeGronnLysImage } from "@/common/images/imageComponents";
 import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
 import { AvbrytPlanKnapp } from "../godkjenn/AvbrytPlanKnapp";
+import { GodkjennPlanTidspunkter } from "../godkjenn/GodkjennPlanTidspunkter";
 import { SePlan } from "../godkjenn/SePlan";
 import { TidligereOppfolgingsplaner } from "../godkjenn/TidligereOppfolgingsplaner";
 import { TilbakeLenke } from "../godkjenn/TilbakeLenke";
@@ -42,6 +43,10 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
           narmesteLeder={oppfolgingsplan.arbeidsgiver.naermesteLeder}
         />
       )}
+
+      <GodkjennPlanTidspunkter
+        gyldighetstidspunkt={godkjentPlan.gyldighetstidspunkt!}
+      />
 
       <GodkjentPlanDeltBekreftelse
         godkjentPlan={oppfolgingsplan.godkjentPlan}

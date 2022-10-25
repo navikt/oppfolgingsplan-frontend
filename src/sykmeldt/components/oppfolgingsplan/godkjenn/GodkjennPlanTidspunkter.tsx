@@ -1,32 +1,25 @@
 import { BubbleImage, CalendarImage } from "@/common/images/imageComponents";
 import { toDateMedMaanedNavn } from "@/common/utils/dateUtils";
-import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
+import { Gyldighetstidspunkt } from "../../../../schema/oppfolgingsplanSchema";
 import { BildeTekstLinje } from "./BildeTekstLinje";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  gyldighetstidspunkt: Gyldighetstidspunkt;
 }
 
-export const GodkjennPlanTidspunkter = ({ oppfolgingsplan }: Props) => {
-  const gyldighetstidspunkt =
-    oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
-
-  if (!gyldighetstidspunkt) {
-    return null;
-  }
-
+export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {
   return (
     <>
       <BildeTekstLinje
         imgUrl={CalendarImage}
         tekst={`Planens varighet: ${toDateMedMaanedNavn(
           gyldighetstidspunkt?.fom
-        )} - ${toDateMedMaanedNavn(gyldighetstidspunkt?.tom)}`}
+        )} - ${toDateMedMaanedNavn(gyldighetstidspunkt.tom)}`}
       />
       <BildeTekstLinje
         imgUrl={BubbleImage}
         tekst={`Planen evalueres: ${toDateMedMaanedNavn(
-          gyldighetstidspunkt?.evalueres
+          gyldighetstidspunkt.evalueres
         )}`}
       />
     </>
