@@ -130,18 +130,6 @@ export const finnAktiveOppfolgingsplaner = (
   });
 };
 
-//todo må vi ha det siste innlogging greiene?
-export const finnBrukersSisteInnlogging = (
-  oppfolgingsplaner: Oppfolgingsplan[]
-) => {
-  const innlogginger = oppfolgingsplaner.map((oppfolgingsplan) => {
-    return oppfolgingsplan.arbeidstaker.sistInnlogget
-      ? new Date(oppfolgingsplan.arbeidstaker.sistInnlogget).getTime()
-      : new Date().getTime();
-  });
-  return new Date(Math.max.apply(null, innlogginger));
-};
-
 export const erAktivOppfolgingsplanOpprettetMedArbeidsgiver = (
   oppfolgingsplaner: Oppfolgingsplan[],
   virksomhetsnummer: string
@@ -175,20 +163,6 @@ export const erOppfolgingsplanOpprettbarMedArbeidsgiver = (
   );
 };
 
-export const erOppfolgingsplanOpprettbarMedMinstEnArbeidsgiver = (
-  oppfolgingsplaner: Oppfolgingsplan[],
-  arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[]
-) => {
-  return (
-    arbeidsgivere.filter((arbeidsgiver) => {
-      return erOppfolgingsplanOpprettbarMedArbeidsgiver(
-        oppfolgingsplaner,
-        arbeidsgiver
-      );
-    }).length > 0
-  );
-};
-
 export const erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere = (
   oppfolgingsplaner: Oppfolgingsplan[],
   sykmeldinger: Sykmelding[],
@@ -213,35 +187,6 @@ export const erOppfolgingsplanOpprettbarDirekte = (
     arbeidsgivere.length === 1 &&
     !harTidligereOppfolgingsplaner(oppfolgingsplaner)
   );
-};
-
-//Todo vurder om dette kan fjernes eller endres
-export const finnGodkjenteplanerAvbruttAvMotpartSidenSistInnlogging = (
-  oppfolgingsplaner: Oppfolgingsplan[]
-) => {
-  if (!oppfolgingsplaner) {
-    return [];
-  }
-  const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsplaner);
-  return oppfolgingsplaner
-    .filter((oppfolgingsplan) => {
-      const avbruttplan =
-        oppfolgingsplan.godkjentPlan &&
-        oppfolgingsplan.godkjentPlan.avbruttPlan;
-      return (
-        oppfolgingsplan.status === STATUS.AVBRUTT &&
-        oppfolgingsplan.arbeidsgiver?.naermesteLeder &&
-        avbruttplan?.av.fnr ===
-          oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr &&
-        new Date(sisteInnlogging) < new Date(avbruttplan.tidspunkt)
-      );
-    })
-    .sort((o1, o2) => {
-      return (
-        getTime(o2.godkjentPlan?.avbruttPlan?.tidspunkt) -
-        getTime(o1.godkjentPlan?.avbruttPlan?.tidspunkt)
-      );
-    });
 };
 
 export const finnNyesteTidligereOppfolgingsplanMedVirksomhet = (
