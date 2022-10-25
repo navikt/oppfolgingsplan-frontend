@@ -31,9 +31,6 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
     case "GODKJENNPLANAVSLATT": {
       return <div>TODO GODKJENNPLANAVSLATT</div>;
     }
-    case "TVANGSGODKJENT": {
-      return <div>TODO TVANGSGODKJENT</div>;
-    }
     case "GODKJENTPLANAVBRUTT": {
       return <div>TODO GODKJENTPLANAVBRUTT</div>;
     }

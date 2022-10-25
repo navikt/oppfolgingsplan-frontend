@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import {
   finnAktiveOppfolgingsplaner,
-  finnGodkjenteplanerAvbruttAvMotpartSidenSistInnlogging,
   finnTidligereOppfolgingsplaner,
   harTidligereOppfolgingsplaner,
 } from "@/common/utils/oppfolgingplanUtils";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
-import { Alert, Button } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
@@ -51,20 +50,8 @@ const OppfolgingsdialogerVisning = ({
     narmesteLedere
   );
 
-  const dialogerAvbruttAvMotpartSidenSistInnlogging =
-    finnGodkjenteplanerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsplaner);
-
   return (
     <div>
-      {/*TODO se på dette greiene her*/}
-      {dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && (
-        <Alert variant={"info"}>
-          `$
-          {dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn} har
-          startet en ny oppfølgingsplan. Den gamle er arkivert.`
-        </Alert>
-      )}
-
       <OpprettOppfolgingsplanModal
         oppfolgingsplaner={oppfolgingsplaner}
         arbeidsgivere={arbeidsgivereForSykmeldinger}

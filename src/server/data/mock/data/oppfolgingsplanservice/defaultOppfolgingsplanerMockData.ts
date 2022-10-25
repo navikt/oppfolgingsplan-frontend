@@ -481,7 +481,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         // tom: "2019-07-15T11:31:29.837",
         evalueres: leggTilDagerPaDato(today, 14).toJSON(),
       },
-      tvungenGodkjenning: false,
+      tvungenGodkjenning: true,
       deltMedNAVTidspunkt: null,
       deltMedNAV: false,
       deltMedFastlegeTidspunkt: null,
@@ -489,29 +489,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       dokumentUuid: "12345678-1234-1234-1234-123456789abc",
       avbruttPlan: null,
     },
-    godkjenninger: [
-      {
-        godkjent: false,
-        godkjentAv: {
-          navn: "Labben Rekemester",
-          fnr: "110110110110",
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
-        beskrivelse: "Beskrivelse",
-        godkjenningsTidspunkt: "2022-10-10T10:46:06.041",
-        gyldighetstidspunkt: {
-          fom: "2022-10-20T10:46:06.041",
-          tom: "2022-10-29T10:46:06.041",
-          evalueres: "2022-11-01T10:46:06.041",
-        },
-        delMedNav: false,
-      },
-    ],
+    godkjenninger: [],
     arbeidsoppgaveListe: [
       {
         arbeidsoppgaveId: 6406,
@@ -924,8 +902,8 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       ],
     },
     sistEndretAv: {
-      navn: defaultNarmesteLedereMockData[0].navn,
-      fnr: defaultNarmesteLedereMockData[0].fnr,
+      navn: defaultNarmesteLedereMockData[1].navn,
+      fnr: defaultNarmesteLedereMockData[1].fnr,
       epost: null,
       tlf: null,
       sistInnlogget: null,

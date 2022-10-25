@@ -49,17 +49,6 @@ export const erForsteGodkjenningGodkjent = (
   );
 };
 
-export const foersteInnloggingSidenGodkjenning = (
-  planOpprettetTidspunkt: string,
-  sykmeldtSistInnlogget: string | null | undefined
-) => {
-  const sistInnlogget: Date = sykmeldtSistInnlogget
-    ? new Date(sykmeldtSistInnlogget)
-    : new Date();
-
-  return sistInnlogget < new Date(planOpprettetTidspunkt);
-};
-
 export const erPlanTilGodkjenning = (oppfolgingsplan: Oppfolgingsplan) => {
   return (
     harNaermesteLeder(oppfolgingsplan) &&
@@ -68,23 +57,11 @@ export const erPlanTilGodkjenning = (oppfolgingsplan: Oppfolgingsplan) => {
   );
 };
 
-const skalViseMeldingOmTvangsGodkjenning = (
-  oppfolgingsplan: Oppfolgingsplan
-) => {
-  return (
-    foersteInnloggingSidenGodkjenning(
-      oppfolgingsplan.godkjentPlan!!.opprettetTidspunkt,
-      oppfolgingsplan.arbeidstaker.sistInnlogget
-    ) && oppfolgingsplan.godkjentPlan!!.tvungenGodkjenning
-  );
-};
-
 export type StatusPageToDisplay =
   | "SENDTPLANTILGODKJENNING"
   | "MOTTATTFLEREGODKJENNINGER"
   | "GODKJENNPLANMOTTATT"
   | "GODKJENNPLANAVSLATT"
-  | "TVANGSGODKJENT"
   | "GODKJENTPLANAVBRUTT"
   | "GODKJENTPLAN"
   | "INGENPLANTILGODKJENNING";
@@ -110,14 +87,10 @@ export const statusPageToDisplay = (
 
   //Godkjent plan-sider
   if (harNaermesteLeder(oppfolgingsplan) && oppfolgingsplan.godkjentPlan) {
-    if (skalViseMeldingOmTvangsGodkjenning(oppfolgingsplan)) {
-      return "TVANGSGODKJENT";
+    if (oppfolgingsplan.godkjentPlan.avbruttPlan) {
+      return "GODKJENTPLANAVBRUTT";
     } else {
-      if (oppfolgingsplan.godkjentPlan.avbruttPlan) {
-        return "GODKJENTPLANAVBRUTT";
-      } else {
-        return "GODKJENTPLAN";
-      }
+      return "GODKJENTPLAN";
     }
   }
 
@@ -155,12 +128,6 @@ export const getStatusPageTitleAndHeading = (
       return {
         title: `Status på oppfølgingsplan`,
         heading: `Lederen din har noen forslag`,
-      };
-    }
-    case "TVANGSGODKJENT": {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Lederen din har laget en oppfølgingsplan`,
       };
     }
     case "GODKJENTPLANAVBRUTT": {
