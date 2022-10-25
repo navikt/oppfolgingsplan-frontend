@@ -12,12 +12,19 @@ interface Props {
 }
 
 export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
+  const gyldighetstidspunkt =
+    oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
+
+  if (!gyldighetstidspunkt) {
+    return null;
+  }
+
   return (
     <SpacedDiv>
       <p>
         {`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
       </p>
-      <GodkjennPlanTidspunkter oppfolgingsplan={oppfolgingsplan} />
+      <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
       <div>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
