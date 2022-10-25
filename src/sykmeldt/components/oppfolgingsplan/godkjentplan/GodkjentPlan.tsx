@@ -13,7 +13,7 @@ import { DelMedNavKnapp } from "./DelMedNavKnapp";
 import { ForcedApprovedOppfolgingsplan } from "./ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
-import { LastNed } from "./LastNed";
+import { AapnePlanSomPDF } from "./AapnePlanSomPDF";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -49,7 +49,7 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
 
       <Row marginBottom={"2rem"}>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
-        <LastNed oppfolgingsplanId={oppfolgingsplan.id} />
+        <AapnePlanSomPDF oppfolgingsplanId={oppfolgingsplan.id} />
         <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>
 
