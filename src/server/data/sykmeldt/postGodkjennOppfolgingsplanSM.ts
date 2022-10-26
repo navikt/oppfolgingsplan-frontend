@@ -1,9 +1,9 @@
 import { NextApiResponse } from "next";
-import { isMockBackend } from "@/common/publicEnv";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { godkjennOppfolgingsplanSM } from "@/server/service/oppfolgingsplanService";
+import { isMockBackend } from "environments/publicEnv";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { godkjennOppfolgingsplanSM } from "server/service/oppfolgingsplanService";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { handleQueryParamError } from "@/server/utils/errors";
+import { handleQueryParamError } from "server/utils/errors";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 
 export const postGodkjennOppfolgingsplanSM = async (

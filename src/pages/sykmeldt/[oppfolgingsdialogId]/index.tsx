@@ -1,15 +1,15 @@
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
-import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import Side from "@/common/components/wrappers/Side";
+import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { OppfolgingsdialogerGodkjenn } from "../../../sykmeldt/components/oppfolgingsplan/godkjenn/OppfolgingsdialogerGodkjenn";
+import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
 import {
   getStatusPageTitleAndHeading,
   statusPageToDisplay,
-} from "@/common/utils/statusPageUtils";
-import { GodkjentPlan } from "../../../sykmeldt/components/oppfolgingsplan/godkjentplan/GodkjentPlan";
-import { IngenPlanTilGodkjenning } from "../../../sykmeldt/components/oppfolgingsplan/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
+} from "utils/statusPageUtils";
+import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPlan";
+import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
+import Side from "components/blocks/wrappers/Side";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;

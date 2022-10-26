@@ -1,5 +1,5 @@
 import createError from "http-errors";
-import serverLogger from "@/server/utils/serverLogger";
+import serverLogger from "server/utils/serverLogger";
 
 interface IAuthorizationHeaders {
   Authorization: string;

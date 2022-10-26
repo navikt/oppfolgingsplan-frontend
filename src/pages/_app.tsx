@@ -1,9 +1,9 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import styled, { createGlobalStyle } from "styled-components";
-import { useAudience } from "@/common/hooks/routeHooks";
-import { BreadcrumbsAppenderSM } from "@/common/breadcrumbs/BreadcrumbsAppenderSM";
-import { BreadcrumbsAppenderAG } from "@/common/breadcrumbs/BreadcrumbsAppenderAG";
+import { useAudience } from "hooks/routeHooks";
+import {BreadcrumbsAppenderSM} from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
+import {BreadcrumbsAppenderAG} from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
 
 const GlobalStyle = createGlobalStyle`
   body {

@@ -1,7 +1,7 @@
-import { isMockBackend } from "@/common/publicEnv";
-import { delMedNavSM } from "@/server/service/oppfolgingsplanService";
-import { handleQueryParamError } from "@/server/utils/errors";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
+import { isMockBackend } from "environments/publicEnv";
+import { delMedNavSM } from "server/service/oppfolgingsplanService";
+import { handleQueryParamError } from "server/utils/errors";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { NextApiResponse } from "next";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 

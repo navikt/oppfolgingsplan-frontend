@@ -1,5 +1,5 @@
-import serverLogger from "@/server/utils/serverLogger";
-import { ApiErrorException, generalError } from "@/common/api/axios/errors";
+import serverLogger from "server/utils/serverLogger";
+import { ApiErrorException, generalError } from "api/axios/errors";
 import { grant } from "./tokenx.grant";
 
 export async function getTokenX(

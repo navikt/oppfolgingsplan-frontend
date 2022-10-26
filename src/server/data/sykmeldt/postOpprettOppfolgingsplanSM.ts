@@ -1,8 +1,8 @@
 import { NextApiResponse } from "next";
-import { isMockBackend } from "@/common/publicEnv";
-import serverLogger from "@/server/utils/serverLogger";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { createOppfolgingsplanSM } from "@/server/service/oppfolgingsplanService";
+import { isMockBackend } from "environments/publicEnv";
+import serverLogger from "server/utils/serverLogger";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { createOppfolgingsplanSM } from "server/service/oppfolgingsplanService";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 

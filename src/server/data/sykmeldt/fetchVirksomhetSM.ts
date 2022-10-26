@@ -1,15 +1,15 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
-import activeMockSM from "@/server/data/mock/activeMockSM";
-import { getVirksomhetSM } from "@/server/service/oppfolgingsplanService";
-import { handleSchemaParsingError } from "@/server/utils/errors";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import { isMockBackend } from "environments/publicEnv";
+import activeMockSM from "server/data/mock/activeMockSM";
+import { getVirksomhetSM } from "server/service/oppfolgingsplanService";
+import { handleSchemaParsingError } from "server/utils/errors";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import {
   Oppfolgingsplan,
   Virksomhet,
 } from "../../../schema/oppfolgingsplanSchema";
-import serverLogger from "@/server/utils/serverLogger";
+import serverLogger from "server/utils/serverLogger";
 
 const findAllVirksomhetsnummer = (oppfolgingsplaner: Oppfolgingsplan[]) => {
   const virksomhetsNummer = oppfolgingsplaner

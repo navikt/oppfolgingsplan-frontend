@@ -2,9 +2,9 @@ import {
   ApiErrorException,
   generalError,
   schemaParsingError,
-} from "@/common/api/axios/errors";
+} from "api/axios/errors";
 import { ZodError } from "zod";
-import { Audience } from "@/common/hooks/routeHooks";
+import { Audience } from "hooks/routeHooks";
 
 export function handleSchemaParsingError(
   audience: Audience,

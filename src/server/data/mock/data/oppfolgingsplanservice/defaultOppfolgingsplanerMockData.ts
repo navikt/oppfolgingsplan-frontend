@@ -1,5 +1,5 @@
-import { leggTilDagerPaDato } from "@/common/utils/dateUtils";
-import { defaultNarmesteLedereMockData } from "@/server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
+import { leggTilDagerPaDato } from "utils/dateUtils";
+import { defaultNarmesteLedereMockData } from "server/data/mock/data/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
 
 const enableTilGodkjenningMock = true;

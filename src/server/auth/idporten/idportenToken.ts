@@ -1,10 +1,10 @@
 import { NextApiResponse } from "next";
-import { IAuthenticatedRequest } from "@/server/api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
+import { IAuthenticatedRequest } from "server/api/IAuthenticatedRequest";
+import { isMockBackend } from "environments/publicEnv";
 import {
   ApiErrorException,
   loginRequiredError,
-} from "@/common/api/axios/errors";
+} from "api/axios/errors";
 import { validateToken } from "./verifyIdportenToken";
 
 async function getIdportenToken(

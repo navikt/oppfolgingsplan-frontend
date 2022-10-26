@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
-import Side from "@/common/components/wrappers/Side";
-import OppfolgingsplanContent from "../../sykmeldt/components/oppfolgingsplan/OppfolgingsplanContent";
-import { useOppfolgingsplanerSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { useSykmeldingerSM } from "@/common/api/queries/sykmeldt/sykmeldingerQueriesSM";
+import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanContent";
+import { useOppfolgingsplanerSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import Side from "components/blocks/wrappers/Side";
 
 const texts = {
   pageTitle: "Oppfølgingsplaner - Oversikt",
