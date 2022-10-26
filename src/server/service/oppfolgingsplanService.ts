@@ -223,6 +223,17 @@ export async function saveTiltak(
   );
 }
 
+export async function deleteOppgave(
+  accessToken: string,
+  arbeidsoppgaveId: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsoppgave/actions/${arbeidsoppgaveId}/slett`,
+    {},
+    { accessToken }
+  );
+}
+
 export async function saveOppgave(
   accessToken: string,
   oppfolgingsplanId: string,
