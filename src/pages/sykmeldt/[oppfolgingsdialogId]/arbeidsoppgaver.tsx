@@ -1,12 +1,13 @@
-import { NyArbeidsoppgave } from "@/common/components/arbeidsoppgaver/NyArbeidsoppgave";
-import { LagredeArbeidsoppgaver } from "@/common/components/arbeidsoppgaver/LagredeArbeidsoppgaver";
-import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+
+import { NextPage } from "next";
+import React from "react";
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "@/common/components/wrappers/OppfolgingsplanPageSM";
-import { NextPage } from "next";
-import React from "react";
+} from "components/blocks/wrappers/OppfolgingsplanPageSM";
+import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeidsoppgaver";
+import { NyArbeidsoppgave } from "components/arbeidsoppgaver/NyArbeidsoppgave";
 
 const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useAktivPlanSM();

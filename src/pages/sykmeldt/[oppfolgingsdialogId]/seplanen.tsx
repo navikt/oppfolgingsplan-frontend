@@ -1,12 +1,11 @@
 import { NextPage } from "next";
-import React from "react";
+import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { SendTilGodkjenning } from "../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenning";
+import { OppfolgingsplanOversikt } from "../../../components/seplanen/OppfolgingsplanOversikt";
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "@/common/components/wrappers/OppfolgingsplanPageSM";
-import { useAktivPlanSM } from "@/common/api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { OppfolgingsplanOversikt } from "@/common/components/oversikt/OppfolgingsplanOversikt";
-import { SendTilGodkjenning } from "../../../sykmeldt/components/oppfolgingsplan/sendTilGodkjenning/SendTilGodkjenning";
+} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();

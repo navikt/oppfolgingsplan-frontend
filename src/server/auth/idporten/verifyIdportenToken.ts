@@ -1,8 +1,8 @@
 import { Client, Issuer } from "openid-client";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 
-import serverLogger from "@/server/utils/serverLogger";
-import serverEnv from "@/server/utils/serverEnv";
+import serverLogger from "server/utils/serverLogger";
+import serverEnv from "server/utils/serverEnv";
 
 let _issuer: Issuer<Client>;
 let _remoteJWKSet: ReturnType<typeof createRemoteJWKSet>;

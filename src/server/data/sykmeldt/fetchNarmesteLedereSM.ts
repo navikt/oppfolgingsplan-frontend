@@ -1,10 +1,10 @@
-import { isMockBackend } from "@/common/publicEnv";
-import activeMockSM from "@/server/data/mock/activeMockSM";
-import { getNarmesteLedere } from "@/server/service/oppfolgingsplanService";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
+import { isMockBackend } from "environments/publicEnv";
+import activeMockSM from "server/data/mock/activeMockSM";
+import { getNarmesteLedere } from "server/service/oppfolgingsplanService";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { handleSchemaParsingError } from "@/server/utils/errors";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import { handleSchemaParsingError } from "server/utils/errors";
+import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 
 export const fetchNarmesteLedereSM = async (
   req: IAuthenticatedRequest,

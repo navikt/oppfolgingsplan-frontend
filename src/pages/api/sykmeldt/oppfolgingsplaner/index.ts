@@ -1,19 +1,19 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { ncOptions } from "@/server/utils/ncOptions";
+import { ncOptions } from "server/utils/ncOptions";
 import { withSentry } from "@sentry/nextjs";
-import getIdportenToken from "@/server/auth/idporten/idportenToken";
-import { fetchOppfolgingsplanerSM } from "@/server/data/sykmeldt/fetchOppfolgingsplanerSM";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import getIdportenToken from "server/auth/idporten/idportenToken";
+import { fetchOppfolgingsplanerSM } from "server/data/sykmeldt/fetchOppfolgingsplanerSM";
+import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import {
   Oppfolgingsplan,
   Person,
 } from "../../../../schema/oppfolgingsplanSchema";
-import { fetchPersonSM } from "@/server/data/sykmeldt/fetchPersonSM";
-import { fetchVirksomhetSM } from "@/server/data/sykmeldt/fetchVirksomhetSM";
-import { fetchKontaktinfoSM } from "@/server/data/sykmeldt/fetchKontaktinfoSM";
-import { fetchArbeidsforholdSM } from "@/server/data/sykmeldt/fetchArbeidsforholdSM";
-import { fetchNarmesteLedereSM } from "@/server/data/sykmeldt/fetchNarmesteLedereSM";
+import { fetchPersonSM } from "server/data/sykmeldt/fetchPersonSM";
+import { fetchVirksomhetSM } from "server/data/sykmeldt/fetchVirksomhetSM";
+import { fetchKontaktinfoSM } from "server/data/sykmeldt/fetchKontaktinfoSM";
+import { fetchArbeidsforholdSM } from "server/data/sykmeldt/fetchArbeidsforholdSM";
+import { fetchNarmesteLedereSM } from "server/data/sykmeldt/fetchNarmesteLedereSM";
 import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
 
 const findNarmesteLeder = (

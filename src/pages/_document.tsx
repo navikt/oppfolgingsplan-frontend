@@ -11,7 +11,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
-import serverEnv from "@/server/utils/serverEnv";
+import serverEnv from "server/utils/serverEnv";
 
 export default class MyDocument extends Document<{ Decorator: Components }> {
   static async getInitialProps(ctx: DocumentContext) {

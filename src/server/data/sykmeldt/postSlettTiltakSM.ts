@@ -1,11 +1,11 @@
 import { NextApiResponse } from "next";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
-import serverLogger from "@/server/utils/serverLogger";
-import { deleteTiltakSM } from "@/server/service/oppfolgingsplanService";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { handleQueryParamError } from "@/server/utils/errors";
-import activeMockSM from "@/server/data/mock/activeMockSM";
+import { isMockBackend } from "environments/publicEnv";
+import serverLogger from "server/utils/serverLogger";
+import { deleteTiltakSM } from "server/service/oppfolgingsplanService";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { handleQueryParamError } from "server/utils/errors";
+import activeMockSM from "server/data/mock/activeMockSM";
 
 export const postSlettTiltakSM = async (
   req: IAuthenticatedRequest,

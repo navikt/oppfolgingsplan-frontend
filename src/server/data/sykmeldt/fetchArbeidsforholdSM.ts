@@ -1,11 +1,11 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
-import activeMockSM from "@/server/data/mock/activeMockSM";
-import { getArbeidsforholdSM } from "@/server/service/oppfolgingsplanService";
-import { handleSchemaParsingError } from "@/server/utils/errors";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { NextApiResponseOppfolgingsplanSM } from "@/server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
-import serverLogger from "@/server/utils/serverLogger";
+import { isMockBackend } from "environments/publicEnv";
+import activeMockSM from "server/data/mock/activeMockSM";
+import { getArbeidsforholdSM } from "server/service/oppfolgingsplanService";
+import { handleSchemaParsingError } from "server/utils/errors";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
+import serverLogger from "server/utils/serverLogger";
 import { Arbeidsforhold } from "../../../schema/ArbeidsforholdSchema";
 
 const fetchSingleArbeidsforhold = async (

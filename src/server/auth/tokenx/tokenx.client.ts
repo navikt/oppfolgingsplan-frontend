@@ -1,6 +1,6 @@
 import { Client } from "openid-client";
 import { getIssuer } from "./tokenx.issuer";
-import serverEnv from "@/server/utils/serverEnv";
+import serverEnv from "server/utils/serverEnv";
 
 let _client: Client;
 

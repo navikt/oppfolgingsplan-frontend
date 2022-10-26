@@ -1,9 +1,9 @@
 import { NextApiResponse } from "next";
-import { isMockBackend } from "@/common/publicEnv";
-import { deleteTiltakCommentSM } from "@/server/service/oppfolgingsplanService";
-import serverLogger from "@/server/utils/serverLogger";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
-import { handleQueryParamError } from "@/server/utils/errors";
+import { isMockBackend } from "environments/publicEnv";
+import { deleteTiltakCommentSM } from "server/service/oppfolgingsplanService";
+import serverLogger from "server/utils/serverLogger";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { handleQueryParamError } from "server/utils/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 
 export const postSlettKommentarSM = async (

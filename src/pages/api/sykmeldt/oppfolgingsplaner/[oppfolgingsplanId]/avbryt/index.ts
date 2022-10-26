@@ -1,6 +1,6 @@
-import getIdportenToken from "@/server/auth/idporten/idportenToken";
-import { postAvbrytOppfolgingsplanSM } from "@/server/data/sykmeldt/postAvbrytOppfolgingsplanSM";
-import { ncOptions } from "@/server/utils/ncOptions";
+import getIdportenToken from "server/auth/idporten/idportenToken";
+import { postAvbrytOppfolgingsplanSM } from "server/data/sykmeldt/postAvbrytOppfolgingsplanSM";
+import { ncOptions } from "server/utils/ncOptions";
 import { withSentry } from "@sentry/nextjs";
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";

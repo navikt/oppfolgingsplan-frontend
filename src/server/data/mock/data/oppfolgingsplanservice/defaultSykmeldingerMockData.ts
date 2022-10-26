@@ -1,7 +1,7 @@
 import {
   createDateMonthsAgo,
   createDateMonthsFromNow,
-} from "@/common/utils/dateUtils";
+} from "utils/dateUtils";
 import { Sykmelding } from "../../../../../schema/sykmeldingSchema";
 
 export const defaultSykmeldingerMockData: Sykmelding[] = [

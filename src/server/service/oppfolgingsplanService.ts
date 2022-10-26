@@ -1,6 +1,6 @@
 import { array } from "zod";
-import { get, post } from "@/common/api/axios/axios";
-import serverEnv from "@/server/utils/serverEnv";
+import { get, post } from "api/axios/axios";
+import serverEnv from "server/utils/serverEnv";
 import { tilgangSchema } from "../../schema/tilgangSchema";
 import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
 import { narmesteLederSchema } from "../../schema/narmestelederSchema";

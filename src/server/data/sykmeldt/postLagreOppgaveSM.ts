@@ -1,9 +1,9 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "@/common/publicEnv";
+import { isMockBackend } from "environments/publicEnv";
 import { NextApiResponse } from "next";
-import { handleQueryParamError } from "@/server/utils/errors";
-import { saveOppgave } from "@/server/service/oppfolgingsplanService";
-import { getOppfolgingsplanTokenX } from "@/server/utils/tokenX";
+import { handleQueryParamError } from "server/utils/errors";
+import { saveOppgave } from "server/service/oppfolgingsplanService";
+import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { Arbeidsoppgave } from "../../../schema/oppfolgingsplanSchema";
 
 export const postLagreOppgaveSM = async (
