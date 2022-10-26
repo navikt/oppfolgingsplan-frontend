@@ -7,10 +7,10 @@ import { DelMedFastlegeKnapp } from "../godkjentplan/DelMedFastlegeKnapp";
 import { DelMedNavKnapp } from "../godkjentplan/DelMedNavKnapp";
 import { ForcedApprovedOppfolgingsplan } from "../godkjentplan/ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "../godkjentplan/GodkjentPlanDeltBekreftelse";
-import { LenkeTilAlleOppfolgingsplaner } from "../LenkeTilAlleOppfolgingsplaner";
+import { TilAlleOppfolgingsplanerKnapp } from "../TilAlleOppfolgingsplanerKnapp";
 import { SePlan } from "../SePlan";
 import { GodkjentPlanAvbruttTidspunkt } from "./GodkjentPlanAvbruttTidspunkt";
-import { LenkeTilGjeldendePlan } from "./LenkeTilGjeldendePlan";
+import { TilGjeldendePlanKnapp } from "./TilGjeldendePlanKnapp";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -28,7 +28,7 @@ export const GodkjentPlanAvbrutt = ({ oppfolgingsplan }: Props) => {
 
   return (
     <SpacedDiv>
-      <LenkeTilGjeldendePlan oppfolgingsplan={oppfolgingsplan} />
+      <TilGjeldendePlanKnapp oppfolgingsplan={oppfolgingsplan} />
       {godkjentPlan.tvungenGodkjenning ? (
         <ForcedApprovedOppfolgingsplan
           narmesteLeder={oppfolgingsplan.arbeidsgiver.naermesteLeder}
@@ -54,7 +54,7 @@ export const GodkjentPlanAvbrutt = ({ oppfolgingsplan }: Props) => {
           <DelMedFastlegeKnapp oppfolgingsplanId={oppfolgingsplan.id} />
         )}
       </Row>
-      <LenkeTilAlleOppfolgingsplaner />
+      <TilAlleOppfolgingsplanerKnapp />
     </SpacedDiv>
   );
 };

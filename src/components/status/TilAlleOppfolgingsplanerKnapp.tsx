@@ -3,11 +3,11 @@ import { Button } from "@navikt/ds-react";
 import { useLandingUrl } from "hooks/routeHooks";
 import NextLink from "next/link";
 
-export const LenkeTilAlleOppfolgingsplaner = () => {
+export const TilAlleOppfolgingsplanerKnapp = () => {
   const landingPage = useLandingUrl();
 
   return (
-    <NextLink href={landingPage} passHref={true}>
+    <NextLink href={landingPage}>
       <Button variant="tertiary" icon={<Back aria-hidden />}>
         Tilbake til oppfølgingsplaner
       </Button>
