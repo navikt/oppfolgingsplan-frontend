@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
 import {
@@ -33,7 +34,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
       return <div>TODO GODKJENNPLANAVSLATT</div>;
     }
     case "GODKJENTPLANAVBRUTT": {
-      return <div>TODO GODKJENTPLANAVBRUTT</div>;
+      return <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLAN": {
       return <GodkjentPlan oppfolgingsplan={oppfolgingsplan} />;

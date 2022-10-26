@@ -4,7 +4,7 @@ import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
-import { TilbakeLenke } from "../TilbakeLenke";
+import { LenkeTilAlleOppfolgingsplaner } from "../LenkeTilAlleOppfolgingsplaner";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 
 interface Props {
@@ -33,7 +33,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
       <GodkjennOppfolgingsplan />
-      <TilbakeLenke />
+      <LenkeTilAlleOppfolgingsplaner />
     </SpacedDiv>
   );
 };
