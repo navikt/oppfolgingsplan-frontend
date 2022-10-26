@@ -2,7 +2,8 @@ import { useApiBasePath } from "hooks/routeHooks";
 import { get } from "api/axios/axios";
 import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
-import useSWRImmutable from "swr/immutable";
+import { useQuery } from "@tanstack/react-query";
+import { ApiErrorException } from "../../axios/errors";
 
 export const NARMESTELEDERE_SM = "narmesteledere-sykmeldt";
 
@@ -13,14 +14,11 @@ export const useNarmesteLedereSM = () => {
   const fetchNarmesteLedere = () =>
     get<NarmesteLeder[]>(`${apiBasePath}/narmesteledere/${sykmeldtFnr}`);
 
-  const { data, error } = useSWRImmutable(
-    !!sykmeldtFnr ? NARMESTELEDERE_SM : null,
-    fetchNarmesteLedere
+  return useQuery<NarmesteLeder[], ApiErrorException>(
+    [NARMESTELEDERE_SM],
+    fetchNarmesteLedere,
+    {
+      enabled: !!sykmeldtFnr,
+    }
   );
-
-  return {
-    data: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
 };

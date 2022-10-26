@@ -45,7 +45,7 @@ export const NyttTiltak = () => {
       <TiltakFormHeading />
       <TiltakForm
         onSubmit={(data) => {
-          lagreTiltak(nyttTiltakInformasjon(data));
+          lagreTiltak.mutate(nyttTiltakInformasjon(data));
           setLeggerTilNyttTiltak(false);
         }}
         onCancel={() => setLeggerTilNyttTiltak(false)}

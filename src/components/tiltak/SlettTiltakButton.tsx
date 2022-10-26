@@ -44,7 +44,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
               <Button
                 variant={"danger"}
                 onClick={() => {
-                  slettTiltak(tiltakId);
+                  slettTiltak.mutate(tiltakId);
                   setModalOpen(false);
                 }}
               >

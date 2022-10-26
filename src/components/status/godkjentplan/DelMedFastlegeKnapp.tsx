@@ -8,7 +8,9 @@ interface Props {
 export const DelMedFastlegeKnapp = ({ oppfolgingsplanId }: Props) => {
   const delOppfolgingsplanMedFastlege = useDelOppfolgingsplanMedFastlegeSM();
   return (
-    <Button onClick={() => delOppfolgingsplanMedFastlege(oppfolgingsplanId)}>
+    <Button
+      onClick={() => delOppfolgingsplanMedFastlege.mutate(oppfolgingsplanId)}
+    >
       Del med fastlege
     </Button>
   );

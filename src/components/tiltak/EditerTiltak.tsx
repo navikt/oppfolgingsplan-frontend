@@ -32,7 +32,7 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
         tom: new Date(tiltak.tom!!),
       }}
       onSubmit={(data) => {
-        lagreTiltak(tiltakInformasjon(data));
+        lagreTiltak.mutate(tiltakInformasjon(data));
         doneEditing();
       }}
       onCancel={doneEditing}

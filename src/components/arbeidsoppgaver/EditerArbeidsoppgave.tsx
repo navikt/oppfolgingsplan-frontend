@@ -49,7 +49,7 @@ export const EditerArbeidsoppgave = ({
         kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!!,
       }}
       onSubmit={(data) => {
-        lagreArbeidsoppgave(arbeidsoppgaveInformasjon(data));
+        lagreArbeidsoppgave.mutate(arbeidsoppgaveInformasjon(data));
         doneEditing();
       }}
       onCancel={doneEditing}

@@ -54,7 +54,7 @@ export const NyArbeidsoppgave = () => {
       <ArbeidsoppgaveFormHeading />
       <ArbeidsoppgaveForm
         onSubmit={(data) => {
-          lagreOppgave(nyArbeidsoppgaveInformasjon(data));
+          lagreOppgave.mutate(nyArbeidsoppgaveInformasjon(data));
           setLeggerTilOppgave(false);
         }}
         onCancel={() => setLeggerTilOppgave(false)}
