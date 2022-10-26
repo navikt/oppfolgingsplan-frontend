@@ -2,8 +2,20 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import styled, { createGlobalStyle } from "styled-components";
 import { useAudience } from "hooks/routeHooks";
-import {BreadcrumbsAppenderSM} from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
-import {BreadcrumbsAppenderAG} from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
+import { BreadcrumbsAppenderSM } from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
+import { BreadcrumbsAppenderAG } from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
+import { useState } from "react";
+import {
+  DehydratedState,
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const minutesToMillis = (minutes: number) => {
+  return 1000 * 60 * minutes;
+};
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -30,26 +42,45 @@ const InnerContentWrapperStyled = styled.div`
   padding-top: 1rem;
 `;
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  pageProps,
+}: AppProps<{ dehydratedState: DehydratedState }>) {
   const { isAudienceSykmeldt } = useAudience();
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            cacheTime: minutesToMillis(60),
+            staleTime: minutesToMillis(30),
+          },
+        },
+      })
+  );
 
   return (
-    <>
-      <GlobalStyle />
-      {isAudienceSykmeldt ? (
-        <BreadcrumbsAppenderSM />
-      ) : (
-        <BreadcrumbsAppenderAG />
-      )}
-      <ContentWrapperStyled>
-        {/*<NotificationBar />*/}
-        <InnerContentWrapperStyled>
-          <main role="main">
-            <Component {...pageProps} />
-          </main>
-        </InnerContentWrapperStyled>
-      </ContentWrapperStyled>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <>
+          <GlobalStyle />
+          {isAudienceSykmeldt ? (
+            <BreadcrumbsAppenderSM />
+          ) : (
+            <BreadcrumbsAppenderAG />
+          )}
+          <ContentWrapperStyled>
+            <InnerContentWrapperStyled>
+              <main role="main">
+                <Component {...pageProps} />
+              </main>
+            </InnerContentWrapperStyled>
+          </ContentWrapperStyled>
+        </>
+      </Hydrate>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

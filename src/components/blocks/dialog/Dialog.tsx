@@ -57,7 +57,7 @@ export const Dialog = ({
               <ButtonRightAligned
                 variant="tertiary"
                 onClick={() =>
-                  slettKommentar({
+                  slettKommentar.mutate({
                     tiltakId: tiltakId,
                     kommentarId: kommentar.id,
                   })

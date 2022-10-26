@@ -1,7 +1,8 @@
 import { useApiBasePath } from "hooks/routeHooks";
 import { get } from "api/axios/axios";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
-import useSWRImmutable from "swr/immutable";
+import { useQuery } from "@tanstack/react-query";
+import { ApiErrorException } from "../../axios/errors";
 
 export const SYKMELDINGER_SM = "sykmeldinger-sykmeldt";
 
@@ -11,19 +12,16 @@ export const useSykmeldingerSM = () => {
   const fetchSykmeldinger = () =>
     get<Sykmelding[]>(`${apiBasePath}/sykmeldinger`);
 
-  const { data, error } = useSWRImmutable(SYKMELDINGER_SM, fetchSykmeldinger);
-
-  return {
-    data: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
+  return useQuery<Sykmelding[], ApiErrorException>(
+    [SYKMELDINGER_SM],
+    fetchSykmeldinger
+  );
 };
 
 export const useSykmeldtFnr = (): string | null => {
   const sykmeldinger = useSykmeldingerSM();
 
-  if (sykmeldinger.data) {
+  if (sykmeldinger.isSuccess) {
     const sykmelding = sykmeldinger.data.find((sykmelding) => sykmelding.fnr);
     return sykmelding?.fnr || null;
   }

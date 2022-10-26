@@ -1,35 +1,40 @@
-import {
-  useApiBasePath,
-  useOppfolgingsplanRouteId,
-} from "hooks/routeHooks";
+import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { post } from "api/axios/axios";
 import { OPPFOLGINGSPLANER_SM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Arbeidsoppgave } from "../../../schema/oppfolgingsplanSchema";
-import { useSWRConfig } from "swr";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useLagreArbeidsoppgaveSM = () => {
   const apiBasePath = useApiBasePath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const { mutate } = useSWRConfig();
+  const queryClient = useQueryClient();
 
-  return async (oppgave: Partial<Arbeidsoppgave>) => {
-    await post(
+  const lagreOppgave = (oppgave: Partial<Arbeidsoppgave>) =>
+    post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
       oppgave
     );
-    await mutate(OPPFOLGINGSPLANER_SM);
-  };
+
+  return useMutation(lagreOppgave, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    },
+  });
 };
 
 export const useSlettOppgaveSM = () => {
   const apiBasePath = useApiBasePath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const { mutate } = useSWRConfig();
+  const queryClient = useQueryClient();
 
-  return async (arbeidsoppgaveId: number) => {
-    await post(
+  const slettOppgave = (arbeidsoppgaveId: number) =>
+    post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
     );
-    await mutate(OPPFOLGINGSPLANER_SM);
-  };
+
+  return useMutation(slettOppgave, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    },
+  });
 };

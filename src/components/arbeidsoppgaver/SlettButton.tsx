@@ -50,7 +50,7 @@ export const SlettButton = ({ show, arbeidsoppgaveId }: Props) => {
               <Button
                 variant={"danger"}
                 onClick={() => {
-                  slettArbeidsoppgave(arbeidsoppgaveId);
+                  slettArbeidsoppgave.mutate(arbeidsoppgaveId);
                   setModalOpen(false);
                 }}
               >

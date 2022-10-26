@@ -144,7 +144,7 @@ export const LagretTiltak = ({
           {displayNyKommentar && (
             <NyKommentar
               lagre={(kommentar: string) => {
-                lagreKommentar({
+                lagreKommentar.mutate({
                   tiltakId,
                   fnr,
                   kommentar,

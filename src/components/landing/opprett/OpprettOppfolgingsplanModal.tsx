@@ -64,16 +64,16 @@ const OpprettOppfolgingsplanModal = ({
         virksomhetsnummer
       );
       if (oppfolgingsplan) {
-        kopierOppfolgingsplan(oppfolgingsplan.id);
+        kopierOppfolgingsplan.mutate(oppfolgingsplan.id);
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
-        opprettOppfolgingsplan({
+        opprettOppfolgingsplan.mutate({
           sykmeldtFnr: sykmeldtFnr!!,
           virksomhetsnummer: virksomhetsnummer,
         });
       }
     } else {
-      opprettOppfolgingsplan({
+      opprettOppfolgingsplan.mutate({
         sykmeldtFnr: sykmeldtFnr!!,
         virksomhetsnummer: virksomhetsnummer,
       });
@@ -104,7 +104,7 @@ const OpprettOppfolgingsplanModal = ({
                   arbeidsgivere={arbeidsgivere}
                   oppfolgingsplaner={oppfolgingsplaner}
                   handleSubmit={(virksomhetsnummer: string) => {
-                    opprettOppfolgingsplan({
+                    opprettOppfolgingsplan.mutate({
                       sykmeldtFnr: sykmeldtFnr!!,
                       virksomhetsnummer: virksomhetsnummer,
                     });

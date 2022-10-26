@@ -8,10 +8,7 @@ import {
 } from "@navikt/ds-react";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement } from "react";
-import {
-  Oppfolgingsplan,
-  Tiltak,
-} from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { useGodkjennOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import styled from "styled-components";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
@@ -96,7 +93,7 @@ export const SendTilGodkjenningForm = ({
     <FormProvider {...formFunctions}>
       <form
         onSubmit={handleSubmit((data: SendTilGodkjenningFormValues) =>
-          sendTilGodkjenning({
+          sendTilGodkjenning.mutate({
             gyldighetstidspunkt: {
               fom: data.startDato.toJSON(),
               tom: data.sluttDato.toJSON(),
