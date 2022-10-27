@@ -139,7 +139,7 @@ export const getStatusPageTitleAndHeading = (
     case "GODKJENTPLAN": {
       return {
         title: `Status på oppfølgingsplan`,
-        heading: `Oppfølgingsplanen`,
+        heading: `Oppfølgingsplan`,
       };
     }
     default: {
