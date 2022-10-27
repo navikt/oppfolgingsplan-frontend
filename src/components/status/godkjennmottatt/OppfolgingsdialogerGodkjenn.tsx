@@ -1,5 +1,5 @@
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { AvbrytPlanKnapp } from "../AvbrytPlanKnapp";
+import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
@@ -27,7 +27,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
       <div>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
-        <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
+        <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </div>
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}

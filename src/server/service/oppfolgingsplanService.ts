@@ -142,6 +142,17 @@ export async function avbrytOppfolgingsplanSM(
   );
 }
 
+export async function avvisOppfolgingsplanSM(
+  accessToken: string,
+  oppfolgingsplanId: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/avvis`,
+    {},
+    { accessToken }
+  );
+}
+
 export async function delMedNavSM(
   accessToken: string,
   oppfolgingsplanId: string
