@@ -7,8 +7,8 @@ import { DelMedFastlegeKnapp } from "../godkjentplan/DelMedFastlegeKnapp";
 import { DelMedNavKnapp } from "../godkjentplan/DelMedNavKnapp";
 import { ForcedApprovedOppfolgingsplan } from "../godkjentplan/ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "../godkjentplan/GodkjentPlanDeltBekreftelse";
-import { TilAlleOppfolgingsplanerKnapp } from "../TilAlleOppfolgingsplanerKnapp";
 import { SePlan } from "../SePlan";
+import { TilAlleOppfolgingsplanerKnapp } from "../TilAlleOppfolgingsplanerKnapp";
 import { GodkjentPlanAvbruttTidspunkt } from "./GodkjentPlanAvbruttTidspunkt";
 import { TilGjeldendePlanKnapp } from "./TilGjeldendePlanKnapp";
 
