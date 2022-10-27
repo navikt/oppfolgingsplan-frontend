@@ -1,5 +1,5 @@
-import { SpacedDiv } from "@/common/components/wrappers/SpacedDiv";
 import { Alert, BodyShort, Heading } from "@navikt/ds-react";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 
 export const HvaSkjerNa = () => {
   return (

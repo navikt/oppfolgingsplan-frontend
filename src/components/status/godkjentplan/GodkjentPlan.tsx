@@ -1,21 +1,19 @@
 import { Heading } from "@navikt/ds-react";
+import { Row } from "components/blocks/wrappers/Row";
+import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { AapnePlanSomPDF } from "../AapnePlanSomPDF";
+import { AvbrytPlanKnapp } from "../AvbrytPlanKnapp";
+import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
+import { SePlan } from "../SePlan";
+import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
+import { TilbakeLenke } from "../TilbakeLenke";
 import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
 import { DelMedFastlegeKnapp } from "./DelMedFastlegeKnapp";
 import { DelMedNavKnapp } from "./DelMedNavKnapp";
 import { ForcedApprovedOppfolgingsplan } from "./ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
-import {Oppfolgingsplan} from "../../../schema/oppfolgingsplanSchema";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import {HakeGronnLysImage} from "../../blocks/images/imageComponents";
-import {GodkjennPlanTidspunkter} from "../GodkjennPlanTidspunkter";
-import { Row } from "components/blocks/wrappers/Row";
-import {SePlan} from "../SePlan";
-import {AapnePlanSomPDF} from "../AapnePlanSomPDF";
-import {AvbrytPlanKnapp} from "../AvbrytPlanKnapp";
-import {TidligereOppfolgingsplaner} from "../TidligereOppfolgingsplaner";
-import {TilbakeLenke} from "../TilbakeLenke";
-
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

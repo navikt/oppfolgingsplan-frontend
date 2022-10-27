@@ -1,7 +1,7 @@
+import { Gyldighetstidspunkt } from "../../schema/oppfolgingsplanSchema";
+import { toDateMedMaanedNavn } from "../../utils/dateUtils";
+import { CalendarImage, StjerneImage } from "../blocks/images/imageComponents";
 import { BildeTekstLinje } from "./BildeTekstLinje";
-import {Gyldighetstidspunkt} from "../../schema/oppfolgingsplanSchema";
-import {CalendarImage, StjerneImage} from "../blocks/images/imageComponents";
-import {toDateMedMaanedNavn} from "../../utils/dateUtils";
 
 interface Props {
   gyldighetstidspunkt: Gyldighetstidspunkt;
