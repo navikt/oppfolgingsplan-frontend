@@ -32,7 +32,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
-      <GodkjennOppfolgingsplan />
+      <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} />
       <TilLandingssideKnapp />
     </SpacedDiv>
   );

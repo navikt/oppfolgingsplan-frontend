@@ -1,6 +1,7 @@
 import { array } from "zod";
 import { get, post } from "api/axios/axios";
 import serverEnv from "server/utils/serverEnv";
+import { GodkjennsistPlanData } from "../../schema/godkjennsistPlanSchema";
 import { tilgangSchema } from "../../schema/tilgangSchema";
 import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
 import { narmesteLederSchema } from "../../schema/narmestelederSchema";
@@ -183,6 +184,17 @@ export async function godkjennOppfolgingsplanSM(
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=makrell&aktoer=arbeidstaker&delmednav=${data.delmednav}`,
     data.gyldighetstidspunkt,
+    { accessToken }
+  );
+}
+
+export async function godkjennsistOppfolgingsplanSM(
+  accessToken: string,
+  oppfolgingsplanId: string,
+  data: GodkjennsistPlanData
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjennsist?aktoer=arbeidstaker&delmednav=${data.delmednav}`,
     { accessToken }
   );
 }

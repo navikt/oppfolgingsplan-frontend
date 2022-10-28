@@ -4,6 +4,7 @@ import {
   useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
+import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
@@ -143,6 +144,26 @@ export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
     );
 
   return useMutation(godkjennPlan, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+      await router.push(statusUrl);
+    },
+  });
+};
+
+export const useGodkjennsistOppfolgingsplanSM = (oppfolgingsplanId: number) => {
+  const apiBasePath = useApiBasePath();
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const godkjennsistPlan = (data: GodkjennsistPlanData) =>
+    post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
+      data
+    );
+
+  return useMutation(godkjennsistPlan, {
     onSuccess: async () => {
       await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
       await router.push(statusUrl);

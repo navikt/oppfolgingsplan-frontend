@@ -39,7 +39,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>
-      <GodkjennOppfolgingsplan />
+      <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} />
       <TilbakeLenke />
     </SpacedDiv>
   );
