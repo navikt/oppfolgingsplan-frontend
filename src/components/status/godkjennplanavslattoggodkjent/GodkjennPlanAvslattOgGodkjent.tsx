@@ -1,0 +1,46 @@
+import { BodyShort } from "@navikt/ds-react";
+import { Row } from "components/blocks/wrappers/Row";
+import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import {
+  Godkjenning,
+  Oppfolgingsplan,
+} from "../../../schema/oppfolgingsplanSchema";
+import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
+import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
+import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
+import { SePlan } from "../SePlan";
+import { TilbakeLenke } from "../TilbakeLenke";
+
+interface Props {
+  oppfolgingsplan: Oppfolgingsplan;
+}
+
+export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
+  const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.filter(
+    (godkjenning: Godkjenning) => {
+      return godkjenning.godkjent;
+    }
+  )[0].gyldighetstidspunkt;
+
+  if (!gyldighetstidspunkt || !oppfolgingsplan.arbeidsgiver?.naermesteLeder) {
+    return null;
+  }
+
+  return (
+    <SpacedDiv>
+      <BodyShort spacing>
+        {oppfolgingsplan.arbeidsgiver.naermesteLeder.navn} har gjort noen
+        endringer i planen og sendt den tilbake til deg.
+      </BodyShort>
+
+      <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
+
+      <Row marginBottom={"2rem"}>
+        <SePlan oppfolgingsplan={oppfolgingsplan} />
+        <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
+      </Row>
+      <GodkjennOppfolgingsplan />
+      <TilbakeLenke />
+    </SpacedDiv>
+  );
+};
