@@ -23,8 +23,6 @@ export const postSlettArbeidsoppgaveSM = async (
   }
 
   if (isMockBackend) {
-    const { oppfolgingsplanId, arbeidsoppgaveId } = req.query;
-
     const aktivPlan = activeMockSM.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );

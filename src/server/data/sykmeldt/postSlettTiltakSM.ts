@@ -23,8 +23,6 @@ export const postSlettTiltakSM = async (
   }
 
   if (isMockBackend) {
-    const { oppfolgingsplanId, tiltakId } = req.query;
-
     const aktivPlan = activeMockSM.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
