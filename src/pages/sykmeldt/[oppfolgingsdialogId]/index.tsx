@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
+import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
 import {
@@ -34,7 +35,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
       return <OppfolgingsdialogerGodkjenn oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENNPLANAVSLATT": {
-      return <div>TODO GODKJENNPLANAVSLATT</div>;
+      return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLANAVBRUTT": {
       return <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan} />;
