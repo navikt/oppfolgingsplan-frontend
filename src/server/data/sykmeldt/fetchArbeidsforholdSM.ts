@@ -43,6 +43,10 @@ export const fetchArbeidsforholdSM = async (
   res: NextApiResponseOppfolgingsplanSM,
   next: () => void
 ) => {
+  if (!res.oppfolgingsplaner.length) {
+    return next();
+  }
+
   if (isMockBackend) {
     res.stillinger = [...activeMockSM.stillinger];
   } else {
