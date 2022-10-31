@@ -9,11 +9,10 @@ import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { AvbrytPlanKnapp } from "./AvbrytPlanKnapp";
 import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
-import { DelMedFastlegeKnapp } from "./DelMedFastlegeKnapp";
-import { DelMedNavKnapp } from "./DelMedNavKnapp";
 import { ForcedApprovedOppfolgingsplan } from "./ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
+import { DelMedNavOgFastlegeButtons } from "./DelMedNavOgFastlegeButtons";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -65,14 +64,10 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
 
-      <Row marginBottom={"2rem"}>
-        {!oppfolgingsplan.godkjentPlan.deltMedNAV && (
-          <DelMedNavKnapp oppfolgingsplanId={oppfolgingsplan.id} />
-        )}
-        {!oppfolgingsplan.godkjentPlan.deltMedFastlege && (
-          <DelMedFastlegeKnapp oppfolgingsplanId={oppfolgingsplan.id} />
-        )}
-      </Row>
+      <DelMedNavOgFastlegeButtons
+        oppfolgingsplanId={oppfolgingsplan.id}
+        godkjentPlan={oppfolgingsplan.godkjentPlan}
+      />
 
       <HvaSkjerNa />
 
