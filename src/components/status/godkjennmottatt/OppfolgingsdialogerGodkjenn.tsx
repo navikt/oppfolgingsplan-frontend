@@ -1,6 +1,6 @@
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
-import { GodkjennOppfolgingsplan } from "./GodkjennOppfolgingsplan";
+import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
@@ -32,7 +32,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
-      <GodkjennOppfolgingsplan />
+      <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} />
       <TilLandingssideKnapp />
     </SpacedDiv>
   );

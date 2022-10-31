@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import React, { ReactElement } from "react";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
+import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
 import {
@@ -25,7 +26,9 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
       return <div>TODO GODKJENTPLANSENDT</div>;
     }
     case "MOTTATTFLEREGODKJENNINGER": {
-      return <div>TODO GODKJENNPLANAVSLATTOGGODKJENT</div>;
+      return (
+        <GodkjennPlanAvslattOgGodkjent oppfolgingsplan={oppfolgingsplan} />
+      );
     }
     case "GODKJENNPLANMOTTATT": {
       return <OppfolgingsdialogerGodkjenn oppfolgingsplan={oppfolgingsplan} />;
