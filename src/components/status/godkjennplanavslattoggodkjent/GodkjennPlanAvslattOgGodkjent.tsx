@@ -16,11 +16,11 @@ interface Props {
 }
 
 export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
-  const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.filter(
+  const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.find(
     (godkjenning: Godkjenning) => {
       return godkjenning.godkjent;
     }
-  )[0].gyldighetstidspunkt;
+  )?.gyldighetstidspunkt;
 
   if (!gyldighetstidspunkt || !oppfolgingsplan.arbeidsgiver?.naermesteLeder) {
     return null;
