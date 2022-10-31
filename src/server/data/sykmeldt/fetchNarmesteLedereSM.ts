@@ -11,6 +11,10 @@ export const fetchNarmesteLedereSM = async (
   res: NextApiResponseOppfolgingsplanSM,
   next: () => void
 ) => {
+  if (!res.oppfolgingsplaner.length) {
+    return next();
+  }
+
   if (isMockBackend) {
     res.narmesteLedere = activeMockSM.narmesteLedere;
   } else {
