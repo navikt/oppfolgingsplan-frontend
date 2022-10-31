@@ -47,9 +47,11 @@ export const useGjeldendePlanSM = (
   }
 
   if (allePlaner.isSuccess) {
-    return finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
-      allePlaner.data,
-      virksomhetsnummer
+    return (
+      finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
+        allePlaner.data,
+        virksomhetsnummer
+      ) || null
     );
   }
 
