@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import getIdportenToken from "server/auth/idporten/idportenToken";
 import { ncOptions } from "server/utils/ncOptions";
-import { postGodkjennsistOppfolgingsplanSM } from "../../../../../../server/data/sykmeldt/postGodkjennsistOppfolgingsplanSM";
+import { postGodkjennsistOppfolgingsplanSM } from "server/data/sykmeldt/postGodkjennsistOppfolgingsplanSM";
 
 const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
   .use(getIdportenToken)
