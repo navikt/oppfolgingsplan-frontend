@@ -9,7 +9,7 @@ import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
-import { TilbakeLenke } from "../TilbakeLenke";
+import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -40,7 +40,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
         <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>
       <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} />
-      <TilbakeLenke />
+      <TilLandingssideKnapp />
     </SpacedDiv>
   );
 };
