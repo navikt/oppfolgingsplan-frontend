@@ -7,7 +7,7 @@ import { AvbrytPlanKnapp } from "../AvbrytPlanKnapp";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
-import { TilAlleOppfolgingsplanerKnapp } from "../TilAlleOppfolgingsplanerKnapp";
+import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
 import { DelMedFastlegeKnapp } from "./DelMedFastlegeKnapp";
 import { DelMedNavKnapp } from "./DelMedNavKnapp";
@@ -76,7 +76,7 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
 
       <HvaSkjerNa />
 
-        <TilAlleOppfolgingsplanerKnapp />
+      <TilLandingssideKnapp />
     </SpacedDiv>
   );
 };

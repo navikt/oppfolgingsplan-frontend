@@ -8,7 +8,7 @@ import { DelMedNavKnapp } from "../godkjentplan/DelMedNavKnapp";
 import { ForcedApprovedOppfolgingsplan } from "../godkjentplan/ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "../godkjentplan/GodkjentPlanDeltBekreftelse";
 import { SePlan } from "../SePlan";
-import { TilAlleOppfolgingsplanerKnapp } from "../TilAlleOppfolgingsplanerKnapp";
+import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { GodkjentPlanAvbruttTidspunkt } from "./GodkjentPlanAvbruttTidspunkt";
 import { TilGjeldendePlanKnapp } from "./TilGjeldendePlanKnapp";
 
@@ -54,7 +54,7 @@ export const GodkjentPlanAvbrutt = ({ oppfolgingsplan }: Props) => {
           <DelMedFastlegeKnapp oppfolgingsplanId={oppfolgingsplan.id} />
         )}
       </Row>
-      <TilAlleOppfolgingsplanerKnapp />
+      <TilLandingssideKnapp />
     </SpacedDiv>
   );
 };

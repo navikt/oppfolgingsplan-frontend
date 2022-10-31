@@ -3,7 +3,7 @@ import { Button } from "@navikt/ds-react";
 import { useLandingUrl } from "hooks/routeHooks";
 import NextLink from "next/link";
 
-export const TilAlleOppfolgingsplanerKnapp = () => {
+export const TilLandingssideKnapp = () => {
   const landingPage = useLandingUrl();
 
   return (
