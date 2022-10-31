@@ -207,3 +207,16 @@ export const finnTidligereOppfolgingsdialoger = (
     })
   );
 };
+
+export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (
+  oppfolgingsplaner: Oppfolgingsplan[],
+  virksomhetsnummer: string
+) => {
+  return finnAktiveOppfolgingsplaner(oppfolgingsplaner).find(
+    (oppfolgingsdialog) => {
+      return (
+        oppfolgingsdialog.virksomhet!.virksomhetsnummer === virksomhetsnummer
+      );
+    }
+  );
+};

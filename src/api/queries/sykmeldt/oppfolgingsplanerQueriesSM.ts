@@ -9,6 +9,7 @@ import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdi
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
 import { ApiErrorException } from "../../axios/errors";
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
@@ -34,6 +35,27 @@ export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
   }
 
   return undefined;
+};
+
+export const useGjeldendePlanSM = (
+  virksomhetsnummer?: string | null
+): Oppfolgingsplan | null => {
+  const allePlaner = useOppfolgingsplanerSM();
+
+  if (!virksomhetsnummer) {
+    return null;
+  }
+
+  if (allePlaner.isSuccess) {
+    return (
+      finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
+        allePlaner.data,
+        virksomhetsnummer
+      ) || null
+    );
+  }
+
+  return null;
 };
 
 export const useKopierOppfolgingsplanSM = () => {
