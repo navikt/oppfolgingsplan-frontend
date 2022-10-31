@@ -86,6 +86,20 @@ export const useAvbrytOppfolgingsplanSM = () => {
   });
 };
 
+export const useAvvisOppfolgingsplanSM = () => {
+  const apiBasePath = useApiBasePath();
+  const queryClient = useQueryClient();
+
+  const postAvvisOppfolgingsplan = (oppfolgingsplanId: number) =>
+    post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avvis`);
+
+  return useMutation(postAvvisOppfolgingsplan, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    },
+  });
+};
+
 export const useDelOppfolgingsplanMedNavSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
