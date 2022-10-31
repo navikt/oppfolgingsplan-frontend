@@ -36,6 +36,8 @@ spec:
   ingresses:
     - "https://oppfolgingsplaner.labs.nais.io/"
   env:
+    - name: NPM_CONFIG_CACHE
+      value: /tmp
     - name: DECORATOR_URL
       value: https://dekoratoren.dev.nav.no
     - name: DECORATOR_ENV
