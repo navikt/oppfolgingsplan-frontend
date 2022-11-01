@@ -28,7 +28,11 @@ export const postSlettTiltakSM = async (
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
-      return generalError(new Error("No aktivPlan"));
+      return generalError(
+        new Error(
+          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+        )
+      );
     }
     const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan);
     const filteredTiltakListe = aktivPlan.tiltakListe!!.filter(
