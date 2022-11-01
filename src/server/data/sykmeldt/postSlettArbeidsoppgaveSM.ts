@@ -39,7 +39,9 @@ export const postSlettArbeidsoppgaveSM = async (
     activeMockSM.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
       filteredArbeidsoppgaveListe;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     await deleteOppgave(oppfolgingsplanTokenX, arbeidsoppgaveId);
     serverLogger.info(

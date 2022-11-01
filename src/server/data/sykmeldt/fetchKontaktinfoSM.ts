@@ -22,7 +22,9 @@ export const fetchKontaktinfoSM = async (
   if (isMockBackend) {
     res.kontaktinfo = activeMockSM.kontaktinfo;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const response = await getKontaktinfoSM(oppfolgingsplanTokenX, sykmeldtFnr);
 

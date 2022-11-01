@@ -38,7 +38,9 @@ export const postSlettTiltakSM = async (
     activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
       filteredTiltakListe;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);
     serverLogger.info(`Attempting to delete tiltak with id: ${tiltakId}`);
