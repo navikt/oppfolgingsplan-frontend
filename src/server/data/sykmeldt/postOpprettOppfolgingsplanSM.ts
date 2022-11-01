@@ -16,7 +16,9 @@ export const postOpprettOppfolgingsplanSM = async (
   if (isMockBackend) {
     return next();
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     await createOppfolgingsplanSM(
       oppfolgingsplanTokenX,

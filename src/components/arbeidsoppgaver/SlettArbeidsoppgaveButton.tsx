@@ -19,7 +19,10 @@ interface Props {
   arbeidsoppgaveId: number;
 }
 
-export const SlettButton = ({ show, arbeidsoppgaveId }: Props) => {
+export const SlettArbeidsoppgaveButton = ({
+  show,
+  arbeidsoppgaveId,
+}: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const slettArbeidsoppgave = useSlettOppgaveSM();
 

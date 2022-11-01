@@ -1,23 +1,19 @@
-import { IAuthenticatedRequest } from "server/api/IAuthenticatedRequest";
+import { accessDeniedError, ApiErrorException } from "api/axios/errors";
 import { getTokenX } from "server/auth/tokenx";
 import serverEnv from "server/utils/serverEnv";
 import serverLogger from "server/utils/serverLogger";
-import {
-  accessDeniedError,
-  ApiErrorException,
-} from "api/axios/errors";
 
 export const getOppfolgingsplanTokenX = async (
-  req: IAuthenticatedRequest
+  idportenToken: string | null
 ): Promise<string> => {
-  if (!req.idportenToken) {
+  if (!idportenToken) {
     throw new ApiErrorException(
       accessDeniedError(new Error("Invalid idporten token."))
     );
   }
 
   const oppfolgingsplanTokenX = getTokenX(
-    req.idportenToken,
+    idportenToken,
     serverEnv.SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
   );
 

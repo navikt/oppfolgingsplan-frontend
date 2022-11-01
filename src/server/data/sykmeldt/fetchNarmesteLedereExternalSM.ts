@@ -17,7 +17,9 @@ export const fetchNarmesteLedereExternalSM = async (
   if (isMockBackend) {
     res.narmesteLedere = activeMockSM.narmesteLedere;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const { sykmeldtFnr } = req.query;
 

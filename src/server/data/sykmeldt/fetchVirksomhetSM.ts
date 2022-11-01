@@ -44,7 +44,9 @@ export const fetchVirksomhetSM = async (
   if (isMockBackend) {
     res.virksomhet = activeMockSM.virksomhet;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
     const alleVirksomhetsnummer = findAllVirksomhetsnummer(
       res.oppfolgingsplaner
     );

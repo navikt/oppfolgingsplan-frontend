@@ -36,7 +36,9 @@ export const postSlettKommentarSM = async (
     //
     // console.log(activeMockSM.oppfolgingsplaner[0].tiltakListe[1].kommentarer)
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     await deleteTiltakCommentSM(oppfolgingsplanTokenX, kommentarId);
     serverLogger.info(`Attempting to delete comment with id: ${kommentarId}`);

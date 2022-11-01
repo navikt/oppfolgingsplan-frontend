@@ -4,7 +4,7 @@ import { EndreButton } from "./EndreButton";
 import { KanIkkeBeskrivelse } from "./KanIkkeBeskrivelse";
 import { ArbeidsoppgaveKnapper } from "./ArbeidsoppgaveKnapper";
 import { OpprettetAv } from "./OpprettetAv";
-import { SlettButton } from "./SlettButton";
+import { SlettArbeidsoppgaveButton } from "./SlettArbeidsoppgaveButton";
 import { TilretteleggingsBeskrivelse } from "./TilretteleggingsBeskrivelse";
 import { VurderButton } from "./VurderButton";
 import { VurderingFraSykmeldt } from "./VurderingFraSykmeldt";
@@ -50,7 +50,7 @@ export const ArbeidsoppgaveCard = ({
     />
   );
   const SlettKnapp = () => (
-    <SlettButton
+    <SlettArbeidsoppgaveButton
       show={aktoerHarOpprettetElement}
       arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}
     />

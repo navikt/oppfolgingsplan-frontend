@@ -18,7 +18,9 @@ export const fetchNarmesteLedereSM = async (
   if (isMockBackend) {
     res.narmesteLedere = activeMockSM.narmesteLedere;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
       .fnr;

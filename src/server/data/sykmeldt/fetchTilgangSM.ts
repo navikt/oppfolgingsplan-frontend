@@ -23,7 +23,9 @@ export const fetchTilgangSM = async (
   if (isMockBackend) {
     res.tilgang = activeMockSM.tilgang;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const tilgangResponse = await getTilgangSM(
       oppfolgingsplanTokenX,

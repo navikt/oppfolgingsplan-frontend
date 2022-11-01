@@ -14,7 +14,9 @@ export const fetchOppfolgingsplanerSM = async (
   if (isMockBackend) {
     res.oppfolgingsplaner = activeMockSM.oppfolgingsplaner;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const oppfolgingsplanerResponse = await getOppfolgingsplanerSM(
       oppfolgingsplanTokenX

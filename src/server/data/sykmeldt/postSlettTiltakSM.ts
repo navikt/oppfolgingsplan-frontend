@@ -1,4 +1,5 @@
 import { NextApiResponse } from "next";
+import { generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
 import serverLogger from "server/utils/serverLogger";
@@ -23,20 +24,27 @@ export const postSlettTiltakSM = async (
   }
 
   if (isMockBackend) {
-    const { oppfolgingsplanId, tiltakId } = req.query;
-
     const aktivPlan = activeMockSM.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
-    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!);
-    const filteredTiltakListe = aktivPlan!!.tiltakListe!!.filter(
+    if (!aktivPlan) {
+      return generalError(
+        new Error(
+          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+        )
+      );
+    }
+    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan);
+    const filteredTiltakListe = aktivPlan.tiltakListe!!.filter(
       (tiltak) => tiltak.tiltakId != Number(tiltakId)
     );
 
     activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
       filteredTiltakListe;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);
     serverLogger.info(`Attempting to delete tiltak with id: ${tiltakId}`);

@@ -50,7 +50,9 @@ export const fetchArbeidsforholdSM = async (
   if (isMockBackend) {
     res.stillinger = [...activeMockSM.stillinger];
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const unikeArbeidsforhold: ArbeidsforholdQueryParams[] = [
       ...new Set(

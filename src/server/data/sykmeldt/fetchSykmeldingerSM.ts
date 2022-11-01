@@ -14,7 +14,9 @@ export const fetchSykmeldingerSM = async (
   if (isMockBackend) {
     res.sykmeldinger = activeMockSM.sykmeldinger;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const sykmeldingerResponse = await getSykmeldingerSM(oppfolgingsplanTokenX);
 

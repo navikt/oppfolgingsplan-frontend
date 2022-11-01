@@ -22,7 +22,9 @@ export const fetchPdfSM = async (
     const encoder = new TextEncoder();
     res.pdf = encoder.encode(defaultPdfMockData.toString());
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     res.pdf = await getPdf(oppfolgingsplanTokenX, oppfolgingsplanId);
   }

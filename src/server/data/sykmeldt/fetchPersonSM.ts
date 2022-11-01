@@ -28,7 +28,9 @@ export const fetchPersonSM = async (
   if (isMockBackend) {
     res.person = activeMockSM.person;
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const response = await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);
 

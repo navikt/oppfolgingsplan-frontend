@@ -20,7 +20,9 @@ export const postGodkjennOppfolgingsplanSM = async (
   if (isMockBackend) {
     return next();
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     const data: GodkjennPlanData = req.body;
 
