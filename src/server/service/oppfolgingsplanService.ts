@@ -154,6 +154,17 @@ export async function avvisOppfolgingsplanSM(
   );
 }
 
+export async function nullstillGodkjenningSM(
+  accessToken: string,
+  oppfolgingsplanId: string
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/nullstillGodkjenning`,
+    {},
+    { accessToken }
+  );
+}
+
 export async function delMedNavSM(
   accessToken: string,
   oppfolgingsplanId: string
