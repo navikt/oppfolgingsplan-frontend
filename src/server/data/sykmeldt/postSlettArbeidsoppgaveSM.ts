@@ -5,6 +5,7 @@ import { deleteOppgave } from "server/service/oppfolgingsplanService";
 import { handleQueryParamError } from "server/utils/errors";
 import serverLogger from "server/utils/serverLogger";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import { generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 
 export const postSlettArbeidsoppgaveSM = async (
@@ -26,12 +27,14 @@ export const postSlettArbeidsoppgaveSM = async (
     const aktivPlan = activeMockSM.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
-    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!);
-    const filteredArbeidsoppgaveListe =
-      aktivPlan!!.arbeidsoppgaveListe!!.filter(
-        (arbeidsoppgave) =>
-          arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
-      );
+    if (!aktivPlan) {
+      return generalError(new Error("No aktivPlan"));
+    }
+    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan);
+    const filteredArbeidsoppgaveListe = aktivPlan.arbeidsoppgaveListe!!.filter(
+      (arbeidsoppgave) =>
+        arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
+    );
 
     activeMockSM.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
       filteredArbeidsoppgaveListe;

@@ -1,4 +1,5 @@
 import { NextApiResponse } from "next";
+import { generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
 import serverLogger from "server/utils/serverLogger";
@@ -26,8 +27,11 @@ export const postSlettTiltakSM = async (
     const aktivPlan = activeMockSM.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
-    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan!!);
-    const filteredTiltakListe = aktivPlan!!.tiltakListe!!.filter(
+    if (!aktivPlan) {
+      return generalError(new Error("No aktivPlan"));
+    }
+    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan);
+    const filteredTiltakListe = aktivPlan.tiltakListe!!.filter(
       (tiltak) => tiltak.tiltakId != Number(tiltakId)
     );
 
