@@ -12,6 +12,12 @@ spec:
     max: 2
     cpuThresholdPercentage: 90
   port: 8080
+  tokenx:
+    enabled: false
+  idporten:
+    enabled: false
+    sidecar:
+      enabled: false
   liveness:
     path: syk/oppfolgingsplaner/api/isAlive
     initialDelay: 20
