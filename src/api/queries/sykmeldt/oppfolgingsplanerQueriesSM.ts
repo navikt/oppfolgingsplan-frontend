@@ -101,9 +101,14 @@ export const useAvvisOppfolgingsplanSM = () => {
   });
 };
 
-export const useNullstillGodkjenningSM = () => {
+export const useNullstillGodkjenningSM = (oppfolgingsplanId: number) => {
   const apiBasePath = useApiBasePath();
+  const arbeidsoppgaverUrl = useOppfolgingsplanUrl(
+    oppfolgingsplanId,
+    "arbeidsoppgaver"
+  );
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const nullstillGodkjenning = (oppfolgingsplanId: number) =>
     post(
@@ -111,8 +116,9 @@ export const useNullstillGodkjenningSM = () => {
     );
 
   return useMutation(nullstillGodkjenning, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+      await router.push(arbeidsoppgaverUrl);
     },
   });
 };

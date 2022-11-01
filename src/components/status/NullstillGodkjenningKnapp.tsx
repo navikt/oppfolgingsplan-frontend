@@ -7,10 +7,11 @@ interface Props {
 }
 
 export const NullstillGodkjenningKnapp = ({ oppfolgingsplanId }: Props) => {
-  const nullstillGodkjenning = useNullstillGodkjenningSM();
+  const nullstillGodkjenning = useNullstillGodkjenningSM(oppfolgingsplanId);
 
   return (
     <Button
+      loading={nullstillGodkjenning.isLoading}
       onClick={() => nullstillGodkjenning.mutate(oppfolgingsplanId)}
       icon={<Edit />}
       variant="tertiary"
