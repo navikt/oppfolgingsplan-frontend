@@ -1,6 +1,7 @@
-import { BodyShort, Button } from "@navikt/ds-react";
+import { BodyShort } from "@navikt/ds-react";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -12,7 +13,7 @@ export const GodkjennPlanAvslatt = ({ oppfolgingsplan }: Props) => {
       <BodyShort spacing>
         Du kan gjøre endringer slik at dere får en god plan.
       </BodyShort>
-      <Button>Rediger planen</Button>
+      <NullstillGodkjenningKnapp oppfolgingsplanId={oppfolgingsplan.id} />
     </SpacedDiv>
   );
 };

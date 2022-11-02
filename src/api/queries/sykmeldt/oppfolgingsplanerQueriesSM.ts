@@ -101,6 +101,28 @@ export const useAvvisOppfolgingsplanSM = () => {
   });
 };
 
+export const useNullstillGodkjenningSM = (oppfolgingsplanId: number) => {
+  const apiBasePath = useApiBasePath();
+  const arbeidsoppgaverUrl = useOppfolgingsplanUrl(
+    oppfolgingsplanId,
+    "arbeidsoppgaver"
+  );
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const nullstillGodkjenning = (oppfolgingsplanId: number) =>
+    post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/nullstillgodkjenning`
+    );
+
+  return useMutation(nullstillGodkjenning, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+      await router.push(arbeidsoppgaverUrl);
+    },
+  });
+};
+
 export const useDelOppfolgingsplanMedNavSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
