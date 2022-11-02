@@ -6,7 +6,7 @@ import serverLogger from "server/utils/serverLogger";
 import { deleteTiltakSM } from "server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { handleQueryParamError } from "server/utils/errors";
-import activeMockSM from "server/data/mock/activeMockSM";
+import activeMockSM from "../mock/activeMockSM";
 
 export const postSlettTiltakSM = async (
   req: IAuthenticatedRequest,
