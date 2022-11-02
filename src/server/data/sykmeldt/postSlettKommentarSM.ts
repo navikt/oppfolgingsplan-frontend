@@ -26,15 +26,6 @@ export const postSlettKommentarSM = async (
   }
 
   if (isMockBackend) {
-    // const {oppfolgingsplanId, tiltakId, kommentarId} = req.query;
-    // console.log(activeMockSM.oppfolgingsplaner[0].tiltakListe[1].kommentarer)
-    // const aktivPlan = activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))
-    // const aktivtTiltak = aktivPlan?.tiltakListe?.find(tiltak => tiltak.tiltakId == Number(tiltakId));
-    // const kommentarer = aktivtTiltak?.kommentarer?.filter(kommentar => kommentar.id != Number(kommentarId))
-    //
-    // activeMockSM.oppfolgingsplaner.find(plan => plan.id == Number(oppfolgingsplanId))!!.tiltakListe.find(tiltak => tiltak.tiltakId == Number(tiltakId))!!.kommentarer = kommentarer
-    //
-    // console.log(activeMockSM.oppfolgingsplaner[0].tiltakListe[1].kommentarer)
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
       req.idportenToken

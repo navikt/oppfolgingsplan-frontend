@@ -66,6 +66,8 @@ spec:
       value: "false"
     - name: ENVIRONMENT
       value: "test"
+    - name: NEXT_PUBLIC_DISPLAY_TESTSCENARIO_SELECTOR
+      value: "false"
   accessPolicy:
     outbound:
       external:

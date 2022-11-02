@@ -1,6 +1,5 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
-import activeMockSM from "server/data/mock/activeMockSM";
 import { NextApiResponseTilgangSM } from "server/types/next/oppfolgingsplan/NextApiResponseTilgangSM";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import {
@@ -8,6 +7,7 @@ import {
   handleSchemaParsingError,
 } from "server/utils/errors";
 import { getTilgangSM } from "server/service/oppfolgingsplanService";
+import activeMockSM from "../mock/activeMockSM";
 
 export const fetchTilgangSM = async (
   req: IAuthenticatedRequest,

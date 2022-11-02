@@ -12,6 +12,8 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { TestScenarioSelector } from "../components/blocks/testscenarioselector/TestScenarioSelector";
+import { displayTestScenarioSelector } from "../environments/publicEnv";
 
 const minutesToMillis = (minutes: number) => {
   return 1000 * 60 * minutes;
@@ -41,6 +43,13 @@ const InnerContentWrapperStyled = styled.div`
   padding-right: 1rem;
   padding-top: 1rem;
 `;
+
+const TestScenarioDevTools = () => {
+  if (displayTestScenarioSelector) {
+    return <TestScenarioSelector />;
+  }
+  return null;
+};
 
 function MyApp({
   Component,
@@ -79,6 +88,7 @@ function MyApp({
           </ContentWrapperStyled>
         </>
       </Hydrate>
+      <TestScenarioDevTools />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

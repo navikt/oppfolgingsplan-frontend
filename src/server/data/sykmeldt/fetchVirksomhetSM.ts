@@ -1,6 +1,5 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
-import activeMockSM from "server/data/mock/activeMockSM";
 import { getVirksomhetSM } from "server/service/oppfolgingsplanService";
 import { handleSchemaParsingError } from "server/utils/errors";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
@@ -10,6 +9,7 @@ import {
   Virksomhet,
 } from "../../../schema/oppfolgingsplanSchema";
 import serverLogger from "server/utils/serverLogger";
+import activeMockSM from "../mock/activeMockSM";
 
 const findAllVirksomhetsnummer = (oppfolgingsplaner: Oppfolgingsplan[]) => {
   const virksomhetsNummer = oppfolgingsplaner

@@ -1,10 +1,10 @@
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
-import activeMockSM from "server/data/mock/activeMockSM";
 import { NextApiResponseSykmeldingerSM } from "server/types/next/oppfolgingsplan/NextApiResponseSykmeldingerSM";
 import { getSykmeldingerSM } from "server/service/oppfolgingsplanService";
 import { handleSchemaParsingError } from "server/utils/errors";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
+import activeMockSM from "../mock/activeMockSM";
 
 export const fetchSykmeldingerSM = async (
   req: IAuthenticatedRequest,
