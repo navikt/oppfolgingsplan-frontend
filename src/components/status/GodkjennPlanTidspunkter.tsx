@@ -4,10 +4,14 @@ import { CalendarImage, StjerneImage } from "../blocks/images/imageComponents";
 import { BildeTekstLinje } from "./BildeTekstLinje";
 
 interface Props {
-  gyldighetstidspunkt: Gyldighetstidspunkt;
+  gyldighetstidspunkt?: Gyldighetstidspunkt | null;
 }
 
 export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {
+  if (!gyldighetstidspunkt) {
+    return null;
+  }
+
   return (
     <>
       <BildeTekstLinje

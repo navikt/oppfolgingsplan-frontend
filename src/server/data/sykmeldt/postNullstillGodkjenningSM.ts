@@ -19,7 +19,9 @@ export const postNullstillGodkjenningSM = async (
   if (isMockBackend) {
     return next();
   } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(req);
+    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
+      req.idportenToken
+    );
 
     await nullstillGodkjenningSM(oppfolgingsplanTokenX, oppfolgingsplanId);
   }

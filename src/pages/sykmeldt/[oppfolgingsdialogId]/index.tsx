@@ -13,6 +13,7 @@ import {
 import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPlan";
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import Side from "components/blocks/wrappers/Side";
+import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -24,7 +25,7 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
 
   switch (pageToDisplay) {
     case "SENDTPLANTILGODKJENNING": {
-      return <div>TODO GODKJENTPLANSENDT</div>;
+      return <GodkjennPlanSendt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return (

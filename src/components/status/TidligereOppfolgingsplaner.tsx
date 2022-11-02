@@ -5,7 +5,7 @@ import { useApiBasePath } from "hooks/routeHooks";
 import styled from "styled-components";
 
 interface Props {
-  avbruttOppfolgingsplaner: Avbruttplan[];
+  avbruttOppfolgingsplaner: Avbruttplan[] | null;
 }
 
 const Container = styled.div`
@@ -16,6 +16,10 @@ export const TidligereOppfolgingsplaner = ({
   avbruttOppfolgingsplaner,
 }: Props) => {
   const apiBasePath = useApiBasePath();
+
+  if (!avbruttOppfolgingsplaner || !avbruttOppfolgingsplaner.length) {
+    return null;
+  }
 
   return (
     <Container>

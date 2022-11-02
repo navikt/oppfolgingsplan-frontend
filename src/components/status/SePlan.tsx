@@ -17,7 +17,7 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <span>
+    <>
       <Button
         icon={<FileContent />}
         variant="tertiary"
@@ -37,6 +37,6 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
           </ModalContentContainer>
         </Modal.Content>
       </Modal>
-    </span>
+    </>
   );
 };
