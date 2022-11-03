@@ -71,7 +71,7 @@ export const godkjentPlanSchema = object({
 export const godkjenningSchema = object({
   godkjent: boolean(),
   godkjentAv: personSchema,
-  beskrivelse: string(),
+  beskrivelse: string().nullish(),
   godkjenningsTidspunkt: string(),
   gyldighetstidspunkt: gyldighetstidspunktSchema.nullable(),
   delMedNav: boolean().nullable(),
@@ -107,7 +107,7 @@ export const arbeidsoppgaveSchema = object({
   arbeidsoppgaveId: number(),
   arbeidsoppgavenavn: string(),
   erVurdertAvSykmeldt: boolean().nullable(),
-  gjennomfoering: gjennomforingSchema.nullable(),
+  gjennomfoering: gjennomforingSchema.nullish(),
   opprettetDato: string(),
   sistEndretDato: string(),
   sistEndretAv: personSchema,
