@@ -8,18 +8,6 @@ import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
 
-const texts = {
-  tittel: "Aktiv oppfølgingsplan",
-  inngangspanel: {
-    tittel: "Du har ingen aktiv oppfølgingsplan",
-    paragraph:
-      "Dere kan når som helst lage en ny plan. Da legger dere inn arbeidsoppgavene dine og noen forslag til hva som skal til for at du skal klare dem.",
-  },
-  knapper: {
-    lagNy: "Lag en ny plan",
-  },
-};
-
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -37,9 +25,9 @@ const OppfolgingsdialogerIngenplan = ({
 
   return (
     <OppfolgingsplanCard
-      legend={texts.tittel}
-      title={texts.inngangspanel.tittel}
-      description={texts.inngangspanel.paragraph}
+      legend="Aktiv oppfølgingsplan"
+      title="Du har ingen aktiv oppfølgingsplan"
+      description="Dere kan når som helst lage en ny plan. Da legger dere inn arbeidsoppgavene dine og noen forslag til hva som skal til for at du skal klare dem."
       image={OppfolgingsdialogTomImage}
     >
       <Button
@@ -57,7 +45,7 @@ const OppfolgingsdialogerIngenplan = ({
           }
         }}
       >
-        {texts.knapper.lagNy}
+        Lag en ny plan
       </Button>
     </OppfolgingsplanCard>
   );

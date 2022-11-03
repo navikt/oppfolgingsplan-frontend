@@ -44,9 +44,11 @@ export const OppfolgingsplanCard = ({
 
       <OppfolgingsplanPanel href={href}>
         <PanelContent>
-          <ImageContainer width={"4rem"}>
-            <Image alt={""} src={image} layout={"responsive"} />
-          </ImageContainer>
+          <div>
+            <ImageContainer width={"4rem"}>
+              <Image alt={""} src={image} layout={"responsive"} />
+            </ImageContainer>
+          </div>
 
           <div>
             <Heading spacing={true} size={"small"} level={"3"}>
@@ -59,10 +61,9 @@ export const OppfolgingsplanCard = ({
               </Heading>
             )}
 
-            <div>
-              {description && <BodyLong spacing={true}>{description}</BodyLong>}
-              <div>{children}</div>
-            </div>
+            {description && <BodyLong spacing={true}>{description}</BodyLong>}
+
+            <div>{children}</div>
           </div>
         </PanelContent>
       </OppfolgingsplanPanel>
