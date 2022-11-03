@@ -50,8 +50,12 @@ export const EditerArbeidsoppgave = ({
       }}
       onSubmit={(data) => {
         lagreArbeidsoppgave.mutate(arbeidsoppgaveInformasjon(data));
-        doneEditing();
+        if (lagreArbeidsoppgave.isSuccess) {
+          doneEditing();
+        }
       }}
+      isSubmitting={lagreArbeidsoppgave.isLoading}
+      isErrorSavingOppgave={lagreArbeidsoppgave.isError}
       onCancel={doneEditing}
       navnIsEditable={false}
     />

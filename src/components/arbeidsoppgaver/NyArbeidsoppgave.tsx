@@ -55,8 +55,12 @@ export const NyArbeidsoppgave = () => {
       <ArbeidsoppgaveForm
         onSubmit={(data) => {
           lagreOppgave.mutate(nyArbeidsoppgaveInformasjon(data));
-          setLeggerTilOppgave(false);
+          if (lagreOppgave.isSuccess) {
+            setLeggerTilOppgave(false);
+          }
         }}
+        isSubmitting={lagreOppgave.isLoading}
+        isErrorSavingOppgave={lagreOppgave.isError}
         onCancel={() => setLeggerTilOppgave(false)}
       />
     </SpacedPanel>
