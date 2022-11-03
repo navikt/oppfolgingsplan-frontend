@@ -1,10 +1,12 @@
 import { useSlettOppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
 import { Delete } from "@navikt/ds-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { texts } from "components/seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
+import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
+import Feilmelding from "../blocks/error/Feilmelding";
 
 const ModalContent = styled.div`
   padding: 2rem;
@@ -49,12 +51,25 @@ export const SlettArbeidsoppgaveButton = ({
               {texts.arbeidsoppgaveList.sletting.erDuSikker}
             </HeadingWithExtraSpacing>
 
+            {slettArbeidsoppgave.isError && (
+              <SpacedDiv>
+                <Feilmelding
+                  description={
+                    "Vi klarte ikke å slette arbeidsoppgaven din. Vennligst prøv igjen senere."
+                  }
+                />
+              </SpacedDiv>
+            )}
+
             <Row>
               <Button
+                loading={slettArbeidsoppgave.isLoading}
                 variant={"danger"}
                 onClick={() => {
                   slettArbeidsoppgave.mutate(arbeidsoppgaveId);
-                  setModalOpen(false);
+                  if (slettArbeidsoppgave.isSuccess) {
+                    setModalOpen(false);
+                  }
                 }}
               >
                 {texts.arbeidsoppgaveList.buttons.slett}

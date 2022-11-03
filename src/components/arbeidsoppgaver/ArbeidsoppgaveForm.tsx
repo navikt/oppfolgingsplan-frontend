@@ -12,6 +12,8 @@ import styled from "styled-components";
 import { KANGJENNOMFOERES, TILRETTELEGGING } from "constants/konstanter";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
+import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
+import Feilmelding from "../blocks/error/Feilmelding";
 
 export type OppgaveFormValues = {
   navnPaaArbeidsoppgaven: string;
@@ -36,6 +38,10 @@ const StyledCheckboxGroup = styled(CheckboxGroup)`
 interface Props {
   onSubmit(data: OppgaveFormValues): void;
 
+  isSubmitting: boolean;
+
+  isErrorSavingOppgave: boolean;
+
   onCancel(): void;
 
   defaultFormValues?: OppgaveFormValues;
@@ -44,6 +50,8 @@ interface Props {
 
 export const ArbeidsoppgaveForm = ({
   onSubmit,
+  isSubmitting,
+  isErrorSavingOppgave,
   onCancel,
   defaultFormValues,
   navnIsEditable = true,
@@ -180,8 +188,18 @@ export const ArbeidsoppgaveForm = ({
             />
           )}
 
+          {isErrorSavingOppgave && (
+            <SpacedDiv>
+              <Feilmelding
+                description={
+                  "Vi klarte ikke å lagre endringene på arbeidsoppgaven din. Vennligst prøv igjen senere."
+                }
+              />
+            </SpacedDiv>
+          )}
+
           <Row>
-            <Button variant={"primary"} type={"submit"}>
+            <Button loading={isSubmitting} variant={"primary"} type={"submit"}>
               Lagre
             </Button>
             <Button variant={"tertiary"} onClick={onCancel}>
