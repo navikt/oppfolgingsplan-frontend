@@ -10,6 +10,7 @@ import { AdresseSperreInfoBoks } from "../infoboks/AdresseSperreInfoBoks";
 import VideoPanel from "../video/VideoPanel";
 import { useTilgangSM } from "api/queries/sykmeldt/tilgangQueriesSM";
 import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
+import { SpacedDiv } from "./SpacedDiv";
 
 const texts = {
   error: {
@@ -24,7 +25,6 @@ interface SideProps {
   heading: string;
   displayPersonvernInfo?: boolean;
   displayVideo?: boolean;
-  isLoading?: boolean;
   children: ReactNode;
 }
 
@@ -33,7 +33,6 @@ const Side = ({
   heading,
   displayPersonvernInfo,
   displayVideo,
-  isLoading,
   children,
 }: SideProps): ReactElement => {
   const tilgang = useTilgangSM();
@@ -49,10 +48,12 @@ const Side = ({
       narmesteLedere.isError
     ) {
       return (
-        <Feilmelding
-          title={texts.error.title}
-          description={texts.error.description}
-        />
+        <SpacedDiv>
+          <Feilmelding
+            title={texts.error.title}
+            description={texts.error.description}
+          />
+        </SpacedDiv>
       );
     } else if (tilgang.data && !tilgang.data.harTilgang) {
       return <AdresseSperreInfoBoks />;
@@ -61,12 +62,13 @@ const Side = ({
     }
   };
 
+  //Check sykmeldinger error state because of dependent queries loading-state (sykmeldt.fnr)
   if (
-    isLoading ||
-    tilgang.isLoading ||
-    oppfolgingsplaner.isLoading ||
-    sykmeldinger.isLoading ||
-    narmesteLedere.isLoading
+    !sykmeldinger.isError &&
+    (tilgang.isLoading ||
+      oppfolgingsplaner.isLoading ||
+      sykmeldinger.isLoading ||
+      narmesteLedere.isLoading)
   ) {
     return <AppSpinner />;
   }
