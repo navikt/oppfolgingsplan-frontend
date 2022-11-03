@@ -1,7 +1,10 @@
 import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
 import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
 import { TILRETTELEGGING } from "constants/konstanter";
-import { Arbeidsoppgave } from "../../schema/oppfolgingsplanSchema";
+import {
+  Arbeidsoppgave,
+  Gjennomforing,
+} from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
   show: Boolean;
@@ -39,12 +42,30 @@ export const EditerArbeidsoppgave = ({
     };
   };
 
+  const getTilretteleggingFormData = (gjennomforing?: Gjennomforing | null) => {
+    const tilrettelegging: string[] = [];
+
+    if (gjennomforing?.medHjelp) {
+      tilrettelegging.push(TILRETTELEGGING.MED_HJELP);
+    }
+    if (gjennomforing?.paaAnnetSted) {
+      tilrettelegging.push(TILRETTELEGGING.PAA_ANNET_STED);
+    }
+    if (gjennomforing?.medMerTid) {
+      tilrettelegging.push(TILRETTELEGGING.MED_MER_TID);
+    }
+
+    return tilrettelegging;
+  };
+
   return show ? (
     <ArbeidsoppgaveForm
       defaultFormValues={{
         navnPaaArbeidsoppgaven: arbeidsoppgave.arbeidsoppgavenavn,
         kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres!!,
-        tilrettelegging: [TILRETTELEGGING.MED_HJELP],
+        tilrettelegging: getTilretteleggingFormData(
+          arbeidsoppgave.gjennomfoering
+        ),
         kanBeskrivelse: arbeidsoppgave.gjennomfoering?.kanBeskrivelse!!,
         kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!!,
       }}

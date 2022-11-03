@@ -18,7 +18,7 @@ import Feilmelding from "../blocks/error/Feilmelding";
 export type OppgaveFormValues = {
   navnPaaArbeidsoppgaven: string;
   kanGjennomfores: string;
-  tilrettelegging?: string[];
+  tilrettelegging: string[];
   kanBeskrivelse: string;
   kanIkkeBeskrivelse: string;
 };
@@ -65,10 +65,25 @@ export const ArbeidsoppgaveForm = ({
     formState: { errors },
   } = formFunctions;
 
-  const navnValue = watch("navnPaaArbeidsoppgaven");
-  const kanBeskrivelseValue = watch("kanBeskrivelse");
-  const kanIkkeBeskrivelseValue = watch("kanIkkeBeskrivelse");
   const kanGjennomforesValue = watch("kanGjennomfores");
+
+  const hasSelectedGjennomforesMedTilrettelegging = () => {
+    if (!kanGjennomforesValue) {
+      return (
+        defaultFormValues?.kanGjennomfores == KANGJENNOMFOERES.TILRETTELEGGING
+      );
+    }
+    return kanGjennomforesValue == KANGJENNOMFOERES.TILRETTELEGGING;
+  };
+
+  const hasSelectedKanIkke = () => {
+    if (!kanGjennomforesValue) {
+      return (
+        defaultFormValues?.kanGjennomfores == KANGJENNOMFOERES.TILRETTELEGGING
+      );
+    }
+    return kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE;
+  };
 
   return (
     <FormProvider {...formFunctions}>
@@ -86,14 +101,13 @@ export const ArbeidsoppgaveForm = ({
                 maxLength: 100,
               })}
               defaultValue={defaultFormValues?.navnPaaArbeidsoppgaven}
-              value={navnValue}
             />
           )}
 
           <Controller
             name="kanGjennomfores"
             rules={{ required: "Du må velge om oppgaven kan gjennomføres" }}
-            defaultValue={null}
+            defaultValue={defaultFormValues?.kanGjennomfores}
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <StyledRadioGroup
                 legend="Kan oppgaven gjennomføres i sykeperioden? (obligatorisk)"
@@ -121,11 +135,11 @@ export const ArbeidsoppgaveForm = ({
             )}
           />
 
-          {kanGjennomforesValue == KANGJENNOMFOERES.TILRETTELEGGING && (
+          {hasSelectedGjennomforesMedTilrettelegging() && (
             <div>
               <Controller
                 name="tilrettelegging"
-                defaultValue={null}
+                defaultValue={defaultFormValues?.tilrettelegging}
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <StyledCheckboxGroup
                     legend="Hva skal til for å gjennomføre oppgaven?"
@@ -162,12 +176,11 @@ export const ArbeidsoppgaveForm = ({
                   maxLength: 1000,
                 })}
                 defaultValue={defaultFormValues?.kanBeskrivelse}
-                value={kanBeskrivelseValue}
               />
             </div>
           )}
 
-          {kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE && (
+          {hasSelectedKanIkke() && (
             <StyledTextarea
               id="kanIkkeBeskrivelse"
               label={
@@ -184,7 +197,6 @@ export const ArbeidsoppgaveForm = ({
                 maxLength: 1000,
               })}
               defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
-              value={kanIkkeBeskrivelseValue}
             />
           )}
 
