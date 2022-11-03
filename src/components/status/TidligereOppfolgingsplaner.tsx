@@ -2,15 +2,11 @@ import { Accordion, Link } from "@navikt/ds-react";
 import { Avbruttplan } from "../../schema/oppfolgingsplanSchema";
 import { restdatoTildato } from "utils/dateUtils";
 import { useApiBasePath } from "hooks/routeHooks";
-import styled from "styled-components";
+import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 
 interface Props {
   avbruttOppfolgingsplaner: Avbruttplan[] | null;
 }
-
-const Container = styled.div`
-  margin: 2rem 0;
-`;
 
 export const TidligereOppfolgingsplaner = ({
   avbruttOppfolgingsplaner,
@@ -22,7 +18,7 @@ export const TidligereOppfolgingsplaner = ({
   }
 
   return (
-    <Container>
+    <SpacedDiv>
       <Accordion style={{ width: "100%", maxWidth: "65ch" }}>
         <Accordion.Item>
           <Accordion.Header>
@@ -43,6 +39,6 @@ export const TidligereOppfolgingsplaner = ({
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
-    </Container>
+    </SpacedDiv>
   );
 };

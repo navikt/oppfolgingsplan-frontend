@@ -7,6 +7,7 @@ import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
 import Infobox from "./Infobox";
+import { Row } from "../../blocks/wrappers/Row";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -20,7 +21,7 @@ function GodkjennPlanSendt({ oppfolgingsplan }: Props) {
 
   return (
     <SpacedDiv>
-      <Heading level="2" size="large" spacing>
+      <Heading level="2" size="medium" spacing>
         Planen er sendt til godkjenning
       </Heading>
 
@@ -31,9 +32,11 @@ function GodkjennPlanSendt({ oppfolgingsplan }: Props) {
 
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
 
-      <SePlan oppfolgingsplan={oppfolgingsplan} />
+      <Row marginBottom={"2rem"}>
+        <SePlan oppfolgingsplan={oppfolgingsplan} />
 
-      <NullstillGodkjenningKnapp oppfolgingsplanId={oppfolgingsplan.id} />
+        <NullstillGodkjenningKnapp oppfolgingsplanId={oppfolgingsplan.id} />
+      </Row>
 
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
