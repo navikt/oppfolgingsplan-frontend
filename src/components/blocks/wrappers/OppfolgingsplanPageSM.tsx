@@ -98,7 +98,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
         {headingText(page)}
       </Heading>
 
-      {stilling && (
+      {stilling?.yrke && (
         <BodyLong spacing={true} size={"medium"}>
           {textStilling(stilling)}
         </BodyLong>
