@@ -17,6 +17,8 @@ export const TidligereOppfolgingsplaner = ({
 }: Props) => {
   const apiBasePath = useApiBasePath();
 
+  if (!avbruttOppfolgingsplaner.length) return null;
+
   return (
     <Container>
       <Accordion style={{ width: "100%", maxWidth: "65ch" }}>
