@@ -94,11 +94,13 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     >
       <OppfolgingsplanStepper activeStep={page.valueOf()} />
 
-      <Heading spacing={true} level="2" size="medium">
-        {headingText(page)}
-      </Heading>
+      {page != Page.SEPLANEN && (
+        <Heading spacing={true} level="2" size="medium">
+          {headingText(page)}
+        </Heading>
+      )}
 
-      {stilling?.yrke && (
+      {page != Page.SEPLANEN && stilling?.yrke && (
         <BodyLong spacing={true} size={"medium"}>
           {textStilling(stilling)}
         </BodyLong>
