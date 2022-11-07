@@ -89,7 +89,6 @@ export const LagretTiltak = ({
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
   const [editererTiltak, setEditererTiltak] = useState(false);
   const lagreKommentar = useLagreKommentarSM();
-  const fnr = arbeidstakerFnr;
   const tiltakId = tiltak.tiltakId;
 
   return (
@@ -140,16 +139,17 @@ export const LagretTiltak = ({
             aktorFnr={arbeidstakerFnr}
           />
 
-          {/*Todo: Finn ut hvorfor den må reassigne tiltakid og fnr*/}
           {displayNyKommentar && (
             <NyKommentar
+              isLoading={lagreKommentar.isLoading}
               lagre={(kommentar: string) => {
                 lagreKommentar.mutate({
-                  tiltakId,
-                  fnr,
-                  kommentar,
+                  tiltakId: tiltakId,
+                  kommentar: { tekst: kommentar },
                 });
-                setDisplayNyKommentar(false);
+                if (lagreKommentar.isSuccess) {
+                  setDisplayNyKommentar(false);
+                }
               }}
               avbryt={() => setDisplayNyKommentar(false)}
             />

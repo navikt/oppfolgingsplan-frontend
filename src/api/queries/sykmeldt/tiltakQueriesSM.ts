@@ -1,7 +1,7 @@
 import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { post } from "api/axios/axios";
 import { OPPFOLGINGSPLANER_SM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { Tiltak } from "../../../schema/oppfolgingsplanSchema";
+import { Kommentar, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useLagreTiltakSM = () => {
@@ -41,8 +41,7 @@ export const useSlettTiltakSM = () => {
 
 interface LagreKommentarProps {
   tiltakId: number;
-  fnr: string;
-  kommentar: string;
+  kommentar: Partial<Kommentar>;
 }
 
 export const useLagreKommentarSM = () => {
@@ -50,13 +49,10 @@ export const useLagreKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const lagreKommentar = ({ tiltakId, fnr, kommentar }: LagreKommentarProps) =>
+  const lagreKommentar = ({ tiltakId, kommentar }: LagreKommentarProps) =>
     post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
-      {
-        fnr: fnr,
-        kommentar: kommentar,
-      }
+      kommentar
     );
 
   return useMutation(lagreKommentar, {

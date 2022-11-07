@@ -37,40 +37,42 @@ export const Dialog = ({
 
   if (!kommentarer || !aktivPlan) return null;
 
-  const alleKommentarer = kommentarer.map((kommentar, index) => {
-    const isAktorsKommentar = kommentar.opprettetAv.fnr == aktorFnr;
+  const alleKommentarer = kommentarer
+    .sort((k1, k2) => k2.id - k1.id)
+    .map((kommentar, index) => {
+      const isAktorsKommentar = kommentar.opprettetAv.fnr == aktorFnr;
 
-    return (
-      <StyledChat
-        key={index}
-        avatar={hentAktoerNavnInitialer(kommentar.opprettetAv.navn)}
-        name={kommentar.opprettetAv.navn}
-        timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
-        avatarBgColor={"#F1F1F1"}
-        backgroundColor={"#F7F7F7"}
-        position={isAktorsKommentar ? "right" : "left"}
-      >
-        <Chat.Bubble>
-          <DialogContent>
-            {kommentar.tekst}
-            {isAktorsKommentar && (
-              <ButtonRightAligned
-                variant="tertiary"
-                onClick={() =>
-                  slettKommentar.mutate({
-                    tiltakId: tiltakId,
-                    kommentarId: kommentar.id,
-                  })
-                }
-              >
-                Slett
-              </ButtonRightAligned>
-            )}
-          </DialogContent>
-        </Chat.Bubble>
-      </StyledChat>
-    );
-  });
+      return (
+        <StyledChat
+          key={index}
+          avatar={hentAktoerNavnInitialer(kommentar.opprettetAv.navn)}
+          name={kommentar.opprettetAv.navn}
+          timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
+          avatarBgColor={"#F1F1F1"}
+          backgroundColor={"#F7F7F7"}
+          position={isAktorsKommentar ? "right" : "left"}
+        >
+          <Chat.Bubble>
+            <DialogContent>
+              {kommentar.tekst}
+              {isAktorsKommentar && (
+                <ButtonRightAligned
+                  variant="tertiary"
+                  onClick={() =>
+                    slettKommentar.mutate({
+                      tiltakId: tiltakId,
+                      kommentarId: kommentar.id,
+                    })
+                  }
+                >
+                  Slett
+                </ButtonRightAligned>
+              )}
+            </DialogContent>
+          </Chat.Bubble>
+        </StyledChat>
+      );
+    });
 
   return <div>{alleKommentarer}</div>;
 };
