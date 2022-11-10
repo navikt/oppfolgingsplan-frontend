@@ -12,13 +12,18 @@ const SpacedTextarea = styled(Textarea)`
 interface Props {
   lagre(kommentar: string): void;
   avbryt(): void;
+  isLoading: boolean;
 }
 
 type KommentarFormValues = {
   kommentar: string;
 };
 
-export const NyKommentar = ({ lagre, avbryt }: Props): ReactElement | null => {
+export const NyKommentar = ({
+  lagre,
+  avbryt,
+  isLoading,
+}: Props): ReactElement | null => {
   const {
     register,
     watch,
@@ -52,7 +57,7 @@ export const NyKommentar = ({ lagre, avbryt }: Props): ReactElement | null => {
         />
 
         <Row>
-          <Button variant={"primary"} type={"submit"}>
+          <Button variant={"primary"} type={"submit"} loading={isLoading}>
             Lagre
           </Button>
           <Button variant={"tertiary"} onClick={avbryt}>

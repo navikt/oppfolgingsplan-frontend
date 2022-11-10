@@ -12,7 +12,7 @@ export const postLagreKommentarSM = async (
   next: () => void
 ) => {
   const { tiltakId } = req.query;
-  const body: Kommentar = req.body;
+  const partialKommentar: Partial<Kommentar> = req.body;
 
   if (typeof tiltakId !== "string") {
     return handleQueryParamError(tiltakId);
@@ -25,7 +25,11 @@ export const postLagreKommentarSM = async (
       req.idportenToken
     );
 
-    await saveTiltakCommentSM(oppfolgingsplanTokenX, tiltakId, body);
+    await saveTiltakCommentSM(
+      oppfolgingsplanTokenX,
+      tiltakId,
+      partialKommentar
+    );
   }
 
   next();

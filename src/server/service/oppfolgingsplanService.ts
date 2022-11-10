@@ -224,13 +224,11 @@ export async function deleteTiltakCommentSM(
 export async function saveTiltakCommentSM(
   accessToken: string,
   tiltakId: string,
-  kommentar: Kommentar
+  kommentar: Partial<Kommentar>
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/lagreKommentar`,
-    {
-      kommentar,
-    },
+    kommentar,
     { accessToken }
   );
 }
