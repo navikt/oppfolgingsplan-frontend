@@ -3,7 +3,6 @@ import nc from "next-connect";
 import { ncOptions } from "server/utils/ncOptions";
 import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "server/auth/idporten/idportenToken";
-import { fetchOppfolgingsplanerSM } from "server/data/sykmeldt/fetchOppfolgingsplanerSM";
 import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import {
   Oppfolgingsplan,
@@ -15,6 +14,11 @@ import { fetchKontaktinfoSM } from "server/data/sykmeldt/fetchKontaktinfoSM";
 import { fetchArbeidsforholdSM } from "server/data/sykmeldt/fetchArbeidsforholdSM";
 import { fetchNarmesteLedereSM } from "server/data/sykmeldt/fetchNarmesteLedereSM";
 import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
+import { getOppfolgingsplanTokenX } from "../../../../server/utils/tokenX";
+import { IAuthenticatedRequest } from "../../../../server/api/IAuthenticatedRequest";
+import { getOppfolgingsplanerSM } from "../../../../server/service/oppfolgingsplanService";
+import { isMockBackend } from "../../../../environments/publicEnv";
+import activeMockSM from "../../../../server/data/mock/activeMockSM";
 
 const findNarmesteLeder = (
   fnr?: string,
@@ -49,12 +53,75 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   ncOptions
 )
   .use(getIdportenToken)
-  .use(fetchOppfolgingsplanerSM)
-  .use(fetchVirksomhetSM)
-  .use(fetchPersonSM)
-  .use(fetchKontaktinfoSM)
-  .use(fetchArbeidsforholdSM)
-  .use(fetchNarmesteLedereSM)
+  .use(
+    async (
+      req: IAuthenticatedRequest,
+      res: NextApiResponseOppfolgingsplanSM,
+      next
+    ) => {
+      if (isMockBackend) {
+        res.oppfolgingsplaner = activeMockSM.oppfolgingsplaner;
+        res.virksomhet = activeMockSM.virksomhet;
+        res.person = activeMockSM.person;
+        res.stillinger = [...activeMockSM.stillinger];
+        res.kontaktinfo = activeMockSM.kontaktinfo;
+        res.narmesteLedere = activeMockSM.narmesteLedere;
+      } else {
+        const oppfolgingsplanTokenx = await getOppfolgingsplanTokenX(
+          req.idportenToken
+        );
+        const oppfolgingsplaner = await getOppfolgingsplanerSM(
+          oppfolgingsplanTokenx
+        );
+
+        res.oppfolgingsplaner = oppfolgingsplaner;
+
+        if (oppfolgingsplaner.length > 0) {
+          const virksomhetPromise = fetchVirksomhetSM(
+            oppfolgingsplanTokenx,
+            oppfolgingsplaner
+          );
+          const personPromise = fetchPersonSM(
+            oppfolgingsplanTokenx,
+            oppfolgingsplaner
+          );
+          const kontaktinfoPromise = fetchKontaktinfoSM(
+            oppfolgingsplanTokenx,
+            oppfolgingsplaner
+          );
+          const arbeidsforholdPromise = fetchArbeidsforholdSM(
+            oppfolgingsplanTokenx,
+            oppfolgingsplaner
+          );
+          const narmesteLederePromise = fetchNarmesteLedereSM(
+            oppfolgingsplanTokenx,
+            oppfolgingsplaner
+          );
+
+          const [
+            virksomhet,
+            person,
+            kontaktinfo,
+            arbeidsforhold,
+            narmesteLedere,
+          ] = await Promise.all([
+            virksomhetPromise,
+            personPromise,
+            kontaktinfoPromise,
+            arbeidsforholdPromise,
+            narmesteLederePromise,
+          ]);
+
+          res.person = person;
+          res.stillinger = arbeidsforhold;
+          res.virksomhet = virksomhet;
+          res.kontaktinfo = kontaktinfo;
+          res.narmesteLedere = narmesteLedere;
+        }
+      }
+      next();
+    }
+  )
   .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
       (oppfolgingsplan) => {

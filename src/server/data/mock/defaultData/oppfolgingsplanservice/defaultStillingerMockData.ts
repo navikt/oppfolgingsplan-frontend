@@ -6,6 +6,5 @@ export const defaultStillingerMockData: Stilling[] = [
     yrke: "Kontaktlærer",
     prosent: 100,
     fom: "2018-01-01T12:00:00+01:00",
-    tom: null,
   },
 ];

@@ -27,7 +27,6 @@ export const stillingSchema = object({
   yrke: string().nullable(),
   prosent: number().nullable(),
   fom: string().nullable(),
-  tom: string().nullable(),
 });
 
 export const personSchema = object({

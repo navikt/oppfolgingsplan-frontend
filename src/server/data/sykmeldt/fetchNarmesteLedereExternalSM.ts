@@ -32,15 +32,7 @@ export const fetchNarmesteLedereExternalSM = async (
       sykmeldtFnr!!
     );
 
-    if (narmesteLedereResponse.success) {
-      res.narmesteLedere = narmesteLedereResponse.data;
-    } else {
-      handleSchemaParsingError(
-        "Sykmeldt",
-        "NarmesteLedere",
-        narmesteLedereResponse.error
-      );
-    }
+    res.narmesteLedere = narmesteLedereResponse;
   }
 
   next();

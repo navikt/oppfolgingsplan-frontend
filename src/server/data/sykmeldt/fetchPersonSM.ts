@@ -1,23 +1,12 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "environments/publicEnv";
-import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
-import { handleSchemaParsingError } from "server/utils/errors";
 import { getPersonSM } from "server/service/oppfolgingsplanService";
-import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import { ApiErrorException, generalError } from "api/axios/errors";
-import activeMockSM from "../mock/activeMockSM";
+import { Oppfolgingsplan, Person } from "../../../schema/oppfolgingsplanSchema";
 
 export const fetchPersonSM = async (
-  req: IAuthenticatedRequest,
-  res: NextApiResponseOppfolgingsplanSM,
-  next: () => void
-) => {
-  if (!res.oppfolgingsplaner.length) {
-    return next();
-  }
-
-  const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
-    .fnr;
+  oppfolgingsplanTokenX: string,
+  oppfolgingsplaner: Oppfolgingsplan[]
+): Promise<Person> | never => {
+  const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 
   if (!sykmeldtFnr) {
     throw new ApiErrorException(
@@ -25,21 +14,5 @@ export const fetchPersonSM = async (
     );
   }
 
-  if (isMockBackend) {
-    res.person = activeMockSM.person;
-  } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
-      req.idportenToken
-    );
-
-    const response = await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);
-
-    if (response.success) {
-      res.person = response.data;
-    } else {
-      handleSchemaParsingError("Sykmeldt", "Person", response.error);
-    }
-  }
-
-  next();
+  return await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);
 };

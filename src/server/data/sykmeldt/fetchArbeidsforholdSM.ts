@@ -1,36 +1,10 @@
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { isMockBackend } from "environments/publicEnv";
 import { getArbeidsforholdSM } from "server/service/oppfolgingsplanService";
-import { handleSchemaParsingError } from "server/utils/errors";
-import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
-import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import serverLogger from "server/utils/serverLogger";
-import { Arbeidsforhold } from "../../../schema/ArbeidsforholdSchema";
-import activeMockSM from "../mock/activeMockSM";
-
-const fetchSingleArbeidsforhold = async (
-  oppfolgingsplanTokenX: string,
-  fnr: string,
-  virksomhetsnummer: string,
-  fom: string
-) => {
-  const response = await getArbeidsforholdSM(
-    oppfolgingsplanTokenX,
-    fnr,
-    virksomhetsnummer,
-    fom
-  );
-
-  if (response.success) {
-    return {
-      ...response.data,
-      virksomhetsnummer: virksomhetsnummer,
-      fom: fom,
-    };
-  } else {
-    handleSchemaParsingError("Sykmeldt", "Arbeidsforhold", response.error);
-  }
-};
+import {
+  Oppfolgingsplan,
+  Stilling,
+} from "../../../schema/oppfolgingsplanSchema";
+import { notNull } from "../../utils/tsUtils";
 
 interface ArbeidsforholdQueryParams {
   fnr: string;
@@ -39,58 +13,46 @@ interface ArbeidsforholdQueryParams {
 }
 
 export const fetchArbeidsforholdSM = async (
-  req: IAuthenticatedRequest,
-  res: NextApiResponseOppfolgingsplanSM,
-  next: () => void
-) => {
-  if (!res.oppfolgingsplaner.length) {
-    return next();
+  oppfolgingsplanTokenX: string,
+  oppfolgingsplaner: Oppfolgingsplan[]
+): Promise<Stilling[]> => {
+  const unikeArbeidsforhold: ArbeidsforholdQueryParams[] = [
+    ...new Set(
+      oppfolgingsplaner
+        .map((it) => {
+          if (!it.arbeidstaker.fnr || !it.virksomhet?.virksomhetsnummer) return;
+          return {
+            fnr: it.arbeidstaker.fnr,
+            fom: it.opprettetDato,
+            virksomhetsnummer: it.virksomhet.virksomhetsnummer,
+          };
+        })
+        .filter(notNull)
+    ),
+  ];
+
+  if (unikeArbeidsforhold.length === 0) {
+    serverLogger.info("Hent oppfølgingsplaner: ingen arbeidsforhold å hente");
+    return [];
   }
 
-  if (isMockBackend) {
-    res.stillinger = [...activeMockSM.stillinger];
-  } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
-      req.idportenToken
-    );
-
-    const unikeArbeidsforhold: ArbeidsforholdQueryParams[] = [
-      ...new Set(
-        res.oppfolgingsplaner
-          .filter((plan) => plan.arbeidstaker.fnr)
-          .filter((plan) => plan.opprettetDato)
-          .filter((plan) => plan.virksomhet?.virksomhetsnummer)
-          .map((plan) => {
-            return {
-              fnr: plan.arbeidstaker.fnr!!,
-              fom: plan.opprettetDato!!,
-              virksomhetsnummer: plan.virksomhet?.virksomhetsnummer!!,
-            };
-          })
-      ),
-    ];
-
-    if (!unikeArbeidsforhold) {
-      serverLogger.info("Hent oppfølgingsplaner: ingen arbeidsforhold å hente");
-      return next();
-    }
-
-    const arbeidsforholdPromises: any[] = [];
-
-    unikeArbeidsforhold.forEach((params) => {
-      if (params) {
-        const arbeidsforhold = fetchSingleArbeidsforhold(
+  return (
+    await Promise.all(
+      unikeArbeidsforhold.map(async ({ fnr, virksomhetsnummer, fom }) => {
+        const arbeidsforhold = await getArbeidsforholdSM(
           oppfolgingsplanTokenX,
-          params.fnr,
-          params.virksomhetsnummer,
-          params.fom
+          fnr,
+          virksomhetsnummer,
+          fom
         );
-        arbeidsforholdPromises.push(arbeidsforhold);
-      }
-    });
 
-    res.stillinger = await Promise.all(arbeidsforholdPromises);
-  }
-
-  next();
+        return arbeidsforhold.map(({ yrke, prosent }) => ({
+          yrke,
+          prosent,
+          virksomhetsnummer,
+          fom,
+        }));
+      })
+    )
+  ).flat();
 };
