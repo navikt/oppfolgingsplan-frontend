@@ -60,7 +60,7 @@ spec:
       value: https://www.nav.no/arbeidsgiver/sykmeldte
     - name: DITT_SYKEFRAVAER_ROOT
       value: https://www.nav.no/syk/sykefravaer
-    - name: NEXT_PUBLIC_DISPLAY_TESTSCENARIO_SELECTOR
+    - name: DISPLAY_TESTSCENARIO_SELECTOR
       value: "false"
   accessPolicy:
     outbound:

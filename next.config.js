@@ -10,11 +10,12 @@ const moduleExports = {
   publicRuntimeConfig: {
     dineSykemeldteRoot: process.env.DINE_SYKMELDTE_ROOT,
     dittSykefravarRoot: process.env.DITT_SYKEFRAVAER_ROOT,
-    basePath
+    displayTestScenarioSelector: process.env.DISPLAY_TESTSCENARIO_SELECTOR,
+    basePath,
   },
   compiler: {
     // ssr and displayName are configured by default
-    styledComponents: true
+    styledComponents: true,
   },
   eslint: {
     // TODO: Remove/fix before prod
@@ -25,7 +26,7 @@ const moduleExports = {
 };
 
 const sentryWebpackPluginOptions = {
-  silent: true
+  silent: true,
 };
 
 // Make sure adding Sentry options is the last code to run before exporting, to
