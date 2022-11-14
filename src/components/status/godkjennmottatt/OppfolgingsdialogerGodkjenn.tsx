@@ -6,6 +6,8 @@ import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { BodyLong } from "@navikt/ds-react";
+import { Row } from "../../blocks/wrappers/Row";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -21,18 +23,23 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
 
   return (
     <SpacedDiv>
-      <p>
+      <BodyLong spacing={true}>
         {`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-      </p>
+      </BodyLong>
+
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
-      <div>
+
+      <Row marginBottom={"2rem"}>
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
-      </div>
+      </Row>
+
       <TidligereOppfolgingsplaner
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
+
       <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} />
+
       <TilLandingssideKnapp />
     </SpacedDiv>
   );

@@ -121,6 +121,15 @@ export const TestScenarioSelector = () => {
                 >
                   Sendt plan til godkjenning
                 </RadioWithHelpText>
+
+                <RadioWithHelpText
+                  value={TestScenario.GODKJENNPLANMOTTATT}
+                  helpText={
+                    "Den andre parten har sendt oppfølgingsplanen til meg for at jeg skal godkjenne den"
+                  }
+                >
+                  Mottatt plan for godkjenning
+                </RadioWithHelpText>
               </RadioGroup>
             </SpacedDiv>
 
