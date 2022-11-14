@@ -17,9 +17,10 @@ import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialo
 import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
 import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
 import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
+import { handleSchemaParsingError } from "../utils/errors";
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
-  return array(narmesteLederSchema).safeParse(
+  const response = array(narmesteLederSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/narmesteledere/${fnr}`,
       {
@@ -27,6 +28,12 @@ export async function getNarmesteLedere(accessToken: string, fnr: string) {
       }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "NarmesteLedere", response.error);
 }
 
 export async function getSykmeldingerSM(accessToken: string) {
@@ -44,7 +51,7 @@ export async function getVirksomhetSM(
   accessToken: string,
   virksomhetsnummer: string
 ) {
-  return virksomhetSchema.safeParse(
+  const response = virksomhetSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/virksomhet/${virksomhetsnummer}`,
       {
@@ -52,6 +59,12 @@ export async function getVirksomhetSM(
       }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "Virksomhet", response.error);
 }
 
 export async function getArbeidsforholdSM(
@@ -60,7 +73,7 @@ export async function getArbeidsforholdSM(
   virksomhetsnummer: string,
   fom: string
 ) {
-  return array(arbeidsforholdSchema).safeParse(
+  const response = array(arbeidsforholdSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/arbeidsforhold?fnr=${fnr}&virksomhetsnummer=${virksomhetsnummer}&fom=${fom}`,
       {
@@ -68,10 +81,16 @@ export async function getArbeidsforholdSM(
       }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "Arbeidsforhold", response.error);
 }
 
 export async function getOppfolgingsplanerSM(accessToken: string) {
-  return array(oppfolgingsplanSchema).safeParse(
+  const response = array(oppfolgingsplanSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
       {
@@ -79,6 +98,12 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
       }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", response.error);
 }
 
 export async function getTilgangSM(accessToken: string, fnr: string) {
@@ -91,21 +116,33 @@ export async function getTilgangSM(accessToken: string, fnr: string) {
 }
 
 export async function getPersonSM(accessToken: string, fnr: string) {
-  return personSchema.safeParse(
+  const response = personSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person/${fnr}`,
       { accessToken }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "Person", response.error);
 }
 
 export async function getKontaktinfoSM(accessToken: string, fnr: string) {
-  return kontaktinfoSchema.safeParse(
+  const response = kontaktinfoSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/kontaktinfo/${fnr}`,
       { accessToken }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "Kontaktinfo", response.error);
 }
 
 export async function createOppfolgingsplanSM(

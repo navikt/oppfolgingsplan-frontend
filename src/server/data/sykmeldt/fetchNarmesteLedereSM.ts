@@ -1,45 +1,11 @@
-import { isMockBackend } from "environments/publicEnv";
 import { getNarmesteLedere } from "server/service/oppfolgingsplanService";
-import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
-import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import { handleSchemaParsingError } from "server/utils/errors";
-import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
-import activeMockSM from "../mock/activeMockSM";
+import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
 export const fetchNarmesteLedereSM = async (
-  req: IAuthenticatedRequest,
-  res: NextApiResponseOppfolgingsplanSM,
-  next: () => void
+  oppfolgingsplanTokenX: string,
+  oppfolgingsplaner: Oppfolgingsplan[]
 ) => {
-  if (!res.oppfolgingsplaner.length) {
-    return next();
-  }
+  const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 
-  if (isMockBackend) {
-    res.narmesteLedere = activeMockSM.narmesteLedere;
-  } else {
-    const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
-      req.idportenToken
-    );
-
-    const sykmeldtFnr = res.oppfolgingsplaner.find((plan) => plan)?.arbeidstaker
-      .fnr;
-
-    const narmesteLedereResponse = await getNarmesteLedere(
-      oppfolgingsplanTokenX,
-      sykmeldtFnr!!
-    );
-
-    if (narmesteLedereResponse.success) {
-      res.narmesteLedere = narmesteLedereResponse.data;
-    } else {
-      handleSchemaParsingError(
-        "Sykmeldt",
-        "NarmesteLedere",
-        narmesteLedereResponse.error
-      );
-    }
-  }
-
-  next();
+  return await getNarmesteLedere(oppfolgingsplanTokenX, sykmeldtFnr!!);
 };

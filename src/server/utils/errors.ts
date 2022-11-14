@@ -10,7 +10,7 @@ export function handleSchemaParsingError(
   audience: Audience,
   schema: string,
   error: ZodError
-) {
+): never {
   throw new ApiErrorException(
     schemaParsingError(
       new Error(

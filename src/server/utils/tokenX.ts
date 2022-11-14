@@ -12,7 +12,7 @@ export const getOppfolgingsplanTokenX = async (
     );
   }
 
-  const oppfolgingsplanTokenX = getTokenX(
+  const oppfolgingsplanTokenX = await getTokenX(
     idportenToken,
     serverEnv.SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
   );

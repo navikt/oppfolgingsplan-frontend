@@ -442,7 +442,6 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
-          tom: "2040-02-11T15:34:53.787",
         },
       ],
     },
