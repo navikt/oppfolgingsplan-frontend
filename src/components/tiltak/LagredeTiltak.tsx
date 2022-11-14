@@ -13,16 +13,18 @@ export const LagredeTiltak = ({
 
   if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null;
 
-  const alleTiltak = oppfolgingsplan.tiltakListe.map((tiltak, index) => {
-    return (
-      <LagretTiltak
-        key={index}
-        arbeidstakerFnr={arbeidstakerFnr}
-        tiltak={tiltak}
-        readonly={false}
-      />
-    );
-  });
+  const alleTiltak = oppfolgingsplan.tiltakListe
+    .sort((t1, t2) => t2.tiltakId - t1.tiltakId)
+    .map((tiltak, index) => {
+      return (
+        <LagretTiltak
+          key={index}
+          arbeidstakerFnr={arbeidstakerFnr}
+          tiltak={tiltak}
+          readonly={false}
+        />
+      );
+    });
 
   return <>{alleTiltak}</>;
 };
