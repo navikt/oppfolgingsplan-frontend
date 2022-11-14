@@ -24,7 +24,6 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
         open={visBekreftelse}
         aria-label="Er du sikker?"
         onClose={() => setVisBekreftelse(false)}
-        aria-labelledby="modal-heading"
       >
         <Modal.Content>
           <Heading size={"medium"} level={"3"} spacing>

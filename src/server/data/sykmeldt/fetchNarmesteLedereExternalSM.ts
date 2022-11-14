@@ -1,5 +1,4 @@
 import { isMockBackend } from "environments/publicEnv";
-import activeMockSM from "server/data/mock/activeMockSM";
 import { getNarmesteLedere } from "server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
@@ -8,6 +7,7 @@ import {
   handleSchemaParsingError,
 } from "server/utils/errors";
 import { NextApiResponseNarmesteLedereSM } from "server/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
+import activeMockSM from "../mock/activeMockSM";
 
 export const fetchNarmesteLedereExternalSM = async (
   req: IAuthenticatedRequest,
