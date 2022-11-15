@@ -39,7 +39,7 @@ export const texts = {
       beskrivelse: "Beskrivelse",
       hvaStarIVeien: "Hva står i veien for å kunne gjennomføre oppgaven?",
       sted: "Arbeide fra annet sted",
-      tid: "Med gitt tid",
+      tid: "Mer gitt tid",
       hjelp: "Med hjelp/hjelpemiddel",
       lagtTilAv: "Lagt til av",
     },
