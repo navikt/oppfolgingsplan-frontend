@@ -1,4 +1,8 @@
-import { basePath, dineSykemeldteRoot, dittSykefravarRoot } from "environments/publicEnv";
+import {
+  basePath,
+  dineSykemeldteRoot,
+  dittSykefravarRoot,
+} from "environments/publicEnv";
 
 // Breadcrumbs for sykmeldt
 export function dittSykefravaerBreadcrumbSM() {
@@ -15,7 +19,7 @@ export function landingBreadcrumbSM() {
     ...dittSykefravaerBreadcrumbSM(),
     {
       url: `${basePath}/sykmeldt`,
-      title: "Oppfølgingsplaner",
+      title: "Dine oppfølgingsplaner",
     },
   ];
 }

@@ -52,10 +52,11 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
 
 const OppfolgingsplanStatus: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
-  const { title, heading } = getStatusPageTitleAndHeading(aktivPlan);
+  const { title, heading, subHeading } =
+    getStatusPageTitleAndHeading(aktivPlan);
 
   return (
-    <Side title={title} heading={heading}>
+    <Side title={title} heading={heading} subHeading={subHeading}>
       <Content oppfolgingsplan={aktivPlan} />
     </Side>
   );

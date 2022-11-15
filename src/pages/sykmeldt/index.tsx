@@ -5,23 +5,14 @@ import { useOppfolgingsplanerSM } from "api/queries/sykmeldt/oppfolgingsplanerQu
 import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import Side from "components/blocks/wrappers/Side";
 
-const texts = {
-  pageTitle: "Oppfølgingsplaner - Oversikt",
-  pageHeader: "Oppfølgingsplaner",
-  brodsmuler: {
-    dittSykefravaer: "Ditt sykefravær",
-    dineOppfolgingsplaner: "Dine oppfølgingsplaner",
-  },
-};
-
 const Home: NextPage = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
 
   return (
     <Side
-      title={texts.pageTitle}
-      heading={texts.pageHeader}
+      title="Dine oppfølgingsplaner - Oversikt"
+      heading="Dine oppfølgingsplaner"
       displayPersonvernInfo={true}
       displayVideo={true}
     >

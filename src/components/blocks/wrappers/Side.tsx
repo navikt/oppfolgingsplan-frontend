@@ -11,6 +11,20 @@ import VideoPanel from "../video/VideoPanel";
 import { useTilgangSM } from "api/queries/sykmeldt/tilgangQueriesSM";
 import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { SpacedDiv } from "./SpacedDiv";
+import { SyfoLogo } from "../images/imageComponents";
+import Image from "next/image";
+import { ImageContainer } from "./ImageContainer";
+import styled from "styled-components";
+
+const HeadingWithLogo = styled.div`
+  display: flex;
+  gap: 1.4rem;
+  margin-bottom: 2rem;
+`;
+
+const SubHeading = styled(Heading)`
+  margin-bottom: 2rem;
+`;
 
 const texts = {
   error: {
@@ -23,6 +37,7 @@ const texts = {
 interface SideProps {
   title: string;
   heading: string;
+  subHeading?: string;
   displayPersonvernInfo?: boolean;
   displayVideo?: boolean;
   children: ReactNode;
@@ -31,6 +46,7 @@ interface SideProps {
 const Side = ({
   title,
   heading,
+  subHeading,
   displayPersonvernInfo,
   displayVideo,
   children,
@@ -81,9 +97,29 @@ const Side = ({
         </title>
       </Head>
 
-      <Heading spacing={true} size={"large"} level={"1"}>
-        {heading}
-      </Heading>
+      <HeadingWithLogo>
+        <ImageContainer width={"64px"}>
+          <Image
+            src={SyfoLogo}
+            width="64"
+            height="64"
+            alt={""}
+            layout={"fixed"}
+            color={"#FF0000"}
+          />
+        </ImageContainer>
+        <Heading size={"xlarge"} level={"1"}>
+          {heading}
+        </Heading>
+      </HeadingWithLogo>
+
+      {/*<GreenDivider />*/}
+
+      {subHeading && (
+        <SubHeading size={"large"} level={"2"}>
+          {subHeading}
+        </SubHeading>
+      )}
 
       {displayPersonvernInfo && <OppfolgingsdialogerInfoPersonvern />}
 

@@ -27,6 +27,7 @@ import OppfolgingsdialogIkkeTilgangImage from "../../../../public/img/svg/oppfol
 import OppfolgingsdialogIngenlederImage from "../../../../public/img/svg/oppfolgingsdialog-ingenleder.svg";
 import StjerneImage from "../../../../public/img/svg/stjerne.svg";
 import PlussOransje from "../../../../public/img/svg/pluss-oransje.svg";
+import SyfoLogo from "../../../../public/img/svg/syfologo.svg";
 
 export {
   AdvarselImage,
@@ -58,4 +59,5 @@ export {
   OppfolgingsdialogUnderArbeidImage,
   StjerneImage,
   PlussOransje,
+  SyfoLogo,
 };

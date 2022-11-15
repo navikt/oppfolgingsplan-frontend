@@ -1,7 +1,4 @@
-import {
-  Godkjenning,
-  Oppfolgingsplan,
-} from "../schema/oppfolgingsplanSchema";
+import { Godkjenning, Oppfolgingsplan } from "../schema/oppfolgingsplanSchema";
 import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
 
 export const harMottattGodkjenninger = (
@@ -100,6 +97,7 @@ export const statusPageToDisplay = (
 interface TitleAndHeading {
   title: string;
   heading: string;
+  subHeading?: string;
 }
 
 export const getStatusPageTitleAndHeading = (
@@ -109,43 +107,50 @@ export const getStatusPageTitleAndHeading = (
     case "SENDTPLANTILGODKJENNING": {
       return {
         title: `Status på oppfølgingsplan`,
-        heading: `Sendt til godkjenning`,
+        heading: `Oppfølgingsplan`,
+        subHeading: `Planen er sendt til godkjenning`,
       };
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return {
         title: `Status på oppfølgingsplan`,
-        heading: `Mottatt endring`,
+        heading: `Oppfølgingsplan`,
+        subHeading: `Mottatt endring`,
       };
     }
     case "GODKJENNPLANMOTTATT": {
       return {
         title: `Godkjenn ${oppfolgingsplan?.virksomhet?.navn}`,
-        heading: `Du har mottatt en ny plan for ${oppfolgingsplan?.virksomhet?.navn}`,
+        heading: `Oppfølgingsplan`,
+        subHeading: `Du har mottatt en ny plan for ${oppfolgingsplan?.virksomhet?.navn}`,
       };
     }
     case "GODKJENNPLANAVSLATT": {
       return {
         title: `Status på oppfølgingsplan`,
-        heading: `Lederen din har noen forslag`,
+        heading: `Oppfølgingsplan`,
+        subHeading: `Lederen din har noen forslag`,
       };
     }
     case "GODKJENTPLANAVBRUTT": {
       return {
         title: `Status på oppfølgingsplan`,
-        heading: `Tidligere oppfølgingsplan`,
+        heading: `Oppfølgingsplan`,
+        subHeading: `Tidligere oppfølgingsplan`,
       };
     }
     case "GODKJENTPLAN": {
       return {
         title: `Status på oppfølgingsplan`,
         heading: `Oppfølgingsplan`,
+        subHeading: `Oppfølgingsplan`,
       };
     }
     default: {
       return {
         title: `Status på oppfølgingsplan`,
-        heading: `Status på oppfølgingsplan`,
+        heading: `Oppfølgingsplan`,
+        subHeading: `Status på oppfølgingsplan`,
       };
     }
   }

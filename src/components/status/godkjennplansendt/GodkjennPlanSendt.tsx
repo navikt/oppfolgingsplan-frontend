@@ -1,5 +1,5 @@
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { BodyLong } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
@@ -21,10 +21,6 @@ function GodkjennPlanSendt({ oppfolgingsplan }: Props) {
 
   return (
     <SpacedDiv>
-      <Heading level="2" size="medium" spacing>
-        Planen er sendt til godkjenning
-      </Heading>
-
       <BodyLong spacing>
         Du har sendt en ny versjon av oppfølgingsplanen til din arbeidsgiver
         {narmesteLederNavn ? ` ${narmesteLederNavn}.` : "."}
