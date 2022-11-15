@@ -78,9 +78,7 @@ export const ArbeidsoppgaveForm = ({
 
   const hasSelectedKanIkke = () => {
     if (!kanGjennomforesValue) {
-      return (
-        defaultFormValues?.kanGjennomfores == KANGJENNOMFOERES.TILRETTELEGGING
-      );
+      return defaultFormValues?.kanGjennomfores == KANGJENNOMFOERES.KAN_IKKE;
     }
     return kanGjennomforesValue == KANGJENNOMFOERES.KAN_IKKE;
   };
