@@ -2,6 +2,7 @@ import { MockSetupSM, TestScenario } from "./activeTestScenario";
 import { noPlanScenarioSM } from "./testscenarios/noplan/noPlanScenario";
 import { godkjennPlanAvslattScenario } from "./testscenarios/godkjentPlanAvslatt/godkjennPlanAvslattScenario";
 import { godkjennPlanSendtScenario } from "./testscenarios/godkjennPlanSendt/godkjennPlanSendtScenario";
+import { godkjennPlanMottattScenario } from "./testscenarios/godkjennPlanMottatt/godkjennPlanMottattScenario";
 
 const activeMockSM: MockSetupSM = { ...noPlanScenarioSM };
 
@@ -13,6 +14,8 @@ const getMockSetupForScenario = (scenario: TestScenario) => {
       return godkjennPlanAvslattScenario;
     case TestScenario.GODKJENNPLANSENDT:
       return godkjennPlanSendtScenario;
+    case TestScenario.GODKJENNPLANMOTTATT:
+      return godkjennPlanMottattScenario;
   }
 };
 
