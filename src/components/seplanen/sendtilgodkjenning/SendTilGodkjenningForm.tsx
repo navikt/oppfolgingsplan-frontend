@@ -184,7 +184,9 @@ export const SendTilGodkjenningForm = ({
           </SpacedDiv>
 
           <Row>
-            <Button type={"submit"}>Send til godkjenning</Button>
+            <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
+              Send til godkjenning
+            </Button>
             <Button variant={"tertiary"} onClick={cancel}>
               Avbryt
             </Button>

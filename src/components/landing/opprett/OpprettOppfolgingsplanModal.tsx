@@ -103,6 +103,7 @@ const OpprettOppfolgingsplanModal = ({
                 <ArbeidsgiverSkjemaForm
                   arbeidsgivere={arbeidsgivere}
                   oppfolgingsplaner={oppfolgingsplaner}
+                  isSubmitting={opprettOppfolgingsplan.isLoading}
                   handleSubmit={(virksomhetsnummer: string) => {
                     opprettOppfolgingsplan.mutate({
                       sykmeldtFnr: sykmeldtFnr!!,

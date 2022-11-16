@@ -70,10 +70,11 @@ export const EditerArbeidsoppgave = ({
         kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!!,
       }}
       onSubmit={(data) => {
-        lagreArbeidsoppgave.mutate(arbeidsoppgaveInformasjon(data));
-        if (lagreArbeidsoppgave.isSuccess) {
-          doneEditing();
-        }
+        lagreArbeidsoppgave
+          .mutateAsync(arbeidsoppgaveInformasjon(data))
+          .then(() => {
+            doneEditing();
+          });
       }}
       isSubmitting={lagreArbeidsoppgave.isLoading}
       isErrorSavingOppgave={lagreArbeidsoppgave.isError}

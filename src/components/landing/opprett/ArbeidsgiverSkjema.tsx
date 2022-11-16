@@ -85,6 +85,7 @@ export const VelgArbeidsgiverUndertekst = ({
 interface ArbeidsgiverSkjemaProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   oppfolgingsplaner: Oppfolgingsplan[];
+  isSubmitting: boolean;
 
   handleClose(): void;
 
@@ -94,6 +95,7 @@ interface ArbeidsgiverSkjemaProps {
 export const ArbeidsgiverSkjema = ({
   arbeidsgivere,
   oppfolgingsplaner,
+  isSubmitting,
   handleClose,
   handleSubmit,
 }: ArbeidsgiverSkjemaProps) => {
@@ -138,6 +140,7 @@ export const ArbeidsgiverSkjema = ({
       <Row>
         <Button
           variant={"primary"}
+          loading={isSubmitting}
           disabled={
             !selectedVirksomhetsnummer ||
             !erOppfolgingsplanOpprettbarMedArbeidsgiver(

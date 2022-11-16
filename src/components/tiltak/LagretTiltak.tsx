@@ -143,13 +143,14 @@ export const LagretTiltak = ({
             <NyKommentar
               isLoading={lagreKommentar.isLoading}
               lagre={(kommentar: string) => {
-                lagreKommentar.mutate({
-                  tiltakId: tiltakId,
-                  kommentar: { tekst: kommentar },
-                });
-                if (lagreKommentar.isSuccess) {
-                  setDisplayNyKommentar(false);
-                }
+                lagreKommentar
+                  .mutateAsync({
+                    tiltakId: tiltakId,
+                    kommentar: { tekst: kommentar },
+                  })
+                  .then(() => {
+                    setDisplayNyKommentar(false);
+                  });
               }}
               avbryt={() => setDisplayNyKommentar(false)}
             />

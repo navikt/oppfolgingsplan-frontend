@@ -9,17 +9,15 @@ export const useLagreTiltakSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const lagreTiltak = (tiltak: Partial<Tiltak>) =>
-    post(
+  const lagreTiltak = async (tiltak: Partial<Tiltak>) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
       tiltak
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(lagreTiltak, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(lagreTiltak);
 };
 
 export const useSlettTiltakSM = () => {
@@ -27,16 +25,14 @@ export const useSlettTiltakSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const slettTiltak = (tiltakId: number) =>
-    post(
+  const slettTiltak = async (tiltakId: number) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(slettTiltak, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(slettTiltak);
 };
 
 interface LagreKommentarProps {
@@ -49,17 +45,18 @@ export const useLagreKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const lagreKommentar = ({ tiltakId, kommentar }: LagreKommentarProps) =>
-    post(
+  const lagreKommentar = async ({
+    tiltakId,
+    kommentar,
+  }: LagreKommentarProps) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       kommentar
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(lagreKommentar, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(lagreKommentar);
 };
 
 interface SlettKommentarProps {
@@ -72,14 +69,15 @@ export const useSlettKommentarSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const slettKommentar = ({ tiltakId, kommentarId }: SlettKommentarProps) =>
-    post(
+  const slettKommentar = async ({
+    tiltakId,
+    kommentarId,
+  }: SlettKommentarProps) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(slettKommentar, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(slettKommentar);
 };

@@ -1,5 +1,5 @@
 import { useLagreTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
-import { TiltakFormValues, TiltakForm } from "./TiltakForm";
+import { TiltakForm, TiltakFormValues } from "./TiltakForm";
 import { Tiltak } from "../../schema/oppfolgingsplanSchema";
 import { STATUS_TILTAK } from "constants/konstanter";
 
@@ -31,9 +31,11 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
         fom: new Date(tiltak.fom!!),
         tom: new Date(tiltak.tom!!),
       }}
+      isSubmitting={lagreTiltak.isLoading}
       onSubmit={(data) => {
-        lagreTiltak.mutate(tiltakInformasjon(data));
-        doneEditing();
+        lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
+          doneEditing();
+        });
       }}
       onCancel={doneEditing}
     />

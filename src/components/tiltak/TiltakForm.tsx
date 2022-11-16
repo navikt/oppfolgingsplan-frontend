@@ -33,6 +33,8 @@ export type TiltakFormValues = {
 };
 
 interface Props {
+  isSubmitting: boolean;
+
   onSubmit(data: TiltakFormValues): void;
 
   onCancel(): void;
@@ -41,6 +43,7 @@ interface Props {
 }
 
 export const TiltakForm = ({
+  isSubmitting,
   onSubmit,
   onCancel,
   defaultFormValues,
@@ -118,6 +121,7 @@ export const TiltakForm = ({
 
           <Row>
             <Button
+              loading={isSubmitting}
               variant={"primary"}
               type={"submit"}
               onClick={() => {

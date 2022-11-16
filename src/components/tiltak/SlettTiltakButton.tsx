@@ -43,9 +43,11 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
             <Row>
               <Button
                 variant={"danger"}
+                loading={slettTiltak.isLoading}
                 onClick={() => {
-                  slettTiltak.mutate(tiltakId);
-                  setModalOpen(false);
+                  slettTiltak.mutateAsync(tiltakId).then(() => {
+                    setModalOpen(false);
+                  });
                 }}
               >
                 Slett

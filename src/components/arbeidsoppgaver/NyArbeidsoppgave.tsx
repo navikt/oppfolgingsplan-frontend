@@ -54,10 +54,11 @@ export const NyArbeidsoppgave = () => {
       <ArbeidsoppgaveFormHeading />
       <ArbeidsoppgaveForm
         onSubmit={(data) => {
-          lagreOppgave.mutate(nyArbeidsoppgaveInformasjon(data));
-          if (lagreOppgave.isSuccess) {
-            setLeggerTilOppgave(false);
-          }
+          lagreOppgave
+            .mutateAsync(nyArbeidsoppgaveInformasjon(data))
+            .then(() => {
+              setLeggerTilOppgave(false);
+            });
         }}
         isSubmitting={lagreOppgave.isLoading}
         isErrorSavingOppgave={lagreOppgave.isError}
