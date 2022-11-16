@@ -65,10 +65,10 @@ const Side = ({
   //Check sykmeldinger error state because of dependent queries loading-state (sykmeldt.fnr)
   if (
     !sykmeldinger.isError &&
-    (tilgang.isLoading ||
+    (tilgang.fetchStatus == "fetching" ||
       oppfolgingsplaner.isLoading ||
       sykmeldinger.isLoading ||
-      narmesteLedere.isLoading)
+      narmesteLedere.fetchStatus == "fetching")
   ) {
     return <AppSpinner />;
   }

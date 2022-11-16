@@ -1,15 +1,6 @@
 import React from "react";
 import { OppfolgingsdialogIkkeAktivSykmeldingImage } from "components/blocks/images/imageComponents";
-import { BodyLong, Heading, Panel } from "@navikt/ds-react";
-import Image from "next/image";
-
-const texts = {
-  title: "Aktiv oppfølgingsplan",
-  infoIngenGyldigeSykmeldinger:
-    "Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå.",
-  infoIngenSendteSykmeldinger:
-    "Du kan ikke lage en ny oppfølgingsplan fordi du ikke har sendt inn sykmeldingen din.",
-};
+import { InfoBoksWithImage } from "../blocks/infoboks/InfoBoksWithImage";
 
 interface Props {
   sykmeldtHarIngenSendteSykmeldinger: boolean;
@@ -19,24 +10,15 @@ const OppfolgingsplanUtenGyldigSykmelding = ({
   sykmeldtHarIngenSendteSykmeldinger,
 }: Props) => {
   return (
-    <div>
-      <Heading size={"medium"} level={"2"}>
-        {texts.title}
-      </Heading>
-
-      <Panel border={true}>
-        <div>
-          <Image alt="" src={OppfolgingsdialogIkkeAktivSykmeldingImage} />
-          <div>
-            {sykmeldtHarIngenSendteSykmeldinger ? (
-              <BodyLong>{texts.infoIngenSendteSykmeldinger}</BodyLong>
-            ) : (
-              <BodyLong>{texts.infoIngenGyldigeSykmeldinger}</BodyLong>
-            )}
-          </div>
-        </div>
-      </Panel>
-    </div>
+    <InfoBoksWithImage
+      heading={"Du kan ikke lage en oppfølgingsplan akkurat nå"}
+      description={
+        sykmeldtHarIngenSendteSykmeldinger
+          ? "Du kan ikke lage en ny oppfølgingsplan fordi du ikke har sendt inn sykmeldingen din."
+          : "Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå."
+      }
+      imageSrc={OppfolgingsdialogIkkeAktivSykmeldingImage}
+    />
   );
 };
 
