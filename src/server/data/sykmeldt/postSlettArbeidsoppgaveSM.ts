@@ -5,7 +5,7 @@ import { deleteOppgave } from "server/service/oppfolgingsplanService";
 import { handleQueryParamError } from "server/utils/errors";
 import serverLogger from "server/utils/serverLogger";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
-import { generalError } from "../../../api/axios/errors";
+import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 
 export const postSlettArbeidsoppgaveSM = async (
@@ -28,9 +28,11 @@ export const postSlettArbeidsoppgaveSM = async (
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
-      return generalError(
-        new Error(
-          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+      throw new ApiErrorException(
+        generalError(
+          new Error(
+            `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+          )
         )
       );
     }

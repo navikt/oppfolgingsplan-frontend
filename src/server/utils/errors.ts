@@ -22,5 +22,8 @@ export function handleSchemaParsingError(
 
 export const handleQueryParamError = (
   ...params: (string | string[] | undefined)[]
-) =>
-  generalError(new Error(`Malformed query params: ${JSON.stringify(params)}`));
+): never => {
+  throw new ApiErrorException(
+    generalError(new Error(`Malformed query params: ${JSON.stringify(params)}`))
+  );
+};

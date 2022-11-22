@@ -1,5 +1,5 @@
 import { NextApiResponse } from "next";
-import { generalError } from "../../../api/axios/errors";
+import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
 import serverLogger from "server/utils/serverLogger";
@@ -28,9 +28,11 @@ export const postSlettTiltakSM = async (
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
-      return generalError(
-        new Error(
-          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+      throw new ApiErrorException(
+        generalError(
+          new Error(
+            `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+          )
         )
       );
     }
