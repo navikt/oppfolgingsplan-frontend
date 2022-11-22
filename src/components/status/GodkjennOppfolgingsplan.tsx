@@ -27,6 +27,7 @@ export const GodkjennOppfolgingsplan = ({ oppfolgingsplanId }: Props) => {
         </Checkbox>
       </SpacedDiv>
       <Button
+        loading={godkjennOppfolgingsplan.isLoading}
         onClick={() =>
           godkjennOppfolgingsplan.mutate({
             delmednav: delMedNav,

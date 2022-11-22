@@ -58,8 +58,9 @@ export const Dialog = ({
               {isAktorsKommentar && (
                 <ButtonRightAligned
                   variant="tertiary"
+                  loading={slettKommentar.isLoading}
                   onClick={() =>
-                    slettKommentar.mutate({
+                    slettKommentar.mutateAsync({
                       tiltakId: tiltakId,
                       kommentarId: kommentar.id,
                     })

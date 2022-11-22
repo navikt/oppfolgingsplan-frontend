@@ -24,15 +24,7 @@ interface Props {
 const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
   const narmesteledere = useNarmesteLedereSM();
 
-  if (
-    erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
-      oppfolgingsplaner,
-      sykmeldinger,
-      narmesteledere.data!!
-    )
-  ) {
-    return <IngenLedereInfoBoks />;
-  } else if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
+  if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
     return (
       <div>
         <OppfolgingsplanUtenGyldigSykmelding
@@ -51,6 +43,14 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
           )}
       </div>
     );
+  } else if (
+    erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
+      oppfolgingsplaner,
+      sykmeldinger,
+      narmesteledere.data!!
+    )
+  ) {
+    return <IngenLedereInfoBoks />;
   } else {
     return (
       <OppfolgingsdialogerVisning

@@ -32,6 +32,7 @@ const OppfolgingsdialogerIngenplan = ({
     >
       <Button
         variant={"primary"}
+        loading={opprettOppfolgingsplan.isLoading}
         onClick={() => {
           if (
             erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner)

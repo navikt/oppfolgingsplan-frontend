@@ -9,17 +9,15 @@ export const useLagreArbeidsoppgaveSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const lagreOppgave = (oppgave: Partial<Arbeidsoppgave>) =>
-    post(
+  const lagreOppgave = async (oppgave: Partial<Arbeidsoppgave>) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/lagre`,
       oppgave
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(lagreOppgave, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(lagreOppgave);
 };
 
 export const useSlettOppgaveSM = () => {
@@ -27,14 +25,12 @@ export const useSlettOppgaveSM = () => {
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const slettOppgave = (arbeidsoppgaveId: number) =>
-    post(
+  const slettOppgave = async (arbeidsoppgaveId: number) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/oppgave/${arbeidsoppgaveId}/slett`
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(slettOppgave, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(slettOppgave);
 };

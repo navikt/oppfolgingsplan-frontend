@@ -44,9 +44,11 @@ export const NyttTiltak = () => {
     <SpacedPanel border={true}>
       <TiltakFormHeading />
       <TiltakForm
+        isSubmitting={lagreTiltak.isLoading}
         onSubmit={(data) => {
-          lagreTiltak.mutate(nyttTiltakInformasjon(data));
-          setLeggerTilNyttTiltak(false);
+          lagreTiltak.mutateAsync(nyttTiltakInformasjon(data)).then(() => {
+            setLeggerTilNyttTiltak(false);
+          });
         }}
         onCancel={() => setLeggerTilNyttTiltak(false)}
       />

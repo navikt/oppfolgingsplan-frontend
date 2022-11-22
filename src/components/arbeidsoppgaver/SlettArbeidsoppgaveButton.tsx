@@ -66,10 +66,9 @@ export const SlettArbeidsoppgaveButton = ({
                 loading={slettArbeidsoppgave.isLoading}
                 variant={"danger"}
                 onClick={() => {
-                  slettArbeidsoppgave.mutate(arbeidsoppgaveId);
-                  if (slettArbeidsoppgave.isSuccess) {
+                  slettArbeidsoppgave.mutateAsync(arbeidsoppgaveId).then(() => {
                     setModalOpen(false);
-                  }
+                  });
                 }}
               >
                 {texts.arbeidsoppgaveList.buttons.slett}
