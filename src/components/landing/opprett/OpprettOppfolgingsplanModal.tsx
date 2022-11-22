@@ -105,11 +105,14 @@ const OpprettOppfolgingsplanModal = ({
                   oppfolgingsplaner={oppfolgingsplaner}
                   isSubmitting={opprettOppfolgingsplan.isLoading}
                   handleSubmit={(virksomhetsnummer: string) => {
-                    opprettOppfolgingsplan.mutate({
-                      sykmeldtFnr: sykmeldtFnr!!,
-                      virksomhetsnummer: virksomhetsnummer,
-                    });
-                    setVisOpprettingModal(false);
+                    opprettOppfolgingsplan
+                      .mutateAsync({
+                        sykmeldtFnr: sykmeldtFnr!!,
+                        virksomhetsnummer: virksomhetsnummer,
+                      })
+                      .then(() => {
+                        setVisOpprettingModal(false);
+                      });
                   }}
                   handleClose={() => setVisOpprettingModal(false)}
                 />
