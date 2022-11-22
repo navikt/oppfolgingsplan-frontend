@@ -151,9 +151,7 @@ export async function createOppfolgingsplanSM(
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
-    {
-      opprettOppfolgingsplanData,
-    },
+    opprettOppfolgingsplanData,
     { accessToken }
   );
 }

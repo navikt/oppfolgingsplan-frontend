@@ -25,7 +25,7 @@ export const postOpprettOppfolgingsplanSM = async (
       opprettOppfolgingsplanData
     );
     serverLogger.info(
-      "Attempting to create oppfolgingsplan.ts",
+      "Attempting to create oppfolgingsplan",
       opprettOppfolgingsplanData
     );
   }
