@@ -18,8 +18,8 @@ export const GodkjennOppfolgingsplan = ({ oppfolgingsplanId }: Props) => {
         Ønsker du å godkjenne denne planen?
       </Heading>
       <BodyShort spacing>
-        Alle godkjente planer mellom deg og arbeidstakeren vil automatisk bli
-        tilgjengelige for arbeidsplassen i Altinn.
+        Alle godkjente planer mellom deg og arbeidsgiveren din vil automatisk
+        bli tilgjengelige for arbeidsplassen i Altinn.
       </BodyShort>
       <SpacedDiv>
         <Checkbox onChange={() => setDelMedNav(!delMedNav)} checked={delMedNav}>
