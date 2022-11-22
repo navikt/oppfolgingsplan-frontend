@@ -1,6 +1,5 @@
 import { ArbeidsoppgaveHeading } from "./ArbeidsoppgaveHeading";
 import { EditerArbeidsoppgave } from "./EditerArbeidsoppgave";
-import { EndreButton } from "./EndreButton";
 import { KanIkkeBeskrivelse } from "./KanIkkeBeskrivelse";
 import { ArbeidsoppgaveKnapper } from "./ArbeidsoppgaveKnapper";
 import { OpprettetAv } from "./OpprettetAv";
@@ -10,13 +9,19 @@ import { VurderButton } from "./VurderButton";
 import { VurderingFraSykmeldt } from "./VurderingFraSykmeldt";
 import { useAudience } from "hooks/routeHooks";
 import { KANGJENNOMFOERES } from "constants/konstanter";
-import { ErrorColored, SuccessColored, WarningColored } from "@navikt/ds-icons";
+import {
+  Edit,
+  ErrorColored,
+  SuccessColored,
+  WarningColored,
+} from "@navikt/ds-icons";
 import { useState } from "react";
 import { Arbeidsoppgave } from "../../schema/oppfolgingsplanSchema";
 import { Card } from "components/blocks/card/Card";
 import { CardHeader } from "components/blocks/card/CardHeader";
 import { texts } from "components/seplanen/texts";
 import { AddColored } from "components/blocks/icons/AddColored";
+import { Button } from "@navikt/ds-react";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -44,10 +49,13 @@ export const ArbeidsoppgaveCard = ({
     />
   );
   const EndreKnapp = () => (
-    <EndreButton
-      show={aktoerHarOpprettetElement}
+    <Button
+      variant={"tertiary"}
+      icon={<Edit />}
       onClick={() => setEditererArbeidsoppgave(true)}
-    />
+    >
+      Endre
+    </Button>
   );
   const SlettKnapp = () => (
     <SlettArbeidsoppgaveButton
