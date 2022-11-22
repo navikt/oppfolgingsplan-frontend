@@ -87,10 +87,13 @@ export const useAvbrytOppfolgingsplanSM = () => {
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
     await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
     await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await router.push(landingUrl);
   };
 
-  return useMutation(postAvbrytOppfolgingsplan);
+  return useMutation(postAvbrytOppfolgingsplan, {
+    onSuccess: () => {
+      router.push(landingUrl);
+    },
+  });
 };
 
 export const useAvvisOppfolgingsplanSM = () => {
