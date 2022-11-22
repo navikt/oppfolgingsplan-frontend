@@ -1,5 +1,5 @@
 import { KANGJENNOMFOERES } from "constants/konstanter";
-import { Heading } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import { Arbeidsoppgave } from "../../../schema/oppfolgingsplanSchema";
 import { ContentWrapper } from "../ContentWrapper";
 import { texts } from "../texts";
@@ -49,7 +49,7 @@ export const ArbeidsoppgaveList = ({
       <Heading level="3" size="medium">
         {texts.arbeidsoppgaveList.title}
       </Heading>
-      {sortedArbeidsoppgaver.length && (
+      {sortedArbeidsoppgaver.length > 0 ? (
         <div>
           {arbeidsoppgaver.map(
             (arbeidsoppgave: Arbeidsoppgave, idx: number) => (
@@ -62,6 +62,8 @@ export const ArbeidsoppgaveList = ({
             )
           )}
         </div>
+      ) : (
+        <BodyLong>Ingen oppgaver er lagt til enda</BodyLong>
       )}
     </ContentWrapper>
   );
