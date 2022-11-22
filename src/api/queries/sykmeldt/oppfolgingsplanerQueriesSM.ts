@@ -1,6 +1,7 @@
 import { get, post } from "api/axios/axios";
 import {
   useApiBasePath,
+  useLandingUrl,
   useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
@@ -79,15 +80,17 @@ export const useKopierOppfolgingsplanSM = () => {
 export const useAvbrytOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
-  const postAvbrytOppfolgingsplan = (oppfolgingsplanId: number) =>
-    post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
+  const landingUrl = useLandingUrl();
 
-  return useMutation(postAvbrytOppfolgingsplan, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
+    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await router.push(landingUrl);
+  };
+
+  return useMutation(postAvbrytOppfolgingsplan);
 };
 
 export const useAvvisOppfolgingsplanSM = () => {
