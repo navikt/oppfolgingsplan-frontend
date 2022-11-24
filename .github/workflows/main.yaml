@@ -4,6 +4,7 @@ on: push
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+  NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
 jobs:
   build:
@@ -16,6 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.14.2"
+          registry-url: 'https://npm.pkg.github.com'
       - name: Cache node modules
         uses: actions/cache@v3
         with:

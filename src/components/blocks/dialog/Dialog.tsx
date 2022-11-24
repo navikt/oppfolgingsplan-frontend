@@ -48,8 +48,6 @@ export const Dialog = ({
           avatar={hentAktoerNavnInitialer(kommentar.opprettetAv.navn)}
           name={kommentar.opprettetAv.navn}
           timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
-          avatarBgColor={"#F1F1F1"}
-          backgroundColor={"#F7F7F7"}
           position={isAktorsKommentar ? "right" : "left"}
         >
           <Chat.Bubble>

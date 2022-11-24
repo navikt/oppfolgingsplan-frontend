@@ -24,7 +24,7 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
       context: isAudienceSykmeldt ? "privatperson" : "arbeidsgiver",
       chatbot: true,
       redirectToApp: true,
-      utloggingsvarsel: true,
+
       level: "Level4",
     };
 
