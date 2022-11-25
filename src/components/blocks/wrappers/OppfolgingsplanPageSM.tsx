@@ -1,4 +1,4 @@
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { BodyLong, Button, GuidePanel, Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
 import {
   Oppfolgingsplan,
@@ -14,6 +14,11 @@ import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBo
 import Side from "./Side";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { statusPageToDisplay } from "../../../utils/statusPageUtils";
+import Link from "next/link";
+import { useLandingUrl } from "../../../hooks/routeHooks";
+import styled from "styled-components";
+import { logger } from "@navikt/next-logger";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -24,6 +29,10 @@ const textStilling = (stilling: Stilling) => {
     stilling.prosent
   } %`;
 };
+
+const SpacedGuidePanel = styled(GuidePanel)`
+  padding-bottom: 2rem;
+`;
 
 export enum Page {
   ARBEIDSOPPGAVER = 1,
@@ -61,7 +70,7 @@ interface Props {
 
 export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
   const aktivPlan = useAktivPlanSM();
-
+  const landingUrl = useLandingUrl();
   const sykmeldinger = useSykmeldingerSM();
   const stilling: Stilling | undefined =
     aktivPlan &&
@@ -86,6 +95,51 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
 
     return <>{children}</>;
   };
+
+  const planStatus = statusPageToDisplay(aktivPlan);
+
+  const errorText = () => {
+    switch (planStatus) {
+      case "SENDTPLANTILGODKJENNING":
+        return "Du har sendt denne oppfølgingsplanen til lederen din for godkjenning. Gå til siste versjon for å se eller endre oppfølgingsplanen.";
+      case "GODKJENNPLANMOTTATT":
+        return "Lederen din har sendt denne oppfølgingsplanen til deg for godkjenning. Gå til siste versjon for å se, endre eller godkjenne oppfølgingsplanen.";
+      case "MOTTATTFLEREGODKJENNINGER":
+        return "Lederen din har sendt denne oppfølgingsplanen til deg for godkjenning. Gå til siste versjon for å se, endre eller godkjenne oppfølgingsplanen.";
+      default:
+        return "Denne oppfølgingsplanen kan ikke redigeres. Gå til siste versjon for å se oppdatert informasjon om oppfølgingsplanen.";
+    }
+  };
+
+  const canEditPlan =
+    planStatus == "INGENPLANTILGODKJENNING" ||
+    planStatus == "GODKJENNPLANAVSLATT";
+
+  if (!canEditPlan) {
+    return (
+      <Side
+        title={titleText(page)}
+        heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}
+      >
+        <SpacedGuidePanel>
+          <BodyLong spacing>{errorText()}</BodyLong>
+
+          <Link href={`${landingUrl}/${aktivPlan?.id}`}>
+            <Button
+              variant={"primary"}
+              onClick={() =>
+                logger.warn(
+                  `Går til oppfølgingsplanen fra ${planStatus} feilside`
+                )
+              }
+            >
+              Gå til oppfølgingsplanen
+            </Button>
+          </Link>
+        </SpacedGuidePanel>
+      </Side>
+    );
+  }
 
   return (
     <Side

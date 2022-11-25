@@ -2,6 +2,8 @@ import { useAvbrytOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplan
 import { Edit } from "@navikt/ds-icons";
 import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { useLandingUrl } from "../../../hooks/routeHooks";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -10,6 +12,8 @@ interface Props {
 export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
   const [visBekreftelse, setVisBekreftelse] = useState(false);
   const avbrytDialog = useAvbrytOppfolgingsplanSM();
+  const router = useRouter();
+  const landingUrl = useLandingUrl();
 
   return (
     <>
@@ -37,7 +41,9 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
             variant={"danger"}
             loading={avbrytDialog.isLoading}
             onClick={() => {
-              avbrytDialog.mutate(oppfolgingsplanId);
+              avbrytDialog.mutateAsync(oppfolgingsplanId).then(() => {
+                router.push(landingUrl);
+              });
             }}
           >
             Gjør endringer
