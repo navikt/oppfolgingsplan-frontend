@@ -1,4 +1,3 @@
-import { withSentry } from "@sentry/nextjs";
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import getIdportenToken from "server/auth/idporten/idportenToken";
@@ -12,4 +11,4 @@ const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
     res.status(200).end();
   });
 
-export default withSentry(handler);
+export default handler;

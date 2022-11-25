@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import { ncOptions } from "server/utils/ncOptions";
-import { withSentry } from "@sentry/nextjs";
 import getIdportenToken from "server/auth/idporten/idportenToken";
 import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import {
@@ -274,4 +273,4 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
     res.status(200).json(mappedPlaner);
   });
 
-export default withSentry(handler);
+export default handler;
