@@ -241,6 +241,7 @@ export async function godkjennsistOppfolgingsplanSM(
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjennsist?aktoer=arbeidstaker&delmednav=${data.delmednav}`,
+    {},
     { accessToken }
   );
 }
