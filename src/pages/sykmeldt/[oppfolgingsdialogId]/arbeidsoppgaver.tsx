@@ -8,6 +8,7 @@ import {
 } from "components/blocks/wrappers/OppfolgingsplanPageSM";
 import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeidsoppgaver";
 import { NyArbeidsoppgave } from "components/arbeidsoppgaver/NyArbeidsoppgave";
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 
 const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
@@ -31,5 +32,7 @@ const Arbeidsoppgaver: NextPage = () => {
     </OppfolgingsplanPageSM>
   );
 };
+
+export const getServerSideProps = beskyttetSideUtenProps;
 
 export default Arbeidsoppgaver;

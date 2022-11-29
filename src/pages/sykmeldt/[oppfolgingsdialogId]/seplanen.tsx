@@ -7,6 +7,7 @@ import {
   Page,
 } from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
 import { Alert } from "@navikt/ds-react";
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
@@ -27,5 +28,7 @@ const Seplanen: NextPage = () => {
     </OppfolgingsplanPageSM>
   );
 };
+
+export const getServerSideProps = beskyttetSideUtenProps;
 
 export default Seplanen;
