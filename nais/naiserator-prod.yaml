@@ -62,6 +62,8 @@ spec:
       value: https://www.nav.no/syk/sykefravaer
     - name: DISPLAY_TESTSCENARIO_SELECTOR
       value: "false"
+    - name: ENVIRONMENT
+      value: "prod"
   accessPolicy:
     outbound:
       external:
