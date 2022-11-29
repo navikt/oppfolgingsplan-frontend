@@ -1,7 +1,8 @@
 import { BodyShort, Button, Checkbox, Heading } from "@navikt/ds-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useGodkjennsistOppfolgingsplanSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
+import Feilmelding from "../blocks/error/Feilmelding";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -36,6 +37,14 @@ export const GodkjennOppfolgingsplan = ({ oppfolgingsplanId }: Props) => {
       >
         Godkjenn
       </Button>
+
+      {godkjennOppfolgingsplan.isError && (
+        <Feilmelding
+          description={
+            "Vi klarte ikke å godkjenne oppfølgingsplanen din. Har lederen din gjort endriner på planen?"
+          }
+        />
+      )}
     </SpacedDiv>
   );
 };

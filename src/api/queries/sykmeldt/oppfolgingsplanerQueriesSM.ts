@@ -180,7 +180,11 @@ export const useGodkjennsistOppfolgingsplanSM = (oppfolgingsplanId: number) => {
     await router.push(statusUrl);
   };
 
-  return useMutation(godkjennsistPlan);
+  return useMutation(godkjennsistPlan, {
+    onError: () => {
+      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    },
+  });
 };
 
 export const useOpprettOppfolgingsplanSM = () => {
