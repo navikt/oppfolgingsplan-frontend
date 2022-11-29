@@ -4,6 +4,7 @@ import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanCont
 import { useOppfolgingsplanerSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import Side from "components/blocks/wrappers/Side";
+import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
 
 const texts = {
   pageTitle: "Oppfølgingsplaner - Oversikt",
@@ -32,5 +33,7 @@ const Home: NextPage = () => {
     </Side>
   );
 };
+
+export const getServerSideProps = beskyttetSideUtenProps;
 
 export default Home;

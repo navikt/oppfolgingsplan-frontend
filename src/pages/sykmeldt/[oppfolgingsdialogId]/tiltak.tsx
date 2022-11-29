@@ -7,6 +7,7 @@ import {
   Page,
 } from "components/blocks/wrappers/OppfolgingsplanPageSM";
 import { LagredeTiltak } from "components/tiltak/LagredeTiltak";
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 
 const Tiltak: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
@@ -23,5 +24,7 @@ const Tiltak: NextPage = () => {
     </OppfolgingsplanPageSM>
   );
 };
+
+export const getServerSideProps = beskyttetSideUtenProps;
 
 export default Tiltak;

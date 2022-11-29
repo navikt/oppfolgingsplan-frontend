@@ -14,6 +14,7 @@ import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPl
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import Side from "components/blocks/wrappers/Side";
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -60,5 +61,7 @@ const OppfolgingsplanStatus: NextPage = () => {
     </Side>
   );
 };
+
+export const getServerSideProps = beskyttetSideUtenProps;
 
 export default OppfolgingsplanStatus;
