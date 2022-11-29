@@ -14,6 +14,8 @@ import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBo
 import Side from "./Side";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { statusPageToDisplay } from "../../../utils/statusPageUtils";
+import { CantEditPlanError } from "../error/CantEditPlanError";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -86,6 +88,19 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
 
     return <>{children}</>;
   };
+
+  const planStatus = statusPageToDisplay(aktivPlan);
+
+  const planIsNotEditable =
+    planStatus == "GODKJENNPLANMOTTATT" ||
+    planStatus == "MOTTATTFLEREGODKJENNINGER" ||
+    planStatus == "GODKJENTPLANAVBRUTT" ||
+    planStatus == "SENDTPLANTILGODKJENNING" ||
+    planStatus == "GODKJENTPLAN";
+
+  if (planIsNotEditable) {
+    return <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />;
+  }
 
   return (
     <Side

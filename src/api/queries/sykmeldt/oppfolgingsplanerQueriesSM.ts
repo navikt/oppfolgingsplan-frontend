@@ -80,56 +80,39 @@ export const useKopierOppfolgingsplanSM = () => {
 export const useAvbrytOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const landingUrl = useLandingUrl();
 
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
     await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
     await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
   };
 
-  return useMutation(postAvbrytOppfolgingsplan, {
-    onSuccess: () => {
-      router.push(landingUrl);
-    },
-  });
+  return useMutation(postAvbrytOppfolgingsplan);
 };
 
 export const useAvvisOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
 
-  const postAvvisOppfolgingsplan = (oppfolgingsplanId: number) =>
-    post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avvis`);
+  const postAvvisOppfolgingsplan = async (oppfolgingsplanId: number) => {
+    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avvis`);
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(postAvvisOppfolgingsplan, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    },
-  });
+  return useMutation(postAvvisOppfolgingsplan);
 };
 
-export const useNullstillGodkjenningSM = (oppfolgingsplanId: number) => {
+export const useNullstillGodkjenningSM = () => {
   const apiBasePath = useApiBasePath();
-  const arbeidsoppgaverUrl = useOppfolgingsplanUrl(
-    oppfolgingsplanId,
-    "arbeidsoppgaver"
-  );
   const queryClient = useQueryClient();
-  const router = useRouter();
 
-  const nullstillGodkjenning = (oppfolgingsplanId: number) =>
-    post(
+  const nullstillGodkjenning = async (oppfolgingsplanId: number) => {
+    await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/nullstillgodkjenning`
     );
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+  };
 
-  return useMutation(nullstillGodkjenning, {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-      await router.push(arbeidsoppgaverUrl);
-    },
-  });
+  return useMutation(nullstillGodkjenning);
 };
 
 export const useDelOppfolgingsplanMedNavSM = () => {
@@ -175,7 +158,11 @@ export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
     await router.push(statusUrl);
   };
 
-  return useMutation(godkjennPlan);
+  return useMutation(godkjennPlan, {
+    onError: () => {
+      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    },
+  });
 };
 
 export const useGodkjennsistOppfolgingsplanSM = (oppfolgingsplanId: number) => {

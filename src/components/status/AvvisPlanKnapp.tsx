@@ -1,8 +1,8 @@
 import { Edit } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
 import { useAvvisOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import Link from "next/link";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
+import { useRouter } from "next/router";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -14,16 +14,20 @@ export const AvvisPlanKnapp = ({ oppfolgingsplanId }: Props) => {
     oppfolgingsplanId,
     "arbeidsoppgaver"
   );
+  const router = useRouter();
 
   return (
-    <Link href={arbeidsOppgaverPage}>
-      <Button
-        onClick={() => avvisDialog.mutate(oppfolgingsplanId)}
-        icon={<Edit />}
-        variant="tertiary"
-      >
-        Gjør endringer
-      </Button>
-    </Link>
+    <Button
+      loading={avvisDialog.isLoading}
+      onClick={() =>
+        avvisDialog.mutateAsync(oppfolgingsplanId).then(() => {
+          router.push(arbeidsOppgaverPage);
+        })
+      }
+      icon={<Edit />}
+      variant="tertiary"
+    >
+      Gjør endringer
+    </Button>
   );
 };

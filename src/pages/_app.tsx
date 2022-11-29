@@ -14,10 +14,15 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TestScenarioSelector } from "../components/blocks/testscenarioselector/TestScenarioSelector";
 import { displayTestScenarioSelector } from "../environments/publicEnv";
+import { configureLogger } from "@navikt/next-logger";
 
 const minutesToMillis = (minutes: number) => {
   return 1000 * 60 * minutes;
 };
+
+configureLogger({
+  basePath: "/syk/oppfolgingsplaner",
+});
 
 const GlobalStyle = createGlobalStyle`
   body {

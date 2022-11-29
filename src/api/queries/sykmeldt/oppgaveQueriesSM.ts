@@ -17,7 +17,11 @@ export const useLagreArbeidsoppgaveSM = () => {
     await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
   };
 
-  return useMutation(lagreOppgave);
+  return useMutation(lagreOppgave, {
+    onError: () => {
+      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    },
+  });
 };
 
 export const useSlettOppgaveSM = () => {
