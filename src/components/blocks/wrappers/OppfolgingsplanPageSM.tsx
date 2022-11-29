@@ -111,11 +111,14 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     }
   };
 
-  const canEditPlan =
-    planStatus == "INGENPLANTILGODKJENNING" ||
-    planStatus == "GODKJENNPLANAVSLATT";
+  const planIsNotEditable =
+    planStatus == "GODKJENNPLANMOTTATT" ||
+    planStatus == "MOTTATTFLEREGODKJENNINGER" ||
+    planStatus == "GODKJENTPLANAVBRUTT" ||
+    planStatus == "SENDTPLANTILGODKJENNING" ||
+    planStatus == "GODKJENTPLAN";
 
-  if (!canEditPlan) {
+  if (planIsNotEditable) {
     return (
       <Side
         title={titleText(page)}
