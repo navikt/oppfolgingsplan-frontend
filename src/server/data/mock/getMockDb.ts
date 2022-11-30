@@ -1,5 +1,33 @@
 import activeMockSM from "./activeMockSM";
-import { MockSetupSM } from "./activeTestScenario";
+import {
+  Oppfolgingsplan,
+  Person,
+  Stilling,
+  Virksomhet,
+} from "../../../schema/oppfolgingsplanSchema";
+import { Sykmelding } from "../../../schema/sykmeldingSchema";
+import { NarmesteLeder } from "../../../schema/narmestelederSchema";
+import { Kontaktinfo } from "../../../schema/kontaktinfoSchema";
+import { Tilgang } from "../../../schema/tilgangSchema";
+
+export type TestScenario =
+  | "INGENPLAN"
+  | "UNDERARBEID"
+  | "GODKJENNPLANAVSLATT"
+  | "GODKJENNPLANSENDT"
+  | "GODKJENNPLANMOTTATT";
+
+export interface MockSetupSM {
+  oppfolgingsplaner: Oppfolgingsplan[];
+  sykmeldinger: Sykmelding[];
+  virksomhet: Virksomhet[];
+  stillinger: Stilling[];
+  narmesteLedere: NarmesteLeder[];
+  person: Person;
+  kontaktinfo: Kontaktinfo;
+  tilgang: Tilgang;
+  activeTestScenario: TestScenario;
+}
 
 declare global {
   // eslint-disable-next-line no-var

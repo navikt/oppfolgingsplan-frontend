@@ -1,4 +1,3 @@
-import { MockSetupSM } from "../../activeTestScenario";
 import { defaultSykmeldingerMockData } from "../../defaultData/oppfolgingsplanservice/defaultSykmeldingerMockData";
 import {
   defaultVirksomhetMockData,
@@ -8,6 +7,7 @@ import { defaultNarmesteLedereMockData } from "../../defaultData/oppfolgingsplan
 import { defaultStillingerMockData } from "../../defaultData/oppfolgingsplanservice/defaultStillingerMockData";
 import { defaultPersonMockData } from "../../defaultData/oppfolgingsplanservice/defaultPersonMockData";
 import { defaultKontaktinfoMockData } from "../../defaultData/oppfolgingsplanservice/defaultKontaktinfoMockData";
+import { MockSetupSM } from "../../getMockDb";
 
 export const noPlanScenarioSM: MockSetupSM = {
   oppfolgingsplaner: [],

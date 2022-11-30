@@ -10,7 +10,7 @@ import {
   useActiveTestScenario,
   useSetActiveTestScenario,
 } from "../../../api/queries/sykmeldt/testScenarioQueries";
-import { TestScenario } from "../../../server/data/mock/activeTestScenario";
+import { TestScenario } from "../../../server/data/mock/getMockDb";
 
 const MockdataWrapper = styled.div`
   position: fixed;
