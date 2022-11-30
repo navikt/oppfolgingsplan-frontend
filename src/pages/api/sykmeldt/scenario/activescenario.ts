@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
-  activeTestScenario,
   setActiveTestScenario,
   TestScenario,
 } from "../../../../server/data/mock/activeTestScenario";
 import { displayTestScenarioSelector } from "../../../../environments/publicEnv";
+import getMockDb from "../../../../server/data/mock/getMockDb";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!displayTestScenarioSelector) {
@@ -17,6 +17,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).end();
   } else {
-    res.status(200).json(activeTestScenario);
+    res.status(200).json(getMockDb().activeTestScenario);
   }
 }

@@ -4,7 +4,7 @@ import { NextApiResponseSykmeldingerSM } from "server/types/next/oppfolgingsplan
 import { getSykmeldingerSM } from "server/service/oppfolgingsplanService";
 import { handleSchemaParsingError } from "server/utils/errors";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
-import activeMockSM from "../mock/activeMockSM";
+import getMockDb from "../mock/getMockDb";
 
 export const fetchSykmeldingerSM = async (
   req: IAuthenticatedRequest,
@@ -12,7 +12,7 @@ export const fetchSykmeldingerSM = async (
   next: () => void
 ) => {
   if (isMockBackend) {
-    res.sykmeldinger = activeMockSM.sykmeldinger;
+    res.sykmeldinger = getMockDb().sykmeldinger;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
       req.idportenToken

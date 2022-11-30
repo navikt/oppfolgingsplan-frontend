@@ -96,7 +96,7 @@ export const TestScenarioSelector = () => {
                 }}
               >
                 <RadioWithHelpText
-                  value={TestScenario.INGENPLAN}
+                  value={"INGENPLAN"}
                   helpText={
                     "Jeg har ingen oppfølgingsplan, og ønsker å kunne opprette ny plan"
                   }
@@ -105,7 +105,7 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                  value={TestScenario.GODKJENNPLANAVSLATT}
+                  value={"GODKJENNPLANAVSLATT"}
                   helpText={
                     "Jeg har sendt oppfølgingsplanen til den andre parten for å at de skal godkjenne den, og de har gått inn for å gjøre endringer"
                   }
@@ -114,7 +114,7 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                  value={TestScenario.GODKJENNPLANSENDT}
+                  value={"GODKJENNPLANSENDT"}
                   helpText={
                     "Jeg har sendt oppfølgingsplanen til den andre parten for at de skal godkjenne den"
                   }
@@ -123,7 +123,7 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                  value={TestScenario.GODKJENNPLANMOTTATT}
+                  value={"GODKJENNPLANMOTTATT"}
                   helpText={
                     "Den andre parten har sendt oppfølgingsplanen til meg for at jeg skal godkjenne den"
                   }

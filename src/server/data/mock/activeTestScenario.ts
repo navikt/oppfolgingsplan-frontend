@@ -8,7 +8,8 @@ import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { Kontaktinfo } from "../../../schema/kontaktinfoSchema";
 import { Tilgang } from "../../../schema/tilgangSchema";
-import { assignNewMockSetup } from "./activeMockSM";
+import { getMockSetupForScenario } from "./activeMockSM";
+import { assignNewDbSetup } from "./getMockDb";
 
 export interface MockSetupSM {
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -19,18 +20,15 @@ export interface MockSetupSM {
   person: Person;
   kontaktinfo: Kontaktinfo;
   tilgang: Tilgang;
+  activeTestScenario: TestScenario;
 }
 
-export enum TestScenario {
-  "INGENPLAN" = "INGENPLAN",
-  "GODKJENNPLANAVSLATT" = "GODKJENNPLANAVSLATT",
-  "GODKJENNPLANSENDT" = "GODKJENNPLANSENDT",
-  "GODKJENNPLANMOTTATT" = "GODKJENNPLANMOTTATT",
-}
-
-export let activeTestScenario = TestScenario.INGENPLAN;
+export type TestScenario =
+  | "INGENPLAN"
+  | "GODKJENNPLANAVSLATT"
+  | "GODKJENNPLANSENDT"
+  | "GODKJENNPLANMOTTATT";
 
 export const setActiveTestScenario = (scenario: TestScenario) => {
-  activeTestScenario = scenario;
-  assignNewMockSetup(scenario);
+  assignNewDbSetup(getMockSetupForScenario(scenario));
 };

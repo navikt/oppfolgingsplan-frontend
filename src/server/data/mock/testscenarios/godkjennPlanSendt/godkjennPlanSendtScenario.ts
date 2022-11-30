@@ -22,4 +22,5 @@ export const godkjennPlanSendtScenario: MockSetupSM = {
     harTilgang: true,
     ikkeTilgangGrunn: null,
   },
+  activeTestScenario: "GODKJENNPLANSENDT",
 };

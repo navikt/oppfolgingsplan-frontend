@@ -21,4 +21,5 @@ export const noPlanScenarioSM: MockSetupSM = {
     harTilgang: true,
     ikkeTilgangGrunn: null,
   },
+  activeTestScenario: "INGENPLAN",
 };

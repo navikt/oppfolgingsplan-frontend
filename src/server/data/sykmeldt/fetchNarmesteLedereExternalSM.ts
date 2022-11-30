@@ -2,12 +2,9 @@ import { isMockBackend } from "environments/publicEnv";
 import { getNarmesteLedere } from "server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
-import {
-  handleQueryParamError,
-  handleSchemaParsingError,
-} from "server/utils/errors";
+import { handleQueryParamError } from "server/utils/errors";
 import { NextApiResponseNarmesteLedereSM } from "server/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import activeMockSM from "../mock/activeMockSM";
+import getMockDb from "../mock/getMockDb";
 
 export const fetchNarmesteLedereExternalSM = async (
   req: IAuthenticatedRequest,
@@ -15,7 +12,7 @@ export const fetchNarmesteLedereExternalSM = async (
   next: () => void
 ) => {
   if (isMockBackend) {
-    res.narmesteLedere = activeMockSM.narmesteLedere;
+    res.narmesteLedere = getMockDb().narmesteLedere;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
       req.idportenToken
