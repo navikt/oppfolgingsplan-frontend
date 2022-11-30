@@ -25,6 +25,7 @@ export interface MockSetupSM {
 
 export type TestScenario =
   | "INGENPLAN"
+  | "UNDERARBEID"
   | "GODKJENNPLANAVSLATT"
   | "GODKJENNPLANSENDT"
   | "GODKJENNPLANMOTTATT";

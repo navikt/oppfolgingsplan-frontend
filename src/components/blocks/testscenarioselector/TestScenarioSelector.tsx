@@ -105,6 +105,13 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
+                  value={"UNDERARBEID"}
+                  helpText={"Jeg har en plan under arbeid"}
+                >
+                  Oppfølgingsplan under arbeid
+                </RadioWithHelpText>
+
+                <RadioWithHelpText
                   value={"GODKJENNPLANAVSLATT"}
                   helpText={
                     "Jeg har sendt oppfølgingsplanen til den andre parten for å at de skal godkjenne den, og de har gått inn for å gjøre endringer"
