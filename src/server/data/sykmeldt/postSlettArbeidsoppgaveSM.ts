@@ -1,12 +1,12 @@
 import { isMockBackend } from "environments/publicEnv";
 import { NextApiResponse } from "next";
-import activeMockSM from "server/data/mock/activeMockSM";
 import { deleteOppgave } from "server/service/oppfolgingsplanService";
 import { handleQueryParamError } from "server/utils/errors";
 import serverLogger from "server/utils/serverLogger";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
+import getMockDb from "../mock/getMockDb";
 
 export const postSlettArbeidsoppgaveSM = async (
   req: IAuthenticatedRequest,
@@ -24,7 +24,9 @@ export const postSlettArbeidsoppgaveSM = async (
   }
 
   if (isMockBackend) {
-    const aktivPlan = activeMockSM.oppfolgingsplaner.find(
+    const activeMock = getMockDb();
+
+    const aktivPlan = activeMock.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
@@ -36,13 +38,13 @@ export const postSlettArbeidsoppgaveSM = async (
         )
       );
     }
-    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan);
+    const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
     const filteredArbeidsoppgaveListe = aktivPlan.arbeidsoppgaveListe!!.filter(
       (arbeidsoppgave) =>
         arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
     );
 
-    activeMockSM.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
+    activeMock.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
       filteredArbeidsoppgaveListe;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(

@@ -6,7 +6,7 @@ import serverLogger from "server/utils/serverLogger";
 import { deleteTiltakSM } from "server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { handleQueryParamError } from "server/utils/errors";
-import activeMockSM from "../mock/activeMockSM";
+import getMockDb from "../mock/getMockDb";
 
 export const postSlettTiltakSM = async (
   req: IAuthenticatedRequest,
@@ -24,7 +24,9 @@ export const postSlettTiltakSM = async (
   }
 
   if (isMockBackend) {
-    const aktivPlan = activeMockSM.oppfolgingsplaner.find(
+    const activeMock = getMockDb();
+
+    const aktivPlan = activeMock.oppfolgingsplaner.find(
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
@@ -36,12 +38,12 @@ export const postSlettTiltakSM = async (
         )
       );
     }
-    const aktivPlanIndex = activeMockSM.oppfolgingsplaner.indexOf(aktivPlan);
+    const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
     const filteredTiltakListe = aktivPlan.tiltakListe!!.filter(
       (tiltak) => tiltak.tiltakId != Number(tiltakId)
     );
 
-    activeMockSM.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
+    activeMock.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
       filteredTiltakListe;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(

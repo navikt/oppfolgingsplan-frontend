@@ -7,11 +7,11 @@ import { defaultStillingerMockData } from "../../defaultData/oppfolgingsplanserv
 import { defaultNarmesteLedereMockData } from "../../defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { defaultPersonMockData } from "../../defaultData/oppfolgingsplanservice/defaultPersonMockData";
 import { defaultKontaktinfoMockData } from "../../defaultData/oppfolgingsplanservice/defaultKontaktinfoMockData";
-import { godkjennPlanMottattOppfolgingsplanerMockData } from "./godkjennPlanMottattOppfolgingsplanerMockData";
+import { planUnderArbeidOppfolgingsplanerMockData } from "./planUnderArbeidOppfolgingsplanerMockData";
 import { MockSetupSM } from "../../getMockDb";
 
-export const godkjennPlanMottattScenario: MockSetupSM = {
-  oppfolgingsplaner: godkjennPlanMottattOppfolgingsplanerMockData,
+export const planUnderArbeidScenario: MockSetupSM = {
+  oppfolgingsplaner: planUnderArbeidOppfolgingsplanerMockData,
   sykmeldinger: defaultSykmeldingerMockData,
   virksomhet: [defaultVirksomhetMockData, otherVirksomhetMockData],
   stillinger: defaultStillingerMockData,
@@ -22,5 +22,5 @@ export const godkjennPlanMottattScenario: MockSetupSM = {
     harTilgang: true,
     ikkeTilgangGrunn: null,
   },
-  activeTestScenario: "GODKJENNPLANMOTTATT",
+  activeTestScenario: "UNDERARBEID",
 };

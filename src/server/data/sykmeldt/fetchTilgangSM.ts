@@ -7,7 +7,7 @@ import {
   handleSchemaParsingError,
 } from "server/utils/errors";
 import { getTilgangSM } from "server/service/oppfolgingsplanService";
-import activeMockSM from "../mock/activeMockSM";
+import getMockDb from "../mock/getMockDb";
 
 export const fetchTilgangSM = async (
   req: IAuthenticatedRequest,
@@ -21,7 +21,7 @@ export const fetchTilgangSM = async (
   }
 
   if (isMockBackend) {
-    res.tilgang = activeMockSM.tilgang;
+    res.tilgang = getMockDb().tilgang;
   } else {
     const oppfolgingsplanTokenX = await getOppfolgingsplanTokenX(
       req.idportenToken

@@ -17,7 +17,7 @@ import { getOppfolgingsplanTokenX } from "../../../../server/utils/tokenX";
 import { IAuthenticatedRequest } from "../../../../server/api/IAuthenticatedRequest";
 import { getOppfolgingsplanerSM } from "../../../../server/service/oppfolgingsplanService";
 import { isMockBackend } from "../../../../environments/publicEnv";
-import activeMockSM from "../../../../server/data/mock/activeMockSM";
+import getMockDb from "../../../../server/data/mock/getMockDb";
 
 const findNarmesteLeder = (
   fnr?: string,
@@ -58,13 +58,15 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
       res: NextApiResponseOppfolgingsplanSM,
       next
     ) => {
+      const activeMock = getMockDb();
+
       if (isMockBackend) {
-        res.oppfolgingsplaner = activeMockSM.oppfolgingsplaner;
-        res.virksomhet = activeMockSM.virksomhet;
-        res.person = activeMockSM.person;
-        res.stillinger = [...activeMockSM.stillinger];
-        res.kontaktinfo = activeMockSM.kontaktinfo;
-        res.narmesteLedere = activeMockSM.narmesteLedere;
+        res.oppfolgingsplaner = activeMock.oppfolgingsplaner;
+        res.virksomhet = activeMock.virksomhet;
+        res.person = activeMock.person;
+        res.stillinger = [...activeMock.stillinger];
+        res.kontaktinfo = activeMock.kontaktinfo;
+        res.narmesteLedere = activeMock.narmesteLedere;
       } else {
         const oppfolgingsplanTokenx = await getOppfolgingsplanTokenX(
           req.idportenToken

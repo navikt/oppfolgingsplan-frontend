@@ -2,7 +2,7 @@ import { useApiBasePath } from "../../../hooks/routeHooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, post } from "../../axios/axios";
 import { ApiErrorException } from "../../axios/errors";
-import { TestScenario } from "../../../server/data/mock/activeTestScenario";
+import { TestScenario } from "../../../server/data/mock/getMockDb";
 
 export const ACTIVE_TEST_SCENARIO = "active-test-scenario";
 
