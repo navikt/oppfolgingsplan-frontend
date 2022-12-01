@@ -60,10 +60,13 @@ const OppfolgingsdialogTeaser = ({
   };
 
   const getSubtitle = () => {
-    if (pendingApproval) {
+    if (!harNarmesteLeder) {
+      return "Planen kan ikke åpnes fordi det ikke er registrert en nærmeste leder for deg på denne virksomheten";
+    } else if (pendingApproval) {
       return texts.tilGodkjenning;
+    } else {
+      return "";
     }
-    return "";
   };
 
   const pendingApproval =
@@ -84,12 +87,6 @@ const OppfolgingsdialogTeaser = ({
         <StyledSmallText
           dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
         />
-      )}
-
-      {!harNarmesteLeder && (
-        <SpacedAlert variant={"warning"}>
-          Planen kan ikke redigeres fordi det ikke finnes aktiv nærmeste leder
-        </SpacedAlert>
       )}
     </OppfolgingsplanCard>
   );
