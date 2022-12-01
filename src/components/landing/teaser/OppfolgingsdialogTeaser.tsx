@@ -9,6 +9,7 @@ import { useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { statusPageToDisplay } from "utils/statusPageUtils";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+import { Alert } from "@navikt/ds-react";
 
 const texts = {
   tilGodkjenning: "Til godkjenning",
@@ -18,6 +19,10 @@ interface OppfolgingsdialogTeaserProps {
   oppfolgingsplan: Oppfolgingsplan;
   rootUrlPlaner?: string;
 }
+
+const SpacedAlert = styled(Alert)`
+  margin-top: 1rem;
+`;
 
 const StyledSmallText = styled.p`
   margin: 0;
@@ -34,14 +39,32 @@ const OppfolgingsdialogTeaser = ({
   const virksomhetsnavn =
     oppfolgingsplan.virksomhet?.navn || "Mangler navn på virksomhet";
 
-  const newOppfolgingsplanUrl = useOppfolgingsplanUrl(
+  const arbeidsoppgaverUrlForPlan = useOppfolgingsplanUrl(
     oppfolgingsplan.id,
     "arbeidsoppgaver"
   );
-  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplan.id, "status");
+  const statusUrlForPlan = useOppfolgingsplanUrl(oppfolgingsplan.id, "status");
 
-  const linkToEditPage =
-    statusPageToDisplay(oppfolgingsplan) == "INGENPLANTILGODKJENNING";
+  const harNarmesteLeder = oppfolgingsplan.arbeidsgiver?.naermesteLeder;
+
+  const getHref = () => {
+    if (!harNarmesteLeder) {
+      return undefined;
+    } else if (
+      statusPageToDisplay(oppfolgingsplan) == "INGENPLANTILGODKJENNING"
+    ) {
+      return arbeidsoppgaverUrlForPlan;
+    } else {
+      return statusUrlForPlan;
+    }
+  };
+
+  const getSubtitle = () => {
+    if (pendingApproval) {
+      return texts.tilGodkjenning;
+    }
+    return "";
+  };
 
   const pendingApproval =
     inneholderGodkjenninger(oppfolgingsplan) &&
@@ -50,9 +73,9 @@ const OppfolgingsdialogTeaser = ({
 
   return (
     <OppfolgingsplanCard
-      href={linkToEditPage ? newOppfolgingsplanUrl : statusUrl}
+      href={getHref()}
       title={virksomhetsnavn}
-      subtitle={pendingApproval ? texts.tilGodkjenning : ""}
+      subtitle={getSubtitle()}
       image={planStatus.img}
     >
       {typeof planStatus.tekst === "object" ? (
@@ -61,6 +84,12 @@ const OppfolgingsdialogTeaser = ({
         <StyledSmallText
           dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
         />
+      )}
+
+      {!harNarmesteLeder && (
+        <SpacedAlert variant={"warning"}>
+          Planen kan ikke redigeres fordi det ikke finnes aktiv nærmeste leder
+        </SpacedAlert>
       )}
     </OppfolgingsplanCard>
   );

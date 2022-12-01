@@ -1,7 +1,10 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useEffect } from "react";
 import Head from "next/head";
 import AppSpinner from "../spinner/AppSpinner";
-import { useOppfolgingsplanerSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import {
+  useInvalidateOppfolgingsplanerSM,
+  useOppfolgingsplanerSM,
+} from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { Heading } from "@navikt/ds-react";
 import OppfolgingsdialogerInfoPersonvern from "../infoboks/OppfolgingsdialogerInfoPersonvern";
@@ -39,6 +42,12 @@ const Side = ({
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
+  const invalidatePlaner = useInvalidateOppfolgingsplanerSM();
+
+  //Invalidate planer on mount to ensure sync between AG and SM
+  useEffect(() => {
+    invalidatePlaner();
+  }, []);
 
   const SideContent = (): ReactElement => {
     if (

@@ -1,7 +1,6 @@
 import { get, post } from "api/axios/axios";
 import {
   useApiBasePath,
-  useLandingUrl,
   useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
@@ -26,6 +25,12 @@ export const useOppfolgingsplanerSM = () => {
     [OPPFOLGINGSPLANER_SM],
     fetchOppfolgingsplaner
   );
+};
+
+export const useInvalidateOppfolgingsplanerSM = () => {
+  const queryClient = useQueryClient();
+
+  return () => queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
 };
 
 export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
