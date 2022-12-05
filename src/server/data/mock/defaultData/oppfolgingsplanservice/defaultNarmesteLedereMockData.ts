@@ -2,6 +2,18 @@ import { NarmesteLeder } from "../../../../../schema/narmestelederSchema";
 
 export const defaultNarmesteLedereMockData: NarmesteLeder[] = [
   {
+    navn: "Jeg er ikke aktiv",
+    fnr: "12011011012",
+    epost: "ikke@aktiv.no",
+    tlf: "111",
+    sistInnlogget: null,
+    samtykke: null,
+    virksomhetsnummer: "110110110",
+    erAktiv: false,
+    aktivFom: "2015-10-18T12:00:00+02:00",
+    aktivTom: "2016-10-18T12:00:00+02:00",
+  },
+  {
     navn: "Albus Dumbledore",
     fnr: "11011011011",
     epost: "albus@hogwarts.ac.uk",

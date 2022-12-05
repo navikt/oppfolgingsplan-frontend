@@ -1,7 +1,4 @@
-import {
-  Godkjenning,
-  Oppfolgingsplan,
-} from "../schema/oppfolgingsplanSchema";
+import { Godkjenning, Oppfolgingsplan } from "../schema/oppfolgingsplanSchema";
 import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
 
 export const harMottattGodkjenninger = (
@@ -26,9 +23,8 @@ export const harNaermesteLeder = (
 export const erAvvistAvArbeidstaker = (
   oppfolgingsplan: Oppfolgingsplan
 ): boolean => {
-  return !!(
-    oppfolgingsplan.godkjenninger &&
-    oppfolgingsplan.godkjenninger.length === 1 &&
+  return (
+    oppfolgingsplan.godkjenninger?.length === 1 &&
     !oppfolgingsplan.godkjenninger[0].godkjent &&
     oppfolgingsplan.arbeidstaker.fnr ===
       oppfolgingsplan.godkjenninger[0].godkjentAv.fnr

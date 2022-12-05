@@ -19,19 +19,6 @@ import { getOppfolgingsplanerSM } from "../../../../server/service/oppfolgingspl
 import { isMockBackend } from "../../../../environments/publicEnv";
 import getMockDb from "../../../../server/data/mock/getMockDb";
 
-const findNarmesteLeder = (
-  fnr?: string,
-  virksomhetsnummer?: string | null,
-  narmesteLedere?: NarmesteLeder[]
-): NarmesteLeder | undefined => {
-  return narmesteLedere?.find(
-    (leder) =>
-      leder.fnr == fnr &&
-      leder.virksomhetsnummer == virksomhetsnummer &&
-      leder.erAktiv
-  );
-};
-
 const findName = (
   narmesteLedere: NarmesteLeder[],
   sykmeldt: Person,
@@ -126,16 +113,6 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
   .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
     const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
       (oppfolgingsplan) => {
-        const aktivNarmesteLeder = findNarmesteLeder(
-          res.narmesteLedere.find(
-            (leder) =>
-              leder.virksomhetsnummer ==
-              oppfolgingsplan.virksomhet?.virksomhetsnummer
-          )?.fnr,
-          oppfolgingsplan.virksomhet?.virksomhetsnummer,
-          res.narmesteLedere
-        );
-
         return {
           id: oppfolgingsplan.id,
           sistEndretDato: oppfolgingsplan.sistEndretDato,
@@ -239,7 +216,12 @@ const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
           avbruttPlanListe: oppfolgingsplan.avbruttPlanListe,
           arbeidsgiver: {
             ...oppfolgingsplan.arbeidsgiver,
-            naermesteLeder: aktivNarmesteLeder,
+            naermesteLeder: res.narmesteLedere.find((leder) => {
+              return (
+                leder.virksomhetsnummer ==
+                  oppfolgingsplan.virksomhet?.virksomhetsnummer && leder.erAktiv
+              );
+            }),
           },
           arbeidstaker: {
             ...oppfolgingsplan.arbeidstaker,
