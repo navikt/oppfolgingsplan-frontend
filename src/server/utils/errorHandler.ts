@@ -1,19 +1,19 @@
 import { Options } from "next-connect";
 import { NextApiRequest, NextApiResponse } from "next";
-import serverLogger from "server/utils/serverLogger";
 import {
   ApiErrorException,
   defaultErrorTexts,
   ErrorType,
 } from "api/axios/errors";
+import { logger } from "@navikt/next-logger";
 
-export const ncOptions: Options<NextApiRequest, NextApiResponse> = {
+export const errorHandler: Options<NextApiRequest, NextApiResponse> = {
   onError: (
     err: ApiErrorException,
     req: NextApiRequest,
     res: NextApiResponse
   ) => {
-    serverLogger.error(
+    logger.error(
       `API request failed: ${err.error.type} - ${err.error.message}`,
       err.error
     );

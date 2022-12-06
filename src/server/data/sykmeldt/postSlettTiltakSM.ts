@@ -2,7 +2,6 @@ import { NextApiResponse } from "next";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import { isMockBackend } from "environments/publicEnv";
-import serverLogger from "server/utils/serverLogger";
 import { deleteTiltakSM } from "server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { handleQueryParamError } from "server/utils/errors";
@@ -51,7 +50,6 @@ export const postSlettTiltakSM = async (
     );
 
     await deleteTiltakSM(oppfolgingsplanTokenX, tiltakId);
-    serverLogger.info(`Attempting to delete tiltak with id: ${tiltakId}`);
   }
 
   next();

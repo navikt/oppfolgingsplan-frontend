@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 import getIdportenToken from "server/auth/idporten/idportenToken";
-import { ncOptions } from "server/utils/ncOptions";
+import { errorHandler } from "server/utils/errorHandler";
 import { postSlettArbeidsoppgaveSM } from "../../../../../../../server/data/sykmeldt/postSlettArbeidsoppgaveSM";
 
-const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
+const handler = nc<NextApiRequest, NextApiResponse>(errorHandler)
   .use(getIdportenToken)
   .use(postSlettArbeidsoppgaveSM)
   .post(async (req: NextApiRequest, res: NextApiResponse) => {

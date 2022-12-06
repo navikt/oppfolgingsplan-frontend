@@ -2,7 +2,6 @@ import { isMockBackend } from "environments/publicEnv";
 import { NextApiResponse } from "next";
 import { deleteOppgave } from "server/service/oppfolgingsplanService";
 import { handleQueryParamError } from "server/utils/errors";
-import serverLogger from "server/utils/serverLogger";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
@@ -52,9 +51,6 @@ export const postSlettArbeidsoppgaveSM = async (
     );
 
     await deleteOppgave(oppfolgingsplanTokenX, arbeidsoppgaveId);
-    serverLogger.info(
-      `Attempting to delete tiltak with id: ${arbeidsoppgaveId}`
-    );
   }
 
   next();

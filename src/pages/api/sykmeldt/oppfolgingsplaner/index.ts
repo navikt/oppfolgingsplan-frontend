@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { ncOptions } from "server/utils/ncOptions";
+import { errorHandler } from "server/utils/errorHandler";
 import getIdportenToken from "server/auth/idporten/idportenToken";
 import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
 import {
@@ -36,7 +36,7 @@ const findName = (
 };
 
 const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>(
-  ncOptions
+  errorHandler
 )
   .use(getIdportenToken)
   .use(

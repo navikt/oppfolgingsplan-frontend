@@ -1,10 +1,10 @@
 import getIdportenToken from "server/auth/idporten/idportenToken";
 import { postAvbrytOppfolgingsplanSM } from "server/data/sykmeldt/postAvbrytOppfolgingsplanSM";
-import { ncOptions } from "server/utils/ncOptions";
+import { errorHandler } from "server/utils/errorHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 
-const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
+const handler = nc<NextApiRequest, NextApiResponse>(errorHandler)
   .use(getIdportenToken)
   .use(postAvbrytOppfolgingsplanSM)
   .post(async (req: NextApiRequest, res: NextApiResponse) => {
