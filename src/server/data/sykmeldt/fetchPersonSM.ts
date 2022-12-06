@@ -1,6 +1,7 @@
 import { getPersonSM } from "server/service/oppfolgingsplanService";
 import { ApiErrorException, generalError } from "api/axios/errors";
 import { Oppfolgingsplan, Person } from "../../../schema/oppfolgingsplanSchema";
+import { logger } from "@navikt/next-logger";
 
 export const fetchPersonSM = async (
   oppfolgingsplanTokenX: string,
@@ -9,9 +10,8 @@ export const fetchPersonSM = async (
   const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 
   if (!sykmeldtFnr) {
-    throw new ApiErrorException(
-      generalError(new Error("No FNR found in oppfolgingsplan"))
-    );
+    logger.error("fetchPersonSM: No FNR found in oppfolgingsplan");
+    throw new ApiErrorException(generalError(new Error()));
   }
 
   return await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);

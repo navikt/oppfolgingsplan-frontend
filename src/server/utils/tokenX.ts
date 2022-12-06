@@ -1,14 +1,14 @@
 import { accessDeniedError, ApiErrorException } from "api/axios/errors";
 import { getTokenX } from "server/auth/tokenx";
 import serverEnv from "server/utils/serverEnv";
+import { logger } from "@navikt/next-logger";
 
 export const getOppfolgingsplanTokenX = async (
   idportenToken: string | null
 ): Promise<string> => {
   if (!idportenToken) {
-    throw new ApiErrorException(
-      accessDeniedError(new Error("Invalid idporten token."))
-    );
+    logger.error("Invalid idporten token.");
+    throw new ApiErrorException(accessDeniedError());
   }
 
   return await getTokenX(

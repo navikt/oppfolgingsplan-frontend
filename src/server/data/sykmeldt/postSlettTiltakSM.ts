@@ -6,6 +6,7 @@ import { deleteTiltakSM } from "server/service/oppfolgingsplanService";
 import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { handleQueryParamError } from "server/utils/errors";
 import getMockDb from "../mock/getMockDb";
+import { logger } from "@navikt/next-logger";
 
 export const postSlettTiltakSM = async (
   req: IAuthenticatedRequest,
@@ -29,13 +30,10 @@ export const postSlettTiltakSM = async (
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
-      throw new ApiErrorException(
-        generalError(
-          new Error(
-            `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
-          )
-        )
+      logger.error(
+        `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
       );
+      throw new ApiErrorException(generalError());
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
     const filteredTiltakListe = aktivPlan.tiltakListe!!.filter(

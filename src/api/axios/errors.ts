@@ -25,9 +25,9 @@ export interface ApiError {
   defaultErrorMsg: string;
 }
 
-export const generalError = (error: Error): ApiError => ({
+export const generalError = (error?: Error): ApiError => ({
   type: ErrorType.GENERAL_ERROR,
-  message: error.message,
+  message: error?.message || defaultErrorTexts.generalError,
   defaultErrorMsg: defaultErrorTexts.generalError,
 });
 
@@ -37,10 +37,10 @@ export const loginRequiredError = (error?: Error): ApiError => ({
   defaultErrorMsg: defaultErrorTexts.loginRequired,
 });
 
-export const accessDeniedError = (error: Error): ApiError => {
+export const accessDeniedError = (error?: Error): ApiError => {
   return {
     type: ErrorType.ACCESS_DENIED,
-    message: error.message,
+    message: error?.message || defaultErrorTexts.accessDenied,
     defaultErrorMsg: defaultErrorTexts.accessDenied,
   };
 };

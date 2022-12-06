@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
-import { errorHandler } from "server/utils/errorHandler";
 import getIdportenToken from "server/auth/idporten/idportenToken";
 import { postKopierOppfolgingsplanSM } from "server/data/sykmeldt/postKopierOppfolgingsplanSM";
 
-const handler = nc<NextApiRequest, NextApiResponse>(errorHandler)
+const handler = nc<NextApiRequest, NextApiResponse>()
   .use(getIdportenToken)
   .use(postKopierOppfolgingsplanSM)
   .post(async (req: NextApiRequest, res: NextApiResponse) => {

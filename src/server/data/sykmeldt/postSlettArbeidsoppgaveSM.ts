@@ -6,6 +6,7 @@ import { getOppfolgingsplanTokenX } from "server/utils/tokenX";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { IAuthenticatedRequest } from "../../api/IAuthenticatedRequest";
 import getMockDb from "../mock/getMockDb";
+import { logger } from "@navikt/next-logger";
 
 export const postSlettArbeidsoppgaveSM = async (
   req: IAuthenticatedRequest,
@@ -29,13 +30,10 @@ export const postSlettArbeidsoppgaveSM = async (
       (plan) => plan.id == Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
-      throw new ApiErrorException(
-        generalError(
-          new Error(
-            `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
-          )
-        )
+      logger.error(
+        `postSlett: Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
       );
+      throw new ApiErrorException(generalError());
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
     const filteredArbeidsoppgaveListe = aktivPlan.arbeidsoppgaveListe!!.filter(

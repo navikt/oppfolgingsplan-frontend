@@ -14,12 +14,12 @@ export async function getTokenX(
     logger.error(
       `Failed grant for client id: ${audience}. Error message: ${e}`
     );
-    throw new ApiErrorException(generalError(new Error("Failed grant")));
+    throw new ApiErrorException(generalError());
   }
 
   if (!tokenX.access_token) {
     logger.error(`Token X missing access token for client id: ${audience}`);
-    throw new ApiErrorException(generalError(new Error("Failed grant")));
+    throw new ApiErrorException(generalError());
   }
 
   return tokenX.access_token;

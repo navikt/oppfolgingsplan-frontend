@@ -7,6 +7,7 @@ import {
   networkError,
 } from "./errors";
 import { loginUser } from "utils/urlUtils";
+import { logger } from "@navikt/next-logger";
 
 interface AxiosOptions {
   accessToken?: string;
@@ -41,8 +42,12 @@ const defaultRequestHeaders = (
   return headers;
 };
 
-function handleAxiosError(error: AxiosError) {
+function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
   if (error.response) {
+    logger.error(`Failed HTTP ${httpMethod} - With response`, {
+      url: url,
+      error: error,
+    });
     switch (error.response.status) {
       case 401: {
         loginUser();
@@ -61,8 +66,16 @@ function handleAxiosError(error: AxiosError) {
         throw new ApiErrorException(generalError(error), error.response.status);
     }
   } else if (error.request) {
+    logger.error(`Failed HTTP ${httpMethod} - Network error`, {
+      url: url,
+      error: error,
+    });
     throw new ApiErrorException(networkError(error));
   } else {
+    logger.error(`Failed HTTP ${httpMethod} - General error`, {
+      url: url,
+      error: error,
+    });
     throw new ApiErrorException(generalError(error));
   }
 }
@@ -80,8 +93,12 @@ export const get = <ResponseData>(
     .then((response) => response.data)
     .catch(function (error) {
       if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
+        handleAxiosError(url, "GET", error);
       } else {
+        logger.error("Failed HTTP GET - Non AXIOS error", {
+          url: url,
+          error: error,
+        });
         throw new ApiErrorException(generalError(error), error.code);
       }
     });
@@ -101,8 +118,12 @@ export const post = <ResponseData>(
     .then((response) => response.data)
     .catch(function (error) {
       if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
+        handleAxiosError(url, "POST", error);
       } else {
+        logger.error("Failed HTTP POST - Non AXIOS error", {
+          url: url,
+          error: error,
+        });
         throw new ApiErrorException(generalError(error.message), error.code);
       }
     });
