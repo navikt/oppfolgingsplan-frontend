@@ -24,28 +24,28 @@ export interface ApiError {
   defaultErrorMsg: string;
 }
 
-export const generalError = (): ApiError => ({
+export const generalError = (message?: string): ApiError => ({
   type: ErrorType.GENERAL_ERROR,
-  message: defaultErrorTexts.generalError,
+  message: message || defaultErrorTexts.generalError,
   defaultErrorMsg: defaultErrorTexts.generalError,
 });
 
-export const loginRequiredError = (): ApiError => ({
+export const loginRequiredError = (message?: string): ApiError => ({
   type: ErrorType.LOGIN_REQUIRED,
-  message: defaultErrorTexts.loginRequired,
+  message: message || defaultErrorTexts.loginRequired,
   defaultErrorMsg: defaultErrorTexts.loginRequired,
 });
 
-export const accessDeniedError = (): ApiError => {
+export const accessDeniedError = (message?: string): ApiError => {
   return {
     type: ErrorType.ACCESS_DENIED,
-    message: defaultErrorTexts.accessDenied,
+    message: message || defaultErrorTexts.accessDenied,
     defaultErrorMsg: defaultErrorTexts.accessDenied,
   };
 };
 
-export const networkError = (): ApiError => ({
+export const networkError = (message?: string): ApiError => ({
   type: ErrorType.NETWORK_ERROR,
-  message: defaultErrorTexts.networkError,
+  message: message || defaultErrorTexts.networkError,
   defaultErrorMsg: defaultErrorTexts.networkError,
 });

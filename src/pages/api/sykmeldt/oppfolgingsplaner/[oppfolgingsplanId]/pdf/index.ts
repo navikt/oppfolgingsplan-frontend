@@ -1,21 +1,30 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { NextApiResponseOppfolgingsplanPdfSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanPdfSM";
-import { fetchPdfSM } from "server/data/sykmeldt/fetchPdfSM";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
+import { getTokenXTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getPdf } from "../../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
+import { defaultPdfMockData } from "../../../../../../server/data/mock/defaultData/oppfolgingsplanservice/defaultPdfMockData";
+import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
 
-const handler = nc<NextApiRequest, NextApiResponse>()
-  .use(getIdportenToken)
-  .use(fetchPdfSM)
-  .get(
-    async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanPdfSM) => {
-      res.setHeader("Content-Type", "application/pdf");
-      res.setHeader(
-        "Content-Disposition",
-        'inline; filename="oppfolgingsplan.pdf"'
-      );
-      res.end(res.pdf);
-    }
-  );
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
+    const encoder = new TextEncoder();
+    res.status(200).json(encoder.encode(defaultPdfMockData.toString()));
+  } else {
+    const tokenX = await getTokenXTokenFromRequest(req);
+    const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
 
-export default handler;
+    const pdf = await getPdf(tokenX, oppfolgingsplanId);
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      'inline; filename="oppfolgingsplan.pdf"'
+    );
+    res.end(pdf);
+  }
+};
+
+export default beskyttetApi(handler);

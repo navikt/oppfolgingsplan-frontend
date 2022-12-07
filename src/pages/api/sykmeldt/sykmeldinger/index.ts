@@ -1,15 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { fetchSykmeldingerSM } from "server/data/sykmeldt/fetchSykmeldingerSM";
-import { NextApiResponseSykmeldingerSM } from "server/types/next/oppfolgingsplan/NextApiResponseSykmeldingerSM";
 import { Sykmelding } from "../../../../schema/sykmeldingSchema";
+import { isMockBackend } from "../../../../environments/publicEnv";
+import getMockDb from "../../../../server/data/mock/getMockDb";
+import { getSykmeldingerSM } from "../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
+import { getTokenXTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 
-const handler = nc<NextApiRequest, NextApiResponse<Sykmelding[]>>()
-  .use(getIdportenToken)
-  .use(fetchSykmeldingerSM)
-  .get(async (req: NextApiRequest, res: NextApiResponseSykmeldingerSM) => {
-    res.status(200).json(res.sykmeldinger);
-  });
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<Sykmelding[]>
+): Promise<void> => {
+  if (isMockBackend) {
+    res.status(200).json(getMockDb().sykmeldinger);
+  } else {
+    const tokenX = await getTokenXTokenFromRequest(req);
+    const sykmeldingerResponse = await getSykmeldingerSM(tokenX);
 
-export default handler;
+    res.status(200).json(sykmeldingerResponse);
+  }
+};
+
+export default beskyttetApi(handler);

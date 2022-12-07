@@ -1,257 +1,61 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { NextApiResponseOppfolgingsplanSM } from "server/types/next/oppfolgingsplan/NextApiResponseOppfolgingsplanSM";
-import {
-  Oppfolgingsplan,
-  Person,
-} from "../../../../schema/oppfolgingsplanSchema";
-import { fetchPersonSM } from "server/data/sykmeldt/fetchPersonSM";
-import { fetchVirksomhetSM } from "server/data/sykmeldt/fetchVirksomhetSM";
-import { fetchKontaktinfoSM } from "server/data/sykmeldt/fetchKontaktinfoSM";
-import { fetchArbeidsforholdSM } from "server/data/sykmeldt/fetchArbeidsforholdSM";
-import { fetchNarmesteLedereSM } from "server/data/sykmeldt/fetchNarmesteLedereSM";
-import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
-import { getOppfolgingsplanTokenX } from "../../../../server/utils/tokenX";
-import { IAuthenticatedRequest } from "../../../../server/api/IAuthenticatedRequest";
-import { getOppfolgingsplanerSM } from "../../../../server/service/oppfolgingsplanService";
-import { isMockBackend } from "../../../../environments/publicEnv";
-import getMockDb from "../../../../server/data/mock/getMockDb";
+import { Oppfolgingsplan } from "../../../../schema/oppfolgingsplanSchema";
+import { fetchOppfolgingsplanerMetaSM } from "../../../../server/data/sykmeldt/fetchOppfolgingsplanerMetaSM";
+import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
+import { mapGodkjenningerSM } from "../../../../server/data/mapping/mapGodkjenningerSM";
+import { mapArbeidsoppgaveListeSM } from "../../../../server/data/mapping/mapArbeidsoppgaveListeSM";
+import { mapTiltakListeSM } from "../../../../server/data/mapping/mapTiltakListeSM";
+import { mapVirksomhetSM } from "../../../../server/data/mapping/mapVirksomhetSM";
+import { findNameSM } from "../../../../server/data/mapping/findNameSM";
+import { mapArbeidstakerSM } from "../../../../server/data/mapping/mapArbeidstakerSM";
 
-const findName = (
-  narmesteLedere: NarmesteLeder[],
-  sykmeldt: Person,
-  fnrToFind?: string | null
-): string => {
-  if (sykmeldt.fnr == fnrToFind) {
-    return sykmeldt.navn;
-  }
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  const oppfolgingplanerMeta = await fetchOppfolgingsplanerMetaSM(req);
 
-  const lederWithFnr = narmesteLedere.find((leder) => leder.fnr == fnrToFind);
+  const mappedPlaner: Oppfolgingsplan[] =
+    oppfolgingplanerMeta?.oppfolgingsplaner.map((oppfolgingsplan) => {
+      return {
+        id: oppfolgingsplan.id,
+        sistEndretDato: oppfolgingsplan.sistEndretDato,
+        opprettetDato: oppfolgingsplan.opprettetDato,
+        status: oppfolgingsplan.status,
+        virksomhet: mapVirksomhetSM(oppfolgingsplan, oppfolgingplanerMeta),
+        godkjentPlan: oppfolgingsplan.godkjentPlan,
+        godkjenninger: mapGodkjenningerSM(
+          oppfolgingsplan,
+          oppfolgingplanerMeta
+        ),
+        arbeidsoppgaveListe: mapArbeidsoppgaveListeSM(
+          oppfolgingsplan,
+          oppfolgingplanerMeta
+        ),
+        tiltakListe: mapTiltakListeSM(oppfolgingsplan, oppfolgingplanerMeta),
+        avbruttPlanListe: oppfolgingsplan.avbruttPlanListe,
+        arbeidsgiver: {
+          ...oppfolgingsplan.arbeidsgiver,
+          naermesteLeder: oppfolgingplanerMeta.narmesteLedere.find((leder) => {
+            return (
+              leder.virksomhetsnummer ==
+                oppfolgingsplan.virksomhet?.virksomhetsnummer && leder.erAktiv
+            );
+          }),
+        },
+        arbeidstaker: mapArbeidstakerSM(oppfolgingsplan, oppfolgingplanerMeta),
+        sistEndretAv: {
+          ...oppfolgingsplan.sistEndretAv,
+          navn: findNameSM(
+            oppfolgingplanerMeta.narmesteLedere,
+            oppfolgingplanerMeta.person,
+            oppfolgingsplan.sistEndretAv.fnr
+          ),
+        },
+      };
+    }) || [];
 
-  if (lederWithFnr) return lederWithFnr.navn;
-
-  return "";
+  res.status(200).json(mappedPlaner);
 };
 
-const handler = nc<NextApiRequest, NextApiResponse<Oppfolgingsplan[]>>()
-  .use(getIdportenToken)
-  .use(
-    async (
-      req: IAuthenticatedRequest,
-      res: NextApiResponseOppfolgingsplanSM,
-      next
-    ) => {
-      const activeMock = getMockDb();
-
-      if (isMockBackend) {
-        res.oppfolgingsplaner = activeMock.oppfolgingsplaner;
-        res.virksomhet = activeMock.virksomhet;
-        res.person = activeMock.person;
-        res.stillinger = [...activeMock.stillinger];
-        res.kontaktinfo = activeMock.kontaktinfo;
-        res.narmesteLedere = activeMock.narmesteLedere;
-      } else {
-        const oppfolgingsplanTokenx = await getOppfolgingsplanTokenX(
-          req.idportenToken
-        );
-        const oppfolgingsplaner = await getOppfolgingsplanerSM(
-          oppfolgingsplanTokenx
-        );
-
-        res.oppfolgingsplaner = oppfolgingsplaner;
-
-        if (oppfolgingsplaner.length > 0) {
-          const virksomhetPromise = fetchVirksomhetSM(
-            oppfolgingsplanTokenx,
-            oppfolgingsplaner
-          );
-          const personPromise = fetchPersonSM(
-            oppfolgingsplanTokenx,
-            oppfolgingsplaner
-          );
-          const kontaktinfoPromise = fetchKontaktinfoSM(
-            oppfolgingsplanTokenx,
-            oppfolgingsplaner
-          );
-          const arbeidsforholdPromise = fetchArbeidsforholdSM(
-            oppfolgingsplanTokenx,
-            oppfolgingsplaner
-          );
-          const narmesteLederePromise = fetchNarmesteLedereSM(
-            oppfolgingsplanTokenx,
-            oppfolgingsplaner
-          );
-
-          const [
-            virksomhet,
-            person,
-            kontaktinfo,
-            arbeidsforhold,
-            narmesteLedere,
-          ] = await Promise.all([
-            virksomhetPromise,
-            personPromise,
-            kontaktinfoPromise,
-            arbeidsforholdPromise,
-            narmesteLederePromise,
-          ]);
-
-          res.person = person;
-          res.stillinger = arbeidsforhold;
-          res.virksomhet = virksomhet;
-          res.kontaktinfo = kontaktinfo;
-          res.narmesteLedere = narmesteLedere;
-        }
-      }
-      next();
-    }
-  )
-  .get(async (req: NextApiRequest, res: NextApiResponseOppfolgingsplanSM) => {
-    const mappedPlaner: Oppfolgingsplan[] = res.oppfolgingsplaner.map(
-      (oppfolgingsplan) => {
-        return {
-          id: oppfolgingsplan.id,
-          sistEndretDato: oppfolgingsplan.sistEndretDato,
-          opprettetDato: oppfolgingsplan.opprettetDato,
-          status: oppfolgingsplan.status,
-          virksomhet: {
-            virksomhetsnummer:
-              oppfolgingsplan.virksomhet?.virksomhetsnummer || null,
-            navn:
-              res.virksomhet.find(
-                (v) =>
-                  v.virksomhetsnummer ==
-                  oppfolgingsplan.virksomhet?.virksomhetsnummer
-              )?.navn || null,
-          },
-          godkjentPlan: oppfolgingsplan.godkjentPlan,
-          godkjenninger:
-            oppfolgingsplan.godkjenninger &&
-            oppfolgingsplan.godkjenninger.map((godkjenning) => {
-              return {
-                ...godkjenning,
-                godkjentAv: {
-                  ...godkjenning.godkjentAv,
-                  navn: findName(
-                    res.narmesteLedere,
-                    res.person,
-                    godkjenning.godkjentAv.fnr
-                  ),
-                },
-              };
-            }),
-          arbeidsoppgaveListe:
-            oppfolgingsplan.arbeidsoppgaveListe &&
-            oppfolgingsplan.arbeidsoppgaveListe.map((oppgave) => {
-              return {
-                ...oppgave,
-                opprettetAv: {
-                  ...oppgave.opprettetAv,
-                  navn: findName(
-                    res.narmesteLedere,
-                    res.person,
-                    oppgave.opprettetAv.fnr
-                  ),
-                },
-                sistEndretAv: {
-                  ...oppgave.sistEndretAv,
-                  navn: findName(
-                    res.narmesteLedere,
-                    res.person,
-                    oppgave.sistEndretAv.fnr
-                  ),
-                },
-              };
-            }),
-          tiltakListe:
-            oppfolgingsplan.tiltakListe &&
-            oppfolgingsplan.tiltakListe.map((tiltak) => {
-              return {
-                ...tiltak,
-                opprettetAv: {
-                  ...tiltak.opprettetAv,
-                  navn: findName(
-                    res.narmesteLedere,
-                    res.person,
-                    tiltak.opprettetAv.fnr
-                  ),
-                },
-                sistEndretAv: {
-                  ...tiltak.sistEndretAv,
-                  navn: findName(
-                    res.narmesteLedere,
-                    res.person,
-                    tiltak.sistEndretAv.fnr
-                  ),
-                },
-                kommentarer:
-                  tiltak.kommentarer &&
-                  tiltak.kommentarer.map((kommentar) => {
-                    return {
-                      ...kommentar,
-                      opprettetAv: {
-                        ...kommentar.opprettetAv,
-                        navn: findName(
-                          res.narmesteLedere,
-                          res.person,
-                          kommentar.opprettetAv.fnr
-                        ),
-                      },
-                      sistEndretAv: {
-                        ...kommentar.sistEndretAv,
-                        navn: findName(
-                          res.narmesteLedere,
-                          res.person,
-                          kommentar.sistEndretAv.fnr
-                        ),
-                      },
-                    };
-                  }),
-              };
-            }),
-          avbruttPlanListe: oppfolgingsplan.avbruttPlanListe,
-          arbeidsgiver: {
-            ...oppfolgingsplan.arbeidsgiver,
-            naermesteLeder: res.narmesteLedere.find((leder) => {
-              return (
-                leder.virksomhetsnummer ==
-                  oppfolgingsplan.virksomhet?.virksomhetsnummer && leder.erAktiv
-              );
-            }),
-          },
-          arbeidstaker: {
-            ...oppfolgingsplan.arbeidstaker,
-            navn: res.person.navn,
-            epost: res.kontaktinfo.epost,
-            tlf: res.kontaktinfo.tlf,
-            stillinger: res.stillinger
-              .filter(
-                (stilling) =>
-                  stilling.virksomhetsnummer ==
-                  oppfolgingsplan.virksomhet?.virksomhetsnummer
-              )
-              .filter((stilling) => {
-                return (
-                  !!stilling.fom &&
-                  new Date(stilling.fom) <
-                    new Date(oppfolgingsplan.opprettetDato)
-                );
-              }),
-          },
-          sistEndretAv: {
-            ...oppfolgingsplan.sistEndretAv,
-            navn: findName(
-              res.narmesteLedere,
-              res.person,
-              oppfolgingsplan.sistEndretAv.fnr
-            ),
-          },
-        };
-      }
-    );
-
-    res.status(200).json(mappedPlaner);
-  });
-
-export default handler;
+export default beskyttetApi(handler);

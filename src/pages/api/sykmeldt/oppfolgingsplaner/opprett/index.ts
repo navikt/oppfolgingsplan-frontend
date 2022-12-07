@@ -1,13 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { postOpprettOppfolgingsplanSM } from "server/data/sykmeldt/postOpprettOppfolgingsplanSM";
+import { isMockBackend } from "../../../../../environments/publicEnv";
+import { getTokenXTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { createOppfolgingsplanSM } from "../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
+import { OpprettOppfoelgingsdialog } from "../../../../../schema/opprettOppfoelgingsdialogSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse>()
-  .use(getIdportenToken)
-  .use(postOpprettOppfolgingsplanSM)
-  .post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
     res.status(200).end();
-  });
+  } else {
+    const tokenX = await getTokenXTokenFromRequest(req);
+    const opprettOppfolgingsplanData: OpprettOppfoelgingsdialog = req.body;
+    await createOppfolgingsplanSM(tokenX, opprettOppfolgingsplanData);
 
-export default handler;
+    res.status(200).end();
+  }
+};
+
+export default beskyttetApi(handler);

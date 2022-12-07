@@ -1,6 +1,5 @@
 import { ApiErrorException, generalError } from "api/axios/errors";
 import { grant } from "./tokenx.grant";
-import { logger } from "@navikt/next-logger";
 
 export async function getTokenX(
   subjectToken: string,
@@ -11,13 +10,17 @@ export async function getTokenX(
   try {
     tokenX = await grant(subjectToken, audience);
   } catch (e) {
-    logger.warn(`Failed grant for client id: ${audience}. Error message: ${e}`);
-    throw new ApiErrorException(generalError());
+    throw new ApiErrorException(
+      generalError(
+        `Failed grant for client id: ${audience}. Error message: ${e}`
+      )
+    );
   }
 
   if (!tokenX.access_token) {
-    logger.warn(`Token X missing access token for client id: ${audience}`);
-    throw new ApiErrorException(generalError());
+    throw new ApiErrorException(
+      generalError(`Token X missing access token for client id: ${audience}`)
+    );
   }
 
   return tokenX.access_token;

@@ -1,15 +1,24 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { fetchNarmesteLedereExternalSM } from "server/data/sykmeldt/fetchNarmesteLedereExternalSM";
-import { NextApiResponseNarmesteLedereSM } from "server/types/next/oppfolgingsplan/NextApiResponseNarmesteLedereSM";
-import { NarmesteLeder } from "../../../../schema/narmestelederSchema";
+import { isMockBackend } from "../../../../environments/publicEnv";
+import { getNarmesteLedere } from "../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
+import getMockDb from "../../../../server/data/mock/getMockDb";
+import { getTokenXTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSykmeldtFnrFromRequest } from "../../../../server/utils/requestUtils";
 
-const handler = nc<NextApiRequest, NextApiResponse<NarmesteLeder[]>>()
-  .use(getIdportenToken)
-  .use(fetchNarmesteLedereExternalSM)
-  .get(async (req: NextApiRequest, res: NextApiResponseNarmesteLedereSM) => {
-    res.status(200).json(res.narmesteLedere);
-  });
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
+    res.status(200).json(getMockDb().narmesteLedere);
+  } else {
+    const tokenX = await getTokenXTokenFromRequest(req);
+    const sykmeldtFnr = getSykmeldtFnrFromRequest(req);
+    const narmesteLedereResponse = await getNarmesteLedere(tokenX, sykmeldtFnr);
 
-export default handler;
+    res.status(200).json(narmesteLedereResponse);
+  }
+};
+
+export default beskyttetApi(handler);

@@ -7,7 +7,6 @@ import {
   networkError,
 } from "./errors";
 import { loginUser } from "utils/urlUtils";
-import { logger } from "@navikt/next-logger";
 
 interface AxiosOptions {
   accessToken?: string;
@@ -19,20 +18,6 @@ interface AxiosOptions {
 export const AUTHORIZATION_HEADER = "Authorization";
 export const NAV_PERSONIDENT_HEADER = "nav-personident";
 export const ORGNUMMER_HEADER = "orgnummer";
-
-const logApiError = (
-  url: string,
-  httpMethod: string,
-  error: Error,
-  errorMsg: string
-) => {
-  logger.error(
-    {
-      url: url,
-    },
-    `Failed HTTP ${httpMethod} - ${errorMsg} ${error.toString()}`
-  );
-};
 
 const defaultRequestHeaders = (
   options?: AxiosOptions
@@ -56,7 +41,7 @@ const defaultRequestHeaders = (
   return headers;
 };
 
-function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
+function handleAxiosError(error: AxiosError) {
   if (error.response) {
     switch (error.response.status) {
       case 401: {
@@ -70,16 +55,16 @@ function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
         throw new ApiErrorException(accessDeniedError(), error.response.status);
       }
       default: {
-        logApiError(url, httpMethod, error, "");
-        throw new ApiErrorException(generalError(), error.response.status);
+        throw new ApiErrorException(
+          generalError(error.message),
+          error.response.status
+        );
       }
     }
   } else if (error.request) {
-    logApiError(url, httpMethod, error, "Network error.");
-    throw new ApiErrorException(networkError());
+    throw new ApiErrorException(networkError(error.message));
   } else {
-    logApiError(url, httpMethod, error, "General error.");
-    throw new ApiErrorException(generalError());
+    throw new ApiErrorException(generalError(error.message));
   }
 }
 
@@ -96,10 +81,9 @@ export const get = <ResponseData>(
     .then((response) => response.data)
     .catch(function (error) {
       if (axios.isAxiosError(error)) {
-        handleAxiosError(url, "GET", error);
+        handleAxiosError(error);
       } else {
-        logApiError(url, "GET", error, "Non AXIOS error.");
-        throw new ApiErrorException(generalError(), error.code);
+        throw new ApiErrorException(generalError(error.message), error.code);
       }
     });
 };
@@ -118,10 +102,9 @@ export const post = <ResponseData>(
     .then((response) => response.data)
     .catch(function (error) {
       if (axios.isAxiosError(error)) {
-        handleAxiosError(url, "POST", error);
+        handleAxiosError(error);
       } else {
-        logApiError(url, "POST", error, "Non AXIOS error.");
-        throw new ApiErrorException(generalError(), error.code);
+        throw new ApiErrorException(generalError(error.message), error.code);
       }
     });
 };
