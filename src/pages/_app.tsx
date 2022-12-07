@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const ContentWrapperStyled = styled.div`
+const ContentWrapperStyled = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,11 +84,9 @@ function MyApp({
           ) : (
             <BreadcrumbsAppenderAG />
           )}
-          <ContentWrapperStyled>
+          <ContentWrapperStyled tabIndex={-1} id="maincontent">
             <InnerContentWrapperStyled>
-              <main role="main">
-                <Component {...pageProps} />
-              </main>
+              <Component {...pageProps} />
             </InnerContentWrapperStyled>
           </ContentWrapperStyled>
         </>
