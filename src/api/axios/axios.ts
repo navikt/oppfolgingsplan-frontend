@@ -20,6 +20,20 @@ export const AUTHORIZATION_HEADER = "Authorization";
 export const NAV_PERSONIDENT_HEADER = "nav-personident";
 export const ORGNUMMER_HEADER = "orgnummer";
 
+const logApiError = (
+  url: string,
+  httpMethod: string,
+  error: Error,
+  errorMsg?: string
+) => {
+  logger.error(
+    {
+      url: url,
+    },
+    `Failed HTTP ${httpMethod} - ${errorMsg} ${error.toString()}`
+  );
+};
+
 const defaultRequestHeaders = (
   options?: AxiosOptions
 ): Record<string, string> => {
@@ -44,10 +58,6 @@ const defaultRequestHeaders = (
 
 function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
   if (error.response) {
-    logger.error(`Failed HTTP ${httpMethod} - With response`, {
-      url: url,
-      error: error,
-    });
     switch (error.response.status) {
       case 401: {
         loginUser();
@@ -62,20 +72,16 @@ function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
           error.response.status
         );
       }
-      default:
+      default: {
+        logApiError(url, httpMethod, error);
         throw new ApiErrorException(generalError(error), error.response.status);
+      }
     }
   } else if (error.request) {
-    logger.error(`Failed HTTP ${httpMethod} - Network error`, {
-      url: url,
-      error: error,
-    });
+    logApiError(url, httpMethod, error, "Network error.");
     throw new ApiErrorException(networkError(error));
   } else {
-    logger.error(`Failed HTTP ${httpMethod} - General error`, {
-      url: url,
-      error: error,
-    });
+    logApiError(url, httpMethod, error, "General error.");
     throw new ApiErrorException(generalError(error));
   }
 }
@@ -95,10 +101,7 @@ export const get = <ResponseData>(
       if (axios.isAxiosError(error)) {
         handleAxiosError(url, "GET", error);
       } else {
-        logger.error("Failed HTTP GET - Non AXIOS error", {
-          url: url,
-          error: error,
-        });
+        logApiError(url, "GET", error, "Non AXIOS error.");
         throw new ApiErrorException(generalError(error), error.code);
       }
     });
@@ -120,10 +123,7 @@ export const post = <ResponseData>(
       if (axios.isAxiosError(error)) {
         handleAxiosError(url, "POST", error);
       } else {
-        logger.error("Failed HTTP POST - Non AXIOS error", {
-          url: url,
-          error: error,
-        });
+        logApiError(url, "POST", error, "Non AXIOS error.");
         throw new ApiErrorException(generalError(error.message), error.code);
       }
     });
