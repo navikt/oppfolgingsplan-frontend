@@ -24,7 +24,7 @@ const logApiError = (
   url: string,
   httpMethod: string,
   error: Error,
-  errorMsg?: string
+  errorMsg: string
 ) => {
   logger.error(
     {
@@ -73,7 +73,7 @@ function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
         );
       }
       default: {
-        logApiError(url, httpMethod, error);
+        logApiError(url, httpMethod, error, "");
         throw new ApiErrorException(generalError(error), error.response.status);
       }
     }

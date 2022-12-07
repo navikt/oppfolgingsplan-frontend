@@ -29,17 +29,17 @@ export async function validateToken(bearerToken: string): Promise<boolean> {
   });
 
   if (verified.payload.exp && verified.payload.exp * 1000 <= Date.now()) {
-    logger.error("token is expired");
+    logger.warn("token is expired");
     return false;
   }
 
   if (verified.payload.client_id !== serverEnv.IDPORTEN_CLIENT_ID) {
-    logger.error("client_id does not match app client_id");
+    logger.warn("client_id does not match app client_id");
     return false;
   }
 
   if (verified.payload.acr !== "Level4") {
-    logger.error("token does not have acr Level4");
+    logger.warn("token does not have acr Level4");
     return false;
   }
 

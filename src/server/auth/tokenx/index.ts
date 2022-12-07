@@ -11,14 +11,12 @@ export async function getTokenX(
   try {
     tokenX = await grant(subjectToken, audience);
   } catch (e) {
-    logger.error(
-      `Failed grant for client id: ${audience}. Error message: ${e}`
-    );
+    logger.warn(`Failed grant for client id: ${audience}. Error message: ${e}`);
     throw new ApiErrorException(generalError());
   }
 
   if (!tokenX.access_token) {
-    logger.error(`Token X missing access token for client id: ${audience}`);
+    logger.warn(`Token X missing access token for client id: ${audience}`);
     throw new ApiErrorException(generalError());
   }
 
