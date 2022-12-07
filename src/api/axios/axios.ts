@@ -62,27 +62,24 @@ function handleAxiosError(url: string, httpMethod: string, error: AxiosError) {
       case 401: {
         loginUser();
         throw new ApiErrorException(
-          loginRequiredError(error),
+          loginRequiredError(),
           error.response.status
         );
       }
       case 403: {
-        throw new ApiErrorException(
-          accessDeniedError(error),
-          error.response.status
-        );
+        throw new ApiErrorException(accessDeniedError(), error.response.status);
       }
       default: {
         logApiError(url, httpMethod, error, "");
-        throw new ApiErrorException(generalError(error), error.response.status);
+        throw new ApiErrorException(generalError(), error.response.status);
       }
     }
   } else if (error.request) {
     logApiError(url, httpMethod, error, "Network error.");
-    throw new ApiErrorException(networkError(error));
+    throw new ApiErrorException(networkError());
   } else {
     logApiError(url, httpMethod, error, "General error.");
-    throw new ApiErrorException(generalError(error));
+    throw new ApiErrorException(generalError());
   }
 }
 
@@ -102,7 +99,7 @@ export const get = <ResponseData>(
         handleAxiosError(url, "GET", error);
       } else {
         logApiError(url, "GET", error, "Non AXIOS error.");
-        throw new ApiErrorException(generalError(error), error.code);
+        throw new ApiErrorException(generalError(), error.code);
       }
     });
 };
@@ -124,7 +121,7 @@ export const post = <ResponseData>(
         handleAxiosError(url, "POST", error);
       } else {
         logApiError(url, "POST", error, "Non AXIOS error.");
-        throw new ApiErrorException(generalError(error.message), error.code);
+        throw new ApiErrorException(generalError(), error.code);
       }
     });
 };
