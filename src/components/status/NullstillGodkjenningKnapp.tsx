@@ -24,7 +24,7 @@ export const NullstillGodkjenningKnapp = ({ oppfolgingsplanId }: Props) => {
           router.push(arbeidsoppgaverUrl);
         })
       }
-      icon={<Edit />}
+      icon={<Edit aria-hidden />}
       variant="tertiary"
     >
       Rediger planen

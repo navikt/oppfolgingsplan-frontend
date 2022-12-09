@@ -51,7 +51,7 @@ export const ArbeidsoppgaveCard = ({
   const EndreKnapp = () => (
     <Button
       variant={"tertiary"}
-      icon={<Edit />}
+      icon={<Edit aria-hidden />}
       onClick={() => setEditererArbeidsoppgave(true)}
     >
       Endre
@@ -75,7 +75,7 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.KAN && (
         <Card>
           <CardHeader>
-            <SuccessColored />
+            <SuccessColored aria-hidden />
             {texts.arbeidsoppgaveList.cards.kan}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -94,7 +94,7 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.TILRETTELEGGING && (
         <Card>
           <CardHeader>
-            <AddColored />
+            <AddColored aria-hidden />
             {texts.arbeidsoppgaveList.cards.tilrettelegging}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -116,7 +116,7 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.KAN_IKKE && (
         <Card>
           <CardHeader>
-            <ErrorColored />
+            <ErrorColored aria-hidden />
             {texts.arbeidsoppgaveList.cards.kanIkke}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -137,7 +137,7 @@ export const ArbeidsoppgaveCard = ({
         (!type && (
           <Card>
             <CardHeader>
-              <WarningColored />
+              <WarningColored aria-hidden />
               {texts.arbeidsoppgaveList.cards.ikkeVurdert}
             </CardHeader>
             <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />

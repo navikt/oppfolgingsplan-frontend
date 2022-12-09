@@ -15,7 +15,7 @@ export const AapnePlanSomPDF = ({ oppfolgingsplanId }: Props) => {
       onClick={() =>
         window.open(downloadPdfUrl, "_blank", "noopener,noreferrer")
       }
-      icon={<FileContent />}
+      icon={<FileContent aria-hidden />}
       variant="tertiary"
     >
       Åpne som pdf

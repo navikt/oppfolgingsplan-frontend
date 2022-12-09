@@ -62,7 +62,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
 
       <Button
         variant={"tertiary"}
-        icon={<Delete />}
+        icon={<Delete aria-hidden />}
         onClick={() => setModalOpen(true)}
       >
         Slett

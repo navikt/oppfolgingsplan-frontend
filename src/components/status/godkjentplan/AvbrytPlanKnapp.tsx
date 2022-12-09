@@ -19,7 +19,7 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
     <>
       <Button
         onClick={() => setVisBekreftelse(true)}
-        icon={<Edit />}
+        icon={<Edit aria-hidden />}
         variant="tertiary"
       >
         Gjør endringer
