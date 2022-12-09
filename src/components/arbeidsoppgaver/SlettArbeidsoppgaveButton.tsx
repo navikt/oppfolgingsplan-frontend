@@ -83,7 +83,7 @@ export const SlettArbeidsoppgaveButton = ({
 
       <Button
         variant={"tertiary"}
-        icon={<Delete />}
+        icon={<Delete aria-hidden />}
         onClick={() => setModalOpen(true)}
       >
         {texts.arbeidsoppgaveList.buttons.slett}

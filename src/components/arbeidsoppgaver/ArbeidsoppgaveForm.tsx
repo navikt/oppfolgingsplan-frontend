@@ -184,11 +184,10 @@ export const ArbeidsoppgaveForm = ({
               label={
                 "Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"
               }
-              error={errors.kanBeskrivelse?.message}
+              error={errors.kanIkkeBeskrivelse?.message}
               description={
                 "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
               }
-              maxLength={1000}
               {...register("kanIkkeBeskrivelse", {
                 required:
                   "Du må gi en beskrivelse av hvorfor du ikke kan gjennomføre oppgaven",

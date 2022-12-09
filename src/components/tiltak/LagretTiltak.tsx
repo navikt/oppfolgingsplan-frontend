@@ -168,7 +168,7 @@ export const LagretTiltak = ({
               {aktoerHarOpprettetElement && (
                 <Button
                   variant={"tertiary"}
-                  icon={<Edit />}
+                  icon={<Edit aria-hidden />}
                   onClick={() => setEditererTiltak(true)}
                 >
                   Endre
@@ -179,7 +179,7 @@ export const LagretTiltak = ({
               )}
               <Button
                 variant={"tertiary"}
-                icon={<DialogDots />}
+                icon={<DialogDots aria-hidden />}
                 onClick={() => setDisplayNyKommentar(true)}
               >
                 Kommenter

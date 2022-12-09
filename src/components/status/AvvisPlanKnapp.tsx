@@ -24,7 +24,7 @@ export const AvvisPlanKnapp = ({ oppfolgingsplanId }: Props) => {
           router.push(arbeidsOppgaverPage);
         })
       }
-      icon={<Edit />}
+      icon={<Edit aria-hidden />}
       variant="tertiary"
     >
       Gjør endringer

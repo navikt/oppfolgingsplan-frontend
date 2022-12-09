@@ -19,7 +19,7 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
   return (
     <>
       <Button
-        icon={<FileContent />}
+        icon={<FileContent aria-hidden />}
         variant="tertiary"
         onClick={() => setOpen(true)}
       >
