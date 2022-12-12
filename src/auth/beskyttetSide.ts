@@ -1,17 +1,17 @@
 import { logger } from "@navikt/next-logger";
-import { GetServerSidePropsResult, NextPageContext } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 
 import { isMockBackend } from "../environments/publicEnv";
 import { validateToken } from "../server/auth/idporten/verifyIdportenToken";
 
-type PageHandler = (
-  context: NextPageContext
-) => void | Promise<GetServerSidePropsResult<Record<string, unknown>>>;
+export type PageHandler = (
+  context: GetServerSidePropsContext
+) => Promise<GetServerSidePropsResult<Record<string, unknown>>>;
 
-function beskyttetSide(handler: PageHandler) {
+const beskyttetSide = (handler: PageHandler) => {
   return async function withBearerTokenHandler(
-    context: NextPageContext
-  ): Promise<ReturnType<typeof handler>> {
+    context: GetServerSidePropsContext
+  ): Promise<ReturnType<NonNullable<typeof handler>>> {
     if (isMockBackend) {
       return handler(context);
     }
@@ -24,7 +24,7 @@ function beskyttetSide(handler: PageHandler) {
 
     const wonderwallRedirect = {
       redirect: {
-        destination: "/oauth2/login?redirect=/syk/oppfolgingsplaner/sykmeldt",
+        destination: `/oauth2/login?redirect=/syk/oppfolgingsplaner/${context.resolvedUrl}`,
         permanent: false,
       },
     };
@@ -43,7 +43,7 @@ function beskyttetSide(handler: PageHandler) {
 
     return handler(context);
   };
-}
+};
 
 export const beskyttetSideUtenProps = beskyttetSide(
   async (): Promise<GetServerSidePropsResult<Record<string, unknown>>> => {

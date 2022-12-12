@@ -47,13 +47,13 @@ export const useApiBasePath = (): string => {
   }
 };
 
-interface IParams extends ParsedUrlQuery {
+interface OppfolgingsdialogIdParam extends ParsedUrlQuery {
   oppfolgingsdialogId: string;
 }
 
 export const useOppfolgingsplanRouteId = (): number => {
   const router = useRouter();
-  const { oppfolgingsdialogId } = router.query as IParams;
+  const { oppfolgingsdialogId } = router.query as OppfolgingsdialogIdParam;
   return Number(oppfolgingsdialogId);
 };
 
@@ -79,4 +79,14 @@ export const useOppfolgingsplanUrl = (
     default:
       return landingPage;
   }
+};
+
+interface NarmesteLederIdParam extends ParsedUrlQuery {
+  narmestelederid: string;
+}
+
+export const useNarmesteLederId = (): string | undefined => {
+  const router = useRouter();
+  const { narmestelederid } = router.query as NarmesteLederIdParam;
+  return narmestelederid;
 };

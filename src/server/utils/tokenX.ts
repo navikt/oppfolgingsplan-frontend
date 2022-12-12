@@ -17,3 +17,19 @@ export const getOppfolgingsplanTokenX = async (
     serverEnv.SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
   );
 };
+
+export const getSykmeldingerArbeidsgiverTokenX = async (
+  idportenToken: string | null
+): Promise<string> => {
+  if (!idportenToken) {
+    throw new ApiErrorException(
+      accessDeniedError("Invalid idporten token."),
+      403
+    );
+  }
+
+  return await getTokenX(
+    idportenToken,
+    serverEnv.SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
+  );
+};
