@@ -3,7 +3,7 @@ import { isMockBackend } from "../../../../environments/publicEnv";
 import { getNarmesteLedere } from "../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
 import getMockDb from "../../../../server/data/mock/getMockDb";
-import { getTokenXTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getSykmeldtFnrFromRequest } from "../../../../server/utils/requestUtils";
 
 const handler = async (
@@ -13,7 +13,7 @@ const handler = async (
   if (isMockBackend) {
     res.status(200).json(getMockDb().narmesteLedere);
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const sykmeldtFnr = getSykmeldtFnrFromRequest(req);
     const narmesteLedereResponse = await getNarmesteLedere(tokenX, sykmeldtFnr);
 

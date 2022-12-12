@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { isMockBackend } from "../../../../../../../../environments/publicEnv";
-import { getTokenXTokenFromRequest } from "../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getTiltakIdFromRequest } from "../../../../../../../../server/utils/requestUtils";
 import { saveTiltakCommentSM } from "../../../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../../../server/auth/beskyttetApi";
@@ -13,7 +13,7 @@ const handler = async (
   if (isMockBackend) {
     res.status(200).end();
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const tiltakId = getTiltakIdFromRequest(req);
     const partialKommentar: Partial<Kommentar> = req.body;
 

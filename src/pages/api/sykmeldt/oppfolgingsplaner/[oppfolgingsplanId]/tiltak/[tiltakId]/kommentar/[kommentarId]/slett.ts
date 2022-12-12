@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { isMockBackend } from "../../../../../../../../../environments/publicEnv";
-import { getTokenXTokenFromRequest } from "../../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getKommentarIdFromRequest } from "../../../../../../../../../server/utils/requestUtils";
 import { deleteTiltakCommentSM } from "../../../../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../../../../server/auth/beskyttetApi";
@@ -12,7 +12,7 @@ const handler = async (
   if (isMockBackend) {
     res.status(200).end();
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const kommentarId = getKommentarIdFromRequest(req);
 
     await deleteTiltakCommentSM(tokenX, kommentarId);

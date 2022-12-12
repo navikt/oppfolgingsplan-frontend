@@ -1,8 +1,10 @@
 import { NextApiRequest } from "next";
-import getIdportenToken2 from "../idporten/idportenToken2";
+import getIdportenToken from "../idporten/idportenToken";
 import { getOppfolgingsplanTokenX } from "../../utils/tokenX";
 
-export const getTokenXTokenFromRequest = async (req: NextApiRequest) => {
-  const idPortenToken = await getIdportenToken2(req);
+export const getSyfoOppfolgingsplanserviceTokenFromRequest = async (
+  req: NextApiRequest
+) => {
+  const idPortenToken = await getIdportenToken(req);
   return await getOppfolgingsplanTokenX(idPortenToken);
 };

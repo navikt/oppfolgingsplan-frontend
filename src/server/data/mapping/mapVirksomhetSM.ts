@@ -10,7 +10,7 @@ export const mapVirksomhetSM = (
     navn:
       oppfolgingplanerMeta.virksomhet.find(
         (v) =>
-          v.virksomhetsnummer == oppfolgingsplan.virksomhet?.virksomhetsnummer
+          v.virksomhetsnummer === oppfolgingsplan.virksomhet?.virksomhetsnummer
       )?.navn || null,
   };
 };

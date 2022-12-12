@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { isMockBackend } from "../../../../../../environments/publicEnv";
-import { getTokenXTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getPdf } from "../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
 import { defaultPdfMockData } from "../../../../../../server/data/mock/defaultData/oppfolgingsplanservice/defaultPdfMockData";
@@ -14,7 +14,7 @@ const handler = async (
     const encoder = new TextEncoder();
     res.status(200).json(encoder.encode(defaultPdfMockData.toString()));
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
 
     const pdf = await getPdf(tokenX, oppfolgingsplanId);

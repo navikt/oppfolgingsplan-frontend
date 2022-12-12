@@ -13,7 +13,7 @@ export const mapArbeidstakerSM = (
     stillinger: oppfolgingplanerMeta.stillinger
       .filter(
         (stilling) =>
-          stilling.virksomhetsnummer ==
+          stilling.virksomhetsnummer ===
           oppfolgingsplan.virksomhet?.virksomhetsnummer
       )
       .filter((stilling) => {

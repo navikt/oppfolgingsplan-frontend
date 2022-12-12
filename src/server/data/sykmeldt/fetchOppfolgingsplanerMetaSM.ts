@@ -15,7 +15,7 @@ import { Kontaktinfo } from "../../../schema/kontaktinfoSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
-import { getTokenXTokenFromRequest } from "../../auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../auth/tokenx/getTokenXFromRequest";
 
 export interface OppfolgingsplanMetaSM {
   person: Person;
@@ -41,7 +41,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
     const oppfolgingsplaner = await getOppfolgingsplanerSM(tokenX);
 

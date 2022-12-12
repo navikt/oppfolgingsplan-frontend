@@ -38,7 +38,7 @@ const handler = async (
           ...oppfolgingsplan.arbeidsgiver,
           naermesteLeder: oppfolgingplanerMeta.narmesteLedere.find((leder) => {
             return (
-              leder.virksomhetsnummer ==
+              leder.virksomhetsnummer ===
                 oppfolgingsplan.virksomhet?.virksomhetsnummer && leder.erAktiv
             );
           }),

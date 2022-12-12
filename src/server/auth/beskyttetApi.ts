@@ -40,7 +40,7 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
 
       return await handler(req, res);
     } catch (error: any) {
-      if (error.code == 401 || error.code == 403) {
+      if (error.code === 401 || error.code === 403) {
         res.status(401).json({ message: "Access denied" });
       } else {
         if (error.code) {

@@ -4,7 +4,7 @@ import { isMockBackend } from "../../../../../../environments/publicEnv";
 import { saveOppgave } from "../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
 import { Arbeidsoppgave } from "../../../../../../schema/oppfolgingsplanSchema";
-import { getTokenXTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
 
 const handler = async (
@@ -14,7 +14,7 @@ const handler = async (
   if (isMockBackend) {
     res.status(200).end();
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
     const oppgave: Arbeidsoppgave = req.body;
 

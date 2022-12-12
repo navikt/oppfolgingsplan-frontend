@@ -6,11 +6,11 @@ export const findNameSM = (
   sykmeldt: Person,
   fnrToFind?: string | null
 ): string => {
-  if (sykmeldt.fnr == fnrToFind) {
+  if (sykmeldt.fnr === fnrToFind) {
     return sykmeldt.navn;
   }
 
-  const lederWithFnr = narmesteLedere.find((leder) => leder.fnr == fnrToFind);
+  const lederWithFnr = narmesteLedere.find((leder) => leder.fnr === fnrToFind);
 
   if (lederWithFnr) return lederWithFnr.navn;
 

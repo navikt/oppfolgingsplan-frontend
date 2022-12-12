@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Sykmelding } from "../../../../../../../schema/sykmeldingSchema";
 import { isMockBackend } from "../../../../../../../environments/publicEnv";
-import { getTokenXTokenFromRequest } from "../../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import {
   getArbeidsoppgaveIdFromRequest,
   getOppfolgingsplanIdFromRequest,
@@ -25,7 +25,7 @@ const handler = async (
     const activeMock = getMockDb();
 
     const aktivPlan = activeMock.oppfolgingsplaner.find(
-      (plan) => plan.id == Number(oppfolgingsplanId)
+      (plan) => plan.id === Number(oppfolgingsplanId)
     );
     if (!aktivPlan) {
       throw new ApiErrorException(
@@ -45,7 +45,7 @@ const handler = async (
 
     res.status(200).end();
   } else {
-    const tokenX = await getTokenXTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
     await deleteOppgave(tokenX, arbeidsoppgaveId);
     res.status(200).end();
