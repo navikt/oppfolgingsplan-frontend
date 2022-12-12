@@ -10,7 +10,7 @@ export const fetchPersonSM = async (
 
   if (!sykmeldtFnr) {
     throw new ApiErrorException(
-      generalError(new Error("No FNR found in oppfolgingsplan"))
+      generalError("fetchPersonSM: No FNR found in oppfolgingsplan")
     );
   }
 

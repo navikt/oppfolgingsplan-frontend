@@ -1,7 +1,6 @@
 import { get, post } from "api/axios/axios";
 import {
   useApiBasePath,
-  useLandingUrl,
   useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
@@ -33,7 +32,7 @@ export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
   const allePlaner = useOppfolgingsplanerSM();
 
   if (allePlaner.isSuccess) {
-    return allePlaner.data!!.find((plan) => plan.id == id);
+    return allePlaner.data!!.find((plan) => plan.id === id);
   }
 
   return undefined;

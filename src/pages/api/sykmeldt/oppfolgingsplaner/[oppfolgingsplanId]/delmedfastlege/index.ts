@@ -1,14 +1,23 @@
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { postDelMedFastlegeSM } from "server/data/sykmeldt/postDelMedFastlegeSM";
-import { ncOptions } from "server/utils/ncOptions";
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
+import { delMedFastlegeSM } from "../../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
 
-const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
-  .use(getIdportenToken)
-  .use(postDelMedFastlegeSM)
-  .post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
     res.status(200).end();
-  });
+  } else {
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
 
-export default handler;
+    await delMedFastlegeSM(tokenX, oppfolgingsplanId);
+    res.status(200).end();
+  }
+};
+
+export default beskyttetApi(handler);

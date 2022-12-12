@@ -37,7 +37,7 @@ export async function getNarmesteLedere(accessToken: string, fnr: string) {
 }
 
 export async function getSykmeldingerSM(accessToken: string) {
-  return array(sykmeldingSchema).safeParse(
+  const response = array(sykmeldingSchema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/sykmeldinger`,
       {
@@ -45,6 +45,12 @@ export async function getSykmeldingerSM(accessToken: string) {
       }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  } else {
+    handleSchemaParsingError("Sykmeldt", "Sykmelding", response.error);
+  }
 }
 
 export async function getVirksomhetSM(
@@ -107,12 +113,18 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
 }
 
 export async function getTilgangSM(accessToken: string, fnr: string) {
-  return tilgangSchema.safeParse(
+  const response = tilgangSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tilgang?fnr=${fnr}`,
       { accessToken }
     )
   );
+
+  if (response.success) {
+    return response.data;
+  } else {
+    handleSchemaParsingError("Sykmeldt", "Tilgang", response.error);
+  }
 }
 
 export async function getPersonSM(accessToken: string, fnr: string) {

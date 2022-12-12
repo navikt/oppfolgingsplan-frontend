@@ -69,7 +69,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     aktivPlan &&
     aktivPlan.arbeidstaker.stillinger?.find(
       (stilling) =>
-        stilling.virksomhetsnummer == aktivPlan?.virksomhet?.virksomhetsnummer
+        stilling.virksomhetsnummer === aktivPlan?.virksomhet?.virksomhetsnummer
     );
 
   const erOppfolgingsdialogTilgjengelig =

@@ -1,14 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import { ncOptions } from "server/utils/ncOptions";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { postLagreTiltakSM } from "server/data/sykmeldt/postLagreTiltakSM";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
+import { saveTiltak } from "../../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
+import { Tiltak } from "../../../../../../schema/oppfolgingsplanSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
-  .use(getIdportenToken)
-  .use(postLagreTiltakSM)
-  .post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
     res.status(200).end();
-  });
+  } else {
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
+    const tiltak: Tiltak = req.body;
 
-export default handler;
+    await saveTiltak(tokenX, oppfolgingsplanId, tiltak);
+    res.status(200).end();
+  }
+};
+
+export default beskyttetApi(handler);

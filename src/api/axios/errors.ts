@@ -10,7 +10,6 @@ export enum ErrorType {
   GENERAL_ERROR = "GENERAL_ERROR",
   NETWORK_ERROR = "NETWORK_ERROR",
   LOGIN_REQUIRED = "LOGIN_REQUIRED",
-  SCHEMA_PARSING_ERROR = "SCHEMA_PARSING_ERROR",
 }
 
 export class ApiErrorException extends Error {
@@ -25,34 +24,28 @@ export interface ApiError {
   defaultErrorMsg: string;
 }
 
-export const generalError = (error: Error): ApiError => ({
+export const generalError = (message?: string): ApiError => ({
   type: ErrorType.GENERAL_ERROR,
-  message: error.message,
+  message: message || defaultErrorTexts.generalError,
   defaultErrorMsg: defaultErrorTexts.generalError,
 });
 
-export const loginRequiredError = (error?: Error): ApiError => ({
+export const loginRequiredError = (message?: string): ApiError => ({
   type: ErrorType.LOGIN_REQUIRED,
-  message: error?.message || defaultErrorTexts.loginRequired,
+  message: message || defaultErrorTexts.loginRequired,
   defaultErrorMsg: defaultErrorTexts.loginRequired,
 });
 
-export const accessDeniedError = (error: Error): ApiError => {
+export const accessDeniedError = (message?: string): ApiError => {
   return {
     type: ErrorType.ACCESS_DENIED,
-    message: error.message,
+    message: message || defaultErrorTexts.accessDenied,
     defaultErrorMsg: defaultErrorTexts.accessDenied,
   };
 };
 
-export const networkError = (error: Error): ApiError => ({
+export const networkError = (message?: string): ApiError => ({
   type: ErrorType.NETWORK_ERROR,
-  message: error.message,
+  message: message || defaultErrorTexts.networkError,
   defaultErrorMsg: defaultErrorTexts.networkError,
-});
-
-export const schemaParsingError = (error: Error): ApiError => ({
-  type: ErrorType.SCHEMA_PARSING_ERROR,
-  message: error.message,
-  defaultErrorMsg: defaultErrorTexts.generalError,
 });

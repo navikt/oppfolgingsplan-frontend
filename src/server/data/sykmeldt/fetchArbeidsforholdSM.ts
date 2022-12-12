@@ -1,5 +1,4 @@
 import { getArbeidsforholdSM } from "server/service/oppfolgingsplanService";
-import serverLogger from "server/utils/serverLogger";
 import {
   Oppfolgingsplan,
   Stilling,
@@ -32,7 +31,6 @@ export const fetchArbeidsforholdSM = async (
   ];
 
   if (unikeArbeidsforhold.length === 0) {
-    serverLogger.info("Hent oppfølgingsplaner: ingen arbeidsforhold å hente");
     return [];
   }
 

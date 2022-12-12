@@ -10,7 +10,7 @@ export const fetchKontaktinfoSM = async (
 
   if (!sykmeldtFnr) {
     throw new ApiErrorException(
-      generalError(new Error(`No FNR found in oppfolgingsplan`))
+      generalError("fetchKontaktinfoSM: No FNR found in oppfolgingsplan")
     );
   }
 

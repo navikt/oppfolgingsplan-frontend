@@ -1,29 +1,29 @@
-import { NextApiResponse } from "next";
-import { IAuthenticatedRequest } from "server/api/IAuthenticatedRequest";
+import { NextApiRequest } from "next";
 import { isMockBackend } from "environments/publicEnv";
-import {
-  ApiErrorException,
-  loginRequiredError,
-} from "api/axios/errors";
+import { ApiErrorException, loginRequiredError } from "api/axios/errors";
 import { validateToken } from "./verifyIdportenToken";
 
-async function getIdportenToken(
-  req: IAuthenticatedRequest,
-  _res: NextApiResponse,
-  next: (e?: Error) => void
-) {
+async function getIdportenToken(req: NextApiRequest) {
   if (isMockBackend) {
-    return next();
+    return "sometoken";
   }
 
   const bearerToken = req.headers["authorization"];
 
-  if (!bearerToken || !(await validateToken(bearerToken))) {
-    throw new ApiErrorException(loginRequiredError());
+  if (!bearerToken) {
+    throw new ApiErrorException(loginRequiredError(), 401);
   }
 
-  req.idportenToken = bearerToken.replace("Bearer ", "");
-  next();
+  if (!(await validateToken(bearerToken))) {
+    throw new ApiErrorException(
+      loginRequiredError(
+        "Failed to validate bearer token, redirecting to login"
+      ),
+      401
+    );
+  }
+
+  return bearerToken.replace("Bearer ", "");
 }
 
 export default getIdportenToken;

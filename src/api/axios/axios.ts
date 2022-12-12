@@ -47,23 +47,24 @@ function handleAxiosError(error: AxiosError) {
       case 401: {
         loginUser();
         throw new ApiErrorException(
-          loginRequiredError(error),
+          loginRequiredError(),
           error.response.status
         );
       }
       case 403: {
+        throw new ApiErrorException(accessDeniedError(), error.response.status);
+      }
+      default: {
         throw new ApiErrorException(
-          accessDeniedError(error),
+          generalError(error.message),
           error.response.status
         );
       }
-      default:
-        throw new ApiErrorException(generalError(error), error.response.status);
     }
   } else if (error.request) {
-    throw new ApiErrorException(networkError(error));
+    throw new ApiErrorException(networkError(error.message));
   } else {
-    throw new ApiErrorException(generalError(error));
+    throw new ApiErrorException(generalError(error.message));
   }
 }
 
@@ -82,7 +83,7 @@ export const get = <ResponseData>(
       if (axios.isAxiosError(error)) {
         handleAxiosError(error);
       } else {
-        throw new ApiErrorException(generalError(error), error.code);
+        throw new ApiErrorException(generalError(error.message), error.code);
       }
     });
 };

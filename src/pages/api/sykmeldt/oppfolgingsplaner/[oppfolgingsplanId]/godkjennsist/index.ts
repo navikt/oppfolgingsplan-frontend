@@ -1,14 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { ncOptions } from "server/utils/ncOptions";
-import { postGodkjennsistOppfolgingsplanSM } from "server/data/sykmeldt/postGodkjennsistOppfolgingsplanSM";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
+import { godkjennsistOppfolgingsplanSM } from "../../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
+import { GodkjennsistPlanData } from "../../../../../../schema/godkjennsistPlanSchema";
 
-const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
-  .use(getIdportenToken)
-  .use(postGodkjennsistOppfolgingsplanSM)
-  .post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
     res.status(200).end();
-  });
+  } else {
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
+    const data: GodkjennsistPlanData = req.body;
 
-export default handler;
+    await godkjennsistOppfolgingsplanSM(tokenX, oppfolgingsplanId, data);
+    res.status(200).end();
+  }
+};
+
+export default beskyttetApi(handler);

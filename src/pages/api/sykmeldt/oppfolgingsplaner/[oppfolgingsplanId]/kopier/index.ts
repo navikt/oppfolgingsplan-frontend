@@ -1,14 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
-import { ncOptions } from "server/utils/ncOptions";
-import getIdportenToken from "server/auth/idporten/idportenToken";
-import { postKopierOppfolgingsplanSM } from "server/data/sykmeldt/postKopierOppfolgingsplanSM";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
+import { kopierOppfolgingsplanSM } from "../../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
 
-const handler = nc<NextApiRequest, NextApiResponse>(ncOptions)
-  .use(getIdportenToken)
-  .use(postKopierOppfolgingsplanSM)
-  .post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  if (isMockBackend) {
     res.status(200).end();
-  });
+  } else {
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
 
-export default handler;
+    await kopierOppfolgingsplanSM(tokenX, oppfolgingsplanId);
+    res.status(200).end();
+  }
+};
+
+export default beskyttetApi(handler);

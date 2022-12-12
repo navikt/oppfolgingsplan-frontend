@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { displayTestScenarioSelector } from "../../../../environments/publicEnv";
+import { displayTestScenarioSelector } from "environments/publicEnv";
 import getMockDb, {
   assignNewDbSetup,
   TestScenario,
-} from "../../../../server/data/mock/getMockDb";
-import { getMockSetupForScenario } from "../../../../server/data/mock/activeMockSM";
+} from "server/data/mock/getMockDb";
+import { getMockSetupForScenario } from "server/data/mock/activeMockSM";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!displayTestScenarioSelector) {
