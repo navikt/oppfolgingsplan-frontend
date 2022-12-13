@@ -3,15 +3,15 @@ import React from "react";
 import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanContent";
 import { useOppfolgingsplanerSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
-import Side from "components/blocks/wrappers/Side";
 import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
+import SykmeldtSide from "../../components/blocks/wrappers/SykmeldtSide";
 
 const Home: NextPage = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
 
   return (
-    <Side
+    <SykmeldtSide
       title="Oppfølgingsplaner - Oversikt"
       heading="Oppfølgingsplaner"
       displayPersonvernInfo={true}
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         oppfolgingsplaner={oppfolgingsplaner.data!!}
         sykmeldinger={sykmeldinger.data!!}
       />
-    </Side>
+    </SykmeldtSide>
   );
 };
 

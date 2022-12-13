@@ -11,11 +11,11 @@ import {
 } from "utils/oppfolgingplanUtils";
 import { NavigationButtons } from "../buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBoks";
-import Side from "./Side";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { statusPageToDisplay } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
+import SykmeldtSide from "./SykmeldtSide";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -103,7 +103,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
   }
 
   return (
-    <Side
+    <SykmeldtSide
       title={titleText(page)}
       heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}
     >
@@ -124,6 +124,6 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
       <Content />
 
       <NavigationButtons activeStep={page.valueOf()} />
-    </Side>
+    </SykmeldtSide>
   );
 };
