@@ -48,8 +48,6 @@ spec:
       value: https://nav.no/dekoratoren
     - name: DECORATOR_ENV
       value: "prod"
-    - name: LOGINSERVICE_URL
-      value: https://loginservice.nav.no/login
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.prod-fss-pub.nais.io
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID

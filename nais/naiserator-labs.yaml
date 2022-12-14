@@ -48,8 +48,6 @@ spec:
       value: https://dekoratoren.dev.nav.no
     - name: DECORATOR_ENV
       value: "prod"
-    - name: LOGINSERVICE_URL
-      value: https://loginservice.dev.nav.no/login
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
@@ -58,8 +56,6 @@ spec:
       value: https://www.nav.no/arbeidsgiver/sykmeldte
     - name: DITT_SYKEFRAVAER_ROOT
       value: https://www.nav.no/syk/sykefravaer
-    - name: SYKMELDINGER_ARBEIDSGIVER_HOST
-      value: https://sykmeldinger-arbeidsgiver.dev.nav.no
     - name: MOCK_BACKEND
       value: "true"
     - name: DISPLAY_TESTSCENARIO_SELECTOR
