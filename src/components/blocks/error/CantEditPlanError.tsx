@@ -1,12 +1,12 @@
 import { BodyLong, Button, GuidePanel } from "@navikt/ds-react";
 import Link from "next/link";
 import { logger } from "@navikt/next-logger";
-import Side from "../wrappers/Side";
 import React from "react";
 import styled from "styled-components";
 import { useLandingUrl } from "../../../hooks/routeHooks";
 import { StatusPageToDisplay } from "../../../utils/statusPageUtils";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import SykmeldtSide from "../wrappers/SykmeldtSide";
 
 const SpacedGuidePanel = styled(GuidePanel)`
   padding-bottom: 2rem;
@@ -38,7 +38,7 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
   const landingUrl = useLandingUrl();
 
   return (
-    <Side
+    <SykmeldtSide
       title={"Oppfølgingsplan"}
       heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}
     >
@@ -58,6 +58,6 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
           </Button>
         </Link>
       </SpacedGuidePanel>
-    </Side>
+    </SykmeldtSide>
   );
 };

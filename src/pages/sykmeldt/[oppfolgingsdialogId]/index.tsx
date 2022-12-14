@@ -12,9 +12,9 @@ import {
 } from "utils/statusPageUtils";
 import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPlan";
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
-import Side from "components/blocks/wrappers/Side";
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
+import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -56,9 +56,9 @@ const OppfolgingsplanStatus: NextPage = () => {
   const { title, heading } = getStatusPageTitleAndHeading(aktivPlan);
 
   return (
-    <Side title={title} heading={heading}>
+    <SykmeldtSide title={title} heading={heading}>
       <Content oppfolgingsplan={aktivPlan} />
-    </Side>
+    </SykmeldtSide>
   );
 };
 
