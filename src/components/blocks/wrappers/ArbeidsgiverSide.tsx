@@ -4,6 +4,9 @@ import { SpacedDiv } from "./SpacedDiv";
 import Feilmelding from "../error/Feilmelding";
 import AppSpinner from "../spinner/AppSpinner";
 import { PageHeading } from "../heading/PageHeading";
+import { useOppfolgingsplanerAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG";
+import { AdresseSperreInfoBoks } from "../infoboks/AdresseSperreInfoBoks";
 
 interface SideProps {
   title: string;
@@ -17,9 +20,11 @@ const ArbeidsgiverSide = ({
   children,
 }: SideProps): ReactElement => {
   const sykmeldt = useDineSykmeldte();
+  const oppfolgingsplaner = useOppfolgingsplanerAG();
+  const tilgang = useTilgangAG();
 
   const PageContent = () => {
-    if (sykmeldt.isError) {
+    if (oppfolgingsplaner.isError || sykmeldt.isError || tilgang.isError) {
       return (
         <SpacedDiv>
           <Feilmelding
@@ -28,13 +33,15 @@ const ArbeidsgiverSide = ({
           />
         </SpacedDiv>
       );
-    } else if (sykmeldt.isLoading) {
+    } else if (
+      oppfolgingsplaner.isLoading ||
+      sykmeldt.isLoading ||
+      tilgang.isLoading
+    ) {
       return <AppSpinner />;
-    }
-    // else if (tilgang.data && !tilgang.data.harTilgang) {
-    //   return <AdresseSperreInfoBoks />;
-    // }
-    else {
+    } else if (tilgang.data && !tilgang.data.harTilgang) {
+      return <AdresseSperreInfoBoks />;
+    } else {
       return <>{children}</>;
     }
   };

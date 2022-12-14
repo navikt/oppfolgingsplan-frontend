@@ -1,4 +1,4 @@
-import { getArbeidsforholdSM } from "server/service/oppfolgingsplanService";
+import { getArbeidsforhold } from "server/service/oppfolgingsplanService";
 import {
   Oppfolgingsplan,
   Stilling,
@@ -11,7 +11,7 @@ interface ArbeidsforholdQueryParams {
   virksomhetsnummer: string;
 }
 
-export const fetchArbeidsforholdSM = async (
+export const fetchArbeidsforhold = async (
   oppfolgingsplanTokenX: string,
   oppfolgingsplaner: Oppfolgingsplan[]
 ): Promise<Stilling[]> => {
@@ -37,7 +37,7 @@ export const fetchArbeidsforholdSM = async (
   return (
     await Promise.all(
       unikeArbeidsforhold.map(async ({ fnr, virksomhetsnummer, fom }) => {
-        const arbeidsforhold = await getArbeidsforholdSM(
+        const arbeidsforhold = await getArbeidsforhold(
           oppfolgingsplanTokenX,
           fnr,
           virksomhetsnummer,

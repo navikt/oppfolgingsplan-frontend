@@ -2,7 +2,7 @@ import { getKontaktinfoSM } from "server/service/oppfolgingsplanService";
 import { ApiErrorException, generalError } from "api/axios/errors";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 
-export const fetchKontaktinfoSM = async (
+export const fetchKontaktinfo = async (
   oppfolgingsplanTokenX: string,
   oppfolgingsplaner: Oppfolgingsplan[]
 ) => {

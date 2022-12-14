@@ -1,9 +1,9 @@
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { OppfolgingsplanMetaSM } from "../sykmeldt/fetchOppfolgingsplanerMetaSM";
+import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
 
-export const mapArbeidstakerSM = (
+export const mapArbeidstaker = (
   oppfolgingsplan: Oppfolgingsplan,
-  oppfolgingplanerMeta: OppfolgingsplanMetaSM
+  oppfolgingplanerMeta: OppfolgingsplanMeta
 ) => {
   return {
     ...oppfolgingsplan.arbeidstaker,

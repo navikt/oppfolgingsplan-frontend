@@ -19,6 +19,27 @@ import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
 import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
 
+export async function getNarmesteLeder(
+  accessToken: string,
+  fnr: string,
+  virksomhetsnummer: string
+) {
+  const response = narmesteLederSchema.safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/narmesteleder/${fnr}?virksomhetsnummer=${virksomhetsnummer}`,
+      {
+        accessToken,
+      }
+    )
+  );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Arbeidsgiver", "NarmesteLeder", response.error);
+}
+
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
   const response = array(narmesteLederSchema).safeParse(
     await get(
@@ -53,7 +74,7 @@ export async function getSykmeldingerSM(accessToken: string) {
   }
 }
 
-export async function getVirksomhetSM(
+export async function getVirksomhet(
   accessToken: string,
   virksomhetsnummer: string
 ) {
@@ -73,7 +94,7 @@ export async function getVirksomhetSM(
   handleSchemaParsingError("Sykmeldt", "Virksomhet", response.error);
 }
 
-export async function getArbeidsforholdSM(
+export async function getArbeidsforhold(
   accessToken: string,
   fnr: string,
   virksomhetsnummer: string,
@@ -112,7 +133,24 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
   handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", response.error);
 }
 
-export async function getTilgangSM(accessToken: string, fnr: string) {
+export async function getOppfolgingsplanerAG(accessToken: string) {
+  const response = array(oppfolgingsplanSchema).safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
+      {
+        accessToken,
+      }
+    )
+  );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Arbeidsgiver", "Oppfolgingsplan", response.error);
+}
+
+export async function getTilgang(accessToken: string, fnr: string) {
   const response = tilgangSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tilgang?fnr=${fnr}`,

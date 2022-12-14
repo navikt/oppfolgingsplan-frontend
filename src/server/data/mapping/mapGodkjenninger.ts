@@ -2,12 +2,12 @@ import {
   Godkjenning,
   Oppfolgingsplan,
 } from "../../../schema/oppfolgingsplanSchema";
-import { findNameSM } from "./findNameSM";
-import { OppfolgingsplanMetaSM } from "../sykmeldt/fetchOppfolgingsplanerMetaSM";
+import { findName } from "./findName";
+import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
 
-export const mapGodkjenningerSM = (
+export const mapGodkjenninger = (
   oppfolgingsplan: Oppfolgingsplan,
-  oppfolgingplanerMeta: OppfolgingsplanMetaSM
+  oppfolgingplanerMeta: OppfolgingsplanMeta
 ): Godkjenning[] | null => {
   if (oppfolgingsplan.godkjenninger) {
     return oppfolgingsplan.godkjenninger.map((godkjenning) => {
@@ -15,7 +15,7 @@ export const mapGodkjenningerSM = (
         ...godkjenning,
         godkjentAv: {
           ...godkjenning.godkjentAv,
-          navn: findNameSM(
+          navn: findName(
             oppfolgingplanerMeta.narmesteLedere,
             oppfolgingplanerMeta.person,
             godkjenning.godkjentAv.fnr

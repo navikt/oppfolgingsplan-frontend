@@ -1,4 +1,4 @@
-import { getVirksomhetSM } from "server/service/oppfolgingsplanService";
+import { getVirksomhet } from "server/service/oppfolgingsplanService";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { notNull } from "../../utils/tsUtils";
 
@@ -12,7 +12,7 @@ const findAllVirksomhetsnummer = (oppfolgingsplaner: Oppfolgingsplan[]) => {
   return [...new Set(virksomhetsNummer)];
 };
 
-export const fetchVirksomhetSM = async (
+export const fetchVirksomhet = async (
   oppfolgingsplanTokenX: string,
   oppfolgingsplaner: Oppfolgingsplan[]
 ) => {
@@ -23,7 +23,7 @@ export const fetchVirksomhetSM = async (
   }
 
   const virksomhetPromises = alleVirksomhetsnummer.map(async (it) => {
-    return await getVirksomhetSM(oppfolgingsplanTokenX, it);
+    return await getVirksomhet(oppfolgingsplanTokenX, it);
   });
 
   return Promise.all(virksomhetPromises);

@@ -1,7 +1,7 @@
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { Person } from "../../../schema/oppfolgingsplanSchema";
 
-export const findNameSM = (
+export const findName = (
   narmesteLedere: NarmesteLeder[],
   sykmeldt: Person,
   fnrToFind?: string | null
