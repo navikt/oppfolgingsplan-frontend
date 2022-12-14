@@ -5,7 +5,7 @@ import { mapArbeidsoppgaveListe } from "./mapArbeidsoppgaveListe";
 import { mapTiltakListe } from "./mapTiltakListe";
 import { mapArbeidstaker } from "./mapArbeidstaker";
 import { findName } from "./findName";
-import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
 export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
   oppfolgingplanerMeta: OppfolgingsplanMeta | undefined

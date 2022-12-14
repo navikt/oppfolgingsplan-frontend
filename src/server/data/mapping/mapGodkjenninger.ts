@@ -3,7 +3,7 @@ import {
   Oppfolgingsplan,
 } from "../../../schema/oppfolgingsplanSchema";
 import { findName } from "./findName";
-import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
 export const mapGodkjenninger = (
   oppfolgingsplan: Oppfolgingsplan,

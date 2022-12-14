@@ -1,6 +1,6 @@
 import { Oppfolgingsplan, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { findName } from "./findName";
-import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
 export const mapTiltakListe = (
   oppfolgingsplan: Oppfolgingsplan,

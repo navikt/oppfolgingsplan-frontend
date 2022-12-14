@@ -1,5 +1,5 @@
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
 export const mapArbeidstaker = (
   oppfolgingsplan: Oppfolgingsplan,

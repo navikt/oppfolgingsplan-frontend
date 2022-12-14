@@ -8,7 +8,7 @@ import { fetchVirksomhet } from "../common/fetchVirksomhet";
 import { fetchArbeidsforhold } from "../common/fetchArbeidsforhold";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
-import { OppfolgingsplanMeta } from "../../../pages/api/arbeidsgiver/oppfolgingsplaner";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
 export const fetchOppfolgingsplanerMetaSM = async (
   req: NextApiRequest
