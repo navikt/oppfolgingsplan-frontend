@@ -1,9 +1,9 @@
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { OppfolgingsplanMetaSM } from "../sykmeldt/fetchOppfolgingsplanerMetaSM";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
-export const mapVirksomhetSM = (
+export const mapVirksomhet = (
   oppfolgingsplan: Oppfolgingsplan,
-  oppfolgingplanerMeta: OppfolgingsplanMetaSM
+  oppfolgingplanerMeta: OppfolgingsplanMeta
 ) => {
   return {
     virksomhetsnummer: oppfolgingsplan.virksomhet?.virksomhetsnummer || null,

@@ -1,10 +1,10 @@
 import { Oppfolgingsplan, Tiltak } from "../../../schema/oppfolgingsplanSchema";
-import { OppfolgingsplanMetaSM } from "../sykmeldt/fetchOppfolgingsplanerMetaSM";
-import { findNameSM } from "./findNameSM";
+import { findName } from "./findName";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
-export const mapTiltakListeSM = (
+export const mapTiltakListe = (
   oppfolgingsplan: Oppfolgingsplan,
-  oppfolgingplanerMeta: OppfolgingsplanMetaSM
+  oppfolgingplanerMeta: OppfolgingsplanMeta
 ): Tiltak[] | null => {
   if (oppfolgingsplan.tiltakListe) {
     return oppfolgingsplan.tiltakListe.map((tiltak) => {
@@ -12,7 +12,7 @@ export const mapTiltakListeSM = (
         ...tiltak,
         opprettetAv: {
           ...tiltak.opprettetAv,
-          navn: findNameSM(
+          navn: findName(
             oppfolgingplanerMeta.narmesteLedere,
             oppfolgingplanerMeta.person,
             tiltak.opprettetAv.fnr
@@ -20,7 +20,7 @@ export const mapTiltakListeSM = (
         },
         sistEndretAv: {
           ...tiltak.sistEndretAv,
-          navn: findNameSM(
+          navn: findName(
             oppfolgingplanerMeta.narmesteLedere,
             oppfolgingplanerMeta.person,
             tiltak.sistEndretAv.fnr
@@ -33,7 +33,7 @@ export const mapTiltakListeSM = (
               ...kommentar,
               opprettetAv: {
                 ...kommentar.opprettetAv,
-                navn: findNameSM(
+                navn: findName(
                   oppfolgingplanerMeta.narmesteLedere,
                   oppfolgingplanerMeta.person,
                   kommentar.opprettetAv.fnr
@@ -41,7 +41,7 @@ export const mapTiltakListeSM = (
               },
               sistEndretAv: {
                 ...kommentar.sistEndretAv,
-                navn: findNameSM(
+                navn: findName(
                   oppfolgingplanerMeta.narmesteLedere,
                   oppfolgingplanerMeta.person,
                   kommentar.sistEndretAv.fnr

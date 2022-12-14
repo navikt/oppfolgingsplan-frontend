@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { fetchOppfolgingsplanerMetaSM } from "../../../../server/data/sykmeldt/fetchOppfolgingsplanerMetaSM";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
+import { fetchOppfolgingsplanerMetaAG } from "../../../../server/data/arbeidsgiver/fetchOppfolgingsplanerMetaAG";
 import { mapOppfolgingsplanMetaToOppfolgingsplaner } from "../../../../server/data/mapping/mapOppfolgingsplanMetaToOppfolgingsplaner";
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  const oppfolgingplanerMeta = await fetchOppfolgingsplanerMetaSM(req);
+  const oppfolgingplanerMeta = await fetchOppfolgingsplanerMetaAG(req);
 
   res
     .status(200)

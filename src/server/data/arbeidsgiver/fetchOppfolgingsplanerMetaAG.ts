@@ -1,20 +1,20 @@
 import { isMockBackend } from "../../../environments/publicEnv";
-import { getOppfolgingsplanerSM } from "../../service/oppfolgingsplanService";
-import { fetchNarmesteLedereSM } from "./fetchNarmesteLedereSM";
 import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanerAG } from "../../service/oppfolgingsplanService";
 import { fetchVirksomhet } from "../common/fetchVirksomhet";
 import { fetchArbeidsforhold } from "../common/fetchArbeidsforhold";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
+import { fetchNaermesteLederForVirksomhet } from "./fetchNaermesteLederForVirksomhet";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
-export const fetchOppfolgingsplanerMetaSM = async (
+export const fetchOppfolgingsplanerMetaAG = async (
   req: NextApiRequest
 ): Promise<OppfolgingsplanMeta | undefined> => {
   if (isMockBackend) {
-    const activeMock = getMockDb();
+    const activeMock = getMockDb(); //Todo finn ut av mockdata løsning
 
     return {
       person: activeMock.person,
@@ -27,7 +27,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
-    const oppfolgingsplaner = await getOppfolgingsplanerSM(tokenX);
+    const oppfolgingsplaner = await getOppfolgingsplanerAG(tokenX);
 
     if (oppfolgingsplaner.length > 0) {
       const virksomhetPromise = fetchVirksomhet(tokenX, oppfolgingsplaner);
@@ -37,18 +37,18 @@ export const fetchOppfolgingsplanerMetaSM = async (
         tokenX,
         oppfolgingsplaner
       );
-      const narmesteLederePromise = fetchNarmesteLedereSM(
+      const narmesteLederPromise = fetchNaermesteLederForVirksomhet(
         tokenX,
         oppfolgingsplaner
       );
 
-      const [virksomhet, person, kontaktinfo, arbeidsforhold, narmesteLedere] =
+      const [virksomhet, person, kontaktinfo, arbeidsforhold, narmesteLeder] =
         await Promise.all([
           virksomhetPromise,
           personPromise,
           kontaktinfoPromise,
           arbeidsforholdPromise,
-          narmesteLederePromise,
+          narmesteLederPromise,
         ]);
 
       return {
@@ -57,7 +57,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
         virksomhet: virksomhet,
         kontaktinfo: kontaktinfo,
         stillinger: arbeidsforhold,
-        narmesteLedere: narmesteLedere,
+        narmesteLedere: [narmesteLeder],
       };
     }
   }

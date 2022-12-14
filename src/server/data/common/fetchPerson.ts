@@ -2,7 +2,7 @@ import { getPersonSM } from "server/service/oppfolgingsplanService";
 import { ApiErrorException, generalError } from "api/axios/errors";
 import { Oppfolgingsplan, Person } from "../../../schema/oppfolgingsplanSchema";
 
-export const fetchPersonSM = async (
+export const fetchPerson = async (
   oppfolgingsplanTokenX: string,
   oppfolgingsplaner: Oppfolgingsplan[]
 ): Promise<Person> | never => {

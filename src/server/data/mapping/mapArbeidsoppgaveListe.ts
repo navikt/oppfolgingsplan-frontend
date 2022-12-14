@@ -2,12 +2,12 @@ import {
   Arbeidsoppgave,
   Oppfolgingsplan,
 } from "../../../schema/oppfolgingsplanSchema";
-import { OppfolgingsplanMetaSM } from "../sykmeldt/fetchOppfolgingsplanerMetaSM";
-import { findNameSM } from "./findNameSM";
+import { findName } from "./findName";
+import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 
-export const mapArbeidsoppgaveListeSM = (
+export const mapArbeidsoppgaveListe = (
   oppfolgingsplan: Oppfolgingsplan,
-  oppfolgingplanerMeta: OppfolgingsplanMetaSM
+  oppfolgingplanerMeta: OppfolgingsplanMeta
 ): Arbeidsoppgave[] | null => {
   if (oppfolgingsplan.arbeidsoppgaveListe) {
     return oppfolgingsplan.arbeidsoppgaveListe.map((oppgave) => {
@@ -15,7 +15,7 @@ export const mapArbeidsoppgaveListeSM = (
         ...oppgave,
         opprettetAv: {
           ...oppgave.opprettetAv,
-          navn: findNameSM(
+          navn: findName(
             oppfolgingplanerMeta.narmesteLedere,
             oppfolgingplanerMeta.person,
             oppgave.opprettetAv.fnr
@@ -23,7 +23,7 @@ export const mapArbeidsoppgaveListeSM = (
         },
         sistEndretAv: {
           ...oppgave.sistEndretAv,
-          navn: findNameSM(
+          navn: findName(
             oppfolgingplanerMeta.narmesteLedere,
             oppfolgingplanerMeta.person,
             oppgave.sistEndretAv.fnr
