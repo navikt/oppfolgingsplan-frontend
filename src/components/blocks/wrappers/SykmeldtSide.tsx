@@ -51,16 +51,16 @@ const SykmeldtSide = ({
     } else if (tilgang.data && !tilgang.data.harTilgang) {
       return <AdresseSperreInfoBoks />;
     } else {
-      return <>{children}</>;
+      return (
+        <>
+          <PageHeading title={title} heading={heading} />
+          {children}
+        </>
+      );
     }
   };
 
-  return (
-    <>
-      <PageHeading title={title} heading={heading} />
-      <PageContent />
-    </>
-  );
+  return <PageContent />;
 };
 
 export default SykmeldtSide;
