@@ -64,6 +64,9 @@ export function leggTilDagerPaDato(date: Date, days: number) {
   return new Date(nyDato);
 }
 
-export const getDateDifferenceInDays = (first: any, second: any) => {
-  return Math.round((second - first) / (1000 * 60 * 60 * 24));
+export const getDateDifferenceInDays = (first: Date, second: Date) => {
+  const msBetweenDates = second.getTime() - first.getTime();
+  const msInADay = 24 * 60 * 60 * 1000;
+
+  return Math.round(msBetweenDates / msInADay);
 };
