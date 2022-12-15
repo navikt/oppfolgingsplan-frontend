@@ -63,3 +63,7 @@ export function leggTilDagerPaDato(date: Date, days: number) {
   nyDato.setTime(nyDato.getTime() + days * MILLISEKUNDER_PER_DAG);
   return new Date(nyDato);
 }
+
+export const getDateDifferenceInDays = (first: any, second: any) => {
+  return Math.round((second - first) / (1000 * 60 * 60 * 24));
+};

@@ -18,6 +18,7 @@ import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
 import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
 import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
+import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
 
 export async function getNarmesteLeder(
   accessToken: string,
@@ -148,6 +149,44 @@ export async function getOppfolgingsplanerAG(accessToken: string) {
   }
 
   handleSchemaParsingError("Arbeidsgiver", "Oppfolgingsplan", response.error);
+}
+
+export async function getDineSykmeldteMedSykmeldinger(
+  accessToken: string
+): Promise<Sykmeldt[]> {
+  const response = array(sykmeldtSchema).safeParse(
+    await get(
+      `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte`,
+      { accessToken }
+    )
+  );
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError(
+    "Arbeidsgiver",
+    "sykmeldtSchema-med-sykmeldinger",
+    response.error
+  );
+}
+
+export async function getSykmeldt(
+  narmestelederid: string,
+  accessToken: string
+): Promise<Sykmeldt> {
+  const response = sykmeldtSchema.safeParse(
+    await get(
+      `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte/${narmestelederid}`,
+      { accessToken }
+    )
+  );
+  if (response.success) {
+    return response.data;
+  } else {
+    handleSchemaParsingError("Arbeidsgiver", "sykmeldtSchema", response.error);
+  }
 }
 
 export async function getTilgang(accessToken: string, fnr: string) {

@@ -1,14 +1,21 @@
 import { isMockBackend } from "../../../environments/publicEnv";
 import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
-import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../auth/tokenx/getTokenXFromRequest";
-import { getOppfolgingsplanerAG } from "../../service/oppfolgingsplanService";
+import {
+  getDineSykmeldteTokenFromRequest,
+  getSyfoOppfolgingsplanserviceTokenFromRequest,
+} from "../../auth/tokenx/getTokenXFromRequest";
+import {
+  getDineSykmeldteMedSykmeldinger,
+  getOppfolgingsplanerAG,
+} from "../../service/oppfolgingsplanService";
 import { fetchVirksomhet } from "../common/fetchVirksomhet";
 import { fetchArbeidsforhold } from "../common/fetchArbeidsforhold";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
 import { fetchNaermesteLederForVirksomhet } from "./fetchNaermesteLederForVirksomhet";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { filterValidOppfolgingsplaner } from "../mapping/filterValidOppfolgingsplaner";
 
 export const fetchOppfolgingsplanerMetaAG = async (
   req: NextApiRequest
@@ -25,21 +32,43 @@ export const fetchOppfolgingsplanerMetaAG = async (
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
-    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const syfoOppfolgingsplanServiceTokenX =
+      await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
-    const oppfolgingsplaner = await getOppfolgingsplanerAG(tokenX);
+    const dineSykmeldteTokenX = await getDineSykmeldteTokenFromRequest(req);
 
-    if (oppfolgingsplaner.length > 0) {
-      const virksomhetPromise = fetchVirksomhet(tokenX, oppfolgingsplaner);
-      const personPromise = fetchPerson(tokenX, oppfolgingsplaner);
-      const kontaktinfoPromise = fetchKontaktinfo(tokenX, oppfolgingsplaner);
+    const oppfolgingsplaner = await getOppfolgingsplanerAG(
+      syfoOppfolgingsplanServiceTokenX
+    );
+    const dineSykmeldteMedSykmeldinger = await getDineSykmeldteMedSykmeldinger(
+      dineSykmeldteTokenX
+    );
+
+    const validOppfolgingsplaner = filterValidOppfolgingsplaner(
+      oppfolgingsplaner,
+      dineSykmeldteMedSykmeldinger
+    );
+
+    if (validOppfolgingsplaner.length > 0) {
+      const virksomhetPromise = fetchVirksomhet(
+        syfoOppfolgingsplanServiceTokenX,
+        validOppfolgingsplaner
+      );
+      const personPromise = fetchPerson(
+        syfoOppfolgingsplanServiceTokenX,
+        validOppfolgingsplaner
+      );
+      const kontaktinfoPromise = fetchKontaktinfo(
+        syfoOppfolgingsplanServiceTokenX,
+        validOppfolgingsplaner
+      );
       const arbeidsforholdPromise = fetchArbeidsforhold(
-        tokenX,
-        oppfolgingsplaner
+        syfoOppfolgingsplanServiceTokenX,
+        validOppfolgingsplaner
       );
       const narmesteLederPromise = fetchNaermesteLederForVirksomhet(
-        tokenX,
-        oppfolgingsplaner
+        syfoOppfolgingsplanServiceTokenX,
+        validOppfolgingsplaner
       );
 
       const [virksomhet, person, kontaktinfo, arbeidsforhold, narmesteLeder] =
@@ -53,7 +82,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
 
       return {
         person: person,
-        oppfolgingsplaner: oppfolgingsplaner,
+        oppfolgingsplaner: validOppfolgingsplaner,
         virksomhet: virksomhet,
         kontaktinfo: kontaktinfo,
         stillinger: arbeidsforhold,

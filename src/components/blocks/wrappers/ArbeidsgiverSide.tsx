@@ -34,9 +34,10 @@ const ArbeidsgiverSide = ({
         </SpacedDiv>
       );
     } else if (
-      oppfolgingsplaner.isLoading ||
-      sykmeldt.isLoading ||
-      tilgang.isLoading
+      !sykmeldt.isError &&
+      (tilgang.fetchStatus === "fetching" ||
+        oppfolgingsplaner.isLoading ||
+        sykmeldt.isLoading)
     ) {
       return <AppSpinner />;
     } else if (tilgang.data && !tilgang.data.harTilgang) {
