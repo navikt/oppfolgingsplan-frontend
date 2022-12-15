@@ -3,7 +3,7 @@ import {
   DineSykmeldteSykmelding,
   Sykmeldt,
 } from "../../../schema/sykmeldtSchema";
-import { getDateDifferenceInDays } from "../../../utils/dateUtils";
+import { differenceInDays } from "date-fns";
 
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING = 4;
 
@@ -66,7 +66,7 @@ const getLastSykefravar = (dineSykmeldteMedSykmeldinger: Sykmeldt[]) => {
 
       for (let i = 1; i < perioderDatesSorted.length; i++) {
         if (
-          getDateDifferenceInDays(
+          differenceInDays(
             perioderDatesSorted[i - 1].tom,
             perioderDatesSorted[i].fom
           ) < 16

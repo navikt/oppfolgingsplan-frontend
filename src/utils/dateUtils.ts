@@ -1,4 +1,5 @@
 import { maanedListe } from "../constants/konstanter";
+
 const MILLISEKUNDER_PER_DAG = 86400000;
 
 export const erGyldigDatoIFortiden = (dato: string) => {
@@ -63,10 +64,3 @@ export function leggTilDagerPaDato(date: Date, days: number) {
   nyDato.setTime(nyDato.getTime() + days * MILLISEKUNDER_PER_DAG);
   return new Date(nyDato);
 }
-
-export const getDateDifferenceInDays = (first: Date, second: Date) => {
-  const msBetweenDates = second.getTime() - first.getTime();
-  const msInADay = 24 * 60 * 60 * 1000;
-
-  return Math.round(msBetweenDates / msInADay);
-};
