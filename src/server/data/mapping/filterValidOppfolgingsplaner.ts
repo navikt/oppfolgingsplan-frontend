@@ -3,7 +3,7 @@ import {
   DineSykmeldteSykmelding,
   Sykmeldt,
 } from "../../../schema/sykmeldtSchema";
-import { differenceInDays } from "date-fns";
+import { compareDesc, differenceInDays } from "date-fns";
 
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING = 4;
 
@@ -17,18 +17,8 @@ const mapToPerioderDatesListSorted = (sykmelding: DineSykmeldteSykmelding) => {
     .map((periode) => {
       return { fom: new Date(periode.fom), tom: new Date(periode.tom) };
     })
-    .sort(compareFomDate);
+    .sort((a, b) => compareDesc(a.fom, b.fom));
 };
-
-function compareFomDate(a: FravaerPeriode, b: FravaerPeriode) {
-  if (a.fom < b.fom) {
-    return -1;
-  }
-  if (a.fom > b.fom) {
-    return 1;
-  }
-  return 0;
-}
 
 const erOppfolgingsplanGyldigForOppfolgingMedGrensedato = (
   fomLastSykefravar: Date,

@@ -167,7 +167,7 @@ export async function getDineSykmeldteMedSykmeldinger(
 
   handleSchemaParsingError(
     "Arbeidsgiver",
-    "sykmeldtSchema-med-sykmeldinger",
+    "sykmeldt-med-sykmeldinger",
     response.error
   );
 }
@@ -185,7 +185,7 @@ export async function getSykmeldt(
   if (response.success) {
     return response.data;
   } else {
-    handleSchemaParsingError("Arbeidsgiver", "sykmeldtSchema", response.error);
+    handleSchemaParsingError("Arbeidsgiver", "sykmeldt", response.error);
   }
 }
 
