@@ -392,30 +392,10 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     avbruttPlanListe: [
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-20T11:31:29.835",
         id: 3451,
       },
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-12T15:24:53.34",
         id: 3450,
       },
@@ -840,30 +820,10 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     avbruttPlanListe: [
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-20T11:31:29.835",
         id: 3451,
       },
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-12T15:24:53.34",
         id: 3450,
       },
@@ -1308,30 +1268,10 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     avbruttPlanListe: [
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-20T11:31:29.835",
         id: 3451,
       },
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-12T15:24:53.34",
         id: 3450,
       },
@@ -1401,16 +1341,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       deltMedFastlege: false,
       dokumentUuid: "ceed5fe6-7149-4a77-9189-f8ef055ce5d2",
       avbruttPlan: {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-12T15:24:53.34",
         id: 3450,
       },
@@ -1598,16 +1528,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       deltMedFastlege: false,
       dokumentUuid: "f054234f-e989-4d14-81a2-e8c1b1023e4b",
       avbruttPlan: {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-20T11:31:29.835",
         id: 3451,
       },
@@ -1938,16 +1858,6 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     avbruttPlanListe: [
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-12T15:24:53.34",
         id: 3450,
       },
