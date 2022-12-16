@@ -19,13 +19,21 @@ export const useOppfolgingsplanerAG = () => {
   );
 };
 
-export const useAktivePlanerAG = (): Oppfolgingsplan[] => {
+export const useAktiveOppfolgingsplanerAG = () => {
   const allePlaner = useOppfolgingsplanerAG();
 
   if (allePlaner.isSuccess) {
-    return allePlaner.data.filter((oppfolgingsplan) => {
+    const planer = allePlaner.data.filter((oppfolgingsplan) => {
       return erOppfolgingsplanAktiv(oppfolgingsplan);
     });
+
+    return {
+      harAktiveOppfolgingsplaner: planer.length > 0,
+      aktiveOppfolgingsplaner: planer,
+    };
   }
-  return [];
+  return {
+    harAktiveOppfolgingsplaner: false,
+    aktiveOppfolgingsplaner: [],
+  };
 };
