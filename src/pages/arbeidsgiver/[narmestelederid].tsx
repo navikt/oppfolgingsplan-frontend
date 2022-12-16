@@ -1,11 +1,16 @@
 import { NextPage } from "next";
 import React from "react";
+import { useAktiveOppfolgingsplanerAG } from "../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
-import ArbeidsgiverSide from "../../components/blocks/wrappers/ArbeidsgiverSide";
 import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../components/blocks/video/VideoPanel";
+import ArbeidsgiverSide from "../../components/blocks/wrappers/ArbeidsgiverSide";
+import OppfolgingsdialogTeasere from "../../components/landing/teaser/OppfolgingsdialogTeasere";
 
 const Home: NextPage = () => {
+  const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
+    useAktiveOppfolgingsplanerAG();
+
   return (
     <ArbeidsgiverSide
       title="Oppfølgingsplaner - Oversikt"
@@ -17,7 +22,12 @@ const Home: NextPage = () => {
         Alle godkjente planer kan ses i Altinn av de hos dere som har tilgang."
       />
 
-      <div>Arbeidsgiver TODO</div>
+      {harAktiveOppfolgingsplaner && (
+        <OppfolgingsdialogTeasere
+          oppfolgingsplaner={aktiveOppfolgingsplaner}
+          tittel={"Aktiv oppfølgingsplan"}
+        />
+      )}
 
       <VideoPanel />
     </ArbeidsgiverSide>
