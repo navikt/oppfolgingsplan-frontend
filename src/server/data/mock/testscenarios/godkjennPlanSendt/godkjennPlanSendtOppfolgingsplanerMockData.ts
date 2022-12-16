@@ -386,30 +386,10 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     avbruttPlanListe: [
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-20T11:31:29.835",
         id: 3451,
       },
       {
-        av: {
-          navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
-          epost: null,
-          tlf: null,
-          sistInnlogget: null,
-          samtykke: null,
-          evaluering: null,
-          stillinger: [],
-        },
         tidspunkt: "2020-02-12T15:24:53.34",
         id: 3450,
       },
