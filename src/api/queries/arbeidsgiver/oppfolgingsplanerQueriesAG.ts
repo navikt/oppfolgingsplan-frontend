@@ -23,9 +23,9 @@ export const useAktiveOppfolgingsplanerAG = () => {
   const allePlaner = useOppfolgingsplanerAG();
 
   if (allePlaner.isSuccess) {
-    const planer = allePlaner.data.filter((oppfolgingsplan) => {
-      return erOppfolgingsplanAktiv(oppfolgingsplan);
-    });
+    const planer = allePlaner.data.filter((oppfolgingsplan) =>
+      erOppfolgingsplanAktiv(oppfolgingsplan)
+    );
 
     return {
       harAktiveOppfolgingsplaner: planer.length > 0,
