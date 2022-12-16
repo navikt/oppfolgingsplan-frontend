@@ -1,4 +1,5 @@
 import { maanedListe } from "../constants/konstanter";
+
 const MILLISEKUNDER_PER_DAG = 86400000;
 
 export const erGyldigDatoIFortiden = (dato: string) => {

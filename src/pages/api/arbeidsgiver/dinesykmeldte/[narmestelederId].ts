@@ -2,9 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { isMockBackend } from "../../../../environments/publicEnv";
 import { getDineSykmeldteTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
-import serverEnv from "../../../../server/utils/serverEnv";
-import { sykmeldtSchema } from "../../../../schema/sykmeldtSchema";
-import { get } from "api/axios/axios";
+import { getSykmeldt } from "../../../../server/service/oppfolgingsplanService";
 
 const handler = async (
   req: NextApiRequest,
@@ -20,16 +18,10 @@ const handler = async (
     });
   } else {
     const accessToken = await getDineSykmeldteTokenFromRequest(req);
+    const { narmestelederId } = <{ narmestelederId: string }>req.query;
+    const response = await getSykmeldt(narmestelederId, accessToken);
 
-    const { narmestelederid } = <{ narmestelederid: string }>req.query;
-
-    const sykmeldtResponse = sykmeldtSchema.safeParse(
-      await get(
-        `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte/${narmestelederid}`,
-        { accessToken }
-      )
-    );
-    res.status(200).json(sykmeldtResponse);
+    res.status(200).json(response);
   }
 };
 
