@@ -1,6 +1,6 @@
 import React from "react";
 import { erOppfolgingsplanOpprettbarDirekte } from "utils/oppfolgingplanUtils";
-import { OppfolgingsdialogTomImage } from "components/blocks/images/imageComponents";
+import OppfolgingsdialogTomImage from "../../blocks/images/oppfolgingsdialog-tom.svg";
 import { Button } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";

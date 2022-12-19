@@ -4,7 +4,7 @@ import getContextRoot from "utils/getContextRoot";
 import { BodyLong, Heading, LinkPanel } from "@navikt/ds-react";
 import { Oppfolgingsplan } from "../../schema/oppfolgingsplanSchema";
 import Image from "next/image";
-import { PlanIkkeAktivSykmeldingImage } from "components/blocks/images/imageComponents";
+import PlanIkkeAktivSykmeldingImage from "../blocks/images/plan-ikke-aktiv-sykmelding--hake.svg";
 
 interface Props {
   oppfolgingsplanUtenAktivSykmelding: Oppfolgingsplan;

@@ -1,4 +1,4 @@
-import { OppfolgingsdialogIngenlederImage } from "components/blocks/images/imageComponents";
+import OppfolgingsdialogIngenlederImage from "../../blocks/images/oppfolgingsdialog-ingenleder.svg";
 import { InfoBoksWithImage } from "./InfoBoksWithImage";
 import React from "react";
 

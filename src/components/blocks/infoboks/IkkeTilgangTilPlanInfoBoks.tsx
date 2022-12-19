@@ -1,5 +1,5 @@
 import { InfoBoksWithImage } from "./InfoBoksWithImage";
-import { OppfolgingsdialogIkkeTilgangImage } from "components/blocks/images/imageComponents";
+import OppfolgingsdialogIkkeTilgangImage from "../../blocks/images/oppfolgingsdialog-infoboks-ikkeTilgang.svg";
 import React from "react";
 
 export const IkkeTilgangTilPlanInfoBoks = () => {

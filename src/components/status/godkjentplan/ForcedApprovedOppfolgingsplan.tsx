@@ -1,6 +1,6 @@
-import {NarmesteLeder} from "../../../schema/narmestelederSchema";
-import {BildeTekstLinje} from "../BildeTekstLinje";
-import {ReportProblemCircleImage} from "../../blocks/images/imageComponents";
+import { NarmesteLeder } from "../../../schema/narmestelederSchema";
+import { BildeTekstLinje } from "../BildeTekstLinje";
+import ReportProblemCircleImage from "../../blocks/images/report-problem-circle.svg";
 
 interface Props {
   narmesteLeder: NarmesteLeder;

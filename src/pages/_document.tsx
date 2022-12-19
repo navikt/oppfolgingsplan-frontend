@@ -12,6 +12,7 @@ import Document, {
   NextScript,
 } from "next/document";
 import serverEnv from "server/utils/serverEnv";
+import Script from "next/script";
 
 export default class MyDocument extends Document<{ Decorator: Components }> {
   static async getInitialProps(ctx: DocumentContext) {
@@ -58,7 +59,16 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
 
     return (
       <Html lang="nb">
-        <Head />
+        <Head>
+          <Decorator.Styles />
+          <link
+            rel="preload"
+            href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        </Head>
         <Decorator.Styles />
         <Decorator.Scripts />
         <body>

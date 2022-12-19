@@ -10,6 +10,10 @@ jobs:
   build:
     name: Checkout code and create docker tag
     runs-on: ubuntu-latest
+    permissions:
+      packages: 'write'
+      contents: 'read'
+      id-token: 'write'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,6 +37,13 @@ jobs:
       - name: Build
         run: |
           npm run build
+      - name: Upload static files to NAV CDN
+        uses: navikt/frontend/actions/cdn-upload/v1@main
+        with:
+          cdn-environment: cdn.nav.no
+          cdn-team-name: team-esyfo
+          source: ./.next/static
+          destination: '/oppfolgingsplan-frontend/_next'
       - name: Login to GitHub Container Registry
         uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
         with:

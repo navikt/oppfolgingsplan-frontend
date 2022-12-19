@@ -10,3 +10,6 @@ export const dittSykefravarRoot =
   publicRuntimeConfig.dittSykefravarRoot as string;
 export const displayTestScenarioSelector: boolean =
   publicRuntimeConfig.displayTestScenarioSelector === "true";
+
+export const cdnPublicPath: string | undefined =
+  publicRuntimeConfig.cdnPublicPath;
