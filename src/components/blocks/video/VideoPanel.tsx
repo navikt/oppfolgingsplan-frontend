@@ -1,5 +1,5 @@
 import React from "react";
-import { getAsset } from "utils/getAssetPath";
+import { getPublicAsset } from "utils/getAssetPath";
 import styled from "styled-components";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { SpacedDiv } from "../wrappers/SpacedDiv";
@@ -28,19 +28,21 @@ const VideoPanel = () => {
         width="100%"
         height="auto"
         controls
-        poster={getAsset("/video/poster.jpg")}
+        poster={getPublicAsset("/video/poster.jpg")}
       >
-        <source src={getAsset("/video/film.mp4")} type="video/mp4" />
+        <source src={getPublicAsset("/video/film.mp4")} type="video/mp4" />
         <track
           label="Norsk bokmål"
           kind="captions"
           srcLang="nb"
-          src={getAsset("/video/subtitle.vtt")}
+          src={getPublicAsset("/video/subtitle.vtt")}
           default
         />
         <p>
           {texts.browserNotSupported}{" "}
-          <a href={getAsset("/video/film.mp4")}>{texts.navigateToMovie}</a>
+          <a href={getPublicAsset("/video/film.mp4")}>
+            {texts.navigateToMovie}
+          </a>
         </p>
       </video>
       <BodyLong>
