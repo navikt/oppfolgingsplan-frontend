@@ -3,9 +3,9 @@ import { godkjennPlanAvslattScenario } from "./testscenarios/godkjentPlanAvslatt
 import { godkjennPlanSendtScenario } from "./testscenarios/godkjennPlanSendt/godkjennPlanSendtScenario";
 import { godkjennPlanMottattScenario } from "./testscenarios/godkjennPlanMottatt/godkjennPlanMottattScenario";
 import { planUnderArbeidScenario } from "./testscenarios/underArbeid/planUnderArbeidScenario";
-import { MockSetupSM, TestScenario } from "./getMockDb";
+import { MockSetup, TestScenario } from "./getMockDb";
 
-const activeMockSM: MockSetupSM = { ...noPlanScenarioSM };
+const activeMockData: MockSetup = { ...noPlanScenarioSM };
 
 export const getMockSetupForScenario = (scenario: TestScenario) => {
   switch (scenario) {
@@ -22,4 +22,4 @@ export const getMockSetupForScenario = (scenario: TestScenario) => {
   }
 };
 
-export default activeMockSM;
+export default activeMockData;

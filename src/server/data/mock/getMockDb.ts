@@ -1,4 +1,4 @@
-import activeMockSM from "./activeMockSM";
+import activeMockData from "./activeMockData";
 import {
   Oppfolgingsplan,
   Person,
@@ -9,6 +9,7 @@ import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { Kontaktinfo } from "../../../schema/kontaktinfoSchema";
 import { Tilgang } from "../../../schema/tilgangSchema";
+import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 
 export type TestScenario =
   | "INGENPLAN"
@@ -17,7 +18,7 @@ export type TestScenario =
   | "GODKJENNPLANSENDT"
   | "GODKJENNPLANMOTTATT";
 
-export interface MockSetupSM {
+export interface MockSetup {
   oppfolgingsplaner: Oppfolgingsplan[];
   sykmeldinger: Sykmelding[];
   virksomhet: Virksomhet[];
@@ -26,12 +27,13 @@ export interface MockSetupSM {
   person: Person;
   kontaktinfo: Kontaktinfo;
   tilgang: Tilgang;
+  sykmeldt: Sykmeldt;
   activeTestScenario: TestScenario;
 }
 
 declare global {
   // eslint-disable-next-line no-var
-  var _mockDb: MockSetupSM;
+  var _mockDb: MockSetup;
 }
 
 /**
@@ -39,7 +41,7 @@ declare global {
  * that mutations were not persisted. Putting the MockDB on the global object
  * fixes this, but that only needs to be done when we are developing locally.
  */
-global._mockDb = global._mockDb || activeMockSM;
+global._mockDb = global._mockDb || activeMockData;
 
 /**
  * Used ONLY by tests to reset the fake DB to initial values between tests
@@ -48,14 +50,14 @@ export function resetMockDb(): void {
   if (process.env.NODE_ENV !== "test")
     throw new Error("This is a test only utility");
 
-  global._mockDb = activeMockSM;
+  global._mockDb = activeMockData;
 }
 
-export function assignNewDbSetup(newSetup: MockSetupSM): void {
+export function assignNewDbSetup(newSetup: MockSetup): void {
   global._mockDb = newSetup;
 }
 
-const getMockDb = (): MockSetupSM => {
+const getMockDb = (): MockSetup => {
   // global._mockDb = new FakeMockDB();
   return global._mockDb;
 };

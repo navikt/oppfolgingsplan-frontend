@@ -3,19 +3,14 @@ import { isMockBackend } from "../../../../environments/publicEnv";
 import { getDineSykmeldteTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
 import { getSykmeldt } from "../../../../server/service/oppfolgingsplanService";
+import getMockDb from "../../../../server/data/mock/getMockDb";
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
   if (isMockBackend) {
-    res.status(200).json({
-      narmestelederId: "123",
-      orgnummer: "000111222",
-      fnr: "01010112345",
-      navn: "Kreativ Hatt",
-      aktivSykmelding: true,
-    });
+    res.status(200).json(getMockDb().sykmeldt);
   } else {
     const accessToken = await getDineSykmeldteTokenFromRequest(req);
     const { narmestelederId } = <{ narmestelederId: string }>req.query;
