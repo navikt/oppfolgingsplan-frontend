@@ -1,8 +1,5 @@
-export const getAsset = (path: string) => {
-  return `/syk/oppfolgingsplaner${path}`;
-};
+import { cdnPublicPath } from "../environments/publicEnv";
 
-// TODO
-// export const getAsset = (path: string) => {
-//   return `${cdnPublicPath}${path}`;
-// };
+export const getPublicAsset = (path: string) => {
+  return `${cdnPublicPath}${path}`;
+};
