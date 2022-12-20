@@ -66,6 +66,8 @@ spec:
       value: "false"
     - name: ENVIRONMENT
       value: "prod"
+    - name: ASSET_PREFIX
+      value: "https://cdn.nav.no/team-esyfo/oppfolgingsplan-frontend"
   accessPolicy:
     outbound:
       external:

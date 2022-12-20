@@ -1,5 +1,5 @@
 import React from "react";
-import { OppfolgingsdialogIkkeAktivSykmeldingImage } from "components/blocks/images/imageComponents";
+import OppfolgingsdialogIkkeAktivSykmeldingImage from "../blocks/images/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg";
 import { InfoBoksWithImage } from "../blocks/infoboks/InfoBoksWithImage";
 
 interface Props {

@@ -1,6 +1,7 @@
 import { Gyldighetstidspunkt } from "../../schema/oppfolgingsplanSchema";
 import { toDateMedMaanedNavn } from "../../utils/dateUtils";
-import { CalendarImage, StjerneImage } from "../blocks/images/imageComponents";
+import CalendarImage from "../blocks/images/calendar.svg";
+import StjerneImage from "../blocks/images/stjerne.svg";
 import { BildeTekstLinje } from "./BildeTekstLinje";
 
 interface Props {

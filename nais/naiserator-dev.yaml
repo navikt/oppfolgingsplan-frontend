@@ -64,6 +64,8 @@ spec:
       value: "false"
     - name: DISPLAY_TESTSCENARIO_SELECTOR
       value: "false"
+    - name: ASSET_PREFIX
+      value: "https://cdn.nav.no/team-esyfo/oppfolgingsplan-frontend"
   accessPolicy:
     outbound:
       external:

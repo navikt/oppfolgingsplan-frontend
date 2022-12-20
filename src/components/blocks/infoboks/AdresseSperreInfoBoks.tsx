@@ -1,5 +1,5 @@
 import React from "react";
-import { OppfolgingsdialogIkkeTilgangImage } from "components/blocks/images/imageComponents";
+import OppfolgingsdialogIkkeTilgangImage from "../../blocks/images/oppfolgingsdialog-infoboks-ikkeTilgang.svg";
 import { InfoBoksWithImage } from "./InfoBoksWithImage";
 
 export const AdresseSperreInfoBoks = () => {
