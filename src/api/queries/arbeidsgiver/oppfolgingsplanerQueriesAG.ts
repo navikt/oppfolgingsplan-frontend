@@ -2,7 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { get } from "api/axios/axios";
 import { useApiBasePath } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
-import { erOppfolgingsplanAktiv } from "../../../utils/oppfolgingplanUtils";
+import {
+  erOppfolgingsplanAktiv,
+  finnTidligereOppfolgingsplaner,
+} from "../../../utils/oppfolgingplanUtils";
 import { ApiErrorException } from "../../axios/errors";
 
 export const OPPFOLGINGSPLANER_AG = "oppfolgingsplaner-arbeidsgiver";
@@ -35,5 +38,21 @@ export const useAktiveOppfolgingsplanerAG = () => {
   return {
     harAktiveOppfolgingsplaner: false,
     aktiveOppfolgingsplaner: [],
+  };
+};
+
+export const useTidligereOppfolgingsplanerAG = () => {
+  const allePlaner = useOppfolgingsplanerAG();
+
+  if (allePlaner.isSuccess) {
+    const planer = finnTidligereOppfolgingsplaner(allePlaner.data);
+    return {
+      harTidligereOppfolgingsplaner: planer.length > 0,
+      tidligereOppfolgingsplaner: planer,
+    };
+  }
+  return {
+    harTidligereOppfolgingsplaner: false,
+    tidligereOppfolgingsplaner: [],
   };
 };

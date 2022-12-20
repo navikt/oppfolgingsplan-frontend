@@ -1,6 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
-import { useAktiveOppfolgingsplanerAG } from "../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import {
+  useAktiveOppfolgingsplanerAG,
+  useTidligereOppfolgingsplanerAG,
+} from "../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
 import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../components/blocks/video/VideoPanel";
@@ -10,6 +13,8 @@ import OppfolgingsdialogTeasere from "../../components/landing/teaser/Oppfolging
 const Home: NextPage = () => {
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
     useAktiveOppfolgingsplanerAG();
+  const { harTidligereOppfolgingsplaner, tidligereOppfolgingsplaner } =
+    useTidligereOppfolgingsplanerAG();
 
   return (
     <ArbeidsgiverSide
@@ -26,6 +31,13 @@ const Home: NextPage = () => {
         <OppfolgingsdialogTeasere
           oppfolgingsplaner={aktiveOppfolgingsplaner}
           tittel={"Aktiv oppfølgingsplan"}
+        />
+      )}
+      {harTidligereOppfolgingsplaner && (
+        <OppfolgingsdialogTeasere
+          oppfolgingsplaner={tidligereOppfolgingsplaner}
+          harTidligerOppfolgingsdialoger
+          tittel={"Tidligere oppfølgingsplaner"}
         />
       )}
 
