@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { Controller, useFormContext } from "react-hook-form";
 import { FieldPathValue } from "react-hook-form/dist/types/path";
 import { Validate } from "react-hook-form/dist/types/validator";
+import { leggTilDagerPaDato } from "../../../utils/dateUtils";
 
 registerLocale("nb", nb);
 
@@ -47,6 +48,7 @@ export const DatoVelger = ({
           id={name}
           locale="nb"
           dateFormat="dd.MM.yyyy"
+          maxDate={leggTilDagerPaDato(new Date(), 365 * 5)}
           ref={(elem: any) => {
             elem && ref(elem.input);
           }}
