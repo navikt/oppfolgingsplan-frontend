@@ -1,3 +1,4 @@
+import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import styled, { createGlobalStyle } from "styled-components";
@@ -84,11 +85,17 @@ function MyApp({
           ) : (
             <BreadcrumbsAppenderAG />
           )}
-          <ContentWrapperStyled tabIndex={-1} id="maincontent">
-            <InnerContentWrapperStyled>
+          {isAudienceSykmeldt ? (
+            <ContentWrapperStyled tabIndex={-1} id="maincontent">
+              <InnerContentWrapperStyled>
+                <Component {...pageProps} />
+              </InnerContentWrapperStyled>
+            </ContentWrapperStyled>
+          ) : (
+            <main tabIndex={-1} id="maincontent">
               <Component {...pageProps} />
-            </InnerContentWrapperStyled>
-          </ContentWrapperStyled>
+            </main>
+          )}
         </>
       </Hydrate>
       <TestScenarioDevTools />
