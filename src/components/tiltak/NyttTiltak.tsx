@@ -1,6 +1,6 @@
 import { Button } from "@navikt/ds-react";
 import { useState } from "react";
-import { useLagreTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
+import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueriesSM";
 import { TiltakForm, TiltakFormValues } from "./TiltakForm";
 import { TiltakFormHeading } from "./TiltakFormHeading";
 import { Tiltak } from "../../schema/oppfolgingsplanSchema";
@@ -9,7 +9,7 @@ import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
 
 export const NyttTiltak = () => {
-  const lagreTiltak = useLagreTiltakSM();
+  const lagreTiltak = useLagreTiltak();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
   const nyttTiltakInformasjon = (data: TiltakFormValues): Partial<Tiltak> => {

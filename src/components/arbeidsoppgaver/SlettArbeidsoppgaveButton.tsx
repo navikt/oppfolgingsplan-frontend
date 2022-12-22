@@ -1,4 +1,4 @@
-import { useSlettOppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
+import { useSlettOppgave } from "api/queries/oppfolgingsplan/oppgaveQueriesSM";
 import { Delete } from "@navikt/ds-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import React, { useEffect, useState } from "react";
@@ -26,7 +26,7 @@ export const SlettArbeidsoppgaveButton = ({
   arbeidsoppgaveId,
 }: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const slettArbeidsoppgave = useSlettOppgaveSM();
+  const slettArbeidsoppgave = useSlettOppgave();
 
   useEffect(() => {
     if (Modal.setAppElement) {

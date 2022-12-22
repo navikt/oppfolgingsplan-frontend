@@ -241,7 +241,7 @@ export async function createOppfolgingsplanSM(
   );
 }
 
-export async function kopierOppfolgingsplanSM(
+export async function kopierOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanIdToCopy: string
 ) {
@@ -252,7 +252,7 @@ export async function kopierOppfolgingsplanSM(
   );
 }
 
-export async function avbrytOppfolgingsplanSM(
+export async function avbrytOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -263,7 +263,7 @@ export async function avbrytOppfolgingsplanSM(
   );
 }
 
-export async function avvisOppfolgingsplanSM(
+export async function avvisOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -274,7 +274,7 @@ export async function avvisOppfolgingsplanSM(
   );
 }
 
-export async function nullstillGodkjenningSM(
+export async function nullstillGodkjenning(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -285,7 +285,7 @@ export async function nullstillGodkjenningSM(
   );
 }
 
-export async function delMedNavSM(
+export async function delMedNav(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -296,7 +296,7 @@ export async function delMedNavSM(
   );
 }
 
-export async function delMedFastlegeSM(
+export async function delMedFastlege(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -307,7 +307,7 @@ export async function delMedFastlegeSM(
   );
 }
 
-export async function godkjennOppfolgingsplanSM(
+export async function godkjennOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string,
   data: GodkjennPlanData
@@ -319,7 +319,7 @@ export async function godkjennOppfolgingsplanSM(
   );
 }
 
-export async function godkjennsistOppfolgingsplanSM(
+export async function godkjennsistOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string,
   data: GodkjennsistPlanData
@@ -331,7 +331,7 @@ export async function godkjennsistOppfolgingsplanSM(
   );
 }
 
-export async function deleteTiltakCommentSM(
+export async function deleteTiltakComment(
   accessToken: string,
   kommentarId: string
 ) {
@@ -342,7 +342,7 @@ export async function deleteTiltakCommentSM(
   );
 }
 
-export async function saveTiltakCommentSM(
+export async function saveTiltakComment(
   accessToken: string,
   tiltakId: string,
   kommentar: Partial<Kommentar>
@@ -354,7 +354,7 @@ export async function saveTiltakCommentSM(
   );
 }
 
-export async function deleteTiltakSM(accessToken: string, tiltakId: string) {
+export async function deleteTiltak(accessToken: string, tiltakId: string) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/slett`,
     {},

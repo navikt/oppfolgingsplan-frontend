@@ -1,4 +1,4 @@
-import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
+import { useLagreArbeidsoppgave } from "api/queries/oppfolgingsplan/oppgaveQueriesSM";
 import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
 import { TILRETTELEGGING } from "constants/konstanter";
 import {
@@ -18,7 +18,7 @@ export const EditerArbeidsoppgave = ({
   arbeidsoppgave,
   doneEditing,
 }: Props) => {
-  const lagreArbeidsoppgave = useLagreArbeidsoppgaveSM();
+  const lagreArbeidsoppgave = useLagreArbeidsoppgave();
 
   const arbeidsoppgaveInformasjon = (
     data: OppgaveFormValues

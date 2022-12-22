@@ -1,11 +1,11 @@
 import { Row } from "../../blocks/wrappers/Row";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Alert, Button } from "@navikt/ds-react";
+import { GodkjentPlan } from "schema/oppfolgingsplanSchema";
 import {
-  useDelOppfolgingsplanMedFastlegeSM,
-  useDelOppfolgingsplanMedNavSM,
-} from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { GodkjentPlan } from "../../../schema/oppfolgingsplanSchema";
+  useDelOppfolgingsplanMedFastlege,
+  useDelOppfolgingsplanMedNav,
+} from "api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -16,8 +16,8 @@ export const DelMedNavOgFastlegeButtons = ({
   oppfolgingsplanId,
   godkjentPlan,
 }: Props) => {
-  const delOppfolgingsplanMedFastlege = useDelOppfolgingsplanMedFastlegeSM();
-  const delOppfolgingsplanMedNAV = useDelOppfolgingsplanMedNavSM();
+  const delOppfolgingsplanMedFastlege = useDelOppfolgingsplanMedFastlege();
+  const delOppfolgingsplanMedNAV = useDelOppfolgingsplanMedNav();
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { BodyShort, Button, Checkbox, Heading } from "@navikt/ds-react";
 import { useState } from "react";
-import { useGodkjennsistOppfolgingsplanSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useGodkjennsistOppfolgingsplan } from "api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export const GodkjennOppfolgingsplan = ({ oppfolgingsplanId }: Props) => {
   const [delMedNav, setDelMedNav] = useState(false);
   const godkjennOppfolgingsplan =
-    useGodkjennsistOppfolgingsplanSM(oppfolgingsplanId);
+    useGodkjennsistOppfolgingsplan(oppfolgingsplanId);
 
   return (
     <SpacedDiv>

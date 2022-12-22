@@ -8,13 +8,13 @@ import {
 } from "@navikt/ds-react";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement } from "react";
-import { Oppfolgingsplan, Tiltak } from "../../../schema/oppfolgingsplanSchema";
-import { useGodkjennOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { Oppfolgingsplan, Tiltak } from "schema/oppfolgingsplanSchema";
 import styled from "styled-components";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
+import { useGodkjennOppfolgingsplan } from "api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -39,7 +39,7 @@ export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
   cancel,
 }: Props): ReactElement => {
-  const sendTilGodkjenning = useGodkjennOppfolgingsplanSM(oppfolgingsplan.id);
+  const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
 
   const formFunctions = useForm<SendTilGodkjenningFormValues>();
   const {

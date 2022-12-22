@@ -2,7 +2,7 @@ import { Button, Heading, Modal } from "@navikt/ds-react";
 import { Delete } from "@navikt/ds-icons";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSlettTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
+import { useSlettTiltak } from "api/queries/oppfolgingsplan/tiltakQueriesSM";
 import { Row } from "../blocks/wrappers/Row";
 
 const ModalContent = styled.div`
@@ -19,7 +19,7 @@ interface Props {
 
 export const SlettTiltakButton = ({ tiltakId }: Props) => {
   const [modelOpen, setModalOpen] = useState(false);
-  const slettTiltak = useSlettTiltakSM();
+  const slettTiltak = useSlettTiltak();
 
   useEffect(() => {
     if (Modal.setAppElement) {

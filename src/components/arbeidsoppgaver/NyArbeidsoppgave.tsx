@@ -1,4 +1,4 @@
-import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
+import { useLagreArbeidsoppgave } from "api/queries/oppfolgingsplan/oppgaveQueriesSM";
 import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
 import { ArbeidsoppgaveFormHeading } from "./ArbeidsoppgaveFormHeading";
 import { TILRETTELEGGING } from "constants/konstanter";
@@ -9,7 +9,7 @@ import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
 
 export const NyArbeidsoppgave = () => {
-  const lagreOppgave = useLagreArbeidsoppgaveSM();
+  const lagreOppgave = useLagreArbeidsoppgave();
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
 
   const nyArbeidsoppgaveInformasjon = (

@@ -1,4 +1,4 @@
-import { useLagreTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
+import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueriesSM";
 import { TiltakForm, TiltakFormValues } from "./TiltakForm";
 import { Tiltak } from "../../schema/oppfolgingsplanSchema";
 import { STATUS_TILTAK } from "constants/konstanter";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
-  const lagreTiltak = useLagreTiltakSM();
+  const lagreTiltak = useLagreTiltak();
 
   const tiltakInformasjon = (data: TiltakFormValues): Tiltak => {
     return {
