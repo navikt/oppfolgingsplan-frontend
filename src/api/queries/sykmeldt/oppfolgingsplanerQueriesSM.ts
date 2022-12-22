@@ -59,23 +59,6 @@ export const useGjeldendePlanSM = (
   return null;
 };
 
-export const useKopierOppfolgingsplanSM = () => {
-  const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
-
-  const postKopierOppfolgingsplanSM = async (
-    oppfolgingsplanIdToCopy: number
-  ) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanIdToCopy}/kopier`
-    );
-
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-  };
-
-  return useMutation(postKopierOppfolgingsplanSM);
-};
-
 export const useAvbrytOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();

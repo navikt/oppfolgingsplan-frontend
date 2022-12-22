@@ -415,7 +415,7 @@ export const godkjennPlanAvslattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
       },
       arbeidstaker: {
         navn: "Labben Rekemester",
-        fnr: "110110110110",
+        fnr: "110110110112",
         epost: null,
         tlf: null,
         sistInnlogget: "2020-02-24T09:34:24.266",

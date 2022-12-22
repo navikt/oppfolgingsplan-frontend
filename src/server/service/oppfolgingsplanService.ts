@@ -242,7 +242,18 @@ export async function createOppfolgingsplanSM(
   );
 }
 
-export async function kopierOppfolgingsplanSM(
+export async function createOppfolgingsplanAG(
+  accessToken: string,
+  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
+    opprettOppfolgingsplanData,
+    { accessToken }
+  );
+}
+
+export async function kopierOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanIdToCopy: string
 ) {

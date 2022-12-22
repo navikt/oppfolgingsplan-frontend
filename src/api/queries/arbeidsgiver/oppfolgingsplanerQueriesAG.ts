@@ -1,8 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { get } from "api/axios/axios";
-import { useApiBasePath } from "hooks/routeHooks";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { get, post } from "api/axios/axios";
+import { useApiBasePath, useOppfolgingsplanApiPath } from "hooks/routeHooks";
+import { OpprettOppfoelgingsdialog } from "schema/opprettOppfoelgingsdialogSchema";
 import {
   erOppfolgingsplanAktiv,
+  finnNyesteTidligereOppfolgingsplanMedVirksomhet,
   finnTidligereOppfolgingsplaner,
 } from "utils/oppfolgingplanUtils";
 import { ApiErrorException } from "api/axios/errors";
@@ -66,4 +68,48 @@ export const useTidligereOppfolgingsplanerAG = () => {
     harTidligereOppfolgingsplaner: false,
     tidligereOppfolgingsplaner: [],
   };
+};
+
+export const useOpprettOppfolgingsplanAG = () => {
+  const sykmeldt = useDineSykmeldte();
+  const oppfolgingsplaner = useOppfolgingsplanerAG();
+
+  const apiBasePath = useApiBasePath();
+  const apiOppfolgingsplanPath = useOppfolgingsplanApiPath();
+  const queryClient = useQueryClient();
+
+  const opprettOppfolgingsplan = async (kopierTidligerePlan: boolean) => {
+    if (!oppfolgingsplaner.isSuccess || !sykmeldt.isSuccess) {
+      return;
+    }
+
+    const opprettOppfoelgingsplan: OpprettOppfoelgingsdialog = {
+      sykmeldtFnr: sykmeldt.data.fnr,
+      virksomhetsnummer: sykmeldt.data.orgnummer,
+    };
+    if (kopierTidligerePlan) {
+      const oppfolgingsplan = finnNyesteTidligereOppfolgingsplanMedVirksomhet(
+        oppfolgingsplaner.data,
+        sykmeldt.data.orgnummer
+      );
+      if (oppfolgingsplan) {
+        await post(`${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`);
+      } else {
+        //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
+        await post(
+          `${apiBasePath}/oppfolgingsplaner/opprett`,
+          opprettOppfoelgingsplan
+        );
+      }
+    } else {
+      await post(
+        `${apiBasePath}/oppfolgingsplaner/opprett`,
+        opprettOppfoelgingsplan
+      );
+    }
+
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+  };
+
+  return useMutation(opprettOppfolgingsplan);
 };
