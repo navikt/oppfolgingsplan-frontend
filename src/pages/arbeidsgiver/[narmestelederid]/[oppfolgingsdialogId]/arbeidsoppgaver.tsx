@@ -1,26 +1,25 @@
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useChosenAktiveOppfolgingsplanerAG } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 
 import { NextPage } from "next";
 import React from "react";
 import {
-  OppfolgingsplanPageSM,
+  OppfolgingsplanPageAG,
   Page,
-} from "components/blocks/wrappers/OppfolgingsplanPageSM";
+} from "components/blocks/wrappers/OppfolgingsplanPageAG";
 import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeidsoppgaver";
-import { NyArbeidsoppgaveSM } from "components/arbeidsoppgaver/NyArbeidsoppgaveSM";
-import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
+import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
+import { NyArbeidsoppgaveAG } from "../../../../components/arbeidsoppgaver/NyArbeidsoppgaveAG";
 
 const Arbeidsoppgaver: NextPage = () => {
-  const aktivPlan = useAktivPlanSM();
-
+  const aktivPlan = useChosenAktiveOppfolgingsplanerAG();
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
   if (!arbeidstakerFnr) return null;
 
   return (
-    <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
+    <OppfolgingsplanPageAG page={Page.ARBEIDSOPPGAVER}>
       {aktivPlan && (
         <div>
-          <NyArbeidsoppgaveSM />
+          <NyArbeidsoppgaveAG />
           {aktivPlan.arbeidsoppgaveListe && (
             <LagredeArbeidsoppgaver
               arbeidstakerFnr={arbeidstakerFnr}
@@ -29,7 +28,7 @@ const Arbeidsoppgaver: NextPage = () => {
           )}
         </div>
       )}
-    </OppfolgingsplanPageSM>
+    </OppfolgingsplanPageAG>
   );
 };
 

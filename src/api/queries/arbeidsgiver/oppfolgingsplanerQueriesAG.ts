@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { get } from "api/axios/axios";
-import { useApiBasePath } from "hooks/routeHooks";
+import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import {
   erOppfolgingsplanAktiv,
@@ -55,4 +55,18 @@ export const useTidligereOppfolgingsplanerAG = () => {
     harTidligereOppfolgingsplaner: false,
     tidligereOppfolgingsplaner: [],
   };
+};
+
+export const useChosenAktiveOppfolgingsplanerAG = ():
+  | Oppfolgingsplan
+  | undefined => {
+  const allePlaner = useOppfolgingsplanerAG();
+  const id = useOppfolgingsplanRouteId();
+
+  if (allePlaner.isSuccess) {
+    return allePlaner.data
+      .filter((oppfolgingsplan) => erOppfolgingsplanAktiv(oppfolgingsplan))
+      .find((plan) => plan.id === id);
+  }
+  return undefined;
 };

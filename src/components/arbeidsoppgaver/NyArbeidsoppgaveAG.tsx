@@ -1,14 +1,16 @@
-import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
-import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
 import { ArbeidsoppgaveFormHeading } from "./ArbeidsoppgaveFormHeading";
-import { TILRETTELEGGING } from "constants/konstanter";
 import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
 import { Arbeidsoppgave } from "../../schema/oppfolgingsplanSchema";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
+import {
+  ArbeidsoppgaveFormAG,
+  OppgaveFormValues,
+} from "./ArbeidsoppgaveFormAG";
+import { useLagreArbeidsoppgaveSM } from "../../api/queries/sykmeldt/oppgaveQueriesSM";
 
-export const NyArbeidsoppgave = () => {
+export const NyArbeidsoppgaveAG = () => {
   const lagreOppgave = useLagreArbeidsoppgaveSM();
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
 
@@ -18,18 +20,12 @@ export const NyArbeidsoppgave = () => {
     return {
       arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
       gjennomfoering: {
-        kanGjennomfoeres: data.kanGjennomfores,
-        paaAnnetSted: data.tilrettelegging
-          ? data.tilrettelegging.includes(TILRETTELEGGING.PAA_ANNET_STED)
-          : false,
-        medMerTid: data.tilrettelegging
-          ? data.tilrettelegging.includes(TILRETTELEGGING.MED_MER_TID)
-          : false,
-        medHjelp: data.tilrettelegging
-          ? data.tilrettelegging.includes(TILRETTELEGGING.MED_HJELP)
-          : false,
-        kanBeskrivelse: data.kanBeskrivelse,
-        kanIkkeBeskrivelse: data.kanIkkeBeskrivelse,
+        kanGjennomfoeres: "KAN",
+        paaAnnetSted: false,
+        medMerTid: false,
+        medHjelp: false,
+        kanBeskrivelse: "",
+        kanIkkeBeskrivelse: "",
       },
     };
   };
@@ -52,7 +48,7 @@ export const NyArbeidsoppgave = () => {
   return (
     <SpacedPanel border={true}>
       <ArbeidsoppgaveFormHeading />
-      <ArbeidsoppgaveForm
+      <ArbeidsoppgaveFormAG
         onSubmit={(data) => {
           lagreOppgave
             .mutateAsync(nyArbeidsoppgaveInformasjon(data))
