@@ -1,7 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## SM Url: http://localhost:3000/syk/oppfolgingsplaner/sykmeldt
-## AG Url: http://localhost:3000/syk/oppfolgingsplaner/arbeidsgiver/123; http://localhost:3000/syk/oppfolgingsplaner/arbeidsgiver/123/3455/arbeidsoppgaver
+## SM Url: 
+http://localhost:3000/syk/oppfolgingsplaner/sykmeldt
+## AG Url: 
+http://localhost:3000/syk/oppfolgingsplaner/arbeidsgiver/123
 
 ## Getting Started
 
