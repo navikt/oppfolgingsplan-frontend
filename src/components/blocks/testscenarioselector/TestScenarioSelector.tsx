@@ -161,7 +161,7 @@ export const TestScenarioSelector = () => {
 
       <MockdataWrapper onClick={() => setOpen(!open)}>
         <ImageContainer width={"4rem"}>
-          <Image src={Sun} alt={""} layout={"responsive"} color={"#FF0000"} />
+          <Image src={Sun} fill={true} alt={""} color={"#FF0000"} />
         </ImageContainer>
       </MockdataWrapper>
     </>
