@@ -4,7 +4,6 @@ import Image from "next/image";
 import React, { ReactNode } from "react";
 import { OppfolgingsplanPanel } from "./OppfolgingsplanPanel";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import { ImageContainer } from "components/blocks/wrappers/ImageContainer";
 
 const PanelContent = styled.div`
   display: flex;
@@ -44,11 +43,7 @@ export const OppfolgingsplanCard = ({
 
       <OppfolgingsplanPanel href={href}>
         <PanelContent>
-          <div>
-            <ImageContainer width={"4rem"}>
-              <Image alt={""} src={image} layout={"responsive"} />
-            </ImageContainer>
-          </div>
+          <Image src={image} width={64} height={64} alt={""} />
 
           <div>
             <Heading spacing={true} size={"small"} level={"3"}>
