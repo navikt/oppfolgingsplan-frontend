@@ -12,6 +12,7 @@ const errorHandler = (error: Error, info: { componentStack: string }) => {
     `ErrorBoundary: ${error.stack}. ** Component stack **: ${info.componentStack}`
   );
 };
+
 export const OPErrorBoundary = ({ children }: Props) => {
   return (
     <ErrorBoundary
