@@ -1,4 +1,4 @@
-import { useChosenAktiveOppfolgingsplanerAG } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useChosenAktivOppfolgingsplanAG } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 
 import { NextPage } from "next";
 import React from "react";
@@ -11,7 +11,7 @@ import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { NyArbeidsoppgaveAG } from "../../../../components/arbeidsoppgaver/NyArbeidsoppgaveAG";
 
 const Arbeidsoppgaver: NextPage = () => {
-  const aktivPlan = useChosenAktiveOppfolgingsplanerAG();
+  const aktivPlan = useChosenAktivOppfolgingsplanAG();
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
   if (!arbeidstakerFnr) return null;
 

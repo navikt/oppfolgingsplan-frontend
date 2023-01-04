@@ -2,7 +2,6 @@ import { Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
 import {
   Oppfolgingsplan,
-  Stilling,
 } from "../../../schema/oppfolgingsplanSchema";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
@@ -13,7 +12,7 @@ import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBo
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { statusPageToDisplay } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
-import { useChosenAktiveOppfolgingsplanerAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useChosenAktivOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { Content } from "@radix-ui/react-tabs";
 import ArbeidsgiverSide from "./ArbeidsgiverSide";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
@@ -57,7 +56,7 @@ interface Props {
 }
 
 export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
-  const aktivPlan = useChosenAktiveOppfolgingsplanerAG();
+  const aktivPlan = useChosenAktivOppfolgingsplanAG();
   const sykmeldt = useDineSykmeldte()?.data;
 
   const erOppfolgingsdialogTilgjengelig =

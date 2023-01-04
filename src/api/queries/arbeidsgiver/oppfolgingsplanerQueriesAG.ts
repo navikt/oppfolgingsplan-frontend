@@ -57,7 +57,7 @@ export const useTidligereOppfolgingsplanerAG = () => {
   };
 };
 
-export const useChosenAktiveOppfolgingsplanerAG = ():
+export const useChosenAktivOppfolgingsplanAG = ():
   | Oppfolgingsplan
   | undefined => {
   const allePlaner = useOppfolgingsplanerAG();
