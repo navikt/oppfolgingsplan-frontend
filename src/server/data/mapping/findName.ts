@@ -1,9 +1,9 @@
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
-import { Person } from "../../../schema/oppfolgingsplanSchema";
+import { PersonV3DTO } from "../../../schema/personSchemas";
 
 export const findName = (
   narmesteLedere: NarmesteLeder[],
-  sykmeldt: Person,
+  sykmeldt: PersonV3DTO,
   fnrToFind?: string | null
 ): string => {
   if (sykmeldt.fnr === fnrToFind) {

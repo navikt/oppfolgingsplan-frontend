@@ -1,5 +1,5 @@
-import { Godkjenning, Oppfolgingsplan } from "../schema/oppfolgingsplanSchema";
 import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
+import { Godkjenning, Oppfolgingsplan } from "../types/oppfolgingsplan";
 
 export const harMottattGodkjenninger = (
   oppfolgingsplan: Oppfolgingsplan

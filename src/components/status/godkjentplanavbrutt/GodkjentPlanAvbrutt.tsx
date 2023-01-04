@@ -1,4 +1,3 @@
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { Row } from "../../blocks/wrappers/Row";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { AapnePlanSomPDF } from "../AapnePlanSomPDF";
@@ -10,6 +9,7 @@ import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { GodkjentPlanAvbruttTidspunkt } from "./GodkjentPlanAvbruttTidspunkt";
 import { TilGjeldendePlanKnapp } from "./TilGjeldendePlanKnapp";
 import { DelMedNavOgFastlegeButtons } from "../godkjentplan/DelMedNavOgFastlegeButtons";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

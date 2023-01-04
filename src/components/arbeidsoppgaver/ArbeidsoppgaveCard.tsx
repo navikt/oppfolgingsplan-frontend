@@ -16,17 +16,17 @@ import {
   WarningColored,
 } from "@navikt/ds-icons";
 import { useState } from "react";
-import { Arbeidsoppgave } from "../../schema/oppfolgingsplanSchema";
 import { Card } from "components/blocks/card/Card";
 import { CardHeader } from "components/blocks/card/CardHeader";
 import { texts } from "components/seplanen/texts";
 import { AddColored } from "components/blocks/icons/AddColored";
 import { Button } from "@navikt/ds-react";
+import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 
 interface Props {
   arbeidstakerFnr: string;
   arbeidsoppgave: Arbeidsoppgave;
-  readonly?: Boolean;
+  readonly?: boolean;
 }
 
 export const ArbeidsoppgaveCard = ({

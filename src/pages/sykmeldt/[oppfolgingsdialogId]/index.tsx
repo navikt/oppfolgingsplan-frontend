@@ -4,7 +4,6 @@ import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM"
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
 import {
   getStatusPageTitleAndHeading,
@@ -15,6 +14,7 @@ import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantil
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;

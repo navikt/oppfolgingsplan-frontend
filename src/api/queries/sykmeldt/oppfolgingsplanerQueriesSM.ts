@@ -5,13 +5,13 @@ import {
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
 import { ApiErrorException } from "../../axios/errors";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
 
@@ -32,7 +32,7 @@ export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
   const allePlaner = useOppfolgingsplanerSM();
 
   if (allePlaner.isSuccess) {
-    return allePlaner.data!!.find((plan) => plan.id === id);
+    return allePlaner.data.find((plan) => plan.id === id);
   }
 
   return undefined;

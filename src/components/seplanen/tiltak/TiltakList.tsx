@@ -3,8 +3,8 @@ import { texts } from "../texts";
 import { STATUS_TILTAK } from "constants/konstanter";
 import { Heading } from "@navikt/ds-react";
 import React from "react";
-import { Oppfolgingsplan, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { LagretTiltak } from "components/tiltak/LagretTiltak";
+import { Oppfolgingsplan, Tiltak } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

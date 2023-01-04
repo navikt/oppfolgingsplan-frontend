@@ -5,8 +5,8 @@ import { Button } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];

@@ -1,12 +1,6 @@
-import { Person } from "../../../../../schema/oppfolgingsplanSchema";
+import { PersonV3DTO } from "../../../../../schema/personSchemas";
 
-export const defaultPersonMockData: Person = {
+export const defaultPersonMockData: PersonV3DTO = {
   navn: "Severus Snape",
   fnr: "110110110110",
-  epost: null,
-  tlf: null,
-  sistInnlogget: null,
-  samtykke: null,
-  evaluering: null,
-  stillinger: [],
 };

@@ -1,10 +1,10 @@
 import { getKontaktinfoSM } from "server/service/oppfolgingsplanService";
 import { ApiErrorException, generalError } from "api/axios/errors";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const fetchKontaktinfo = async (
   oppfolgingsplanTokenX: string,
-  oppfolgingsplaner: Oppfolgingsplan[]
+  oppfolgingsplaner: OppfolgingsplanDTO[]
 ) => {
   const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 

@@ -5,7 +5,7 @@ import {
   useDelOppfolgingsplanMedFastlegeSM,
   useDelOppfolgingsplanMedNavSM,
 } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { GodkjentPlan } from "../../../schema/oppfolgingsplanSchema";
+import { GodkjentPlan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplanId: number;

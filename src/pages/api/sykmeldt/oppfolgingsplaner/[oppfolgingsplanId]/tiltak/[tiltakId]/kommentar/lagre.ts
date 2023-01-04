@@ -4,7 +4,7 @@ import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../..
 import { getTiltakIdFromRequest } from "../../../../../../../../server/utils/requestUtils";
 import { saveTiltakCommentSM } from "../../../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../../../server/auth/beskyttetApi";
-import { Kommentar } from "../../../../../../../../schema/oppfolgingsplanSchema";
+import { Kommentar } from "../../../../../../../../types/oppfolgingsplan";
 
 const handler = async (
   req: NextApiRequest,

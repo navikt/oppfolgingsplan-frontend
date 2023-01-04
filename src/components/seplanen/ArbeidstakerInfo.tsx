@@ -1,12 +1,12 @@
-import { Person, Stilling } from "../../schema/oppfolgingsplanSchema";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "./ContentWrapper";
 import { texts } from "./texts";
 import { TextWithLabel } from "./TextWithLabel";
+import { Arbeidstaker, Stilling } from "../../types/oppfolgingsplan";
 
 interface Props {
-  arbeidstaker?: Person;
+  arbeidstaker?: Arbeidstaker;
 }
 
 export const ArbeidstakerInfo = ({ arbeidstaker }: Props) => {

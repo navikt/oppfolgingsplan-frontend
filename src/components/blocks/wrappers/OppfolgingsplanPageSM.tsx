@@ -1,9 +1,5 @@
 import { BodyLong, Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
-import {
-  Oppfolgingsplan,
-  Stilling,
-} from "../../../schema/oppfolgingsplanSchema";
 import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmelding,
@@ -16,6 +12,7 @@ import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM"
 import { statusPageToDisplay } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
 import SykmeldtSide from "./SykmeldtSide";
+import { Oppfolgingsplan, Stilling } from "../../../types/oppfolgingsplan";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;

@@ -1,7 +1,7 @@
-import { GodkjentPlan } from "../../../schema/oppfolgingsplanSchema";
 import { toDateMedMaanedNavn } from "../../../utils/dateUtils";
 import CalendarImage from "../../blocks/images/calendar.svg";
 import { BildeTekstLinje } from "../BildeTekstLinje";
+import { GodkjentPlan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   godkjentPlan: GodkjentPlan;
