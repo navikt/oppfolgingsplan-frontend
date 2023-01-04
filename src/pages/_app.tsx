@@ -1,7 +1,7 @@
 import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { useAudience } from "hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
@@ -31,23 +31,6 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
   }
-`;
-
-const ContentWrapperStyled = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const InnerContentWrapperStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 50rem;
-  flex-grow: 1;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
 `;
 
 const TestScenarioDevTools = () => {
@@ -85,17 +68,9 @@ function MyApp({
           ) : (
             <BreadcrumbsAppenderAG />
           )}
-          {isAudienceSykmeldt ? (
-            <ContentWrapperStyled tabIndex={-1} id="maincontent">
-              <InnerContentWrapperStyled>
-                <Component {...pageProps} />
-              </InnerContentWrapperStyled>
-            </ContentWrapperStyled>
-          ) : (
-            <main tabIndex={-1} id="maincontent">
-              <Component {...pageProps} />
-            </main>
-          )}
+          <main tabIndex={-1} id="maincontent">
+            <Component {...pageProps} />
+          </main>
         </>
       </Hydrate>
       <TestScenarioDevTools />

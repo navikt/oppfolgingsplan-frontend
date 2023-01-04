@@ -8,6 +8,24 @@ import Feilmelding from "../error/Feilmelding";
 import AppSpinner from "../spinner/AppSpinner";
 import { AdresseSperreInfoBoks } from "../infoboks/AdresseSperreInfoBoks";
 import { PageHeading } from "../heading/PageHeading";
+import styled from "styled-components";
+
+const ContentWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InnerContentWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 50rem;
+  flex-grow: 1;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+`;
 
 interface SideProps {
   title: string;
@@ -60,7 +78,13 @@ const SykmeldtSide = ({
     }
   };
 
-  return <PageContent />;
+  return (
+    <ContentWrapperStyled>
+      <InnerContentWrapperStyled>
+        <PageContent />
+      </InnerContentWrapperStyled>
+    </ContentWrapperStyled>
+  );
 };
 
 export default SykmeldtSide;
