@@ -1,5 +1,8 @@
 import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
-import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
+import {
+  ArbeidsoppgaveFormSM,
+  OppgaveFormValues,
+} from "./ArbeidsoppgaveFormSM";
 import { TILRETTELEGGING } from "constants/konstanter";
 import {
   Arbeidsoppgave,
@@ -59,7 +62,7 @@ export const EditerArbeidsoppgave = ({
   };
 
   return show ? (
-    <ArbeidsoppgaveForm
+    <ArbeidsoppgaveFormSM
       defaultFormValues={{
         navnPaaArbeidsoppgaven: arbeidsoppgave.arbeidsoppgavenavn,
         kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres!!,
