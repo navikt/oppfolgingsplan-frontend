@@ -1,1 +1,22 @@
 @import "~@navikt/ds-css/dist/index.css";
+
+html {
+    /* Will be set programatically by dekoratøren */
+    --decorator-sticky-offset: 0px;
+}
+
+:root {
+    --navds-content-container-max-width: 50rem;
+}
+
+@media print {
+    html {
+        font-size: 16px;
+    }
+
+    #decorator-header,
+    #decorator-footer,
+    ._hj_feedback_container {
+        display: none;
+    }
+}
