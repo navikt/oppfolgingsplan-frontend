@@ -1,9 +1,9 @@
-import { Sykmeldt } from "../../../../../schema/sykmeldtSchema";
+import { Sykmeldt } from "schema/sykmeldtSchema";
 
 export const defaultSykmeldtMockData: Sykmeldt = {
   narmestelederId: "123",
   orgnummer: "000111222",
-  fnr: "01010112345",
+  fnr: "110110110110",
   navn: "Kreativ Hatt",
   aktivSykmelding: true,
 };

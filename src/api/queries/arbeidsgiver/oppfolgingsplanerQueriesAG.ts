@@ -1,24 +1,35 @@
 import { useQuery } from "@tanstack/react-query";
 import { get } from "api/axios/axios";
 import { useApiBasePath } from "hooks/routeHooks";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "schema/oppfolgingsplanSchema";
 import {
   erOppfolgingsplanAktiv,
   finnTidligereOppfolgingsplaner,
-} from "../../../utils/oppfolgingplanUtils";
-import { ApiErrorException } from "../../axios/errors";
+} from "utils/oppfolgingplanUtils";
+import { ApiErrorException } from "api/axios/errors";
+import { useDineSykmeldte } from "api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 
 export const OPPFOLGINGSPLANER_AG = "oppfolgingsplaner-arbeidsgiver";
 
 export const useOppfolgingsplanerAG = () => {
   const apiBasePath = useApiBasePath();
+  const sykmeldt = useDineSykmeldte();
+
+  const sykmeldtFnr = sykmeldt.data?.fnr;
 
   const fetchOppfolgingsplaner = () =>
-    get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`);
+    get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner/`).then(
+      (oppfolgingsplaner) => {
+        return oppfolgingsplaner.filter(
+          (plan) => plan.arbeidstaker.fnr === sykmeldtFnr
+        );
+      }
+    );
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [OPPFOLGINGSPLANER_AG],
-    fetchOppfolgingsplaner
+    fetchOppfolgingsplaner,
+    { enabled: !!sykmeldtFnr }
   );
 };
 
