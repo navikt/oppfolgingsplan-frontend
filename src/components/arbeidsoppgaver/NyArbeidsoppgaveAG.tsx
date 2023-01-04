@@ -8,10 +8,10 @@ import {
   ArbeidsoppgaveFormAG,
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormAG";
-import { useLagreArbeidsoppgaveSM } from "../../api/queries/sykmeldt/oppgaveQueriesSM";
+import {useLagreArbeidsoppgaveAG} from "../../api/queries/arbeidsgiver/oppgaveQueriesAG";
 
 export const NyArbeidsoppgaveAG = () => {
-  const lagreOppgave = useLagreArbeidsoppgaveSM();
+  const lagreOppgave = useLagreArbeidsoppgaveAG();
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
 
   const nyArbeidsoppgaveInformasjon = (
