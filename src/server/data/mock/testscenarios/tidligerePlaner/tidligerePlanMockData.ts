@@ -1,10 +1,10 @@
 import { leggTilDagerPaDato } from "utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { Oppfolgingsplan } from "types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "schema/oppfolgingsplanSchema";
 
 const today = new Date();
 
-export const tidligerePlanerMockData: Oppfolgingsplan[] = [
+export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
   {
     id: 7777,
     sistEndretDato: "2020-02-20T11:31:29.837",
@@ -412,7 +412,7 @@ export const tidligerePlanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Albus Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
@@ -439,6 +439,7 @@ export const tidligerePlanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2200-02-11T15:34:53.787",
         },
       ],
     },
