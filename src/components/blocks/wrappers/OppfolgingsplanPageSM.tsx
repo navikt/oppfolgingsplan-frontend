@@ -9,7 +9,7 @@ import { NavigationButtons } from "../buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBoks";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { statusPageToDisplay } from "../../../utils/statusPageUtils";
+import { statusPageToDisplaySM } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
 import SykmeldtSide from "./SykmeldtSide";
 import { Oppfolgingsplan, Stilling } from "../../../types/oppfolgingsplan";
@@ -86,7 +86,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     return <>{children}</>;
   };
 
-  const planStatus = statusPageToDisplay(aktivPlan);
+  const planStatus = statusPageToDisplaySM(aktivPlan);
 
   const planIsNotEditable =
     planStatus == "GODKJENNPLANMOTTATT" ||
