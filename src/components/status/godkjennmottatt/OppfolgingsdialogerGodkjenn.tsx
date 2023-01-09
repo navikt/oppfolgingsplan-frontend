@@ -1,4 +1,3 @@
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
@@ -8,6 +7,7 @@ import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { BodyLong } from "@navikt/ds-react";
 import { Row } from "../../blocks/wrappers/Row";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

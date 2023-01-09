@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { get } from "api/axios/axios";
 import { useApiBasePath } from "hooks/routeHooks";
-import { Oppfolgingsplan } from "schema/oppfolgingsplanSchema";
 import {
   erOppfolgingsplanAktiv,
   finnTidligereOppfolgingsplaner,
 } from "utils/oppfolgingplanUtils";
 import { ApiErrorException } from "api/axios/errors";
 import { useDineSykmeldte } from "api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 export const OPPFOLGINGSPLANER_AG = "oppfolgingsplaner-arbeidsgiver";
 

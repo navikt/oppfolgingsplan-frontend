@@ -5,8 +5,8 @@ import React from "react";
 import styled from "styled-components";
 import { useLandingUrl } from "../../../hooks/routeHooks";
 import { StatusPageToDisplay } from "../../../utils/statusPageUtils";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import SykmeldtSide from "../wrappers/SykmeldtSide";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const SpacedGuidePanel = styled(GuidePanel)`
   padding-bottom: 2rem;

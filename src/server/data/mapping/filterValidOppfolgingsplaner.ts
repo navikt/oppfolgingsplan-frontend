@@ -1,9 +1,9 @@
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import {
   DineSykmeldteSykmelding,
   Sykmeldt,
 } from "../../../schema/sykmeldtSchema";
 import { compareDesc, differenceInDays } from "date-fns";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING = 4;
 
@@ -84,9 +84,9 @@ const getLastSykefravar = (dineSykmeldteMedSykmeldinger: Sykmeldt[]) => {
 };
 
 export const filterValidOppfolgingsplaner = (
-  oppfolgingsplaner: Oppfolgingsplan[],
+  oppfolgingsplaner: OppfolgingsplanDTO[],
   dineSykmeldteMedSykmeldinger: Sykmeldt[]
-): Oppfolgingsplan[] => {
+): OppfolgingsplanDTO[] => {
   if (oppfolgingsplaner.length === 0) return [];
 
   const virksomhetsnummer =

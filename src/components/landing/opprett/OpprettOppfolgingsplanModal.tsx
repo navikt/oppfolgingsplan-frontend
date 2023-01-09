@@ -3,7 +3,6 @@ import ArbeidsgiverSkjemaForm from "./ArbeidsgiverSkjema";
 import BaserTidligereSkjema from "./BaserTidligereSkjema";
 import { Modal } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import styled from "styled-components";
 import {
   useKopierOppfolgingsplanSM,
@@ -12,6 +11,7 @@ import {
 import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "utils/oppfolgingplanUtils";
 import Feilmelding from "components/blocks/error/Feilmelding";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
   errorNoLeader: {

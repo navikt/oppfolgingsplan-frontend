@@ -17,7 +17,7 @@ const HeadingWithExtraSpacing = styled(Heading)`
 `;
 
 interface Props {
-  show: Boolean;
+  show: boolean;
   arbeidsoppgaveId: number;
 }
 

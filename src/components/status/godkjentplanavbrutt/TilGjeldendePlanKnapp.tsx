@@ -3,8 +3,8 @@ import { Button } from "@navikt/ds-react";
 import { useLandingUrl } from "hooks/routeHooks";
 import NextLink from "next/link";
 import { useGjeldendePlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

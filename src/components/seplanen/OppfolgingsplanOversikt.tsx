@@ -1,10 +1,10 @@
-import { Oppfolgingsplan } from "../../schema/oppfolgingsplanSchema";
 import { ArbeidstakerInfo } from "./ArbeidstakerInfo";
 import { ArbeidsgiverInfo } from "./ArbeidsgiverInfo";
 import { ArbeidsoppgaveList } from "./arbeidsoppgaver/ArbeidsoppgaveList";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { texts } from "./texts";
 import { TiltakList } from "./tiltak/TiltakList";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;

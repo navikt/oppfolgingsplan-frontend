@@ -6,9 +6,9 @@ import {
 } from "utils/oppfolgingplanUtils";
 import { hentPlanStatus } from "utils/teaserUtils";
 import { useOppfolgingsplanUrl } from "hooks/routeHooks";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { statusPageToDisplay } from "utils/statusPageUtils";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
   tilGodkjenning: "Til godkjenning",

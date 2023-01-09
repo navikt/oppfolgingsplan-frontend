@@ -1,8 +1,8 @@
 import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { post } from "api/axios/axios";
 import { OPPFOLGINGSPLANER_SM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { Arbeidsoppgave } from "../../../schema/oppfolgingsplanSchema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 export const useLagreArbeidsoppgaveSM = () => {
   const apiBasePath = useApiBasePath();

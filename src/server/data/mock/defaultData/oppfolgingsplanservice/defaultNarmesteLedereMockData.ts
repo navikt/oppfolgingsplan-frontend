@@ -1,6 +1,6 @@
-import { NarmesteLeder } from "../../../../../schema/narmestelederSchema";
+import { NarmesteV3LederDTO } from "../../../../../schema/narmestelederSchema";
 
-export const defaultNarmesteLedereMockData: NarmesteLeder[] = [
+export const defaultNarmesteLedereMockData: NarmesteV3LederDTO[] = [
   {
     navn: "Jeg er ikke aktiv",
     fnr: "12011011012",

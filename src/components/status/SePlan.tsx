@@ -2,8 +2,8 @@ import { FileContent } from "@navikt/ds-icons";
 import { Button, Modal } from "@navikt/ds-react";
 import { useState } from "react";
 import styled from "styled-components";
-import { Oppfolgingsplan } from "../../schema/oppfolgingsplanSchema";
 import { OppfolgingsplanOversikt } from "../seplanen/OppfolgingsplanOversikt";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

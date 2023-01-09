@@ -7,9 +7,9 @@ import {
   finnArbeidsgivereForGyldigeSykmeldinger,
 } from "./sykmeldingUtils";
 import { erGyldigDatoIFortiden, getTime } from "./dateUtils";
-import { Oppfolgingsplan } from "../schema/oppfolgingsplanSchema";
 import { Sykmelding } from "../schema/sykmeldingSchema";
 import { NarmesteLeder } from "../schema/narmestelederSchema";
+import { Oppfolgingsplan } from "../types/oppfolgingsplan";
 
 export const inneholderGodkjenninger = (oppfolgingsplan: Oppfolgingsplan) => {
   return (

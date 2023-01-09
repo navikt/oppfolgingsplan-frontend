@@ -1,11 +1,11 @@
 import { leggTilDagerPaDato } from "utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
 const enableTilGodkjenningMock = true;
 const today = new Date();
 
-export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
+export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
   {
     id: 3455,
     sistEndretDato: "2020-02-20T11:31:29.837",
@@ -401,7 +401,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Labben Rekemester",
         fnr: "20405060718",
         epost: null,
@@ -428,6 +428,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -829,7 +830,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Albus Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
@@ -856,6 +857,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -1277,7 +1279,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Albus Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
@@ -1304,6 +1306,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -1456,7 +1459,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
     ],
     avbruttPlanListe: [],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Labben Rekemester",
         fnr: "20405060718",
         epost: null,
@@ -1491,6 +1494,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -1863,7 +1867,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: defaultNarmesteLedereMockData[0].navn,
         fnr: "20405060718",
         epost: null,
@@ -1898,6 +1902,7 @@ export const defaultOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },

@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { LagretTiltak } from "./LagretTiltak";
-import { Oppfolgingsplan } from "../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

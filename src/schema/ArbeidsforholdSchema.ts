@@ -5,4 +5,4 @@ export const arbeidsforholdSchema = object({
   prosent: number(),
 });
 
-export type Arbeidsforhold = z.infer<typeof arbeidsforholdSchema>;
+export type ArbeidsforholdDTO = z.infer<typeof arbeidsforholdSchema>;
