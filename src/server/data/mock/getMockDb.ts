@@ -13,6 +13,7 @@ import { PersonV3DTO } from "../../../schema/personSchemas";
 
 export type TestScenario =
   | "INGENPLAN"
+  | "TIDLIGEREPLANER"
   | "UNDERARBEID"
   | "GODKJENNPLANAVSLATT"
   | "GODKJENNPLANSENDT"

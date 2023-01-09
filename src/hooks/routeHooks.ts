@@ -47,6 +47,11 @@ export const useApiBasePath = (): string => {
   }
 };
 
+export const useOppfolgingsplanApiPath = (): string => {
+  const router = useRouter();
+  return `${router.basePath}/api/oppfolgingsplan`;
+};
+
 interface OppfolgingsdialogIdParam extends ParsedUrlQuery {
   oppfolgingsdialogId: string;
 }
