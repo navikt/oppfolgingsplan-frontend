@@ -7,5 +7,5 @@ export const fetchNarmesteLedereSM = async (
 ) => {
   const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 
-  return await getNarmesteLedere(oppfolgingsplanTokenX, sykmeldtFnr!!);
+  return await getNarmesteLedere(oppfolgingsplanTokenX, sykmeldtFnr!);
 };
