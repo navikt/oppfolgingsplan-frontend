@@ -38,13 +38,13 @@ const erOppfolgingsplanGyldigForOppfolgingMedGrensedato = (
 };
 
 const getLastSykefravar = (dineSykmeldteMedSykmeldinger: Sykmeldt[]) => {
-  let sykefravarList: FravaerPeriode[] = [];
+  const sykefravarList: FravaerPeriode[] = [];
 
   dineSykmeldteMedSykmeldinger.filter((dineSykmeldte) => {
     dineSykmeldte.sykmeldinger?.filter((sykmelding) => {
       const perioderDatesSorted = mapToPerioderDatesListSorted(sykmelding);
 
-      let currentFravar = {
+      const currentFravar = {
         fom: perioderDatesSorted[0].fom,
         tom: perioderDatesSorted[0].tom,
       };
@@ -89,8 +89,7 @@ export const filterValidOppfolgingsplaner = (
 ): OppfolgingsplanDTO[] => {
   if (oppfolgingsplaner.length === 0) return [];
 
-  const virksomhetsnummer =
-    oppfolgingsplaner[0].virksomhet?.virksomhetsnummer!!;
+  const virksomhetsnummer = oppfolgingsplaner[0].virksomhet?.virksomhetsnummer;
 
   const dineSykmeldteMedSykmeldingerPaVirksomhet =
     dineSykmeldteMedSykmeldinger.filter((sykmeldt) => {
@@ -105,7 +104,7 @@ export const filterValidOppfolgingsplaner = (
     if (oppfolgingsplan.godkjentPlan) {
       return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(
         lastSykefravar.fom,
-        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt!!.tom!!
+        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt!.tom!
       );
     }
     return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(

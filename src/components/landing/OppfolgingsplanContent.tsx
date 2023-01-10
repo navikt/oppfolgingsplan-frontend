@@ -47,7 +47,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
     erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
-      narmesteledere.data!!
+      narmesteledere.data!
     )
   ) {
     return <IngenLedereInfoBoks />;
@@ -56,7 +56,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
       <OppfolgingsdialogerVisning
         oppfolgingsplaner={oppfolgingsplaner}
         sykmeldinger={sykmeldinger}
-        narmesteLedere={narmesteledere.data!!}
+        narmesteLedere={narmesteledere.data!}
       />
     );
   }

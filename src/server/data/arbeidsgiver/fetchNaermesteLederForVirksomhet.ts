@@ -7,7 +7,7 @@ export const fetchNaermesteLederForVirksomhet = async (
 ) => {
   return await getNarmesteLeder(
     oppfolgingsplanTokenX,
-    oppfolgingsplaner[0].arbeidstaker.fnr!!,
+    oppfolgingsplaner[0].arbeidstaker.fnr,
     oppfolgingsplaner[0].virksomhet.virksomhetsnummer
   );
 };

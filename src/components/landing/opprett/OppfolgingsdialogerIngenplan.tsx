@@ -38,7 +38,7 @@ const OppfolgingsdialogerIngenplan = ({
             erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner)
           ) {
             opprettOppfolgingsplan.mutate({
-              sykmeldtFnr: sykmeldtFnr!!,
+              sykmeldtFnr: sykmeldtFnr!,
               virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer,
             });
           } else {

@@ -154,7 +154,7 @@ export const TestScenarioSelector = () => {
                 variant={"primary"}
                 disabled={!setActiveTestScenario}
                 onClick={() => {
-                  setActiveTestScenario.mutate(selectedScenario!!);
+                  setActiveTestScenario.mutate(selectedScenario!);
                   setOpen(false);
                 }}
               >

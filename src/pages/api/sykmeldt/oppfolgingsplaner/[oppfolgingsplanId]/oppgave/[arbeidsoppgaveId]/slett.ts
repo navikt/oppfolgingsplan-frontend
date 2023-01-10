@@ -35,7 +35,7 @@ const handler = async (
       );
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
-    const filteredArbeidsoppgaveListe = aktivPlan.arbeidsoppgaveListe!!.filter(
+    const filteredArbeidsoppgaveListe = aktivPlan.arbeidsoppgaveListe!.filter(
       (arbeidsoppgave) =>
         arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
     );
