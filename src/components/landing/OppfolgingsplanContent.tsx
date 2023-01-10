@@ -1,27 +1,31 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere,
   finnTidligereOppfolgingsplaner,
   harTidligereOppfolgingsplaner,
 } from "utils/oppfolgingplanUtils";
-import { Sykmelding } from "../../schema/sykmeldingSchema";
+import { Sykmelding } from "schema/sykmeldingSchema";
 import {
   sykmeldtHarGyldigSykmelding,
   sykmeldtHarIngenSendteSykmeldinger,
 } from "utils/sykmeldingUtils";
-import OppfolgingsdialogerVisning from "./teaser/OppfolgingsdialogerVisning";
 import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
 import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
 import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { IngenLedereInfoBoks } from "components/blocks/infoboks/IngenLedereInfoBoks";
-import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
+import { Oppfolgingsplan } from "types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
   sykmeldinger: Sykmelding[];
+  children: ReactNode;
 }
 
-const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
+const OppfolgingsplanContent = ({
+  oppfolgingsplaner,
+  sykmeldinger,
+  children,
+}: Props) => {
   const narmesteledere = useNarmesteLedereSM();
 
   if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
@@ -52,13 +56,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
   ) {
     return <IngenLedereInfoBoks />;
   } else {
-    return (
-      <OppfolgingsdialogerVisning
-        oppfolgingsplaner={oppfolgingsplaner}
-        sykmeldinger={sykmeldinger}
-        narmesteLedere={narmesteledere.data!!}
-      />
-    );
+    return <>{children}</>;
   }
 };
 

@@ -1,17 +1,25 @@
 import { get, post } from "api/axios/axios";
 import {
   useApiBasePath,
+  useOppfolgingsplanApiPath,
   useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
-import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
-import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
-import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
+import { GodkjennsistPlanData } from "schema/godkjennsistPlanSchema";
+import { OpprettOppfoelgingsdialog } from "schema/opprettOppfoelgingsdialogSchema";
+import { GodkjennPlanData } from "schema/godkjennPlanSchema";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
-import { ApiErrorException } from "../../axios/errors";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import {
+  erOppfolgingsplanAktiv,
+  finnNyesteTidligereOppfolgingsplanMedVirksomhet,
+  finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
+  finnTidligereOppfolgingsplaner,
+} from "utils/oppfolgingplanUtils";
+import { ApiErrorException } from "api/axios/errors";
+import { useOppfolgingsplanerAG } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { Oppfolgingsplan } from "types/oppfolgingsplan";
 
 export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
 
@@ -25,6 +33,41 @@ export const useOppfolgingsplanerSM = () => {
     [OPPFOLGINGSPLANER_SM],
     fetchOppfolgingsplaner
   );
+};
+
+export const useAktiveOppfolgingsplanerSM = () => {
+  const allePlaner = useOppfolgingsplanerSM();
+
+  if (allePlaner.isSuccess) {
+    const planer = allePlaner.data.filter((oppfolgingsplan) =>
+      erOppfolgingsplanAktiv(oppfolgingsplan)
+    );
+
+    return {
+      harAktiveOppfolgingsplaner: planer.length > 0,
+      aktiveOppfolgingsplaner: planer,
+    };
+  }
+  return {
+    harAktiveOppfolgingsplaner: false,
+    aktiveOppfolgingsplaner: [],
+  };
+};
+
+export const useTidligereOppfolgingsplanerSM = () => {
+  const allePlaner = useOppfolgingsplanerSM();
+
+  if (allePlaner.isSuccess) {
+    const planer = finnTidligereOppfolgingsplaner(allePlaner.data);
+    return {
+      harTidligereOppfolgingsplaner: planer.length > 0,
+      tidligereOppfolgingsplaner: planer,
+    };
+  }
+  return {
+    harTidligereOppfolgingsplaner: false,
+    tidligereOppfolgingsplaner: [],
+  };
 };
 
 export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
@@ -166,11 +209,46 @@ export const useGodkjennsistOppfolgingsplanSM = (oppfolgingsplanId: number) => {
 };
 
 export const useOpprettOppfolgingsplanSM = () => {
+  const sykmeldtFnr = useSykmeldtFnr();
+  const oppfolgingsplaner = useOppfolgingsplanerAG();
+
   const apiBasePath = useApiBasePath();
+  const apiOppfolgingsplanPath = useOppfolgingsplanApiPath();
   const queryClient = useQueryClient();
 
-  const opprettOppfolgingsplan = async (data: OpprettOppfoelgingsdialog) => {
-    await post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
+  const opprettOppfolgingsplan = async (data: {
+    kopierTidligerePlan: boolean;
+    virksomhetsnummer: string;
+  }) => {
+    if (!oppfolgingsplaner.isSuccess || !sykmeldtFnr) {
+      return;
+    }
+
+    const opprettOppfoelgingsdialog: OpprettOppfoelgingsdialog = {
+      sykmeldtFnr: sykmeldtFnr,
+      virksomhetsnummer: data.virksomhetsnummer,
+    };
+    if (data.kopierTidligerePlan) {
+      const oppfolgingsplan = finnNyesteTidligereOppfolgingsplanMedVirksomhet(
+        oppfolgingsplaner.data,
+        data.virksomhetsnummer
+      );
+      if (oppfolgingsplan) {
+        await post(`${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`);
+      } else {
+        //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
+        await post(
+          `${apiBasePath}/oppfolgingsplaner/opprett`,
+          opprettOppfoelgingsdialog
+        );
+      }
+    } else {
+      await post(
+        `${apiBasePath}/oppfolgingsplaner/opprett`,
+        opprettOppfoelgingsdialog
+      );
+    }
+
     await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
   };
 
