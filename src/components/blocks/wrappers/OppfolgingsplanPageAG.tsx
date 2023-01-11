@@ -1,8 +1,7 @@
 import { Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
-import {
-  Oppfolgingsplan,
-} from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
   erOppfolgingsplanTidligere,
@@ -10,7 +9,7 @@ import {
 import { NavigationButtons } from "../buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBoks";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
-import { statusPageToDisplay } from "../../../utils/statusPageUtils";
+import { statusPageToDisplayAG } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
 import { useChosenAktivOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { Content } from "@radix-ui/react-tabs";
@@ -77,7 +76,7 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
     return <>{children}</>;
   };
 
-  const planStatus = statusPageToDisplay(aktivPlan);
+  const planStatus = statusPageToDisplayAG(aktivPlan);
 
   const planIsNotEditable =
     planStatus == "GODKJENNPLANMOTTATT" ||
