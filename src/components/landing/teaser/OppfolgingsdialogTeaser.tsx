@@ -5,10 +5,13 @@ import {
   inneholderGodkjenningerAvArbeidstaker,
 } from "utils/oppfolgingplanUtils";
 import { hentPlanStatus } from "utils/teaserUtils";
-import { useOppfolgingsplanUrl } from "hooks/routeHooks";
-import { statusPageToDisplay } from "utils/statusPageUtils";
-import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+import { useAudience, useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import {
+  statusPageToDisplayAG,
+  statusPageToDisplaySM,
+} from "utils/statusPageUtils";
+import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
 
 const texts = {
   tilGodkjenning: "Til godkjenning",
@@ -30,6 +33,7 @@ const OppfolgingsdialogTeaser = ({
   oppfolgingsplan,
 }: OppfolgingsdialogTeaserProps) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
+  const { isAudienceSykmeldt } = useAudience();
 
   const virksomhetsnavn =
     oppfolgingsplan.virksomhet?.navn || "Mangler navn på virksomhet";
@@ -40,8 +44,9 @@ const OppfolgingsdialogTeaser = ({
   );
   const statusUrl = useOppfolgingsplanUrl(oppfolgingsplan.id, "status");
 
-  const linkToEditPage =
-    statusPageToDisplay(oppfolgingsplan) == "INGENPLANTILGODKJENNING";
+  const godkjenningsStatus = isAudienceSykmeldt
+    ? statusPageToDisplaySM(oppfolgingsplan)
+    : statusPageToDisplayAG(oppfolgingsplan);
 
   const pendingApproval =
     inneholderGodkjenninger(oppfolgingsplan) &&
@@ -50,7 +55,11 @@ const OppfolgingsdialogTeaser = ({
 
   return (
     <OppfolgingsplanCard
-      href={linkToEditPage ? newOppfolgingsplanUrl : statusUrl}
+      href={
+        godkjenningsStatus === "INGENPLANTILGODKJENNING"
+          ? newOppfolgingsplanUrl
+          : statusUrl
+      }
       title={virksomhetsnavn}
       subtitle={pendingApproval ? texts.tilGodkjenning : ""}
       image={planStatus.img}
