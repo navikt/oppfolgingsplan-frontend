@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Link from "next/link";
-import { Panel } from "@navikt/ds-react";
+import { LinkPanel, Panel } from "@navikt/ds-react";
 
 interface Props {
   href?: string;
@@ -11,7 +11,9 @@ export const OppfolgingsplanPanel = ({ children, href }: Props) => {
   if (href) {
     return (
       <Link href={href}>
-        <Panel border>{children}</Panel>
+        <LinkPanel as="div" border>
+          {children}
+        </LinkPanel>
       </Link>
     );
   }
