@@ -5,16 +5,11 @@ import React from "react";
 import styled from "styled-components";
 import { useLandingUrl } from "../../../hooks/routeHooks";
 import { StatusPageToDisplay } from "../../../utils/statusPageUtils";
-import SykmeldtSide from "../wrappers/SykmeldtSide";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const SpacedGuidePanel = styled(GuidePanel)`
   padding-bottom: 2rem;
 `;
-
-const textOverskrift = (arbeidsgiver?: string) => {
-  return `Oppfølgingsplan hos ${arbeidsgiver}`;
-};
 
 const errorText = (planStatus: StatusPageToDisplay) => {
   switch (planStatus) {
@@ -38,10 +33,6 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
   const landingUrl = useLandingUrl();
 
   return (
-    <SykmeldtSide
-      title={"Oppfølgingsplan"}
-      heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}
-    >
       <SpacedGuidePanel>
         <BodyLong spacing>{errorText(planStatus)}</BodyLong>
 
@@ -58,6 +49,5 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
           </Button>
         </Link>
       </SpacedGuidePanel>
-    </SykmeldtSide>
   );
 };

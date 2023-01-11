@@ -96,7 +96,13 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     planStatus == "GODKJENTPLAN";
 
   if (planIsNotEditable) {
-    return <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />;
+    return(
+        <SykmeldtSide
+            title={titleText(page)}
+            heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}>
+          <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />
+        </SykmeldtSide>
+    )
   }
 
   return (

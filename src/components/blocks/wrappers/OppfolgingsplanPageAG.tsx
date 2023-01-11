@@ -85,7 +85,14 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
     planStatus == "GODKJENTPLAN";
 
   if (planIsNotEditable) {
-    return <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />;
+    return (
+        <ArbeidsgiverSide
+            title={titleText(page)}
+            heading={textOverskrift(aktivPlan?.arbeidstaker?.navn ?? "")}
+        >
+          <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />
+        </ArbeidsgiverSide>
+    )
   }
 
   return (
