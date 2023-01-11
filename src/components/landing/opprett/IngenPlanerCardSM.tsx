@@ -6,19 +6,19 @@ import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { Oppfolgingsplan } from "types/oppfolgingsplan";
 
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   oppfolgingsplaner: Oppfolgingsplan[];
 
-  setVisOpprettingModal(set: boolean): void;
+  setVisOpprettModal(vis: boolean): void;
 }
 
-const OppfolgingsdialogerIngenplan = ({
+const IngenPlanerCardSM = ({
   arbeidsgivere,
   oppfolgingsplaner,
-  setVisOpprettingModal,
+  setVisOpprettModal,
 }: OppfolgingsdialogerIngenplanProps) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
   const sykmeldtFnr = useSykmeldtFnr();
@@ -42,7 +42,7 @@ const OppfolgingsdialogerIngenplan = ({
               virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer,
             });
           } else {
-            setVisOpprettingModal(true);
+            setVisOpprettModal(true);
           }
         }}
       >
@@ -52,4 +52,4 @@ const OppfolgingsdialogerIngenplan = ({
   );
 };
 
-export default OppfolgingsdialogerIngenplan;
+export default IngenPlanerCardSM;

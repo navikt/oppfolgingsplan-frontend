@@ -13,6 +13,7 @@ import BaserTidligereSkjema from "components/landing/opprett/BaserTidligereSkjem
 import IngenPlanerCard from "components/landing/opprett/IngenPlanerCard";
 import OpprettModal from "components/landing/opprett/OpprettModal";
 import OppfolgingsdialogTeasere from "components/landing/teaser/OppfolgingsdialogTeasere";
+import IngenPlanerCardAG from "components/landing/opprett/IngenPlanerCardAG";
 
 const Home: NextPage = () => {
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
@@ -50,18 +51,7 @@ const Home: NextPage = () => {
               />
             }
           />
-          <IngenPlanerCard
-            title={"Det finnes ingen aktiv oppfølgingsplan"}
-            description={
-              "Dere kan når som helst lage en ny plan. Da legger dere inn arbeidsoppgavene og noen forslag til hva som skal til for å klare dem."
-            }
-            isLoading={opprettOppfolgingsplan.isLoading}
-            onClick={() =>
-              !harTidligereOppfolgingsplaner
-                ? opprettOppfolgingsplan.mutate(false)
-                : setVisOpprettModal(true)
-            }
-          />
+          <IngenPlanerCardAG setVisOpprettModal={setVisOpprettModal} />
         </>
       )}
       {harAktiveOppfolgingsplaner && (

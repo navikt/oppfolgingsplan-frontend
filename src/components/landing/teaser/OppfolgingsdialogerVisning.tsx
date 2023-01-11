@@ -6,13 +6,13 @@ import {
 } from "utils/oppfolgingplanUtils";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
 import { Button } from "@navikt/ds-react";
-import { NarmesteLeder } from "../../../schema/narmestelederSchema";
-import { Sykmelding } from "../../../schema/sykmeldingSchema";
+import { NarmesteLeder } from "schema/narmestelederSchema";
+import { Sykmelding } from "schema/sykmeldingSchema";
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import OpprettOppfolgingsplanModal from "../opprett/OpprettOppfolgingsplanModal";
-import OppfolgingsdialogerIngenplan from "../opprett/OppfolgingsdialogerIngenplan";
+import IngenPlanerCardSM from "components/landing/opprett/IngenPlanerCardSM";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { Oppfolgingsplan } from "types/oppfolgingsplan";
 
 const texts = {
   oppfolgingsdialogNyKnapp: {
@@ -60,10 +60,10 @@ const OppfolgingsdialogerVisning = ({
       />
 
       {aktiveOppfolgingsplaner.length === 0 && (
-        <OppfolgingsdialogerIngenplan
+        <IngenPlanerCardSM
           arbeidsgivere={arbeidsgivereForSykmeldinger}
           oppfolgingsplaner={oppfolgingsplaner}
-          setVisOpprettingModal={setVisOpprettingModal}
+          setVisOpprettModal={setVisOpprettingModal}
         />
       )}
       {aktiveOppfolgingsplaner.length > 0 && (
