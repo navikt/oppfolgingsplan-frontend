@@ -132,7 +132,7 @@ export const ArbeidsgiverSkjema = ({
         <SpacedDiv>
           <VelgArbeidsgiverUndertekst
             oppfolgingsplaner={oppfolgingsplaner}
-            arbeidsgiver={selectedArbeidsgiver!!}
+            arbeidsgiver={selectedArbeidsgiver!}
           />
         </SpacedDiv>
       )}
@@ -145,10 +145,10 @@ export const ArbeidsgiverSkjema = ({
             !selectedVirksomhetsnummer ||
             !erOppfolgingsplanOpprettbarMedArbeidsgiver(
               oppfolgingsplaner,
-              selectedArbeidsgiver!!
+              selectedArbeidsgiver!
             )
           }
-          onClick={() => handleSubmit(selectedVirksomhetsnummer!!)}
+          onClick={() => handleSubmit(selectedVirksomhetsnummer!)}
         >
           {texts.arbeidsgiverSkjema.buttonSubmit}
         </Button>

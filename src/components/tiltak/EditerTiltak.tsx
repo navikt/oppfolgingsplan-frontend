@@ -27,9 +27,9 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
     <TiltakForm
       defaultFormValues={{
         overskrift: tiltak.tiltaknavn,
-        beskrivelse: tiltak.beskrivelse!!,
-        fom: new Date(tiltak.fom!!),
-        tom: new Date(tiltak.tom!!),
+        beskrivelse: tiltak.beskrivelse!,
+        fom: new Date(tiltak.fom!),
+        tom: new Date(tiltak.tom!),
       }}
       isSubmitting={lagreTiltak.isLoading}
       onSubmit={(data) => {

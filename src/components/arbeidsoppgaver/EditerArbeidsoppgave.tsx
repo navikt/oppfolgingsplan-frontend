@@ -59,12 +59,15 @@ export const EditerArbeidsoppgave = ({
     <ArbeidsoppgaveForm
       defaultFormValues={{
         navnPaaArbeidsoppgaven: arbeidsoppgave.arbeidsoppgavenavn,
-        kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres!!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres!,
         tilrettelegging: getTilretteleggingFormData(
           arbeidsoppgave.gjennomfoering
         ),
-        kanBeskrivelse: arbeidsoppgave.gjennomfoering?.kanBeskrivelse!!,
-        kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        kanBeskrivelse: arbeidsoppgave.gjennomfoering?.kanBeskrivelse!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!,
       }}
       onSubmit={(data) => {
         lagreArbeidsoppgave
