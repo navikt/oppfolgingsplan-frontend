@@ -7,10 +7,10 @@ import {
 import { Alert, BodyShort, Button, Heading, Select } from "@navikt/ds-react";
 import Link from "next/link";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { useLandingUrl } from "hooks/routeHooks";
 import styled from "styled-components";
 import { Row } from "components/blocks/wrappers/Row";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
   arbeidsgiverSkjema: {

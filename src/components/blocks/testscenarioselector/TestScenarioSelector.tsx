@@ -105,6 +105,15 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
+                  value={"TIDLIGEREPLANER"}
+                  helpText={
+                    "Jeg har ingen aktiv oppfølgingsplan, men har tidligere planer"
+                  }
+                >
+                  Tidligere planer
+                </RadioWithHelpText>
+
+                <RadioWithHelpText
                   value={"UNDERARBEID"}
                   helpText={"Jeg har en plan under arbeid"}
                 >
@@ -161,7 +170,7 @@ export const TestScenarioSelector = () => {
 
       <MockdataWrapper onClick={() => setOpen(!open)}>
         <ImageContainer width={"4rem"}>
-          <Image src={Sun} alt={""} layout={"responsive"} color={"#FF0000"} />
+          <Image src={Sun} fill={true} alt={""} color={"#FF0000"} />
         </ImageContainer>
       </MockdataWrapper>
     </>

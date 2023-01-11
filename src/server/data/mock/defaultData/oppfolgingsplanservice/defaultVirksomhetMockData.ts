@@ -1,11 +1,11 @@
-import { Virksomhet } from "../../../../../schema/oppfolgingsplanSchema";
+import { VirksomhetDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
-export const defaultVirksomhetMockData: Virksomhet = {
+export const defaultVirksomhetMockData: VirksomhetDTO = {
   virksomhetsnummer: "110110110",
   navn: "Hogwarts School of Witchcraft and Wizardry",
 };
 
-export const otherVirksomhetMockData: Virksomhet = {
+export const otherVirksomhetMockData: VirksomhetDTO = {
   virksomhetsnummer: "123456789",
   navn: "Skogen Barnehave",
 };

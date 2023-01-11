@@ -4,13 +4,10 @@ import {
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormSM";
 import { TILRETTELEGGING } from "constants/konstanter";
-import {
-  Arbeidsoppgave,
-  Gjennomforing,
-} from "../../schema/oppfolgingsplanSchema";
+import { Arbeidsoppgave, Gjennomforing } from "../../types/oppfolgingsplan";
 
 interface Props {
-  show: Boolean;
+  show: boolean;
   arbeidsoppgave: Arbeidsoppgave;
 
   doneEditing(): void;

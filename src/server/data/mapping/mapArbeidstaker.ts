@@ -1,10 +1,11 @@
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { Arbeidstaker } from "../../../types/oppfolgingsplan";
 
 export const mapArbeidstaker = (
-  oppfolgingsplan: Oppfolgingsplan,
+  oppfolgingsplan: OppfolgingsplanDTO,
   oppfolgingplanerMeta: OppfolgingsplanMeta
-) => {
+): Arbeidstaker => {
   return {
     ...oppfolgingsplan.arbeidstaker,
     navn: oppfolgingplanerMeta.person.navn,

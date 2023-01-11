@@ -5,7 +5,6 @@ import {
   harTidligereOppfolgingsplaner,
 } from "utils/oppfolgingplanUtils";
 import { Sykmelding } from "../../schema/sykmeldingSchema";
-import { Oppfolgingsplan } from "../../schema/oppfolgingsplanSchema";
 import {
   sykmeldtHarGyldigSykmelding,
   sykmeldtHarIngenSendteSykmeldinger,
@@ -15,6 +14,7 @@ import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAkt
 import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
 import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { IngenLedereInfoBoks } from "components/blocks/infoboks/IngenLedereInfoBoks";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];

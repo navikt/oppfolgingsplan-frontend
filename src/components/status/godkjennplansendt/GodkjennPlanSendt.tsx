@@ -1,6 +1,5 @@
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
@@ -8,6 +7,7 @@ import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
 import Infobox from "./Infobox";
 import { Row } from "../../blocks/wrappers/Row";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

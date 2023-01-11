@@ -18,15 +18,15 @@ export const OppfolgingsplanStepper = ({ activeStep }: Props) => {
 
   return (
     <StepperWithSpacing activeStep={activeStep} orientation="horizontal">
-      <Link href={`${basePath}/arbeidsoppgaver`} passHref={true}>
+      <Link href={`${basePath}/arbeidsoppgaver`} passHref={true} legacyBehavior>
         <Stepper.Step unsafe_index={0}>Arbeidsoppgaver</Stepper.Step>
       </Link>
 
-      <Link href={`${basePath}/tiltak`} passHref={true}>
+      <Link href={`${basePath}/tiltak`} passHref={true} legacyBehavior>
         <Stepper.Step unsafe_index={1}>Tiltak</Stepper.Step>
       </Link>
 
-      <Link href={`${basePath}/seplanen`} passHref={true}>
+      <Link href={`${basePath}/seplanen`} passHref={true} legacyBehavior>
         <Stepper.Step unsafe_index={2}>Se planen</Stepper.Step>
       </Link>
     </StepperWithSpacing>

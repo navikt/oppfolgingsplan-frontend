@@ -17,6 +17,7 @@ const moduleExports = {
     // ssr and displayName are configured by default
     styledComponents: true,
   },
+  productionBrowserSourceMaps: true,
 };
 
 module.exports = moduleExports;

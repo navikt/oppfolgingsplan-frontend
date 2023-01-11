@@ -4,8 +4,8 @@ export const kontaktinfoSchema = object({
   fnr: string(),
   epost: string().nullish(),
   tlf: string().nullish(),
-  skalHaVarsel: boolean().nullish(),
+  skalHaVarsel: boolean(),
   feilAarsak: string().nullish(),
 });
 
-export type Kontaktinfo = z.infer<typeof kontaktinfoSchema>;
+export type KontaktinfoDTO = z.infer<typeof kontaktinfoSchema>;

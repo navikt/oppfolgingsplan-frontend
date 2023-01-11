@@ -4,17 +4,63 @@ import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM"
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
-import {
-  getStatusPageTitleAndHeading,
-  statusPageToDisplay,
-} from "utils/statusPageUtils";
+import { statusPageToDisplaySM } from "utils/statusPageUtils";
 import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPlan";
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+
+export const getStatusPageTitleAndHeading = (
+  oppfolgingsplan?: Oppfolgingsplan
+) => {
+  switch (statusPageToDisplaySM(oppfolgingsplan)) {
+    case "SENDTPLANTILGODKJENNING": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Sendt til godkjenning`,
+      };
+    }
+    case "MOTTATTFLEREGODKJENNINGER": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Mottatt endring`,
+      };
+    }
+    case "GODKJENNPLANMOTTATT": {
+      return {
+        title: `Godkjenn ${oppfolgingsplan?.virksomhet?.navn}`,
+        heading: `Du har mottatt en ny plan for ${oppfolgingsplan?.virksomhet?.navn}`,
+      };
+    }
+    case "GODKJENNPLANAVSLATT": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Lederen din har noen forslag`,
+      };
+    }
+    case "GODKJENTPLANAVBRUTT": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Tidligere oppfølgingsplan`,
+      };
+    }
+    case "GODKJENTPLAN": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Oppfølgingsplan`,
+      };
+    }
+    default: {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Status på oppfølgingsplan`,
+      };
+    }
+  }
+};
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -22,7 +68,7 @@ interface ContentProps {
 
 const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
   if (!oppfolgingsplan) return null;
-  const pageToDisplay = statusPageToDisplay(oppfolgingsplan);
+  const pageToDisplay = statusPageToDisplaySM(oppfolgingsplan);
 
   switch (pageToDisplay) {
     case "SENDTPLANTILGODKJENNING": {

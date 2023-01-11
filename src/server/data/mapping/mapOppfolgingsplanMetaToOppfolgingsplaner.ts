@@ -1,11 +1,11 @@
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { mapVirksomhet } from "./mapVirksomhet";
 import { mapGodkjenninger } from "./mapGodkjenninger";
 import { mapArbeidsoppgaveListe } from "./mapArbeidsoppgaveListe";
 import { mapTiltakListe } from "./mapTiltakListe";
 import { mapArbeidstaker } from "./mapArbeidstaker";
-import { findName } from "./findName";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { findName } from "./findName";
 
 export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
   oppfolgingplanerMeta: OppfolgingsplanMeta | undefined
@@ -27,11 +27,10 @@ export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
         tiltakListe: mapTiltakListe(oppfolgingsplan, oppfolgingplanerMeta),
         avbruttPlanListe: oppfolgingsplan.avbruttPlanListe,
         arbeidsgiver: {
-          ...oppfolgingsplan.arbeidsgiver,
           naermesteLeder: oppfolgingplanerMeta.narmesteLedere.find((leder) => {
             return (
               leder.virksomhetsnummer ===
-                oppfolgingsplan.virksomhet?.virksomhetsnummer && leder.erAktiv
+                oppfolgingsplan.virksomhet.virksomhetsnummer && leder.erAktiv
             );
           }),
         },

@@ -1,10 +1,11 @@
+import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { useAudience } from "hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   DehydratedState,
   Hydrate,
@@ -15,6 +16,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TestScenarioSelector } from "../components/blocks/testscenarioselector/TestScenarioSelector";
 import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
+import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 
 const minutesToMillis = (minutes: number) => {
   return 1000 * 60 * minutes;
@@ -30,23 +32,6 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
   }
-`;
-
-const ContentWrapperStyled = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const InnerContentWrapperStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 50rem;
-  flex-grow: 1;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
 `;
 
 const TestScenarioDevTools = () => {
@@ -84,11 +69,11 @@ function MyApp({
           ) : (
             <BreadcrumbsAppenderAG />
           )}
-          <ContentWrapperStyled tabIndex={-1} id="maincontent">
-            <InnerContentWrapperStyled>
+          <main tabIndex={-1} id="maincontent">
+            <OPErrorBoundary>
               <Component {...pageProps} />
-            </InnerContentWrapperStyled>
-          </ContentWrapperStyled>
+            </OPErrorBoundary>
+          </main>
         </>
       </Hydrate>
       <TestScenarioDevTools />

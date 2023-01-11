@@ -16,11 +16,11 @@ import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { useLagreKommentarSM } from "api/queries/sykmeldt/tiltakQueriesSM";
 import { EditerTiltak } from "./EditerTiltak";
-import { Tiltak } from "../../schema/oppfolgingsplanSchema";
 import { SpacedDetail } from "../blocks/SpacedDetail";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import { Dialog } from "components/blocks/dialog/Dialog";
 import { Row } from "components/blocks/wrappers/Row";
+import { Tiltak } from "../../types/oppfolgingsplan";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -76,7 +76,7 @@ const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
 interface Props {
   arbeidstakerFnr: string;
   tiltak: Tiltak;
-  readonly?: Boolean;
+  readonly?: boolean;
 }
 
 export const LagretTiltak = ({

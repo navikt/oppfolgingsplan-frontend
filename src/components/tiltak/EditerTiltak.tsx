@@ -1,7 +1,7 @@
 import { useLagreTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
 import { TiltakForm, TiltakFormValues } from "./TiltakForm";
-import { Tiltak } from "../../schema/oppfolgingsplanSchema";
 import { STATUS_TILTAK } from "constants/konstanter";
+import { Tiltak } from "../../types/oppfolgingsplan";
 
 interface Props {
   tiltak: Tiltak;

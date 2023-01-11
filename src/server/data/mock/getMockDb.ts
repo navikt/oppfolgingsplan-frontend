@@ -1,31 +1,32 @@
 import activeMockData from "./activeMockData";
 import {
-  Oppfolgingsplan,
-  Person,
-  Stilling,
-  Virksomhet,
+  OppfolgingsplanDTO,
+  StillingDTO,
+  VirksomhetDTO,
 } from "../../../schema/oppfolgingsplanSchema";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
-import { Kontaktinfo } from "../../../schema/kontaktinfoSchema";
+import { KontaktinfoDTO } from "../../../schema/kontaktinfoSchema";
 import { Tilgang } from "../../../schema/tilgangSchema";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
+import { PersonV3DTO } from "../../../schema/personSchemas";
 
 export type TestScenario =
   | "INGENPLAN"
+  | "TIDLIGEREPLANER"
   | "UNDERARBEID"
   | "GODKJENNPLANAVSLATT"
   | "GODKJENNPLANSENDT"
   | "GODKJENNPLANMOTTATT";
 
 export interface MockSetup {
-  oppfolgingsplaner: Oppfolgingsplan[];
+  oppfolgingsplaner: OppfolgingsplanDTO[];
   sykmeldinger: Sykmelding[];
-  virksomhet: Virksomhet[];
-  stillinger: Stilling[];
+  virksomhet: VirksomhetDTO[];
+  stillinger: StillingDTO[];
   narmesteLedere: NarmesteLeder[];
-  person: Person;
-  kontaktinfo: Kontaktinfo;
+  person: PersonV3DTO;
+  kontaktinfo: KontaktinfoDTO;
   tilgang: Tilgang;
   sykmeldt: Sykmeldt;
   activeTestScenario: TestScenario;

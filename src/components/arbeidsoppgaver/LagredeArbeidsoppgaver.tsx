@@ -1,6 +1,6 @@
 import { ArbeidsoppgaveCard } from "./ArbeidsoppgaveCard";
 import React from "react";
-import { Arbeidsoppgave } from "../../schema/oppfolgingsplanSchema";
+import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 
 interface Props {
   arbeidstakerFnr: string;

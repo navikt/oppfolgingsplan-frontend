@@ -90,7 +90,7 @@ export const get = <ResponseData>(
 
 export const post = <ResponseData>(
   url: string,
-  data?: any,
+  data?: unknown,
   options?: AxiosOptions
 ): Promise<ResponseData> => {
   return axios

@@ -1,15 +1,12 @@
 import { BodyShort } from "@navikt/ds-react";
 import { Row } from "components/blocks/wrappers/Row";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import {
-  Godkjenning,
-  Oppfolgingsplan,
-} from "../../../schema/oppfolgingsplanSchema";
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
+import { Godkjenning, Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

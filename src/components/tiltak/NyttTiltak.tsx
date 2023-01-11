@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useLagreTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
 import { TiltakForm, TiltakFormValues } from "./TiltakForm";
 import { TiltakFormHeading } from "./TiltakFormHeading";
-import { Tiltak } from "../../schema/oppfolgingsplanSchema";
 import { STATUS_TILTAK } from "constants/konstanter";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
+import { Tiltak } from "../../types/oppfolgingsplan";
 
 export const NyttTiltak = () => {
   const lagreTiltak = useLagreTiltakSM();
