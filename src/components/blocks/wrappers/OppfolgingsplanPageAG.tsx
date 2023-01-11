@@ -12,7 +12,6 @@ import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { statusPageToDisplayAG } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
 import { useChosenAktivOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-import { Content } from "@radix-ui/react-tabs";
 import ArbeidsgiverSide from "./ArbeidsgiverSide";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 
