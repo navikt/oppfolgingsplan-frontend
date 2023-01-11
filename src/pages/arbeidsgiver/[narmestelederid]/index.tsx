@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import React, { useState } from "react";
 import {
   useAktiveOppfolgingsplanerAG,
-  useOpprettOppfolgingsplanAG,
   useTidligereOppfolgingsplanerAG,
 } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "auth/beskyttetSide";
@@ -14,13 +13,13 @@ import IngenPlanerCard from "components/landing/opprett/IngenPlanerCard";
 import OpprettModal from "components/landing/opprett/OpprettModal";
 import OppfolgingsdialogTeasere from "components/landing/teaser/OppfolgingsdialogTeasere";
 import IngenPlanerCardAG from "components/landing/opprett/IngenPlanerCardAG";
+import OpprettModalAG from "components/landing/opprett/OpprettModalAG";
 
 const Home: NextPage = () => {
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
     useAktiveOppfolgingsplanerAG();
   const { harTidligereOppfolgingsplaner, tidligereOppfolgingsplaner } =
     useTidligereOppfolgingsplanerAG();
-  const opprettOppfolgingsplan = useOpprettOppfolgingsplanAG();
   const [visOpprettModal, setVisOpprettModal] = useState(false);
 
   return (
@@ -36,20 +35,9 @@ const Home: NextPage = () => {
 
       {!harAktiveOppfolgingsplaner && (
         <>
-          <OpprettModal
+          <OpprettModalAG
             visOpprettModal={visOpprettModal}
             setVisOpprettModal={setVisOpprettModal}
-            modalContent={
-              <BaserTidligereSkjema
-                isLoading={opprettOppfolgingsplan.isLoading}
-                onSubmit={(kopierplan) =>
-                  opprettOppfolgingsplan
-                    .mutateAsync(kopierplan)
-                    .then(() => setVisOpprettModal(false))
-                }
-                handleClose={() => setVisOpprettModal(false)}
-              />
-            }
           />
           <IngenPlanerCardAG setVisOpprettModal={setVisOpprettModal} />
         </>

@@ -8,20 +8,8 @@ import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingspla
 import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "utils/oppfolgingplanUtils";
 import Feilmelding from "components/blocks/error/Feilmelding";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { Oppfolgingsplan } from "types/oppfolgingsplan";
 import { useKopierOppfolgingsplan } from "api/queries/oppfolgingsplan/oppfolgingsplanQueries";
-
-const texts = {
-  errorNoLeader: {
-    title: "Kan ikke opprette ny plan",
-    message:
-      "Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn",
-  },
-  errorNoGodkjentPlan: {
-    title: "Kan ikke opprette ny plan",
-    message: "Fant ingen tidligere godkjent plan med virksomhet",
-  },
-};
 
 const FormContainer = styled.div`
   padding: 2rem;
@@ -30,16 +18,16 @@ const FormContainer = styled.div`
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-  visOpprettingModal: boolean;
+  visOpprettModal: boolean;
 
-  setVisOpprettingModal(vis: boolean): void;
+  setVisOpprettModal(vis: boolean): void;
 }
 
-const OpprettOppfolgingsplanModal = ({
+const OpprettModalSM = ({
   oppfolgingsplaner,
   arbeidsgivere,
-  visOpprettingModal,
-  setVisOpprettingModal,
+  visOpprettModal,
+  setVisOpprettModal,
 }: Props) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
   const kopierOppfolgingsplan = useKopierOppfolgingsplan();
@@ -80,10 +68,10 @@ const OpprettOppfolgingsplanModal = ({
 
   return (
     <Modal
-      open={visOpprettingModal}
+      open={visOpprettModal}
       aria-label="Opprett oppfølgingsplan"
       onClose={() => {
-        setVisOpprettingModal(false);
+        setVisOpprettModal(false);
       }}
     >
       <FormContainer>
@@ -92,8 +80,10 @@ const OpprettOppfolgingsplanModal = ({
             if (manglerNarmesteLeder) {
               return (
                 <Feilmelding
-                  title={texts.errorNoLeader.title}
-                  description={texts.errorNoLeader.message}
+                  title={"Kan ikke opprette ny plan"}
+                  description={
+                    "Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn"
+                  }
                 />
               );
             } else if (arbeidsgivere.length > 1) {
@@ -109,10 +99,10 @@ const OpprettOppfolgingsplanModal = ({
                         virksomhetsnummer: virksomhetsnummer,
                       })
                       .then(() => {
-                        setVisOpprettingModal(false);
+                        setVisOpprettModal(false);
                       });
                   }}
-                  handleClose={() => setVisOpprettingModal(false)}
+                  handleClose={() => setVisOpprettModal(false)}
                 />
               );
             } else {
@@ -122,7 +112,7 @@ const OpprettOppfolgingsplanModal = ({
                   onSubmit={(kopierplan) =>
                     opprett(kopierplan, arbeidsgivere[0].virksomhetsnummer)
                   }
-                  handleClose={() => setVisOpprettingModal(false)}
+                  handleClose={() => setVisOpprettModal(false)}
                 />
               );
             }
@@ -133,4 +123,4 @@ const OpprettOppfolgingsplanModal = ({
   );
 };
 
-export default OpprettOppfolgingsplanModal;
+export default OpprettModalSM;

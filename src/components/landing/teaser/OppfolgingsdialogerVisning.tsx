@@ -9,7 +9,7 @@ import { Button } from "@navikt/ds-react";
 import { NarmesteLeder } from "schema/narmestelederSchema";
 import { Sykmelding } from "schema/sykmeldingSchema";
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import OpprettOppfolgingsplanModal from "../opprett/OpprettOppfolgingsplanModal";
+import OpprettModalSM from "components/landing/opprett/OpprettModalSM";
 import IngenPlanerCardSM from "components/landing/opprett/IngenPlanerCardSM";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { Oppfolgingsplan } from "types/oppfolgingsplan";
@@ -40,7 +40,7 @@ const OppfolgingsdialogerVisning = ({
   sykmeldinger,
   narmesteLedere,
 }: Props) => {
-  const [visOpprettingModal, setVisOpprettingModal] = useState(false);
+  const [visOpprettModal, setVisOpprettModal] = useState(false);
 
   const aktiveOppfolgingsplaner: Oppfolgingsplan[] =
     finnAktiveOppfolgingsplaner(oppfolgingsplaner, sykmeldinger);
@@ -52,18 +52,18 @@ const OppfolgingsdialogerVisning = ({
 
   return (
     <div>
-      <OpprettOppfolgingsplanModal
+      <OpprettModalSM
         oppfolgingsplaner={oppfolgingsplaner}
         arbeidsgivere={arbeidsgivereForSykmeldinger}
-        visOpprettingModal={visOpprettingModal}
-        setVisOpprettingModal={setVisOpprettingModal}
+        visOpprettModal={visOpprettModal}
+        setVisOpprettModal={setVisOpprettModal}
       />
 
       {aktiveOppfolgingsplaner.length === 0 && (
         <IngenPlanerCardSM
           arbeidsgivere={arbeidsgivereForSykmeldinger}
           oppfolgingsplaner={oppfolgingsplaner}
-          setVisOpprettModal={setVisOpprettingModal}
+          setVisOpprettModal={setVisOpprettModal}
         />
       )}
       {aktiveOppfolgingsplaner.length > 0 && (
@@ -74,7 +74,7 @@ const OppfolgingsdialogerVisning = ({
                 variant={"secondary"}
                 size={"medium"}
                 onClick={() => {
-                  setVisOpprettingModal(true);
+                  setVisOpprettModal(true);
                 }}
               >
                 {texts.oppfolgingsdialogNyKnapp.button}
