@@ -11,7 +11,8 @@ export const OppfolgingsplanPanel = ({ children, href }: Props) => {
   if (href) {
     return (
       <Link href={href} passHref={true}>
-        <LinkPanel border>{children}</LinkPanel>
+        {/* as div for å unngå nested <a> tag error */}
+        <LinkPanel as="div" border>{children}</LinkPanel>
       </Link>
     );
   }

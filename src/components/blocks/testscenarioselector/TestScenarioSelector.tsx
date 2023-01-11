@@ -121,30 +121,30 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                  value={"GODKJENNPLANAVSLATT"}
+                  value={"SYKMELDT_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"}
                   helpText={
-                    "Jeg har sendt oppfølgingsplanen til den andre parten for å at de skal godkjenne den, og de har gått inn for å gjøre endringer"
+                    "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning, og arbeidsgiver har gått inn for å gjøre endringer"
                   }
                 >
-                  Sendt plan til godkjenning, arbeidsgiver har gjort endringer
+                  Sykmeldt har sendt plan til godkjenning, arbeidsgiver har gjort endringer
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                  value={"GODKJENNPLANSENDT"}
+                  value={"SYKMELDT_SENDT_TIL_GODKJENNING"}
                   helpText={
-                    "Jeg har sendt oppfølgingsplanen til den andre parten for at de skal godkjenne den"
+                    "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning"
                   }
                 >
-                  Sendt plan til godkjenning
+                  Sykmeldt har sendt plan til godkjenning
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                  value={"GODKJENNPLANMOTTATT"}
+                  value={"ARBEIDSGIVER_SENDT_TIL_GODKJENNING"}
                   helpText={
-                    "Den andre parten har sendt oppfølgingsplanen til meg for at jeg skal godkjenne den"
+                    "Arbeidsgiver har sendt oppfølgingsplanen til den sykmeldte for godkjenning"
                   }
                 >
-                  Mottatt plan for godkjenning
+                  Arbeidsgiver har sendt plan til godkjenning
                 </RadioWithHelpText>
               </RadioGroup>
             </SpacedDiv>

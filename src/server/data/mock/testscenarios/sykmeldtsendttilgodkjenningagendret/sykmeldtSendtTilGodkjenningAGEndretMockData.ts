@@ -1,12 +1,15 @@
+import { leggTilDagerPaDato } from "utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
-export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
+const today = new Date();
+
+export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
   [
     {
       id: 3455,
-      sistEndretDato: "2020-02-20T11:31:29.837",
-      opprettetDato: "2020-02-20",
+      sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
+      opprettetDato: leggTilDagerPaDato(today, -30).toJSON(),
       status: "UNDER_ARBEID",
       virksomhet: {
         virksomhetsnummer: "110110110",
@@ -15,7 +18,7 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
       godkjentPlan: null,
       godkjenninger: [
         {
-          godkjent: true,
+          godkjent: false,
           godkjentAv: {
             navn: "Albus Dumbledore",
             fnr: "11011011011",
@@ -27,11 +30,11 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
             stillinger: [],
           },
           beskrivelse: "Beskrivelse",
-          godkjenningsTidspunkt: "2022-10-10T10:46:06.041",
+          godkjenningsTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
           gyldighetstidspunkt: {
-            fom: "2022-10-20T10:46:06.041",
-            tom: "2022-10-29T10:46:06.041",
-            evalueres: "2022-11-01T10:46:06.041",
+            fom: leggTilDagerPaDato(today, -7).toJSON(),
+            tom: leggTilDagerPaDato(today, 14).toJSON(),
+            evalueres: leggTilDagerPaDato(today, 12).toJSON(),
           },
           delMedNav: false,
         },
@@ -50,8 +53,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
               "Trenger mer tid til de faste oppgavene og kan utføre noen av disse hjemmefra. ",
             kanIkkeBeskrivelse: null,
           },
-          opprettetDato: "2020-02-20T11:31:30.305",
-          sistEndretDato: "2020-02-20T11:31:30.305",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           sistEndretAv: {
             navn: "Labben Rekemester",
             fnr: "110110110110",
@@ -85,8 +88,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
             kanBeskrivelse: null,
             kanIkkeBeskrivelse: null,
           },
-          opprettetDato: "2020-02-20T11:31:30.318",
-          sistEndretDato: "2020-02-20T11:31:30.318",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           sistEndretAv: {
             navn: "Labben Rekemester",
             fnr: "110110110110",
@@ -120,8 +123,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
             kanBeskrivelse: null,
             kanIkkeBeskrivelse: "Blir for krevende ",
           },
-          opprettetDato: "2020-02-20T11:31:30.319",
-          sistEndretDato: "2020-02-20T11:31:30.319",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           sistEndretAv: {
             navn: defaultNarmesteLedereMockData[0].navn,
             fnr: defaultNarmesteLedereMockData[0].fnr,
@@ -148,8 +151,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
           arbeidsoppgavenavn: "Undervisning ",
           erVurdertAvSykmeldt: false,
           gjennomfoering: null,
-          opprettetDato: "2020-02-20T11:31:30.322",
-          sistEndretDato: "2020-02-20T11:31:30.322",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           sistEndretAv: {
             navn: defaultNarmesteLedereMockData[0].navn,
             fnr: defaultNarmesteLedereMockData[0].fnr,
@@ -177,20 +180,20 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
           tiltakId: 4852,
           tiltaknavn: "Hjemmekontor ",
           knyttetTilArbeidsoppgaveId: null,
-          fom: "2021-04-15",
-          tom: "2022-07-26",
+          fom: leggTilDagerPaDato(today, -11).toJSON(),
+          tom: leggTilDagerPaDato(today, 22).toJSON(),
           beskrivelse:
             "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
           beskrivelseIkkeAktuelt: null,
-          opprettetDato: "2020-02-20T11:31:30.338",
-          sistEndretDato: "2020-02-20T11:31:30.338",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           kommentarer: [
             {
               id: 782,
               tekst:
                 "Her må vi bli enige om antall timer og hvor mange dager. ",
-              opprettetTidspunkt: "2020-02-20T11:31:30.352",
-              sistEndretDato: "2020-02-20T11:31:30.352",
+              opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
+              sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
               opprettetAv: {
                 navn: defaultNarmesteLedereMockData[0].navn,
                 fnr: defaultNarmesteLedereMockData[0].fnr,
@@ -240,18 +243,18 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
           tiltakId: 4853,
           tiltaknavn: "Kortere arbeidsdag",
           knyttetTilArbeidsoppgaveId: null,
-          fom: "2020-02-10",
-          tom: "2020-02-21",
+          fom: leggTilDagerPaDato(today, -7).toJSON(),
+          tom: leggTilDagerPaDato(today, -5).toJSON(),
           beskrivelse: "Undervise i ett fag for å unngå overbelastning ",
           beskrivelseIkkeAktuelt: null,
-          opprettetDato: "2020-02-20T11:31:30.373",
-          sistEndretDato: "2020-02-20T11:31:30.373",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           kommentarer: [
             {
               id: 783,
               tekst: "Hvilket fag passer det best å starte med? ",
-              opprettetTidspunkt: "2020-02-20T11:31:30.376",
-              sistEndretDato: "2020-02-20T11:31:30.376",
+              opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
+              sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
               opprettetAv: {
                 navn: defaultNarmesteLedereMockData[0].navn,
                 fnr: defaultNarmesteLedereMockData[0].fnr,
@@ -276,8 +279,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
             {
               id: 784,
               tekst: "Gjerne KRLE eller samfunnsfag.",
-              opprettetTidspunkt: "2020-02-20T11:31:30.378",
-              sistEndretDato: "2020-02-20T11:31:30.378",
+              opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
+              sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
               opprettetAv: {
                 navn: "Labben Rekemester",
                 fnr: "110110110110",
@@ -302,8 +305,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
             {
               id: 785,
               tekst: "Men, ønsker kun å undervise digitalt.",
-              opprettetTidspunkt: "2020-02-21T12:33:12.378",
-              sistEndretDato: "2020-02-21T12:33:12.378",
+              opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
+              sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
               opprettetAv: {
                 navn: "Labben Rekemester",
                 fnr: "110110110110",
@@ -359,8 +362,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
           beskrivelse: "Assistent til å bistå i undervisningen.",
           beskrivelseIkkeAktuelt:
             "Skolen har ikke ressurser til å kunne tilby dette. ",
-          opprettetDato: "2020-02-20T11:31:30.38",
-          sistEndretDato: "2020-02-20T11:31:30.38",
+          opprettetDato: leggTilDagerPaDato(today, -7).toJSON(),
+          sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
           kommentarer: [],
           status: "IKKE_AKTUELT",
           gjennomfoering: null,
@@ -388,11 +391,11 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
       ],
       avbruttPlanListe: [
         {
-          tidspunkt: "2020-02-20T11:31:29.835",
+          tidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
           id: 3451,
         },
         {
-          tidspunkt: "2020-02-12T15:24:53.34",
+          tidspunkt: leggTilDagerPaDato(today, -8).toJSON(),
           id: 3450,
         },
       ],
@@ -402,11 +405,11 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
           fnr: "20405060718",
           epost: null,
           tlf: null,
-          sistInnlogget: "2020-02-24T08:57:46.747",
+          sistInnlogget: leggTilDagerPaDato(today, -7).toJSON(),
           samtykke: null,
           virksomhetsnummer: "123",
           erAktiv: false,
-          aktivFom: "2020-02-24T08:57:46.747",
+          aktivFom: leggTilDagerPaDato(today, -117).toJSON(),
           aktivTom: null,
         },
       },
@@ -424,7 +427,7 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] 
             yrke: "Soppkontrollør",
             prosent: 80,
             fom: "2000-02-11T15:34:53.787",
-            tom: "2022-02-11T15:34:53.787",
+            tom: "2200-02-11T15:34:53.787",
           },
         ],
       },

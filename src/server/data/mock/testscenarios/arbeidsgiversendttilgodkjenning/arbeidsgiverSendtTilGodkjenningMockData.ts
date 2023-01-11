@@ -1,7 +1,7 @@
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
-export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
+export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] =
   [
     {
       id: 3455,
@@ -17,8 +17,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
         {
           godkjent: true,
           godkjentAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: "Albus Dumbledore",
+            fnr: "11011011011",
             epost: null,
             tlf: null,
             sistInnlogget: null,

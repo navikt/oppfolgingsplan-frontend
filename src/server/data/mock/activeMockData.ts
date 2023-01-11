@@ -1,27 +1,27 @@
-import { noPlanScenarioSM } from "./testscenarios/noplan/noPlanScenario";
-import { godkjennPlanAvslattScenario } from "./testscenarios/godkjentPlanAvslatt/godkjennPlanAvslattScenario";
-import { godkjennPlanSendtScenario } from "./testscenarios/godkjennPlanSendt/godkjennPlanSendtScenario";
-import { godkjennPlanMottattScenario } from "./testscenarios/godkjennPlanMottatt/godkjennPlanMottattScenario";
-import { planUnderArbeidScenario } from "./testscenarios/underArbeid/planUnderArbeidScenario";
+import { ingenPlanScenario } from "./testscenarios/ingenplan/ingenPlanScenario";
+import { sykmeldtSendtTilGodkjenningAGEndretScenario } from "./testscenarios/sykmeldtsendttilgodkjenningagendret/sykmeldtSendtTilGodkjenningAGEndretScenario";
+import { sykmeldtSendtTilGodkjenningScenario } from "./testscenarios/sykmeldtsendttilgodkjenning/sykmeldtSendtTilGodkjenningScenario";
+import { arbeidsgiverSendtTilGodkjenningScenario } from "./testscenarios/arbeidsgiversendttilgodkjenning/arbeidsgiverSendtTilGodkjenningScenario";
+import { planUnderArbeidScenario } from "./testscenarios/underarbeid/planUnderArbeidScenario";
 import { MockSetup, TestScenario } from "./getMockDb";
-import { tidligerePlanerScenario } from "server/data/mock/testscenarios/tidligerePlaner/tidligerePlanerScenario";
+import { tidligerePlanerScenario } from "server/data/mock/testscenarios/tidligereplaner/tidligerePlanerScenario";
 
-const activeMockData: MockSetup = { ...noPlanScenarioSM };
+const activeMockData: MockSetup = { ...ingenPlanScenario };
 
 export const getMockSetupForScenario = (scenario: TestScenario) => {
   switch (scenario) {
     case "INGENPLAN":
-      return noPlanScenarioSM;
+      return ingenPlanScenario;
     case "TIDLIGEREPLANER":
       return tidligerePlanerScenario;
-    case "GODKJENNPLANAVSLATT":
-      return godkjennPlanAvslattScenario;
+    case "SYKMELDT_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET":
+      return sykmeldtSendtTilGodkjenningAGEndretScenario;
     case "UNDERARBEID":
       return planUnderArbeidScenario;
-    case "GODKJENNPLANSENDT":
-      return godkjennPlanSendtScenario;
-    case "GODKJENNPLANMOTTATT":
-      return godkjennPlanMottattScenario;
+    case "SYKMELDT_SENDT_TIL_GODKJENNING":
+      return sykmeldtSendtTilGodkjenningScenario;
+    case "ARBEIDSGIVER_SENDT_TIL_GODKJENNING":
+      return arbeidsgiverSendtTilGodkjenningScenario;
   }
 };
 
