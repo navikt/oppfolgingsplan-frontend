@@ -15,6 +15,7 @@ import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAkt
 import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
 import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { IngenLedereInfoBoks } from "components/blocks/infoboks/IngenLedereInfoBoks";
+import ReservertSykmeldtMelding from "./ReservertSykmeldtMelding";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -23,7 +24,7 @@ interface Props {
 
 const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
   const narmesteledere = useNarmesteLedereSM();
-
+<ReservertSykmeldtMelding/>
   if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
     return (
       <div>

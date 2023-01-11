@@ -130,6 +130,7 @@ export const oppfolgingsplanSchema = object({
   arbeidsgiver: arbeidsgiverSchema.nullable(),
   arbeidstaker: personSchema,
   sistEndretAv: personSchema,
+  skalHaVarsel: boolean().nullish(),
 });
 
 export type Oppfolgingsplan = z.infer<typeof oppfolgingsplanSchema>;
