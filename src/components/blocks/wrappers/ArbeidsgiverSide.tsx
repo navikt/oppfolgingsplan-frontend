@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useEffect } from "react";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 import Feilmelding from "../error/Feilmelding";
 import AppSpinner from "../spinner/AppSpinner";
@@ -38,6 +38,38 @@ interface SideProps {
   heading: string;
   children: ReactNode;
 }
+interface PageContentProps extends SideProps {}
+
+const PageContent = ({ title, heading, children }: PageContentProps) => {
+  const sykmeldt = useDineSykmeldte();
+  const oppfolgingsplaner = useOppfolgingsplanerAG();
+  const tilgang = useTilgangAG();
+
+  if (oppfolgingsplaner.isError || sykmeldt.isError || tilgang.isError) {
+    return (
+      <Feilmelding
+        title="Beklager, vi fikk en teknisk feil"
+        description="Det skjedde en feil ved henting av dine oppfølgingsplaner. Vennligst prøv igjen senere."
+      />
+    );
+  } else if (
+    !sykmeldt.isError &&
+    (tilgang.fetchStatus === "fetching" ||
+      oppfolgingsplaner.isLoading ||
+      sykmeldt.isLoading)
+  ) {
+    return <AppSpinner />;
+  } else if (tilgang.data && !tilgang.data.harTilgang) {
+    return <AdresseSperreInfoBoks />;
+  } else {
+    return (
+      <>
+        <PageHeading title={title} heading={heading} />
+        {children}
+      </>
+    );
+  }
+};
 
 const ArbeidsgiverSide = ({
   title,
@@ -45,35 +77,6 @@ const ArbeidsgiverSide = ({
   children,
 }: SideProps): ReactElement => {
   const sykmeldt = useDineSykmeldte();
-  const oppfolgingsplaner = useOppfolgingsplanerAG();
-  const tilgang = useTilgangAG();
-
-  const PageContent = () => {
-    if (oppfolgingsplaner.isError || sykmeldt.isError || tilgang.isError) {
-      return (
-        <Feilmelding
-          title="Beklager, vi fikk en teknisk feil"
-          description="Det skjedde en feil ved henting av dine oppfølgingsplaner. Vennligst prøv igjen senere."
-        />
-      );
-    } else if (
-      !sykmeldt.isError &&
-      (tilgang.fetchStatus === "fetching" ||
-        oppfolgingsplaner.isLoading ||
-        sykmeldt.isLoading)
-    ) {
-      return <AppSpinner />;
-    } else if (tilgang.data && !tilgang.data.harTilgang) {
-      return <AdresseSperreInfoBoks />;
-    } else {
-      return (
-        <>
-          <PageHeading title={title} heading={heading} />
-          {children}
-        </>
-      );
-    }
-  };
 
   return (
     <PageContainer
@@ -81,7 +84,9 @@ const ArbeidsgiverSide = ({
       header={getSykmeldtHeader(sykmeldt.data)}
       navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
     >
-      <PageContent />
+      <PageContent title={title} heading={heading}>
+        {children}
+      </PageContent>
     </PageContainer>
   );
 };
