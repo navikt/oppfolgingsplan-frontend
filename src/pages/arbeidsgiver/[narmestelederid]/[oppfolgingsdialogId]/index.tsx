@@ -10,6 +10,8 @@ import { IngenPlanTilGodkjenning } from "components/status/ingenplantilgodkjenni
 import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import ArbeidsgiverSide from "../../../../components/blocks/wrappers/ArbeidsgiverSide";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
+import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
+import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -24,7 +26,18 @@ const Content = ({
 
   switch (pageToDisplay) {
     case "SENDTPLANTILGODKJENNING": {
-      return <div>SENDTPLANTILGODKJENNING</div>;
+      return (
+        <GodkjennPlanSendt
+          oppfolgingsplan={oppfolgingsplan}
+          description={
+            "Du har sendt en ny versjon av oppfølgingsplanen til din arbeidstaker"
+          }
+        >
+          <GodkjennPlanSendtInfoBox
+            godkjennPlanTargetAudience={"Arbeidstakeren"}
+          />
+        </GodkjennPlanSendt>
+      );
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return <div>MOTTATTFLEREGODKJENNINGER</div>;
