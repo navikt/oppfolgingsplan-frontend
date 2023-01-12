@@ -4,7 +4,7 @@ import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema"
 
 const today = new Date();
 
-export const godkjennPlanAvslattOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
+export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
   [
     {
       id: 3455,
