@@ -16,6 +16,7 @@ import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/Godk
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -27,9 +28,20 @@ const Content = ({
 }: ContentProps): ReactElement | null => {
   if (!oppfolgingsplan) return null;
 
+  const narmesteLederNavn = oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn;
+
   switch (pageToDisplay) {
     case "SENDTPLANTILGODKJENNING": {
-      return <GodkjennPlanSendt oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjennPlanSendt
+          oppfolgingsplan={oppfolgingsplan}
+          description={`Du har sendt en ny versjon av oppfølgingsplanen til din arbeidsgiver ${
+            narmesteLederNavn ? narmesteLederNavn : ""
+          } `}
+        >
+          <GodkjennPlanSendtInfoBox godkjennPlanTargetAudience={"Lederen"} />
+        </GodkjennPlanSendt>
+      );
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return (

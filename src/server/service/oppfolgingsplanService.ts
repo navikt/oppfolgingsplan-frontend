@@ -286,7 +286,7 @@ export async function avvisOppfolgingsplanSM(
   );
 }
 
-export async function nullstillGodkjenningSM(
+export async function nullstillGodkjenning(
   accessToken: string,
   oppfolgingsplanId: string
 ) {

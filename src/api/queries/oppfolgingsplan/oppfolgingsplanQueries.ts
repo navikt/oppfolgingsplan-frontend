@@ -17,3 +17,16 @@ export const useKopierOppfolgingsplan = () => {
 
   return useMutation(postKopierOppfolgingsplan);
 };
+
+export const useNullstillGodkjenning = () => {
+  const apiPath = useOppfolgingsplanApiPath();
+  const queryClient = useQueryClient();
+
+  const nullstillGodkjenning = async (oppfolgingsplanId: number) => {
+    await post(`${apiPath}/${oppfolgingsplanId}/nullstillgodkjenning`);
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+  };
+
+  return useMutation(nullstillGodkjenning);
+};

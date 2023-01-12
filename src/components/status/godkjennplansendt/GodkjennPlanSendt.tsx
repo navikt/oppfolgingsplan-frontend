@@ -5,19 +5,19 @@ import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
-import Infobox from "./Infobox";
 import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { ReactNode } from "react";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
+  description: string;
+  children?: ReactNode;
 }
 
-function GodkjennPlanSendt({ oppfolgingsplan }: Props) {
+function GodkjennPlanSendt({ oppfolgingsplan, description, children }: Props) {
   const gyldighetstidspunkt =
     oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
-
-  const narmesteLederNavn = oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn;
 
   return (
     <SpacedDiv>
@@ -25,10 +25,7 @@ function GodkjennPlanSendt({ oppfolgingsplan }: Props) {
         Planen er sendt til godkjenning
       </Heading>
 
-      <BodyLong spacing>
-        Du har sendt en ny versjon av oppfølgingsplanen til din arbeidsgiver
-        {narmesteLederNavn ? ` ${narmesteLederNavn}.` : "."}
-      </BodyLong>
+      <BodyLong spacing>{description}</BodyLong>
 
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
 
@@ -42,7 +39,7 @@ function GodkjennPlanSendt({ oppfolgingsplan }: Props) {
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
 
-      <Infobox />
+      {children}
 
       <TilLandingssideKnapp />
     </SpacedDiv>

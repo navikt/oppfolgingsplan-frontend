@@ -83,20 +83,6 @@ export const useAvvisOppfolgingsplanSM = () => {
   return useMutation(postAvvisOppfolgingsplan);
 };
 
-export const useNullstillGodkjenningSM = () => {
-  const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
-
-  const nullstillGodkjenning = async (oppfolgingsplanId: number) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/nullstillgodkjenning`
-    );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-  };
-
-  return useMutation(nullstillGodkjenning);
-};
-
 export const useDelOppfolgingsplanMedNavSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
