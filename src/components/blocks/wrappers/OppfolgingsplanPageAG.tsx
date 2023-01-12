@@ -11,7 +11,7 @@ import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBo
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { statusPageToDisplayAG } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
-import { useChosenAktivOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useAktivOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import ArbeidsgiverSide from "./ArbeidsgiverSide";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 
@@ -54,7 +54,7 @@ interface Props {
 }
 
 export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
-  const aktivPlan = useChosenAktivOppfolgingsplanAG();
+  const aktivPlan = useAktivOppfolgingsplanAG();
   const sykmeldt = useDineSykmeldte()?.data;
 
   const erOppfolgingsdialogTilgjengelig =
@@ -86,13 +86,13 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
 
   if (planIsNotEditable) {
     return (
-        <ArbeidsgiverSide
-            title={titleText(page)}
-            heading={textOverskrift(aktivPlan?.arbeidstaker?.navn ?? "")}
-        >
-          <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />
-        </ArbeidsgiverSide>
-    )
+      <ArbeidsgiverSide
+        title={titleText(page)}
+        heading={textOverskrift(aktivPlan?.arbeidstaker?.navn ?? "")}
+      >
+        <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />
+      </ArbeidsgiverSide>
+    );
   }
 
   return (

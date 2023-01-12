@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, post } from "api/axios/axios";
-import { useApiBasePath, useOppfolgingsplanApiPath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
+import {
+  useApiBasePath,
+  useOppfolgingsplanApiPath,
+  useOppfolgingsplanRouteId,
+} from "hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "schema/opprettOppfoelgingsdialogSchema";
 import {
   erOppfolgingsplanAktiv,
@@ -114,16 +118,14 @@ export const useOpprettOppfolgingsplanAG = () => {
   return useMutation(opprettOppfolgingsplan);
 };
 
-export const useChosenAktivOppfolgingsplanAG = ():
-    | Oppfolgingsplan
-    | undefined => {
+export const useAktivOppfolgingsplanAG = (): Oppfolgingsplan | undefined => {
   const allePlaner = useOppfolgingsplanerAG();
   const id = useOppfolgingsplanRouteId();
 
   if (allePlaner.isSuccess) {
     return allePlaner.data
-        .filter((oppfolgingsplan) => erOppfolgingsplanAktiv(oppfolgingsplan))
-        .find((plan) => plan.id === id);
+      .filter((oppfolgingsplan) => erOppfolgingsplanAktiv(oppfolgingsplan))
+      .find((plan) => plan.id === id);
   }
   return undefined;
 };
