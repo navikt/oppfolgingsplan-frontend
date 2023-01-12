@@ -6,13 +6,13 @@ import {
   useTidligereOppfolgingsplanerAG,
 } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "auth/beskyttetSide";
-import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
-import VideoPanel from "../../components/blocks/video/VideoPanel";
-import ArbeidsgiverSide from "../../components/blocks/wrappers/ArbeidsgiverSide";
-import BaserTidligereSkjema from "../../components/landing/opprett/BaserTidligereSkjema";
-import IngenPlanerCard from "../../components/landing/opprett/IngenPlanerCard";
-import OpprettModal from "../../components/landing/opprett/OpprettModal";
-import OppfolgingsdialogTeasere from "../../components/landing/teaser/OppfolgingsdialogTeasere";
+import OppfolgingsdialogerInfoPersonvern from "components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
+import VideoPanel from "components/blocks/video/VideoPanel";
+import ArbeidsgiverSide from "components/blocks/wrappers/ArbeidsgiverSide";
+import BaserTidligereSkjema from "components/landing/opprett/BaserTidligereSkjema";
+import IngenPlanerCard from "components/landing/opprett/IngenPlanerCard";
+import OpprettModal from "components/landing/opprett/OpprettModal";
+import OppfolgingsdialogTeasere from "components/landing/teaser/OppfolgingsdialogTeasere";
 
 const Home: NextPage = () => {
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =

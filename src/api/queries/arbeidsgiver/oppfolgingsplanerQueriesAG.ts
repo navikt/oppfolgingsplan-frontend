@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, post } from "api/axios/axios";
-import { useApiBasePath, useOppfolgingsplanApiPath } from "hooks/routeHooks";
+import {useApiBasePath, useOppfolgingsplanApiPath, useOppfolgingsplanRouteId} from "hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "schema/opprettOppfoelgingsdialogSchema";
 import {
   erOppfolgingsplanAktiv,
@@ -33,6 +33,17 @@ export const useOppfolgingsplanerAG = () => {
     fetchOppfolgingsplaner,
     { enabled: !!sykmeldtFnr }
   );
+};
+
+export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
+  const id = useOppfolgingsplanRouteId();
+  const allePlaner = useOppfolgingsplanerAG();
+
+  if (allePlaner.isSuccess) {
+    return allePlaner.data.find((plan) => plan.id === id);
+  }
+
+  return undefined;
 };
 
 export const useAktiveOppfolgingsplanerAG = () => {
