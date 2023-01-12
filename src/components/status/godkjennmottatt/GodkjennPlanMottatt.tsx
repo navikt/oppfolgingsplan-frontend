@@ -11,9 +11,15 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
+  description: string;
+  altInnTargetAudience: string;
 }
 
-export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
+export const GodkjennPlanMottatt = ({
+  oppfolgingsplan,
+  description,
+  altInnTargetAudience,
+}: Props) => {
   const gyldighetstidspunkt =
     oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
 
@@ -23,9 +29,7 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
 
   return (
     <SpacedDiv>
-      <BodyLong spacing={true}>
-        {`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-      </BodyLong>
+      <BodyLong spacing={true}>{description}</BodyLong>
 
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
 
@@ -38,7 +42,10 @@ export const OppfolgingsdialogerGodkjenn = ({ oppfolgingsplan }: Props) => {
         avbruttOppfolgingsplaner={oppfolgingsplan?.avbruttPlanListe ?? []}
       />
 
-      <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} />
+      <GodkjennOppfolgingsplan
+        oppfolgingsplanId={oppfolgingsplan.id}
+        altInnTargetAudience={altInnTargetAudience}
+      />
 
       <TilLandingssideKnapp />
     </SpacedDiv>

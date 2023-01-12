@@ -1,26 +1,27 @@
 import { BodyShort, Button, Checkbox, Heading } from "@navikt/ds-react";
 import { useState } from "react";
-import { useGodkjennsistOppfolgingsplanSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
+import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplanId: number;
+  altInnTargetAudience: string;
 }
 
-export const GodkjennOppfolgingsplan = ({ oppfolgingsplanId }: Props) => {
+export const GodkjennOppfolgingsplan = ({
+  oppfolgingsplanId,
+  altInnTargetAudience,
+}: Props) => {
   const [delMedNav, setDelMedNav] = useState(false);
   const godkjennOppfolgingsplan =
-    useGodkjennsistOppfolgingsplanSM(oppfolgingsplanId);
+    useGodkjennsistOppfolgingsplan(oppfolgingsplanId);
 
   return (
     <SpacedDiv>
       <Heading level={"2"} size={"medium"} spacing>
         Ønsker du å godkjenne denne planen?
       </Heading>
-      <BodyShort spacing>
-        Alle godkjente planer mellom deg og arbeidsgiveren din vil automatisk
-        bli tilgjengelige for arbeidsplassen i Altinn.
-      </BodyShort>
+      <BodyShort spacing>Alle godkjente planer mellom deg og {altInnTargetAudience} vil automatisk bli tilgjengelige for arbeidsplassen i Altinn.</BodyShort>
       <SpacedDiv>
         <Checkbox onChange={() => setDelMedNav(!delMedNav)} checked={delMedNav}>
           Del planen med NAV (valgfritt)

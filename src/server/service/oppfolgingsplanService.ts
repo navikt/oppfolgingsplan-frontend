@@ -275,7 +275,7 @@ export async function avbrytOppfolgingsplanSM(
   );
 }
 
-export async function avvisOppfolgingsplanSM(
+export async function avvisOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -338,6 +338,18 @@ export async function godkjennsistOppfolgingsplanSM(
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjennsist?aktoer=arbeidstaker&delmednav=${data.delmednav}`,
+    {},
+    { accessToken }
+  );
+}
+
+export async function godkjennsistOppfolgingsplanAG(
+  accessToken: string,
+  oppfolgingsplanId: string,
+  data: GodkjennsistPlanData
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjennsist?aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
     {},
     { accessToken }
   );

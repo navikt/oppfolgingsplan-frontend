@@ -4,7 +4,6 @@ import {
   useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
-import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { useRouter } from "next/router";
@@ -71,18 +70,6 @@ export const useAvbrytOppfolgingsplanSM = () => {
   return useMutation(postAvbrytOppfolgingsplan);
 };
 
-export const useAvvisOppfolgingsplanSM = () => {
-  const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
-
-  const postAvvisOppfolgingsplan = async (oppfolgingsplanId: number) => {
-    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avvis`);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-  };
-
-  return useMutation(postAvvisOppfolgingsplan);
-};
-
 export const useDelOppfolgingsplanMedNavSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
@@ -131,24 +118,6 @@ export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
       queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
     },
   });
-};
-
-export const useGodkjennsistOppfolgingsplanSM = (oppfolgingsplanId: number) => {
-  const apiBasePath = useApiBasePath();
-  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const godkjennsistPlan = async (data: GodkjennsistPlanData) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
-      data
-    );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await router.push(statusUrl);
-  };
-
-  return useMutation(godkjennsistPlan);
 };
 
 export const useOpprettOppfolgingsplanSM = () => {
