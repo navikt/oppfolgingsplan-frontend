@@ -1,18 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Sykmelding } from "../../../../../../../schema/sykmeldingSchema";
-import { isMockBackend } from "../../../../../../../environments/publicEnv";
-import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import {Sykmelding} from "../../../../../../schema/sykmeldingSchema";
 import {
   getArbeidsoppgaveIdFromRequest,
-  getOppfolgingsplanIdFromRequest,
-} from "../../../../../../../server/utils/requestUtils";
-import { deleteOppgave } from "../../../../../../../server/service/oppfolgingsplanService";
-import { beskyttetApi } from "../../../../../../../server/auth/beskyttetApi";
-import getMockDb from "../../../../../../../server/data/mock/getMockDb";
-import {
-  ApiErrorException,
-  generalError,
-} from "../../../../../../../api/axios/errors";
+  getOppfolgingsplanIdFromRequest
+} from "../../../../../../server/utils/requestUtils";
+import {isMockBackend} from "../../../../../../environments/publicEnv";
+import getMockDb from "../../../../../../server/data/mock/getMockDb";
+import {ApiErrorException, generalError} from "../../../../../../api/axios/errors";
+import {deleteOppgave} from "../../../../../../server/service/oppfolgingsplanService";
+import {beskyttetApi} from "../../../../../../server/auth/beskyttetApi";
+import {getSyfoOppfolgingsplanserviceTokenFromRequest} from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+
 
 const handler = async (
   req: NextApiRequest,

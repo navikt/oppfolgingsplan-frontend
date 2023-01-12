@@ -1,4 +1,3 @@
-import { useSlettOppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
 import { Delete } from "@navikt/ds-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import React, { useEffect, useState } from "react";
@@ -7,6 +6,7 @@ import { texts } from "components/seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
+import {useSlettArbeidsoppgave} from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const ModalContent = styled.div`
   padding: 2rem;
@@ -26,7 +26,7 @@ export const SlettArbeidsoppgaveButton = ({
   arbeidsoppgaveId,
 }: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const slettArbeidsoppgave = useSlettOppgaveSM();
+  const slettArbeidsoppgave = useSlettArbeidsoppgave();
 
   useEffect(() => {
     if (Modal.setAppElement) {
