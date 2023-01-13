@@ -26,13 +26,13 @@ export const ArbeidsoppgaveList = ({
     ];
     return arbeidsoppgaver.sort((a, b) => {
       if (
-        order.indexOf(b.gjennomfoering?.kanGjennomfoeres!) <
-        order.indexOf(a.gjennomfoering?.kanGjennomfoeres!)
+        order.indexOf(b.gjennomfoering?.kanGjennomfoeres) <
+        order.indexOf(a.gjennomfoering?.kanGjennomfoeres)
       )
         return 1;
       if (
-        order.indexOf(b.gjennomfoering?.kanGjennomfoeres!) >
-        order.indexOf(a.gjennomfoering?.kanGjennomfoeres!)
+        order.indexOf(b.gjennomfoering?.kanGjennomfoeres) >
+        order.indexOf(a.gjennomfoering?.kanGjennomfoeres)
       )
         return -1;
       else {

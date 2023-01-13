@@ -17,7 +17,6 @@ export interface IServerEnvironmentVariables {
   DINE_SYKMELDTE_ROOT: string;
 }
 
-// @ts-ignore
-const serverEnv = process.env as IServerEnvironmentVariables;
+const serverEnv = process.env as unknown as IServerEnvironmentVariables;
 
 export default serverEnv;

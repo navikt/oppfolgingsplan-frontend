@@ -9,7 +9,7 @@ export const erGyldigDatoIFortiden = (dato: string) => {
 };
 
 export const toDateMedMaanedNavn = (dato?: string | null) => {
-  const nyDato = new Date(dato!!);
+  const nyDato = new Date(dato!);
   const dag = nyDato.getDate();
   const maaned = maanedListe[nyDato.getMonth()];
   const aar = nyDato.getFullYear();

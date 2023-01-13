@@ -1,6 +1,57 @@
 import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
 import { Godkjenning, Oppfolgingsplan } from "../types/oppfolgingsplan";
 
+export const getStatusPageTitleAndHeading = (
+    godkjenningsStatus: StatusPageToDisplay | null,
+    virksomhetsNavn: string | undefined,
+    navnPaaMotpart: string
+) => {
+  switch (godkjenningsStatus) {
+    case "SENDTPLANTILGODKJENNING": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Sendt til godkjenning`,
+      };
+    }
+    case "MOTTATTFLEREGODKJENNINGER": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Mottatt endring`,
+      };
+    }
+    case "GODKJENNPLANMOTTATT": {
+      return {
+        title: `Godkjenn ${virksomhetsNavn}`,
+        heading: `Du har mottatt en ny plan for ${virksomhetsNavn}`,
+      };
+    }
+    case "GODKJENNPLANAVSLATT": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `${navnPaaMotpart} har noen forslag`,
+      };
+    }
+    case "GODKJENTPLANAVBRUTT": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Tidligere oppfølgingsplan`,
+      };
+    }
+    case "GODKJENTPLAN": {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Oppfølgingsplan`,
+      };
+    }
+    default: {
+      return {
+        title: `Status på oppfølgingsplan`,
+        heading: `Status på oppfølgingsplan`,
+      };
+    }
+  }
+};
+
 const harMottattGodkjenningerFraArbeidsgiver = (
   oppfolgingsplan: Oppfolgingsplan
 ): boolean => {
@@ -49,8 +100,8 @@ const harFlereEnnEnGodkjenning = (godkjenninger: Godkjenning[] | null) => {
 const erForsteGodkjenningGodkjent = (
   oppfolgingsplan: Oppfolgingsplan
 ): boolean => {
-  return !!(
-    oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger[0].godkjent
+  return (
+      oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger[0].godkjent
   );
 };
 

@@ -91,7 +91,7 @@ export type Arbeidsoppgave = {
 
 export type Kommentar = {
   id: number;
-  tekst: string;
+  tekst: string | null;
   opprettetTidspunkt: string;
   sistEndretDato: string;
   opprettetAv: Person;

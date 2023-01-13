@@ -1,95 +1,58 @@
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
-import { GodkjentPlanAvbrutt } from "../../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
-import { GodkjennPlanAvslattOgGodkjent } from "../../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
-import { GodkjennPlanAvslatt } from "../../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
-import { OppfolgingsdialogerGodkjenn } from "../../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
-import { statusPageToDisplayAG } from "utils/statusPageUtils";
-import { GodkjentPlan } from "../../../../components/status/godkjentplan/GodkjentPlan";
-import { IngenPlanTilGodkjenning } from "../../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
-import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
-import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
-import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
+import { Oppfolgingsplan } from "types/oppfolgingsplan";
+import {
+  getStatusPageTitleAndHeading,
+  StatusPageToDisplay,
+  statusPageToDisplayAG,
+} from "utils/statusPageUtils";
+import { IngenPlanTilGodkjenning } from "components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
+import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import ArbeidsgiverSide from "../../../../components/blocks/wrappers/ArbeidsgiverSide";
-import { useAktivOppfolgingsplanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-
-export const getStatusPageTitleAndHeading = (
-  oppfolgingsplan?: Oppfolgingsplan
-) => {
-  switch (statusPageToDisplayAG(oppfolgingsplan)) {
-    case "SENDTPLANTILGODKJENNING": {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Sendt til godkjenning`,
-      };
-    }
-    case "MOTTATTFLEREGODKJENNINGER": {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Mottatt endring`,
-      };
-    }
-    case "GODKJENNPLANMOTTATT": {
-      return {
-        title: `Godkjenn ${oppfolgingsplan?.virksomhet?.navn}`,
-        heading: `Du har mottatt en ny plan for ${oppfolgingsplan?.virksomhet?.navn}`,
-      };
-    }
-    case "GODKJENNPLANAVSLATT": {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Lederen din har noen forslag`,
-      };
-    }
-    case "GODKJENTPLANAVBRUTT": {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Tidligere oppfølgingsplan`,
-      };
-    }
-    case "GODKJENTPLAN": {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Oppfølgingsplan`,
-      };
-    }
-    default: {
-      return {
-        title: `Status på oppfølgingsplan`,
-        heading: `Status på oppfølgingsplan`,
-      };
-    }
-  }
-};
+import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
+import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
+import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
+  pageToDisplay: StatusPageToDisplay | null;
 }
 
-const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
+const Content = ({
+  oppfolgingsplan,
+  pageToDisplay,
+}: ContentProps): ReactElement | null => {
   if (!oppfolgingsplan) return null;
-  const pageToDisplay = statusPageToDisplayAG(oppfolgingsplan);
 
   switch (pageToDisplay) {
     case "SENDTPLANTILGODKJENNING": {
-      return <GodkjennPlanSendt oppfolgingsplan={oppfolgingsplan} />;
-    }
-    case "MOTTATTFLEREGODKJENNINGER": {
       return (
-        <GodkjennPlanAvslattOgGodkjent oppfolgingsplan={oppfolgingsplan} />
+        <GodkjennPlanSendt
+          oppfolgingsplan={oppfolgingsplan}
+          description={
+            "Du har sendt en ny versjon av oppfølgingsplanen til din arbeidstaker"
+          }
+        >
+          <GodkjennPlanSendtInfoBox
+            godkjennPlanTargetAudience={"Arbeidstakeren"}
+          />
+        </GodkjennPlanSendt>
       );
     }
+    case "MOTTATTFLEREGODKJENNINGER": {
+      return <div>MOTTATTFLEREGODKJENNINGER</div>;
+    }
     case "GODKJENNPLANMOTTATT": {
-      return <OppfolgingsdialogerGodkjenn oppfolgingsplan={oppfolgingsplan} />;
+      return <div>GODKJENNPLANMOTTATT</div>;
     }
     case "GODKJENNPLANAVSLATT": {
-      return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
+      return <div>GODKJENNPLANAVSLATT</div>;
     }
     case "GODKJENTPLANAVBRUTT": {
-      return <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan} />;
+      return <div>GODKJENTPLANAVBRUTT</div>;
     }
     case "GODKJENTPLAN": {
-      return <GodkjentPlan oppfolgingsplan={oppfolgingsplan} />;
+      return <div>GODKJENTPLAN</div>;
     }
     default: {
       return <IngenPlanTilGodkjenning />;
@@ -97,17 +60,22 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
   }
 };
 
-const OppfolgingsplanStatus: NextPage = () => {
-  const aktivPlan = useAktivOppfolgingsplanAG();
-  const { title, heading } = getStatusPageTitleAndHeading(aktivPlan);
+const OppfolgingsplanStatusAG: NextPage = () => {
+  const aktivPlan = useAktivPlanAG();
+  const pageToDisplay = statusPageToDisplayAG(aktivPlan);
+  const { title, heading } = getStatusPageTitleAndHeading(
+    pageToDisplay,
+    aktivPlan?.virksomhet?.navn,
+    aktivPlan?.arbeidstaker.navn || "Den sykmeldte"
+  );
 
   return (
     <ArbeidsgiverSide title={title} heading={heading}>
-      <Content oppfolgingsplan={aktivPlan} />
+      <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
     </ArbeidsgiverSide>
   );
 };
 
 export const getServerSideProps = beskyttetSideUtenProps;
 
-export default OppfolgingsplanStatus;
+export default OppfolgingsplanStatusAG;

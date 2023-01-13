@@ -1,7 +1,10 @@
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
+import { defaultPersonMockData } from "../../defaultData/oppfolgingsplanservice/defaultPersonMockData";
 
-export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
+const aktivNarmesteLeder = defaultNarmesteLedereMockData[1];
+
+export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
   [
     {
       id: 3455,
@@ -9,16 +12,16 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
       opprettetDato: "2020-02-20",
       status: "UNDER_ARBEID",
       virksomhet: {
-        virksomhetsnummer: "110110110",
+        virksomhetsnummer: aktivNarmesteLeder.virksomhetsnummer,
         navn: "",
       },
       godkjentPlan: null,
       godkjenninger: [
         {
-          godkjent: true,
+          godkjent: false,
           godkjentAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: "Albus Dumbledore",
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -53,8 +56,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           opprettetDato: "2020-02-20T11:31:30.305",
           sistEndretDato: "2020-02-20T11:31:30.305",
           sistEndretAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: defaultPersonMockData.navn,
+            fnr: defaultPersonMockData.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -64,7 +67,7 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           },
           opprettetAv: {
             navn: "Labben Krabbeklo",
-            fnr: "110110110110",
+            fnr: defaultPersonMockData.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -88,8 +91,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           opprettetDato: "2020-02-20T11:31:30.318",
           sistEndretDato: "2020-02-20T11:31:30.318",
           sistEndretAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: defaultPersonMockData.navn,
+            fnr: defaultPersonMockData.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -98,8 +101,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             stillinger: [],
           },
           opprettetAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: defaultPersonMockData.navn,
+            fnr: defaultPersonMockData.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -123,8 +126,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           opprettetDato: "2020-02-20T11:31:30.319",
           sistEndretDato: "2020-02-20T11:31:30.319",
           sistEndretAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -133,8 +136,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             stillinger: [],
           },
           opprettetAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -151,8 +154,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           opprettetDato: "2020-02-20T11:31:30.322",
           sistEndretDato: "2020-02-20T11:31:30.322",
           sistEndretAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -161,8 +164,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             stillinger: [],
           },
           opprettetAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -192,8 +195,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
               opprettetTidspunkt: "2020-02-20T11:31:30.352",
               sistEndretDato: "2020-02-20T11:31:30.352",
               opprettetAv: {
-                navn: defaultNarmesteLedereMockData[0].navn,
-                fnr: defaultNarmesteLedereMockData[0].fnr,
+                navn: aktivNarmesteLeder.navn,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -202,8 +205,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
                 stillinger: [],
               },
               sistEndretAv: {
-                navn: defaultNarmesteLedereMockData[0].navn,
-                fnr: defaultNarmesteLedereMockData[0].fnr,
+                navn: aktivNarmesteLeder.navn,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -216,8 +219,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           status: "FORSLAG",
           gjennomfoering: null,
           opprettetAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: defaultPersonMockData.navn,
+            fnr: defaultPersonMockData.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -226,8 +229,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             stillinger: [],
           },
           sistEndretAv: {
-            navn: "Labben Rekemester",
-            fnr: "110110110110",
+            navn: defaultPersonMockData.navn,
+            fnr: defaultPersonMockData.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -253,8 +256,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
               opprettetTidspunkt: "2020-02-20T11:31:30.376",
               sistEndretDato: "2020-02-20T11:31:30.376",
               opprettetAv: {
-                navn: defaultNarmesteLedereMockData[0].navn,
-                fnr: defaultNarmesteLedereMockData[0].fnr,
+                navn: aktivNarmesteLeder.navn,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -263,8 +266,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
                 stillinger: [],
               },
               sistEndretAv: {
-                navn: defaultNarmesteLedereMockData[0].navn,
-                fnr: defaultNarmesteLedereMockData[0].fnr,
+                navn: aktivNarmesteLeder.navn,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -279,8 +282,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
               opprettetTidspunkt: "2020-02-20T11:31:30.378",
               sistEndretDato: "2020-02-20T11:31:30.378",
               opprettetAv: {
-                navn: "Labben Rekemester",
-                fnr: "110110110110",
+                navn: defaultPersonMockData.navn,
+                fnr: defaultPersonMockData.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -289,8 +292,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
                 stillinger: [],
               },
               sistEndretAv: {
-                navn: "Labben Rekemester",
-                fnr: "110110110110",
+                navn: defaultPersonMockData.navn,
+                fnr: defaultPersonMockData.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -305,8 +308,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
               opprettetTidspunkt: "2020-02-21T12:33:12.378",
               sistEndretDato: "2020-02-21T12:33:12.378",
               opprettetAv: {
-                navn: "Labben Rekemester",
-                fnr: "110110110110",
+                navn: defaultPersonMockData.navn,
+                fnr: defaultPersonMockData.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -315,8 +318,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
                 stillinger: [],
               },
               sistEndretAv: {
-                navn: "Labben Rekemester",
-                fnr: "110110110110",
+                navn: defaultPersonMockData.navn,
+                fnr: defaultPersonMockData.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -330,8 +333,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           gjennomfoering:
             "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
           opprettetAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -340,8 +343,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             stillinger: [],
           },
           sistEndretAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -365,8 +368,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
           status: "IKKE_AKTUELT",
           gjennomfoering: null,
           opprettetAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -375,8 +378,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             stillinger: [],
           },
           sistEndretAv: {
-            navn: defaultNarmesteLedereMockData[0].navn,
-            fnr: defaultNarmesteLedereMockData[0].fnr,
+            navn: aktivNarmesteLeder.navn,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -398,8 +401,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
       ],
       arbeidsgiver: {
         narmesteLeder: {
-          navn: "Labben Rekemester",
-          fnr: "20405060718",
+          navn: aktivNarmesteLeder.navn,
+          fnr: aktivNarmesteLeder.fnr,
           epost: null,
           tlf: null,
           sistInnlogget: "2020-02-24T08:57:46.747",
@@ -411,8 +414,8 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
         },
       },
       arbeidstaker: {
-        navn: "Labben Rekemester",
-        fnr: "110110110110",
+        navn: defaultPersonMockData.navn,
+        fnr: defaultPersonMockData.fnr,
         epost: null,
         tlf: null,
         sistInnlogget: "2020-02-24T09:34:24.266",
@@ -424,13 +427,13 @@ export const godkjennPlanSendtOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
             yrke: "Soppkontrollør",
             prosent: 80,
             fom: "2000-02-11T15:34:53.787",
-            tom: "2022-02-11T15:34:53.787",
+            tom: "2200-02-11T15:34:53.787",
           },
         ],
       },
       sistEndretAv: {
-        navn: defaultNarmesteLedereMockData[0].navn,
-        fnr: defaultNarmesteLedereMockData[0].fnr,
+        navn: aktivNarmesteLeder.navn,
+        fnr: aktivNarmesteLeder.fnr,
         epost: null,
         tlf: null,
         sistInnlogget: null,

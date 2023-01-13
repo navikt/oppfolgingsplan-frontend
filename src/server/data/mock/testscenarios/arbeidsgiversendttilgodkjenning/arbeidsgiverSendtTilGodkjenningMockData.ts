@@ -1,7 +1,7 @@
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
-export const godkjennPlanMottattOppfolgingsplanerMockData: OppfolgingsplanDTO[] =
+export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] =
   [
     {
       id: 3455,

@@ -66,13 +66,13 @@ const OpprettOppfolgingsplanModal = ({
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
         opprettOppfolgingsplan.mutate({
-          sykmeldtFnr: sykmeldtFnr!!,
+          sykmeldtFnr: sykmeldtFnr!,
           virksomhetsnummer: virksomhetsnummer,
         });
       }
     } else {
       opprettOppfolgingsplan.mutate({
-        sykmeldtFnr: sykmeldtFnr!!,
+        sykmeldtFnr: sykmeldtFnr!,
         virksomhetsnummer: virksomhetsnummer,
       });
     }
@@ -105,7 +105,7 @@ const OpprettOppfolgingsplanModal = ({
                   handleSubmit={(virksomhetsnummer: string) => {
                     opprettOppfolgingsplan
                       .mutateAsync({
-                        sykmeldtFnr: sykmeldtFnr!!,
+                        sykmeldtFnr: sykmeldtFnr!,
                         virksomhetsnummer: virksomhetsnummer,
                       })
                       .then(() => {
