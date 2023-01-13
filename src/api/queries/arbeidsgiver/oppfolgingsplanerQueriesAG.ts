@@ -35,18 +35,6 @@ export const useOppfolgingsplanerAG = () => {
   );
 };
 
-//todo
-export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
-  const id = useOppfolgingsplanRouteId();
-  const allePlaner = useOppfolgingsplanerAG();
-
-  if (allePlaner.isSuccess) {
-    return allePlaner.data.find((plan) => plan.id === id);
-  }
-
-  return undefined;
-};
-
 export const useAktiveOppfolgingsplanerAG = () => {
   const allePlaner = useOppfolgingsplanerAG();
 
@@ -126,7 +114,7 @@ export const useOpprettOppfolgingsplanAG = () => {
   return useMutation(opprettOppfolgingsplan);
 };
 
-//TODO
+//TODO: do we need to check erOppfolgingsplanAktiv(oppfolgingsplan)?
 export const useAktivOppfolgingsplanAG = (): Oppfolgingsplan | undefined => {
   const allePlaner = useOppfolgingsplanerAG();
   const id = useOppfolgingsplanRouteId();
@@ -136,5 +124,17 @@ export const useAktivOppfolgingsplanAG = (): Oppfolgingsplan | undefined => {
       .filter((oppfolgingsplan) => erOppfolgingsplanAktiv(oppfolgingsplan))
       .find((plan) => plan.id === id);
   }
+  return undefined;
+};
+
+//TODO: do we need to check erOppfolgingsplanAktiv(oppfolgingsplan)?
+export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
+  const id = useOppfolgingsplanRouteId();
+  const allePlaner = useOppfolgingsplanerAG();
+
+  if (allePlaner.isSuccess) {
+    return allePlaner.data.find((plan) => plan.id === id);
+  }
+
   return undefined;
 };
