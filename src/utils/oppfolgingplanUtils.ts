@@ -47,7 +47,7 @@ export const erSykmeldingGyldigForOppfolgingMedGrensedato = (
 
 export const erOppfolgingsplanKnyttetTilGyldigSykmeldingAG = (
   oppfolgingsplan: Oppfolgingsplan,
-  orgnummer: String,
+  orgnummer: string,
   aktivSykmelding: boolean | null | undefined
 ) => {
   return (
