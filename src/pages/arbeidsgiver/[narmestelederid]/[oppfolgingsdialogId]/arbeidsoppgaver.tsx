@@ -17,11 +17,11 @@ const Arbeidsoppgaver: NextPage = () => {
 
   return (
       <>
-         {!aktivPlan || !arbeidstakerFnr && (
+            {(!aktivPlan || !arbeidstakerFnr) && (
                 <SpacedDiv>
                     <Feilmelding
                         description={
-                            "Vi lkarte ikke å hente aktiv oppfølgingsplan eller Oppfolgingsplan mangler arbeidstakers fødselsnummer. Vennligst prøv igjen senere."
+                            "Denne oppfølgingsplanen er ikke aktiv eller mangler arbeidstakers fødselsnummer. Vennligst prøv igjen senere."
                         }
                     />
                 </SpacedDiv>
