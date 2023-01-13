@@ -29,7 +29,7 @@ interface Props {
   onCancel(): void;
 
   defaultFormValues?: OppgaveFormValues;
-  navnIsEditable?: Boolean;
+  navnIsEditable?: boolean;
 }
 
 export const ArbeidsoppgaveFormAG = ({
