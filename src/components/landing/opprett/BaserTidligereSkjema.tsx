@@ -29,7 +29,7 @@ export const BaserTidligereSkjema = ({
   onSubmit,
   handleClose,
 }: Props): ReactElement => {
-  const [baserTidligere, setBaserTidligere] = useState<boolean>();
+  const [baserTidligere, setBaserTidligere] = useState(false);
 
   return (
     <>
