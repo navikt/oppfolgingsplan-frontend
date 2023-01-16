@@ -22,7 +22,8 @@ const Home: NextPage = () => {
     useTidligereOppfolgingsplanerAG();
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanAG();
   const [visOpprettModal, setVisOpprettModal] = useState(false);
-  const [visReservertInfoboks, setVisReservertInfoboks] = useState(!aktiveOppfolgingsplaner[0]?.skalHaVarsel);
+  const skalIkkeHaVarsel = aktiveOppfolgingsplaner[0]?  !aktiveOppfolgingsplaner[0]?.skalHaVarsel : false
+  const [visReservertInfoboks, setVisReservertInfoboks] = useState(skalIkkeHaVarsel);
 
   return (
     <ArbeidsgiverSide
