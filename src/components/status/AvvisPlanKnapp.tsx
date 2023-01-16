@@ -1,15 +1,15 @@
 import { Edit } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
-import { useAvvisOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
 import { useRouter } from "next/router";
+import { useAvvisOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplanId: number;
 }
 
 export const AvvisPlanKnapp = ({ oppfolgingsplanId }: Props) => {
-  const avvisDialog = useAvvisOppfolgingsplanSM();
+  const avvisDialog = useAvvisOppfolgingsplan();
   const arbeidsOppgaverPage = useOppfolgingsplanUrl(
     oppfolgingsplanId,
     "arbeidsoppgaver"

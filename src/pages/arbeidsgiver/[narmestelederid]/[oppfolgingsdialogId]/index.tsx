@@ -12,6 +12,7 @@ import ArbeidsgiverSide from "../../../../components/blocks/wrappers/Arbeidsgive
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
+import { GodkjennPlanMottatt } from "../../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -43,7 +44,13 @@ const Content = ({
       return <div>MOTTATTFLEREGODKJENNINGER</div>;
     }
     case "GODKJENNPLANMOTTATT": {
-      return <div>GODKJENNPLANMOTTATT</div>;
+      return (
+        <GodkjennPlanMottatt
+          oppfolgingsplan={oppfolgingsplan}
+          description={`${oppfolgingsplan?.arbeidstaker?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
+          altinnTargetAudience={"arbeidstakeren"}
+        />
+      );
     }
     case "GODKJENNPLANAVSLATT": {
       return <div>GODKJENNPLANAVSLATT</div>;
