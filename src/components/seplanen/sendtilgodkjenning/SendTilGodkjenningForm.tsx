@@ -131,7 +131,9 @@ export const SendTilGodkjenningForm = ({
             <DatoVelger
               name="startDato"
               label={"Startdato (obligatorisk)"}
-              defaultValue={new Date(suggestedStartDate!)}
+              defaultValue={
+                suggestedStartDate ? new Date(suggestedStartDate) : null
+              }
               errorMessageToDisplay={errors.startDato?.message}
               requiredErrorMessage={"Du må velge startdato"}
             />
