@@ -2,8 +2,8 @@ import { array, boolean, number, object, string, z } from "zod";
 import { narmesteLederSchema } from "./narmestelederSchema";
 
 export const virksomhetSchema = object({
-  virksomhetsnummer: string().nullable(),
-  navn: string().nullable(),
+  virksomhetsnummer: string(),
+  navn: string(),
 });
 
 export const gyldighetstidspunktSchema = object({
@@ -16,33 +16,34 @@ export const evalueringSchema = object({
   effekt: string().nullable(),
   hvorfor: string().nullable(),
   videre: string().nullable(),
-  interneaktiviteter: boolean().nullable(),
+  interneaktiviteter: boolean(),
   ekstratid: boolean().nullable(),
   bistand: boolean().nullable(),
   ingen: boolean().nullable(),
 });
 
 export const stillingSchema = object({
-  virksomhetsnummer: string().nullable(),
-  yrke: string().nullable(),
-  prosent: number().nullable(),
-  fom: string().nullable(),
+  virksomhetsnummer: string(),
+  yrke: string(),
+  prosent: number(),
+  fom: string(),
+  tom: string(),
 });
 
 export const personSchema = object({
   navn: string(),
-  fnr: string().nullable().optional(),
-  epost: string().nullable().optional(),
+  fnr: string(),
+  epost: string().nullish(),
   tlf: string().nullable().optional(),
   sistInnlogget: string().nullable().optional(),
   samtykke: boolean().nullable().optional(),
   evaluering: evalueringSchema.nullable().optional(),
-  stillinger: array(stillingSchema).nullable().optional(),
+  stillinger: array(stillingSchema),
 });
 
 export const kommentarSchema = object({
   id: number(),
-  tekst: string().nullish(),
+  tekst: string().nullable(),
   opprettetTidspunkt: string(),
   sistEndretDato: string(),
   opprettetAv: personSchema,
@@ -56,13 +57,13 @@ export const avbruttplanSchema = object({
 
 export const godkjentPlanSchema = object({
   opprettetTidspunkt: string(),
-  gyldighetstidspunkt: gyldighetstidspunktSchema.nullable(),
-  tvungenGodkjenning: boolean().nullable(),
+  gyldighetstidspunkt: gyldighetstidspunktSchema,
+  tvungenGodkjenning: boolean(),
   deltMedNAVTidspunkt: string().nullish(),
-  deltMedNAV: boolean().nullable(),
+  deltMedNAV: boolean(),
   deltMedFastlegeTidspunkt: string().nullish(),
-  deltMedFastlege: boolean().nullable(),
-  dokumentUuid: string().nullable(),
+  deltMedFastlege: boolean(),
+  dokumentUuid: string(),
   avbruttPlan: avbruttplanSchema.nullable(),
 });
 
@@ -71,8 +72,8 @@ export const godkjenningSchema = object({
   godkjentAv: personSchema,
   beskrivelse: string().nullish(),
   godkjenningsTidspunkt: string(),
-  gyldighetstidspunkt: gyldighetstidspunktSchema.nullable(),
-  delMedNav: boolean().nullable(),
+  gyldighetstidspunkt: gyldighetstidspunktSchema,
+  delMedNav: boolean(),
 });
 
 export const tiltakSchema = object({
@@ -85,8 +86,8 @@ export const tiltakSchema = object({
   beskrivelseIkkeAktuelt: string().nullish(),
   opprettetDato: string(),
   sistEndretDato: string(),
-  kommentarer: array(kommentarSchema).nullable(),
-  status: string().nullable(),
+  kommentarer: array(kommentarSchema),
+  status: string(),
   gjennomfoering: string().nullish(),
   opprettetAv: personSchema,
   sistEndretAv: personSchema,
@@ -104,7 +105,7 @@ export const gjennomforingSchema = object({
 export const arbeidsoppgaveSchema = object({
   arbeidsoppgaveId: number(),
   arbeidsoppgavenavn: string(),
-  erVurdertAvSykmeldt: boolean().nullable(),
+  erVurdertAvSykmeldt: boolean(),
   gjennomfoering: gjennomforingSchema.nullish(),
   opprettetDato: string(),
   sistEndretDato: string(),
@@ -113,7 +114,7 @@ export const arbeidsoppgaveSchema = object({
 });
 
 export const arbeidsgiverSchema = object({
-  naermesteLeder: narmesteLederSchema.nullable().optional(),
+  narmesteLeder: narmesteLederSchema,
 });
 
 export const oppfolgingsplanSchema = object({
@@ -121,29 +122,18 @@ export const oppfolgingsplanSchema = object({
   sistEndretDato: string(),
   opprettetDato: string(),
   status: string(),
-  virksomhet: virksomhetSchema.nullable(),
+  virksomhet: virksomhetSchema,
   godkjentPlan: godkjentPlanSchema.nullable(),
-  godkjenninger: array(godkjenningSchema).nullable(),
-  arbeidsoppgaveListe: array(arbeidsoppgaveSchema).nullable(),
-  tiltakListe: array(tiltakSchema).nullable(),
-  avbruttPlanListe: array(avbruttplanSchema).nullable(),
-  arbeidsgiver: arbeidsgiverSchema.nullable(),
+  godkjenninger: array(godkjenningSchema),
+  arbeidsoppgaveListe: array(arbeidsoppgaveSchema),
+  tiltakListe: array(tiltakSchema),
+  avbruttPlanListe: array(avbruttplanSchema),
+  arbeidsgiver: arbeidsgiverSchema,
   arbeidstaker: personSchema,
   sistEndretAv: personSchema,
   skalHaVarsel: boolean().nullish(),
 });
 
-export type Oppfolgingsplan = z.infer<typeof oppfolgingsplanSchema>;
-export type Godkjenning = z.infer<typeof godkjenningSchema>;
-export type Arbeidsgiver = z.infer<typeof arbeidsgiverSchema>;
-export type Arbeidsoppgave = z.infer<typeof arbeidsoppgaveSchema>;
-export type Gjennomforing = z.infer<typeof gjennomforingSchema>;
-export type Tiltak = z.infer<typeof tiltakSchema>;
-export type GodkjentPlan = z.infer<typeof godkjentPlanSchema>;
-export type Avbruttplan = z.infer<typeof avbruttplanSchema>;
-export type Stilling = z.infer<typeof stillingSchema>;
-export type Evaluering = z.infer<typeof evalueringSchema>;
-export type Gyldighetstidspunkt = z.infer<typeof gyldighetstidspunktSchema>;
-export type Virksomhet = z.infer<typeof virksomhetSchema>;
-export type Kommentar = z.infer<typeof kommentarSchema>;
-export type Person = z.infer<typeof personSchema>;
+export type OppfolgingsplanDTO = z.infer<typeof oppfolgingsplanSchema>;
+export type StillingDTO = z.infer<typeof stillingSchema>;
+export type VirksomhetDTO = z.infer<typeof virksomhetSchema>;

@@ -1,9 +1,9 @@
 import { KANGJENNOMFOERES } from "constants/konstanter";
 import { BodyLong, Heading } from "@navikt/ds-react";
-import { Arbeidsoppgave } from "../../../schema/oppfolgingsplanSchema";
 import { ContentWrapper } from "../ContentWrapper";
 import { texts } from "../texts";
 import { ArbeidsoppgaveCard } from "components/arbeidsoppgaver/ArbeidsoppgaveCard";
+import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -26,13 +26,13 @@ export const ArbeidsoppgaveList = ({
     ];
     return arbeidsoppgaver.sort((a, b) => {
       if (
-        order.indexOf(b.gjennomfoering?.kanGjennomfoeres!) <
-        order.indexOf(a.gjennomfoering?.kanGjennomfoeres!)
+        order.indexOf(b.gjennomfoering?.kanGjennomfoeres) <
+        order.indexOf(a.gjennomfoering?.kanGjennomfoeres)
       )
         return 1;
       if (
-        order.indexOf(b.gjennomfoering?.kanGjennomfoeres!) >
-        order.indexOf(a.gjennomfoering?.kanGjennomfoeres!)
+        order.indexOf(b.gjennomfoering?.kanGjennomfoeres) >
+        order.indexOf(a.gjennomfoering?.kanGjennomfoeres)
       )
         return -1;
       else {

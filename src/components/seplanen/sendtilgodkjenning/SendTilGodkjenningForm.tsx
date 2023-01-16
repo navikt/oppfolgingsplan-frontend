@@ -8,13 +8,13 @@ import {
 } from "@navikt/ds-react";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement } from "react";
-import { Oppfolgingsplan, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { useGodkjennOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import styled from "styled-components";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
+import { Oppfolgingsplan, Tiltak } from "../../../types/oppfolgingsplan";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -52,13 +52,13 @@ export const SendTilGodkjenningForm = ({
   const suggestedStartDate = oppfolgingsplan.tiltakListe
     ?.filter((tiltak) => tiltak.fom)
     .sort((t1: Tiltak, t2: Tiltak) => {
-      return new Date(t1.fom!!).getTime() - new Date(t2.fom!!).getTime();
+      return new Date(t1.fom!).getTime() - new Date(t2.fom!).getTime();
     })[0]?.fom;
 
   const suggestedEndDate = oppfolgingsplan.tiltakListe
     ?.filter((tiltak) => tiltak.tom)
     .sort((t1: Tiltak, t2: Tiltak) => {
-      return new Date(t2.tom!!).getTime() - new Date(t1.tom!!).getTime();
+      return new Date(t2.tom!).getTime() - new Date(t1.tom!).getTime();
     })[0]?.tom;
 
   const startDate = watch("startDato");
@@ -131,7 +131,7 @@ export const SendTilGodkjenningForm = ({
             <DatoVelger
               name="startDato"
               label={"Startdato (obligatorisk)"}
-              defaultValue={new Date(suggestedStartDate!!)}
+              defaultValue={new Date(suggestedStartDate!)}
               errorMessageToDisplay={errors.startDato?.message}
               requiredErrorMessage={"Du må velge startdato"}
             />

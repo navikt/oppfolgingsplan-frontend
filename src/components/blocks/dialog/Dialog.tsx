@@ -5,7 +5,7 @@ import { hentAktoerNavnInitialer } from "utils/stringUtils";
 import { getFullDateFormat } from "utils/dateUtils";
 import { useSlettKommentarSM } from "api/queries/sykmeldt/tiltakQueriesSM";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { Kommentar } from "../../../schema/oppfolgingsplanSchema";
+import { Kommentar } from "../../../types/oppfolgingsplan";
 
 interface Props {
   aktorFnr: string;

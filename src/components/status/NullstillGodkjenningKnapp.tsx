@@ -1,8 +1,8 @@
 import { Edit } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
-import { useNullstillGodkjenningSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
 import { useRouter } from "next/router";
+import { useNullstillGodkjenning } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -10,7 +10,7 @@ interface Props {
 
 export const NullstillGodkjenningKnapp = ({ oppfolgingsplanId }: Props) => {
   const router = useRouter();
-  const nullstillGodkjenning = useNullstillGodkjenningSM();
+  const nullstillGodkjenning = useNullstillGodkjenning();
   const arbeidsoppgaverUrl = useOppfolgingsplanUrl(
     oppfolgingsplanId,
     "arbeidsoppgaver"

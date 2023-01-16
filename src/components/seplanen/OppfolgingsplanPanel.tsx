@@ -10,8 +10,10 @@ interface Props {
 export const OppfolgingsplanPanel = ({ children, href }: Props) => {
   if (href) {
     return (
-      <Link href={href} passHref={true}>
-        <LinkPanel border>{children}</LinkPanel>
+      <Link href={href}>
+        <LinkPanel as="div" border>
+          {children}
+        </LinkPanel>
       </Link>
     );
   }

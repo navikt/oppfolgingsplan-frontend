@@ -1,29 +1,23 @@
-import {
-  Godkjenning,
-  Oppfolgingsplan,
-} from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { findName } from "./findName";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { Godkjenning } from "../../../types/oppfolgingsplan";
 
 export const mapGodkjenninger = (
-  oppfolgingsplan: Oppfolgingsplan,
+  oppfolgingsplan: OppfolgingsplanDTO,
   oppfolgingplanerMeta: OppfolgingsplanMeta
-): Godkjenning[] | null => {
-  if (oppfolgingsplan.godkjenninger) {
-    return oppfolgingsplan.godkjenninger.map((godkjenning) => {
-      return {
-        ...godkjenning,
-        godkjentAv: {
-          ...godkjenning.godkjentAv,
-          navn: findName(
-            oppfolgingplanerMeta.narmesteLedere,
-            oppfolgingplanerMeta.person,
-            godkjenning.godkjentAv.fnr
-          ),
-        },
-      };
-    });
-  }
-
-  return null;
+): Godkjenning[] => {
+  return oppfolgingsplan.godkjenninger.map((godkjenning) => {
+    return {
+      ...godkjenning,
+      godkjentAv: {
+        ...godkjenning.godkjentAv,
+        navn: findName(
+          oppfolgingplanerMeta.narmesteLedere,
+          oppfolgingplanerMeta.person,
+          godkjenning.godkjentAv.fnr
+        ),
+      },
+    };
+  });
 };

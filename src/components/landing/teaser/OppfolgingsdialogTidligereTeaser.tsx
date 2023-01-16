@@ -1,8 +1,8 @@
 import { useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { hentPlanStatus } from "utils/teaserUtils";
 import React from "react";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

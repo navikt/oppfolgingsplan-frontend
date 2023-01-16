@@ -2,9 +2,9 @@ import { Alert, BodyLong, Button, GuidePanel } from "@navikt/ds-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Arbeidsoppgave, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { Arbeidsoppgave, Tiltak } from "../../../types/oppfolgingsplan";
 
 const SpacedGuidePanel = styled(GuidePanel)`
   margin-bottom: 2rem;

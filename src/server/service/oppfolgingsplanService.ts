@@ -4,13 +4,12 @@ import serverEnv from "server/utils/serverEnv";
 import { GodkjennsistPlanData } from "../../schema/godkjennsistPlanSchema";
 import { tilgangSchema } from "../../schema/tilgangSchema";
 import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
-import { narmesteLederSchema } from "../../schema/narmestelederSchema";
 import {
-  Arbeidsoppgave,
-  Kommentar,
+  narmesteLederSchema,
+  narmesteLederV3Schema,
+} from "../../schema/narmestelederSchema";
+import {
   oppfolgingsplanSchema,
-  personSchema,
-  Tiltak,
   virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
@@ -19,6 +18,8 @@ import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
 import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
+import { personV3Schema } from "../../schema/personSchemas";
+import { Arbeidsoppgave, Kommentar, Tiltak } from "../../types/oppfolgingsplan";
 
 export async function getNarmesteLeder(
   accessToken: string,
@@ -42,7 +43,7 @@ export async function getNarmesteLeder(
 }
 
 export async function getNarmesteLedere(accessToken: string, fnr: string) {
-  const response = array(narmesteLederSchema).safeParse(
+  const response = array(narmesteLederV3Schema).safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/narmesteledere/${fnr}`,
       {
@@ -201,7 +202,7 @@ export async function getTilgang(accessToken: string, fnr: string) {
 }
 
 export async function getPersonSM(accessToken: string, fnr: string) {
-  const response = personSchema.safeParse(
+  const response = personV3Schema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person/${fnr}`,
       { accessToken }
@@ -241,7 +242,18 @@ export async function createOppfolgingsplanSM(
   );
 }
 
-export async function kopierOppfolgingsplanSM(
+export async function createOppfolgingsplanAG(
+  accessToken: string,
+  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
+    opprettOppfolgingsplanData,
+    { accessToken }
+  );
+}
+
+export async function kopierOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanIdToCopy: string
 ) {
@@ -274,7 +286,7 @@ export async function avvisOppfolgingsplanSM(
   );
 }
 
-export async function nullstillGodkjenningSM(
+export async function nullstillGodkjenning(
   accessToken: string,
   oppfolgingsplanId: string
 ) {

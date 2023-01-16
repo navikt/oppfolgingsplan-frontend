@@ -1,8 +1,8 @@
 import MedicalBoxImage from "../../blocks/images/medical-box.svg";
 import NavLogoImage from "../../blocks/images/nav-logo.svg";
 import { toDateMedMaanedNavn } from "utils/dateUtils";
-import { GodkjentPlan } from "../../../schema/oppfolgingsplanSchema";
 import { BildeTekstLinje } from "../BildeTekstLinje";
+import { GodkjentPlan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   godkjentPlan: GodkjentPlan;

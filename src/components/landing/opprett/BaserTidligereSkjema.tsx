@@ -17,16 +17,19 @@ const SpacedRadioGroup = styled(RadioGroup)`
 `;
 
 interface Props {
+  isLoading: boolean;
+
   onSubmit(value: boolean): void;
 
   handleClose(): void;
 }
 
 export const BaserTidligereSkjema = ({
+  isLoading,
   onSubmit,
   handleClose,
 }: Props): ReactElement => {
-  const [baserTidligere, setBaserTidligere] = useState(false);
+  const [baserTidligere, setBaserTidligere] = useState<boolean>();
 
   return (
     <>
@@ -43,7 +46,8 @@ export const BaserTidligereSkjema = ({
         <Button
           variant={"primary"}
           type={"button"}
-          onClick={() => onSubmit(baserTidligere)}
+          loading={isLoading}
+          onClick={() => onSubmit(baserTidligere ?? false)}
         >
           {texts.buttonSubmit}
         </Button>

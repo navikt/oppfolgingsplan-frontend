@@ -1,8 +1,8 @@
 import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { post } from "api/axios/axios";
 import { OPPFOLGINGSPLANER_SM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { Kommentar, Tiltak } from "../../../schema/oppfolgingsplanSchema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
 
 export const useLagreTiltakSM = () => {
   const apiBasePath = useApiBasePath();

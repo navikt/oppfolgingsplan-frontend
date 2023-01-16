@@ -1,23 +1,40 @@
+import { leggTilDagerPaDato } from "utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "schema/oppfolgingsplanSchema";
 
-export const godkjennPlanMottattOppfolgingsplanerMockData: Oppfolgingsplan[] = [
+const today = new Date();
+
+export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
   {
-    id: 3455,
+    id: 7777,
     sistEndretDato: "2020-02-20T11:31:29.837",
     opprettetDato: "2020-02-20",
-    status: "UNDER_ARBEID",
+    status: "UTDATERT",
     virksomhet: {
       virksomhetsnummer: "110110110",
       navn: "",
     },
-    godkjentPlan: null,
+    godkjentPlan: {
+      opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
+      gyldighetstidspunkt: {
+        fom: "2015-09-11T11:31:29.837",
+        tom: "2015-11-16T11:31:29.837",
+        evalueres: leggTilDagerPaDato(today, 14).toJSON(),
+      },
+      tvungenGodkjenning: true,
+      deltMedNAVTidspunkt: null,
+      deltMedNAV: false,
+      deltMedFastlegeTidspunkt: null,
+      deltMedFastlege: false,
+      dokumentUuid: "12345678-1234-1234-1234-123456789abc",
+      avbruttPlan: null,
+    },
     godkjenninger: [
       {
         godkjent: true,
         godkjentAv: {
-          navn: "Albus Dumbledore",
-          fnr: "11011011011",
+          navn: "Labben Rekemester",
+          fnr: "110110110110",
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -44,7 +61,7 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           kanGjennomfoeres: "TILRETTELEGGING",
           paaAnnetSted: true,
           medMerTid: true,
-          medHjelp: false,
+          medHjelp: true,
           kanBeskrivelse:
             "Trenger mer tid til de faste oppgavene og kan utføre noen av disse hjemmefra. ",
           kanIkkeBeskrivelse: null,
@@ -176,8 +193,8 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: Oppfolgingsplan[] = [
         tiltakId: 4852,
         tiltaknavn: "Hjemmekontor ",
         knyttetTilArbeidsoppgaveId: null,
-        fom: "2021-04-15",
-        tom: "2022-07-26",
+        fom: "2020-02-10",
+        tom: "2020-02-21",
         beskrivelse:
           "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
         beskrivelseIkkeAktuelt: null,
@@ -395,15 +412,15 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
-        navn: "Labben Rekemester",
-        fnr: "20405060718",
-        epost: null,
-        tlf: null,
+      narmesteLeder: {
+        navn: "Albus Dumbledore",
+        fnr: "11011011011",
+        epost: "albus@hogwarts.ac.uk",
+        tlf: "110",
         sistInnlogget: "2020-02-24T08:57:46.747",
         samtykke: null,
-        virksomhetsnummer: "123",
-        erAktiv: false,
+        virksomhetsnummer: "110110110",
+        erAktiv: true,
         aktivFom: "2020-02-24T08:57:46.747",
         aktivTom: null,
       },
@@ -422,6 +439,7 @@ export const godkjennPlanMottattOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2200-02-11T15:34:53.787",
         },
       ],
     },

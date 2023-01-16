@@ -1,8 +1,8 @@
 import React from "react";
 import OppfolgingsdialogTeaser from "./OppfolgingsdialogTeaser";
 import OppfolgingsdialogTidligereTeaser from "./OppfolgingsdialogTidligereTeaser";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { Heading } from "@navikt/ds-react";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   tittel: string;

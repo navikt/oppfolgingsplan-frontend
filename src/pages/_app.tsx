@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { useAudience } from "hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   DehydratedState,
   Hydrate,
@@ -16,6 +16,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TestScenarioSelector } from "../components/blocks/testscenarioselector/TestScenarioSelector";
 import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
+import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 
 const minutesToMillis = (minutes: number) => {
   return 1000 * 60 * minutes;
@@ -69,7 +70,9 @@ function MyApp({
             <BreadcrumbsAppenderAG />
           )}
           <main tabIndex={-1} id="maincontent">
-            <Component {...pageProps} />
+            <OPErrorBoundary>
+              <Component {...pageProps} />
+            </OPErrorBoundary>
           </main>
         </>
       </Hydrate>

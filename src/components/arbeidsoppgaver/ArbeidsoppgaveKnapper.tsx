@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Row } from "components/blocks/wrappers/Row";
 
 interface Props {
-  show: Boolean;
+  show: boolean;
   children: ReactNode;
 }
 

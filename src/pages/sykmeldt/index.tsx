@@ -24,8 +24,8 @@ const Home: NextPage = () => {
       />
 
       <OppfolgingsplanContent
-        oppfolgingsplaner={oppfolgingsplaner.data!!}
-        sykmeldinger={sykmeldinger.data!!}
+        oppfolgingsplaner={oppfolgingsplaner.data!}
+        sykmeldinger={sykmeldinger.data!}
       />
 
       <VideoPanel />

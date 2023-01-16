@@ -1,7 +1,7 @@
 import { BodyShort } from "@navikt/ds-react";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;

@@ -3,9 +3,9 @@ import { Sykmelding } from "../../../../../../schema/sykmeldingSchema";
 import { isMockBackend } from "../../../../../../environments/publicEnv";
 import { saveOppgave } from "../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
-import { Arbeidsoppgave } from "../../../../../../schema/oppfolgingsplanSchema";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
+import { Arbeidsoppgave } from "../../../../../../types/oppfolgingsplan";
 
 const handler = async (
   req: NextApiRequest,

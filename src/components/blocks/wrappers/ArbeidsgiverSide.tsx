@@ -39,41 +39,43 @@ interface SideProps {
   children: ReactNode;
 }
 
+const PageContent = ({ title, heading, children }: SideProps) => {
+  const sykmeldt = useDineSykmeldte();
+  const oppfolgingsplaner = useOppfolgingsplanerAG();
+  const tilgang = useTilgangAG();
+
+  if (oppfolgingsplaner.isError || sykmeldt.isError || tilgang.isError) {
+    return (
+      <Feilmelding
+        title="Beklager, vi fikk en teknisk feil"
+        description="Det skjedde en feil ved henting av dine oppfølgingsplaner. Vennligst prøv igjen senere."
+      />
+    );
+  } else if (
+    !sykmeldt.isError &&
+    (tilgang.fetchStatus === "fetching" ||
+      oppfolgingsplaner.isLoading ||
+      sykmeldt.isLoading)
+  ) {
+    return <AppSpinner />;
+  } else if (tilgang.data && !tilgang.data.harTilgang) {
+    return <AdresseSperreInfoBoks />;
+  } else {
+    return (
+      <>
+        <PageHeading title={title} heading={heading} />
+        {children}
+      </>
+    );
+  }
+};
+
 const ArbeidsgiverSide = ({
   title,
   heading,
   children,
 }: SideProps): ReactElement => {
   const sykmeldt = useDineSykmeldte();
-  const oppfolgingsplaner = useOppfolgingsplanerAG();
-  const tilgang = useTilgangAG();
-
-  const PageContent = () => {
-    if (oppfolgingsplaner.isError || sykmeldt.isError || tilgang.isError) {
-      return (
-        <Feilmelding
-          title="Beklager, vi fikk en teknisk feil"
-          description="Det skjedde en feil ved henting av dine oppfølgingsplaner. Vennligst prøv igjen senere."
-        />
-      );
-    } else if (
-      !sykmeldt.isError &&
-      (tilgang.fetchStatus === "fetching" ||
-        oppfolgingsplaner.isLoading ||
-        sykmeldt.isLoading)
-    ) {
-      return <AppSpinner />;
-    } else if (tilgang.data && !tilgang.data.harTilgang) {
-      return <AdresseSperreInfoBoks />;
-    } else {
-      return (
-        <>
-          <PageHeading title={title} heading={heading} />
-          {children}
-        </>
-      );
-    }
-  };
 
   return (
     <PageContainer
@@ -81,7 +83,9 @@ const ArbeidsgiverSide = ({
       header={getSykmeldtHeader(sykmeldt.data)}
       navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
     >
-      <PageContent />
+      <PageContent title={title} heading={heading}>
+        {children}
+      </PageContent>
     </PageContainer>
   );
 };

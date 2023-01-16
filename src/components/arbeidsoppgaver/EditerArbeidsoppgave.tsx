@@ -1,13 +1,10 @@
 import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
 import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
 import { TILRETTELEGGING } from "constants/konstanter";
-import {
-  Arbeidsoppgave,
-  Gjennomforing,
-} from "../../schema/oppfolgingsplanSchema";
+import { Arbeidsoppgave, Gjennomforing } from "../../types/oppfolgingsplan";
 
 interface Props {
-  show: Boolean;
+  show: boolean;
   arbeidsoppgave: Arbeidsoppgave;
 
   doneEditing(): void;
@@ -62,12 +59,15 @@ export const EditerArbeidsoppgave = ({
     <ArbeidsoppgaveForm
       defaultFormValues={{
         navnPaaArbeidsoppgaven: arbeidsoppgave.arbeidsoppgavenavn,
-        kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres!!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres!,
         tilrettelegging: getTilretteleggingFormData(
           arbeidsoppgave.gjennomfoering
         ),
-        kanBeskrivelse: arbeidsoppgave.gjennomfoering?.kanBeskrivelse!!,
-        kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        kanBeskrivelse: arbeidsoppgave.gjennomfoering?.kanBeskrivelse!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+        kanIkkeBeskrivelse: arbeidsoppgave.gjennomfoering?.kanIkkeBeskrivelse!,
       }}
       onSubmit={(data) => {
         lagreArbeidsoppgave

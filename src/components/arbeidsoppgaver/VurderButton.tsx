@@ -3,7 +3,7 @@ import { MouseEventHandler } from "react";
 import { texts } from "components/seplanen/texts";
 
 interface Props {
-  show: Boolean;
+  show: boolean;
   onClick: MouseEventHandler | undefined;
 }
 

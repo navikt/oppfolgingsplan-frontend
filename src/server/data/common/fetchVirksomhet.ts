@@ -1,8 +1,8 @@
 import { getVirksomhet } from "server/service/oppfolgingsplanService";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { notNull } from "../../utils/tsUtils";
 
-const findAllVirksomhetsnummer = (oppfolgingsplaner: Oppfolgingsplan[]) => {
+const findAllVirksomhetsnummer = (oppfolgingsplaner: OppfolgingsplanDTO[]) => {
   const virksomhetsNummer = oppfolgingsplaner
     .map(({ virksomhet }) => {
       return virksomhet?.virksomhetsnummer;
@@ -14,7 +14,7 @@ const findAllVirksomhetsnummer = (oppfolgingsplaner: Oppfolgingsplan[]) => {
 
 export const fetchVirksomhet = async (
   oppfolgingsplanTokenX: string,
-  oppfolgingsplaner: Oppfolgingsplan[]
+  oppfolgingsplaner: OppfolgingsplanDTO[]
 ) => {
   const alleVirksomhetsnummer = findAllVirksomhetsnummer(oppfolgingsplaner);
 

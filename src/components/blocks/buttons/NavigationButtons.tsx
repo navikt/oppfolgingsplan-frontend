@@ -38,18 +38,18 @@ export const NavigationButtons = ({ activeStep }: Props) => {
   return (
     <Row marginTop={"2rem"} marginBottom={"2rem"}>
       {previousPage && (
-        <Link href={previousPage} passHref={true}>
+        <Link href={previousPage}>
           <Button variant={"secondary"}>Forrige steg</Button>
         </Link>
       )}
 
       {nextPage && (
-        <Link href={nextPage} passHref={true}>
+        <Link href={nextPage}>
           <Button variant={"primary"}>Neste steg</Button>
         </Link>
       )}
 
-      <Link href={landingUrl} passHref={true}>
+      <Link href={landingUrl}>
         <Button variant={"tertiary"}>Fortsett senere</Button>
       </Link>
     </Row>

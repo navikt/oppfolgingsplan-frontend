@@ -3,15 +3,13 @@ import ArbeidsgiverSkjemaForm from "./ArbeidsgiverSkjema";
 import BaserTidligereSkjema from "./BaserTidligereSkjema";
 import { Modal } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import styled from "styled-components";
-import {
-  useKopierOppfolgingsplanSM,
-  useOpprettOppfolgingsplanSM,
-} from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "utils/oppfolgingplanUtils";
 import Feilmelding from "components/blocks/error/Feilmelding";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { useKopierOppfolgingsplan } from "api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const texts = {
   errorNoLeader: {
@@ -44,7 +42,7 @@ const OpprettOppfolgingsplanModal = ({
   setVisOpprettingModal,
 }: Props) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
-  const kopierOppfolgingsplan = useKopierOppfolgingsplanSM();
+  const kopierOppfolgingsplan = useKopierOppfolgingsplan();
 
   const sykmeldtFnr = useSykmeldtFnr();
 
@@ -68,13 +66,13 @@ const OpprettOppfolgingsplanModal = ({
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
         opprettOppfolgingsplan.mutate({
-          sykmeldtFnr: sykmeldtFnr!!,
+          sykmeldtFnr: sykmeldtFnr!,
           virksomhetsnummer: virksomhetsnummer,
         });
       }
     } else {
       opprettOppfolgingsplan.mutate({
-        sykmeldtFnr: sykmeldtFnr!!,
+        sykmeldtFnr: sykmeldtFnr!,
         virksomhetsnummer: virksomhetsnummer,
       });
     }
@@ -107,7 +105,7 @@ const OpprettOppfolgingsplanModal = ({
                   handleSubmit={(virksomhetsnummer: string) => {
                     opprettOppfolgingsplan
                       .mutateAsync({
-                        sykmeldtFnr: sykmeldtFnr!!,
+                        sykmeldtFnr: sykmeldtFnr!,
                         virksomhetsnummer: virksomhetsnummer,
                       })
                       .then(() => {
@@ -120,6 +118,7 @@ const OpprettOppfolgingsplanModal = ({
             } else {
               return (
                 <BaserTidligereSkjema
+                  isLoading={opprettOppfolgingsplan.isLoading}
                   onSubmit={(kopierplan) =>
                     opprett(kopierplan, arbeidsgivere[0].virksomhetsnummer)
                   }

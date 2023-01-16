@@ -1,6 +1,6 @@
 import { BodyLong, Label } from "@navikt/ds-react";
-import { Gjennomforing } from "../../schema/oppfolgingsplanSchema";
 import { texts } from "components/seplanen/texts";
+import { Gjennomforing } from "../../types/oppfolgingsplan";
 
 interface Props {
   gjennomfoering: Gjennomforing;

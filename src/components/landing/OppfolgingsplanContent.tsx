@@ -5,7 +5,6 @@ import {
   harTidligereOppfolgingsplaner,
 } from "utils/oppfolgingplanUtils";
 import { Sykmelding } from "../../schema/sykmeldingSchema";
-import { Oppfolgingsplan } from "../../schema/oppfolgingsplanSchema";
 import {
   sykmeldtHarGyldigSykmelding,
   sykmeldtHarIngenSendteSykmeldinger,
@@ -15,6 +14,7 @@ import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAkt
 import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
 import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { IngenLedereInfoBoks } from "components/blocks/infoboks/IngenLedereInfoBoks";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import ReservertSykmeldtMelding from "./ReservertSykmeldtMelding";
 
 interface Props {
@@ -48,7 +48,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
     erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
-      narmesteledere.data!!
+      narmesteledere.data!
     )
   ) {
     return <IngenLedereInfoBoks />;
@@ -57,7 +57,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
       <OppfolgingsdialogerVisning
         oppfolgingsplaner={oppfolgingsplaner}
         sykmeldinger={sykmeldinger}
-        narmesteLedere={narmesteledere.data!!}
+        narmesteLedere={narmesteledere.data!}
       />
     );
   }

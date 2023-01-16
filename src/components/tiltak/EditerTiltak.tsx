@@ -1,7 +1,7 @@
 import { useLagreTiltakSM } from "api/queries/sykmeldt/tiltakQueriesSM";
 import { TiltakForm, TiltakFormValues } from "./TiltakForm";
-import { Tiltak } from "../../schema/oppfolgingsplanSchema";
 import { STATUS_TILTAK } from "constants/konstanter";
+import { Tiltak } from "../../types/oppfolgingsplan";
 
 interface Props {
   tiltak: Tiltak;
@@ -27,9 +27,9 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
     <TiltakForm
       defaultFormValues={{
         overskrift: tiltak.tiltaknavn,
-        beskrivelse: tiltak.beskrivelse!!,
-        fom: new Date(tiltak.fom!!),
-        tom: new Date(tiltak.tom!!),
+        beskrivelse: tiltak.beskrivelse!,
+        fom: new Date(tiltak.fom!),
+        tom: new Date(tiltak.tom!),
       }}
       isSubmitting={lagreTiltak.isLoading}
       onSubmit={(data) => {

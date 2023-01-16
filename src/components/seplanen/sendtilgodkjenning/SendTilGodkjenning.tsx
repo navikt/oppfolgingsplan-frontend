@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
 import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;

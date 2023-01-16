@@ -1,9 +1,7 @@
 import { getArbeidsforhold } from "server/service/oppfolgingsplanService";
-import {
-  Oppfolgingsplan,
-  Stilling,
-} from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { notNull } from "../../utils/tsUtils";
+import { Stilling } from "../../../types/oppfolgingsplan";
 
 interface ArbeidsforholdQueryParams {
   fnr: string;
@@ -13,7 +11,7 @@ interface ArbeidsforholdQueryParams {
 
 export const fetchArbeidsforhold = async (
   oppfolgingsplanTokenX: string,
-  oppfolgingsplaner: Oppfolgingsplan[]
+  oppfolgingsplaner: OppfolgingsplanDTO[]
 ): Promise<Stilling[]> => {
   const unikeArbeidsforhold: ArbeidsforholdQueryParams[] = [
     ...new Set(

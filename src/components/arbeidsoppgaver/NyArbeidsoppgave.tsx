@@ -4,9 +4,9 @@ import { ArbeidsoppgaveFormHeading } from "./ArbeidsoppgaveFormHeading";
 import { TILRETTELEGGING } from "constants/konstanter";
 import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
-import { Arbeidsoppgave } from "../../schema/oppfolgingsplanSchema";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
+import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 
 export const NyArbeidsoppgave = () => {
   const lagreOppgave = useLagreArbeidsoppgaveSM();

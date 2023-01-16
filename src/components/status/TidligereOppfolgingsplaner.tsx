@@ -1,8 +1,8 @@
 import { Accordion, Link } from "@navikt/ds-react";
-import { Avbruttplan } from "../../schema/oppfolgingsplanSchema";
 import { restdatoTildato } from "utils/dateUtils";
 import { useApiBasePath } from "hooks/routeHooks";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
+import { Avbruttplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   avbruttOppfolgingsplaner: Avbruttplan[] | null;

@@ -1,9 +1,7 @@
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { Oppfolgingsplan } from "../../../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
-const today = new Date();
-
-export const planUnderArbeidOppfolgingsplanerMockData: Oppfolgingsplan[] = [
+export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
   {
     id: 3455,
     sistEndretDato: "2020-02-20T11:31:29.837",
@@ -375,7 +373,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: Oppfolgingsplan[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Labben Rekemester",
         fnr: "20405060718",
         epost: null,
@@ -402,6 +400,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: Oppfolgingsplan[] = [
           yrke: "Soppkontrollør",
           prosent: 80,
           fom: "2000-02-11T15:34:53.787",
+          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },

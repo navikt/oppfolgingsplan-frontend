@@ -4,29 +4,44 @@ import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM"
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
-import { Oppfolgingsplan } from "../../../schema/oppfolgingsplanSchema";
 import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
 import {
   getStatusPageTitleAndHeading,
-  statusPageToDisplay,
+  StatusPageToDisplay,
+  statusPageToDisplaySM,
 } from "utils/statusPageUtils";
 import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPlan";
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
+  pageToDisplay: StatusPageToDisplay | null;
 }
-
-const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
+const Content = ({
+  oppfolgingsplan,
+  pageToDisplay,
+}: ContentProps): ReactElement | null => {
   if (!oppfolgingsplan) return null;
-  const pageToDisplay = statusPageToDisplay(oppfolgingsplan);
+
+  const narmesteLederNavn = oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn;
 
   switch (pageToDisplay) {
     case "SENDTPLANTILGODKJENNING": {
-      return <GodkjennPlanSendt oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjennPlanSendt
+          oppfolgingsplan={oppfolgingsplan}
+          description={`Du har sendt en ny versjon av oppfølgingsplanen til din arbeidsgiver ${
+            narmesteLederNavn ? narmesteLederNavn : ""
+          } `}
+        >
+          <GodkjennPlanSendtInfoBox godkjennPlanTargetAudience={"Lederen"} />
+        </GodkjennPlanSendt>
+      );
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return (
@@ -53,11 +68,17 @@ const Content = ({ oppfolgingsplan }: ContentProps): ReactElement | null => {
 
 const OppfolgingsplanStatus: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
-  const { title, heading } = getStatusPageTitleAndHeading(aktivPlan);
+
+  const pageToDisplay = statusPageToDisplaySM(aktivPlan);
+  const { title, heading } = getStatusPageTitleAndHeading(
+    pageToDisplay,
+    aktivPlan?.virksomhet?.navn,
+    "Lederen din"
+  );
 
   return (
     <SykmeldtSide title={title} heading={heading}>
-      <Content oppfolgingsplan={aktivPlan} />
+      <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
     </SykmeldtSide>
   );
 };
