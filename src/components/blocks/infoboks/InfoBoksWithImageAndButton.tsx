@@ -22,7 +22,7 @@ interface Props {
   description?: string;
   buttonText: string;
   show: boolean;
-  setVisInfoboks: any;
+  onClose(show: boolean): void;
 }
 
 export const InfoBoksWithImageAndButton = ({
@@ -31,24 +31,22 @@ export const InfoBoksWithImageAndButton = ({
   description,
   buttonText,
   show,
-  setVisInfoboks,
+  onClose,
 }: Props) => {
 
   if (!show){
-    console.log("1")
     return null
   }
-  console.log("2", show)
   return (
         <StyledPanel border={true}>
         <PanelContent>
-          <Image src={imageSrc} alt={""} />
+          <Image src={imageSrc} width={64} height={64}  alt={""}/>
           <Heading size={"medium"} level={"2"}>
             {heading}
           </Heading>
 
           {description && <BodyLong>{description}</BodyLong>}
-          <Button variant={"secondary"} onClick={() => this.props.setVisInfoboks(false)}>
+          <Button variant={"secondary"} onClick={() => onClose(false)}>
             {buttonText}
           </Button>
         </PanelContent>
