@@ -35,17 +35,6 @@ export const useOppfolgingsplanerAG = () => {
   );
 };
 
-export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
-  const id = useOppfolgingsplanRouteId();
-  const allePlaner = useOppfolgingsplanerAG();
-
-  if (allePlaner.isSuccess) {
-    return allePlaner.data.find((plan) => plan.id === id);
-  }
-
-  return undefined;
-};
-
 export const useAktiveOppfolgingsplanerAG = () => {
   const allePlaner = useOppfolgingsplanerAG();
 
@@ -123,4 +112,15 @@ export const useOpprettOppfolgingsplanAG = () => {
   };
 
   return useMutation(opprettOppfolgingsplan);
+};
+
+export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
+  const id = useOppfolgingsplanRouteId();
+  const allePlaner = useOppfolgingsplanerAG();
+
+  if (allePlaner.isSuccess) {
+    return allePlaner.data.find((plan) => plan.id === id);
+  }
+
+  return undefined;
 };

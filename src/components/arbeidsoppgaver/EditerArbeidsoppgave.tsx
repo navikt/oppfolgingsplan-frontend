@@ -1,7 +1,10 @@
-import { useLagreArbeidsoppgaveSM } from "api/queries/sykmeldt/oppgaveQueriesSM";
-import { ArbeidsoppgaveForm, OppgaveFormValues } from "./ArbeidsoppgaveForm";
+import {
+  ArbeidsoppgaveFormSM,
+  OppgaveFormValues,
+} from "./ArbeidsoppgaveFormSM";
 import { TILRETTELEGGING } from "constants/konstanter";
 import { Arbeidsoppgave, Gjennomforing } from "../../types/oppfolgingsplan";
+import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   show: boolean;
@@ -15,7 +18,7 @@ export const EditerArbeidsoppgave = ({
   arbeidsoppgave,
   doneEditing,
 }: Props) => {
-  const lagreArbeidsoppgave = useLagreArbeidsoppgaveSM();
+  const lagreArbeidsoppgave = useLagreArbeidsoppgave();
 
   const arbeidsoppgaveInformasjon = (
     data: OppgaveFormValues
@@ -56,7 +59,7 @@ export const EditerArbeidsoppgave = ({
   };
 
   return show ? (
-    <ArbeidsoppgaveForm
+    <ArbeidsoppgaveFormSM
       defaultFormValues={{
         navnPaaArbeidsoppgaven: arbeidsoppgave.arbeidsoppgavenavn,
         // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain

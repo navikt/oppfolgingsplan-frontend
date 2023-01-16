@@ -14,6 +14,10 @@ export function createBreadcrumbsAG(
 ) {
   switch (pathname) {
     case "/arbeidsgiver/[narmestelederid]":
+    case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]/arbeidsoppgaver":
+    case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]/tiltak":
+    case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]/seplanen":
+    case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]":
       return landingBreadcrumbAG(sykmeldtName, narmestelederid);
     case "/arbeidsgiver/[narmestelederid]/referat/[brevuuid]":
       return referatBreadcrumbAG(sykmeldtName, narmestelederid);
