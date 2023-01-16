@@ -21,7 +21,6 @@ const Arbeidsoppgaver: NextPage = () => {
                             arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}/>
                     )}
                 </div>
-
             )}
         </OppfolgingsplanPageAG>
     );
