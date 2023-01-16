@@ -114,20 +114,6 @@ export const useOpprettOppfolgingsplanAG = () => {
   return useMutation(opprettOppfolgingsplan);
 };
 
-//TODO: do we need to check erOppfolgingsplanAktiv(oppfolgingsplan)?
-export const useAktivOppfolgingsplanAG = (): Oppfolgingsplan | undefined => {
-  const allePlaner = useOppfolgingsplanerAG();
-  const id = useOppfolgingsplanRouteId();
-
-  if (allePlaner.isSuccess) {
-    return allePlaner.data
-      .filter((oppfolgingsplan) => erOppfolgingsplanAktiv(oppfolgingsplan))
-      .find((plan) => plan.id === id);
-  }
-  return undefined;
-};
-
-//TODO: do we need to check erOppfolgingsplanAktiv(oppfolgingsplan)?
 export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
   const id = useOppfolgingsplanRouteId();
   const allePlaner = useOppfolgingsplanerAG();

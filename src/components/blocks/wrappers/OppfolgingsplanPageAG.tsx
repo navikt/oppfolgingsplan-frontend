@@ -11,7 +11,7 @@ import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBo
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { statusPageToDisplayAG } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
-import { useAktivOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useAktivPlanAG} from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import ArbeidsgiverSide from "./ArbeidsgiverSide";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 
@@ -54,7 +54,7 @@ interface Props {
 }
 
 export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
-  const aktivPlan = useAktivOppfolgingsplanAG();
+  const aktivPlan = useAktivPlanAG();
   const sykmeldt = useDineSykmeldte()?.data;
 
   const erOppfolgingsdialogTilgjengelig =
