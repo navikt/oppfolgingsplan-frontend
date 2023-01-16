@@ -4,7 +4,7 @@ import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM"
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
-import { OppfolgingsdialogerGodkjenn } from "../../../components/status/godkjennmottatt/OppfolgingsdialogerGodkjenn";
+import { GodkjennPlanMottatt } from "../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
 import {
   getStatusPageTitleAndHeading,
   StatusPageToDisplay,
@@ -49,7 +49,13 @@ const Content = ({
       );
     }
     case "GODKJENNPLANMOTTATT": {
-      return <OppfolgingsdialogerGodkjenn oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjennPlanMottatt
+          oppfolgingsplan={oppfolgingsplan}
+          description={`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
+          altinnTargetAudience={"arbeidsgiveren din"}
+        />
+      );
     }
     case "GODKJENNPLANAVSLATT": {
       return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
