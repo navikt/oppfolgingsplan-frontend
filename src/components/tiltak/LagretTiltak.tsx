@@ -14,7 +14,7 @@ import { DialogDots, Edit } from "@navikt/ds-icons";
 import { SlettTiltakButton } from "./SlettTiltakButton";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { useLagreKommentarSM } from "api/queries/sykmeldt/tiltakQueriesSM";
+import { useLagreKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { EditerTiltak } from "./EditerTiltak";
 import { SpacedDetail } from "../blocks/SpacedDetail";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
@@ -88,7 +88,7 @@ export const LagretTiltak = ({
     arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
   const [editererTiltak, setEditererTiltak] = useState(false);
-  const lagreKommentar = useLagreKommentarSM();
+  const lagreKommentar = useLagreKommentar();
   const tiltakId = tiltak.tiltakId;
 
   return (

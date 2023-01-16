@@ -7,8 +7,8 @@ import {
   ArbeidsoppgaveFormAG,
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormAG";
-import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import {Arbeidsoppgave} from "../../types/oppfolgingsplan";
+import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 
 export const NyArbeidsoppgaveAG = () => {
   const lagreOppgave = useLagreArbeidsoppgave();

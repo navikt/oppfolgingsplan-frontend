@@ -1,6 +1,6 @@
 import { PersonV3DTO } from "../../../../../schema/personSchemas";
 
 export const defaultPersonMockData: PersonV3DTO = {
-  navn: "Severus Snape",
+  navn: "Kreativ Hatt",
   fnr: "110110110110",
 };

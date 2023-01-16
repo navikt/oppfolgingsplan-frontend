@@ -378,7 +378,7 @@ export async function saveTiltakCommentSM(
   );
 }
 
-export async function deleteTiltakSM(accessToken: string, tiltakId: string) {
+export async function deleteTiltak(accessToken: string, tiltakId: string) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/slett`,
     {},

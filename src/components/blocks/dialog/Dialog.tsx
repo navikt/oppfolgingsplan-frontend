@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button, Chat } from "@navikt/ds-react";
 import { hentAktoerNavnInitialer } from "utils/stringUtils";
 import { getFullDateFormat } from "utils/dateUtils";
-import { useSlettKommentarSM } from "api/queries/sykmeldt/tiltakQueriesSM";
+import { useSlettKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
 
@@ -32,7 +32,7 @@ export const Dialog = ({
   tiltakId,
   kommentarer,
 }: Props): ReactElement | null => {
-  const slettKommentar = useSlettKommentarSM();
+  const slettKommentar = useSlettKommentar();
   const aktivPlan = useAktivPlanSM();
 
   if (!kommentarer || !aktivPlan) return null;
