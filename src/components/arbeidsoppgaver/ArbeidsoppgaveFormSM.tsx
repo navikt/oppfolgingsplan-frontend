@@ -48,7 +48,7 @@ interface Props {
   navnIsEditable?: boolean;
 }
 
-export const ArbeidsoppgaveForm = ({
+export const ArbeidsoppgaveFormSM = ({
   onSubmit,
   isSubmitting,
   isErrorSavingOppgave,

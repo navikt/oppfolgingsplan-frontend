@@ -1,27 +1,22 @@
-import { BodyLong, Heading } from "@navikt/ds-react";
+import { Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
-import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+
 import {
-  erOppfolgingsplanKnyttetTilGyldigSykmelding,
+  erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
   erOppfolgingsplanTidligere,
 } from "utils/oppfolgingplanUtils";
 import { NavigationButtons } from "../buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBoks";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { statusPageToDisplaySM } from "../../../utils/statusPageUtils";
+import { statusPageToDisplayAG } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
-import SykmeldtSide from "./SykmeldtSide";
-import { Oppfolgingsplan, Stilling } from "../../../types/oppfolgingsplan";
+import { useAktivPlanAG} from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import ArbeidsgiverSide from "./ArbeidsgiverSide";
+import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 
-const textOverskrift = (arbeidsgiver?: string) => {
-  return `Oppfølgingsplan hos ${arbeidsgiver}`;
-};
-
-const textStilling = (stilling: Stilling) => {
-  return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${
-    stilling.prosent
-  } %`;
+const textOverskrift = (arbeidstakerNavn?: string) => {
+  return `Oppfølgingsplan for ${arbeidstakerNavn}`;
 };
 
 export enum Page {
@@ -58,24 +53,18 @@ interface Props {
   children: ReactNode;
 }
 
-export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
-  const aktivPlan = useAktivPlanSM();
-
-  const sykmeldinger = useSykmeldingerSM();
-  const stilling: Stilling | undefined =
-    aktivPlan &&
-    aktivPlan.arbeidstaker.stillinger?.find(
-      (stilling) =>
-        stilling.virksomhetsnummer === aktivPlan?.virksomhet?.virksomhetsnummer
-    );
+export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
+  const aktivPlan = useAktivPlanAG();
+  const sykmeldt = useDineSykmeldte()?.data;
 
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&
-    sykmeldinger.data &&
+    sykmeldt &&
     (erOppfolgingsplanTidligere(aktivPlan) ||
-      erOppfolgingsplanKnyttetTilGyldigSykmelding(
+      erOppfolgingsplanKnyttetTilGyldigSykmeldingAG(
         aktivPlan,
-        sykmeldinger.data
+        sykmeldt.orgnummer,
+        sykmeldt.aktivSykmelding
       ));
 
   const Content = (): ReactElement => {
@@ -86,7 +75,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     return <>{children}</>;
   };
 
-  const planStatus = statusPageToDisplaySM(aktivPlan);
+  const planStatus = statusPageToDisplayAG(aktivPlan);
 
   const planIsNotEditable =
     planStatus == "GODKJENNPLANMOTTATT" ||
@@ -96,19 +85,20 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
     planStatus == "GODKJENTPLAN";
 
   if (planIsNotEditable) {
-    return(
-        <SykmeldtSide
-            title={titleText(page)}
-            heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}>
-          <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />
-        </SykmeldtSide>
-    )
+    return (
+      <ArbeidsgiverSide
+        title={titleText(page)}
+        heading={textOverskrift(aktivPlan?.arbeidstaker?.navn ?? "")}
+      >
+        <CantEditPlanError planStatus={planStatus} aktivPlan={aktivPlan} />
+      </ArbeidsgiverSide>
+    );
   }
 
   return (
-    <SykmeldtSide
+    <ArbeidsgiverSide
       title={titleText(page)}
-      heading={textOverskrift(aktivPlan?.virksomhet?.navn ?? "")}
+      heading={textOverskrift(aktivPlan?.arbeidstaker?.navn ?? "")}
     >
       <OppfolgingsplanStepper activeStep={page.valueOf()} />
 
@@ -118,15 +108,9 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
         </Heading>
       )}
 
-      {page !== Page.SEPLANEN && stilling?.yrke && (
-        <BodyLong spacing={true} size={"medium"}>
-          {textStilling(stilling)}
-        </BodyLong>
-      )}
-
       <Content />
 
       <NavigationButtons activeStep={page.valueOf()} />
-    </SykmeldtSide>
+    </ArbeidsgiverSide>
   );
 };
