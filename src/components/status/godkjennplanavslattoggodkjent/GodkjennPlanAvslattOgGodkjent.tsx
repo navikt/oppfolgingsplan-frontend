@@ -37,7 +37,10 @@ export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
         <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>
 
-      <GodkjennOppfolgingsplan oppfolgingsplanId={oppfolgingsplan.id} altInnTargetAudience={"arbeidsgiveren din"} />
+      <GodkjennOppfolgingsplan
+        oppfolgingsplanId={oppfolgingsplan.id}
+        altinnTargetAudience={"arbeidsgiveren din"}
+      />
       <TilLandingssideKnapp />
     </SpacedDiv>
   );

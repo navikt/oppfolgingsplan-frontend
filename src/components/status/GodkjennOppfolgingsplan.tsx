@@ -5,12 +5,12 @@ import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingspla
 
 interface Props {
   oppfolgingsplanId: number;
-  altInnTargetAudience: string;
+  altinnTargetAudience: string;
 }
 
 export const GodkjennOppfolgingsplan = ({
   oppfolgingsplanId,
-  altInnTargetAudience,
+  altinnTargetAudience,
 }: Props) => {
   const [delMedNav, setDelMedNav] = useState(false);
   const godkjennOppfolgingsplan =
@@ -21,7 +21,10 @@ export const GodkjennOppfolgingsplan = ({
       <Heading level={"2"} size={"medium"} spacing>
         Ønsker du å godkjenne denne planen?
       </Heading>
-      <BodyShort spacing>Alle godkjente planer mellom deg og {altInnTargetAudience} vil automatisk bli tilgjengelige for arbeidsplassen i Altinn.</BodyShort>
+      <BodyShort spacing>
+        Alle godkjente planer mellom deg og {altinnTargetAudience} vil
+        automatisk bli tilgjengelige for arbeidsplassen i Altinn.
+      </BodyShort>
       <SpacedDiv>
         <Checkbox onChange={() => setDelMedNav(!delMedNav)} checked={delMedNav}>
           Del planen med NAV (valgfritt)

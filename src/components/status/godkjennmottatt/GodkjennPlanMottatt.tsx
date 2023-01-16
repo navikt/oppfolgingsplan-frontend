@@ -12,13 +12,13 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   description: string;
-  altInnTargetAudience: string;
+  altinnTargetAudience: string;
 }
 
 export const GodkjennPlanMottatt = ({
   oppfolgingsplan,
   description,
-  altInnTargetAudience,
+  altinnTargetAudience,
 }: Props) => {
   const gyldighetstidspunkt =
     oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
@@ -44,7 +44,7 @@ export const GodkjennPlanMottatt = ({
 
       <GodkjennOppfolgingsplan
         oppfolgingsplanId={oppfolgingsplan.id}
-        altInnTargetAudience={altInnTargetAudience}
+        altinnTargetAudience={altinnTargetAudience}
       />
 
       <TilLandingssideKnapp />

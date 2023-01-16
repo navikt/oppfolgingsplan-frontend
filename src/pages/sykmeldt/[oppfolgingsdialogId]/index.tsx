@@ -53,7 +53,7 @@ const Content = ({
         <GodkjennPlanMottatt
           oppfolgingsplan={oppfolgingsplan}
           description={`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-          altInnTargetAudience={"arbeidsgiveren din"}
+          altinnTargetAudience={"arbeidsgiveren din"}
         />
       );
     }

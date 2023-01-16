@@ -48,7 +48,7 @@ const Content = ({
         <GodkjennPlanMottatt
           oppfolgingsplan={oppfolgingsplan}
           description={`${oppfolgingsplan?.arbeidstaker?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-          altInnTargetAudience={"arbeidstakeren"}
+          altinnTargetAudience={"arbeidstakeren"}
         />
       );
     }
