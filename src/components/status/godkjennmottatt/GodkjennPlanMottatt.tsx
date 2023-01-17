@@ -1,5 +1,8 @@
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
-import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
+import {
+  AltinnTargetAudience,
+  GodkjennOppfolgingsplan,
+} from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
@@ -12,7 +15,7 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   description: string;
-  altinnTargetAudience: string;
+  altinnTargetAudience: AltinnTargetAudience;
 }
 
 export const GodkjennPlanMottatt = ({

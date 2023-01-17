@@ -13,6 +13,7 @@ import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { GodkjennPlanMottatt } from "../../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
+import { GodkjennPlanAvslattOgGodkjent } from "../../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -41,7 +42,14 @@ const Content = ({
       );
     }
     case "MOTTATTFLEREGODKJENNINGER": {
-      return <div>MOTTATTFLEREGODKJENNINGER</div>;
+      return (
+        <GodkjennPlanAvslattOgGodkjent
+          oppfolgingsplan={oppfolgingsplan}
+          description={`${oppfolgingsplan?.arbeidstaker?.navn} har gjort noen
+        endringer i planen og sendt den tilbake til deg.`}
+          altinnTargetAudience={"arbeidsgiveren din"}
+        />
+      );
     }
     case "GODKJENNPLANMOTTATT": {
       return (

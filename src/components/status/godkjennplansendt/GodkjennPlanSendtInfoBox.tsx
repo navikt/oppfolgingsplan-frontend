@@ -2,7 +2,7 @@ import { Alert, BodyShort, Heading } from "@navikt/ds-react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 
 interface Props {
-  godkjennPlanTargetAudience: string;
+  godkjennPlanTargetAudience: "Lederen" | "Arbeidstakeren";
 }
 
 const GodkjennPlanSendtInfoBox = ({ godkjennPlanTargetAudience }: Props) => {

@@ -3,9 +3,11 @@ import { useState } from "react";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
+export type AltinnTargetAudience = "arbeidstakeren" | "arbeidsgiveren din";
+
 interface Props {
   oppfolgingsplanId: number;
-  altinnTargetAudience: string;
+  altinnTargetAudience: AltinnTargetAudience;
 }
 
 export const GodkjennOppfolgingsplan = ({

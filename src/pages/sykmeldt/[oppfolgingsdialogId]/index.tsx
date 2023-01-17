@@ -45,14 +45,19 @@ const Content = ({
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return (
-        <GodkjennPlanAvslattOgGodkjent oppfolgingsplan={oppfolgingsplan} />
+        <GodkjennPlanAvslattOgGodkjent
+          oppfolgingsplan={oppfolgingsplan}
+          description={`${narmesteLederNavn} har gjort noen
+        endringer i planen og sendt den tilbake til deg.`}
+          altinnTargetAudience={"arbeidsgiveren din"}
+        />
       );
     }
     case "GODKJENNPLANMOTTATT": {
       return (
         <GodkjennPlanMottatt
           oppfolgingsplan={oppfolgingsplan}
-          description={`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
+          description={`${narmesteLederNavn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
           altinnTargetAudience={"arbeidsgiveren din"}
         />
       );
