@@ -205,7 +205,7 @@ export const finnNyesteTidligereOppfolgingsplanMedVirksomhet = (
   virksomhetsnummer: string
 ) => {
   return finnTidligereOppfolgingsplaner(oppfolgingsplaner).filter((plan) => {
-    return plan.virksomhet?.virksomhetsnummer === virksomhetsnummer;
+    return plan.virksomhet.virksomhetsnummer === virksomhetsnummer;
   })[0];
 };
 
@@ -216,7 +216,7 @@ export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (
   return finnAktiveOppfolgingsplaner(oppfolgingsplaner).find(
     (oppfolgingsdialog) => {
       return (
-        oppfolgingsdialog.virksomhet!.virksomhetsnummer === virksomhetsnummer
+        oppfolgingsdialog.virksomhet.virksomhetsnummer === virksomhetsnummer
       );
     }
   );

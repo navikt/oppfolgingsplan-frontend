@@ -121,28 +121,29 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                    value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"}
-                    helpText={
-                      "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning, og arbeidsgiver har gått inn for å gjøre endringer"
-                    }
+                  value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"}
+                  helpText={
+                    "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning, og arbeidsgiver har gått inn for å gjøre endringer"
+                  }
                 >
-                  Sykmeldt har sendt plan til godkjenning, arbeidsgiver har gjort endringer
+                  Sykmeldt har sendt plan til godkjenning, arbeidsgiver har
+                  gjort endringer
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                    value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING"}
-                    helpText={
-                      "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning"
-                    }
+                  value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING"}
+                  helpText={
+                    "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning"
+                  }
                 >
                   Sykmeldt har sendt plan til godkjenning
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
-                    value={"ARBEIDSGIVER_HAR_SENDT_TIL_GODKJENNING"}
-                    helpText={
-                      "Arbeidsgiver har sendt oppfølgingsplanen til den sykmeldte for godkjenning"
-                    }
+                  value={"ARBEIDSGIVER_HAR_SENDT_TIL_GODKJENNING"}
+                  helpText={
+                    "Arbeidsgiver har sendt oppfølgingsplanen til den sykmeldte for godkjenning"
+                  }
                 >
                   Arbeidsgiver har sendt plan til godkjenning
                 </RadioWithHelpText>
@@ -154,7 +155,7 @@ export const TestScenarioSelector = () => {
                 variant={"primary"}
                 disabled={!setActiveTestScenario}
                 onClick={() => {
-                  setActiveTestScenario.mutate(selectedScenario!);
+                  setActiveTestScenario.mutate(selectedScenario);
                   setOpen(false);
                 }}
               >

@@ -35,13 +35,11 @@ const handler = async (
       );
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
-    const filteredArbeidsoppgaveListe = aktivPlan.arbeidsoppgaveListe!.filter(
-      (arbeidsoppgave) =>
-        arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
-    );
-
     activeMock.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
-      filteredArbeidsoppgaveListe;
+      aktivPlan.arbeidsoppgaveListe.filter(
+        (arbeidsoppgave) =>
+          arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
+      );
 
     res.status(200).end();
   } else {

@@ -39,7 +39,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
       );
       const narmesteLederePromise = fetchNarmesteLedereSM(
         tokenX,
-        oppfolgingsplaner
+        oppfolgingsplaner[0].arbeidstaker.fnr
       );
 
       const [virksomhet, person, kontaktinfo, arbeidsforhold, narmesteLedere] =

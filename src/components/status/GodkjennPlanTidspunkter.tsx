@@ -5,11 +5,15 @@ import { BildeTekstLinje } from "./BildeTekstLinje";
 import { Gyldighetstidspunkt } from "../../types/oppfolgingsplan";
 
 interface Props {
-  gyldighetstidspunkt?: Gyldighetstidspunkt | null;
+  gyldighetstidspunkt: Gyldighetstidspunkt;
 }
 
 export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {
-  if (!gyldighetstidspunkt) {
+  if (
+    !gyldighetstidspunkt.fom ||
+    !gyldighetstidspunkt.tom ||
+    !gyldighetstidspunkt.evalueres
+  ) {
     return null;
   }
 
@@ -18,7 +22,7 @@ export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {
       <BildeTekstLinje
         imgUrl={CalendarImage}
         tekst={`Planens varighet: ${toDateMedMaanedNavn(
-          gyldighetstidspunkt?.fom
+          gyldighetstidspunkt.fom
         )} - ${toDateMedMaanedNavn(gyldighetstidspunkt.tom)}`}
       />
       <BildeTekstLinje

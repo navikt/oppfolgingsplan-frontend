@@ -18,6 +18,7 @@ export const useTilgangSM = () => {
     fetchTilgang,
     {
       enabled: !!sykmeldtFnr,
+      useErrorBoundary: true
     }
   );
 };

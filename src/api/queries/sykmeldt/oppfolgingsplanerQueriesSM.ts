@@ -12,6 +12,7 @@ import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/
 import { ApiErrorException } from "../../axios/errors";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
+import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
 
 export const useOppfolgingsplanerSM = () => {
   const apiBasePath = useApiBasePath();
@@ -21,7 +22,10 @@ export const useOppfolgingsplanerSM = () => {
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
-    fetchOppfolgingsplaner
+    fetchOppfolgingsplaner,
+      {
+        useErrorBoundary: true,
+      }
   );
 };
 
@@ -82,8 +86,16 @@ export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
 export const useOpprettOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
+  const sykmeldtFnr = useSykmeldtFnr();
 
-  const opprettOppfolgingsplan = async (data: OpprettOppfoelgingsdialog) => {
+  const opprettOppfolgingsplan = async (virksomhetsnummer: string) => {
+    if (!sykmeldtFnr) return;
+
+    const data: OpprettOppfoelgingsdialog = {
+      sykmeldtFnr: sykmeldtFnr,
+      virksomhetsnummer: virksomhetsnummer,
+    };
+
     await post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };

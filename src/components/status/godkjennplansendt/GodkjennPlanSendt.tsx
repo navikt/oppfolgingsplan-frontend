@@ -16,8 +16,7 @@ interface Props {
 }
 
 function GodkjennPlanSendt({ oppfolgingsplan, description, children }: Props) {
-  const gyldighetstidspunkt =
-    oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
+  if (!oppfolgingsplan?.godkjenninger[0]) return null;
 
   return (
     <SpacedDiv>
@@ -27,7 +26,11 @@ function GodkjennPlanSendt({ oppfolgingsplan, description, children }: Props) {
 
       <BodyLong spacing>{description}</BodyLong>
 
-      <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
+      <GodkjennPlanTidspunkter
+        gyldighetstidspunkt={
+          oppfolgingsplan.godkjenninger[0].gyldighetstidspunkt
+        }
+      />
 
       <Row marginBottom={"2rem"}>
         <SePlan oppfolgingsplan={oppfolgingsplan} />

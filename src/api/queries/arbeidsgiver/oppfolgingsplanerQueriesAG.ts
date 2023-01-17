@@ -34,7 +34,7 @@ export const useOppfolgingsplanerAG = () => {
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner,
-    { enabled: !!sykmeldtFnr }
+    { enabled: !!sykmeldtFnr, useErrorBoundary: true }
   );
 };
 

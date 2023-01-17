@@ -99,13 +99,8 @@ export const ArbeidsgiverSkjema = ({
   handleClose,
   handleSubmit,
 }: ArbeidsgiverSkjemaProps) => {
-  const [selectedVirksomhetsnummer, setSelectedVirksomhetsnummer] = useState<
-    string | null
-  >(null);
-
-  const selectedArbeidsgiver = arbeidsgivere.find(
-    (ag) => ag.virksomhetsnummer == selectedVirksomhetsnummer
-  );
+  const [selectedVirksomhet, setSelectedVirksomhet] =
+    useState<ArbeidsgivereForGyldigeSykmeldinger | null>(null);
 
   return (
     <>
@@ -116,7 +111,13 @@ export const ArbeidsgiverSkjema = ({
       <SpacedSelect
         label={texts.arbeidsgiverSkjema.question}
         hideLabel={true}
-        onChange={(e) => setSelectedVirksomhetsnummer(e.target.value)}
+        onChange={(e) =>
+          setSelectedVirksomhet(
+            arbeidsgivere.find(
+              (ag) => ag.virksomhetsnummer == e.target.value
+            ) ?? null
+          )
+        }
       >
         <option value="">Velg arbeidsgiver</option>
         {arbeidsgivere.map((arbeidsgiver, index) => {
@@ -128,11 +129,11 @@ export const ArbeidsgiverSkjema = ({
         })}
       </SpacedSelect>
 
-      {selectedVirksomhetsnummer && (
+      {selectedVirksomhet && (
         <SpacedDiv>
           <VelgArbeidsgiverUndertekst
             oppfolgingsplaner={oppfolgingsplaner}
-            arbeidsgiver={selectedArbeidsgiver!}
+            arbeidsgiver={selectedVirksomhet}
           />
         </SpacedDiv>
       )}
@@ -142,13 +143,17 @@ export const ArbeidsgiverSkjema = ({
           variant={"primary"}
           loading={isSubmitting}
           disabled={
-            !selectedVirksomhetsnummer ||
+            !selectedVirksomhet ||
             !erOppfolgingsplanOpprettbarMedArbeidsgiver(
               oppfolgingsplaner,
-              selectedArbeidsgiver!
+              selectedVirksomhet
             )
           }
-          onClick={() => handleSubmit(selectedVirksomhetsnummer!)}
+          onClick={() =>
+            selectedVirksomhet?.virksomhetsnummer
+              ? handleSubmit(selectedVirksomhet?.virksomhetsnummer)
+              : {}
+          }
         >
           {texts.arbeidsgiverSkjema.buttonSubmit}
         </Button>

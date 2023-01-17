@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode } from "react";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
-import Feilmelding from "../error/Feilmelding";
 import AppSpinner from "../spinner/AppSpinner";
 import { PageHeading } from "../heading/PageHeading";
 import { useOppfolgingsplanerAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
@@ -44,21 +43,9 @@ const PageContent = ({ title, heading, children }: SideProps) => {
   const oppfolgingsplaner = useOppfolgingsplanerAG();
   const tilgang = useTilgangAG();
 
-  if (oppfolgingsplaner.isError || sykmeldt.isError || tilgang.isError) {
-    return (
-      <Feilmelding
-        title="Beklager, vi fikk en teknisk feil"
-        description="Det skjedde en feil ved henting av dine oppfølgingsplaner. Vennligst prøv igjen senere."
-      />
-    );
-  } else if (
-    !sykmeldt.isError &&
-    (tilgang.fetchStatus === "fetching" ||
-      oppfolgingsplaner.isLoading ||
-      sykmeldt.isLoading)
-  ) {
+  if (tilgang.isLoading || oppfolgingsplaner.isLoading || sykmeldt.isLoading) {
     return <AppSpinner />;
-  } else if (tilgang.data && !tilgang.data.harTilgang) {
+  } else if (tilgang.data && tilgang.data.harTilgang === false) {
     return <AdresseSperreInfoBoks />;
   } else {
     return (

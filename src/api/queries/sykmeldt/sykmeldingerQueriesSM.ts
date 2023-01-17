@@ -13,7 +13,10 @@ export const useSykmeldingerSM = () => {
 
   return useQuery<Sykmelding[], ApiErrorException>(
     [queryKeys.SYKMELDINGER],
-    fetchSykmeldinger
+    fetchSykmeldinger,
+      {
+        useErrorBoundary: true,
+      }
   );
 };
 
