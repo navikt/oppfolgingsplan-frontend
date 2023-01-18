@@ -14,6 +14,7 @@ import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/G
 import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { GodkjennPlanMottatt } from "../../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
+import { GodkjennPlanAvslatt } from "../../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -61,7 +62,7 @@ const Content = ({
       );
     }
     case "GODKJENNPLANAVSLATT": {
-      return <div>GODKJENNPLANAVSLATT</div>;
+      return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLANAVBRUTT": {
       return <div>GODKJENTPLANAVBRUTT</div>;
@@ -81,7 +82,7 @@ const OppfolgingsplanStatusAG: NextPage = () => {
   const { title, heading } = getStatusPageTitleAndHeading(
     pageToDisplay,
     aktivPlan?.virksomhet?.navn,
-    aktivPlan?.arbeidstaker.navn || "Den sykmeldte"
+    aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din"
   );
 
   return (
