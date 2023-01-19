@@ -1,8 +1,8 @@
 import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { post } from "api/axios/axios";
-import { OPPFOLGINGSPLANER_SM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
+import { queryKeys } from "../queryKeys";
 
 export const useLagreTiltakSM = () => {
   const apiBasePath = useApiBasePath();
@@ -14,7 +14,7 @@ export const useLagreTiltakSM = () => {
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
       tiltak
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(lagreTiltak);
@@ -29,7 +29,7 @@ export const useSlettTiltakSM = () => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(slettTiltak);
@@ -53,7 +53,7 @@ export const useLagreKommentarSM = () => {
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       kommentar
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(lagreKommentar);
@@ -76,7 +76,7 @@ export const useSlettKommentarSM = () => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(slettKommentar);

@@ -3,8 +3,7 @@ import { get, post } from "../axios/axios";
 import { ApiErrorException } from "../axios/errors";
 import { TestScenario } from "../../server/data/mock/getMockDb";
 import { useRouter } from "next/router";
-
-export const ACTIVE_TEST_SCENARIO = "active-test-scenario";
+import { queryKeys } from "./queryKeys";
 
 export const useSetActiveTestScenario = () => {
   const router = useRouter();
@@ -27,7 +26,7 @@ export const useActiveTestScenario = () => {
     get<TestScenario>(`${router.basePath}/api/scenario/activescenario`);
 
   return useQuery<TestScenario, ApiErrorException>(
-    [ACTIVE_TEST_SCENARIO],
+    [queryKeys.ACTIVE_TEST_SCENARIO],
     fetchActiveTestScenario
   );
 };

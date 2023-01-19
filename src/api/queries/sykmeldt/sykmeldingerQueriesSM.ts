@@ -3,8 +3,7 @@ import { get } from "api/axios/axios";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
-
-export const SYKMELDINGER_SM = "sykmeldinger-sykmeldt";
+import { queryKeys } from "../queryKeys";
 
 export const useSykmeldingerSM = () => {
   const apiBasePath = useApiBasePath();
@@ -13,7 +12,7 @@ export const useSykmeldingerSM = () => {
     get<Sykmelding[]>(`${apiBasePath}/sykmeldinger`);
 
   return useQuery<Sykmelding[], ApiErrorException>(
-    [SYKMELDINGER_SM],
+    [queryKeys.SYKMELDINGER],
     fetchSykmeldinger
   );
 };
