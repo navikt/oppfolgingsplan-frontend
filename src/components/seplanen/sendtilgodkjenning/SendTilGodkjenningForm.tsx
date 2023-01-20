@@ -7,15 +7,15 @@ import {
   Heading,
 } from "@navikt/ds-react";
 import { FormProvider, useForm } from "react-hook-form";
-import React, { ReactElement } from "react";
-import { useGodkjennOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
+import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -32,15 +32,19 @@ export type SendTilGodkjenningFormValues = {
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
+  visTvungenGodkjenningToggle: boolean;
 
   cancel(): void;
 }
 
 export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
+  visTvungenGodkjenningToggle,
   cancel,
 }: Props): ReactElement => {
-  const sendTilGodkjenning = useGodkjennOppfolgingsplanSM(oppfolgingsplan.id);
+  const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
+
+  const [tvungenGodkjenning, setTvungenGodkjenning] = useState(false);
 
   const formFunctions = useForm<SendTilGodkjenningFormValues>();
   const {
@@ -102,101 +106,96 @@ export const SendTilGodkjenningForm = ({
               tom: data.sluttDato.toJSON(),
               evalueres: data.evalueresInnen.toJSON(),
             },
+            tvungenGodkjenning: tvungenGodkjenning ?? false,
             delmednav: data.delMedNAV === "true",
           })
         )}
       >
-        <LightGreyPanel border>
-          <Heading spacing size={"medium"} level={"2"}>
-            Send til lederen din for godkjenning
-          </Heading>
+        <BodyLong spacing>
+          Alle felt må fylles ut, bortsett fra de som er markert som valgfrie.
+        </BodyLong>
 
-          <BodyLong spacing>
-            Når du har sendt planen, kan lederen din enten godkjenne den, eller
-            gjøre endringer og sende den tilbake til deg for ny godkjenning.
-          </BodyLong>
+        <Line />
 
-          <BodyLong spacing>
-            Alle felt må fylles ut, bortsett fra de som er markert som valgfrie.
-          </BodyLong>
+        <Heading spacing size={"small"} level={"3"}>
+          Hvor lenge skal planen vare?
+        </Heading>
 
-          <Line />
+        <BodyLong spacing>
+          Vi har foreslått datoer basert på tiltakene dere har skrevet:
+        </BodyLong>
 
-          <Heading spacing size={"small"} level={"3"}>
-            Hvor lenge skal planen vare?
-          </Heading>
-
-          <BodyLong spacing>
-            Vi har foreslått datoer basert på tiltakene dere har skrevet:
-          </BodyLong>
-
-          <Row gap={"0"}>
-            <DatoVelger
-              name="startDato"
-              label={"Startdato (obligatorisk)"}
-              defaultValue={
-                suggestedStartDate ? new Date(suggestedStartDate) : null
-              }
-              errorMessageToDisplay={errors.startDato?.message}
-              requiredErrorMessage={"Du må velge startdato"}
-            />
-
-            <DatoVelger
-              name="sluttDato"
-              label={"Sluttdato (obligatorisk)"}
-              defaultValue={
-                suggestedEndDate ? new Date(suggestedEndDate) : null
-              }
-              errorMessageToDisplay={getSluttDatoErrorMessage()}
-              requiredErrorMessage={"Du må velge sluttdato"}
-              validate={isAfterStartDate}
-            />
-          </Row>
-
+        <Row gap={"0"}>
           <DatoVelger
-            name="evalueresInnen"
-            label={"Evalueres innen (obligatorisk)"}
-            errorMessageToDisplay={getEvalueresInnenErrorMessage()}
-            requiredErrorMessage={
-              "Du må velge frist for når planen skal evalueres"
+            name="startDato"
+            label={"Startdato (obligatorisk)"}
+            defaultValue={
+              suggestedStartDate ? new Date(suggestedStartDate) : null
             }
-            validate={isAfterStartDate}
+            errorMessageToDisplay={errors.startDato?.message}
+            requiredErrorMessage={"Du må velge startdato"}
           />
 
-          <Line />
+          <DatoVelger
+            name="sluttDato"
+            label={"Sluttdato (obligatorisk)"}
+            defaultValue={suggestedEndDate ? new Date(suggestedEndDate) : null}
+            errorMessageToDisplay={getSluttDatoErrorMessage()}
+            requiredErrorMessage={"Du må velge sluttdato"}
+            validate={isAfterStartDate}
+          />
+        </Row>
 
-          <SpacedDiv>
-            <CheckboxGroup legend="Samtykke og deling" hideLegend>
-              <Checkbox value={"true"} {...register("delMedNAV")}>
-                Jeg vil dele planen med NAV når{" "}
-                {oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn ||
-                  "lederen min"}{" "}
-                har godkjent den (valgfritt)
-              </Checkbox>
-              <Checkbox
-                value={"true"}
-                {...register("enigIPlanen", {
-                  required: "Du må godkjenne planen for å komme videre",
-                })}
-                error={!!errors.enigIPlanen}
-              >
-                Jeg er enig i denne oppfølgingsplanen (obligatorisk)
-              </Checkbox>
-            </CheckboxGroup>
-            {errors.enigIPlanen?.message && (
-              <ErrorMessage>{errors.enigIPlanen?.message}</ErrorMessage>
-            )}
-          </SpacedDiv>
+        <DatoVelger
+          name="evalueresInnen"
+          label={"Evalueres innen (obligatorisk)"}
+          errorMessageToDisplay={getEvalueresInnenErrorMessage()}
+          requiredErrorMessage={
+            "Du må velge frist for når planen skal evalueres"
+          }
+          validate={isAfterStartDate}
+        />
 
-          <Row>
-            <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
-              Send til godkjenning
-            </Button>
-            <Button variant={"tertiary"} onClick={cancel}>
-              Avbryt
-            </Button>
-          </Row>
-        </LightGreyPanel>
+        <Line />
+
+        {visTvungenGodkjenningToggle && (
+          <TvungenGodkjenningToggle
+            setTvungenGodkjenning={setTvungenGodkjenning}
+            tvungenGodkjenning={tvungenGodkjenning}
+          />
+        )}
+
+        <SpacedDiv>
+          <CheckboxGroup legend="Samtykke og deling" hideLegend>
+            <Checkbox value={"true"} {...register("delMedNAV")}>
+              Jeg vil dele planen med NAV når{" "}
+              {oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn ||
+                "lederen min"}{" "}
+              har godkjent den (valgfritt)
+            </Checkbox>
+            <Checkbox
+              value={"true"}
+              {...register("enigIPlanen", {
+                required: "Du må godkjenne planen for å komme videre",
+              })}
+              error={!!errors.enigIPlanen}
+            >
+              Jeg er enig i denne oppfølgingsplanen (obligatorisk)
+            </Checkbox>
+          </CheckboxGroup>
+          {errors.enigIPlanen?.message && (
+            <ErrorMessage>{errors.enigIPlanen?.message}</ErrorMessage>
+          )}
+        </SpacedDiv>
+
+        <Row>
+          <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
+            Send til godkjenning
+          </Button>
+          <Button variant={"tertiary"} onClick={cancel}>
+            Avbryt
+          </Button>
+        </Row>
       </form>
     </FormProvider>
   );
