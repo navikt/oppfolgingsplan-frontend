@@ -15,6 +15,9 @@ import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplan
 import { GodkjennPlanMottatt } from "../../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
+import { ApprovalInformationAG } from "../../../../components/status/godkjentplan/ApprovalInformation";
+import { GodkjentPlanAvbrutt } from "../../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
+import { GodkjentPlan } from "../../../../components/status/godkjentplan/GodkjentPlan";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -65,10 +68,24 @@ const Content = ({
       return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLANAVBRUTT": {
-      return <div>GODKJENTPLANAVBRUTT</div>;
+      return (
+        <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationAG
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            motpartNavn={oppfolgingsplan.arbeidstaker?.navn}
+          />
+        </GodkjentPlanAvbrutt>
+      );
     }
     case "GODKJENTPLAN": {
-      return <div>GODKJENTPLAN</div>;
+      return (
+        <GodkjentPlan oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationAG
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            motpartNavn={oppfolgingsplan.arbeidstaker?.navn}
+          />
+        </GodkjentPlan>
+      );
     }
     default: {
       return <IngenPlanTilGodkjenning />;

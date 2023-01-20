@@ -1,11 +1,12 @@
 import { Row } from "../../blocks/wrappers/Row";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Alert, Button } from "@navikt/ds-react";
-import {
-  useDelOppfolgingsplanMedFastlegeSM,
-  useDelOppfolgingsplanMedNavSM,
-} from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { GodkjentPlan } from "../../../types/oppfolgingsplan";
+import {
+  useDelOppfolgingsplanMedFastlege,
+  useDelOppfolgingsplanMedNav,
+} from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useAudience } from "../../../hooks/routeHooks";
 
 interface Props {
   oppfolgingsplanId: number;
@@ -16,8 +17,18 @@ export const DelMedNavOgFastlegeButtons = ({
   oppfolgingsplanId,
   godkjentPlan,
 }: Props) => {
-  const delOppfolgingsplanMedFastlege = useDelOppfolgingsplanMedFastlegeSM();
-  const delOppfolgingsplanMedNAV = useDelOppfolgingsplanMedNavSM();
+  const delOppfolgingsplanMedFastlege = useDelOppfolgingsplanMedFastlege();
+  const delOppfolgingsplanMedNAV = useDelOppfolgingsplanMedNav();
+  const { isAudienceSykmeldt } = useAudience();
+
+  //TODO: Finn en pen måte å bytte audience med komposisjon på
+  const delMedFastLegeErrorText = () => {
+    if (isAudienceSykmeldt) {
+      return "Du får dessverre ikke delt planen med legen herfra. Det kan hende fastlegen din ikke kan ta imot elektroniske meldinger. Eller har du kanskje ingen fastlege? For å dele planen kan du laste den ned, skrive den ut og ta den med deg neste gang du er hos legen.";
+    }
+
+    return "Du får dessverre ikke delt denne planen med legen herfra. Det kan hende fastlegen ikke kan ta imot elektroniske meldinger. I dette tilfellet må dere laste ned og skrive ut planen slik at dere får delt den med legen manuelt.";
+  };
 
   return (
     <>
@@ -46,12 +57,7 @@ export const DelMedNavOgFastlegeButtons = ({
 
       {delOppfolgingsplanMedFastlege.isError && (
         <SpacedDiv>
-          <Alert variant={"error"}>
-            Du får dessverre ikke delt planen med legen herfra. Det kan hende
-            fastlegen din ikke kan ta imot elektroniske meldinger. Eller har du
-            kanskje ingen fastlege? For å dele planen kan du laste den ned,
-            skrive den ut og ta den med deg neste gang du er hos legen.
-          </Alert>
+          <Alert variant={"error"}>{delMedFastLegeErrorText()}</Alert>
         </SpacedDiv>
       )}
 

@@ -17,6 +17,7 @@ import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
+import { ApprovalInformationSM } from "../../../components/status/godkjentplan/ApprovalInformation";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -66,10 +67,24 @@ const Content = ({
       return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLANAVBRUTT": {
-      return <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationSM
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            motpartNavn={oppfolgingsplan.arbeidsgiver.naermesteLeder?.navn}
+          />
+        </GodkjentPlanAvbrutt>
+      );
     }
     case "GODKJENTPLAN": {
-      return <GodkjentPlan oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjentPlan oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationSM
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            motpartNavn={oppfolgingsplan.arbeidsgiver.naermesteLeder?.navn}
+          />
+        </GodkjentPlan>
+      );
     }
     default: {
       return <IngenPlanTilGodkjenning />;

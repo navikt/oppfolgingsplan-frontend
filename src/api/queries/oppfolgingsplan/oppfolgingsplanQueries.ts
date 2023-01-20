@@ -17,7 +17,6 @@ export const useKopierOppfolgingsplan = () => {
 
   const postKopierOppfolgingsplan = async (oppfolgingsplanIdToCopy: number) => {
     await post(`${apiPath}/${oppfolgingsplanIdToCopy}/kopier`);
-
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -96,4 +95,40 @@ export const useAvvisOppfolgingsplan = () => {
   };
 
   return useMutation(postAvvisOppfolgingsplan);
+};
+
+export const useDelOppfolgingsplanMedNav = () => {
+  const apiBasePath = useOppfolgingsplanApiPath();
+  const queryClient = useQueryClient();
+
+  const delPlanMedNAV = async (oppfolgingsplanId: number) => {
+    await post(`${apiBasePath}/${oppfolgingsplanId}/delmednav`);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+  };
+
+  return useMutation(delPlanMedNAV);
+};
+
+export const useDelOppfolgingsplanMedFastlege = () => {
+  const apiBasePath = useOppfolgingsplanApiPath();
+  const queryClient = useQueryClient();
+
+  const delPlanMedFastlege = async (oppfolgingsplanId: number) => {
+    await post(`${apiBasePath}/${oppfolgingsplanId}/delmedfastlege`);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+  };
+
+  return useMutation(delPlanMedFastlege);
+};
+
+export const useAvbrytOppfolgingsplan = () => {
+  const apiBasePath = useApiBasePath();
+  const queryClient = useQueryClient();
+
+  const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
+    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+  };
+
+  return useMutation(postAvbrytOppfolgingsplan);
 };

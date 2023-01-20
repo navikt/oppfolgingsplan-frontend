@@ -9,8 +9,8 @@ export const HvaSkjerNa = () => {
           Hva skjer nå?
         </Heading>
         <BodyShort spacing>
-          Innen fire uker skal fastlegen din få se planen. Du og lederen din kan
-          dele den med både legen og NAV når dere er blitt enige.
+          Innen fire uker skal fastlegen få se planen. Dere kan dele den med
+          både legen og NAV når dere er blitt enige.
         </BodyShort>
         <BodyShort spacing>
           OBS: NAV kan ikke se planen før dere har delt den.
