@@ -7,27 +7,22 @@ import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { AvbrytPlanKnapp } from "./AvbrytPlanKnapp";
-import { BothApprovedOppfolgingsplan } from "./BothApprovedOppfolgingsplan";
-import { ForcedApprovedOppfolgingsplan } from "./ForcedApprovedOppfolgingsplan";
 import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
 import { DelMedNavOgFastlegeButtons } from "./DelMedNavOgFastlegeButtons";
 import { erOppfolgingsplanTidligere } from "../../../utils/oppfolgingplanUtils";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { ReactNode } from "react";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
+  children: ReactNode;
 }
 
-export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
-  if (
-    !oppfolgingsplan.godkjentPlan ||
-    !oppfolgingsplan.arbeidsgiver?.naermesteLeder
-  ) {
+export const GodkjentPlan = ({ oppfolgingsplan, children }: Props) => {
+  if (!oppfolgingsplan.godkjentPlan) {
     return null;
   }
-
-  const godkjentPlan = oppfolgingsplan.godkjentPlan;
 
   return (
     <SpacedDiv>
@@ -37,18 +32,10 @@ export const GodkjentPlan = ({ oppfolgingsplan }: Props) => {
         </Heading>
       </SpacedDiv>
 
-      {godkjentPlan.tvungenGodkjenning ? (
-        <ForcedApprovedOppfolgingsplan
-          narmesteLeder={oppfolgingsplan.arbeidsgiver.naermesteLeder}
-        />
-      ) : (
-        <BothApprovedOppfolgingsplan
-          narmesteLeder={oppfolgingsplan.arbeidsgiver.naermesteLeder}
-        />
-      )}
+      {children}
 
       <GodkjennPlanTidspunkter
-        gyldighetstidspunkt={godkjentPlan.gyldighetstidspunkt!}
+        gyldighetstidspunkt={oppfolgingsplan.godkjentPlan.gyldighetstidspunkt!}
       />
 
       <GodkjentPlanDeltBekreftelse

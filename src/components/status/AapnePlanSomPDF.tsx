@@ -1,4 +1,4 @@
-import { useApiBasePath } from "hooks/routeHooks";
+import { useOppfolgingsplanApiPath } from "hooks/routeHooks";
 import { FileContent } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const AapnePlanSomPDF = ({ oppfolgingsplanId }: Props) => {
-  const apiBasePath = useApiBasePath();
+  const apiBasePath = useOppfolgingsplanApiPath();
   const downloadPdfUrl = `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/pdf`;
 
   return (

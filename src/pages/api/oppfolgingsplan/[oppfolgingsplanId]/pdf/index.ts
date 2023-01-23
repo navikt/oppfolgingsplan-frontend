@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../../../environments/publicEnv";
-import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
-import { getPdf } from "../../../../../../server/service/oppfolgingsplanService";
-import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
-import { defaultPdfMockData } from "../../../../../../server/data/mock/defaultData/oppfolgingsplanservice/defaultPdfMockData";
-import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
+import { isMockBackend } from "../../../../../environments/publicEnv";
+import { defaultPdfMockData } from "../../../../../server/data/mock/defaultData/oppfolgingsplanservice/defaultPdfMockData";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanIdFromRequest } from "../../../../../server/utils/requestUtils";
+import { getPdf } from "../../../../../server/service/oppfolgingsplanService";
+import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 
 const handler = async (
   req: NextApiRequest,

@@ -2,7 +2,10 @@ import { BodyShort } from "@navikt/ds-react";
 import { Row } from "components/blocks/wrappers/Row";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
-import { GodkjennOppfolgingsplan } from "../GodkjennOppfolgingsplan";
+import {
+  GodkjennOppfolgingsplan,
+  MotpartNavnForAltinn,
+} from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
@@ -10,25 +13,28 @@ import { Godkjenning, Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
+  description: string;
+  motpartNavnForAltinn: MotpartNavnForAltinn;
 }
 
-export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
+export const GodkjennPlanAvslattOgGodkjent = ({
+  oppfolgingsplan,
+  description,
+  motpartNavnForAltinn,
+}: Props) => {
   const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.find(
     (godkjenning: Godkjenning) => {
       return godkjenning.godkjent;
     }
   )?.gyldighetstidspunkt;
 
-  if (!gyldighetstidspunkt || !oppfolgingsplan.arbeidsgiver?.naermesteLeder) {
+  if (!gyldighetstidspunkt) {
     return null;
   }
 
   return (
     <SpacedDiv>
-      <BodyShort spacing>
-        {oppfolgingsplan.arbeidsgiver.naermesteLeder.navn} har gjort noen
-        endringer i planen og sendt den tilbake til deg.
-      </BodyShort>
+      <BodyShort spacing>{description}</BodyShort>
 
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
 
@@ -39,7 +45,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({ oppfolgingsplan }: Props) => {
 
       <GodkjennOppfolgingsplan
         oppfolgingsplanId={oppfolgingsplan.id}
-        altinnTargetAudience={"arbeidsgiveren din"}
+        motpartNavnForAltinn={motpartNavnForAltinn}
       />
       <TilLandingssideKnapp />
     </SpacedDiv>

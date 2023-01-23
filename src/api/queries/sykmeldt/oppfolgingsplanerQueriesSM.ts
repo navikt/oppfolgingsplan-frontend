@@ -57,46 +57,6 @@ export const useGjeldendePlanSM = (
   return null;
 };
 
-export const useAvbrytOppfolgingsplanSM = () => {
-  const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
-
-  const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
-    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-  };
-
-  return useMutation(postAvbrytOppfolgingsplan);
-};
-
-export const useDelOppfolgingsplanMedNavSM = () => {
-  const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
-
-  const delPlanMedNAV = async (oppfolgingsplanId: number) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/delmednav`
-    );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-  };
-
-  return useMutation(delPlanMedNAV);
-};
-
-export const useDelOppfolgingsplanMedFastlegeSM = () => {
-  const apiBasePath = useApiBasePath();
-  const queryClient = useQueryClient();
-
-  const delPlanMedFastlege = async (oppfolgingsplanId: number) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/delmedfastlege`
-    );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-  };
-
-  return useMutation(delPlanMedFastlege);
-};
-
 export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
   const apiBasePath = useApiBasePath();
   const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");

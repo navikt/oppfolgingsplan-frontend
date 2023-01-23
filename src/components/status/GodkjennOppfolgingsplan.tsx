@@ -3,14 +3,16 @@ import { useState } from "react";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
+export type MotpartNavnForAltinn = "arbeidstakeren" | "arbeidsgiveren din";
+
 interface Props {
   oppfolgingsplanId: number;
-  altinnTargetAudience: string;
+  motpartNavnForAltinn: MotpartNavnForAltinn;
 }
 
 export const GodkjennOppfolgingsplan = ({
   oppfolgingsplanId,
-  altinnTargetAudience,
+  motpartNavnForAltinn,
 }: Props) => {
   const [delMedNav, setDelMedNav] = useState(false);
   const godkjennOppfolgingsplan =
@@ -22,7 +24,7 @@ export const GodkjennOppfolgingsplan = ({
         Ønsker du å godkjenne denne planen?
       </Heading>
       <BodyShort spacing>
-        Alle godkjente planer mellom deg og {altinnTargetAudience} vil
+        Alle godkjente planer mellom deg og {motpartNavnForAltinn} vil
         automatisk bli tilgjengelige for arbeidsplassen i Altinn.
       </BodyShort>
       <SpacedDiv>
