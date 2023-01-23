@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
-import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 
 export const NyArbeidsoppgaveSM = () => {
   const lagreOppgave = useLagreArbeidsoppgave();

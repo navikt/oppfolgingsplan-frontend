@@ -6,6 +6,7 @@ import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
+import {useAudience} from "../../hooks/routeHooks";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -24,6 +25,13 @@ const DateRow = styled.div`
 const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `;
+
+const arbeidstakerInfoText = "Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du\n" +
+    " ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose. Du\n" +
+    " må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren\n" +
+    " din og NAV kan følge deg opp"
+
+const arbeidsgiverInfoText = "Husk at arbeidstakeren din kan se det du skriver her. Du må ikke gi sensitive personopplysninger."
 
 export type TiltakFormValues = {
   overskrift: string;
@@ -49,7 +57,7 @@ export const TiltakForm = ({
   defaultFormValues,
 }: Props) => {
   const errorRef = useRef<any>(null);
-
+  const { isAudienceSykmeldt } = useAudience();
   const formFunctions = useForm<TiltakFormValues>();
   const {
     handleSubmit,
@@ -59,6 +67,8 @@ export const TiltakForm = ({
   } = formFunctions;
 
   const beskrivelseValue = watch("beskrivelse");
+
+  const infoText = isAudienceSykmeldt ? arbeidstakerInfoText : arbeidsgiverInfoText
 
   return (
     <FormProvider {...formFunctions}>
@@ -95,10 +105,7 @@ export const TiltakForm = ({
           />
 
           <SpacedAlert variant={"info"}>
-            Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du
-            ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose. Du
-            må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren
-            din og NAV kan følge deg opp
+            {infoText}
           </SpacedAlert>
 
           <DateRow>
