@@ -11,8 +11,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
 import { ApiErrorException } from "../../axios/errors";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-
-export const OPPFOLGINGSPLANER_SM = "oppfolgingsplaner-sykmeldt";
+import { queryKeys } from "../queryKeys";
 
 export const useOppfolgingsplanerSM = () => {
   const apiBasePath = useApiBasePath();
@@ -21,7 +20,7 @@ export const useOppfolgingsplanerSM = () => {
     get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`);
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
-    [OPPFOLGINGSPLANER_SM],
+    [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner
   );
 };
@@ -64,7 +63,7 @@ export const useAvbrytOppfolgingsplanSM = () => {
 
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
     await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(postAvbrytOppfolgingsplan);
@@ -78,7 +77,7 @@ export const useDelOppfolgingsplanMedNavSM = () => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/delmednav`
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(delPlanMedNAV);
@@ -92,7 +91,7 @@ export const useDelOppfolgingsplanMedFastlegeSM = () => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/delmedfastlege`
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(delPlanMedFastlege);
@@ -109,13 +108,13 @@ export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
       data
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     await router.push(statusUrl);
   };
 
   return useMutation(godkjennPlan, {
     onError: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -126,7 +125,7 @@ export const useOpprettOppfolgingsplanSM = () => {
 
   const opprettOppfolgingsplan = async (data: OpprettOppfoelgingsdialog) => {
     await post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(opprettOppfolgingsplan);
