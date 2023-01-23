@@ -51,7 +51,7 @@ const Content = ({
           oppfolgingsplan={oppfolgingsplan}
           description={`${oppfolgingsplan?.arbeidstaker?.navn} har gjort noen
         endringer i planen og sendt den tilbake til deg.`}
-          altinnTargetAudience={"arbeidsgiveren din"}
+          motpartNavnForAltinn={"arbeidstakeren"}
         />
       );
     }
@@ -60,7 +60,7 @@ const Content = ({
         <GodkjennPlanMottatt
           oppfolgingsplan={oppfolgingsplan}
           description={`${oppfolgingsplan?.arbeidstaker?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-          altinnTargetAudience={"arbeidstakeren"}
+          motpartNavnForAltinn={"arbeidstakeren"}
         />
       );
     }
@@ -72,7 +72,7 @@ const Content = ({
         <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan}>
           <ApprovalInformationAG
             godkjentPlan={oppfolgingsplan.godkjentPlan}
-            motpartNavn={oppfolgingsplan.arbeidstaker?.navn}
+            sykmeldtNavn={oppfolgingsplan.arbeidstaker?.navn}
           />
         </GodkjentPlanAvbrutt>
       );
@@ -82,7 +82,7 @@ const Content = ({
         <GodkjentPlan oppfolgingsplan={oppfolgingsplan}>
           <ApprovalInformationAG
             godkjentPlan={oppfolgingsplan.godkjentPlan}
-            motpartNavn={oppfolgingsplan.arbeidstaker?.navn}
+            sykmeldtNavn={oppfolgingsplan.arbeidstaker?.navn}
           />
         </GodkjentPlan>
       );

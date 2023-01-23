@@ -1,6 +1,6 @@
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import {
-  AltinnTargetAudience,
+  MotpartNavnForAltinn,
   GodkjennOppfolgingsplan,
 } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
@@ -15,13 +15,13 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   description: string;
-  altinnTargetAudience: AltinnTargetAudience;
+  motpartNavnForAltinn: MotpartNavnForAltinn;
 }
 
 export const GodkjennPlanMottatt = ({
   oppfolgingsplan,
   description,
-  altinnTargetAudience,
+  motpartNavnForAltinn,
 }: Props) => {
   const gyldighetstidspunkt =
     oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
@@ -47,7 +47,7 @@ export const GodkjennPlanMottatt = ({
 
       <GodkjennOppfolgingsplan
         oppfolgingsplanId={oppfolgingsplan.id}
-        altinnTargetAudience={altinnTargetAudience}
+        motpartNavnForAltinn={motpartNavnForAltinn}
       />
 
       <TilLandingssideKnapp />

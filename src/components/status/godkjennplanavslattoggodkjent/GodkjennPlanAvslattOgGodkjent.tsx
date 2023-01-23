@@ -3,8 +3,8 @@ import { Row } from "components/blocks/wrappers/Row";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import {
-  AltinnTargetAudience,
   GodkjennOppfolgingsplan,
+  MotpartNavnForAltinn,
 } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
@@ -14,13 +14,13 @@ import { Godkjenning, Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   description: string;
-  altinnTargetAudience: AltinnTargetAudience;
+  motpartNavnForAltinn: MotpartNavnForAltinn;
 }
 
 export const GodkjennPlanAvslattOgGodkjent = ({
   oppfolgingsplan,
   description,
-  altinnTargetAudience,
+  motpartNavnForAltinn,
 }: Props) => {
   const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.find(
     (godkjenning: Godkjenning) => {
@@ -45,7 +45,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({
 
       <GodkjennOppfolgingsplan
         oppfolgingsplanId={oppfolgingsplan.id}
-        altinnTargetAudience={altinnTargetAudience}
+        motpartNavnForAltinn={motpartNavnForAltinn}
       />
       <TilLandingssideKnapp />
     </SpacedDiv>
