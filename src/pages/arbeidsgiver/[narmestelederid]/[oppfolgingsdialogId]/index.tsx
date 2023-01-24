@@ -13,6 +13,11 @@ import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import GodkjennPlanSendtInfoBox from "../../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { GodkjennPlanMottatt } from "../../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
+import { GodkjennPlanAvslattOgGodkjent } from "../../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
+import { GodkjennPlanAvslatt } from "../../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
+import { ApprovalInformationAG } from "../../../../components/status/godkjentplan/ApprovalInformation";
+import { GodkjentPlanAvbrutt } from "../../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
+import { GodkjentPlan } from "../../../../components/status/godkjentplan/GodkjentPlan";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -41,25 +46,46 @@ const Content = ({
       );
     }
     case "MOTTATTFLEREGODKJENNINGER": {
-      return <div>MOTTATTFLEREGODKJENNINGER</div>;
+      return (
+        <GodkjennPlanAvslattOgGodkjent
+          oppfolgingsplan={oppfolgingsplan}
+          description={`${oppfolgingsplan?.arbeidstaker?.navn} har gjort noen
+        endringer i planen og sendt den tilbake til deg.`}
+          motpartNavnForAltinn={"arbeidstakeren"}
+        />
+      );
     }
     case "GODKJENNPLANMOTTATT": {
       return (
         <GodkjennPlanMottatt
           oppfolgingsplan={oppfolgingsplan}
           description={`${oppfolgingsplan?.arbeidstaker?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-          altinnTargetAudience={"arbeidstakeren"}
+          motpartNavnForAltinn={"arbeidstakeren"}
         />
       );
     }
     case "GODKJENNPLANAVSLATT": {
-      return <div>GODKJENNPLANAVSLATT</div>;
+      return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLANAVBRUTT": {
-      return <div>GODKJENTPLANAVBRUTT</div>;
+      return (
+        <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationAG
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            sykmeldtNavn={oppfolgingsplan.arbeidstaker?.navn}
+          />
+        </GodkjentPlanAvbrutt>
+      );
     }
     case "GODKJENTPLAN": {
-      return <div>GODKJENTPLAN</div>;
+      return (
+        <GodkjentPlan oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationAG
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            sykmeldtNavn={oppfolgingsplan.arbeidstaker?.navn}
+          />
+        </GodkjentPlan>
+      );
     }
     default: {
       return <IngenPlanTilGodkjenning />;
@@ -73,7 +99,7 @@ const OppfolgingsplanStatusAG: NextPage = () => {
   const { title, heading } = getStatusPageTitleAndHeading(
     pageToDisplay,
     aktivPlan?.virksomhet?.navn,
-    aktivPlan?.arbeidstaker.navn || "Den sykmeldte"
+    aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din"
   );
 
   return (

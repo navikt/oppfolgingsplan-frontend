@@ -3,10 +3,12 @@ import { texts } from "../seplanen/texts";
 import { Gjennomforing } from "../../types/oppfolgingsplan";
 
 interface Props {
-  gjennomfoering: Gjennomforing;
+  gjennomfoering?: Gjennomforing | null;
 }
 
 export const TilretteleggingsBeskrivelse = ({ gjennomfoering }: Props) => {
+  if (!gjennomfoering) return null;
+
   return (
     <>
       <Label>{texts.arbeidsoppgaveList.labels.hvaSkalTil}</Label>

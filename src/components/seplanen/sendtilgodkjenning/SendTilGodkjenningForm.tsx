@@ -14,7 +14,8 @@ import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
-import { Oppfolgingsplan, Tiltak } from "../../../types/oppfolgingsplan";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { notNullish } from "../../../server/utils/tsUtils";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -49,17 +50,19 @@ export const SendTilGodkjenningForm = ({
     formState: { errors },
   } = formFunctions;
 
-  const suggestedStartDate = oppfolgingsplan.tiltakListe
-    ?.filter((tiltak) => tiltak.fom)
-    .sort((t1: Tiltak, t2: Tiltak) => {
-      return new Date(t1.fom!).getTime() - new Date(t2.fom!).getTime();
-    })[0]?.fom;
+  const suggestedStartDate: string | null = oppfolgingsplan.tiltakListe
+    .map((tiltak) => tiltak.fom)
+    .filter(notNullish)
+    .sort((t1: string, t2: string) => {
+      return new Date(t1).getTime() - new Date(t2).getTime();
+    })[0];
 
-  const suggestedEndDate = oppfolgingsplan.tiltakListe
-    ?.filter((tiltak) => tiltak.tom)
-    .sort((t1: Tiltak, t2: Tiltak) => {
-      return new Date(t2.tom!).getTime() - new Date(t1.tom!).getTime();
-    })[0]?.tom;
+  const suggestedEndDate: string | null = oppfolgingsplan.tiltakListe
+    .map((tiltak) => tiltak.tom)
+    .filter(notNullish)
+    .sort((t1: string, t2: string) => {
+      return new Date(t2).getTime() - new Date(t1).getTime();
+    })[0];
 
   const startDate = watch("startDato");
 
@@ -131,7 +134,9 @@ export const SendTilGodkjenningForm = ({
             <DatoVelger
               name="startDato"
               label={"Startdato (obligatorisk)"}
-              defaultValue={new Date(suggestedStartDate!)}
+              defaultValue={
+                suggestedStartDate ? new Date(suggestedStartDate) : null
+              }
               errorMessageToDisplay={errors.startDato?.message}
               requiredErrorMessage={"Du må velge startdato"}
             />

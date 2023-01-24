@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, post } from "api/axios/axios";
-import {useApiBasePath, useOppfolgingsplanApiPath, useOppfolgingsplanRouteId} from "hooks/routeHooks";
+import {
+  useApiBasePath,
+  useOppfolgingsplanApiPath,
+  useOppfolgingsplanRouteId,
+} from "hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "schema/opprettOppfoelgingsdialogSchema";
 import {
   erOppfolgingsplanAktiv,
@@ -10,8 +14,7 @@ import {
 import { ApiErrorException } from "api/axios/errors";
 import { useDineSykmeldte } from "api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-
-export const OPPFOLGINGSPLANER_AG = "oppfolgingsplaner-arbeidsgiver";
+import { queryKeys } from "../queryKeys";
 
 export const useOppfolgingsplanerAG = () => {
   const apiBasePath = useApiBasePath();
@@ -29,9 +32,9 @@ export const useOppfolgingsplanerAG = () => {
     );
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
-    [OPPFOLGINGSPLANER_AG],
+    [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner,
-    { enabled: !!sykmeldtFnr }
+    { enabled: !!sykmeldtFnr, useErrorBoundary: true }
   );
 };
 
@@ -108,7 +111,7 @@ export const useOpprettOppfolgingsplanAG = () => {
       );
     }
 
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(opprettOppfolgingsplan);

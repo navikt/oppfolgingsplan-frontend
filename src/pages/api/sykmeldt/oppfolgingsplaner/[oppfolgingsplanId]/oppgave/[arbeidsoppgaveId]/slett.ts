@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Sykmelding } from "../../../../../../../schema/sykmeldingSchema";
 import { isMockBackend } from "../../../../../../../environments/publicEnv";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import {
+  getArbeidsoppgaveIdFromRequest,
   getOppfolgingsplanIdFromRequest,
-  getTiltakIdFromRequest,
 } from "../../../../../../../server/utils/requestUtils";
-import { deleteTiltak } from "../../../../../../../server/service/oppfolgingsplanService";
+import { deleteOppgave } from "../../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../../server/auth/beskyttetApi";
 import getMockDb from "../../../../../../../server/data/mock/getMockDb";
 import {
@@ -15,10 +16,10 @@ import {
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Sykmelding[]>
 ): Promise<void> => {
   const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
-  const tiltakId = getTiltakIdFromRequest(req);
+  const arbeidsoppgaveId = getArbeidsoppgaveIdFromRequest(req);
 
   if (isMockBackend) {
     const activeMock = getMockDb();
@@ -29,20 +30,22 @@ const handler = async (
     if (!aktivPlan) {
       throw new ApiErrorException(
         generalError(
-          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
+          `postSlett: Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
         )
       );
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
-    activeMock.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
-      aktivPlan.tiltakListe.filter(
-        (tiltak) => tiltak.tiltakId != Number(tiltakId)
+    activeMock.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
+      aktivPlan.arbeidsoppgaveListe.filter(
+        (arbeidsoppgave) =>
+          arbeidsoppgave.arbeidsoppgaveId !== Number(arbeidsoppgaveId)
       );
+
     res.status(200).end();
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
-    await deleteTiltak(tokenX, tiltakId);
+    await deleteOppgave(tokenX, arbeidsoppgaveId);
     res.status(200).end();
   }
 };

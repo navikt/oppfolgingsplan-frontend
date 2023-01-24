@@ -22,8 +22,8 @@ export const TiltakList = ({ oppfolgingsplan }: Props) => {
       STATUS_TILTAK.IKKE_AKTUELT,
     ];
     return arbeidsoppgaver.sort((a, b) => {
-      if (order.indexOf(b.status!) < order.indexOf(a.status!)) return 1;
-      if (order.indexOf(b.status!) > order.indexOf(a.status!)) return -1;
+      if (order.indexOf(b.status) < order.indexOf(a.status)) return 1;
+      if (order.indexOf(b.status) > order.indexOf(a.status)) return -1;
       else {
         return b.tiltakId - a.tiltakId;
       }

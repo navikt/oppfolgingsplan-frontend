@@ -264,7 +264,7 @@ export async function kopierOppfolgingsplan(
   );
 }
 
-export async function avbrytOppfolgingsplanSM(
+export async function avbrytOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -297,7 +297,7 @@ export async function nullstillGodkjenning(
   );
 }
 
-export async function delMedNavSM(
+export async function delMedNav(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
@@ -308,7 +308,7 @@ export async function delMedNavSM(
   );
 }
 
-export async function delMedFastlegeSM(
+export async function delMedFastlege(
   accessToken: string,
   oppfolgingsplanId: string
 ) {

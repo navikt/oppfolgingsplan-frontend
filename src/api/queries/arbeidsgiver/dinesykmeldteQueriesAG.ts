@@ -3,8 +3,7 @@ import { get } from "api/axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
-
-export const DINESYKMELDTE_AG = "dinesykmeldte-ag";
+import { queryKeys } from "../queryKeys";
 
 export const useDineSykmeldte = () => {
   const apiBasePath = useApiBasePath();
@@ -14,10 +13,11 @@ export const useDineSykmeldte = () => {
     get<Sykmeldt>(`${apiBasePath}/dinesykmeldte/${narmestelederId}`);
 
   return useQuery<Sykmeldt, ApiErrorException>(
-    [DINESYKMELDTE_AG],
+    [queryKeys.DINESYKMELDTE],
     fetchDineSykmeldte,
     {
       enabled: !!narmestelederId,
+      useErrorBoundary: true,
     }
   );
 };

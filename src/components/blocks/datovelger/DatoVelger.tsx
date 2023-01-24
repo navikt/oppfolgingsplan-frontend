@@ -5,8 +5,6 @@ import nb from "date-fns/locale/nb";
 import { TextField } from "@navikt/ds-react";
 import styled from "styled-components";
 import { Controller, useFormContext } from "react-hook-form";
-import { FieldPathValue } from "react-hook-form/dist/types/path";
-import { Validate } from "react-hook-form/dist/types/validator";
 import { leggTilDagerPaDato } from "../../../utils/dateUtils";
 
 registerLocale("nb", nb);
@@ -17,9 +15,7 @@ interface Props {
   defaultValue?: Date | null;
   errorMessageToDisplay?: string;
   requiredErrorMessage: string;
-  validate?:
-    | Validate<FieldPathValue<any, any>>
-    | Record<string, Validate<FieldPathValue<any, any>>>;
+  validate?: (date: Date) => boolean;
 }
 
 const SpacedTextField = styled(TextField)`

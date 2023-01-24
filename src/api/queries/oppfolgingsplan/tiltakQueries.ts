@@ -1,9 +1,8 @@
 import { useOppfolgingsplanApiPath, useOppfolgingsplanRouteId} from "hooks/routeHooks";
 import { post } from "api/axios/axios";
-import { OPPFOLGINGSPLANER_SM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
-import {OPPFOLGINGSPLANER_AG} from "../arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { queryKeys } from "../queryKeys";
 
 export const useLagreTiltak = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -15,8 +14,7 @@ export const useLagreTiltak = () => {
       `${apiPath}/${oppfolgingsplanId}/tiltak/lagre`,
       tiltak
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(lagreTiltak);
@@ -31,8 +29,7 @@ export const useSlettTiltakSM = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(slettTiltak);
@@ -56,8 +53,7 @@ export const useLagreKommentar = () => {
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       kommentar
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(lagreKommentar);
@@ -80,8 +76,7 @@ export const useSlettKommentar = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
   return useMutation(slettKommentar);

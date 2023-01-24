@@ -12,18 +12,20 @@ import {
 import OppfolgingsdialogerVisning from "./teaser/OppfolgingsdialogerVisning";
 import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
 import OppfolgingsplanUtenGyldigSykmelding from "./OppfolgingsplanUtenGyldigSykmelding";
-import { useNarmesteLedereSM } from "api/queries/sykmeldt/narmesteLedereQueriesSM";
 import { IngenLedereInfoBoks } from "components/blocks/infoboks/IngenLedereInfoBoks";
-import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
+import { NarmesteLeder, Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
   sykmeldinger: Sykmelding[];
+  narmesteLedere: NarmesteLeder[];
 }
 
-const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
-  const narmesteledere = useNarmesteLedereSM();
-
+const OppfolgingsplanContent = ({
+  oppfolgingsplaner,
+  sykmeldinger,
+  narmesteLedere,
+}: Props) => {
   if (!sykmeldtHarGyldigSykmelding(sykmeldinger)) {
     return (
       <div>
@@ -47,7 +49,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
     erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
-      narmesteledere.data!
+      narmesteLedere
     )
   ) {
     return <IngenLedereInfoBoks />;
@@ -56,7 +58,7 @@ const OppfolgingsplanContent = ({ oppfolgingsplaner, sykmeldinger }: Props) => {
       <OppfolgingsdialogerVisning
         oppfolgingsplaner={oppfolgingsplaner}
         sykmeldinger={sykmeldinger}
-        narmesteLedere={narmesteledere.data!}
+        narmesteLedere={narmesteLedere}
       />
     );
   }

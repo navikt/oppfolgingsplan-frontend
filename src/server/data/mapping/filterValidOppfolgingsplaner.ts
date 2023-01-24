@@ -101,10 +101,13 @@ export const filterValidOppfolgingsplaner = (
   );
 
   return oppfolgingsplaner.filter((oppfolgingsplan) => {
-    if (oppfolgingsplan.godkjentPlan) {
+    if (
+      oppfolgingsplan.godkjentPlan &&
+      oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
+    ) {
       return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(
         lastSykefravar.fom,
-        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt!.tom!
+        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
       );
     }
     return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(

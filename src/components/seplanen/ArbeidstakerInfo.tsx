@@ -14,16 +14,6 @@ export const ArbeidstakerInfo = ({ arbeidstaker }: Props) => {
     return null;
   }
 
-  const getArbeidstakerInfoIfNotNull = (
-    atInfo: string | undefined | null,
-    label: string
-  ) => {
-    if (atInfo) {
-      return <BodyShort>{`${label} ${atInfo}`}</BodyShort>;
-    }
-    return null;
-  };
-
   return (
     <ContentWrapper>
       <Heading level="3" size="medium" spacing={true}>

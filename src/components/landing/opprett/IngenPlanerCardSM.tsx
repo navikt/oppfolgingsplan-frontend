@@ -4,7 +4,6 @@ import OppfolgingsdialogTomImage from "../../blocks/images/oppfolgingsdialog-tom
 import { Button } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
 import { Oppfolgingsplan } from "types/oppfolgingsplan";
 
@@ -21,7 +20,6 @@ const IngenPlanerCardSM = ({
   setVisOpprettModal,
 }: OppfolgingsdialogerIngenplanProps) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
-  const sykmeldtFnr = useSykmeldtFnr();
 
   return (
     <OppfolgingsplanCard
@@ -37,10 +35,7 @@ const IngenPlanerCardSM = ({
           if (
             erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner)
           ) {
-            opprettOppfolgingsplan.mutate({
-              sykmeldtFnr: sykmeldtFnr!,
-              virksomhetsnummer: arbeidsgivere[0].virksomhetsnummer,
-            });
+            opprettOppfolgingsplan.mutate(arbeidsgivere[0].virksomhetsnummer);
           } else {
             setVisOpprettModal(true);
           }

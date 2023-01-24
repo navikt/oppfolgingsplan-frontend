@@ -7,11 +7,31 @@ import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
 import SykmeldtSide from "../../components/blocks/wrappers/SykmeldtSide";
 import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../components/blocks/video/VideoPanel";
+import { useNarmesteLedereSM } from "../../api/queries/sykmeldt/narmesteLedereQueriesSM";
 
-const Home: NextPage = () => {
+const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
+  const narmesteLedere = useNarmesteLedereSM();
 
+  if (
+    oppfolgingsplaner.isSuccess &&
+    sykmeldinger.isSuccess &&
+    narmesteLedere.isSuccess
+  ) {
+    return (
+      <OppfolgingsplanContent
+        oppfolgingsplaner={oppfolgingsplaner.data}
+        sykmeldinger={sykmeldinger.data}
+        narmesteLedere={narmesteLedere.data}
+      />
+    );
+  }
+
+  return null;
+};
+
+const Home: NextPage = () => {
   return (
     <SykmeldtSide
       title="Oppfølgingsplaner - Oversikt"
@@ -23,10 +43,7 @@ const Home: NextPage = () => {
         Alle godkjente planer kan ses i Altinn av de på arbeidsplassen din som har tilgang."
       />
 
-      <OppfolgingsplanContent
-        oppfolgingsplaner={oppfolgingsplaner.data!}
-        sykmeldinger={sykmeldinger.data!}
-      />
+      <PageContent />
 
       <VideoPanel />
     </SykmeldtSide>

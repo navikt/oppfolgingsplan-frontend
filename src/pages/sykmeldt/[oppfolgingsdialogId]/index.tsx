@@ -17,6 +17,7 @@ import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
+import { ApprovalInformationSM } from "../../../components/status/godkjentplan/ApprovalInformation";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -45,15 +46,20 @@ const Content = ({
     }
     case "MOTTATTFLEREGODKJENNINGER": {
       return (
-        <GodkjennPlanAvslattOgGodkjent oppfolgingsplan={oppfolgingsplan} />
+        <GodkjennPlanAvslattOgGodkjent
+          oppfolgingsplan={oppfolgingsplan}
+          description={`${narmesteLederNavn} har gjort noen
+        endringer i planen og sendt den tilbake til deg.`}
+          motpartNavnForAltinn={"arbeidsgiveren din"}
+        />
       );
     }
     case "GODKJENNPLANMOTTATT": {
       return (
         <GodkjennPlanMottatt
           oppfolgingsplan={oppfolgingsplan}
-          description={`${oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
-          altinnTargetAudience={"arbeidsgiveren din"}
+          description={`${narmesteLederNavn} har sendt deg en ny oppfølgingsplan for godkjenning.`}
+          motpartNavnForAltinn={"arbeidsgiveren din"}
         />
       );
     }
@@ -61,10 +67,28 @@ const Content = ({
       return <GodkjennPlanAvslatt oppfolgingsplan={oppfolgingsplan} />;
     }
     case "GODKJENTPLANAVBRUTT": {
-      return <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjentPlanAvbrutt oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationSM
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            narmesteLederNavn={
+              oppfolgingsplan.arbeidsgiver.naermesteLeder?.navn
+            }
+          />
+        </GodkjentPlanAvbrutt>
+      );
     }
     case "GODKJENTPLAN": {
-      return <GodkjentPlan oppfolgingsplan={oppfolgingsplan} />;
+      return (
+        <GodkjentPlan oppfolgingsplan={oppfolgingsplan}>
+          <ApprovalInformationSM
+            godkjentPlan={oppfolgingsplan.godkjentPlan}
+            narmesteLederNavn={
+              oppfolgingsplan.arbeidsgiver.naermesteLeder?.navn
+            }
+          />
+        </GodkjentPlan>
+      );
     }
     default: {
       return <IngenPlanTilGodkjenning />;
