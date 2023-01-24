@@ -149,4 +149,5 @@ export type Oppfolgingsplan = {
   arbeidsgiver: Arbeidsgiver;
   arbeidstaker: Arbeidstaker;
   sistEndretAv: Person;
+  skalHaVarsel: boolean;
 };
