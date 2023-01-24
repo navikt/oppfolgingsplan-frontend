@@ -43,6 +43,7 @@ export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
             oppfolgingsplan.sistEndretAv.fnr
           ),
         },
+        skalHaVarsel: oppfolgingplanerMeta?.kontaktinfo?.skalHaVarsel,
       };
     }) || []
   );

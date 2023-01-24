@@ -131,6 +131,7 @@ export const oppfolgingsplanSchema = object({
   arbeidsgiver: arbeidsgiverSchema,
   arbeidstaker: personSchema,
   sistEndretAv: personSchema,
+  skalHaVarsel: boolean().nullish(),
 });
 
 export type OppfolgingsplanDTO = z.infer<typeof oppfolgingsplanSchema>;
