@@ -1,12 +1,12 @@
-import { Alert, Button, Textarea, TextField } from "@navikt/ds-react";
+import {Alert, Button, Radio, RadioGroup, Textarea, TextField} from "@navikt/ds-react";
 import styled from "styled-components";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
-import {useAudience} from "../../hooks/routeHooks";
+import { STATUS_TILTAK } from "../../constants/konstanter";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -26,19 +26,26 @@ const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `;
 
-const arbeidstakerInfoText = "Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du\n" +
-    " ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose. Du\n" +
-    " må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren\n" +
-    " din og NAV kan følge deg opp"
-
-const arbeidsgiverInfoText = "Husk at arbeidstakeren din kan se det du skriver her. Du må ikke gi sensitive personopplysninger."
+const arbeidsgiverInfoText =
+  "Husk at arbeidstakeren din kan se det du skriver her. Du må ikke gi sensitive personopplysninger.";
 
 export type TiltakFormValues = {
   overskrift: string;
   beskrivelse: string;
   fom: Date | null;
   tom: Date | null;
+  status: string;
+  gjennomfoering: string;
+  beskrivelseIkkeAktuelt: string;
 };
+
+const StyledTextarea = styled(Textarea)`
+  margin-bottom: 2rem;
+`;
+
+const StyledRadioGroup = styled(RadioGroup)`
+  margin-bottom: 2rem;
+`;
 
 interface Props {
   isSubmitting: boolean;
@@ -50,25 +57,38 @@ interface Props {
   defaultFormValues?: TiltakFormValues;
 }
 
-export const TiltakForm = ({
+export const TiltakFormAG = ({
   isSubmitting,
   onSubmit,
   onCancel,
   defaultFormValues,
 }: Props) => {
   const errorRef = useRef<any>(null);
-  const { isAudienceSykmeldt } = useAudience();
   const formFunctions = useForm<TiltakFormValues>();
   const {
     handleSubmit,
     register,
     watch,
+    resetField,
     formState: { errors },
   } = formFunctions;
 
   const beskrivelseValue = watch("beskrivelse");
+  const statusValue = watch("status");
 
-  const infoText = isAudienceSykmeldt ? arbeidstakerInfoText : arbeidsgiverInfoText
+  const hasSelectedIkkeAktuelt = () => {
+    if (!statusValue) {
+      return defaultFormValues?.status == STATUS_TILTAK.IKKE_AKTUELT;
+    }
+    return statusValue == STATUS_TILTAK.IKKE_AKTUELT;
+  };
+
+  const hasSelectedAvtalt = () => {
+    if (!statusValue) {
+      return defaultFormValues?.status == STATUS_TILTAK.AVTALT;
+    }
+    return statusValue == STATUS_TILTAK.AVTALT;
+  };
 
   return (
     <FormProvider {...formFunctions}>
@@ -104,9 +124,67 @@ export const TiltakForm = ({
             value={beskrivelseValue}
           />
 
-          <SpacedAlert variant={"info"}>
-            {infoText}
-          </SpacedAlert>
+          <SpacedAlert variant={"info"}>{arbeidsgiverInfoText}</SpacedAlert>
+
+          <Controller
+            name="status"
+            rules={{ required: "Du må oppgi din vurdering" }}
+            defaultValue={defaultFormValues?.status}
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <StyledRadioGroup
+                legend="Din vurdering (obligatorisk)"
+                onBlur={onBlur}
+                onChange={(e) => {
+                  onChange(e);
+                  resetField("gjennomfoering");
+                  resetField("beskrivelseIkkeAktuelt");
+                }}
+                error={errors.status?.message}
+                ref={ref}
+                value={value}
+              >
+                <Radio value={STATUS_TILTAK.FORSLAG}>Forslag</Radio>
+                <Radio value={STATUS_TILTAK.AVTALT}>Avtalt</Radio>
+                <Radio value={STATUS_TILTAK.IKKE_AKTUELT}>Ikke aktuelt</Radio>
+              </StyledRadioGroup>
+            )}
+          />
+
+          {hasSelectedAvtalt() && (
+            <StyledTextarea
+              id="gjennomfoering"
+              label={"Hvordan skal dette følges opp underveis? (obligatorisk)"}
+              error={errors.gjennomfoering?.message}
+              description={
+                "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+              }
+              {...register("gjennomfoering", {
+                required:
+                  "Du må gi en beskrivelse av hvordan skal dette følges opp underveis",
+                maxLength: 1000,
+              })}
+              defaultValue={defaultFormValues?.gjennomfoering}
+            />
+          )}
+
+          {hasSelectedIkkeAktuelt() && (
+            <StyledTextarea
+              id="beskrivelseIkkeAktuelt"
+              label={
+                "Beskriv hvorfor tiltaket ikke er aktuelt akkurat nå (obligatorisk)"
+              }
+              error={errors.beskrivelseIkkeAktuelt?.message}
+              description={
+                "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+              }
+              {...register("beskrivelseIkkeAktuelt", {
+                required:
+                  "Du må gi en beskrivelse av hvorfor tiltaket ikke er aktuelt akkurat nå",
+                maxLength: 1000,
+              })}
+              defaultValue={defaultFormValues?.beskrivelseIkkeAktuelt}
+            />
+          )}
 
           <DateRow>
             <DatoVelger

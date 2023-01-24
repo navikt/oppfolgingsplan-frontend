@@ -9,7 +9,7 @@ const arbeidstakerTexts = {
 
 const arbeidsgiverTexts = {
     title: "Hva kan dere gjøre som arbeidsgiver?",
-    body: "Trenger vi en ny tekst her?" //TODO
+    body: ""
 }
 
 export const TiltakFormHeading = (): ReactElement => {

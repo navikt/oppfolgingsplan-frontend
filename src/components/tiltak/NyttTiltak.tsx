@@ -1,16 +1,19 @@
 import { Button } from "@navikt/ds-react";
 import { useState } from "react";
 import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
-import { TiltakForm, TiltakFormValues } from "./TiltakForm";
+import { TiltakFormSM, TiltakFormValues } from "./TiltakFormSM";
 import { TiltakFormHeading } from "./TiltakFormHeading";
 import { STATUS_TILTAK } from "constants/konstanter";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
 import { Tiltak } from "../../types/oppfolgingsplan";
+import { useAudience } from "../../hooks/routeHooks";
+import { TiltakFormAG } from "./TiltakFormAG";
 
 export const NyttTiltak = () => {
   const lagreTiltak = useLagreTiltak();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
+  const { isAudienceSykmeldt } = useAudience();
 
   const nyttTiltakInformasjon = (data: TiltakFormValues): Partial<Tiltak> => {
     return {
@@ -18,7 +21,9 @@ export const NyttTiltak = () => {
       beskrivelse: data.beskrivelse,
       fom: data.fom?.toJSON(),
       tom: data.tom?.toJSON(),
-      status: STATUS_TILTAK.FORSLAG,
+      status: data.status,
+      beskrivelseIkkeAktuelt: data.beskrivelseIkkeAktuelt,
+      gjennomfoering: data.gjennomfoering,
     };
   };
 
@@ -43,15 +48,29 @@ export const NyttTiltak = () => {
   return (
     <SpacedPanel border={true}>
       <TiltakFormHeading />
-      <TiltakForm
-        isSubmitting={lagreTiltak.isLoading}
-        onSubmit={(data) => {
-          lagreTiltak.mutateAsync(nyttTiltakInformasjon(data)).then(() => {
-            setLeggerTilNyttTiltak(false);
-          });
-        }}
-        onCancel={() => setLeggerTilNyttTiltak(false)}
-      />
+      {isAudienceSykmeldt && (
+        <TiltakFormSM
+          isSubmitting={lagreTiltak.isLoading}
+          onSubmit={(data) => {
+            data.status = STATUS_TILTAK.FORSLAG;
+            lagreTiltak.mutateAsync(nyttTiltakInformasjon(data)).then(() => {
+              setLeggerTilNyttTiltak(false);
+            });
+          }}
+          onCancel={() => setLeggerTilNyttTiltak(false)}
+        />
+      )}
+      {!isAudienceSykmeldt && (
+        <TiltakFormAG
+          isSubmitting={lagreTiltak.isLoading}
+          onSubmit={(data) => {
+            lagreTiltak.mutateAsync(nyttTiltakInformasjon(data)).then(() => {
+              setLeggerTilNyttTiltak(false);
+            });
+          }}
+          onCancel={() => setLeggerTilNyttTiltak(false)}
+        />
+      )}
     </SpacedPanel>
   );
 };
