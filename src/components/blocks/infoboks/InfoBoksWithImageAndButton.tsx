@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {BodyLong, Button, Heading, Panel} from "@navikt/ds-react";
+import { BodyLong, Button, Heading, Panel } from "@navikt/ds-react";
 import React from "react";
 import styled from "styled-components";
 
@@ -33,23 +33,22 @@ export const InfoBoksWithImageAndButton = ({
   show,
   onClose,
 }: Props) => {
-
-  if (!show){
-    return null
+  if (!show) {
+    return null;
   }
   return (
-        <StyledPanel border={true}>
-        <PanelContent>
-          <Image src={imageSrc} width={64} height={64}  alt={""}/>
-          <Heading size={"medium"} level={"2"}>
-            {heading}
-          </Heading>
+    <StyledPanel border={true}>
+      <PanelContent>
+        <Image src={imageSrc} width={64} height={64} alt={""} />
+        <Heading size={"medium"} level={"2"}>
+          {heading}
+        </Heading>
 
-          {description && <BodyLong>{description}</BodyLong>}
-          <Button variant={"secondary"} onClick={() => onClose(false)}>
-            {buttonText}
-          </Button>
-        </PanelContent>
-      </StyledPanel>
-  )
+        {description && <BodyLong>{description}</BodyLong>}
+        <Button variant={"secondary"} onClick={() => onClose(false)}>
+          {buttonText}
+        </Button>
+      </PanelContent>
+    </StyledPanel>
+  );
 };
