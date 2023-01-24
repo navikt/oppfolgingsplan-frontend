@@ -23,14 +23,20 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
     };
   };
 
+  const createDefaultFormValues = (): TiltakFormValues | undefined => {
+    if (tiltak.tiltaknavn && tiltak.beskrivelse) {
+      return {
+        overskrift: tiltak.tiltaknavn,
+        beskrivelse: tiltak.beskrivelse,
+        fom: tiltak.fom ? new Date(tiltak.fom) : null,
+        tom: tiltak.tom ? new Date(tiltak.tom) : null,
+      };
+    }
+  };
+
   return (
     <TiltakForm
-      defaultFormValues={{
-        overskrift: tiltak.tiltaknavn,
-        beskrivelse: tiltak.beskrivelse!,
-        fom: new Date(tiltak.fom!),
-        tom: new Date(tiltak.tom!),
-      }}
+      defaultFormValues={createDefaultFormValues()}
       isSubmitting={lagreTiltak.isLoading}
       onSubmit={(data) => {
         lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {

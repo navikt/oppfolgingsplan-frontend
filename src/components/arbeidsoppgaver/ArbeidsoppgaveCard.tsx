@@ -99,7 +99,7 @@ export const ArbeidsoppgaveCard = ({
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
           <TilretteleggingsBeskrivelse
-            gjennomfoering={arbeidsoppgave.gjennomfoering!}
+            gjennomfoering={arbeidsoppgave.gjennomfoering}
           />
           <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
           {!readonly && (
@@ -120,7 +120,7 @@ export const ArbeidsoppgaveCard = ({
             {texts.arbeidsoppgaveList.cards.kanIkke}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
-          <KanIkkeBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering!} />
+          <KanIkkeBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering} />
           <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
           {!readonly && (
             <>

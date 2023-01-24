@@ -5,7 +5,6 @@ import { Modal } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import styled from "styled-components";
 import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "utils/oppfolgingplanUtils";
 import Feilmelding from "components/blocks/error/Feilmelding";
 import { Oppfolgingsplan } from "types/oppfolgingsplan";
@@ -32,8 +31,6 @@ const OpprettModalSM = ({
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
   const kopierOppfolgingsplan = useKopierOppfolgingsplan();
 
-  const sykmeldtFnr = useSykmeldtFnr();
-
   useEffect(() => {
     if (Modal.setAppElement) {
       Modal.setAppElement("#__next");
@@ -53,16 +50,10 @@ const OpprettModalSM = ({
         kopierOppfolgingsplan.mutate(oppfolgingsplan.id);
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
-        opprettOppfolgingsplan.mutate({
-          sykmeldtFnr: sykmeldtFnr!,
-          virksomhetsnummer: virksomhetsnummer,
-        });
+        opprettOppfolgingsplan.mutate(virksomhetsnummer);
       }
     } else {
-      opprettOppfolgingsplan.mutate({
-        sykmeldtFnr: sykmeldtFnr!,
-        virksomhetsnummer: virksomhetsnummer,
-      });
+      opprettOppfolgingsplan.mutate(virksomhetsnummer);
     }
   };
 
@@ -94,10 +85,7 @@ const OpprettModalSM = ({
                   isSubmitting={opprettOppfolgingsplan.isLoading}
                   handleSubmit={(virksomhetsnummer: string) => {
                     opprettOppfolgingsplan
-                      .mutateAsync({
-                        sykmeldtFnr: sykmeldtFnr!,
-                        virksomhetsnummer: virksomhetsnummer,
-                      })
+                      .mutateAsync(virksomhetsnummer)
                       .then(() => {
                         setVisOpprettModal(false);
                       });

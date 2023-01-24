@@ -17,6 +17,7 @@ export const useDineSykmeldte = () => {
     fetchDineSykmeldte,
     {
       enabled: !!narmestelederId,
+      useErrorBoundary: true,
     }
   );
 };

@@ -29,7 +29,6 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
       status.tekst =
         oppfolgingsdialog &&
         oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt &&
-        // eslint-disable-next-line max-len
         `${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
         )} - ${toDateMedMaanedNavn(
@@ -52,7 +51,6 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
       status.tekst =
         oppfolgingsdialog &&
         oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt &&
-        // eslint-disable-next-line max-len
         `${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
         )} - ${toDateMedMaanedNavn(
@@ -64,7 +62,6 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
       status.tekst =
         oppfolgingsdialog &&
         oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt &&
-        // eslint-disable-next-line max-len
         `${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom
         )} - ${toDateMedMaanedNavn(

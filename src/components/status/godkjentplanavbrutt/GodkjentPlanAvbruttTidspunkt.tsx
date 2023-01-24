@@ -8,12 +8,15 @@ interface Props {
 }
 
 export const GodkjentPlanAvbruttTidspunkt = ({ godkjentPlan }: Props) => {
+  if (!godkjentPlan.gyldighetstidspunkt.fom || !godkjentPlan.avbruttPlan)
+    return null;
+
   return (
     <BildeTekstLinje
       imgUrl={CalendarImage}
       tekst={`Planens varighet: ${toDateMedMaanedNavn(
-        godkjentPlan.gyldighetstidspunkt?.fom
-      )} - ${toDateMedMaanedNavn(godkjentPlan.avbruttPlan?.tidspunkt)}`}
+        godkjentPlan.gyldighetstidspunkt.fom
+      )} - ${toDateMedMaanedNavn(godkjentPlan.avbruttPlan.tidspunkt)}`}
     />
   );
 };

@@ -18,6 +18,7 @@ export const useNarmesteLedereSM = () => {
     fetchNarmesteLedere,
     {
       enabled: !!sykmeldtFnr,
+      useErrorBoundary: true,
     }
   );
 };
