@@ -114,7 +114,7 @@ export const ArbeidsgiverSkjema = ({
         onChange={(e) =>
           setSelectedVirksomhet(
             arbeidsgivere.find(
-              (ag) => ag.virksomhetsnummer == e.target.value
+              (ag) => ag.virksomhetsnummer === e.target.value
             ) ?? null
           )
         }

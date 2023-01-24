@@ -15,7 +15,7 @@ import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-import { removeNullish } from "../../../utils/typeGuards";
+import { notNullish } from "../../../server/utils/tsUtils";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -52,14 +52,14 @@ export const SendTilGodkjenningForm = ({
 
   const suggestedStartDate: string | null = oppfolgingsplan.tiltakListe
     .map((tiltak) => tiltak.fom)
-    .filter(removeNullish)
+    .filter(notNullish)
     .sort((t1: string, t2: string) => {
       return new Date(t1).getTime() - new Date(t2).getTime();
     })[0];
 
   const suggestedEndDate: string | null = oppfolgingsplan.tiltakListe
     .map((tiltak) => tiltak.tom)
-    ?.filter(removeNullish)
+    .filter(notNullish)
     .sort((t1: string, t2: string) => {
       return new Date(t2).getTime() - new Date(t1).getTime();
     })[0];

@@ -9,29 +9,29 @@ import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/
 import VideoPanel from "../../components/blocks/video/VideoPanel";
 import { useNarmesteLedereSM } from "../../api/queries/sykmeldt/narmesteLedereQueriesSM";
 
-const Home: NextPage = () => {
+const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
 
-  const PageContent = () => {
-    if (
-      oppfolgingsplaner.isSuccess &&
-      sykmeldinger.isSuccess &&
-      narmesteLedere.isSuccess
-    ) {
-      return (
-        <OppfolgingsplanContent
-          oppfolgingsplaner={oppfolgingsplaner.data}
-          sykmeldinger={sykmeldinger.data}
-          narmesteLedere={narmesteLedere.data}
-        />
-      );
-    }
+  if (
+    oppfolgingsplaner.isSuccess &&
+    sykmeldinger.isSuccess &&
+    narmesteLedere.isSuccess
+  ) {
+    return (
+      <OppfolgingsplanContent
+        oppfolgingsplaner={oppfolgingsplaner.data}
+        sykmeldinger={sykmeldinger.data}
+        narmesteLedere={narmesteLedere.data}
+      />
+    );
+  }
 
-    return null;
-  };
+  return null;
+};
 
+const Home: NextPage = () => {
   return (
     <SykmeldtSide
       title="Oppfølgingsplaner - Oversikt"

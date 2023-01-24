@@ -38,7 +38,7 @@ const handler = async (
     activeMock.oppfolgingsplaner[aktivPlanIndex].arbeidsoppgaveListe =
       aktivPlan.arbeidsoppgaveListe.filter(
         (arbeidsoppgave) =>
-          arbeidsoppgave.arbeidsoppgaveId != Number(arbeidsoppgaveId)
+          arbeidsoppgave.arbeidsoppgaveId !== Number(arbeidsoppgaveId)
       );
 
     res.status(200).end();
