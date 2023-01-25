@@ -331,6 +331,22 @@ export async function godkjennOppfolgingsplanSM(
   );
 }
 
+export async function godkjennOppfolgingsplanAG(
+  accessToken: string,
+  oppfolgingsplanId: string,
+  data: GodkjennPlanData
+) {
+  return await post(
+    `${
+      serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST
+    }/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=${
+      data.tvungenGodkjenning ? "tvungenGodkjenning" : "makrell"
+    }&aktoer=arbeidstaker&delmednav=${data.delmednav}`,
+    data.gyldighetstidspunkt,
+    { accessToken }
+  );
+}
+
 export async function godkjennsistOppfolgingsplanSM(
   accessToken: string,
   oppfolgingsplanId: string,
