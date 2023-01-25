@@ -18,7 +18,7 @@ export const useTilgangAG = () => {
     fetchTilgang,
     {
       enabled: !!sykmeldtData.data?.fnr,
-      useErrorBoundary: true
+      useErrorBoundary: true,
     }
   );
 };

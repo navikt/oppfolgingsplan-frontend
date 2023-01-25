@@ -5,7 +5,7 @@ import { saveOppgave } from "../../../../../server/service/oppfolgingsplanServic
 import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../server/utils/requestUtils";
-import {Arbeidsoppgave} from "../../../../../types/oppfolgingsplan";
+import { Arbeidsoppgave } from "../../../../../types/oppfolgingsplan";
 
 const handler = async (
   req: NextApiRequest,

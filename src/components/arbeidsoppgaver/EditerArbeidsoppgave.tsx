@@ -4,7 +4,7 @@ import {
 } from "./ArbeidsoppgaveFormSM";
 import { TILRETTELEGGING } from "constants/konstanter";
 import { Arbeidsoppgave, Gjennomforing } from "../../types/oppfolgingsplan";
-import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   show: boolean;
