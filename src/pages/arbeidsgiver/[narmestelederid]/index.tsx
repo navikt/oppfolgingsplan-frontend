@@ -12,6 +12,7 @@ import OppfolgingsdialogTeasere from "components/landing/teaser/Oppfolgingsdialo
 import IngenPlanerCardAG from "components/landing/opprett/IngenPlanerCardAG";
 import OpprettModalAG from "components/landing/opprett/OpprettModalAG";
 import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMelding";
+import { SamtaleStotte } from "../../../components/blocks/samtalestotte/SamtaleStotte";
 
 const Home: NextPage = () => {
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
@@ -66,6 +67,7 @@ const Home: NextPage = () => {
               tittel={"Tidligere oppfølgingsplaner"}
             />
           )}
+          <SamtaleStotte />
           <VideoPanel />
         </>
       )}
