@@ -17,9 +17,9 @@ export const useOppfolgingsplanerSM = () => {
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner,
-      {
-        useErrorBoundary: true,
-      }
+    {
+      useErrorBoundary: true,
+    }
   );
 };
 

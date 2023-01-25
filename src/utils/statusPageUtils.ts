@@ -2,9 +2,9 @@ import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
 import { Godkjenning, Oppfolgingsplan } from "../types/oppfolgingsplan";
 
 export const getStatusPageTitleAndHeading = (
-    godkjenningsStatus: StatusPageToDisplay | null,
-    virksomhetsNavn: string | undefined,
-    navnPaaMotpart: string
+  godkjenningsStatus: StatusPageToDisplay | null,
+  virksomhetsNavn: string | undefined,
+  navnPaaMotpart: string
 ) => {
   switch (godkjenningsStatus) {
     case "SENDTPLANTILGODKJENNING": {
@@ -101,7 +101,7 @@ const erForsteGodkjenningGodkjent = (
   oppfolgingsplan: Oppfolgingsplan
 ): boolean => {
   return (
-      oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger[0].godkjent
+    oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger[0].godkjent
   );
 };
 

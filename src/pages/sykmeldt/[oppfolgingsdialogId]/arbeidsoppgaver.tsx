@@ -15,18 +15,19 @@ const Arbeidsoppgaver: NextPage = () => {
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
 
   return (
-      <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
-        {(arbeidstakerFnr && aktivPlan) && (
-            <div>
-              <NyArbeidsoppgaveSM/>
-              {aktivPlan.arbeidsoppgaveListe && (
-                  <LagredeArbeidsoppgaver
-                      arbeidstakerFnr={arbeidstakerFnr}
-                      arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}/>
-              )}
-            </div>
-        )}
-      </OppfolgingsplanPageSM>
+    <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
+      {arbeidstakerFnr && aktivPlan && (
+        <div>
+          <NyArbeidsoppgaveSM />
+          {aktivPlan.arbeidsoppgaveListe && (
+            <LagredeArbeidsoppgaver
+              arbeidstakerFnr={arbeidstakerFnr}
+              arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}
+            />
+          )}
+        </div>
+      )}
+    </OppfolgingsplanPageSM>
   );
 };
 
