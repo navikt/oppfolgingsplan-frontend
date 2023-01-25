@@ -23,7 +23,7 @@ import { Row } from "components/blocks/wrappers/Row";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { VurderButton } from "../blocks/buttons/VurderButton";
-import {VurderTiltak} from "./VurderTiltak";
+import { VurderTiltak } from "./VurderTiltak";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -119,13 +119,11 @@ export const LagretTiltak = ({
         </>
       )}
 
-      {!readonly &&
-        isAudienceSykmeldt &&
-        manglerVurderingFraLeder && (
-          <SpacedAlert variant={"warning"}>
-            Dette tiltaket mangler vurdering fra lederen din
-          </SpacedAlert>
-        )}
+      {!readonly && isAudienceSykmeldt && manglerVurderingFraLeder && (
+        <SpacedAlert variant={"warning"}>
+          Dette tiltaket mangler vurdering fra lederen din
+        </SpacedAlert>
+      )}
 
       {tiltak.gjennomfoering && tiltak.status === STATUS_TILTAK.AVTALT && (
         <>
@@ -169,10 +167,10 @@ export const LagretTiltak = ({
           )}
 
           {vurdererTiltak && (
-              <VurderTiltak
-                  tiltak={tiltak}
-                  doneEditing={() => setVurdererTiltak(false)}
-              />
+            <VurderTiltak
+              tiltak={tiltak}
+              doneEditing={() => setVurdererTiltak(false)}
+            />
           )}
 
           {!displayNyKommentar && !editererTiltak && (
@@ -187,15 +185,13 @@ export const LagretTiltak = ({
                 </Button>
               )}
 
-              {(isOpprettetAvArbeidstaker && !manglerVurderingFraLeder) && (
+              {isOpprettetAvArbeidstaker && !manglerVurderingFraLeder && (
                 <SlettTiltakButton tiltakId={tiltak.tiltakId} />
               )}
 
               <VurderButton
                 show={
-                  !readonly &&
-                  !isAudienceSykmeldt &&
-                  manglerVurderingFraLeder
+                  !readonly && !isAudienceSykmeldt && manglerVurderingFraLeder
                 }
                 onClick={() => setVurdererTiltak(true)}
                 text="Gi din vurdering"
