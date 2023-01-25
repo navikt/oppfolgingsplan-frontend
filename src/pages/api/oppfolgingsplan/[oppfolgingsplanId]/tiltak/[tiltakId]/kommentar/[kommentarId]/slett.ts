@@ -4,7 +4,7 @@ import {
   getSyfoOppfolgingsplanserviceTokenFromRequest
 } from "../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import {getKommentarIdFromRequest} from "../../../../../../../../server/utils/requestUtils";
-import {deleteTiltakCommentSM} from "../../../../../../../../server/service/oppfolgingsplanService";
+import {deleteTiltakComment} from "../../../../../../../../server/service/oppfolgingsplanService";
 import {beskyttetApi} from "../../../../../../../../server/auth/beskyttetApi";
 
 
@@ -18,7 +18,7 @@ const handler = async (
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const kommentarId = getKommentarIdFromRequest(req);
 
-    await deleteTiltakCommentSM(tokenX, kommentarId);
+    await deleteTiltakComment(tokenX, kommentarId);
     res.status(200).end();
   }
 };

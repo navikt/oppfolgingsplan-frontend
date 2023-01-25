@@ -355,7 +355,7 @@ export async function godkjennsistOppfolgingsplanAG(
   );
 }
 
-export async function deleteTiltakCommentSM(
+export async function deleteTiltakComment(
   accessToken: string,
   kommentarId: string
 ) {
@@ -366,7 +366,7 @@ export async function deleteTiltakCommentSM(
   );
 }
 
-export async function saveTiltakCommentSM(
+export async function saveTiltakComment(
   accessToken: string,
   tiltakId: string,
   kommentar: Partial<Kommentar>
