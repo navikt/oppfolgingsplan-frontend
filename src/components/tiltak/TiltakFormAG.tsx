@@ -186,23 +186,25 @@ export const TiltakFormAG = ({
             />
           )}
 
-          <DateRow>
-            <DatoVelger
-              name="fom"
-              label={"Startdato (obligatorisk)"}
-              defaultValue={defaultFormValues?.fom}
-              errorMessageToDisplay={errors.fom?.message}
-              requiredErrorMessage={"Du må velge startdato"}
-            />
+          {!hasSelectedIkkeAktuelt() && (
+              <DateRow>
+                <DatoVelger
+                    name="fom"
+                    label={"Startdato (obligatorisk)"}
+                    defaultValue={defaultFormValues?.fom}
+                    errorMessageToDisplay={errors.fom?.message}
+                    requiredErrorMessage={"Du må velge startdato"}
+                />
 
-            <DatoVelger
-              name="tom"
-              label={"Sluttdato (obligatorisk)"}
-              defaultValue={defaultFormValues?.tom}
-              errorMessageToDisplay={errors.tom?.message}
-              requiredErrorMessage={"Du må velge sluttdato"}
-            />
-          </DateRow>
+                <DatoVelger
+                    name="tom"
+                    label={"Sluttdato (obligatorisk)"}
+                    defaultValue={defaultFormValues?.tom}
+                    errorMessageToDisplay={errors.tom?.message}
+                    requiredErrorMessage={"Du må velge sluttdato"}
+                />
+              </DateRow>
+          )}
 
           <Row>
             <Button
