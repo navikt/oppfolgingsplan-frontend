@@ -48,7 +48,7 @@ export const NyttTiltak = () => {
   return (
     <SpacedPanel border={true}>
       <TiltakFormHeading />
-      {isAudienceSykmeldt && (
+      {isAudienceSykmeldt ? (
         <TiltakFormSM
           isSubmitting={lagreTiltak.isLoading}
           onSubmit={(data) => {
@@ -59,8 +59,7 @@ export const NyttTiltak = () => {
           }}
           onCancel={() => setLeggerTilNyttTiltak(false)}
         />
-      )}
-      {!isAudienceSykmeldt && (
+      ) : (
         <TiltakFormAG
           isSubmitting={lagreTiltak.isLoading}
           onSubmit={(data) => {

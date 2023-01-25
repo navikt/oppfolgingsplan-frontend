@@ -44,7 +44,7 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
 
   return (
     <>
-      {isAudienceSykmeldt && (
+      {isAudienceSykmeldt ? (
         <TiltakFormSM
           defaultFormValues={createDefaultFormValues()}
           isSubmitting={lagreTiltak.isLoading}
@@ -56,9 +56,7 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
           }}
           onCancel={doneEditing}
         />
-      )}
-
-      {!isAudienceSykmeldt && (
+      ) : (
         <TiltakFormAG
           defaultFormValues={createDefaultFormValues()}
           isSubmitting={lagreTiltak.isLoading}
