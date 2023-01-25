@@ -6,6 +6,7 @@ import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
+import {TiltakFormValues} from "./utils/typer";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -30,16 +31,6 @@ const arbeidstakerInfoText =
   " ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose. Du\n" +
   " må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren\n" +
   " din og NAV kan følge deg opp";
-
-export type TiltakFormValues = {
-  overskrift: string;
-  beskrivelse: string;
-  fom: Date | null;
-  tom: Date | null;
-  status: string;
-  gjennomfoering: string;
-  beskrivelseIkkeAktuelt: string;
-};
 
 interface Props {
   isSubmitting: boolean;

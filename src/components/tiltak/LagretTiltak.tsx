@@ -21,6 +21,9 @@ import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import { Dialog } from "components/blocks/dialog/Dialog";
 import { Row } from "components/blocks/wrappers/Row";
 import { Tiltak } from "../../types/oppfolgingsplan";
+import { useAudience } from "../../hooks/routeHooks";
+import { VurderButton } from "../blocks/buttons/VurderButton";
+import {VurderTiltak} from "./VurderTiltak";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -63,16 +66,6 @@ export const SpacedAlert = styled(Alert)`
   margin-bottom: 1rem;
 `;
 
-const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
-  return (
-    tiltak &&
-    !tiltak.gjennomfoering &&
-    !tiltak.beskrivelseIkkeAktuelt &&
-    fnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
-    tiltak.sistEndretAv.fnr === fnr
-  );
-};
-
 interface Props {
   arbeidstakerFnr: string;
   tiltak: Tiltak;
@@ -84,12 +77,22 @@ export const LagretTiltak = ({
   tiltak,
   readonly = true,
 }: Props) => {
-  const aktoerHarOpprettetElement =
+  const isOpprettetAvArbeidstaker =
     arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
   const [editererTiltak, setEditererTiltak] = useState(false);
+  const [vurdererTiltak, setVurdererTiltak] = useState(false);
   const lagreKommentar = useLagreKommentar();
+  const { isAudienceSykmeldt } = useAudience();
+
   const tiltakId = tiltak.tiltakId;
+
+  const manglerVurderingFraLeder =
+    tiltak &&
+    !tiltak.gjennomfoering &&
+    !tiltak.beskrivelseIkkeAktuelt &&
+    arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
+    tiltak.sistEndretAv.fnr === arbeidstakerFnr;
 
   return (
     <SpacedPanel border={true}>
@@ -116,11 +119,13 @@ export const LagretTiltak = ({
         </>
       )}
 
-      {!readonly && manglerVurderingFraLeder(arbeidstakerFnr, tiltak) && (
-        <SpacedAlert variant={"warning"}>
-          Dette tiltaket mangler vurdering fra lederen din
-        </SpacedAlert>
-      )}
+      {!readonly &&
+        isAudienceSykmeldt &&
+        manglerVurderingFraLeder && (
+          <SpacedAlert variant={"warning"}>
+            Dette tiltaket mangler vurdering fra lederen din
+          </SpacedAlert>
+        )}
 
       {tiltak.gjennomfoering && tiltak.status === STATUS_TILTAK.AVTALT && (
         <>
@@ -163,9 +168,16 @@ export const LagretTiltak = ({
             />
           )}
 
+          {vurdererTiltak && (
+              <VurderTiltak
+                  tiltak={tiltak}
+                  doneEditing={() => setVurdererTiltak(false)}
+              />
+          )}
+
           {!displayNyKommentar && !editererTiltak && (
             <Row>
-              {aktoerHarOpprettetElement && (
+              {(isOpprettetAvArbeidstaker && !manglerVurderingFraLeder) && (
                 <Button
                   variant={"tertiary"}
                   icon={<Edit aria-hidden />}
@@ -174,9 +186,21 @@ export const LagretTiltak = ({
                   Endre
                 </Button>
               )}
-              {aktoerHarOpprettetElement && (
+
+              {(isOpprettetAvArbeidstaker && !manglerVurderingFraLeder) && (
                 <SlettTiltakButton tiltakId={tiltak.tiltakId} />
               )}
+
+              <VurderButton
+                show={
+                  !readonly &&
+                  !isAudienceSykmeldt &&
+                  manglerVurderingFraLeder
+                }
+                onClick={() => setVurdererTiltak(true)}
+                text="Gi din vurdering"
+              />
+
               <Button
                 variant={"tertiary"}
                 icon={<DialogDots aria-hidden />}

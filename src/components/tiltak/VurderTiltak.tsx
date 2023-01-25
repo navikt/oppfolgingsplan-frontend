@@ -1,9 +1,7 @@
 import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
-import { TiltakFormSM } from "./TiltakFormSM";
 import { Tiltak } from "../../types/oppfolgingsplan";
-import { useAudience } from "../../hooks/routeHooks";
-import {TiltakFormAG} from "./TiltakFormAG";
-import { STATUS_TILTAK } from "../../constants/konstanter";
+import { VurderTiltakForm } from "./VurderTiltakForm";
+import styled from "styled-components";
 import {TiltakFormValues} from "./utils/typer";
 
 interface Props {
@@ -12,9 +10,12 @@ interface Props {
   doneEditing(): void;
 }
 
-export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
+const VurderTiltakFormWrapper = styled.div`
+  margin-bottom: 1rem;
+`;
+
+export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
   const lagreTiltak = useLagreTiltak();
-  const { isAudienceSykmeldt } = useAudience();
 
   const tiltakInformasjon = (data: TiltakFormValues): Tiltak => {
     return {
@@ -44,31 +45,17 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
   };
 
   return (
-    <>
-      {isAudienceSykmeldt ? (
-        <TiltakFormSM
-          defaultFormValues={createDefaultFormValues()}
-          isSubmitting={lagreTiltak.isLoading}
-          onSubmit={(data) => {
-            data.status = STATUS_TILTAK.FORSLAG;
-            lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
-              doneEditing();
-            });
-          }}
-          onCancel={doneEditing}
-        />
-      ) : (
-        <TiltakFormAG
-          defaultFormValues={createDefaultFormValues()}
-          isSubmitting={lagreTiltak.isLoading}
-          onSubmit={(data) => {
-            lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
-              doneEditing();
-            });
-          }}
-          onCancel={doneEditing}
-        />
-      )}
-    </>
+    <VurderTiltakFormWrapper>
+      <VurderTiltakForm
+        defaultFormValues={createDefaultFormValues()}
+        isSubmitting={lagreTiltak.isLoading}
+        onSubmit={(data) => {
+          lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
+            doneEditing();
+          });
+        }}
+        onCancel={doneEditing}
+      />
+    </VurderTiltakFormWrapper>
   );
 };

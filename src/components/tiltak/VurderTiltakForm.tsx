@@ -1,4 +1,11 @@
-import {Alert, Button, Radio, RadioGroup, Textarea, TextField} from "@navikt/ds-react";
+import {
+  BodyLong,
+  Button,
+  Label,
+  Radio,
+  RadioGroup,
+  Textarea,
+} from "@navikt/ds-react";
 import styled from "styled-components";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
@@ -7,28 +14,13 @@ import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
 import { STATUS_TILTAK } from "../../constants/konstanter";
-import {TiltakFormValues} from "./utils/typer";
-
-const OverskriftTextField = styled(TextField)`
-  margin-bottom: 2rem;
-`;
-
-const OverskriftTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
+import { TiltakFormValues } from "./utils/typer";
 
 const DateRow = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
 `;
-
-const SpacedAlert = styled(Alert)`
-  margin-bottom: 2rem;
-`;
-
-const arbeidsgiverInfoText =
-  "Husk at arbeidstakeren din kan se det du skriver her. Du må ikke gi sensitive personopplysninger.";
 
 const StyledTextarea = styled(Textarea)`
   margin-bottom: 2rem;
@@ -48,7 +40,7 @@ interface Props {
   defaultFormValues?: TiltakFormValues;
 }
 
-export const TiltakFormAG = ({
+export const VurderTiltakForm = ({
   isSubmitting,
   onSubmit,
   onCancel,
@@ -64,7 +56,6 @@ export const TiltakFormAG = ({
     formState: { errors },
   } = formFunctions;
 
-  const beskrivelseValue = watch("beskrivelse");
   const statusValue = watch("status");
 
   const hasSelectedIkkeAktuelt = () => {
@@ -87,35 +78,8 @@ export const TiltakFormAG = ({
         <LightGreyPanel border={true}>
           <FormErrorSummary errors={errors} ref={errorRef} />
 
-          <OverskriftTextField
-            id="overskrift"
-            label={"Overskrift (obligatorisk)"}
-            error={errors.overskrift?.message}
-            defaultValue={defaultFormValues?.overskrift}
-            maxLength={80}
-            {...register("overskrift", {
-              required: "Du må gi en overskrift av tiltaket",
-              maxLength: 80,
-            })}
-          />
-
-          <OverskriftTextarea
-            id="beskrivelse"
-            label={"Beskriv hva som skal skje (obligatorisk)"}
-            error={errors.beskrivelse?.message}
-            description={
-              "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-            }
-            maxLength={600}
-            {...register("beskrivelse", {
-              required: "Du må gi en beskrivelse av tiltaket",
-              maxLength: 600,
-            })}
-            defaultValue={defaultFormValues?.beskrivelse}
-            value={beskrivelseValue}
-          />
-
-          <SpacedAlert variant={"info"}>{arbeidsgiverInfoText}</SpacedAlert>
+          <Label>Beskrivelse</Label>
+          <BodyLong spacing={true}>{defaultFormValues?.beskrivelse}</BodyLong>
 
           <Controller
             name="status"
@@ -178,23 +142,23 @@ export const TiltakFormAG = ({
           )}
 
           {!hasSelectedIkkeAktuelt() && (
-              <DateRow>
-                <DatoVelger
-                    name="fom"
-                    label={"Startdato (obligatorisk)"}
-                    defaultValue={defaultFormValues?.fom}
-                    errorMessageToDisplay={errors.fom?.message}
-                    requiredErrorMessage={"Du må velge startdato"}
-                />
+            <DateRow>
+              <DatoVelger
+                name="fom"
+                label={"Startdato (obligatorisk)"}
+                defaultValue={defaultFormValues?.fom}
+                errorMessageToDisplay={errors.fom?.message}
+                requiredErrorMessage={"Du må velge startdato"}
+              />
 
-                <DatoVelger
-                    name="tom"
-                    label={"Sluttdato (obligatorisk)"}
-                    defaultValue={defaultFormValues?.tom}
-                    errorMessageToDisplay={errors.tom?.message}
-                    requiredErrorMessage={"Du må velge sluttdato"}
-                />
-              </DateRow>
+              <DatoVelger
+                name="tom"
+                label={"Sluttdato (obligatorisk)"}
+                defaultValue={defaultFormValues?.tom}
+                errorMessageToDisplay={errors.tom?.message}
+                requiredErrorMessage={"Du må velge sluttdato"}
+              />
+            </DateRow>
           )}
 
           <Row>
