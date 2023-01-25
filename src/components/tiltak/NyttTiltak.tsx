@@ -1,7 +1,7 @@
 import { Button } from "@navikt/ds-react";
 import { useState } from "react";
 import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
-import { TiltakFormSM, TiltakFormValues } from "./TiltakFormSM";
+import { TiltakFormSM } from "./TiltakFormSM";
 import { TiltakFormHeading } from "./TiltakFormHeading";
 import { STATUS_TILTAK } from "constants/konstanter";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
@@ -9,6 +9,7 @@ import PlusIcon from "components/blocks/icons/PlusIcon";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { TiltakFormAG } from "./TiltakFormAG";
+import {TiltakFormValues} from "./utils/typer";
 
 export const NyttTiltak = () => {
   const lagreTiltak = useLagreTiltak();
