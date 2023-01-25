@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Radio, RadioGroup } from "@navikt/ds-react";
+import { Alert, Radio, RadioGroup } from "@navikt/ds-react";
 import React from "react";
 import styled from "styled-components";
 
@@ -17,7 +17,7 @@ export const TvungenGodkjenningToggle = ({
   setTvungenGodkjenning,
 }: Props) => {
   return (
-    <div>
+    <>
       <RadioGroup
         legend={"Velg hva du vil gjøre:"}
         onChange={(val: boolean) => setTvungenGodkjenning(val)}
@@ -33,21 +33,17 @@ export const TvungenGodkjenningToggle = ({
 
       {tvungenGodkjenning && (
         <SpacedAlert variant={"info"}>
-          <BodyLong>
-            Du kan bare velge dette hvis arbeidstakeren ikke kan eller ønsker å
-            delta. Dette vil bli synlig i planen.
-          </BodyLong>
+          Du kan bare velge dette hvis arbeidstakeren ikke kan eller ønsker å
+          delta. Dette vil bli synlig i planen.
         </SpacedAlert>
       )}
 
       {!tvungenGodkjenning && (
         <SpacedAlert variant={"info"}>
-          <BodyLong>
-            Arbeidstakeren kan deretter godkjenne eller gjøre endringer og sende
-            planen tilbake deg.
-          </BodyLong>
+          Arbeidstakeren kan deretter godkjenne eller gjøre endringer og sende
+          planen tilbake deg.
         </SpacedAlert>
       )}
-    </div>
+    </>
   );
 };

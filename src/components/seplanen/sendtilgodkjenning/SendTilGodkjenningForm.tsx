@@ -106,7 +106,7 @@ export const SendTilGodkjenningForm = ({
               tom: data.sluttDato.toJSON(),
               evalueres: data.evalueresInnen.toJSON(),
             },
-            tvungenGodkjenning: tvungenGodkjenning ?? false,
+            tvungenGodkjenning: tvungenGodkjenning,
             delmednav: data.delMedNAV === "true",
           })
         )}
@@ -184,7 +184,7 @@ export const SendTilGodkjenningForm = ({
             </Checkbox>
           </CheckboxGroup>
           {errors.enigIPlanen?.message && (
-            <ErrorMessage>{errors.enigIPlanen?.message}</ErrorMessage>
+            <ErrorMessage>{errors.enigIPlanen.message}</ErrorMessage>
           )}
         </SpacedDiv>
 
