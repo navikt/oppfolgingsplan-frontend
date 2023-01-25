@@ -1,4 +1,11 @@
-import {Alert, Button, Radio, RadioGroup, Textarea, TextField} from "@navikt/ds-react";
+import {
+  Alert,
+  Button,
+  Radio,
+  RadioGroup,
+  Textarea,
+  TextField,
+} from "@navikt/ds-react";
 import styled from "styled-components";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
@@ -7,7 +14,7 @@ import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
 import { STATUS_TILTAK } from "../../constants/konstanter";
-import {TiltakFormValues} from "./utils/typer";
+import { TiltakFormValues } from "./utils/typer";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -178,23 +185,23 @@ export const TiltakFormAG = ({
           )}
 
           {!hasSelectedIkkeAktuelt() && (
-              <DateRow>
-                <DatoVelger
-                    name="fom"
-                    label={"Startdato (obligatorisk)"}
-                    defaultValue={defaultFormValues?.fom}
-                    errorMessageToDisplay={errors.fom?.message}
-                    requiredErrorMessage={"Du må velge startdato"}
-                />
+            <DateRow>
+              <DatoVelger
+                name="fom"
+                label={"Startdato (obligatorisk)"}
+                defaultValue={defaultFormValues?.fom}
+                errorMessageToDisplay={errors.fom?.message}
+                requiredErrorMessage={"Du må velge startdato"}
+              />
 
-                <DatoVelger
-                    name="tom"
-                    label={"Sluttdato (obligatorisk)"}
-                    defaultValue={defaultFormValues?.tom}
-                    errorMessageToDisplay={errors.tom?.message}
-                    requiredErrorMessage={"Du må velge sluttdato"}
-                />
-              </DateRow>
+              <DatoVelger
+                name="tom"
+                label={"Sluttdato (obligatorisk)"}
+                defaultValue={defaultFormValues?.tom}
+                errorMessageToDisplay={errors.tom?.message}
+                requiredErrorMessage={"Du må velge sluttdato"}
+              />
+            </DateRow>
           )}
 
           <Row>
