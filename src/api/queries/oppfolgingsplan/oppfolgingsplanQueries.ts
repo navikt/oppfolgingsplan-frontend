@@ -79,15 +79,13 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
       data
     );
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-    await queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     await router.push(statusUrl);
   };
 
   return useMutation(godkjennPlan, {
     onError: () => {
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_SM]);
-      queryClient.invalidateQueries([OPPFOLGINGSPLANER_AG]);
+      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
