@@ -68,22 +68,30 @@ export const SpacedAlert = styled(Alert)`
 
 interface Props {
   arbeidstakerFnr: string;
+  narmesteLederFnr: string | null | undefined;
   tiltak: Tiltak;
   readonly?: boolean;
 }
 
 export const LagretTiltak = ({
   arbeidstakerFnr,
+  narmesteLederFnr,
   tiltak,
   readonly = true,
 }: Props) => {
-  const isOpprettetAvArbeidstaker =
-    arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
   const [editererTiltak, setEditererTiltak] = useState(false);
   const [vurdererTiltak, setVurdererTiltak] = useState(false);
   const lagreKommentar = useLagreKommentar();
   const { isAudienceSykmeldt } = useAudience();
+
+  const isOpprettetAvInnloggetPerson = () => {
+    if (isAudienceSykmeldt) {
+      return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+    } else {
+      return narmesteLederFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+    }
+  };
 
   const tiltakId = tiltak.tiltakId;
 
@@ -175,7 +183,7 @@ export const LagretTiltak = ({
 
           {!displayNyKommentar && !editererTiltak && (
             <Row>
-              {(isOpprettetAvArbeidstaker && !manglerVurderingFraLeder) && (
+              {!readonly && !manglerVurderingFraLeder && (
                 <Button
                   variant={"tertiary"}
                   icon={<Edit aria-hidden />}
@@ -185,7 +193,7 @@ export const LagretTiltak = ({
                 </Button>
               )}
 
-              {isOpprettetAvArbeidstaker && !manglerVurderingFraLeder && (
+              {!readonly && isOpprettetAvInnloggetPerson() && (
                 <SlettTiltakButton tiltakId={tiltak.tiltakId} />
               )}
 

@@ -12,6 +12,7 @@ interface Props {
 
 export const TiltakList = ({ oppfolgingsplan }: Props) => {
   const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
+  const narmesteLederFnr = oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.fnr;
 
   if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null;
 
@@ -39,6 +40,7 @@ export const TiltakList = ({ oppfolgingsplan }: Props) => {
       <LagretTiltak
         key={index}
         arbeidstakerFnr={arbeidstakerFnr}
+        narmesteLederFnr={narmesteLederFnr}
         tiltak={tiltak}
         readonly={true}
       />
