@@ -6,7 +6,7 @@ import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
-import {TiltakFormValues} from "./utils/typer";
+import { TiltakFormValues } from "./utils/typer";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
