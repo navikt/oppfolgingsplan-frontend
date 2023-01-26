@@ -1,12 +1,6 @@
 import { get, post } from "api/axios/axios";
-import {
-  useApiBasePath,
-  useOppfolgingsplanRouteId,
-  useOppfolgingsplanUrl,
-} from "hooks/routeHooks";
+import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
-import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
-import { useRouter } from "next/router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
 import { ApiErrorException } from "../../axios/errors";
@@ -23,9 +17,9 @@ export const useOppfolgingsplanerSM = () => {
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner,
-      {
-        useErrorBoundary: true,
-      }
+    {
+      useErrorBoundary: true,
+    }
   );
 };
 
@@ -59,28 +53,6 @@ export const useGjeldendePlanSM = (
   }
 
   return null;
-};
-
-export const useGodkjennOppfolgingsplanSM = (oppfolgingsplanId: number) => {
-  const apiBasePath = useApiBasePath();
-  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const godkjennPlan = async (data: GodkjennPlanData) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
-      data
-    );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-    await router.push(statusUrl);
-  };
-
-  return useMutation(godkjennPlan, {
-    onError: () => {
-      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-    },
-  });
 };
 
 export const useOpprettOppfolgingsplanSM = () => {

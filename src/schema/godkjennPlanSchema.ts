@@ -3,6 +3,7 @@ import { gyldighetstidspunktSchema } from "./oppfolgingsplanSchema";
 
 export const godkjennPlanSchema = object({
   gyldighetstidspunkt: gyldighetstidspunktSchema,
+  tvungenGodkjenning: boolean().optional(),
   delmednav: boolean().optional(),
 });
 

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { SendTilGodkjenning } from "../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenning";
+import { SendTilGodkjenningSM } from "../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenningSM";
 import { OppfolgingsplanOversikt } from "../../../components/seplanen/OppfolgingsplanOversikt";
 import {
   OppfolgingsplanPageSM,
@@ -18,7 +18,7 @@ const Seplanen: NextPage = () => {
   return (
     <OppfolgingsplanPageSM page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
-      {!isOwnLeader && <SendTilGodkjenning oppfolgingsplan={aktivPlan} />}
+      {!isOwnLeader && <SendTilGodkjenningSM oppfolgingsplan={aktivPlan} />}
       {isOwnLeader && (
         <Alert variant={"info"}>
           Fordi du er din egen leder, må du logge inn som arbeidsgiver for å

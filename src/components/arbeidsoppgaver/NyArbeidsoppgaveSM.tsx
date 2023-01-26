@@ -1,4 +1,7 @@
-import { ArbeidsoppgaveFormSM, OppgaveFormValues } from "./ArbeidsoppgaveFormSM";
+import {
+  ArbeidsoppgaveFormSM,
+  OppgaveFormValues,
+} from "./ArbeidsoppgaveFormSM";
 import { ArbeidsoppgaveFormHeading } from "./ArbeidsoppgaveFormHeading";
 import { TILRETTELEGGING } from "constants/konstanter";
 import { Button } from "@navikt/ds-react";
@@ -6,7 +9,7 @@ import React, { useState } from "react";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
-import {useLagreArbeidsoppgave} from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
+import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 
 export const NyArbeidsoppgaveSM = () => {
   const lagreOppgave = useLagreArbeidsoppgave();

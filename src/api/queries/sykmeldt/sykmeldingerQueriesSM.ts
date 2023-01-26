@@ -14,9 +14,9 @@ export const useSykmeldingerSM = () => {
   return useQuery<Sykmelding[], ApiErrorException>(
     [queryKeys.SYKMELDINGER],
     fetchSykmeldinger,
-      {
-        useErrorBoundary: true,
-      }
+    {
+      useErrorBoundary: true,
+    }
   );
 };
 

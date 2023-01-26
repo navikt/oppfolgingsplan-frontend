@@ -33,21 +33,19 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
   const landingUrl = useLandingUrl();
 
   return (
-      <SpacedGuidePanel>
-        <BodyLong spacing>{errorText(planStatus)}</BodyLong>
+    <SpacedGuidePanel>
+      <BodyLong spacing>{errorText(planStatus)}</BodyLong>
 
-        <Link href={`${landingUrl}/${aktivPlan?.id}`}>
-          <Button
-            variant={"primary"}
-            onClick={() =>
-              logger.warn(
-                `Går til oppfølgingsplanen fra ${planStatus} feilside`
-              )
-            }
-          >
-            Gå til oppfølgingsplanen
-          </Button>
-        </Link>
-      </SpacedGuidePanel>
+      <Link href={`${landingUrl}/${aktivPlan?.id}`}>
+        <Button
+          variant={"primary"}
+          onClick={() =>
+            logger.warn(`Går til oppfølgingsplanen fra ${planStatus} feilside`)
+          }
+        >
+          Gå til oppfølgingsplanen
+        </Button>
+      </Link>
+    </SpacedGuidePanel>
   );
 };

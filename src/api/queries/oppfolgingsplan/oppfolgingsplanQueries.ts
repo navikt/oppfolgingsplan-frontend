@@ -7,6 +7,7 @@ import {
 } from "hooks/routeHooks";
 import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
+import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { queryKeys } from "../queryKeys";
 
 export const useKopierOppfolgingsplan = () => {
