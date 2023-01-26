@@ -9,7 +9,7 @@ import PlusIcon from "components/blocks/icons/PlusIcon";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { TiltakFormAG } from "./TiltakFormAG";
-import {TiltakFormValues} from "./utils/typer";
+import { TiltakFormValues } from "./utils/typer";
 
 export const NyttTiltak = () => {
   const lagreTiltak = useLagreTiltak();

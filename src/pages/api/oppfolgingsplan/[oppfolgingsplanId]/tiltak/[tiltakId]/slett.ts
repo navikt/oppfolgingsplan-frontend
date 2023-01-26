@@ -1,11 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {getOppfolgingsplanIdFromRequest, getTiltakIdFromRequest} from "../../../../../../server/utils/requestUtils";
-import {isMockBackend} from "../../../../../../environments/publicEnv";
+import {
+  getOppfolgingsplanIdFromRequest,
+  getTiltakIdFromRequest,
+} from "../../../../../../server/utils/requestUtils";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
 import getMockDb from "../../../../../../server/data/mock/getMockDb";
-import {ApiErrorException, generalError} from "../../../../../../api/axios/errors";
-import {beskyttetApi} from "../../../../../../server/auth/beskyttetApi";
-import {deleteTiltak} from "../../../../../../server/service/oppfolgingsplanService";
-import {getSyfoOppfolgingsplanserviceTokenFromRequest} from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import {
+  ApiErrorException,
+  generalError,
+} from "../../../../../../api/axios/errors";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
+import { deleteTiltak } from "../../../../../../server/service/oppfolgingsplanService";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
 
 const handler = async (
   req: NextApiRequest,

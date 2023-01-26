@@ -2,9 +2,9 @@ import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormSM } from "./TiltakFormSM";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
-import {TiltakFormAG} from "./TiltakFormAG";
+import { TiltakFormAG } from "./TiltakFormAG";
 import { STATUS_TILTAK } from "../../constants/konstanter";
-import {TiltakFormValues} from "./utils/typer";
+import { TiltakFormValues } from "./utils/typer";
 
 interface Props {
   tiltak: Tiltak;

@@ -89,7 +89,9 @@ export const LagretTiltak = ({
     if (isAudienceSykmeldt) {
       return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
     } else {
-      return narmesteLederFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+      return (
+        narmesteLederFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr)
+      );
     }
   };
 

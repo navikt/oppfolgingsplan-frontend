@@ -1,4 +1,7 @@
-import { useOppfolgingsplanApiPath, useOppfolgingsplanRouteId} from "hooks/routeHooks";
+import {
+  useOppfolgingsplanApiPath,
+  useOppfolgingsplanRouteId,
+} from "hooks/routeHooks";
 import { post } from "api/axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
@@ -10,10 +13,7 @@ export const useLagreTiltak = () => {
   const queryClient = useQueryClient();
 
   const lagreTiltak = async (tiltak: Partial<Tiltak>) => {
-    await post(
-      `${apiPath}/${oppfolgingsplanId}/tiltak/lagre`,
-      tiltak
-    );
+    await post(`${apiPath}/${oppfolgingsplanId}/tiltak/lagre`, tiltak);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -26,9 +26,7 @@ export const useSlettTiltakSM = () => {
   const queryClient = useQueryClient();
 
   const slettTiltak = async (tiltakId: number) => {
-    await post(
-      `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
-    );
+    await post(`${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
