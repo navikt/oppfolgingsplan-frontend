@@ -68,14 +68,12 @@ export const SpacedAlert = styled(Alert)`
 
 interface Props {
   arbeidstakerFnr: string;
-  narmesteLederFnr: string | null | undefined;
   tiltak: Tiltak;
   readonly?: boolean;
 }
 
 export const LagretTiltak = ({
   arbeidstakerFnr,
-  narmesteLederFnr,
   tiltak,
   readonly = true,
 }: Props) => {
@@ -85,16 +83,6 @@ export const LagretTiltak = ({
   const lagreKommentar = useLagreKommentar();
   const { isAudienceSykmeldt } = useAudience();
 
-  const isOpprettetAvInnloggetPerson = () => {
-    if (isAudienceSykmeldt) {
-      return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
-    } else {
-      return (
-        narmesteLederFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr)
-      );
-    }
-  };
-
   const tiltakId = tiltak.tiltakId;
 
   const manglerVurderingFraLeder =
@@ -103,6 +91,14 @@ export const LagretTiltak = ({
     !tiltak.beskrivelseIkkeAktuelt &&
     arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
     tiltak.sistEndretAv.fnr === arbeidstakerFnr;
+
+  const kanSletteTiltak = () => {
+    if (isAudienceSykmeldt) {
+      return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+    } else {
+      return !manglerVurderingFraLeder;
+    }
+  };
 
   return (
     <SpacedPanel border={true}>
@@ -195,7 +191,7 @@ export const LagretTiltak = ({
                 </Button>
               )}
 
-              {!readonly && isOpprettetAvInnloggetPerson() && (
+              {!readonly && kanSletteTiltak() && (
                 <SlettTiltakButton tiltakId={tiltak.tiltakId} />
               )}
 

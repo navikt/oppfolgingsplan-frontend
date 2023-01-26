@@ -10,7 +10,6 @@ export const LagredeTiltak = ({
   oppfolgingsplan,
 }: Props): ReactElement | null => {
   const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
-  const narmesteLederFnr = oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.fnr;
 
   if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null;
 
@@ -21,7 +20,6 @@ export const LagredeTiltak = ({
         <LagretTiltak
           key={index}
           arbeidstakerFnr={arbeidstakerFnr}
-          narmesteLederFnr={narmesteLederFnr}
           tiltak={tiltak}
           readonly={false}
         />
