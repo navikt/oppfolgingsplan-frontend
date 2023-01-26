@@ -2,7 +2,7 @@ import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { VurderTiltakForm } from "./VurderTiltakForm";
 import styled from "styled-components";
-import {TiltakFormValues} from "./utils/typer";
+import { TiltakFormValues } from "./utils/typer";
 
 interface Props {
   tiltak: Tiltak;
@@ -44,12 +44,20 @@ export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
     }
   };
 
+  const tiltaknavn = createDefaultFormValues()?.overskrift;
+  const beskrivelse = createDefaultFormValues()?.beskrivelse;
+
   return (
     <VurderTiltakFormWrapper>
       <VurderTiltakForm
         defaultFormValues={createDefaultFormValues()}
         isSubmitting={lagreTiltak.isLoading}
         onSubmit={(data) => {
+          if (tiltaknavn && beskrivelse) {
+            data.overskrift = tiltaknavn;
+            data.beskrivelse = beskrivelse;
+          }
+
           lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
             doneEditing();
           });
