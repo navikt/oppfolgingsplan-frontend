@@ -8,6 +8,7 @@ import {
 import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
+import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -49,6 +50,28 @@ export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
   };
 
   return useMutation(godkjennsistPlan);
+};
+
+export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
+  const apiBasePath = useApiBasePath();
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const godkjennPlan = async (data: GodkjennPlanData) => {
+    await post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
+      data
+    );
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    await router.push(statusUrl);
+  };
+
+  return useMutation(godkjennPlan, {
+    onError: () => {
+      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };
 
 export const useAvvisOppfolgingsplan = () => {
