@@ -35,7 +35,7 @@ const handler = async (
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
     const filteredTiltakListe = aktivPlan.tiltakListe!.filter(
-      (tiltak) => tiltak.tiltakId != Number(tiltakId)
+      (tiltak) => tiltak.tiltakId !== Number(tiltakId)
     );
 
     activeMock.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
