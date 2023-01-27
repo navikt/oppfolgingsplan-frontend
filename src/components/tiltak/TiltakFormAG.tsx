@@ -47,11 +47,8 @@ const StyledRadioGroup = styled(RadioGroup)`
 
 interface Props {
   isSubmitting: boolean;
-
   onSubmit(data: TiltakFormValues): void;
-
   onCancel(): void;
-
   defaultFormValues?: TiltakFormValues;
 }
 
