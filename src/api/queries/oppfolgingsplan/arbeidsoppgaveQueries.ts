@@ -13,7 +13,7 @@ export const useLagreArbeidsoppgave = () => {
   const queryClient = useQueryClient();
 
   const lagreOppgave = async (oppgave: Partial<Arbeidsoppgave>) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/arbeisoppgave/lagre`, oppgave);
+    await post(`${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/lagre`, oppgave);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -31,7 +31,7 @@ export const useSlettArbeidsoppgave = () => {
 
   const slettOppgave = async (arbeidsoppgaveId: number) => {
     await post(
-      `${apiPath}/${oppfolgingsplanId}/arbeisoppgave/${arbeidsoppgaveId}/slett`
+      `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/${arbeidsoppgaveId}/slett`
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
