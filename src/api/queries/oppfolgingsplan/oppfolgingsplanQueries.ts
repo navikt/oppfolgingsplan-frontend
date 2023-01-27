@@ -145,11 +145,11 @@ export const useDelOppfolgingsplanMedFastlege = () => {
 };
 
 export const useAvbrytOppfolgingsplan = () => {
-  const apiBasePath = useApiBasePath();
+  const apiBasePath = useOppfolgingsplanApiPath();
   const queryClient = useQueryClient();
 
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
-    await post(`${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/avbryt`);
+    await post(`${apiBasePath}/${oppfolgingsplanId}/avbryt`);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
