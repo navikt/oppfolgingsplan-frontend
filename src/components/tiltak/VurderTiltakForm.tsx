@@ -46,7 +46,7 @@ export const VurderTiltakForm = ({
   onCancel,
   defaultFormValues,
 }: Props) => {
-  const errorRef = useRef<any>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
   const formFunctions = useForm<TiltakFormValues>();
   const {
     handleSubmit,
