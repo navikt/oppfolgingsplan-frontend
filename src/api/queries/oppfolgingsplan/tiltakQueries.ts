@@ -1,19 +1,19 @@
-import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
+import {
+  useOppfolgingsplanApiPath,
+  useOppfolgingsplanRouteId,
+} from "hooks/routeHooks";
 import { post } from "api/axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 
-export const useLagreTiltakSM = () => {
-  const apiBasePath = useApiBasePath();
+export const useLagreTiltak = () => {
+  const apiPath = useOppfolgingsplanApiPath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
   const lagreTiltak = async (tiltak: Partial<Tiltak>) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/lagre`,
-      tiltak
-    );
+    await post(`${apiPath}/${oppfolgingsplanId}/tiltak/lagre`, tiltak);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -21,14 +21,12 @@ export const useLagreTiltakSM = () => {
 };
 
 export const useSlettTiltakSM = () => {
-  const apiBasePath = useApiBasePath();
+  const apiPath = useOppfolgingsplanApiPath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
   const slettTiltak = async (tiltakId: number) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`
-    );
+    await post(`${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`);
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -40,8 +38,8 @@ interface LagreKommentarProps {
   kommentar: Partial<Kommentar>;
 }
 
-export const useLagreKommentarSM = () => {
-  const apiBasePath = useApiBasePath();
+export const useLagreKommentar = () => {
+  const apiPath = useOppfolgingsplanApiPath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
@@ -50,7 +48,7 @@ export const useLagreKommentarSM = () => {
     kommentar,
   }: LagreKommentarProps) => {
     await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
+      `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       kommentar
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
@@ -64,8 +62,8 @@ interface SlettKommentarProps {
   kommentarId: number;
 }
 
-export const useSlettKommentarSM = () => {
-  const apiBasePath = useApiBasePath();
+export const useSlettKommentar = () => {
+  const apiPath = useOppfolgingsplanApiPath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
@@ -74,7 +72,7 @@ export const useSlettKommentarSM = () => {
     kommentarId,
   }: SlettKommentarProps) => {
     await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
+      `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };

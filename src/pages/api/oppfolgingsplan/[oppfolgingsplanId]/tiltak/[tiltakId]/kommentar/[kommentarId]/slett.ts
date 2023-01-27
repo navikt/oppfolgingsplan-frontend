@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { isMockBackend } from "../../../../../../../../environments/publicEnv";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
-import { getTiltakIdFromRequest } from "../../../../../../../../server/utils/requestUtils";
-import { saveTiltakCommentSM } from "../../../../../../../../server/service/oppfolgingsplanService";
+import { getKommentarIdFromRequest } from "../../../../../../../../server/utils/requestUtils";
+import { deleteTiltakComment } from "../../../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../../../server/auth/beskyttetApi";
-import { Kommentar } from "../../../../../../../../types/oppfolgingsplan";
 
 const handler = async (
   req: NextApiRequest,
@@ -14,10 +13,9 @@ const handler = async (
     res.status(200).end();
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
-    const tiltakId = getTiltakIdFromRequest(req);
-    const partialKommentar: Partial<Kommentar> = req.body;
+    const kommentarId = getKommentarIdFromRequest(req);
 
-    await saveTiltakCommentSM(tokenX, tiltakId, partialKommentar);
+    await deleteTiltakComment(tokenX, kommentarId);
     res.status(200).end();
   }
 };

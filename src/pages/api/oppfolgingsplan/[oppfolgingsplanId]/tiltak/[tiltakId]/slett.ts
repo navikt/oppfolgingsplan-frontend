@@ -1,17 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../../../../environments/publicEnv";
-import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import {
   getOppfolgingsplanIdFromRequest,
   getTiltakIdFromRequest,
-} from "../../../../../../../server/utils/requestUtils";
-import { deleteTiltakSM } from "../../../../../../../server/service/oppfolgingsplanService";
-import { beskyttetApi } from "../../../../../../../server/auth/beskyttetApi";
-import getMockDb from "../../../../../../../server/data/mock/getMockDb";
+} from "../../../../../../server/utils/requestUtils";
+import { isMockBackend } from "../../../../../../environments/publicEnv";
+import getMockDb from "../../../../../../server/data/mock/getMockDb";
 import {
   ApiErrorException,
   generalError,
-} from "../../../../../../../api/axios/errors";
+} from "../../../../../../api/axios/errors";
+import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
+import { deleteTiltak } from "../../../../../../server/service/oppfolgingsplanService";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
 
 const handler = async (
   req: NextApiRequest,
@@ -34,15 +34,17 @@ const handler = async (
       );
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
+    const filteredTiltakListe = aktivPlan.tiltakListe!.filter(
+      (tiltak) => tiltak.tiltakId !== Number(tiltakId)
+    );
+
     activeMock.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
-      aktivPlan.tiltakListe.filter(
-        (tiltak) => tiltak.tiltakId != Number(tiltakId)
-      );
+      filteredTiltakListe;
     res.status(200).end();
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
-    await deleteTiltakSM(tokenX, tiltakId);
+    await deleteTiltak(tokenX, tiltakId);
     res.status(200).end();
   }
 };

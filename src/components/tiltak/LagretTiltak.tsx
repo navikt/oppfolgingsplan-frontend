@@ -14,13 +14,16 @@ import { DialogDots, Edit } from "@navikt/ds-icons";
 import { SlettTiltakButton } from "./SlettTiltakButton";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { useLagreKommentarSM } from "api/queries/sykmeldt/tiltakQueriesSM";
+import { useLagreKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { EditerTiltak } from "./EditerTiltak";
 import { SpacedDetail } from "../blocks/SpacedDetail";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import { Dialog } from "components/blocks/dialog/Dialog";
 import { Row } from "components/blocks/wrappers/Row";
 import { Tiltak } from "../../types/oppfolgingsplan";
+import { useAudience } from "../../hooks/routeHooks";
+import { VurderButton } from "../blocks/buttons/VurderButton";
+import { VurderTiltak } from "./VurderTiltak";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -63,16 +66,6 @@ export const SpacedAlert = styled(Alert)`
   margin-bottom: 1rem;
 `;
 
-const manglerVurderingFraLeder = (fnr: string, tiltak: Tiltak) => {
-  return (
-    tiltak &&
-    !tiltak.gjennomfoering &&
-    !tiltak.beskrivelseIkkeAktuelt &&
-    fnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
-    tiltak.sistEndretAv.fnr === fnr
-  );
-};
-
 interface Props {
   arbeidstakerFnr: string;
   tiltak: Tiltak;
@@ -84,12 +77,28 @@ export const LagretTiltak = ({
   tiltak,
   readonly = true,
 }: Props) => {
-  const aktoerHarOpprettetElement =
-    arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
   const [displayNyKommentar, setDisplayNyKommentar] = useState(false);
   const [editererTiltak, setEditererTiltak] = useState(false);
-  const lagreKommentar = useLagreKommentarSM();
+  const [vurdererTiltak, setVurdererTiltak] = useState(false);
+  const lagreKommentar = useLagreKommentar();
+  const { isAudienceSykmeldt } = useAudience();
+
   const tiltakId = tiltak.tiltakId;
+
+  const manglerVurderingFraLeder =
+    tiltak &&
+    !tiltak.gjennomfoering &&
+    !tiltak.beskrivelseIkkeAktuelt &&
+    arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
+    tiltak.sistEndretAv.fnr === arbeidstakerFnr;
+
+  const kanSletteTiltak = () => {
+    if (isAudienceSykmeldt) {
+      return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+    } else {
+      return !manglerVurderingFraLeder;
+    }
+  };
 
   return (
     <SpacedPanel border={true}>
@@ -116,7 +125,7 @@ export const LagretTiltak = ({
         </>
       )}
 
-      {!readonly && manglerVurderingFraLeder(arbeidstakerFnr, tiltak) && (
+      {!readonly && isAudienceSykmeldt && manglerVurderingFraLeder && (
         <SpacedAlert variant={"warning"}>
           Dette tiltaket mangler vurdering fra lederen din
         </SpacedAlert>
@@ -163,9 +172,16 @@ export const LagretTiltak = ({
             />
           )}
 
+          {vurdererTiltak && (
+            <VurderTiltak
+              tiltak={tiltak}
+              doneEditing={() => setVurdererTiltak(false)}
+            />
+          )}
+
           {!displayNyKommentar && !editererTiltak && (
             <Row>
-              {aktoerHarOpprettetElement && (
+              {!readonly && !manglerVurderingFraLeder && (
                 <Button
                   variant={"tertiary"}
                   icon={<Edit aria-hidden />}
@@ -174,9 +190,19 @@ export const LagretTiltak = ({
                   Endre
                 </Button>
               )}
-              {aktoerHarOpprettetElement && (
+
+              {!readonly && kanSletteTiltak() && (
                 <SlettTiltakButton tiltakId={tiltak.tiltakId} />
               )}
+
+              <VurderButton
+                show={
+                  !readonly && !isAudienceSykmeldt && manglerVurderingFraLeder
+                }
+                onClick={() => setVurdererTiltak(true)}
+                text="Gi din vurdering"
+              />
+
               <Button
                 variant={"tertiary"}
                 icon={<DialogDots aria-hidden />}

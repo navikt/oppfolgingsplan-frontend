@@ -5,7 +5,7 @@ import { ArbeidsoppgaveKnapper } from "./ArbeidsoppgaveKnapper";
 import { OpprettetAv } from "./OpprettetAv";
 import { SlettArbeidsoppgaveButton } from "./SlettArbeidsoppgaveButton";
 import { TilretteleggingsBeskrivelse } from "./TilretteleggingsBeskrivelse";
-import { VurderButton } from "./VurderButton";
+import { VurderButton } from "../blocks/buttons/VurderButton";
 import { VurderingFraSykmeldt } from "./VurderingFraSykmeldt";
 import { useAudience } from "hooks/routeHooks";
 import { KANGJENNOMFOERES } from "constants/konstanter";
@@ -67,6 +67,7 @@ export const ArbeidsoppgaveCard = ({
     <VurderButton
       show={isAudienceSykmeldt}
       onClick={() => setEditererArbeidsoppgave(true)}
+      text={texts.arbeidsoppgaveList.buttons.giDinVurdering}
     />
   );
 

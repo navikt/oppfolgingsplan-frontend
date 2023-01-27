@@ -6,6 +6,7 @@ import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
 import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
+import { TiltakFormValues } from "./utils/typer";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -25,24 +26,20 @@ const SpacedAlert = styled(Alert)`
   margin-bottom: 2rem;
 `;
 
-export type TiltakFormValues = {
-  overskrift: string;
-  beskrivelse: string;
-  fom: Date | null;
-  tom: Date | null;
-};
+const arbeidstakerInfoText =
+  "Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du\n" +
+  " ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose. Du\n" +
+  " må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren\n" +
+  " din og NAV kan følge deg opp";
 
 interface Props {
   isSubmitting: boolean;
-
   onSubmit(data: TiltakFormValues): void;
-
   onCancel(): void;
-
   defaultFormValues?: TiltakFormValues;
 }
 
-export const TiltakForm = ({
+export const TiltakFormSM = ({
   isSubmitting,
   onSubmit,
   onCancel,
@@ -94,12 +91,7 @@ export const TiltakForm = ({
             value={beskrivelseValue}
           />
 
-          <SpacedAlert variant={"info"}>
-            Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du
-            ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose. Du
-            må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren
-            din og NAV kan følge deg opp
-          </SpacedAlert>
+          <SpacedAlert variant={"info"}>{arbeidstakerInfoText}</SpacedAlert>
 
           <DateRow>
             <DatoVelger

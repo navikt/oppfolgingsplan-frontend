@@ -1,6 +1,6 @@
-import { Heading } from "@navikt/ds-react";
+import { BodyLong, Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { Oppfolgingsplan, Stilling } from "../../../types/oppfolgingsplan";
 
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
@@ -17,6 +17,12 @@ import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldt
 
 const textOverskrift = (arbeidstakerNavn?: string) => {
   return `Oppfølgingsplan for ${arbeidstakerNavn}`;
+};
+
+const textStilling = (stilling: Stilling) => {
+  return `Den sykmeldte jobber som ${stilling?.yrke?.toLowerCase()} ${
+    stilling.prosent
+  } %`;
 };
 
 export enum Page {
@@ -56,6 +62,13 @@ interface Props {
 export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
   const aktivPlan = useAktivPlanAG();
   const sykmeldt = useDineSykmeldte()?.data;
+
+  const stilling: Stilling | undefined =
+    aktivPlan &&
+    aktivPlan.arbeidstaker.stillinger?.find(
+      (stilling) =>
+        stilling.virksomhetsnummer === aktivPlan?.virksomhet?.virksomhetsnummer
+    );
 
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&
@@ -106,6 +119,12 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
         <Heading spacing={true} level="2" size="medium">
           {headingText(page)}
         </Heading>
+      )}
+
+      {page !== Page.SEPLANEN && stilling?.yrke && (
+        <BodyLong spacing={true} size={"medium"}>
+          {textStilling(stilling)}
+        </BodyLong>
       )}
 
       <Content />

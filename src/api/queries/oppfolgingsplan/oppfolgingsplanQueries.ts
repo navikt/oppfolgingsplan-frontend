@@ -1,16 +1,14 @@
 import { post } from "api/axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 import {
   useApiBasePath,
   useOppfolgingsplanApiPath,
-  useOppfolgingsplanRouteId,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
 import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
-import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { queryKeys } from "../queryKeys";
+import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -36,36 +34,22 @@ export const useNullstillGodkjenning = () => {
   return useMutation(nullstillGodkjenning);
 };
 
-export const useLagreArbeidsoppgave = () => {
-  const apiPath = useOppfolgingsplanApiPath();
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
+  const apiBasePath = useApiBasePath();
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
   const queryClient = useQueryClient();
+  const router = useRouter();
 
-  const lagreOppgave = async (oppgave: Partial<Arbeidsoppgave>) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/arbeisoppgave/lagre`, oppgave);
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-  };
-
-  return useMutation(lagreOppgave, {
-    onError: () => {
-      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-    },
-  });
-};
-
-export const useSlettArbeidsoppgave = () => {
-  const apiPath = useOppfolgingsplanApiPath();
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const queryClient = useQueryClient();
-
-  const slettOppgave = async (arbeidsoppgaveId: number) => {
+  const godkjennsistPlan = async (data: GodkjennsistPlanData) => {
     await post(
-      `${apiPath}/${oppfolgingsplanId}/arbeisoppgave/${arbeidsoppgaveId}/slett`
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
+      data
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    await router.push(statusUrl);
   };
 
-  return useMutation(slettOppgave);
+  return useMutation(godkjennsistPlan);
 };
 
 export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
@@ -88,24 +72,6 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
       queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
-};
-
-export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
-  const apiBasePath = useApiBasePath();
-  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const godkjennsistPlan = async (data: GodkjennsistPlanData) => {
-    await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
-      data
-    );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
-    await router.push(statusUrl);
-  };
-
-  return useMutation(godkjennsistPlan);
 };
 
 export const useAvvisOppfolgingsplan = () => {

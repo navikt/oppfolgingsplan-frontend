@@ -6,7 +6,7 @@ import { texts } from "components/seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
-import { useSlettArbeidsoppgave } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useSlettArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 
 const ModalContent = styled.div`
   padding: 2rem;
