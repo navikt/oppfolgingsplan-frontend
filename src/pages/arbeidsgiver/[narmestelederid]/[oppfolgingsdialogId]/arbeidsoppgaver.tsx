@@ -8,10 +8,11 @@ import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeid
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { NyArbeidsoppgaveAG } from "../../../../components/arbeidsoppgaver/NyArbeidsoppgaveAG";
 import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useInnloggetFnr } from "../../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useAktivPlanAG();
-  const innloggetFnr = aktivPlan?.arbeidsgiver.naermesteLeder?.fnr;
+  const innloggetFnr = useInnloggetFnr(aktivPlan);
 
   return (
     <OppfolgingsplanPageAG page={Page.ARBEIDSOPPGAVER}>
