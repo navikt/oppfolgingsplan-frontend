@@ -98,7 +98,10 @@ export const LagretTiltak = ({
     if (isAudienceSykmeldt) {
       return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
     } else {
-      return !manglerVurderingFraLeder;
+      return (
+        !manglerVurderingFraLeder &&
+        innloggetFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr)
+      );
     }
   };
 
