@@ -20,7 +20,7 @@ export const NyArbeidsoppgaveAG = () => {
     return {
       arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
       gjennomfoering: {
-        kanGjennomfoeres: "KAN",
+        kanGjennomfoeres: "IKKE_VURDERT",
         paaAnnetSted: false,
         medMerTid: false,
         medHjelp: false,
