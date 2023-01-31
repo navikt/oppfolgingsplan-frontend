@@ -76,8 +76,7 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
     (erOppfolgingsplanTidligere(aktivPlan) ||
       erOppfolgingsplanKnyttetTilGyldigSykmeldingAG(
         aktivPlan,
-        sykmeldt.orgnummer,
-        sykmeldt.aktivSykmelding
+        sykmeldt.orgnummer
       ));
 
   const Content = (): ReactElement => {
