@@ -1,8 +1,8 @@
 import { Accordion, Link } from "@navikt/ds-react";
 import { restdatoTildato } from "utils/dateUtils";
-import { useApiBasePath } from "hooks/routeHooks";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { Avbruttplan } from "../../types/oppfolgingsplan";
+import { useOppfolgingsplanApiPath } from "../../hooks/routeHooks";
 
 interface Props {
   avbruttOppfolgingsplaner: Avbruttplan[] | null;
@@ -11,7 +11,7 @@ interface Props {
 export const TidligereOppfolgingsplaner = ({
   avbruttOppfolgingsplaner,
 }: Props) => {
-  const apiBasePath = useApiBasePath();
+  const oppfolgingsplanApiRoute = useOppfolgingsplanApiPath();
 
   if (!avbruttOppfolgingsplaner || !avbruttOppfolgingsplaner.length) {
     return null;
@@ -28,7 +28,7 @@ export const TidligereOppfolgingsplaner = ({
             {avbruttOppfolgingsplaner.map((plan: Avbruttplan, idx: number) => (
               <div key={`avbrutt-plan-${idx}`}>
                 <Link
-                  href={`${apiBasePath}/oppfolgingsplaner/${plan.id}/pdf`}
+                  href={`${oppfolgingsplanApiRoute}/${plan.id}/pdf`}
                   target="_blank"
                   rel="noreferrer"
                 >
