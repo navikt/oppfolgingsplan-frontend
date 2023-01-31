@@ -91,14 +91,16 @@ export const LagretTiltak = ({
     tiltak &&
     !tiltak.gjennomfoering &&
     !tiltak.beskrivelseIkkeAktuelt &&
-    arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
+    arbeidstakerFnr === tiltak.opprettetAv?.fnr &&
     tiltak.sistEndretAv.fnr === arbeidstakerFnr;
 
   const kanSletteTiltak = () => {
     if (isAudienceSykmeldt) {
-      return arbeidstakerFnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr);
+      return arbeidstakerFnr === tiltak.opprettetAv?.fnr;
     } else {
-      return !manglerVurderingFraLeder;
+      return (
+        !manglerVurderingFraLeder && innloggetFnr === tiltak.opprettetAv?.fnr
+      );
     }
   };
 
