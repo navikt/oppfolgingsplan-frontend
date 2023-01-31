@@ -1,4 +1,4 @@
-import { ArbeidsoppgaveFormHeading } from "./ArbeidsoppgaveFormHeading";
+import { ArbeidsoppgaveFormHeadingAG } from "./ArbeidsoppgaveFormHeading";
 import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
@@ -33,7 +33,7 @@ export const NyArbeidsoppgaveAG = () => {
   if (!leggerTilOppgave) {
     return (
       <SpacedPanel border={true}>
-        <ArbeidsoppgaveFormHeading />
+        <ArbeidsoppgaveFormHeadingAG />
         <Button
           variant={"secondary"}
           icon={<PlusIcon />}
@@ -47,7 +47,7 @@ export const NyArbeidsoppgaveAG = () => {
 
   return (
     <SpacedPanel border={true}>
-      <ArbeidsoppgaveFormHeading />
+      <ArbeidsoppgaveFormHeadingAG />
       <ArbeidsoppgaveFormAG
         onSubmit={(data) => {
           lagreOppgave
