@@ -5,6 +5,7 @@ import { Heading } from "@navikt/ds-react";
 import React from "react";
 import { LagretTiltak } from "components/tiltak/LagretTiltak";
 import { Oppfolgingsplan, Tiltak } from "../../../types/oppfolgingsplan";
+import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -12,8 +13,11 @@ interface Props {
 
 export const TiltakList = ({ oppfolgingsplan }: Props) => {
   const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
+  const innloggetFnr = useInnloggetFnr(oppfolgingsplan);
 
-  if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr) return null;
+  if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr || !innloggetFnr) {
+    return null;
+  }
 
   const sorterTiltakEtterTypeOgOpprettet = (arbeidsoppgaver: Tiltak[]) => {
     const order = [
@@ -39,6 +43,7 @@ export const TiltakList = ({ oppfolgingsplan }: Props) => {
       <LagretTiltak
         key={index}
         arbeidstakerFnr={arbeidstakerFnr}
+        innloggetFnr={innloggetFnr}
         tiltak={tiltak}
         readonly={true}
       />
