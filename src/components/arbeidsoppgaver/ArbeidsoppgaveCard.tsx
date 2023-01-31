@@ -24,13 +24,13 @@ import { Button } from "@navikt/ds-react";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 
 interface Props {
-  arbeidstakerFnr: string;
+  innloggetFnr: string;
   arbeidsoppgave: Arbeidsoppgave;
   readonly?: boolean;
 }
 
 export const ArbeidsoppgaveCard = ({
-  arbeidstakerFnr,
+  innloggetFnr,
   arbeidsoppgave,
   readonly = true,
 }: Props) => {
@@ -38,8 +38,7 @@ export const ArbeidsoppgaveCard = ({
   const type = arbeidsoppgave.gjennomfoering?.kanGjennomfoeres;
   const [editererArbeidsoppgave, setEditererArbeidsoppgave] = useState(false);
   const aktoerHarOpprettetElement =
-    arbeidstakerFnr ===
-    (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
+    innloggetFnr === arbeidsoppgave.opprettetAv.fnr;
 
   const EditerArbeidsoppgaveForm = () => (
     <EditerArbeidsoppgave
@@ -48,15 +47,22 @@ export const ArbeidsoppgaveCard = ({
       doneEditing={() => setEditererArbeidsoppgave(false)}
     />
   );
-  const EndreKnapp = () => (
-    <Button
-      variant={"tertiary"}
-      icon={<Edit aria-hidden />}
-      onClick={() => setEditererArbeidsoppgave(true)}
-    >
-      Endre
-    </Button>
-  );
+
+  // TODO: Swap audience with composition
+  const EndreKnapp = () => {
+    if (isAudienceSykmeldt) {
+      return (
+        <Button
+          variant={"tertiary"}
+          icon={<Edit aria-hidden />}
+          onClick={() => setEditererArbeidsoppgave(true)}
+        >
+          Endre
+        </Button>
+      );
+    }
+    return null;
+  };
   const SlettKnapp = () => (
     <SlettArbeidsoppgaveButton
       show={aktoerHarOpprettetElement}

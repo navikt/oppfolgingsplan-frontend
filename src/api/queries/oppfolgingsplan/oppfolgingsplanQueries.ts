@@ -2,6 +2,7 @@ import { post } from "api/axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   useApiBasePath,
+  useAudience,
   useOppfolgingsplanApiPath,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
@@ -9,6 +10,7 @@ import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -120,4 +122,15 @@ export const useAvbrytOppfolgingsplan = () => {
   };
 
   return useMutation(postAvbrytOppfolgingsplan);
+};
+
+export const useInnloggetFnr = (
+  oppfolgingsplan: Oppfolgingsplan | undefined
+): string | null | undefined => {
+  const { isAudienceSykmeldt } = useAudience();
+
+  if (isAudienceSykmeldt) {
+    return oppfolgingsplan?.arbeidstaker.fnr;
+  }
+  return oppfolgingsplan?.arbeidsgiver.naermesteLeder?.fnr;
 };

@@ -8,19 +8,20 @@ import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeid
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { NyArbeidsoppgaveAG } from "../../../../components/arbeidsoppgaver/NyArbeidsoppgaveAG";
 import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useInnloggetFnr } from "../../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useAktivPlanAG();
-  const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
+  const innloggetFnr = useInnloggetFnr(aktivPlan);
 
   return (
     <OppfolgingsplanPageAG page={Page.ARBEIDSOPPGAVER}>
-      {arbeidstakerFnr && aktivPlan && (
+      {innloggetFnr && aktivPlan && (
         <div>
           <NyArbeidsoppgaveAG />
           {aktivPlan.arbeidsoppgaveListe && (
             <LagredeArbeidsoppgaver
-              arbeidstakerFnr={arbeidstakerFnr}
+              innloggetFnr={innloggetFnr}
               arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}
             />
           )}

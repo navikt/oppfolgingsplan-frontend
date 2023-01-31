@@ -5,18 +5,20 @@ import { BodyShort, Heading } from "@navikt/ds-react";
 import { texts } from "./texts";
 import { TiltakList } from "./tiltak/TiltakList";
 import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
+import { useInnloggetFnr } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;
 }
 
 export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
+  const innloggetFnr = useInnloggetFnr(oppfolgingsplan);
+
   if (!oppfolgingsplan) {
     return null;
   }
 
   const atNavn = oppfolgingsplan?.arbeidstaker.navn;
-  const atFnr = oppfolgingsplan?.arbeidstaker.fnr;
   const agNavn = oppfolgingsplan?.arbeidsgiver?.naermesteLeder?.navn;
 
   return (
@@ -34,9 +36,9 @@ export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
         narmesteLeder={oppfolgingsplan?.arbeidsgiver?.naermesteLeder}
         virksomhet={oppfolgingsplan?.virksomhet}
       />
-      {oppfolgingsplan.arbeidsoppgaveListe && atFnr && (
+      {oppfolgingsplan.arbeidsoppgaveListe && innloggetFnr && (
         <ArbeidsoppgaveList
-          arbeidstakerFnr={atFnr}
+          innloggetFnr={innloggetFnr}
           arbeidsoppgaver={oppfolgingsplan.arbeidsoppgaveListe}
         />
       )}
