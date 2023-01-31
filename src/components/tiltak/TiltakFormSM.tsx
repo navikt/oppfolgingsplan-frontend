@@ -122,7 +122,7 @@ export const TiltakFormSM = ({
             >
               Lagre
             </Button>
-            <Button variant={"tertiary"} onClick={onCancel}>
+            <Button variant={"tertiary"} onClick={onCancel} type="button">
               Avbryt
             </Button>
           </Row>

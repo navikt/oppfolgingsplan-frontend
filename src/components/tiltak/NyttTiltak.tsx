@@ -1,5 +1,5 @@
 import { Button } from "@navikt/ds-react";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormHeading } from "./TiltakFormHeading";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
@@ -9,15 +9,18 @@ interface Props {
   children: ReactNode;
   formHeadingTitle: string;
   formHeadingBody: string;
+  leggerTilNyttTiltak: boolean;
+  setLeggerTilNyttTiltak: (value: boolean) => void;
 }
 
 export const NyttTiltak = ({
   children,
   formHeadingTitle,
   formHeadingBody,
+  leggerTilNyttTiltak,
+  setLeggerTilNyttTiltak,
 }: Props) => {
   useLagreTiltak();
-  const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
   if (!leggerTilNyttTiltak) {
     return (

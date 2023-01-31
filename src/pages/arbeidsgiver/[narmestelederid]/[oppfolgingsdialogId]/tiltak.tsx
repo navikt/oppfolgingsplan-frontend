@@ -38,6 +38,8 @@ const Tiltak: NextPage = () => {
           <NyttTiltak
             formHeadingTitle={formHeadingTexts.title}
             formHeadingBody={formHeadingTexts.body}
+            leggerTilNyttTiltak={leggerTilNyttTiltak}
+            setLeggerTilNyttTiltak={setLeggerTilNyttTiltak}
           >
             <TiltakFormAG
               isSubmitting={lagreTiltak.isLoading}
