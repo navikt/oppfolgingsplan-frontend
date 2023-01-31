@@ -2,7 +2,7 @@ import {
   ArbeidsoppgaveFormSM,
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormSM";
-import { ArbeidsoppgaveFormHeading } from "./ArbeidsoppgaveFormHeading";
+import { ArbeidsoppgaveFormHeadingSM } from "./ArbeidsoppgaveFormHeading";
 import { TILRETTELEGGING } from "constants/konstanter";
 import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
@@ -40,7 +40,7 @@ export const NyArbeidsoppgaveSM = () => {
   if (!leggerTilOppgave) {
     return (
       <SpacedPanel border={true}>
-        <ArbeidsoppgaveFormHeading />
+        <ArbeidsoppgaveFormHeadingSM />
         <Button
           variant={"secondary"}
           icon={<PlusIcon />}
@@ -54,7 +54,7 @@ export const NyArbeidsoppgaveSM = () => {
 
   return (
     <SpacedPanel border={true}>
-      <ArbeidsoppgaveFormHeading />
+      <ArbeidsoppgaveFormHeadingSM />
       <ArbeidsoppgaveFormSM
         onSubmit={(data) => {
           lagreOppgave
