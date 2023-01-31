@@ -68,12 +68,14 @@ export const SpacedAlert = styled(Alert)`
 
 interface Props {
   arbeidstakerFnr: string;
+  innloggetFnr: string;
   tiltak: Tiltak;
   readonly?: boolean;
 }
 
 export const LagretTiltak = ({
   arbeidstakerFnr,
+  innloggetFnr,
   tiltak,
   readonly = true,
 }: Props) => {
@@ -145,7 +147,7 @@ export const LagretTiltak = ({
           <Dialog
             tiltakId={tiltak.tiltakId}
             kommentarer={tiltak.kommentarer}
-            aktorFnr={arbeidstakerFnr}
+            aktorFnr={innloggetFnr}
           />
 
           {displayNyKommentar && (
