@@ -180,7 +180,7 @@ export const LagretTiltak = ({
           )}
 
           {!displayNyKommentar && !editererTiltak && (
-            <Row>
+            <Row marginTop={"2rem"}>
               {!readonly && !manglerVurderingFraLeder && (
                 <Button
                   variant={"tertiary"}
