@@ -3,12 +3,12 @@ import React from "react";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 
 interface Props {
-  arbeidstakerFnr: string;
+  innloggetFnr: string;
   arbeidsoppgaver: Arbeidsoppgave[];
 }
 
 export const LagredeArbeidsoppgaver = ({
-  arbeidstakerFnr,
+  innloggetFnr,
   arbeidsoppgaver,
 }: Props) => {
   arbeidsoppgaver.sort((a, b) => {
@@ -19,7 +19,7 @@ export const LagredeArbeidsoppgaver = ({
     <>
       {arbeidsoppgaver.map((arbeidsoppgave: Arbeidsoppgave, idx: number) => (
         <ArbeidsoppgaveCard
-          arbeidstakerFnr={arbeidstakerFnr}
+          innloggetFnr={innloggetFnr}
           arbeidsoppgave={arbeidsoppgave}
           readonly={false}
           key={`arbeidsoppgaver-list-${idx}`}
