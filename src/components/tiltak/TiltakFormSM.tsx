@@ -34,8 +34,11 @@ const arbeidstakerInfoText =
 
 interface Props {
   isSubmitting: boolean;
+
   onSubmit(data: TiltakFormValues): void;
+
   onCancel(): void;
+
   defaultFormValues?: TiltakFormValues;
 }
 
@@ -56,6 +59,24 @@ export const TiltakFormSM = ({
   } = formFunctions;
 
   const beskrivelseValue = watch("beskrivelse");
+
+  const startDate = watch("fom");
+
+  const isAfterStartDate = (date: Date) => {
+    if (!startDate) return true;
+
+    return date.getTime() > new Date(startDate).getTime();
+  };
+
+  const getSluttDatoErrorMessage = (): string | undefined => {
+    if (errors.tom?.message) {
+      return errors.tom?.message;
+    }
+
+    if (errors.tom?.type === "validate") {
+      return "Sluttdato må være etter startdato";
+    }
+  };
 
   return (
     <FormProvider {...formFunctions}>
@@ -106,8 +127,9 @@ export const TiltakFormSM = ({
               name="tom"
               label={"Sluttdato (obligatorisk)"}
               defaultValue={defaultFormValues?.tom}
-              errorMessageToDisplay={errors.tom?.message}
               requiredErrorMessage={"Du må velge sluttdato"}
+              errorMessageToDisplay={getSluttDatoErrorMessage()}
+              validate={isAfterStartDate}
             />
           </DateRow>
 
