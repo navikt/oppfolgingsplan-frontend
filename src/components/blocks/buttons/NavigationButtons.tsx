@@ -36,22 +36,26 @@ export const NavigationButtons = ({ activeStep }: Props) => {
   const nextPage = getNextHref(basePath, activeStep);
 
   return (
-    <Row marginTop={"2rem"} marginBottom={"2rem"}>
-      {previousPage && (
-        <Link href={previousPage}>
-          <Button variant={"secondary"}>Forrige steg</Button>
-        </Link>
-      )}
+    <>
+      <Row marginTop={"2rem"} marginBottom={"1rem"}>
+        {previousPage && (
+          <Link href={previousPage}>
+            <Button variant={"secondary"}>Forrige steg</Button>
+          </Link>
+        )}
 
-      {nextPage && (
-        <Link href={nextPage}>
-          <Button variant={"primary"}>Neste steg</Button>
-        </Link>
-      )}
+        {nextPage && (
+          <Link href={nextPage}>
+            <Button variant={"primary"}>Neste steg</Button>
+          </Link>
+        )}
+      </Row>
 
-      <Link href={landingUrl}>
-        <Button variant={"tertiary"}>Fortsett senere</Button>
-      </Link>
-    </Row>
+      <Row marginBottom={"2rem"}>
+        <Link href={landingUrl}>
+          <Button variant={"tertiary"}>Fortsett senere</Button>
+        </Link>
+      </Row>
+    </>
   );
 };
