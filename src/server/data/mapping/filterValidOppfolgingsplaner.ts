@@ -85,11 +85,17 @@ const getLastSykefravar = (dineSykmeldteMedSykmeldinger: Sykmeldt[]) => {
 
 export const filterValidOppfolgingsplaner = (
   oppfolgingsplaner: OppfolgingsplanDTO[],
-  dineSykmeldteMedSykmeldinger: Sykmeldt[]
+  dineSykmeldteMedSykmeldinger: Sykmeldt[],
+  sykmeldtFnr: string
 ): OppfolgingsplanDTO[] => {
-  if (oppfolgingsplaner.length === 0) return [];
+  const oppfolgingsplanerForSykmeldt = oppfolgingsplaner?.filter(
+    (plan) => plan.arbeidstaker.fnr === sykmeldtFnr
+  );
 
-  const virksomhetsnummer = oppfolgingsplaner[0].virksomhet?.virksomhetsnummer;
+  if (oppfolgingsplanerForSykmeldt.length === 0) return [];
+
+  const virksomhetsnummer =
+    oppfolgingsplanerForSykmeldt[0].virksomhet?.virksomhetsnummer;
 
   const dineSykmeldteMedSykmeldingerPaVirksomhet =
     dineSykmeldteMedSykmeldinger.filter((sykmeldt) => {
@@ -100,7 +106,7 @@ export const filterValidOppfolgingsplaner = (
     dineSykmeldteMedSykmeldingerPaVirksomhet
   );
 
-  return oppfolgingsplaner.filter((oppfolgingsplan) => {
+  return oppfolgingsplanerForSykmeldt.filter((oppfolgingsplan) => {
     if (
       oppfolgingsplan.godkjentPlan &&
       oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom

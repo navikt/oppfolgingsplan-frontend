@@ -16,12 +16,16 @@ import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
 import { fetchNaermesteLederForVirksomhet } from "./fetchNaermesteLederForVirksomhet";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 import { filterValidOppfolgingsplaner } from "../mapping/filterValidOppfolgingsplaner";
+import { NAV_PERSONIDENT_HEADER } from "../../../api/axios/axios";
+import { ApiErrorException, generalError } from "../../../api/axios/errors";
 
 export const fetchOppfolgingsplanerMetaAG = async (
   req: NextApiRequest
 ): Promise<OppfolgingsplanMeta | undefined> => {
+  const sykmeldtFnr = req.headers[NAV_PERSONIDENT_HEADER];
+
   if (isMockBackend) {
-    const activeMock = getMockDb(); //Todo finn ut av mockdata løsning
+    const activeMock = getMockDb();
 
     return {
       person: activeMock.person,
@@ -32,6 +36,12 @@ export const fetchOppfolgingsplanerMetaAG = async (
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
+    if (!sykmeldtFnr || typeof sykmeldtFnr !== "string") {
+      throw new ApiErrorException(
+        generalError("Mangler fødselsnummer eller feil format")
+      );
+    }
+
     const syfoOppfolgingsplanServiceTokenX =
       await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
@@ -46,7 +56,8 @@ export const fetchOppfolgingsplanerMetaAG = async (
 
     const validOppfolgingsplaner = filterValidOppfolgingsplaner(
       oppfolgingsplaner,
-      dineSykmeldteMedSykmeldinger
+      dineSykmeldteMedSykmeldinger,
+      sykmeldtFnr
     );
 
     if (validOppfolgingsplaner.length > 0) {

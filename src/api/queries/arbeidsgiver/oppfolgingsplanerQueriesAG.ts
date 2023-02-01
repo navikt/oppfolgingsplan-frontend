@@ -23,13 +23,9 @@ export const useOppfolgingsplanerAG = () => {
   const sykmeldtFnr = sykmeldt.data?.fnr;
 
   const fetchOppfolgingsplaner = () =>
-    get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner/`).then(
-      (oppfolgingsplaner) => {
-        return oppfolgingsplaner.filter(
-          (plan) => plan.arbeidstaker.fnr === sykmeldtFnr
-        );
-      }
-    );
+    get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`, {
+      personIdent: sykmeldtFnr,
+    });
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
