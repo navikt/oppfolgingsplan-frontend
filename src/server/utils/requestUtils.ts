@@ -1,8 +1,19 @@
 import { NextApiRequest } from "next";
 import { handleQueryParamError } from "./errors";
+import { NAV_PERSONIDENT_HEADER } from "../../api/axios/axios";
 
 export const getSykmeldtFnrFromRequest = (req: NextApiRequest) => {
   const { sykmeldtFnr } = req.query;
+
+  if (typeof sykmeldtFnr !== "string") {
+    return handleQueryParamError(sykmeldtFnr);
+  }
+
+  return sykmeldtFnr;
+};
+
+export const getSykmeldtFnrFromHeader = (req: NextApiRequest) => {
+  const sykmeldtFnr = req.headers[NAV_PERSONIDENT_HEADER];
 
   if (typeof sykmeldtFnr !== "string") {
     return handleQueryParamError(sykmeldtFnr);

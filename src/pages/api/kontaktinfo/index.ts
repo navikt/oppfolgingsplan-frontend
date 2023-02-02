@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getKontaktinfoSM } from "../../../server/service/oppfolgingsplanService";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../server/auth/tokenx/getTokenXFromRequest";
-import { getSykmeldtFnrFromRequest } from "../../../server/utils/requestUtils";
+import { getSykmeldtFnrFromHeader } from "../../../server/utils/requestUtils";
 import { beskyttetApi } from "../../../server/auth/beskyttetApi";
 import { isMockBackend } from "../../../environments/publicEnv";
 import getMockDb from "../../../server/data/mock/getMockDb";
@@ -15,7 +15,7 @@ const handler = async (
   } else {
     const syfoOppfolgingsplanServiceTokenX =
       await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
-    const sykmeldtFnr = getSykmeldtFnrFromRequest(req);
+    const sykmeldtFnr = getSykmeldtFnrFromHeader(req);
     const kontaktinfo = await getKontaktinfoSM(
       syfoOppfolgingsplanServiceTokenX,
       sykmeldtFnr
