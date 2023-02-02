@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useAktiveOppfolgingsplanerAG,
   useTidligereOppfolgingsplanerAG,
@@ -13,18 +13,32 @@ import IngenPlanerCardAG from "components/landing/opprett/IngenPlanerCardAG";
 import OpprettModalAG from "components/landing/opprett/OpprettModalAG";
 import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMelding";
 import { SamtaleStotte } from "../../../components/blocks/samtalestotte/SamtaleStotte";
+import { useKontaktinfo } from "../../../api/queries/kontaktinfo/kontaktinfoQueries";
+import { useNarmesteLederId } from "../../../hooks/routeHooks";
 
 const Home: NextPage = () => {
+  const narmesteLederId = useNarmesteLederId();
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
     useAktiveOppfolgingsplanerAG();
   const { harTidligereOppfolgingsplaner, tidligereOppfolgingsplaner } =
     useTidligereOppfolgingsplanerAG();
   const [visOpprettModal, setVisOpprettModal] = useState(false);
-  const skalIkkeHaVarsel = aktiveOppfolgingsplaner[0]
-    ? !aktiveOppfolgingsplaner[0]?.skalHaVarsel
-    : false;
-  const [visReservertInfoboks, setVisReservertInfoboks] =
-    useState(skalIkkeHaVarsel);
+  const sykmeldtesKontaktinfo = useKontaktinfo();
+  const [visReservertInfoboks, setVisReservertInfoboks] = useState(false);
+
+  useEffect(() => {
+    const hasSeenReservertInfo = sessionStorage?.getItem(
+      `${narmesteLederId}-seen-varsel`
+    );
+    if (!sykmeldtesKontaktinfo.data?.skalHaVarsel && !hasSeenReservertInfo) {
+      setVisReservertInfoboks(true);
+    }
+  }, [narmesteLederId, sykmeldtesKontaktinfo.data?.skalHaVarsel]);
+
+  const setHasReadReservertInfoBoks = () => {
+    sessionStorage?.setItem(`${narmesteLederId}-seen-varsel`, "true");
+    setVisReservertInfoboks(false);
+  };
 
   return (
     <ArbeidsgiverSide
@@ -32,10 +46,7 @@ const Home: NextPage = () => {
       heading="Oppfølgingsplaner"
     >
       {visReservertInfoboks && (
-        <ReservertSykmeldtMelding
-          visReservertInfoboks={visReservertInfoboks}
-          setVisReservertInfoboks={setVisReservertInfoboks}
-        />
+        <ReservertSykmeldtMelding onClose={setHasReadReservertInfoBoks} />
       )}
       {!visReservertInfoboks && (
         <>

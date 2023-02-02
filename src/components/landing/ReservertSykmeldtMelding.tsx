@@ -1,14 +1,11 @@
 import React from "react";
 import Information from "../blocks/images/information.svg";
 import { InfoBoksWithImageAndButton } from "../blocks/infoboks/InfoBoksWithImageAndButton";
+
 interface Props {
-  visReservertInfoboks: boolean;
-  setVisReservertInfoboks(vis: boolean): void;
+  onClose(): void;
 }
-const ReservertSykmeldtMelding = ({
-  visReservertInfoboks,
-  setVisReservertInfoboks,
-}: Props) => {
+const ReservertSykmeldtMelding = ({ onClose }: Props) => {
   return (
     <InfoBoksWithImageAndButton
       heading={"Din sykmeldte arbeidstaker ønsker ikke digitale varsler"}
@@ -17,8 +14,7 @@ const ReservertSykmeldtMelding = ({
       }
       imageSrc={Information}
       buttonText={"Jeg forstår"}
-      show={visReservertInfoboks}
-      onClose={setVisReservertInfoboks}
+      onClose={onClose}
     />
   );
 };

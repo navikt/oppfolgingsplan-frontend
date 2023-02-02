@@ -21,7 +21,6 @@ interface Props {
   heading: string;
   description?: string;
   buttonText: string;
-  show: boolean;
   onClose(show: boolean): void;
 }
 
@@ -30,12 +29,8 @@ export const InfoBoksWithImageAndButton = ({
   heading,
   description,
   buttonText,
-  show,
   onClose,
 }: Props) => {
-  if (!show) {
-    return null;
-  }
   return (
     <StyledPanel border={true}>
       <PanelContent>
