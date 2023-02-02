@@ -30,10 +30,18 @@ const Home: NextPage = () => {
     const hasSeenReservertInfo = sessionStorage?.getItem(
       `${narmesteLederId}-seen-varsel`
     );
-    if (!sykmeldtesKontaktinfo.data?.skalHaVarsel && !hasSeenReservertInfo) {
+    if (
+      sykmeldtesKontaktinfo.isSuccess &&
+      !sykmeldtesKontaktinfo.data.skalHaVarsel &&
+      !hasSeenReservertInfo
+    ) {
       setVisReservertInfoboks(true);
     }
-  }, [narmesteLederId, sykmeldtesKontaktinfo.data?.skalHaVarsel]);
+  }, [
+    narmesteLederId,
+    sykmeldtesKontaktinfo.data?.skalHaVarsel,
+    sykmeldtesKontaktinfo.isSuccess,
+  ]);
 
   const setHasReadReservertInfoBoks = () => {
     sessionStorage?.setItem(`${narmesteLederId}-seen-varsel`, "true");
