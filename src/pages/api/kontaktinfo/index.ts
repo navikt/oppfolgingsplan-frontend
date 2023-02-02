@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getKontaktinfoSM } from "../../../server/service/oppfolgingsplanService";
+import { getKontaktinfo } from "../../../server/service/oppfolgingsplanService";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../server/auth/tokenx/getTokenXFromRequest";
 import { getSykmeldtFnrFromHeader } from "../../../server/utils/requestUtils";
 import { beskyttetApi } from "../../../server/auth/beskyttetApi";
@@ -16,7 +16,7 @@ const handler = async (
     const syfoOppfolgingsplanServiceTokenX =
       await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const sykmeldtFnr = getSykmeldtFnrFromHeader(req);
-    const kontaktinfo = await getKontaktinfoSM(
+    const kontaktinfo = await getKontaktinfo(
       syfoOppfolgingsplanServiceTokenX,
       sykmeldtFnr
     );

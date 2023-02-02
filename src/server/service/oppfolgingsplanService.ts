@@ -216,7 +216,7 @@ export async function getPersonSM(accessToken: string, fnr: string) {
   handleSchemaParsingError("Sykmeldt", "Person", response.error);
 }
 
-export async function getKontaktinfoSM(accessToken: string, fnr: string) {
+export async function getKontaktinfo(accessToken: string, fnr: string) {
   const response = kontaktinfoSchema.safeParse(
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/kontaktinfo/${fnr}`,

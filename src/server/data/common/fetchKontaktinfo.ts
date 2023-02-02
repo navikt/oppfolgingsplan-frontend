@@ -1,4 +1,4 @@
-import { getKontaktinfoSM } from "server/service/oppfolgingsplanService";
+import { getKontaktinfo } from "server/service/oppfolgingsplanService";
 import { ApiErrorException, generalError } from "api/axios/errors";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
@@ -14,5 +14,5 @@ export const fetchKontaktinfo = async (
     );
   }
 
-  return await getKontaktinfoSM(oppfolgingsplanTokenX, sykmeldtFnr);
+  return await getKontaktinfo(oppfolgingsplanTokenX, sykmeldtFnr);
 };
