@@ -23,7 +23,7 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
         variant="tertiary"
         onClick={() => setOpen(true)}
       >
-        Se plan
+        Se planen
       </Button>
       <Modal
         open={open}
