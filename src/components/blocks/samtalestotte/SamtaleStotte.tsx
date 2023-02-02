@@ -1,14 +1,15 @@
-import { BodyLong, GuidePanel, Link } from "@navikt/ds-react";
-import styled from "styled-components";
-
-const SpacedGuidePanel = styled(GuidePanel)`
-  margin-bottom: 2rem;
-`;
+import { BodyLong, Heading, Link } from "@navikt/ds-react";
+import React from "react";
+import { SpacedDiv } from "../wrappers/SpacedDiv";
 
 export const SamtaleStotte = () => {
   return (
-    <SpacedGuidePanel>
-      <BodyLong spacing={true}>
+    <SpacedDiv>
+      <Heading spacing={true} size={"medium"} level={"2"}>
+        Hvordan skape en god dialog
+      </Heading>
+
+      <BodyLong>
         Samtaler rundt sykefravær kan være vanskelige. Vi har laget et verktøy
         for arbeidsgivere for å gjøre det lettere å forberede seg til samtaler
         med medarbeidere!
@@ -22,6 +23,6 @@ export const SamtaleStotte = () => {
       >
         Gå til samtalestøtten
       </Link>
-    </SpacedGuidePanel>
+    </SpacedDiv>
   );
 };
