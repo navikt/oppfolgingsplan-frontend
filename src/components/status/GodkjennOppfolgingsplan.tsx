@@ -1,18 +1,29 @@
-import { BodyShort, Button, Checkbox, Heading } from "@navikt/ds-react";
+import { BodyLong, Button, Checkbox, Heading } from "@navikt/ds-react";
 import { useState } from "react";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { Godkjenning } from "../../types/oppfolgingsplan";
+import { InformationColored } from "@navikt/ds-icons";
+import styled from "styled-components";
+
+const AlignedContent = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`;
 
 export type MotpartNavnForAltinn = "arbeidstakeren" | "arbeidsgiveren din";
 
 interface Props {
   oppfolgingsplanId: number;
   motpartNavnForAltinn: MotpartNavnForAltinn;
+  godkjenninger: Godkjenning[];
 }
 
 export const GodkjennOppfolgingsplan = ({
   oppfolgingsplanId,
   motpartNavnForAltinn,
+  godkjenninger,
 }: Props) => {
   const [delMedNav, setDelMedNav] = useState(false);
   const godkjennOppfolgingsplan =
@@ -23,14 +34,24 @@ export const GodkjennOppfolgingsplan = ({
       <Heading level={"2"} size={"medium"} spacing>
         Ønsker du å godkjenne denne planen?
       </Heading>
-      <BodyShort spacing>
+      <BodyLong spacing>
         Alle godkjente planer mellom deg og {motpartNavnForAltinn} vil
         automatisk bli tilgjengelige for arbeidsplassen i Altinn.
-      </BodyShort>
+      </BodyLong>
       <SpacedDiv>
-        <Checkbox onChange={() => setDelMedNav(!delMedNav)} checked={delMedNav}>
-          Del planen med NAV (valgfritt)
-        </Checkbox>
+        {godkjenninger.find((godkjenning) => godkjenning.delMedNav) ? (
+          <AlignedContent>
+            <InformationColored />
+            Planen vil bli delt med NAV når du godkjenner den.
+          </AlignedContent>
+        ) : (
+          <Checkbox
+            onChange={() => setDelMedNav(!delMedNav)}
+            checked={delMedNav}
+          >
+            Del planen med NAV (valgfritt)
+          </Checkbox>
+        )}
       </SpacedDiv>
       <Button
         loading={godkjennOppfolgingsplan.isLoading}
