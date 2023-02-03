@@ -1,6 +1,5 @@
 import React from "react";
 import { getPublicAsset } from "utils/getAssetPath";
-import styled from "styled-components";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { SpacedDiv } from "../wrappers/SpacedDiv";
 
@@ -13,17 +12,12 @@ const texts = {
   navigateToMovie: "Gå direkte til filmen!",
 };
 
-const HeaderStyled = styled(Heading)`
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
 const VideoPanel = () => {
   return (
     <SpacedDiv>
-      <HeaderStyled level="2">{texts.title}</HeaderStyled>
+      <Heading spacing={true} size={"medium"} level={"2"}>
+        {texts.title}
+      </Heading>
       <video
         width="100%"
         height="auto"
