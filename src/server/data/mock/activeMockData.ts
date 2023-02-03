@@ -6,7 +6,7 @@ import { planUnderArbeidScenario } from "./testscenarios/planunderarbeid/planUnd
 import { MockSetup, TestScenario } from "./getMockDb";
 import { tidligerePlanerScenario } from "./testscenarios/tidligereoppfolgingsplaner/tidligerePlanerScenario";
 
-const activeMockData: MockSetup = { ...ingenPlanScenario };
+const activeMockData: MockSetup = { ...planUnderArbeidScenario };
 
 export const getMockSetupForScenario = (scenario: TestScenario) => {
   switch (scenario) {
