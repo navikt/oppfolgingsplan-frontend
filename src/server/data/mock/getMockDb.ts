@@ -1,7 +1,6 @@
 import activeMockData from "./activeMockData";
 import {
   OppfolgingsplanDTO,
-  StillingDTO,
   VirksomhetDTO,
 } from "../../../schema/oppfolgingsplanSchema";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
@@ -23,7 +22,6 @@ export interface MockSetup {
   oppfolgingsplaner: OppfolgingsplanDTO[];
   sykmeldinger: Sykmelding[];
   virksomhet: VirksomhetDTO[];
-  stillinger: StillingDTO[];
   narmesteLedere: NarmesteLeder[];
   person: PersonV3DTO;
   kontaktinfo: KontaktinfoDTO;

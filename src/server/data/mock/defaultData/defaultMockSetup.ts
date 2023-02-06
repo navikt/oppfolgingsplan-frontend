@@ -4,7 +4,6 @@ import {
   defaultVirksomhetMockData,
   otherVirksomhetMockData,
 } from "./oppfolgingsplanservice/defaultVirksomhetMockData";
-import { defaultStillingerMockData } from "./oppfolgingsplanservice/defaultStillingerMockData";
 import { defaultNarmesteLedereMockData } from "./oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { defaultPersonMockData } from "./oppfolgingsplanservice/defaultPersonMockData";
 import { defaultKontaktinfoMockData } from "./oppfolgingsplanservice/defaultKontaktinfoMockData";
@@ -14,7 +13,6 @@ export const defaultMockSetup: MockSetup = {
   oppfolgingsplaner: [],
   sykmeldinger: defaultSykmeldingerMockData,
   virksomhet: [defaultVirksomhetMockData, otherVirksomhetMockData],
-  stillinger: defaultStillingerMockData,
   narmesteLedere: defaultNarmesteLedereMockData,
   person: defaultPersonMockData,
   kontaktinfo: defaultKontaktinfoMockData,

@@ -62,12 +62,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
   const aktivPlan = useAktivPlanSM();
 
   const sykmeldinger = useSykmeldingerSM();
-  const stilling: Stilling | undefined =
-    aktivPlan &&
-    aktivPlan.arbeidstaker.stillinger?.find(
-      (stilling) =>
-        stilling.virksomhetsnummer === aktivPlan?.virksomhet?.virksomhetsnummer
-    );
+  const stilling: Stilling | undefined = aktivPlan?.arbeidstaker.stillinger[0];
 
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&

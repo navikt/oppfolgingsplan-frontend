@@ -3,10 +3,10 @@ import { BodyShort, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "./ContentWrapper";
 import { texts } from "./texts";
 import { TextWithLabel } from "./TextWithLabel";
-import { Arbeidstaker, Stilling } from "../../types/oppfolgingsplan";
+import { Person, Stilling } from "../../types/oppfolgingsplan";
 
 interface Props {
-  arbeidstaker?: Arbeidstaker;
+  arbeidstaker?: Person;
 }
 
 export const ArbeidstakerInfo = ({ arbeidstaker }: Props) => {

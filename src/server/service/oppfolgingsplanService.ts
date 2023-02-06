@@ -14,7 +14,6 @@ import {
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
 import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
-import { arbeidsforholdSchema } from "../../schema/ArbeidsforholdSchema";
 import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
@@ -94,28 +93,6 @@ export async function getVirksomhet(
   }
 
   handleSchemaParsingError("Sykmeldt", "Virksomhet", response.error);
-}
-
-export async function getArbeidsforhold(
-  accessToken: string,
-  fnr: string,
-  virksomhetsnummer: string,
-  fom: string
-) {
-  const response = array(arbeidsforholdSchema).safeParse(
-    await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/arbeidsforhold?fnr=${fnr}&virksomhetsnummer=${virksomhetsnummer}&fom=${fom}`,
-      {
-        accessToken,
-      }
-    )
-  );
-
-  if (response.success) {
-    return response.data;
-  }
-
-  handleSchemaParsingError("Sykmeldt", "Arbeidsforhold", response.error);
 }
 
 export async function getOppfolgingsplanerSM(accessToken: string) {
