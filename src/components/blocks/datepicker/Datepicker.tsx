@@ -29,15 +29,18 @@ const Datepicker = ({ name, label, defaultValue, validate }: Props) => {
   });
 
   return (
-    <UNSAFE_DatePicker {...datepickerProps}>
-      <UNSAFE_DatePicker.Input
-        id={field.name}
-        {...inputProps}
-        label={label}
-        placeholder="DD.MM.ÅÅÅÅ"
-        error={fieldState.error?.message}
-      />
-    </UNSAFE_DatePicker>
+    <div>
+      <div className="pt-4">{field.value && field.value.toString()}</div>
+      <UNSAFE_DatePicker {...datepickerProps}>
+        <UNSAFE_DatePicker.Input
+          id={field.name}
+          {...inputProps}
+          label={label}
+          placeholder="DD.MM.ÅÅÅÅ"
+          error={fieldState.error?.message}
+        />
+      </UNSAFE_DatePicker>
+    </div>
   );
 };
 

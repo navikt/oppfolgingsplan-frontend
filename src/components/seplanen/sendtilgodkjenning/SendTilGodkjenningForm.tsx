@@ -17,6 +17,7 @@ import { notNullish } from "../../../server/utils/tsUtils";
 import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import Datepicker from "../../blocks/datepicker/Datepicker";
 import { toDate } from "../../../utils/dateUtils";
+import { formatISO } from "date-fns";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -77,9 +78,9 @@ export const SendTilGodkjenningForm = ({
         onSubmit={handleSubmit((data: SendTilGodkjenningFormValues) =>
           sendTilGodkjenning.mutate({
             gyldighetstidspunkt: {
-              fom: data.startDato.toJSON(),
-              tom: data.sluttDato.toJSON(),
-              evalueres: data.evalueresInnen.toJSON(),
+              fom: formatISO(data.startDato),
+              tom: formatISO(data.sluttDato),
+              evalueres: formatISO(data.evalueresInnen),
             },
             tvungenGodkjenning: tvungenGodkjenning,
             delmednav: data.delMedNAV === "true",
