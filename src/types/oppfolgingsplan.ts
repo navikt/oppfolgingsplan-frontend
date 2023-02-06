@@ -37,13 +37,11 @@ type Evaluering = {
 };
 
 export type Stilling = {
-  virksomhetsnummer: string;
   yrke: string;
   prosent: number;
-  fom: string;
 };
 
-type Person = {
+export type Person = {
   navn: string;
   fnr: string;
   epost?: string | null;
@@ -51,13 +49,7 @@ type Person = {
   sistInnlogget?: string | null;
   samtykke?: boolean | null;
   evaluering?: Evaluering | null;
-  stillinger: {
-    virksomhetsnummer: string;
-    yrke: string;
-    prosent: number;
-    fom: string;
-    tom: string;
-  }[];
+  stillinger: Stilling[];
 };
 
 export type Godkjenning = {
@@ -131,10 +123,6 @@ type Arbeidsgiver = {
   naermesteLeder?: NarmesteLeder;
 };
 
-export type Arbeidstaker = Omit<Person, "stillinger"> & {
-  stillinger: Stilling[];
-};
-
 export type Oppfolgingsplan = {
   id: number;
   sistEndretDato: string;
@@ -147,7 +135,7 @@ export type Oppfolgingsplan = {
   tiltakListe: Tiltak[];
   avbruttPlanListe: Avbruttplan[];
   arbeidsgiver: Arbeidsgiver;
-  arbeidstaker: Arbeidstaker;
+  arbeidstaker: Person;
   sistEndretAv: Person;
   skalHaVarsel: boolean;
 };

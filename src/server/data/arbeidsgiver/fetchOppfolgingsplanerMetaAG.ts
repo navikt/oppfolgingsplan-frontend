@@ -10,7 +10,6 @@ import {
   getOppfolgingsplanerAG,
 } from "../../service/oppfolgingsplanService";
 import { fetchVirksomhet } from "../common/fetchVirksomhet";
-import { fetchArbeidsforhold } from "../common/fetchArbeidsforhold";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
 import { fetchNaermesteLederForVirksomhet } from "./fetchNaermesteLederForVirksomhet";
@@ -32,7 +31,6 @@ export const fetchOppfolgingsplanerMetaAG = async (
       oppfolgingsplaner: activeMock.oppfolgingsplaner,
       virksomhet: activeMock.virksomhet,
       kontaktinfo: activeMock.kontaktinfo,
-      stillinger: activeMock.stillinger,
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
@@ -73,21 +71,16 @@ export const fetchOppfolgingsplanerMetaAG = async (
         syfoOppfolgingsplanServiceTokenX,
         validOppfolgingsplaner
       );
-      const arbeidsforholdPromise = fetchArbeidsforhold(
-        syfoOppfolgingsplanServiceTokenX,
-        validOppfolgingsplaner
-      );
       const narmesteLederPromise = fetchNaermesteLederForVirksomhet(
         syfoOppfolgingsplanServiceTokenX,
         validOppfolgingsplaner
       );
 
-      const [virksomhet, person, kontaktinfo, arbeidsforhold, narmesteLeder] =
+      const [virksomhet, person, kontaktinfo, narmesteLeder] =
         await Promise.all([
           virksomhetPromise,
           personPromise,
           kontaktinfoPromise,
-          arbeidsforholdPromise,
           narmesteLederPromise,
         ]);
 
@@ -96,7 +89,6 @@ export const fetchOppfolgingsplanerMetaAG = async (
         oppfolgingsplaner: validOppfolgingsplaner,
         virksomhet: virksomhet,
         kontaktinfo: kontaktinfo,
-        stillinger: arbeidsforhold,
         narmesteLedere: [narmesteLeder],
       };
     }

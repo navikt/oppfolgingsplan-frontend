@@ -424,11 +424,8 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       evaluering: null,
       stillinger: [
         {
-          virksomhetsnummer: "110110110",
           yrke: "Soppkontrollør",
           prosent: 80,
-          fom: "2000-02-11T15:34:53.787",
-          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -853,11 +850,8 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       evaluering: null,
       stillinger: [
         {
-          virksomhetsnummer: "110110110",
           yrke: "Soppkontrollør",
           prosent: 80,
-          fom: "2000-02-11T15:34:53.787",
-          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -1302,11 +1296,8 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       evaluering: null,
       stillinger: [
         {
-          virksomhetsnummer: "110110110",
           yrke: "Soppkontrollør",
           prosent: 80,
-          fom: "2000-02-11T15:34:53.787",
-          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -1490,11 +1481,8 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
       stillinger: [
         {
-          virksomhetsnummer: "110110110",
           yrke: "Soppkontrollør",
           prosent: 80,
-          fom: "2000-02-11T15:34:53.787",
-          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },
@@ -1898,11 +1886,8 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
       stillinger: [
         {
-          virksomhetsnummer: "110110110",
           yrke: "Soppkontrollør",
           prosent: 80,
-          fom: "2000-02-11T15:34:53.787",
-          tom: "2022-02-11T15:34:53.787",
         },
       ],
     },

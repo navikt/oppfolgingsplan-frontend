@@ -64,11 +64,7 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
   const sykmeldt = useDineSykmeldte()?.data;
 
   const stilling: Stilling | undefined =
-    aktivPlan &&
-    aktivPlan.arbeidstaker.stillinger?.find(
-      (stilling) =>
-        stilling.virksomhetsnummer === aktivPlan?.virksomhet?.virksomhetsnummer
-    );
+    aktivPlan && aktivPlan.arbeidstaker.stillinger[0];
 
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&

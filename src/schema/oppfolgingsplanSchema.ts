@@ -23,11 +23,8 @@ export const evalueringSchema = object({
 });
 
 export const stillingSchema = object({
-  virksomhetsnummer: string(),
   yrke: string(),
   prosent: number(),
-  fom: string(),
-  tom: string(),
 });
 
 export const personSchema = object({
