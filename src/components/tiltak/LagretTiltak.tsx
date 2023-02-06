@@ -87,22 +87,17 @@ export const LagretTiltak = ({
 
   const tiltakId = tiltak.tiltakId;
 
-  const manglerVurderingFraLeder =
-    tiltak &&
-    !tiltak.gjennomfoering &&
-    !tiltak.beskrivelseIkkeAktuelt &&
-    arbeidstakerFnr === tiltak.opprettetAv?.fnr &&
-    tiltak.sistEndretAv.fnr === arbeidstakerFnr;
-
-  const kanSletteTiltak = () => {
+  function isTiltakCreatedByInnloggetRole() {
     if (isAudienceSykmeldt) {
-      return arbeidstakerFnr === tiltak.opprettetAv?.fnr;
-    } else {
-      return (
-        !manglerVurderingFraLeder && innloggetFnr === tiltak.opprettetAv?.fnr
-      );
+      return innloggetFnr === tiltak.opprettetAv.fnr;
     }
-  };
+
+    return arbeidstakerFnr !== tiltak.opprettetAv.fnr;
+  }
+
+  function isVudert() {
+    return !!tiltak.gjennomfoering || !!tiltak.beskrivelseIkkeAktuelt;
+  }
 
   return (
     <SpacedPanel border={true}>
@@ -129,7 +124,7 @@ export const LagretTiltak = ({
         </>
       )}
 
-      {!readonly && isAudienceSykmeldt && manglerVurderingFraLeder && (
+      {!readonly && isAudienceSykmeldt && !isVudert() && (
         <SpacedAlert variant={"warning"}>
           Dette tiltaket mangler vurdering fra lederen din
         </SpacedAlert>
@@ -183,28 +178,29 @@ export const LagretTiltak = ({
             />
           )}
 
-          {!displayNyKommentar && !editererTiltak && (
+          {!displayNyKommentar && !editererTiltak && !vurdererTiltak && (
             <Row marginTop={"2rem"}>
-              {!readonly && !manglerVurderingFraLeder && (
-                <Button
-                  variant={"tertiary"}
-                  icon={<Edit aria-hidden />}
-                  onClick={() => setEditererTiltak(true)}
-                >
-                  Endre
-                </Button>
-              )}
-
-              {!readonly && kanSletteTiltak() && (
-                <SlettTiltakButton tiltakId={tiltak.tiltakId} />
-              )}
+              {!readonly &&
+                isTiltakCreatedByInnloggetRole() &&
+                (!isAudienceSykmeldt || !isVudert()) && (
+                  <Button
+                    variant={"tertiary"}
+                    icon={<Edit aria-hidden />}
+                    onClick={() => setEditererTiltak(true)}
+                  >
+                    Endre
+                  </Button>
+                )}
 
               <VurderButton
                 show={
-                  !readonly && !isAudienceSykmeldt && manglerVurderingFraLeder
+                  !readonly &&
+                  !isAudienceSykmeldt &&
+                  (!isVudert() ||
+                    (!isTiltakCreatedByInnloggetRole() && isVudert()))
                 }
                 onClick={() => setVurdererTiltak(true)}
-                text="Gi din vurdering"
+                text={isVudert() ? "Endre vurdering" : "Gi din vurdering"}
               />
 
               <Button
@@ -214,6 +210,10 @@ export const LagretTiltak = ({
               >
                 Kommenter
               </Button>
+
+              {!readonly && isTiltakCreatedByInnloggetRole() && (
+                <SlettTiltakButton tiltakId={tiltak.tiltakId} />
+              )}
             </Row>
           )}
         </>

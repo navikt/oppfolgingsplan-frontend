@@ -1,5 +1,6 @@
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
+import { defaultPersonMockData } from "../../defaultData/oppfolgingsplanservice/defaultPersonMockData";
 
 export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
   {
@@ -150,6 +151,40 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
     ],
     tiltakListe: [
+      {
+        tiltakId: 4852,
+        tiltaknavn: "Starte etter lunsj",
+        knyttetTilArbeidsoppgaveId: null,
+        fom: "2021-04-15",
+        tom: "2022-07-26",
+        beskrivelse: "Ta det rolig om morningen",
+        beskrivelseIkkeAktuelt: null,
+        opprettetDato: "2020-02-20T11:31:30.338",
+        sistEndretDato: "2020-02-20T11:31:30.338",
+        kommentarer: [],
+        status: "AVTALT",
+        gjennomfoering: "Lets gooo :)",
+        opprettetAv: {
+          navn: defaultPersonMockData.navn,
+          fnr: defaultPersonMockData.fnr,
+          epost: null,
+          tlf: null,
+          sistInnlogget: null,
+          samtykke: null,
+          evaluering: null,
+          stillinger: [],
+        },
+        sistEndretAv: {
+          navn: defaultPersonMockData.navn,
+          fnr: defaultPersonMockData.fnr,
+          epost: null,
+          tlf: null,
+          sistInnlogget: null,
+          samtykke: null,
+          evaluering: null,
+          stillinger: [],
+        },
+      },
       {
         tiltakId: 4852,
         tiltaknavn: "Hjemmekontor ",

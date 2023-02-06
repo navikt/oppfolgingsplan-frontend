@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { Row } from "components/blocks/wrappers/Row";
+import { useAudience } from "../../hooks/routeHooks";
 
 const SpacedTextarea = styled(Textarea)`
   padding-bottom: 2rem;
@@ -30,6 +31,7 @@ export const NyKommentar = ({
     handleSubmit,
     formState: { errors },
   } = useForm<KommentarFormValues>();
+  const { isAudienceSykmeldt } = useAudience();
 
   const kommentar = watch("kommentar");
 
@@ -37,9 +39,11 @@ export const NyKommentar = ({
     <form onSubmit={handleSubmit(() => lagre(kommentar))}>
       <LightGreyPanel border={true}>
         <BodyLong spacing>
-          Kommentarer er laget for å hjelpe deg og arbeidsgiveren din med å
+          {`Kommentarer er laget for å hjelpe deg og ${
+            isAudienceSykmeldt ? "arbeidsgiveren" : "arbeidstakeren"
+          } din med å
           utarbeide en god plan sammen. Kommentarene vil derfor ikke vises i den
-          ferdige oppfølgingsplanen dere kan dele med fastlegen eller NAV.
+          ferdige oppfølgingsplanen dere kan dele med fastlegen eller NAV.`}
         </BodyLong>
 
         <SpacedTextarea
