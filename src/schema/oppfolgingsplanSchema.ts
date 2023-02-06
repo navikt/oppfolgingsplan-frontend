@@ -49,7 +49,7 @@ export const kommentarSchema = object({
 
 export const avbruttplanSchema = object({
   tidspunkt: string(),
-  id: number().nullish(),
+  id: number(),
 });
 
 export const godkjentPlanSchema = object({

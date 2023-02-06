@@ -95,3 +95,9 @@ export const useNarmesteLederId = (): string | undefined => {
   const { narmestelederid } = router.query as NarmesteLederIdParam;
   return narmestelederid;
 };
+
+export function usePdfApiUrl(oppfolgingsplanId: number) {
+  const OppfolgingsplanApiUrl = useOppfolgingsplanApiPath();
+
+  return `${OppfolgingsplanApiUrl}/${oppfolgingsplanId}/pdf`;
+}

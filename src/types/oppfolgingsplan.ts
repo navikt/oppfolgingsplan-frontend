@@ -11,7 +11,7 @@ export type Gyldighetstidspunkt = {
 
 export type Avbruttplan = {
   tidspunkt: string;
-  id?: number | null;
+  id: number;
 };
 
 export type GodkjentPlan = {
