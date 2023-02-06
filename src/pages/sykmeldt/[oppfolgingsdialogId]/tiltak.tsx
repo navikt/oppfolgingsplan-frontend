@@ -13,6 +13,7 @@ import { STATUS_TILTAK } from "../../../constants/konstanter";
 import { useLagreTiltak } from "../../../api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormValues } from "../../../components/tiltak/utils/typer";
 import { Tiltak } from "../../../types/oppfolgingsplan";
+import { formatAsLocalDateTime } from "../../../utils/dateUtils";
 
 const formHeadingTexts = {
   title: "Hva kan gjøre det lettere å jobbe?",
@@ -27,8 +28,8 @@ const Tiltak: NextPage = () => {
     return {
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,
-      fom: data.fom?.toJSON(),
-      tom: data.tom?.toJSON(),
+      fom: data.fom ? formatAsLocalDateTime(data.fom) : null,
+      tom: data.tom ? formatAsLocalDateTime(data.tom) : null,
       status: data.status,
       beskrivelseIkkeAktuelt: data.beskrivelseIkkeAktuelt,
       gjennomfoering: data.gjennomfoering,
@@ -48,6 +49,7 @@ const Tiltak: NextPage = () => {
             <TiltakFormSM
               isSubmitting={lagreTiltak.isLoading}
               onSubmit={(data) => {
+                console.log(data);
                 data.status = STATUS_TILTAK.FORSLAG;
                 lagreTiltak
                   .mutateAsync(nyttTiltakInformasjon(data))

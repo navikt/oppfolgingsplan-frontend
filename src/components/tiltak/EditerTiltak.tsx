@@ -5,6 +5,7 @@ import { useAudience } from "../../hooks/routeHooks";
 import { TiltakFormAG } from "./TiltakFormAG";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { TiltakFormValues } from "./utils/typer";
+import { formatAsLocalDateTime } from "../../utils/dateUtils";
 
 interface Props {
   tiltak: Tiltak;
@@ -21,8 +22,8 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
       ...tiltak,
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,
-      fom: data.fom?.toJSON() ?? null,
-      tom: data.tom?.toJSON() ?? null,
+      fom: data.fom ? formatAsLocalDateTime(data.fom) : null,
+      tom: data.tom ? formatAsLocalDateTime(data.tom) : null,
       status: data.status,
       gjennomfoering: data.gjennomfoering,
       beskrivelseIkkeAktuelt: data.beskrivelseIkkeAktuelt,
@@ -37,7 +38,9 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
         fom: tiltak.fom ? new Date(tiltak.fom) : null,
         tom: tiltak.tom ? new Date(tiltak.tom) : null,
         status: tiltak.status,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         gjennomfoering: tiltak.gjennomfoering!,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         beskrivelseIkkeAktuelt: tiltak.beskrivelseIkkeAktuelt!,
       };
     }

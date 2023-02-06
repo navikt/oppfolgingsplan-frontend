@@ -9,13 +9,14 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { Row } from "components/blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
 import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import Datepicker from "../../blocks/datepicker/Datepicker";
+import { formatAsLocalDateTime, toDate } from "../../../utils/dateUtils";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -70,41 +71,15 @@ export const SendTilGodkjenningForm = ({
 
   const startDate = watch("startDato");
 
-  const isAfterStartDate = (date: Date) => {
-    if (!startDate) return true;
-
-    return date.getTime() > new Date(startDate).getTime();
-  };
-
-  const getSluttDatoErrorMessage = (): string | undefined => {
-    if (errors.sluttDato?.message) {
-      return errors.sluttDato?.message;
-    }
-
-    if (errors.sluttDato?.type === "validate") {
-      return "Sluttdato må være etter startdato";
-    }
-  };
-
-  const getEvalueresInnenErrorMessage = (): string | undefined => {
-    if (errors.evalueresInnen?.message) {
-      return errors.evalueresInnen?.message;
-    }
-
-    if (errors.evalueresInnen?.type === "validate") {
-      return "Evalueringsdato må være etter startdato";
-    }
-  };
-
   return (
     <FormProvider {...formFunctions}>
       <form
         onSubmit={handleSubmit((data: SendTilGodkjenningFormValues) =>
           sendTilGodkjenning.mutate({
             gyldighetstidspunkt: {
-              fom: data.startDato.toJSON(),
-              tom: data.sluttDato.toJSON(),
-              evalueres: data.evalueresInnen.toJSON(),
+              fom: formatAsLocalDateTime(data.startDato),
+              tom: formatAsLocalDateTime(data.sluttDato),
+              evalueres: formatAsLocalDateTime(data.evalueresInnen),
             },
             tvungenGodkjenning: tvungenGodkjenning,
             delmednav: data.delMedNAV === "true",
@@ -125,35 +100,48 @@ export const SendTilGodkjenningForm = ({
           Vi har foreslått datoer basert på tiltakene dere har skrevet:
         </BodyLong>
 
-        <Row gap={"0"}>
-          <DatoVelger
+        <Row gap={"2rem"} marginBottom={"2rem"}>
+          <Datepicker
             name="startDato"
-            label={"Startdato (obligatorisk)"}
+            label="Startdato (obligatorisk)"
             defaultValue={
               suggestedStartDate ? new Date(suggestedStartDate) : null
             }
-            errorMessageToDisplay={errors.startDato?.message}
-            requiredErrorMessage={"Du må velge startdato"}
+            validate={(value: Date | undefined) => {
+              if (!value) {
+                return "Du må velge startdato";
+              }
+            }}
           />
 
-          <DatoVelger
+          <Datepicker
             name="sluttDato"
             label={"Sluttdato (obligatorisk)"}
             defaultValue={suggestedEndDate ? new Date(suggestedEndDate) : null}
-            errorMessageToDisplay={getSluttDatoErrorMessage()}
-            requiredErrorMessage={"Du må velge sluttdato"}
-            validate={isAfterStartDate}
+            validate={(value: Date | undefined) => {
+              if (!value) {
+                return "Du må velge sluttdato";
+              }
+
+              if (startDate && value.getTime() < toDate(startDate).getTime()) {
+                return "Sluttdato må være etter startdato";
+              }
+            }}
           />
         </Row>
 
-        <DatoVelger
+        <Datepicker
           name="evalueresInnen"
           label={"Evalueres innen (obligatorisk)"}
-          errorMessageToDisplay={getEvalueresInnenErrorMessage()}
-          requiredErrorMessage={
-            "Du må velge frist for når planen skal evalueres"
-          }
-          validate={isAfterStartDate}
+          validate={(value: Date | undefined) => {
+            if (!value) {
+              return "Du må velge frist for når planen skal evalueres";
+            }
+
+            if (startDate && value.getTime() < toDate(startDate).getTime()) {
+              return "Evalueringsdato må være etter startdato";
+            }
+          }}
         />
 
         <Line />
