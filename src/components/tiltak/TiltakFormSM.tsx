@@ -4,9 +4,9 @@ import { FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
-import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
 import { TiltakFormValues } from "./utils/typer";
+import { TiltakStartSluttDato } from "./TiltakStartSluttDato";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -14,12 +14,6 @@ const OverskriftTextField = styled(TextField)`
 
 const OverskriftTextarea = styled(Textarea)`
   margin-bottom: 2rem;
-`;
-
-const DateRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
 `;
 
 const SpacedAlert = styled(Alert)`
@@ -62,22 +56,6 @@ export const TiltakFormSM = ({
 
   const startDate = watch("fom");
 
-  const isAfterStartDate = (date: Date) => {
-    if (!startDate) return true;
-
-    return date.getTime() > new Date(startDate).getTime();
-  };
-
-  const getSluttDatoErrorMessage = (): string | undefined => {
-    if (errors.tom?.message) {
-      return errors.tom?.message;
-    }
-
-    if (errors.tom?.type === "validate") {
-      return "Sluttdato må være etter startdato";
-    }
-  };
-
   return (
     <FormProvider {...formFunctions}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -114,24 +92,11 @@ export const TiltakFormSM = ({
 
           <SpacedAlert variant={"info"}>{arbeidstakerInfoText}</SpacedAlert>
 
-          <DateRow>
-            <DatoVelger
-              name="fom"
-              label={"Startdato (obligatorisk)"}
-              defaultValue={defaultFormValues?.fom}
-              errorMessageToDisplay={errors.fom?.message}
-              requiredErrorMessage={"Du må velge startdato"}
-            />
-
-            <DatoVelger
-              name="tom"
-              label={"Sluttdato (obligatorisk)"}
-              defaultValue={defaultFormValues?.tom}
-              requiredErrorMessage={"Du må velge sluttdato"}
-              errorMessageToDisplay={getSluttDatoErrorMessage()}
-              validate={isAfterStartDate}
-            />
-          </DateRow>
+          <TiltakStartSluttDato
+            startDate={startDate}
+            defaultValueFom={defaultFormValues?.fom}
+            defaultValueTom={defaultFormValues?.tom}
+          />
 
           <Row>
             <Button

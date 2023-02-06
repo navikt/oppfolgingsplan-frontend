@@ -11,16 +11,10 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
 import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
-import { DatoVelger } from "components/blocks/datovelger/DatoVelger";
 import { Row } from "../blocks/wrappers/Row";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { TiltakFormValues } from "./utils/typer";
-
-const DateRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-`;
+import { TiltakStartSluttDato } from "./TiltakStartSluttDato";
 
 const StyledTextarea = styled(Textarea)`
   margin-bottom: 2rem;
@@ -57,6 +51,7 @@ export const VurderTiltakForm = ({
   } = formFunctions;
 
   const statusValue = watch("status");
+  const startDate = watch("fom");
 
   const hasSelectedIkkeAktuelt = () => {
     if (!statusValue) {
@@ -142,23 +137,11 @@ export const VurderTiltakForm = ({
           )}
 
           {!hasSelectedIkkeAktuelt() && (
-            <DateRow>
-              <DatoVelger
-                name="fom"
-                label={"Startdato (obligatorisk)"}
-                defaultValue={defaultFormValues?.fom}
-                errorMessageToDisplay={errors.fom?.message}
-                requiredErrorMessage={"Du må velge startdato"}
-              />
-
-              <DatoVelger
-                name="tom"
-                label={"Sluttdato (obligatorisk)"}
-                defaultValue={defaultFormValues?.tom}
-                errorMessageToDisplay={errors.tom?.message}
-                requiredErrorMessage={"Du må velge sluttdato"}
-              />
-            </DateRow>
+            <TiltakStartSluttDato
+              startDate={startDate}
+              defaultValueFom={defaultFormValues?.fom}
+              defaultValueTom={defaultFormValues?.tom}
+            />
           )}
 
           <Row>
