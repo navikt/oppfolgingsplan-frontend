@@ -180,8 +180,7 @@ export const LagretTiltak = ({
 
           {!displayNyKommentar && !editererTiltak && !vurdererTiltak && (
             <Row marginTop={"2rem"}>
-              {!readonly &&
-                isTiltakCreatedByInnloggetRole() &&
+              {isTiltakCreatedByInnloggetRole() &&
                 (!isAudienceSykmeldt || !isVudert()) && (
                   <Button
                     variant={"tertiary"}
@@ -193,12 +192,7 @@ export const LagretTiltak = ({
                 )}
 
               <VurderButton
-                show={
-                  !readonly &&
-                  !isAudienceSykmeldt &&
-                  (!isVudert() ||
-                    (!isTiltakCreatedByInnloggetRole() && isVudert()))
-                }
+                show={!isAudienceSykmeldt && !isTiltakCreatedByInnloggetRole()}
                 onClick={() => setVurdererTiltak(true)}
                 text={isVudert() ? "Endre vurdering" : "Gi din vurdering"}
               />
@@ -211,7 +205,7 @@ export const LagretTiltak = ({
                 Kommenter
               </Button>
 
-              {!readonly && isTiltakCreatedByInnloggetRole() && (
+              {isTiltakCreatedByInnloggetRole() && (
                 <SlettTiltakButton tiltakId={tiltak.tiltakId} />
               )}
             </Row>
