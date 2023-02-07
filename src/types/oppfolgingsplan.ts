@@ -9,9 +9,9 @@ export type Gyldighetstidspunkt = {
   evalueres?: string | null;
 };
 
-export type Avbruttplan = {
+export type GodkjentAvbruttplan = {
   tidspunkt: string;
-  id: number;
+  id?: number | null;
 };
 
 export type GodkjentPlan = {
@@ -23,7 +23,7 @@ export type GodkjentPlan = {
   deltMedFastlegeTidspunkt?: string | null;
   deltMedFastlege: boolean;
   dokumentUuid: string;
-  avbruttPlan: Avbruttplan | null;
+  avbruttPlan: GodkjentAvbruttplan | null;
 };
 
 type Evaluering = {
@@ -121,6 +121,11 @@ export type NarmesteLeder = {
 };
 type Arbeidsgiver = {
   naermesteLeder?: NarmesteLeder;
+};
+
+export type Avbruttplan = {
+  tidspunkt: string;
+  id: number;
 };
 
 export type Oppfolgingsplan = {

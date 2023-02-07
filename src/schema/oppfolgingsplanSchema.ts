@@ -47,9 +47,9 @@ export const kommentarSchema = object({
   sistEndretAv: personSchema,
 });
 
-export const avbruttplanSchema = object({
+export const godkjentAvbruttplanSchema = object({
   tidspunkt: string(),
-  id: number(),
+  id: number().nullish(),
 });
 
 export const godkjentPlanSchema = object({
@@ -61,7 +61,7 @@ export const godkjentPlanSchema = object({
   deltMedFastlegeTidspunkt: string().nullish(),
   deltMedFastlege: boolean(),
   dokumentUuid: string(),
-  avbruttPlan: avbruttplanSchema.nullable(),
+  avbruttPlan: godkjentAvbruttplanSchema.nullable(),
 });
 
 export const godkjenningSchema = object({
@@ -112,6 +112,11 @@ export const arbeidsoppgaveSchema = object({
 
 export const arbeidsgiverSchema = object({
   narmesteLeder: narmesteLederSchema,
+});
+
+export const avbruttplanSchema = object({
+  tidspunkt: string(),
+  id: number(),
 });
 
 export const oppfolgingsplanSchema = object({
