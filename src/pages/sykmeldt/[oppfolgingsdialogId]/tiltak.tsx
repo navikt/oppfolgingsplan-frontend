@@ -49,7 +49,6 @@ const Tiltak: NextPage = () => {
             <TiltakFormSM
               isSubmitting={lagreTiltak.isLoading}
               onSubmit={(data) => {
-                console.log(data);
                 data.status = STATUS_TILTAK.FORSLAG;
                 lagreTiltak
                   .mutateAsync(nyttTiltakInformasjon(data))
