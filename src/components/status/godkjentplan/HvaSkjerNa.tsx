@@ -9,8 +9,9 @@ export const HvaSkjerNa = () => {
           Hva skjer nå?
         </Heading>
         <BodyShort spacing>
-          Innen fire uker skal fastlegen få se planen. Dere kan dele den med
-          både legen og NAV når dere er blitt enige.
+          Innen 4 uker av sykefraværet skal oppfølgingsplanen deles med
+          fastlegen. Dere kan dele den med både legen og NAV når dere er blitt
+          enige.
         </BodyShort>
         <BodyShort spacing>
           OBS: NAV kan ikke se planen før dere har delt den.
