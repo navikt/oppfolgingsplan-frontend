@@ -1,9 +1,20 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## SM Url: 
+## SM Url:
+
 http://localhost:3000/syk/oppfolgingsplaner/sykmeldt
-## AG Url: 
+
+## AG Url:
+
 http://localhost:3000/syk/oppfolgingsplaner/arbeidsgiver/123
+
+### Installing dependencies
+
+This project uses modules from GitHub Package Repository and requires a PAT token in order to install the dependencies.
+
+Go to [https://github.com/settings/tokens](https://github.com/settings/tokens) and create a PAT token with the `package:read` permission.
+
+Export an environment variable named `NPM_AUTH_TOKEN` using `export NPM_AUTH_TOKEN=<PAT>`.
 
 ## Getting Started
 
@@ -31,9 +42,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
