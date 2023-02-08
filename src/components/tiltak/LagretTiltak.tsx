@@ -95,7 +95,7 @@ export const LagretTiltak = ({
     return arbeidstakerFnr !== tiltak.opprettetAv.fnr;
   }
 
-  function isVudert() {
+  function isVurdert() {
     return !!tiltak.gjennomfoering || !!tiltak.beskrivelseIkkeAktuelt;
   }
 
@@ -124,7 +124,7 @@ export const LagretTiltak = ({
         </>
       )}
 
-      {!readonly && isAudienceSykmeldt && !isVudert() && (
+      {!readonly && isAudienceSykmeldt && !isVurdert() && (
         <SpacedAlert variant={"warning"}>
           Dette tiltaket mangler vurdering fra lederen din
         </SpacedAlert>
@@ -181,7 +181,7 @@ export const LagretTiltak = ({
           {!displayNyKommentar && !editererTiltak && !vurdererTiltak && (
             <Row marginTop={"2rem"}>
               {isTiltakCreatedByInnloggetRole() &&
-                (!isAudienceSykmeldt || !isVudert()) && (
+                (!isAudienceSykmeldt || !isVurdert()) && (
                   <Button
                     variant={"tertiary"}
                     icon={<Edit aria-hidden />}
@@ -194,7 +194,7 @@ export const LagretTiltak = ({
               <VurderButton
                 show={!isAudienceSykmeldt && !isTiltakCreatedByInnloggetRole()}
                 onClick={() => setVurdererTiltak(true)}
-                text={isVudert() ? "Endre vurdering" : "Gi din vurdering"}
+                text={isVurdert() ? "Endre vurdering" : "Gi din vurdering"}
               />
 
               <Button
