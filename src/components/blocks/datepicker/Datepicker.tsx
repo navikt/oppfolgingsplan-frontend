@@ -7,8 +7,7 @@ export interface Props {
   name: string;
   label?: string | ReactNode;
   defaultValue?: Date | null;
-  // eslint-disable-next-line
-  validate?: Validate<any> | Record<string, Validate<any>>;
+  validate?: Validate<Date> | Record<string, Validate<Date>>;
 }
 
 const Datepicker = ({ name, label, defaultValue, validate }: Props) => {
