@@ -1,4 +1,4 @@
-import { useOppfolgingsplanApiPath } from "hooks/routeHooks";
+import { usePdfApiUrl } from "hooks/routeHooks";
 import { FileContent } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
 
@@ -7,14 +7,11 @@ interface Props {
 }
 
 export const AapnePlanSomPDF = ({ oppfolgingsplanId }: Props) => {
-  const apiBasePath = useOppfolgingsplanApiPath();
-  const downloadPdfUrl = `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/pdf`;
+  const pdfUrl = usePdfApiUrl(oppfolgingsplanId);
 
   return (
     <Button
-      onClick={() =>
-        window.open(downloadPdfUrl, "_blank", "noopener,noreferrer")
-      }
+      onClick={() => window.open(pdfUrl, "_blank", "noopener,noreferrer")}
       icon={<FileContent aria-hidden />}
       variant="tertiary"
     >
