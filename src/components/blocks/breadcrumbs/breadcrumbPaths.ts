@@ -34,26 +34,6 @@ export function oppfolgingsplanBreadcrumbSM() {
   ];
 }
 
-export function moteinnkallingBreadcrumbSM() {
-  return [
-    ...landingBreadcrumbSM(),
-    {
-      url: `${basePath}/sykmeldt`, //url-field is not in use but the api requires a non-empty string
-      title: "Moteinnkalling",
-    },
-  ];
-}
-
-export function motebehovBreadcrumbSM() {
-  return [
-    ...landingBreadcrumbSM(),
-    {
-      url: `${basePath}/sykmeldt`, //url-field is not in use but the api requires a non-empty string
-      title: "Meld behov",
-    },
-  ];
-}
-
 // Breadcrumbs for arbeidsgiver
 export function dineSykemeldteBreadcrumbAG(
   sykmeldtName: string,
@@ -86,7 +66,7 @@ export function landingBreadcrumbAG(
   ];
 }
 
-export function referatBreadcrumbAG(
+export function oppfolgingsplanBreadcrumbAG(
   sykmeldtName: string,
   narmestelederId: string
 ) {
@@ -94,33 +74,7 @@ export function referatBreadcrumbAG(
     ...landingBreadcrumbAG(sykmeldtName, narmestelederId),
     {
       url: `${basePath}/arbeidsgiver/${narmestelederId}`, //url-field is not in use but the api requires a non-empty string
-      title: "Referat",
-    },
-  ];
-}
-
-export function moteinnkallingBreadcrumbAG(
-  sykmeldtName: string,
-  narmestelederId: string
-) {
-  return [
-    ...landingBreadcrumbAG(sykmeldtName, narmestelederId),
-    {
-      url: `${basePath}/arbeidsgiver/${narmestelederId}`, //url-field is not in use but the api requires a non-empty string
-      title: "Møteinnkalling",
-    },
-  ];
-}
-
-export function motebehovBreadcrumbAG(
-  sykmeldtName: string,
-  narmestelederId: string
-) {
-  return [
-    ...landingBreadcrumbAG(sykmeldtName, narmestelederId),
-    {
-      url: `${basePath}/arbeidsgiver/${narmestelederId}`, //url-field is not in use but the api requires a non-empty string
-      title: "Meld behov",
+      title: "Oppfølgingsplan",
     },
   ];
 }
