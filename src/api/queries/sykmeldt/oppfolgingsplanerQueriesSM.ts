@@ -1,5 +1,9 @@
 import { get, post } from "api/axios/axios";
-import { useApiBasePath, useOppfolgingsplanRouteId } from "hooks/routeHooks";
+import {
+  useApiBasePath,
+  useLandingUrl,
+  useOppfolgingsplanRouteId,
+} from "hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
@@ -7,6 +11,7 @@ import { ApiErrorException } from "../../axios/errors";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
+import { useRouter } from "next/router";
 
 export const useOppfolgingsplanerSM = () => {
   const apiBasePath = useApiBasePath();
@@ -59,6 +64,8 @@ export const useOpprettOppfolgingsplanSM = () => {
   const apiBasePath = useApiBasePath();
   const queryClient = useQueryClient();
   const sykmeldtFnr = useSykmeldtFnr();
+  const landingPage = useLandingUrl();
+  const router = useRouter();
 
   const opprettOppfolgingsplan = async (virksomhetsnummer: string) => {
     if (!sykmeldtFnr) return;
@@ -68,8 +75,13 @@ export const useOpprettOppfolgingsplanSM = () => {
       virksomhetsnummer: virksomhetsnummer,
     };
 
-    await post(`${apiBasePath}/oppfolgingsplaner/opprett`, data);
+    const oppfolgingsplanId = await post<number>(
+      `${apiBasePath}/oppfolgingsplaner/opprett`,
+      data
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
+    await router.push(arbeidsOppgaverPage);
   };
 
   return useMutation(opprettOppfolgingsplan);
