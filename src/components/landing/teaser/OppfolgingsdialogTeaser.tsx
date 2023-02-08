@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  inneholderGodkjenninger,
-  inneholderGodkjenningerAvArbeidstaker,
-} from "utils/oppfolgingplanUtils";
+import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
 import { hentPlanStatus } from "utils/teaserUtils";
 import { useAudience, useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
@@ -49,9 +46,7 @@ const OppfolgingsdialogTeaser = ({
     : statusPageToDisplayAG(oppfolgingsplan);
 
   const pendingApproval =
-    inneholderGodkjenninger(oppfolgingsplan) &&
-    !inneholderGodkjenningerAvArbeidstaker(oppfolgingsplan) &&
-    !oppfolgingsplan.godkjentPlan;
+    inneholderGodkjenninger(oppfolgingsplan) && !oppfolgingsplan.godkjentPlan;
 
   return (
     <OppfolgingsplanCard
