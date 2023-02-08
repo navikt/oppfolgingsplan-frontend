@@ -55,7 +55,9 @@ const OppfolgingsdialogTeaser = ({
           ? newOppfolgingsplanUrl
           : statusUrl
       }
-      title={virksomhetsnavn}
+      title={
+        isAudienceSykmeldt ? virksomhetsnavn : oppfolgingsplan.arbeidstaker.navn
+      }
       subtitle={pendingApproval ? texts.tilGodkjenning : ""}
       image={planStatus.img}
     >

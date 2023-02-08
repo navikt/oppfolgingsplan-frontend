@@ -1,4 +1,4 @@
-import { useOppfolgingsplanUrl } from "hooks/routeHooks";
+import { useAudience, useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { hentPlanStatus } from "utils/teaserUtils";
 import React from "react";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
@@ -12,6 +12,7 @@ const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsplan }: Props) => {
   const planStatus = hentPlanStatus(oppfolgingsplan);
   const virksomhetsnavn =
     oppfolgingsplan.virksomhet?.navn || "Mangler navn på virksomhet";
+  const { isAudienceSykmeldt } = useAudience();
 
   const oppfolgingsplanUrl = useOppfolgingsplanUrl(
     oppfolgingsplan.id,
@@ -21,7 +22,9 @@ const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsplan }: Props) => {
   return (
     <OppfolgingsplanCard
       href={oppfolgingsplanUrl}
-      title={virksomhetsnavn}
+      title={
+        isAudienceSykmeldt ? virksomhetsnavn : oppfolgingsplan.arbeidstaker.navn
+      }
       description={planStatus.tekst}
       image={planStatus.img}
     />
