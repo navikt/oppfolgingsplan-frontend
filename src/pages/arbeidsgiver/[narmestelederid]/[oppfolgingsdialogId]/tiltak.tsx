@@ -10,6 +10,7 @@ import { useLagreTiltak } from "../../../../api/queries/oppfolgingsplan/tiltakQu
 import { TiltakFormValues } from "../../../../components/tiltak/utils/typer";
 import { Tiltak } from "../../../../types/oppfolgingsplan";
 import { TiltakFormAG } from "../../../../components/tiltak/TiltakFormAG";
+import { formatAsLocalDateTime } from "../../../../utils/dateUtils";
 
 const formHeadingTexts = {
   title: "Hva kan dere gjøre som arbeidsgiver?",
@@ -24,8 +25,8 @@ const Tiltak: NextPage = () => {
     return {
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,
-      fom: data.fom?.toJSON(),
-      tom: data.tom?.toJSON(),
+      fom: data.fom ? formatAsLocalDateTime(data.fom) : null,
+      tom: data.tom ? formatAsLocalDateTime(data.tom) : null,
       status: data.status,
       beskrivelseIkkeAktuelt: data.beskrivelseIkkeAktuelt,
       gjennomfoering: data.gjennomfoering,

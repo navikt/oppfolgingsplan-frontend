@@ -1,4 +1,5 @@
 import { maanedListe } from "../constants/konstanter";
+import { format, parseISO } from "date-fns";
 
 const MILLISEKUNDER_PER_DAG = 86400000;
 
@@ -64,3 +65,11 @@ export function leggTilDagerPaDato(date: Date, days: number) {
   nyDato.setTime(nyDato.getTime() + days * MILLISEKUNDER_PER_DAG);
   return new Date(nyDato);
 }
+
+export function toDate(date: string | Date): Date {
+  return typeof date === "string" ? parseISO(date) : date;
+}
+
+export const formatAsLocalDateTime = (date: Date) => {
+  return format(date, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+};
