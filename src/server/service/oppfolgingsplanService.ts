@@ -212,7 +212,7 @@ export async function createOppfolgingsplanSM(
   accessToken: string,
   opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
 ) {
-  return await post(
+  return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
     opprettOppfolgingsplanData,
     { accessToken }
@@ -223,7 +223,7 @@ export async function createOppfolgingsplanAG(
   accessToken: string,
   opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
 ) {
-  return await post(
+  return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
     opprettOppfolgingsplanData,
     { accessToken }
@@ -234,7 +234,7 @@ export async function kopierOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanIdToCopy: string
 ) {
-  return await post(
+  return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanIdToCopy}/kopier`,
     {},
     { accessToken }

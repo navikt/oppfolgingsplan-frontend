@@ -36,9 +36,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
           <BaserTidligereSkjema
             isLoading={opprettOppfolgingsplan.isLoading}
             onSubmit={(kopierplan) =>
-              opprettOppfolgingsplan
-                .mutateAsync(kopierplan)
-                .then(() => setVisOpprettModal(false))
+              opprettOppfolgingsplan.mutateAsync(kopierplan)
             }
             handleClose={() => setVisOpprettModal(false)}
           />

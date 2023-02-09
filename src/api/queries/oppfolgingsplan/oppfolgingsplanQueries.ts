@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   useApiBasePath,
   useAudience,
+  useLandingUrl,
   useOppfolgingsplanApiPath,
   useOppfolgingsplanUrl,
 } from "hooks/routeHooks";
@@ -15,10 +16,16 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
   const queryClient = useQueryClient();
+  const landingPage = useLandingUrl();
+  const router = useRouter();
 
   const postKopierOppfolgingsplan = async (oppfolgingsplanIdToCopy: number) => {
-    await post(`${apiPath}/${oppfolgingsplanIdToCopy}/kopier`);
+    const oppfolgingsplanId = await post<number>(
+      `${apiPath}/${oppfolgingsplanIdToCopy}/kopier`
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
+    await router.push(arbeidsOppgaverPage);
   };
 
   return useMutation(postKopierOppfolgingsplan);

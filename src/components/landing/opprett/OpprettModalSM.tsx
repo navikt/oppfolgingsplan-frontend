@@ -84,11 +84,7 @@ const OpprettModalSM = ({
                   oppfolgingsplaner={oppfolgingsplaner}
                   isSubmitting={opprettOppfolgingsplan.isLoading}
                   handleSubmit={(virksomhetsnummer: string) => {
-                    opprettOppfolgingsplan
-                      .mutateAsync(virksomhetsnummer)
-                      .then(() => {
-                        setVisOpprettModal(false);
-                      });
+                    opprettOppfolgingsplan.mutateAsync(virksomhetsnummer);
                   }}
                   handleClose={() => setVisOpprettModal(false)}
                 />

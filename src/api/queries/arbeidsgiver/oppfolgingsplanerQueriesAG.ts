@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, post } from "api/axios/axios";
 import {
   useApiBasePath,
+  useLandingUrl,
   useOppfolgingsplanApiPath,
   useOppfolgingsplanRouteId,
 } from "hooks/routeHooks";
@@ -15,6 +16,7 @@ import { ApiErrorException } from "api/axios/errors";
 import { useDineSykmeldte } from "api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
+import { useRouter } from "next/router";
 
 export const useOppfolgingsplanerAG = () => {
   const apiBasePath = useApiBasePath();
@@ -76,11 +78,15 @@ export const useOpprettOppfolgingsplanAG = () => {
   const apiBasePath = useApiBasePath();
   const apiOppfolgingsplanPath = useOppfolgingsplanApiPath();
   const queryClient = useQueryClient();
+  const landingPage = useLandingUrl();
+  const router = useRouter();
 
-  const opprettOppfolgingsplan = async (kopierTidligerePlan: boolean) => {
+  const opprettOppfolgingsplanAG = async (kopierTidligerePlan: boolean) => {
     if (!oppfolgingsplaner.isSuccess || !sykmeldt.isSuccess) {
       return;
     }
+
+    let oppfolgingsplanId;
 
     const opprettOppfoelgingsplan: OpprettOppfoelgingsdialog = {
       sykmeldtFnr: sykmeldt.data.fnr,
@@ -92,25 +98,28 @@ export const useOpprettOppfolgingsplanAG = () => {
         sykmeldt.data.orgnummer
       );
       if (oppfolgingsplan) {
-        await post(`${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`);
+        oppfolgingsplanId = await post(
+          `${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`
+        );
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
-        await post(
+        oppfolgingsplanId = await post(
           `${apiBasePath}/oppfolgingsplaner/opprett`,
           opprettOppfoelgingsplan
         );
       }
     } else {
-      await post(
+      oppfolgingsplanId = await post(
         `${apiBasePath}/oppfolgingsplaner/opprett`,
         opprettOppfoelgingsplan
       );
     }
-
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
+    await router.push(arbeidsOppgaverPage);
   };
 
-  return useMutation(opprettOppfolgingsplan);
+  return useMutation(opprettOppfolgingsplanAG);
 };
 
 export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
