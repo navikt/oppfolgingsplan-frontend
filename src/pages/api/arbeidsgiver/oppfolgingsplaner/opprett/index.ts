@@ -10,7 +10,7 @@ const handler = async (
   res: NextApiResponse
 ): Promise<void> => {
   if (isMockBackend) {
-    res.status(200).json("123");
+    res.status(200).send(123);
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const opprettOppfolgingsplanData: OpprettOppfoelgingsdialog = req.body;
@@ -19,7 +19,7 @@ const handler = async (
       opprettOppfolgingsplanData
     );
 
-    res.status(200).json(id);
+    res.status(200).send(id);
   }
 };
 
