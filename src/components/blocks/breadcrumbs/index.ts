@@ -1,10 +1,8 @@
 import {
-  oppfolgingsplanBreadcrumbSM,
   landingBreadcrumbAG,
   landingBreadcrumbSM,
-  motebehovBreadcrumbAG,
-  moteinnkallingBreadcrumbAG,
-  referatBreadcrumbAG,
+  oppfolgingsplanBreadcrumbAG,
+  oppfolgingsplanBreadcrumbSM,
 } from "./breadcrumbPaths";
 
 export function createBreadcrumbsAG(
@@ -14,18 +12,12 @@ export function createBreadcrumbsAG(
 ) {
   switch (pathname) {
     case "/arbeidsgiver/[narmestelederid]":
+      return landingBreadcrumbAG(sykmeldtName, narmestelederid);
     case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]/arbeidsoppgaver":
     case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]/tiltak":
     case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]/seplanen":
     case "/arbeidsgiver/[narmestelederid]/[oppfolgingsdialogId]":
-      return landingBreadcrumbAG(sykmeldtName, narmestelederid);
-    case "/arbeidsgiver/[narmestelederid]/referat/[brevuuid]":
-      return referatBreadcrumbAG(sykmeldtName, narmestelederid);
-    case "/arbeidsgiver/[narmestelederid]/moteinnkalling":
-      return moteinnkallingBreadcrumbAG(sykmeldtName, narmestelederid);
-    case "/arbeidsgiver/[narmestelederid]/motebehov/meld":
-    case "/arbeidsgiver/[narmestelederid]/motebehov/svar":
-      return motebehovBreadcrumbAG(sykmeldtName, narmestelederid);
+      return oppfolgingsplanBreadcrumbAG(sykmeldtName, narmestelederid);
     default:
       return [];
   }
