@@ -18,7 +18,8 @@ const ContentWrapperStyled = styled.div`
 const InnerContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 50rem;
+  width: 50rem;
+  max-width: 100%;
   flex-grow: 1;
   padding-left: 1rem;
   padding-right: 1rem;
