@@ -8,7 +8,7 @@ interface Props {
 
 export const Row = styled.div<Props>`
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   gap: ${(p) => p.gap || "1rem"};
   margin-top: ${(p) => p.marginTop || 0};
   margin-bottom: ${(p) => p.marginBottom || 0};
