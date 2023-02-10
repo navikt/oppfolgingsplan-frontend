@@ -116,9 +116,6 @@ export const filterValidOppfolgingsplaner = (
         oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
       );
     }
-    return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(
-      lastSykefravar.fom,
-      oppfolgingsplan.sistEndretDato
-    );
+    return true;
   });
 };
