@@ -1,5 +1,4 @@
-import { BodyLong, Button, GuidePanel } from "@navikt/ds-react";
-import Link from "next/link";
+import { BodyLong, Button, GuidePanel, Link } from "@navikt/ds-react";
 import { logger } from "@navikt/next-logger";
 import React from "react";
 import styled from "styled-components";
@@ -35,7 +34,6 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
   return (
     <SpacedGuidePanel>
       <BodyLong spacing>{errorText(planStatus)}</BodyLong>
-
       <Link href={`${landingUrl}/${aktivPlan?.id}`}>
         <Button
           variant={"primary"}

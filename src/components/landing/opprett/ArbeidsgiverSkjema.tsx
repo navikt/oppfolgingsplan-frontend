@@ -4,8 +4,14 @@ import {
   erOppfolgingsplanOpprettbarMedArbeidsgiver,
   hentAktivOppfolgingsplanOpprettetMedArbeidsgiver,
 } from "utils/oppfolgingplanUtils";
-import { Alert, BodyShort, Button, Heading, Select } from "@navikt/ds-react";
-import Link from "next/link";
+import {
+  Alert,
+  BodyShort,
+  Button,
+  Heading,
+  Link,
+  Select,
+} from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import { useLandingUrl } from "hooks/routeHooks";
 import styled from "styled-components";

@@ -1,5 +1,4 @@
-import { Alert, BodyLong, Button, GuidePanel } from "@navikt/ds-react";
-import Link from "next/link";
+import { Alert, BodyLong, Button, GuidePanel, Link } from "@navikt/ds-react";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useOppfolgingsplanUrl } from "hooks/routeHooks";

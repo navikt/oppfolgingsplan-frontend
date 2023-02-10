@@ -1,7 +1,6 @@
 import { Back } from "@navikt/ds-icons";
-import { Button } from "@navikt/ds-react";
+import { Button, Link } from "@navikt/ds-react";
 import { useLandingUrl } from "hooks/routeHooks";
-import NextLink from "next/link";
 import { useGjeldendePlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
@@ -24,11 +23,11 @@ export const TilGjeldendePlanKnapp = ({ oppfolgingsplan }: Props) => {
 
   return (
     <SpacedDiv>
-      <NextLink href={url}>
+      <Link href={url}>
         <Button variant="tertiary" icon={<Back aria-hidden />}>
           Tilbake til den gjeldende utgave
         </Button>
-      </NextLink>
+      </Link>
     </SpacedDiv>
   );
 };

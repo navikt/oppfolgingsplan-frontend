@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Link from "next/link";
 import { LinkPanel, Panel } from "@navikt/ds-react";
 
 interface Props {
@@ -10,11 +9,9 @@ interface Props {
 export const OppfolgingsplanPanel = ({ children, href }: Props) => {
   if (href) {
     return (
-      <Link href={href}>
-        <LinkPanel as="div" border>
-          {children}
-        </LinkPanel>
-      </Link>
+      <LinkPanel href={href} border>
+        {children}
+      </LinkPanel>
     );
   }
 

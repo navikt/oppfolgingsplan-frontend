@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
+import { basePath } from "../environments/publicEnv";
 
 export type Audience = "Sykmeldt" | "Arbeidsgiver";
 
@@ -30,9 +31,9 @@ export const useLandingUrl = (): string => {
   const { narmestelederid } = router.query;
 
   if (isAudienceSykmeldt) {
-    return "/sykmeldt";
+    return `${basePath}/sykmeldt`;
   } else {
-    return `/arbeidsgiver/${narmestelederid}`;
+    return `${basePath}/arbeidsgiver/${narmestelederid}`;
   }
 };
 

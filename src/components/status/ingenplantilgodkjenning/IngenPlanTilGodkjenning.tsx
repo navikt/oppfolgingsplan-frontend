@@ -1,5 +1,4 @@
-import { Alert, BodyLong } from "@navikt/ds-react";
-import Link from "next/link";
+import { Alert, BodyLong, Link } from "@navikt/ds-react";
 import React from "react";
 import { useLandingUrl } from "hooks/routeHooks";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
