@@ -14,10 +14,17 @@ export const useLagreTiltak = () => {
 
   const lagreTiltak = async (tiltak: Partial<Tiltak>) => {
     await post(`${apiPath}/${oppfolgingsplanId}/tiltak/lagre`, tiltak);
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(lagreTiltak);
+  return useMutation({
+    mutationFn: lagreTiltak,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+    onError: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };
 
 export const useSlettTiltakSM = () => {
@@ -27,10 +34,17 @@ export const useSlettTiltakSM = () => {
 
   const slettTiltak = async (tiltakId: number) => {
     await post(`${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`);
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(slettTiltak);
+  return useMutation({
+    mutationFn: slettTiltak,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+    onError: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };
 
 interface LagreKommentarProps {
@@ -51,10 +65,17 @@ export const useLagreKommentar = () => {
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       kommentar
     );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(lagreKommentar);
+  return useMutation({
+    mutationFn: lagreKommentar,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+    onError: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };
 
 interface SlettKommentarProps {
@@ -74,8 +95,15 @@ export const useSlettKommentar = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
     );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(slettKommentar);
+  return useMutation({
+    mutationFn: slettKommentar,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+    onError: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };

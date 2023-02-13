@@ -14,12 +14,15 @@ export const useLagreArbeidsoppgave = () => {
 
   const lagreOppgave = async (oppgave: Partial<Arbeidsoppgave>) => {
     await post(`${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/lagre`, oppgave);
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(lagreOppgave, {
+  return useMutation({
+    mutationFn: lagreOppgave,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
     onError: () => {
-      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -33,8 +36,15 @@ export const useSlettArbeidsoppgave = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/${arbeidsoppgaveId}/slett`
     );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(slettOppgave);
+  return useMutation({
+    mutationFn: slettOppgave,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+    onError: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };
