@@ -51,10 +51,18 @@ export const useLagreKommentar = () => {
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       kommentar
     );
-    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation(lagreKommentar);
+  return useMutation({
+    mutationFn: lagreKommentar,
+    onSuccess: () => {
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+    onError: () => {
+      console.log(`happy happy dance`);
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
 };
 
 interface SlettKommentarProps {
