@@ -3,14 +3,17 @@ import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
 import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
-import { Heading } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;
+  isOwnLeader?: boolean;
 }
 
 export const SendTilGodkjenningAG = ({
   oppfolgingsplan,
+  isOwnLeader,
 }: Props): ReactElement | null => {
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
     useState(false);
@@ -33,11 +36,19 @@ export const SendTilGodkjenningAG = ({
       <Heading spacing size={"medium"} level={"2"}>
         Jeg er ferdig med planen
       </Heading>
+      {isOwnLeader && (
+        <SpacedDiv marginBottom={"1rem"}>
+          <Alert variant={"info"}>
+            Fordi du er din egen leder, kan du opprette planen nå.
+          </Alert>
+        </SpacedDiv>
+      )}
 
       <SendTilGodkjenningForm
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
-        visTvungenGodkjenningToggle={true}
+        visTvungenGodkjenningToggle={!isOwnLeader}
+        isOwnLeader={isOwnLeader}
       />
     </LightGreyPanel>
   );

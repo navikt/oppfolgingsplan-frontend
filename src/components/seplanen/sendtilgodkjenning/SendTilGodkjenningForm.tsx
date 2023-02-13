@@ -34,13 +34,14 @@ export type SendTilGodkjenningFormValues = {
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   visTvungenGodkjenningToggle: boolean;
-
+  isOwnLeader?: boolean;
   cancel(): void;
 }
 
 export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
   visTvungenGodkjenningToggle,
+  isOwnLeader,
   cancel,
 }: Props): ReactElement => {
   const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
@@ -81,7 +82,8 @@ export const SendTilGodkjenningForm = ({
               tom: formatAsLocalDateTime(data.sluttDato),
               evalueres: formatAsLocalDateTime(data.evalueresInnen),
             },
-            tvungenGodkjenning: tvungenGodkjenning,
+            //TODO: check what SM will see when tvungenGodkjenning is false
+            tvungenGodkjenning: isOwnLeader ? false : tvungenGodkjenning,
             delmednav: data.delMedNAV === "true",
           })
         )}
@@ -177,9 +179,16 @@ export const SendTilGodkjenningForm = ({
         </SpacedDiv>
 
         <Row>
-          <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
-            Send til godkjenning
-          </Button>
+          {!isOwnLeader && (
+            <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
+              Send til godkjenning
+            </Button>
+          )}
+          {isOwnLeader && (
+            <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
+              Opprett plan
+            </Button>
+          )}
           <Button variant={"tertiary"} onClick={cancel}>
             Avbryt
           </Button>

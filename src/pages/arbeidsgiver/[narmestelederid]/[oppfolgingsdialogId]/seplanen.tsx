@@ -10,11 +10,19 @@ import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgings
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanAG();
+  const isOwnLeader =
+    aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr ===
+    aktivPlan?.arbeidstaker.fnr;
 
   return (
     <OppfolgingsplanPageAG page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
-      <SendTilGodkjenningAG oppfolgingsplan={aktivPlan} />
+      {
+        <SendTilGodkjenningAG
+          oppfolgingsplan={aktivPlan}
+          isOwnLeader={isOwnLeader}
+        />
+      }
     </OppfolgingsplanPageAG>
   );
 };
