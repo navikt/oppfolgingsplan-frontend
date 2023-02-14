@@ -44,10 +44,10 @@ const SykmeldtSide = ({
 
   const PageContent = () => {
     if (
-      oppfolgingsplaner.fetchStatus == "fetching" ||
-      sykmeldinger.fetchStatus == "fetching" ||
-      tilgang.fetchStatus == "fetching" ||
-      narmesteLedere.fetchStatus == "fetching"
+      oppfolgingsplaner.isLoading ||
+      sykmeldinger.isLoading ||
+      tilgang.fetchStatus === "fetching" ||
+      narmesteLedere.fetchStatus === "fetching"
     ) {
       return <AppSpinner />;
     } else if (tilgang.data && tilgang.data.harTilgang === false) {

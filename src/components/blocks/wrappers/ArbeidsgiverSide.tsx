@@ -45,8 +45,8 @@ const PageContent = ({ title, heading, children }: SideProps) => {
 
   if (
     tilgang.fetchStatus == "fetching" ||
-    oppfolgingsplaner.fetchStatus == "fetching" ||
-    sykmeldt.fetchStatus == "fetching"
+    oppfolgingsplaner.isLoading ||
+    sykmeldt.isLoading
   ) {
     return <AppSpinner />;
   } else if (tilgang.data && tilgang.data.harTilgang === false) {
