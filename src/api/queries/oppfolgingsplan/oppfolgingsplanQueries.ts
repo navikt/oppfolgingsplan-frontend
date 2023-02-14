@@ -12,6 +12,7 @@ import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { GodkjennEgenPlanData } from "../../../schema/godkjennEgenPlanSchema";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -77,6 +78,28 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
   };
 
   return useMutation(godkjennPlan, {
+    onError: () => {
+      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    },
+  });
+};
+
+export const useGodkjennEgenOppfolgingsplan = (oppfolgingsplanId: number) => {
+  const apiBasePath = useApiBasePath();
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const godkjennEgenPlan = async (data: GodkjennEgenPlanData) => {
+    await post(
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
+      data
+    );
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    await router.push(statusUrl);
+  };
+
+  return useMutation(godkjennEgenPlan, {
     onError: () => {
       queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },

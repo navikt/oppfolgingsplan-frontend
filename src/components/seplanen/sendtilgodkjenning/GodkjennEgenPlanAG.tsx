@@ -1,15 +1,16 @@
 import React, { ReactElement, useState } from "react";
 import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
-import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
-import { Heading } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
+import { GodkjennEgenPlanAGForm } from "./GodkjennEgenPlanAGForm";
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;
 }
 
-export const SendTilGodkjenningAG = ({
+export const GodkjennEgenPlanAG = ({
   oppfolgingsplan,
 }: Props): ReactElement | null => {
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
@@ -33,11 +34,15 @@ export const SendTilGodkjenningAG = ({
       <Heading spacing size={"medium"} level={"2"}>
         Jeg er ferdig med planen
       </Heading>
+      <SpacedDiv marginBottom={"1rem"}>
+        <Alert variant={"info"}>
+          Fordi du er din egen leder, kan du opprette planen nå.
+        </Alert>
+      </SpacedDiv>
 
-      <SendTilGodkjenningForm
+      <GodkjennEgenPlanAGForm
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
-        visTvungenGodkjenningToggle={true}
       />
     </LightGreyPanel>
   );

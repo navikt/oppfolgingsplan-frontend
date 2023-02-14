@@ -7,14 +7,13 @@ import {
   Heading,
 } from "@navikt/ds-react";
 import { FormProvider, useForm } from "react-hook-form";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { Row } from "components/blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
-import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useGodkjennEgenOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import Datepicker from "../../blocks/datepicker/Datepicker";
 import { formatAsLocalDateTime, toDate } from "../../../utils/dateUtils";
 
@@ -23,7 +22,7 @@ const Line = styled.hr`
   margin-bottom: 1rem;
 `;
 
-export type SendTilGodkjenningFormValues = {
+export type GodkjennEgenPlanFormValues = {
   startDato: Date;
   sluttDato: Date;
   evalueresInnen: Date;
@@ -33,21 +32,16 @@ export type SendTilGodkjenningFormValues = {
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
-  visTvungenGodkjenningToggle: boolean;
-
   cancel(): void;
 }
 
-export const SendTilGodkjenningForm = ({
+export const GodkjennEgenPlanAGForm = ({
   oppfolgingsplan,
-  visTvungenGodkjenningToggle,
   cancel,
 }: Props): ReactElement => {
-  const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
+  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplan(oppfolgingsplan.id);
 
-  const [tvungenGodkjenning, setTvungenGodkjenning] = useState(false);
-
-  const formFunctions = useForm<SendTilGodkjenningFormValues>();
+  const formFunctions = useForm<GodkjennEgenPlanFormValues>();
   const {
     handleSubmit,
     register,
@@ -74,22 +68,17 @@ export const SendTilGodkjenningForm = ({
   return (
     <FormProvider {...formFunctions}>
       <form
-        onSubmit={handleSubmit((data: SendTilGodkjenningFormValues) =>
-          sendTilGodkjenning.mutate({
+        onSubmit={handleSubmit((data: GodkjennEgenPlanFormValues) =>
+          godkjennEgenPlan.mutate({
             gyldighetstidspunkt: {
               fom: formatAsLocalDateTime(data.startDato),
               tom: formatAsLocalDateTime(data.sluttDato),
               evalueres: formatAsLocalDateTime(data.evalueresInnen),
             },
-            tvungenGodkjenning: tvungenGodkjenning,
             delmednav: data.delMedNAV === "true",
           })
         )}
       >
-        <BodyLong spacing>
-          Alle felt må fylles ut, bortsett fra de som er markert som valgfrie.
-        </BodyLong>
-
         <Line />
 
         <Heading spacing size={"small"} level={"3"}>
@@ -146,20 +135,10 @@ export const SendTilGodkjenningForm = ({
 
         <Line />
 
-        {visTvungenGodkjenningToggle && (
-          <TvungenGodkjenningToggle
-            setTvungenGodkjenning={setTvungenGodkjenning}
-            tvungenGodkjenning={tvungenGodkjenning}
-          />
-        )}
-
         <SpacedDiv>
           <CheckboxGroup legend="Samtykke og deling" hideLegend>
             <Checkbox value={"true"} {...register("delMedNAV")}>
-              Jeg vil dele planen med NAV når{" "}
-              {oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn ||
-                "lederen min"}{" "}
-              har godkjent den (valgfritt)
+              Jeg vil dele planen med NAV når jeg har godkjent den (valgfritt)
             </Checkbox>
             <Checkbox
               value={"true"}
@@ -177,8 +156,8 @@ export const SendTilGodkjenningForm = ({
         </SpacedDiv>
 
         <Row>
-          <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
-            Send til godkjenning
+          <Button type={"submit"} loading={godkjennEgenPlan.isLoading}>
+            Opprett plan
           </Button>
           <Button variant={"tertiary"} onClick={cancel}>
             Avbryt
