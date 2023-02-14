@@ -43,7 +43,11 @@ const PageContent = ({ title, heading, children }: SideProps) => {
   const oppfolgingsplaner = useOppfolgingsplanerAG();
   const tilgang = useTilgangAG();
 
-  if (tilgang.isLoading || oppfolgingsplaner.isLoading || sykmeldt.isLoading) {
+  if (
+    tilgang.fetchStatus == "fetching" ||
+    oppfolgingsplaner.fetchStatus == "fetching" ||
+    sykmeldt.fetchStatus == "fetching"
+  ) {
     return <AppSpinner />;
   } else if (tilgang.data && tilgang.data.harTilgang === false) {
     return <AdresseSperreInfoBoks />;
