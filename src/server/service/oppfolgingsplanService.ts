@@ -245,7 +245,7 @@ export async function avbrytOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
-  return await post(
+  return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/avbryt`,
     {},
     { accessToken }
