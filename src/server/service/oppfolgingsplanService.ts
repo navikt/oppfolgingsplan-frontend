@@ -331,7 +331,7 @@ export async function godkjennEgenOppfolgingsplanAG(
   data: GodkjennEgenPlanData
 ) {
   return await post(
-    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?delmednav=${data.delmednav}`,
     data.gyldighetstidspunkt,
     { accessToken }
   );
