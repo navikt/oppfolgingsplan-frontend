@@ -1,18 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
 import { hentPlanStatus } from "utils/teaserUtils";
 import { useAudience, useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import {
+  StatusPageToDisplay,
   statusPageToDisplayAG,
   statusPageToDisplaySM,
 } from "utils/statusPageUtils";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
-
-const texts = {
-  tilGodkjenning: "Til godkjenning",
-};
 
 interface OppfolgingsdialogTeaserProps {
   oppfolgingsplan: Oppfolgingsplan;
@@ -25,6 +21,18 @@ const StyledSmallText = styled.p`
   line-height: 20px;
   letter-spacing: 0.004em;
 `;
+
+const subtitleText = (godkjenningsStatus: StatusPageToDisplay | null) => {
+  switch (godkjenningsStatus) {
+    case "SENDTPLANTILGODKJENNING": {
+      return "Sendt til godkjenning";
+    }
+    case "MOTTATTFLEREGODKJENNINGER":
+    case "GODKJENNPLANMOTTATT": {
+      return "Venter på din godkjenning";
+    }
+  }
+};
 
 const OppfolgingsdialogTeaser = ({
   oppfolgingsplan,
@@ -45,9 +53,6 @@ const OppfolgingsdialogTeaser = ({
     ? statusPageToDisplaySM(oppfolgingsplan)
     : statusPageToDisplayAG(oppfolgingsplan);
 
-  const pendingApproval =
-    inneholderGodkjenninger(oppfolgingsplan) && !oppfolgingsplan.godkjentPlan;
-
   return (
     <OppfolgingsplanCard
       href={
@@ -56,7 +61,7 @@ const OppfolgingsdialogTeaser = ({
           : statusUrl
       }
       title={virksomhetsnavn}
-      subtitle={pendingApproval ? texts.tilGodkjenning : ""}
+      subtitle={subtitleText(godkjenningsStatus)}
       image={planStatus.img}
     >
       {typeof planStatus.tekst === "object" ? (
