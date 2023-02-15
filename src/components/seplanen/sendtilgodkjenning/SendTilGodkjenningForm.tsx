@@ -70,6 +70,7 @@ export const SendTilGodkjenningForm = ({
     })[0];
 
   const startDate = watch("startDato");
+  const sluttDate = watch("sluttDato");
 
   return (
     <FormProvider {...formFunctions}>
@@ -140,6 +141,10 @@ export const SendTilGodkjenningForm = ({
 
             if (startDate && value.getTime() < toDate(startDate).getTime()) {
               return "Evalueringsdato må være etter startdato";
+            }
+
+            if (sluttDate && value.getTime() > toDate(sluttDate).getTime()) {
+              return "Evalueringsdato må være før sluttdato";
             }
           }}
         />
