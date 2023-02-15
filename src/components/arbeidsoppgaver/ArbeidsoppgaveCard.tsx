@@ -25,12 +25,14 @@ import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 
 interface Props {
   innloggetFnr: string;
+  arbeidstakerFnr?: string;
   arbeidsoppgave: Arbeidsoppgave;
   readonly?: boolean;
 }
 
 export const ArbeidsoppgaveCard = ({
   innloggetFnr,
+  arbeidstakerFnr,
   arbeidsoppgave,
   readonly = true,
 }: Props) => {
@@ -38,7 +40,9 @@ export const ArbeidsoppgaveCard = ({
   const type = arbeidsoppgave.gjennomfoering?.kanGjennomfoeres;
   const [editererArbeidsoppgave, setEditererArbeidsoppgave] = useState(false);
   const aktoerHarOpprettetElement =
-    innloggetFnr === arbeidsoppgave.opprettetAv.fnr;
+    innloggetFnr === arbeidsoppgave.opprettetAv.fnr ||
+    (innloggetFnr !== arbeidstakerFnr &&
+      arbeidstakerFnr !== arbeidsoppgave.opprettetAv.fnr);
 
   const EditerArbeidsoppgaveForm = () => (
     <EditerArbeidsoppgave
