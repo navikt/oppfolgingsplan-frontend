@@ -19,7 +19,7 @@ import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
 import { personV3Schema } from "../../schema/personSchemas";
 import { Arbeidsoppgave, Kommentar, Tiltak } from "../../types/oppfolgingsplan";
-import { GodkjennEgenPlanData } from "../../schema/godkjennEgenPlanSchema";
+import { GodkjennEgenPlanDataAG } from "../../schema/godkjennEgenPlanAGSchema";
 
 export async function getNarmesteLeder(
   accessToken: string,
@@ -328,7 +328,7 @@ export async function godkjennOppfolgingsplanAG(
 export async function godkjennEgenOppfolgingsplanAG(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennEgenPlanData
+  data: GodkjennEgenPlanDataAG
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?delmednav=${data.delmednav}`,

@@ -13,7 +13,7 @@ import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
 import { Row } from "components/blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { notNullish } from "../../../server/utils/tsUtils";
-import { useGodkjennEgenOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useGodkjennEgenOppfolgingsplanAG } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import Datepicker from "../../blocks/datepicker/Datepicker";
 import { formatAsLocalDateTime, toDate } from "../../../utils/dateUtils";
 
@@ -22,7 +22,7 @@ const Line = styled.hr`
   margin-bottom: 1rem;
 `;
 
-export type GodkjennEgenPlanFormValues = {
+export type GodkjennEgenPlanFormValuesAG = {
   startDato: Date;
   sluttDato: Date;
   evalueresInnen: Date;
@@ -39,9 +39,9 @@ export const GodkjennEgenPlanAGForm = ({
   oppfolgingsplan,
   cancel,
 }: Props): ReactElement => {
-  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplan(oppfolgingsplan.id);
+  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplanAG(oppfolgingsplan.id);
 
-  const formFunctions = useForm<GodkjennEgenPlanFormValues>();
+  const formFunctions = useForm<GodkjennEgenPlanFormValuesAG>();
   const {
     handleSubmit,
     register,
@@ -68,7 +68,7 @@ export const GodkjennEgenPlanAGForm = ({
   return (
     <FormProvider {...formFunctions}>
       <form
-        onSubmit={handleSubmit((data: GodkjennEgenPlanFormValues) =>
+        onSubmit={handleSubmit((data: GodkjennEgenPlanFormValuesAG) =>
           godkjennEgenPlan.mutate({
             gyldighetstidspunkt: {
               fom: formatAsLocalDateTime(data.startDato),

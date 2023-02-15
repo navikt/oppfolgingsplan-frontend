@@ -12,7 +12,7 @@ import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-import { GodkjennEgenPlanData } from "../../../schema/godkjennEgenPlanSchema";
+import { GodkjennEgenPlanDataAG } from "../../../schema/godkjennEgenPlanAGSchema";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -84,13 +84,13 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
   });
 };
 
-export const useGodkjennEgenOppfolgingsplan = (oppfolgingsplanId: number) => {
+export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
   const apiBasePath = useApiBasePath();
   const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const godkjennEgenPlan = async (data: GodkjennEgenPlanData) => {
+  const godkjennEgenPlan = async (data: GodkjennEgenPlanDataAG) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
       data
