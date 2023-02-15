@@ -1,7 +1,10 @@
-export const hentAktoerNavnInitialer = (aktoerNavn: string) => {
+export const hentAktoerNavnInitialer = (
+  aktoerNavn: string,
+  isAudienceSykmeldt: boolean
+) => {
   let initialer = "";
   if (aktoerNavn.length === 0) {
-    return initialer;
+    return isAudienceSykmeldt ? "AT" : "AG";
   }
   const navneListe = aktoerNavn.split(" ");
   if (navneListe.length > 2) {

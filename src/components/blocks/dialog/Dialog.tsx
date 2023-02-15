@@ -6,9 +6,10 @@ import { getFullDateFormat } from "utils/dateUtils";
 import { useSlettKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
+import { useAudience } from "../../../hooks/routeHooks";
 
 interface Props {
-  aktorFnr: string;
+  arbeidstakerFnr: string;
   tiltakId: number;
   kommentarer?: Kommentar[] | null;
 }
@@ -28,25 +29,45 @@ const ButtonRightAligned = styled(Button)`
 `;
 
 export const Dialog = ({
-  aktorFnr,
+  arbeidstakerFnr,
   tiltakId,
   kommentarer,
 }: Props): ReactElement | null => {
+  const { isAudienceSykmeldt } = useAudience();
   const slettKommentar = useSlettKommentar();
   const aktivPlan = useAktivPlanSM();
 
   if (!kommentarer || !aktivPlan) return null;
+  const isKommentarBelongingToInnloggetAudience = (kommentar: Kommentar) => {
+    if (isAudienceSykmeldt) {
+      return kommentar.opprettetAv.fnr === arbeidstakerFnr;
+    }
+    return kommentar.opprettetAv.fnr !== arbeidstakerFnr;
+  };
+
+  const aktorNavn = (kommentar: Kommentar) => {
+    if (!kommentar.opprettetAv.navn) {
+      if (isAudienceSykmeldt) {
+        return "Arbeidstaker";
+      }
+      return "Arbeidsgiver";
+    }
+  };
 
   const alleKommentarer = kommentarer
     .sort((k1, k2) => k2.id - k1.id)
     .map((kommentar, index) => {
-      const isAktorsKommentar = kommentar.opprettetAv.fnr == aktorFnr;
+      const isAktorsKommentar =
+        isKommentarBelongingToInnloggetAudience(kommentar);
 
       return (
         <StyledChat
           key={index}
-          avatar={hentAktoerNavnInitialer(kommentar.opprettetAv.navn)}
-          name={kommentar.opprettetAv.navn}
+          avatar={hentAktoerNavnInitialer(
+            kommentar.opprettetAv.navn,
+            isAudienceSykmeldt
+          )}
+          name={aktorNavn(kommentar)}
           timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
           position={isAktorsKommentar ? "right" : "left"}
         >
