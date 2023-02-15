@@ -22,8 +22,8 @@ const StyledSmallText = styled.p`
   letter-spacing: 0.004em;
 `;
 
-const subtitleText = (oppfolgingsplanStatus: StatusPageToDisplay | null) => {
-  switch (oppfolgingsplanStatus) {
+const subtitleText = (godkjenningsStatus: StatusPageToDisplay | null) => {
+  switch (godkjenningsStatus) {
     case "SENDTPLANTILGODKJENNING": {
       return "Sendt til godkjenning";
     }
