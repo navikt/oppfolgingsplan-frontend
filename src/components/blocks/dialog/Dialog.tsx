@@ -52,6 +52,7 @@ export const Dialog = ({
       }
       return "Arbeidsgiver";
     }
+    return kommentar.opprettetAv.navn;
   };
 
   const alleKommentarer = kommentarer
