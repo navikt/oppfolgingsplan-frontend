@@ -11,10 +11,18 @@ import { GodkjennEgenPlanAG } from "../../../../components/seplanen/sendtilgodkj
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanAG();
+  const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr
+    ? aktivPlan?.arbeidstaker.fnr
+    : undefined;
+  const narnesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
+    ? aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
+    : undefined;
+
   const isOwnLeader =
-    aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr ===
-    aktivPlan?.arbeidstaker.fnr;
-  console.log("own lead ", isOwnLeader);
+    narnesteLederFnr !== undefined &&
+    arbeidstakerFnr !== undefined &&
+    narnesteLederFnr === arbeidstakerFnr;
+
   return (
     <OppfolgingsplanPageAG page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />

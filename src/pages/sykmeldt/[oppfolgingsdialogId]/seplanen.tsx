@@ -11,9 +11,17 @@ import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
+  const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr
+    ? aktivPlan?.arbeidstaker.fnr
+    : undefined;
+  const narnesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
+    ? aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
+    : undefined;
+
   const isOwnLeader =
-    aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr ===
-    aktivPlan?.arbeidstaker.fnr;
+    narnesteLederFnr !== undefined &&
+    arbeidstakerFnr !== undefined &&
+    narnesteLederFnr === arbeidstakerFnr;
 
   return (
     <OppfolgingsplanPageSM page={Page.SEPLANEN}>
