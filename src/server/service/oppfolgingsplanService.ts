@@ -112,10 +112,13 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
   handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", response.error);
 }
 
-export async function getOppfolgingsplanerAG(accessToken: string) {
+export async function getOppfolgingsplanerAG(
+  sykmeldtFnr: string,
+  accessToken: string
+) {
   const response = array(oppfolgingsplanSchema).safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner/${sykmeldtFnr}`,
       {
         accessToken,
       }
