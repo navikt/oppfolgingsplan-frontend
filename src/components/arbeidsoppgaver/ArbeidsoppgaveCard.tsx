@@ -44,6 +44,18 @@ export const ArbeidsoppgaveCard = ({
     (innloggetFnr !== arbeidstakerFnr &&
       arbeidstakerFnr !== arbeidsoppgave.opprettetAv.fnr);
 
+  const opprettetAvText = () => {
+    if (isAudienceSykmeldt && aktoerHarOpprettetElement) {
+      return arbeidsoppgave.opprettetAv.navn
+        ? arbeidsoppgave.opprettetAv.navn
+        : "arbeidstaker";
+    } else {
+      return arbeidsoppgave.opprettetAv.navn
+        ? arbeidsoppgave.opprettetAv.navn
+        : "arbeidsgiver";
+    }
+  };
+
   const EditerArbeidsoppgaveForm = () => (
     <EditerArbeidsoppgave
       show={editererArbeidsoppgave}
@@ -90,7 +102,7 @@ export const ArbeidsoppgaveCard = ({
             {texts.arbeidsoppgaveList.cards.kan}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
-          <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+          <OpprettetAv opprettetAv={opprettetAvText()} />
           {!readonly && (
             <>
               <EditerArbeidsoppgaveForm />
@@ -112,7 +124,7 @@ export const ArbeidsoppgaveCard = ({
           <TilretteleggingsBeskrivelse
             gjennomfoering={arbeidsoppgave.gjennomfoering}
           />
-          <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+          <OpprettetAv opprettetAv={opprettetAvText()} />
           {!readonly && (
             <>
               <EditerArbeidsoppgaveForm />
@@ -132,7 +144,7 @@ export const ArbeidsoppgaveCard = ({
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
           <KanIkkeBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering} />
-          <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+          <OpprettetAv opprettetAv={opprettetAvText()} />
           {!readonly && (
             <>
               <EditerArbeidsoppgaveForm />
@@ -152,7 +164,7 @@ export const ArbeidsoppgaveCard = ({
               {texts.arbeidsoppgaveList.cards.ikkeVurdert}
             </CardHeader>
             <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
-            <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+            <OpprettetAv opprettetAv={opprettetAvText()} />
             {!readonly && (
               <>
                 <VurderingFraSykmeldt />
