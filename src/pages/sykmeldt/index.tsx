@@ -8,11 +8,46 @@ import SykmeldtSide from "../../components/blocks/wrappers/SykmeldtSide";
 import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../components/blocks/video/VideoPanel";
 import { useNarmesteLedereSM } from "../../api/queries/sykmeldt/narmesteLedereQueriesSM";
+import {
+  sykmeldtHarGyldigSykmelding,
+  sykmeldtHarIngenSendteSykmeldinger,
+} from "../../utils/sykmeldingUtils";
+import OppfolgingsplanUtenGyldigSykmelding from "../../components/landing/OppfolgingsplanUtenGyldigSykmelding";
+import {
+  finnTidligereOppfolgingsplaner,
+  harTidligereOppfolgingsplaner,
+} from "../../utils/oppfolgingplanUtils";
+import OppfolgingsdialogerUtenAktivSykmelding from "../../components/landing/OppfolgingsdialogerUtenAktivSykmelding";
 
 const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
+
+  if (
+    oppfolgingsplaner.isSuccess &&
+    sykmeldinger.isSuccess &&
+    !sykmeldtHarGyldigSykmelding(sykmeldinger.data)
+  ) {
+    return (
+      <div>
+        <OppfolgingsplanUtenGyldigSykmelding
+          sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(
+            sykmeldinger.data
+          )}
+        />
+
+        {oppfolgingsplaner.data &&
+          harTidligereOppfolgingsplaner(oppfolgingsplaner.data) && (
+            <OppfolgingsdialogerUtenAktivSykmelding
+              oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsplaner(
+                oppfolgingsplaner.data
+              )}
+            />
+          )}
+      </div>
+    );
+  }
 
   if (
     oppfolgingsplaner.isSuccess &&
