@@ -4,10 +4,12 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
 import { Alert, Heading } from "@navikt/ds-react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
-import { GodkjennEgenPlanAGForm } from "./GodkjennEgenPlanAGForm";
+import { formatAsLocalDateTime } from "../../../utils/dateUtils";
+import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
+import { useGodkjennEgenOppfolgingsplanAG } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
-  oppfolgingsplan?: Oppfolgingsplan;
+  oppfolgingsplan: Oppfolgingsplan;
 }
 
 export const GodkjennEgenPlanAG = ({
@@ -15,6 +17,8 @@ export const GodkjennEgenPlanAG = ({
 }: Props): ReactElement | null => {
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
     useState(false);
+
+  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplanAG(oppfolgingsplan.id);
 
   if (!oppfolgingsplan) return null;
 
@@ -40,9 +44,21 @@ export const GodkjennEgenPlanAG = ({
         </Alert>
       </SpacedDiv>
 
-      <GodkjennEgenPlanAGForm
+      <SendTilGodkjenningForm
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
+        visTvungenGodkjenningToggle={false}
+        isSubmitting={godkjennEgenPlan.isLoading}
+        sendTilGodkjenning={(data) => {
+          godkjennEgenPlan.mutate({
+            gyldighetstidspunkt: {
+              fom: formatAsLocalDateTime(data.startDato),
+              tom: formatAsLocalDateTime(data.sluttDato),
+              evalueres: formatAsLocalDateTime(data.evalueresInnen),
+            },
+            delMedNav: data.delMedNAV === "true",
+          });
+        }}
       />
     </LightGreyPanel>
   );

@@ -14,9 +14,8 @@ import { Row } from "components/blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
-import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import Datepicker from "../../blocks/datepicker/Datepicker";
-import { formatAsLocalDateTime, toDate } from "../../../utils/dateUtils";
+import { toDate } from "../../../utils/dateUtils";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -29,11 +28,14 @@ export type SendTilGodkjenningFormValues = {
   evalueresInnen: Date;
   delMedNAV: string;
   enigIPlanen: string | null;
+  tvungenGodkjenning: boolean;
 };
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   visTvungenGodkjenningToggle: boolean;
+  sendTilGodkjenning: (values: SendTilGodkjenningFormValues) => void;
+  isSubmitting: boolean;
 
   cancel(): void;
 }
@@ -41,12 +43,11 @@ interface Props {
 export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
   visTvungenGodkjenningToggle,
+  sendTilGodkjenning,
+  isSubmitting,
   cancel,
 }: Props): ReactElement => {
-  const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
-
   const [tvungenGodkjenning, setTvungenGodkjenning] = useState(false);
-
   const formFunctions = useForm<SendTilGodkjenningFormValues>();
   const {
     handleSubmit,
@@ -71,21 +72,14 @@ export const SendTilGodkjenningForm = ({
 
   const startDate = watch("startDato");
 
+  const onSubmit = (data: SendTilGodkjenningFormValues) => {
+    data.tvungenGodkjenning = tvungenGodkjenning;
+    sendTilGodkjenning(data);
+  };
+
   return (
     <FormProvider {...formFunctions}>
-      <form
-        onSubmit={handleSubmit((data: SendTilGodkjenningFormValues) =>
-          sendTilGodkjenning.mutate({
-            gyldighetstidspunkt: {
-              fom: formatAsLocalDateTime(data.startDato),
-              tom: formatAsLocalDateTime(data.sluttDato),
-              evalueres: formatAsLocalDateTime(data.evalueresInnen),
-            },
-            tvungenGodkjenning: tvungenGodkjenning,
-            delmednav: data.delMedNAV === "true",
-          })
-        )}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <BodyLong spacing>
           Alle felt må fylles ut, bortsett fra de som er markert som valgfrie.
         </BodyLong>
@@ -145,6 +139,7 @@ export const SendTilGodkjenningForm = ({
         />
 
         <Line />
+        <div {...register("tvungenGodkjenning")} />
 
         {visTvungenGodkjenningToggle && (
           <TvungenGodkjenningToggle
@@ -177,7 +172,7 @@ export const SendTilGodkjenningForm = ({
         </SpacedDiv>
 
         <Row>
-          <Button type={"submit"} loading={sendTilGodkjenning.isLoading}>
+          <Button type={"submit"} loading={isSubmitting}>
             Send til godkjenning
           </Button>
           <Button variant={"tertiary"} onClick={cancel}>

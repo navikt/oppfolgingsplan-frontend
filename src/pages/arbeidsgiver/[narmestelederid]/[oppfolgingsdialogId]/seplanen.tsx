@@ -20,8 +20,12 @@ const Seplanen: NextPage = () => {
   return (
     <OppfolgingsplanPageAG page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
-      {!isOwnLeader && <SendTilGodkjenningAG oppfolgingsplan={aktivPlan} />}
-      {isOwnLeader && <GodkjennEgenPlanAG oppfolgingsplan={aktivPlan} />}
+      {!isOwnLeader && aktivPlan && (
+        <SendTilGodkjenningAG oppfolgingsplan={aktivPlan} />
+      )}
+      {isOwnLeader && aktivPlan && (
+        <GodkjennEgenPlanAG oppfolgingsplan={aktivPlan} />
+      )}
     </OppfolgingsplanPageAG>
   );
 };

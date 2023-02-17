@@ -4,9 +4,11 @@ import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
 import { Heading } from "@navikt/ds-react";
+import { formatAsLocalDateTime } from "../../../utils/dateUtils";
+import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
-  oppfolgingsplan?: Oppfolgingsplan;
+  oppfolgingsplan: Oppfolgingsplan;
 }
 
 export const SendTilGodkjenningAG = ({
@@ -15,6 +17,7 @@ export const SendTilGodkjenningAG = ({
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
     useState(false);
 
+  const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
   if (!oppfolgingsplan) return null;
 
   if (!visOppfolgingsplanSkjema) {
@@ -38,6 +41,18 @@ export const SendTilGodkjenningAG = ({
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
         visTvungenGodkjenningToggle={true}
+        isSubmitting={sendTilGodkjenning.isLoading}
+        sendTilGodkjenning={(data) => {
+          sendTilGodkjenning.mutate({
+            gyldighetstidspunkt: {
+              fom: formatAsLocalDateTime(data.startDato),
+              tom: formatAsLocalDateTime(data.sluttDato),
+              evalueres: formatAsLocalDateTime(data.evalueresInnen),
+            },
+            tvungenGodkjenning: data.tvungenGodkjenning,
+            delmednav: data.delMedNAV === "true",
+          });
+        }}
       />
     </LightGreyPanel>
   );
