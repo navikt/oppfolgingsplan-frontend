@@ -144,3 +144,8 @@ export type Oppfolgingsplan = {
   sistEndretAv: Person;
   skalHaVarsel: boolean;
 };
+
+export type GodkjennEgenPlan = {
+  gyldighetstidspunkt: Gyldighetstidspunkt;
+  delMedNav: boolean;
+};

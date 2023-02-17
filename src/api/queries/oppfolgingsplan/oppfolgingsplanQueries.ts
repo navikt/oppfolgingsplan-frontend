@@ -11,8 +11,10 @@ import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-import { GodkjennEgenPlanDataAG } from "../../../schema/godkjennEgenPlanAGSchema";
+import {
+  GodkjennEgenPlan,
+  Oppfolgingsplan,
+} from "../../../types/oppfolgingsplan";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -90,7 +92,7 @@ export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const godkjennEgenPlan = async (data: GodkjennEgenPlanDataAG) => {
+  const godkjennEgenPlan = async (data: GodkjennEgenPlan) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
       data
