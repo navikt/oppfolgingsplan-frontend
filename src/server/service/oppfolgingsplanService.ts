@@ -321,7 +321,7 @@ export async function godkjennOppfolgingsplanAG(
       serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST
     }/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=${
       data.tvungenGodkjenning ? "tvungenGodkjenning" : "makrell"
-    }&aktoer=arbeidstaker&delmednav=${data.delmednav}`,
+    }&aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
     data.gyldighetstidspunkt,
     { accessToken }
   );
