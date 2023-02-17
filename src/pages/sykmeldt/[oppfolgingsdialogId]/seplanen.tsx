@@ -20,7 +20,9 @@ const Seplanen: NextPage = () => {
   return (
     <OppfolgingsplanPageSM page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
-      {!isOwnLeader && <SendTilGodkjenningSM oppfolgingsplan={aktivPlan} />}
+      {!isOwnLeader && aktivPlan && (
+        <SendTilGodkjenningSM oppfolgingsplan={aktivPlan} />
+      )}
       {isOwnLeader && (
         <Alert variant={"info"}>
           Fordi du er din egen leder, må du logge inn som arbeidsgiver for å
