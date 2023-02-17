@@ -24,7 +24,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
   const sykmeldtFnr = req.headers[NAV_PERSONIDENT_HEADER];
 
   if (isMockBackend) {
-    const activeMock = getMockDb();
+    const activeMock = getMockDb(req);
 
     return {
       person: activeMock.person,

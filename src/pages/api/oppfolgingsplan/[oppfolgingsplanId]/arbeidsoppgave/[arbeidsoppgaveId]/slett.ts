@@ -22,7 +22,7 @@ const handler = async (
   const arbeidsoppgaveId = getArbeidsoppgaveIdFromRequest(req);
 
   if (isMockBackend) {
-    const activeMock = getMockDb();
+    const activeMock = getMockDb(req);
 
     const aktivPlan = activeMock.oppfolgingsplaner.find(
       (plan) => plan.id === Number(oppfolgingsplanId)

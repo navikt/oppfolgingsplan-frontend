@@ -11,7 +11,7 @@ const handler = async (
   res: NextApiResponse
 ): Promise<void> => {
   if (isMockBackend) {
-    res.status(200).json(getMockDb().kontaktinfo);
+    res.status(200).json(getMockDb(req).kontaktinfo);
   } else {
     const syfoOppfolgingsplanServiceTokenX =
       await getSyfoOppfolgingsplanserviceTokenFromRequest(req);

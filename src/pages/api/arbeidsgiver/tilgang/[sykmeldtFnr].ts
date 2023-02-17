@@ -5,13 +5,21 @@ import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../serve
 import { getSykmeldtFnrFromRequest } from "../../../../server/utils/requestUtils";
 import { getTilgang } from "../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
+import { TEST_SESSION_ID } from "../../../../api/axios/axios";
+import { handleQueryParamError } from "../../../../server/utils/errors";
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
   if (isMockBackend) {
-    res.status(200).json(getMockDb().tilgang);
+    const sessionId = req.headers[TEST_SESSION_ID];
+
+    if (typeof sessionId !== "string") {
+      return handleQueryParamError(sessionId);
+    }
+
+    res.status(200).json(getMockDb(req).tilgang);
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const sykmeldtFnr = getSykmeldtFnrFromRequest(req);
