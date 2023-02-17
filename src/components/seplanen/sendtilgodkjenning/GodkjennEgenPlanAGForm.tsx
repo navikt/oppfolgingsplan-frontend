@@ -75,7 +75,7 @@ export const GodkjennEgenPlanAGForm = ({
               tom: formatAsLocalDateTime(data.sluttDato),
               evalueres: formatAsLocalDateTime(data.evalueresInnen),
             },
-            delmednav: data.delMedNAV === "true",
+            delMedNav: data.delMedNAV === "true",
           })
         )}
       >
