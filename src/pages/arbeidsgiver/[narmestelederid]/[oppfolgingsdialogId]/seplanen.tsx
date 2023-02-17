@@ -14,14 +14,14 @@ const Seplanen: NextPage = () => {
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr
     ? aktivPlan?.arbeidstaker.fnr
     : undefined;
-  const narnesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
+  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
     ? aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr
     : undefined;
 
   const isOwnLeader =
-    narnesteLederFnr !== undefined &&
+    narmesteLederFnr !== undefined &&
     arbeidstakerFnr !== undefined &&
-    narnesteLederFnr === arbeidstakerFnr;
+    narmesteLederFnr === arbeidstakerFnr;
 
   return (
     <OppfolgingsplanPageAG page={Page.SEPLANEN}>
