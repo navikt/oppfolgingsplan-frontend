@@ -17,18 +17,6 @@ export const inneholderGodkjenninger = (oppfolgingsplan: Oppfolgingsplan) => {
   );
 };
 
-export const inneholderGodkjenningerAvArbeidstaker = (
-  oppfolgingsplan: Oppfolgingsplan
-) => {
-  return (
-    oppfolgingsplan.godkjenninger &&
-    oppfolgingsplan.godkjenninger.length > 0 &&
-    oppfolgingsplan.godkjenninger[0].godkjent &&
-    oppfolgingsplan.godkjenninger[0].godkjentAv.fnr ===
-      oppfolgingsplan.arbeidstaker.fnr
-  );
-};
-
 export const erSykmeldingGyldigForOppfolgingMedGrensedato = (
   sykmelding: Sykmelding,
   dato: Date
