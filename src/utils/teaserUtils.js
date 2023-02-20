@@ -1,8 +1,8 @@
 import { STATUS } from "constants/konstanter";
 import { toDateMedMaanedNavn } from "./dateUtils";
-import PlanGodkjentImage from "../components/blocks/images/plan-godkjent.svg";
+import PlanGodkjentImage from "../components/blocks/images/oppfolgingsdialog-green.svg";
 import PlanAvbruttImage from "../components/blocks/images//plan-avbrutt.svg";
-import OppfolgingsdialogUnderArbeidImage from "../components/blocks/images//oppfolgingsdialog-under-arbeid.svg";
+import OppfolgingsdialogUnderArbeidImage from "../components/blocks/images//oppfolgingsdialog-beige.svg";
 import PlanIkkeAktivSykmeldingImage from "../components/blocks/images//plan-ikke-aktiv-sykmelding--hake.svg";
 
 const texts = {

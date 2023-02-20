@@ -42,6 +42,9 @@ export const SendTilGodkjenningSM = ({
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
         visTvungenGodkjenningToggle={false}
+        navnPaaMotpart={
+          oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn || "lederen min"
+        }
       />
     </LightGreyPanel>
   );
