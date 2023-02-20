@@ -23,6 +23,7 @@ const Arbeidsoppgaver: NextPage = () => {
             <LagredeArbeidsoppgaver
               innloggetFnr={innloggetFnr}
               arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}
+              arbeidstakerFnr={aktivPlan.arbeidstaker.fnr}
             />
           )}
         </div>
