@@ -38,6 +38,7 @@ export const SendTilGodkjenningAG = ({
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
         visTvungenGodkjenningToggle={true}
+        navnPaaMotpart={oppfolgingsplan.arbeidstaker.navn}
       />
     </LightGreyPanel>
   );

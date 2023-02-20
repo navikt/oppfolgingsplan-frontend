@@ -34,13 +34,14 @@ export type SendTilGodkjenningFormValues = {
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   visTvungenGodkjenningToggle: boolean;
-
+  navnPaaMotpart: string;
   cancel(): void;
 }
 
 export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
   visTvungenGodkjenningToggle,
+  navnPaaMotpart,
   cancel,
 }: Props): ReactElement => {
   const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
@@ -161,10 +162,8 @@ export const SendTilGodkjenningForm = ({
         <SpacedDiv>
           <CheckboxGroup legend="Samtykke og deling" hideLegend>
             <Checkbox value={"true"} {...register("delMedNAV")}>
-              Jeg vil dele planen med NAV når{" "}
-              {oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn ||
-                "lederen min"}{" "}
-              har godkjent den (valgfritt)
+              Jeg vil dele planen med NAV når {navnPaaMotpart} har godkjent den
+              (valgfritt)
             </Checkbox>
             <Checkbox
               value={"true"}
