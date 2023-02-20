@@ -7,6 +7,11 @@ import { useSlettKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
 import { useAudience } from "../../../hooks/routeHooks";
+import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import {
+  aktorHarOpprettetElement,
+  getAktorNavn,
+} from "../../../utils/textContextUtils";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -36,30 +41,18 @@ export const Dialog = ({
   const { isAudienceSykmeldt } = useAudience();
   const slettKommentar = useSlettKommentar();
   const aktivPlan = useAktivPlanSM();
+  const innloggetFnr = useInnloggetFnr(aktivPlan);
 
   if (!kommentarer || !aktivPlan) return null;
-  const isKommentarBelongingToInnloggetAudience = (kommentar: Kommentar) => {
-    if (isAudienceSykmeldt) {
-      return kommentar.opprettetAv.fnr === arbeidstakerFnr;
-    }
-    return kommentar.opprettetAv.fnr !== arbeidstakerFnr;
-  };
-
-  const aktorNavn = (kommentar: Kommentar) => {
-    if (!kommentar.opprettetAv.navn) {
-      if (isAudienceSykmeldt) {
-        return "Arbeidstaker";
-      }
-      return "Arbeidsgiver";
-    }
-    return kommentar.opprettetAv.navn;
-  };
 
   const alleKommentarer = kommentarer
     .sort((k1, k2) => k2.id - k1.id)
     .map((kommentar, index) => {
-      const isAktorsKommentar =
-        isKommentarBelongingToInnloggetAudience(kommentar);
+      const isAktorsKommentar = aktorHarOpprettetElement(
+        innloggetFnr,
+        arbeidstakerFnr,
+        kommentar.opprettetAv.fnr
+      );
 
       return (
         <StyledChat
@@ -68,7 +61,11 @@ export const Dialog = ({
             kommentar.opprettetAv.navn,
             isAudienceSykmeldt
           )}
-          name={aktorNavn(kommentar)}
+          name={getAktorNavn(
+            isAudienceSykmeldt,
+            isAktorsKommentar,
+            kommentar.opprettetAv.navn
+          )}
           timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
           position={isAktorsKommentar ? "right" : "left"}
         >
