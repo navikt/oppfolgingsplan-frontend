@@ -7,11 +7,13 @@ import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 interface Props {
   innloggetFnr: string;
+  arbeidstakerFnr: string;
   arbeidsoppgaver: Arbeidsoppgave[];
 }
 
 export const ArbeidsoppgaveList = ({
   innloggetFnr,
+  arbeidstakerFnr,
   arbeidsoppgaver,
 }: Props) => {
   const sorterArbeidsoppgaverEtterTypeOgOpprettet = (
@@ -56,6 +58,7 @@ export const ArbeidsoppgaveList = ({
               <ArbeidsoppgaveCard
                 innloggetFnr={innloggetFnr}
                 arbeidsoppgave={arbeidsoppgave}
+                arbeidstakerFnr={arbeidstakerFnr}
                 readonly={true}
                 key={`arbeidsoppgaver-list-${idx}`}
               />

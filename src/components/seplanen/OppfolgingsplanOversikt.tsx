@@ -40,6 +40,7 @@ export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
         <ArbeidsoppgaveList
           innloggetFnr={innloggetFnr}
           arbeidsoppgaver={oppfolgingsplan.arbeidsoppgaveListe}
+          arbeidstakerFnr={oppfolgingsplan.arbeidstaker.fnr}
         />
       )}
       {oppfolgingsplan.tiltakListe && (
