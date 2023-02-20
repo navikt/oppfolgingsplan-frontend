@@ -6,13 +6,11 @@ import { ArbeidsoppgaveCard } from "components/arbeidsoppgaver/ArbeidsoppgaveCar
 import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 interface Props {
-  innloggetFnr: string;
   arbeidstakerFnr: string;
   arbeidsoppgaver: Arbeidsoppgave[];
 }
 
 export const ArbeidsoppgaveList = ({
-  innloggetFnr,
   arbeidstakerFnr,
   arbeidsoppgaver,
 }: Props) => {
@@ -56,7 +54,6 @@ export const ArbeidsoppgaveList = ({
           {arbeidsoppgaver.map(
             (arbeidsoppgave: Arbeidsoppgave, idx: number) => (
               <ArbeidsoppgaveCard
-                innloggetFnr={innloggetFnr}
                 arbeidsoppgave={arbeidsoppgave}
                 arbeidstakerFnr={arbeidstakerFnr}
                 readonly={true}

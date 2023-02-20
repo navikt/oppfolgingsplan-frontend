@@ -7,7 +7,6 @@ import { useSlettKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
 import { useAudience } from "../../../hooks/routeHooks";
-import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import {
   aktorHarOpprettetElement,
   getAktorNavn,
@@ -41,7 +40,6 @@ export const Dialog = ({
   const { isAudienceSykmeldt } = useAudience();
   const slettKommentar = useSlettKommentar();
   const aktivPlan = useAktivPlanSM();
-  const innloggetFnr = useInnloggetFnr(aktivPlan);
 
   if (!kommentarer || !aktivPlan) return null;
 
@@ -49,7 +47,7 @@ export const Dialog = ({
     .sort((k1, k2) => k2.id - k1.id)
     .map((kommentar, index) => {
       const isAktorsKommentar = aktorHarOpprettetElement(
-        innloggetFnr,
+        isAudienceSykmeldt,
         arbeidstakerFnr,
         kommentar.opprettetAv.fnr
       );
@@ -61,11 +59,7 @@ export const Dialog = ({
             kommentar.opprettetAv.navn,
             isAudienceSykmeldt
           )}
-          name={getAktorNavn(
-            isAudienceSykmeldt,
-            isAktorsKommentar,
-            kommentar.opprettetAv.navn
-          )}
+          name={getAktorNavn(isAudienceSykmeldt, kommentar.opprettetAv.navn)}
           timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
           position={isAktorsKommentar ? "right" : "left"}
         >

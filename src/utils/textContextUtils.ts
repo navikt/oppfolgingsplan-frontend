@@ -1,24 +1,19 @@
 export const aktorHarOpprettetElement = (
-  innloggetFnr: string | null | undefined,
+  isAudienceSykmeldt: boolean,
   arbeidstakerFnr: string,
   opprettetAvFnr: string
 ): boolean => {
-  if (innloggetFnr) {
-    return (
-      innloggetFnr === opprettetAvFnr ||
-      (innloggetFnr !== arbeidstakerFnr && opprettetAvFnr !== arbeidstakerFnr)
-    );
-  } else {
-    return false;
+  if (isAudienceSykmeldt) {
+    return opprettetAvFnr === arbeidstakerFnr;
   }
+  return opprettetAvFnr !== arbeidstakerFnr;
 };
 
 export const getAktorNavn = (
   isAudienceSykmeldt: boolean,
-  aktorHarOpprettetElement: boolean,
   opprettetAvNavn: string
 ) => {
-  if (isAudienceSykmeldt && aktorHarOpprettetElement) {
+  if (isAudienceSykmeldt) {
     return opprettetAvNavn ? opprettetAvNavn : "Arbeidstaker";
   } else {
     return opprettetAvNavn ? opprettetAvNavn : "Arbeidsgiver";

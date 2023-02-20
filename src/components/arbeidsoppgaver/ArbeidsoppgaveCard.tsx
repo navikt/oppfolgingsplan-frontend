@@ -28,14 +28,12 @@ import {
 } from "../../utils/textContextUtils";
 
 interface Props {
-  innloggetFnr: string;
   arbeidstakerFnr: string;
   arbeidsoppgave: Arbeidsoppgave;
   readonly?: boolean;
 }
 
 export const ArbeidsoppgaveCard = ({
-  innloggetFnr,
   arbeidstakerFnr,
   arbeidsoppgave,
   readonly = true,
@@ -44,13 +42,12 @@ export const ArbeidsoppgaveCard = ({
   const type = arbeidsoppgave.gjennomfoering?.kanGjennomfoeres;
   const [editererArbeidsoppgave, setEditererArbeidsoppgave] = useState(false);
   const isAktorHarOpprettetElement = aktorHarOpprettetElement(
-    innloggetFnr,
+    isAudienceSykmeldt,
     arbeidstakerFnr,
     arbeidsoppgave.opprettetAv.fnr
   );
   const aktorNavn = getAktorNavn(
     isAudienceSykmeldt,
-    isAktorHarOpprettetElement,
     arbeidsoppgave.opprettetAv.navn
   );
 
