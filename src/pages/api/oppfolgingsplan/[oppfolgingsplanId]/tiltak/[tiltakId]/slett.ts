@@ -21,7 +21,7 @@ const handler = async (
   const tiltakId = getTiltakIdFromRequest(req);
 
   if (isMockBackend) {
-    const activeMock = getMockDb();
+    const activeMock = getMockDb(req);
 
     const aktivPlan = activeMock.oppfolgingsplaner.find(
       (plan) => plan.id === Number(oppfolgingsplanId)
@@ -34,12 +34,10 @@ const handler = async (
       );
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
-    const filteredTiltakListe = aktivPlan.tiltakListe!.filter(
-      (tiltak) => tiltak.tiltakId !== Number(tiltakId)
-    );
-
     activeMock.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
-      filteredTiltakListe;
+      aktivPlan.tiltakListe?.filter(
+        (tiltak) => tiltak.tiltakId !== Number(tiltakId)
+      );
     res.status(200).end();
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);

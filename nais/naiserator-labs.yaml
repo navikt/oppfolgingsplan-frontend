@@ -59,4 +59,4 @@ spec:
     - name: MOCK_BACKEND
       value: "true"
     - name: DISPLAY_TESTSCENARIO_SELECTOR
-      value: "false"
+      value: "true"
