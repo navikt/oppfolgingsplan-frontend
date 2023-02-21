@@ -9,6 +9,7 @@ import {
   statusPageToDisplaySM,
 } from "utils/statusPageUtils";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+import { STATUS } from "../../../constants/konstanter";
 
 interface OppfolgingsdialogTeaserProps {
   oppfolgingsplan: Oppfolgingsplan;
@@ -64,12 +65,18 @@ const OppfolgingsdialogTeaser = ({
       subtitle={subtitleText(godkjenningsStatus)}
       image={planStatus.img}
     >
-      {typeof planStatus.tekst === "object" ? (
-        <StyledSmallText dangerouslySetInnerHTML={planStatus.tekst} />
-      ) : (
-        <StyledSmallText
-          dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
-        />
+      {oppfolgingsplan.status === STATUS.UNDER_ARBEID && (
+        <>
+          <StyledSmallText>
+            Sist endret: {planStatus.tekstUnderArbeid.sistEndret}
+          </StyledSmallText>
+          <StyledSmallText>
+            Endret av: {planStatus.tekstUnderArbeid.endretAv}
+          </StyledSmallText>
+        </>
+      )}
+      {oppfolgingsplan.status !== STATUS.UNDER_ARBEID && (
+        <StyledSmallText>{planStatus.tekst}</StyledSmallText>
       )}
     </OppfolgingsplanCard>
   );

@@ -38,13 +38,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
       title={virksomhetsnavn}
       image={planStatus.img}
     >
-      {typeof planStatus.tekst === "object" ? (
-        <StyledSmallText dangerouslySetInnerHTML={planStatus.tekst} />
-      ) : (
-        <StyledSmallText
-          dangerouslySetInnerHTML={{ __html: planStatus.tekst }}
-        />
-      )}
+      <StyledSmallText>{planStatus.tekst}</StyledSmallText>
     </OppfolgingsplanCard>
   );
 };
