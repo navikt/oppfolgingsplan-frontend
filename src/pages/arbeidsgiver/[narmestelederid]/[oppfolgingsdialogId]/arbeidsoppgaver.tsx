@@ -21,7 +21,6 @@ const Arbeidsoppgaver: NextPage = () => {
           <NyArbeidsoppgaveAG />
           {aktivPlan.arbeidsoppgaveListe && (
             <LagredeArbeidsoppgaver
-              innloggetFnr={innloggetFnr}
               arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}
               arbeidstakerFnr={aktivPlan.arbeidstaker.fnr}
             />
