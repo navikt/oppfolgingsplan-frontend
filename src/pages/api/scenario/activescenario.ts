@@ -10,7 +10,7 @@ import { handleQueryParamError } from "../../../server/utils/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!displayTestScenarioSelector) {
-    return res.status(204).end();
+    return res.status(404).end();
   }
 
   if (req.method === "POST") {

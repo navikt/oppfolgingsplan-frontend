@@ -14,11 +14,11 @@ const SpacedGuidePanel = styled(GuidePanel)`
 const errorText = (planStatus: StatusPageToDisplay) => {
   switch (planStatus) {
     case "SENDTPLANTILGODKJENNING":
-      return "Du har sendt denne oppfølgingsplanen til lederen din for godkjenning. Gå til siste versjon for å se eller endre oppfølgingsplanen.";
+      return "Du har sendt denne oppfølgingsplanen til godkjenning. Gå til siste versjon for å se eller endre oppfølgingsplanen.";
     case "GODKJENNPLANMOTTATT":
-      return "Lederen din har sendt denne oppfølgingsplanen til deg for godkjenning. Gå til siste versjon for å se, endre eller godkjenne oppfølgingsplanen.";
+      return "Denne planen har blitt sendt til deg for godkjenning. Gå til siste versjon for å se, endre eller godkjenne oppfølgingsplanen.";
     case "MOTTATTFLEREGODKJENNINGER":
-      return "Lederen din har sendt denne oppfølgingsplanen til deg for godkjenning. Gå til siste versjon for å se, endre eller godkjenne oppfølgingsplanen.";
+      return "Denne planen har blitt sendt til deg for godkjenning. Gå til siste versjon for å se, endre eller godkjenne oppfølgingsplanen.";
     default:
       return "Denne oppfølgingsplanen kan ikke redigeres. Gå til siste versjon for å se oppdatert informasjon om oppfølgingsplanen.";
   }
