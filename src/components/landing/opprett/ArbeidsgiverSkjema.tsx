@@ -4,7 +4,15 @@ import {
   erOppfolgingsplanOpprettbarMedArbeidsgiver,
   hentAktivOppfolgingsplanOpprettetMedArbeidsgiver,
 } from "utils/oppfolgingplanUtils";
-import { Alert, BodyShort, Button, Heading, Select } from "@navikt/ds-react";
+import {
+  Alert,
+  BodyShort,
+  Button,
+  Heading,
+  Radio,
+  RadioGroup,
+  Select,
+} from "@navikt/ds-react";
 import Link from "next/link";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
 import { useLandingUrl } from "hooks/routeHooks";
@@ -15,7 +23,7 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 const texts = {
   arbeidsgiverSkjema: {
     question: "Hvilken arbeidsgiver skal du lage en plan med?",
-    buttonSubmit: "VELG ARBEIDSGIVER",
+    optionValue: "Velg arbeidsgiver",
   },
   velgArbeidsgiverUndertekst: {
     alreadyCreatedPlan:
@@ -24,13 +32,25 @@ const texts = {
       "Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn.",
     leader: "Nærmeste leder er ",
   },
+  baserPaTidligereText: {
+    question: "Ønsker du å basere den nye planen på den som gjaldt sist?",
+    answer: {
+      yes: "Ja, ta utgangspunkt i den tidligere planen",
+      no: "Nei, start en ny plan der vi ikke har fylt ut noe",
+    },
+    buttonSubmit: "Start",
+  },
 };
 
 const SpacedDiv = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 2.5rem;
 `;
 
 const SpacedSelect = styled(Select)`
+  margin-bottom: 1rem;
+`;
+
+const SpacedRadioGroup = styled(RadioGroup)`
   margin-bottom: 1rem;
 `;
 
@@ -89,7 +109,7 @@ interface ArbeidsgiverSkjemaProps {
 
   handleClose(): void;
 
-  handleSubmit(virksomhetsnummer: string): void;
+  handleSubmit(kopierTidligerePlan: boolean, virksomhetsnummer: string): void;
 }
 
 export const ArbeidsgiverSkjema = ({
@@ -101,6 +121,7 @@ export const ArbeidsgiverSkjema = ({
 }: ArbeidsgiverSkjemaProps) => {
   const [selectedVirksomhet, setSelectedVirksomhet] =
     useState<ArbeidsgivereForGyldigeSykmeldinger | null>(null);
+  const [kopierTidligerePlan, setKopierTidligerePlan] = useState(false);
 
   return (
     <>
@@ -119,7 +140,7 @@ export const ArbeidsgiverSkjema = ({
           )
         }
       >
-        <option value="">Velg arbeidsgiver</option>
+        <option value="">{texts.arbeidsgiverSkjema.optionValue}</option>
         {arbeidsgivere.map((arbeidsgiver, index) => {
           return (
             <option key={index} value={arbeidsgiver.virksomhetsnummer}>
@@ -130,33 +151,55 @@ export const ArbeidsgiverSkjema = ({
       </SpacedSelect>
 
       {selectedVirksomhet && (
-        <SpacedDiv>
-          <VelgArbeidsgiverUndertekst
-            oppfolgingsplaner={oppfolgingsplaner}
-            arbeidsgiver={selectedVirksomhet}
-          />
-        </SpacedDiv>
+        <>
+          <SpacedDiv>
+            <VelgArbeidsgiverUndertekst
+              oppfolgingsplaner={oppfolgingsplaner}
+              arbeidsgiver={selectedVirksomhet}
+            />
+          </SpacedDiv>
+          <SpacedDiv>
+            <SpacedRadioGroup
+              legend={texts.baserPaTidligereText.question}
+              onChange={(val: boolean) => setKopierTidligerePlan(val)}
+              value={kopierTidligerePlan}
+            >
+              <Radio value={true}>
+                {texts.baserPaTidligereText.answer.yes}
+              </Radio>
+              <Radio value={false}>
+                {texts.baserPaTidligereText.answer.no}
+              </Radio>
+            </SpacedRadioGroup>
+          </SpacedDiv>
+        </>
       )}
 
       <Row>
-        <Button
-          variant={"primary"}
-          loading={isSubmitting}
-          disabled={
-            !selectedVirksomhet ||
-            !erOppfolgingsplanOpprettbarMedArbeidsgiver(
-              oppfolgingsplaner,
-              selectedVirksomhet
-            )
-          }
-          onClick={() =>
-            selectedVirksomhet?.virksomhetsnummer
-              ? handleSubmit(selectedVirksomhet?.virksomhetsnummer)
-              : {}
-          }
-        >
-          {texts.arbeidsgiverSkjema.buttonSubmit}
-        </Button>
+        {selectedVirksomhet && (
+          <Button
+            variant={"primary"}
+            onClick={() =>
+              selectedVirksomhet?.virksomhetsnummer
+                ? handleSubmit(
+                    kopierTidligerePlan,
+                    selectedVirksomhet?.virksomhetsnummer
+                  )
+                : {}
+            }
+            loading={isSubmitting}
+            disabled={
+              !selectedVirksomhet ||
+              !erOppfolgingsplanOpprettbarMedArbeidsgiver(
+                oppfolgingsplaner,
+                selectedVirksomhet
+              )
+            }
+          >
+            {texts.baserPaTidligereText.buttonSubmit}
+          </Button>
+        )}
+
         <Button variant={"tertiary"} onClick={handleClose}>
           Avbryt
         </Button>
