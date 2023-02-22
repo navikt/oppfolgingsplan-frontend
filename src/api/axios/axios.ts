@@ -42,10 +42,10 @@ const defaultRequestHeaders = (
   }
 
   if (displayTestScenarioSelector && typeof window !== "undefined") {
-    let sessionId = sessionStorage.getItem(TEST_SESSION_ID);
+    let sessionId = localStorage.getItem(TEST_SESSION_ID);
     if (!sessionId) {
       sessionId = uuidv4();
-      sessionStorage.setItem(TEST_SESSION_ID, sessionId);
+      localStorage.setItem(TEST_SESSION_ID, sessionId);
     }
     headers[TEST_SESSION_ID] = sessionId;
   }
