@@ -162,7 +162,7 @@ export const TestScenarioSelector = () => {
                 variant={"primary"}
                 disabled={!setActiveTestScenario}
                 onClick={() => {
-                  setActiveTestScenario.mutate(selectedScenario);
+                  setActiveTestScenario.mutateAsync(selectedScenario);
                   setOpen(false);
                 }}
               >
