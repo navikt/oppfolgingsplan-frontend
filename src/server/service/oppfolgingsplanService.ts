@@ -18,7 +18,12 @@ import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
 import { personV3Schema } from "../../schema/personSchemas";
-import { Arbeidsoppgave, Kommentar, Tiltak } from "../../types/oppfolgingsplan";
+import {
+  Arbeidsoppgave,
+  GodkjennEgenPlan,
+  Kommentar,
+  Tiltak,
+} from "../../types/oppfolgingsplan";
 
 export async function getNarmesteLeder(
   accessToken: string,
@@ -322,6 +327,18 @@ export async function godkjennOppfolgingsplanAG(
     }/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=${
       data.tvungenGodkjenning ? "tvungenGodkjenning" : "makrell"
     }&aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
+    data.gyldighetstidspunkt,
+    { accessToken }
+  );
+}
+
+export async function godkjennEgenOppfolgingsplanAG(
+  accessToken: string,
+  oppfolgingsplanId: string,
+  data: GodkjennEgenPlan
+) {
+  return await post(
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?delmednav=${data.delMedNav}`,
     data.gyldighetstidspunkt,
     { accessToken }
   );

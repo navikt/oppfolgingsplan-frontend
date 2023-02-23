@@ -1,23 +1,25 @@
 import React, { ReactElement, useState } from "react";
 import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
-import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
-import { Heading } from "@navikt/ds-react";
+import { Alert, Heading } from "@navikt/ds-react";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { formatAsLocalDateTime } from "../../../utils/dateUtils";
-import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
+import { useGodkjennEgenOppfolgingsplanAG } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
 }
 
-export const SendTilGodkjenningAG = ({
+export const GodkjennEgenPlanAG = ({
   oppfolgingsplan,
 }: Props): ReactElement | null => {
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
     useState(false);
 
-  const sendTilGodkjenning = useGodkjennOppfolgingsplan(oppfolgingsplan.id);
+  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplanAG(oppfolgingsplan.id);
+
   if (!oppfolgingsplan) return null;
 
   if (!visOppfolgingsplanSkjema) {
@@ -36,22 +38,27 @@ export const SendTilGodkjenningAG = ({
       <Heading spacing size={"medium"} level={"2"}>
         Jeg er ferdig med planen
       </Heading>
+      <SpacedDiv marginBottom={"1rem"}>
+        <Alert variant={"info"}>
+          Fordi du er din egen leder, kan du opprette planen nå.
+        </Alert>
+      </SpacedDiv>
 
       <SendTilGodkjenningForm
         oppfolgingsplan={oppfolgingsplan}
         cancel={() => setVisOppfolgingsplanSkjema(false)}
-        visTvungenGodkjenningToggle={true}
+        visTvungenGodkjenningToggle={false}
+        isOwnLeder={true}
+        isSubmitting={godkjennEgenPlan.isLoading}
         navnPaaMotpart={oppfolgingsplan.arbeidstaker.navn}
-        isSubmitting={sendTilGodkjenning.isLoading}
         sendTilGodkjenning={(data) => {
-          sendTilGodkjenning.mutate({
+          godkjennEgenPlan.mutate({
             gyldighetstidspunkt: {
               fom: formatAsLocalDateTime(data.startDato),
               tom: formatAsLocalDateTime(data.sluttDato),
               evalueres: formatAsLocalDateTime(data.evalueresInnen),
             },
-            tvungenGodkjenning: data.tvungenGodkjenning,
-            delmednav: data.delMedNAV === "true",
+            delMedNav: data.delMedNAV === "true",
           });
         }}
       />

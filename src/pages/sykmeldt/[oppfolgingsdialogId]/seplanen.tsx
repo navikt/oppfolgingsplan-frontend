@@ -11,14 +11,18 @@ import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
+  const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
+  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr;
+
   const isOwnLeader =
-    aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr ===
-    aktivPlan?.arbeidstaker.fnr;
+    narmesteLederFnr && arbeidstakerFnr && narmesteLederFnr === arbeidstakerFnr;
 
   return (
     <OppfolgingsplanPageSM page={Page.SEPLANEN}>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
-      {!isOwnLeader && <SendTilGodkjenningSM oppfolgingsplan={aktivPlan} />}
+      {!isOwnLeader && aktivPlan && (
+        <SendTilGodkjenningSM oppfolgingsplan={aktivPlan} />
+      )}
       {isOwnLeader && (
         <Alert variant={"info"}>
           Fordi du er din egen leder, må du logge inn som arbeidsgiver for å
