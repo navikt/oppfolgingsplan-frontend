@@ -3,18 +3,11 @@ import { hentStatusUtenAktivSykmelding } from "utils/teaserUtils";
 import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { OppfolgingsplanCard } from "../seplanen/OppfolgingsplanCard";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
-import styled from "styled-components";
+import { Detail } from "@navikt/ds-react";
 
 interface Props {
   oppfolgingsplanUtenAktivSykmelding: Oppfolgingsplan;
 }
-
-const StyledSmallText = styled.p`
-  margin: 0;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.004em;
-`;
 
 const OppfolgingsdialogTidligereUtenSykmelding = ({
   oppfolgingsplanUtenAktivSykmelding,
@@ -38,7 +31,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
       title={virksomhetsnavn}
       image={planStatus.img}
     >
-      <StyledSmallText>{planStatus.tekst}</StyledSmallText>
+      <Detail>{planStatus.tekst}</Detail>
     </OppfolgingsplanCard>
   );
 };

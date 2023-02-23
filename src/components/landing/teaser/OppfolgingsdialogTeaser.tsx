@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { hentPlanStatus } from "utils/teaserUtils";
 import { useAudience, useOppfolgingsplanUrl } from "hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
@@ -10,18 +9,12 @@ import {
 } from "utils/statusPageUtils";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
 import { STATUS } from "../../../constants/konstanter";
+import { Detail } from "@navikt/ds-react";
 
 interface OppfolgingsdialogTeaserProps {
   oppfolgingsplan: Oppfolgingsplan;
   rootUrlPlaner?: string;
 }
-
-const StyledSmallText = styled.p`
-  margin: 0;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.004em;
-`;
 
 const subtitleText = (godkjenningsStatus: StatusPageToDisplay | null) => {
   switch (godkjenningsStatus) {
@@ -67,16 +60,12 @@ const OppfolgingsdialogTeaser = ({
     >
       {oppfolgingsplan.status === STATUS.UNDER_ARBEID && (
         <>
-          <StyledSmallText>
-            Sist endret: {planStatus.tekstUnderArbeid.sistEndret}
-          </StyledSmallText>
-          <StyledSmallText>
-            Endret av: {planStatus.tekstUnderArbeid.endretAv}
-          </StyledSmallText>
+          <Detail>Sist indent: {planStatus.tekstUnderArbeid.sistEndret}</Detail>
+          <Detail>Endret av: {planStatus.tekstUnderArbeid.endretAv}</Detail>
         </>
       )}
       {oppfolgingsplan.status !== STATUS.UNDER_ARBEID && (
-        <StyledSmallText>{planStatus.tekst}</StyledSmallText>
+        <Detail>{planStatus.tekst}</Detail>
       )}
     </OppfolgingsplanCard>
   );
