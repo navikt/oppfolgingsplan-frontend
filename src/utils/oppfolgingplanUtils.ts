@@ -105,6 +105,18 @@ export const harTidligereOppfolgingsplaner = (
   return finnTidligereOppfolgingsplaner(oppfolgingsplaner).length > 0;
 };
 
+export const harTidligereOppfolgingsplanMedVirksomhet = (
+  oppfolgingsplaner: Oppfolgingsplan[],
+  virksomhetsnummer: string
+): boolean => {
+  return (
+    finnNyesteTidligereOppfolgingsplanMedVirksomhet(
+      oppfolgingsplaner,
+      virksomhetsnummer
+    ) !== undefined
+  );
+};
+
 export const finnAktiveOppfolgingsplaner = (
   oppfolgingsplaner: Oppfolgingsplan[],
   sykmeldinger?: Sykmelding[]

@@ -83,8 +83,11 @@ const OpprettModalSM = ({
                   arbeidsgivere={arbeidsgivere}
                   oppfolgingsplaner={oppfolgingsplaner}
                   isSubmitting={opprettOppfolgingsplan.isLoading}
-                  handleSubmit={(virksomhetsnummer: string) => {
-                    opprettOppfolgingsplan.mutateAsync(virksomhetsnummer);
+                  handleSubmit={(
+                    kopierTidligerePlan: boolean,
+                    virksomhetsnummer: string
+                  ) => {
+                    opprett(kopierTidligerePlan, virksomhetsnummer);
                   }}
                   handleClose={() => setVisOpprettModal(false)}
                 />
@@ -93,8 +96,11 @@ const OpprettModalSM = ({
               return (
                 <BaserTidligereSkjema
                   isLoading={opprettOppfolgingsplan.isLoading}
-                  onSubmit={(kopierplan) =>
-                    opprett(kopierplan, arbeidsgivere[0].virksomhetsnummer)
+                  onSubmit={(kopierTidligerePlan) =>
+                    opprett(
+                      kopierTidligerePlan,
+                      arbeidsgivere[0].virksomhetsnummer
+                    )
                   }
                   handleClose={() => setVisOpprettModal(false)}
                 />
