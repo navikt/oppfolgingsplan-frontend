@@ -63,6 +63,8 @@ export const TiltakFormAG = ({
   } = formFunctions;
 
   const beskrivelseValue = watch("beskrivelse");
+  const gjennomfoeringValue = watch("gjennomfoering");
+  const beskrivelseIkkeAktueltValue = watch("beskrivelseIkkeAktuelt");
   const statusValue = watch("status");
   const startDate = watch("fom");
 
@@ -108,7 +110,10 @@ export const TiltakFormAG = ({
             maxLength={600}
             {...register("beskrivelse", {
               required: "Du må gi en beskrivelse av tiltaket",
-              maxLength: 600,
+              maxLength: {
+                value: 600,
+                message: "Beskrivelse må være på 600 tegn eller mindre",
+              },
             })}
             defaultValue={defaultFormValues?.beskrivelse}
             value={beskrivelseValue}
@@ -148,12 +153,17 @@ export const TiltakFormAG = ({
               description={
                 "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
               }
+              maxLength={1000}
               {...register("gjennomfoering", {
                 required:
                   "Du må gi en beskrivelse av hvordan skal dette følges opp underveis",
-                maxLength: 1000,
+                maxLength: {
+                  value: 10000,
+                  message: "Beskrivelse må være på 1000 tegn eller mindre",
+                },
               })}
               defaultValue={defaultFormValues?.gjennomfoering}
+              value={gjennomfoeringValue}
             />
           )}
 
@@ -167,12 +177,17 @@ export const TiltakFormAG = ({
               description={
                 "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
               }
+              maxLength={1000}
               {...register("beskrivelseIkkeAktuelt", {
                 required:
                   "Du må gi en beskrivelse av hvorfor tiltaket ikke er aktuelt akkurat nå",
-                maxLength: 1000,
+                maxLength: {
+                  value: 10000,
+                  message: "Beskrivelse må være på 1000 tegn eller mindre",
+                },
               })}
               defaultValue={defaultFormValues?.beskrivelseIkkeAktuelt}
+              value={beskrivelseIkkeAktueltValue}
             />
           )}
 
