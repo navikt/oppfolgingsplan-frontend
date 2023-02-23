@@ -60,7 +60,7 @@ const OppfolgingsdialogTeaser = ({
     >
       {oppfolgingsplan.status === STATUS.UNDER_ARBEID && (
         <>
-          <Detail>Sist indent: {planStatus.tekstUnderArbeid.sistEndret}</Detail>
+          <Detail>Sist endret: {planStatus.tekstUnderArbeid.sistEndret}</Detail>
           <Detail>Endret av: {planStatus.tekstUnderArbeid.endretAv}</Detail>
         </>
       )}
