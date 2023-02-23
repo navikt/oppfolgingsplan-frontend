@@ -1,10 +1,9 @@
 import React from "react";
 import { hentStatusUtenAktivSykmelding } from "utils/teaserUtils";
-import getContextRoot from "utils/getContextRoot";
-import { BodyLong, Heading, LinkPanel } from "@navikt/ds-react";
-import Image from "next/image";
-import PlanIkkeAktivSykmeldingImage from "../blocks/images/plan-ikke-aktiv-sykmelding--hake.svg";
 import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
+import { OppfolgingsplanCard } from "../seplanen/OppfolgingsplanCard";
+import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
+import { Detail } from "@navikt/ds-react";
 
 interface Props {
   oppfolgingsplanUtenAktivSykmelding: Oppfolgingsplan;
@@ -17,21 +16,23 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
     oppfolgingsplanUtenAktivSykmelding
   );
 
+  const virksomhetsnavn =
+    oppfolgingsplanUtenAktivSykmelding.virksomhet?.navn ||
+    "Mangler navn på virksomhet";
+
+  const statusUrl = useOppfolgingsplanUrl(
+    oppfolgingsplanUtenAktivSykmelding.id,
+    "status"
+  );
+
   return (
-    <LinkPanel
-      href={`${getContextRoot()}/oppfolgingsplaner/${
-        oppfolgingsplanUtenAktivSykmelding.id
-      }`}
-      border
+    <OppfolgingsplanCard
+      href={statusUrl}
+      title={virksomhetsnavn}
+      image={planStatus.img}
     >
-      <Image alt="" src={PlanIkkeAktivSykmeldingImage} />
-      <div>
-        <Heading size={"medium"} level={"3"}>
-          {oppfolgingsplanUtenAktivSykmelding.virksomhet?.navn}
-        </Heading>
-        <BodyLong>{planStatus.tekst}</BodyLong>
-      </div>
-    </LinkPanel>
+      <Detail>{planStatus.tekst}</Detail>
+    </OppfolgingsplanCard>
   );
 };
 
