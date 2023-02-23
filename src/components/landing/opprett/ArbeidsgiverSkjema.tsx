@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   erAktivOppfolgingsplanOpprettetMedArbeidsgiver,
   erOppfolgingsplanOpprettbarMedArbeidsgiver,
+  harTidligereOppfolgingsplanMedVirksomhet,
   hentAktivOppfolgingsplanOpprettetMedArbeidsgiver,
 } from "utils/oppfolgingplanUtils";
 import {
@@ -24,6 +25,7 @@ const texts = {
   arbeidsgiverSkjema: {
     question: "Hvilken arbeidsgiver skal du lage en plan med?",
     optionValue: "Velg arbeidsgiver",
+    buttonSubmit: "Velg arbeidsgiver",
   },
   velgArbeidsgiverUndertekst: {
     alreadyCreatedPlan:
@@ -158,47 +160,85 @@ export const ArbeidsgiverSkjema = ({
               arbeidsgiver={selectedVirksomhet}
             />
           </SpacedDiv>
-          <SpacedDiv>
-            <SpacedRadioGroup
-              legend={texts.baserPaTidligereText.question}
-              onChange={(val: boolean) => setKopierTidligerePlan(val)}
-              value={kopierTidligerePlan}
-            >
-              <Radio value={true}>
-                {texts.baserPaTidligereText.answer.yes}
-              </Radio>
-              <Radio value={false}>
-                {texts.baserPaTidligereText.answer.no}
-              </Radio>
-            </SpacedRadioGroup>
-          </SpacedDiv>
+          {harTidligereOppfolgingsplanMedVirksomhet(
+            oppfolgingsplaner,
+            selectedVirksomhet.virksomhetsnummer
+          ) &&
+            !erAktivOppfolgingsplanOpprettetMedArbeidsgiver(
+              oppfolgingsplaner,
+              selectedVirksomhet.virksomhetsnummer
+            ) && (
+              <SpacedDiv>
+                <SpacedRadioGroup
+                  legend={texts.baserPaTidligereText.question}
+                  onChange={(val: boolean) => setKopierTidligerePlan(val)}
+                  value={kopierTidligerePlan}
+                >
+                  <Radio value={true}>
+                    {texts.baserPaTidligereText.answer.yes}
+                  </Radio>
+                  <Radio value={false}>
+                    {texts.baserPaTidligereText.answer.no}
+                  </Radio>
+                </SpacedRadioGroup>
+              </SpacedDiv>
+            )}
         </>
       )}
 
       <Row>
-        {selectedVirksomhet && (
-          <Button
-            variant={"primary"}
-            onClick={() =>
-              selectedVirksomhet?.virksomhetsnummer
-                ? handleSubmit(
-                    kopierTidligerePlan,
-                    selectedVirksomhet?.virksomhetsnummer
-                  )
-                : {}
-            }
-            loading={isSubmitting}
-            disabled={
-              !selectedVirksomhet ||
-              !erOppfolgingsplanOpprettbarMedArbeidsgiver(
-                oppfolgingsplaner,
-                selectedVirksomhet
-              )
-            }
-          >
-            {texts.baserPaTidligereText.buttonSubmit}
-          </Button>
-        )}
+        {selectedVirksomhet &&
+          harTidligereOppfolgingsplanMedVirksomhet(
+            oppfolgingsplaner,
+            selectedVirksomhet.virksomhetsnummer
+          ) && (
+            <Button
+              variant={"primary"}
+              onClick={() =>
+                selectedVirksomhet?.virksomhetsnummer
+                  ? handleSubmit(
+                      kopierTidligerePlan,
+                      selectedVirksomhet?.virksomhetsnummer
+                    )
+                  : {}
+              }
+              loading={isSubmitting}
+              disabled={
+                !selectedVirksomhet ||
+                !erOppfolgingsplanOpprettbarMedArbeidsgiver(
+                  oppfolgingsplaner,
+                  selectedVirksomhet
+                )
+              }
+            >
+              {texts.baserPaTidligereText.buttonSubmit}
+            </Button>
+          )}
+
+        {selectedVirksomhet &&
+          !harTidligereOppfolgingsplanMedVirksomhet(
+            oppfolgingsplaner,
+            selectedVirksomhet.virksomhetsnummer
+          ) && (
+            <Button
+              variant={"primary"}
+              onClick={() =>
+                selectedVirksomhet?.virksomhetsnummer
+                  ? handleSubmit(false, selectedVirksomhet?.virksomhetsnummer)
+                  : {}
+              }
+              loading={isSubmitting}
+              disabled={
+                !selectedVirksomhet ||
+                !erOppfolgingsplanOpprettbarMedArbeidsgiver(
+                  oppfolgingsplaner,
+                  selectedVirksomhet
+                )
+              }
+            >
+              {texts.arbeidsgiverSkjema.buttonSubmit}
+            </Button>
+          )}
 
         <Button variant={"tertiary"} onClick={handleClose}>
           Avbryt
