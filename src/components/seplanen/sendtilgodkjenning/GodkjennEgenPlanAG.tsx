@@ -49,6 +49,7 @@ export const GodkjennEgenPlanAG = ({
         cancel={() => setVisOppfolgingsplanSkjema(false)}
         visTvungenGodkjenningToggle={false}
         isSubmitting={godkjennEgenPlan.isLoading}
+        navnPaaMotpart={oppfolgingsplan.arbeidstaker.navn}
         sendTilGodkjenning={(data) => {
           godkjennEgenPlan.mutate({
             gyldighetstidspunkt: {
