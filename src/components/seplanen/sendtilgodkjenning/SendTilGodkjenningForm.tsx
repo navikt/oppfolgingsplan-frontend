@@ -33,6 +33,7 @@ export type SendTilGodkjenningFormValues = {
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
+  isOwnLeder?: boolean;
   visTvungenGodkjenningToggle: boolean;
   navnPaaMotpart: string;
   sendTilGodkjenning: (values: SendTilGodkjenningFormValues) => void;
@@ -42,6 +43,7 @@ interface Props {
 
 export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
+  isOwnLeder = false,
   visTvungenGodkjenningToggle,
   navnPaaMotpart,
   sendTilGodkjenning,
@@ -177,7 +179,7 @@ export const SendTilGodkjenningForm = ({
 
         <Row>
           <Button type={"submit"} loading={isSubmitting}>
-            Send til godkjenning
+            {isOwnLeder ? "Opprett plan" : "Send til godkjenning"}
           </Button>
           <Button variant={"tertiary"} onClick={cancel}>
             Avbryt
