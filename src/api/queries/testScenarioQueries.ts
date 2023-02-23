@@ -9,14 +9,12 @@ export const useSetActiveTestScenario = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const setActiveTestScenario = (mockSetup: TestScenario) =>
-    post(`${router.basePath}/api/scenario/activescenario`, mockSetup);
+  const setActiveTestScenario = async (mockSetup: TestScenario) => {
+    await post(`${router.basePath}/api/scenario/activescenario`, mockSetup);
+    await queryClient.invalidateQueries();
+  };
 
-  return useMutation(setActiveTestScenario, {
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-    },
-  });
+  return useMutation(setActiveTestScenario);
 };
 
 export const useActiveTestScenario = () => {

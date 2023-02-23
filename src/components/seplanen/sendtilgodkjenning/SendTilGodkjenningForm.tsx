@@ -34,15 +34,16 @@ export type SendTilGodkjenningFormValues = {
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
   visTvungenGodkjenningToggle: boolean;
+  navnPaaMotpart: string;
   sendTilGodkjenning: (values: SendTilGodkjenningFormValues) => void;
   isSubmitting: boolean;
-
   cancel(): void;
 }
 
 export const SendTilGodkjenningForm = ({
   oppfolgingsplan,
   visTvungenGodkjenningToggle,
+  navnPaaMotpart,
   sendTilGodkjenning,
   isSubmitting,
   cancel,
@@ -71,6 +72,7 @@ export const SendTilGodkjenningForm = ({
     })[0];
 
   const startDate = watch("startDato");
+  const sluttDate = watch("sluttDato");
 
   const onSubmit = (data: SendTilGodkjenningFormValues) => {
     data.tvungenGodkjenning = tvungenGodkjenning;
@@ -135,6 +137,10 @@ export const SendTilGodkjenningForm = ({
             if (startDate && value.getTime() < toDate(startDate).getTime()) {
               return "Evalueringsdato må være etter startdato";
             }
+
+            if (sluttDate && value.getTime() > toDate(sluttDate).getTime()) {
+              return "Evalueringsdato må være før sluttdato";
+            }
           }}
         />
 
@@ -151,10 +157,8 @@ export const SendTilGodkjenningForm = ({
         <SpacedDiv>
           <CheckboxGroup legend="Samtykke og deling" hideLegend>
             <Checkbox value={"true"} {...register("delMedNAV")}>
-              Jeg vil dele planen med NAV når{" "}
-              {oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn ||
-                "lederen min"}{" "}
-              har godkjent den (valgfritt)
+              Jeg vil dele planen med NAV når {navnPaaMotpart} har godkjent den
+              (valgfritt)
             </Checkbox>
             <Checkbox
               value={"true"}

@@ -1,17 +1,34 @@
+import { leggTilDagerPaDato } from "utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "schema/oppfolgingsplanSchema";
 
-export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
+const today = new Date();
+
+export const godkjentPlanMockData: OppfolgingsplanDTO[] = [
   {
-    id: 3455,
-    sistEndretDato: "2020-02-20T11:31:29.837",
-    opprettetDato: "2020-02-20",
-    status: "UNDER_ARBEID",
+    id: 7777,
+    sistEndretDato: leggTilDagerPaDato(today, -7).toJSON(),
+    opprettetDato: leggTilDagerPaDato(today, -20).toJSON(),
+    status: "AKTIV",
     virksomhet: {
       virksomhetsnummer: "110110110",
       navn: "",
     },
-    godkjentPlan: null,
+    godkjentPlan: {
+      opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
+      gyldighetstidspunkt: {
+        fom: leggTilDagerPaDato(today, -5).toJSON(),
+        tom: leggTilDagerPaDato(today, 7).toJSON(),
+        evalueres: leggTilDagerPaDato(today, 14).toJSON(),
+      },
+      tvungenGodkjenning: false,
+      deltMedNAVTidspunkt: null,
+      deltMedNAV: false,
+      deltMedFastlegeTidspunkt: null,
+      deltMedFastlege: false,
+      dokumentUuid: "12345678-1234-1234-1234-123456789abc",
+      avbruttPlan: null,
+    },
     godkjenninger: [],
     arbeidsoppgaveListe: [
       {
@@ -22,7 +39,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
           kanGjennomfoeres: "TILRETTELEGGING",
           paaAnnetSted: true,
           medMerTid: true,
-          medHjelp: false,
+          medHjelp: true,
           kanBeskrivelse:
             "Trenger mer tid til de faste oppgavene og kan utføre noen av disse hjemmefra. ",
           kanIkkeBeskrivelse: null,
@@ -154,8 +171,8 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         tiltakId: 4852,
         tiltaknavn: "Hjemmekontor ",
         knyttetTilArbeidsoppgaveId: null,
-        fom: "2021-04-15",
-        tom: "2022-07-26",
+        fom: "2020-02-10",
+        tom: "2020-02-21",
         beskrivelse:
           "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
         beskrivelseIkkeAktuelt: null,
@@ -193,7 +210,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: "Labben Rekemester",
-          fnr: "12011011012",
+          fnr: "110110110110",
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -203,7 +220,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: "Labben Rekemester",
-          fnr: "12011011012",
+          fnr: "110110110110",
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -301,32 +318,6 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
               stillinger: [],
             },
           },
-          {
-            id: 786,
-            tekst: "Det er greit!",
-            opprettetTidspunkt: "2021-02-20T11:31:30.376",
-            sistEndretDato: "2022-02-20T11:31:30.376",
-            opprettetAv: {
-              navn: defaultNarmesteLedereMockData[1].navn,
-              fnr: defaultNarmesteLedereMockData[1].fnr,
-              epost: null,
-              tlf: null,
-              sistInnlogget: null,
-              samtykke: null,
-              evaluering: null,
-              stillinger: [],
-            },
-            sistEndretAv: {
-              navn: defaultNarmesteLedereMockData[1].navn,
-              fnr: defaultNarmesteLedereMockData[1].fnr,
-              epost: null,
-              tlf: null,
-              sistInnlogget: null,
-              samtykke: null,
-              evaluering: null,
-              stillinger: [],
-            },
-          },
         ],
         status: "AVTALT",
         gjennomfoering:
@@ -400,14 +391,14 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     ],
     arbeidsgiver: {
       narmesteLeder: {
-        navn: "Labben Rekemester",
-        fnr: "20405060718",
-        epost: null,
-        tlf: null,
+        navn: "Albus Dumbledore",
+        fnr: "11011011011",
+        epost: "albus@hogwarts.ac.uk",
+        tlf: "110",
         sistInnlogget: "2020-02-24T08:57:46.747",
         samtykke: null,
-        virksomhetsnummer: "123",
-        erAktiv: false,
+        virksomhetsnummer: "110110110",
+        erAktiv: true,
         aktivFom: "2020-02-24T08:57:46.747",
         aktivTom: null,
       },

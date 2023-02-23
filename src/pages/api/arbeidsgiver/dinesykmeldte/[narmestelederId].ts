@@ -10,7 +10,7 @@ const handler = async (
   res: NextApiResponse
 ): Promise<void> => {
   if (isMockBackend) {
-    res.status(200).json(getMockDb().sykmeldt);
+    res.status(200).json(getMockDb(req).sykmeldt);
   } else {
     const accessToken = await getDineSykmeldteTokenFromRequest(req);
     const { narmestelederId } = <{ narmestelederId: string }>req.query;

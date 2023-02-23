@@ -18,7 +18,7 @@ export const NyArbeidsoppgaveAG = () => {
     data: OppgaveFormValues
   ): Partial<Arbeidsoppgave> => {
     return {
-      arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
+      arbeidsoppgavenavn: data.arbeidsoppgaveNavn,
       gjennomfoering: {
         kanGjennomfoeres: "IKKE_VURDERT",
         paaAnnetSted: false,

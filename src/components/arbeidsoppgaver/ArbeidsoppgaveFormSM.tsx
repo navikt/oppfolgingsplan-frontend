@@ -96,7 +96,11 @@ export const ArbeidsoppgaveFormSM = ({
               maxLength={100}
               {...register("navnPaaArbeidsoppgaven", {
                 required: "Du må gi et navn på oppgaven",
-                maxLength: 100,
+                maxLength: {
+                  value: 100,
+                  message:
+                    "Navnet på arbeidsoppgaven må være på 100 tegn eller mindre",
+                },
               })}
               defaultValue={defaultFormValues?.navnPaaArbeidsoppgaven}
             />

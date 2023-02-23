@@ -13,7 +13,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
   req: NextApiRequest
 ): Promise<OppfolgingsplanMeta | undefined> => {
   if (isMockBackend) {
-    const activeMock = getMockDb();
+    const activeMock = getMockDb(req);
 
     return {
       person: activeMock.person,

@@ -117,10 +117,13 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
   handleSchemaParsingError("Sykmeldt", "Oppfolgingsplan", response.error);
 }
 
-export async function getOppfolgingsplanerAG(accessToken: string) {
+export async function getOppfolgingsplanerAG(
+  sykmeldtFnr: string,
+  accessToken: string
+) {
   const response = array(oppfolgingsplanSchema).safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner/${sykmeldtFnr}`,
       {
         accessToken,
       }
@@ -250,7 +253,7 @@ export async function avbrytOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string
 ) {
-  return await post(
+  return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/avbryt`,
     {},
     { accessToken }
@@ -323,7 +326,7 @@ export async function godkjennOppfolgingsplanAG(
       serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST
     }/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=${
       data.tvungenGodkjenning ? "tvungenGodkjenning" : "makrell"
-    }&aktoer=arbeidstaker&delmednav=${data.delmednav}`,
+    }&aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
     data.gyldighetstidspunkt,
     { accessToken }
   );

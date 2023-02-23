@@ -1,4 +1,4 @@
-import activeMockData from "./activeMockData";
+import activeMockData, { getMockSetupForScenario } from "./activeMockData";
 import {
   OppfolgingsplanDTO,
   VirksomhetDTO,
@@ -9,11 +9,15 @@ import { KontaktinfoDTO } from "../../../schema/kontaktinfoSchema";
 import { Tilgang } from "../../../schema/tilgangSchema";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { PersonV3DTO } from "../../../schema/personSchemas";
+import { TEST_SESSION_ID } from "../../../api/axios/axios";
+import { handleQueryParamError } from "../../utils/errors";
+import { NextApiRequest } from "next";
 
 export type TestScenario =
   | "INGENPLAN"
   | "TIDLIGEREPLANER"
   | "UNDERARBEID"
+  | "GODKJENTPLAN"
   | "SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"
   | "SYKMELDT_HAR_SENDT_TIL_GODKJENNING"
   | "ARBEIDSGIVER_HAR_SENDT_TIL_GODKJENNING";
@@ -32,7 +36,7 @@ export interface MockSetup {
 
 declare global {
   // eslint-disable-next-line no-var
-  var _mockDb: MockSetup;
+  var _mockDb: { [key: string]: MockSetup };
 }
 
 /**
@@ -40,25 +44,28 @@ declare global {
  * that mutations were not persisted. Putting the MockDB on the global object
  * fixes this, but that only needs to be done when we are developing locally.
  */
-global._mockDb = global._mockDb || activeMockData;
+global._mockDb = global._mockDb || ["123", activeMockData];
 
-/**
- * Used ONLY by tests to reset the fake DB to initial values between tests
- */
-export function resetMockDb(): void {
-  if (process.env.NODE_ENV !== "test")
-    throw new Error("This is a test only utility");
-
-  global._mockDb = activeMockData;
+export function assignNewDbSetup(newSetup: MockSetup, sessionId: string): void {
+  global._mockDb[sessionId] = newSetup;
 }
 
-export function assignNewDbSetup(newSetup: MockSetup): void {
-  global._mockDb = newSetup;
-}
+const getMockDb = (req: NextApiRequest): MockSetup => {
+  const sessionId = req.headers[TEST_SESSION_ID];
 
-const getMockDb = (): MockSetup => {
+  if (typeof sessionId !== "string") {
+    return handleQueryParamError(sessionId);
+  }
+
   // global._mockDb = new FakeMockDB();
-  return global._mockDb;
+  let storedSetup = global._mockDb[sessionId];
+
+  if (!storedSetup) {
+    assignNewDbSetup(getMockSetupForScenario("UNDERARBEID"), sessionId);
+    storedSetup = global._mockDb[sessionId];
+  }
+
+  return storedSetup;
 };
 
 export default getMockDb;

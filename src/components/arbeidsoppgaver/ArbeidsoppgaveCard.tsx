@@ -22,23 +22,34 @@ import { texts } from "components/seplanen/texts";
 import { AddColored } from "components/blocks/icons/AddColored";
 import { Button } from "@navikt/ds-react";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
+import {
+  aktorHarOpprettetElement,
+  getAktorNavn,
+} from "../../utils/textContextUtils";
 
 interface Props {
-  innloggetFnr: string;
+  arbeidstakerFnr: string;
   arbeidsoppgave: Arbeidsoppgave;
   readonly?: boolean;
 }
 
 export const ArbeidsoppgaveCard = ({
-  innloggetFnr,
+  arbeidstakerFnr,
   arbeidsoppgave,
   readonly = true,
 }: Props) => {
   const { isAudienceSykmeldt } = useAudience();
   const type = arbeidsoppgave.gjennomfoering?.kanGjennomfoeres;
   const [editererArbeidsoppgave, setEditererArbeidsoppgave] = useState(false);
-  const aktoerHarOpprettetElement =
-    innloggetFnr === arbeidsoppgave.opprettetAv.fnr;
+  const isAktorHarOpprettetElement = aktorHarOpprettetElement(
+    isAudienceSykmeldt,
+    arbeidstakerFnr,
+    arbeidsoppgave.opprettetAv.fnr
+  );
+  const aktorNavn = getAktorNavn(
+    isAudienceSykmeldt,
+    arbeidsoppgave.opprettetAv.navn
+  );
 
   const EditerArbeidsoppgaveForm = () => (
     <EditerArbeidsoppgave
@@ -65,7 +76,7 @@ export const ArbeidsoppgaveCard = ({
   };
   const SlettKnapp = () => (
     <SlettArbeidsoppgaveButton
-      show={aktoerHarOpprettetElement}
+      show={isAktorHarOpprettetElement}
       arbeidsoppgaveId={arbeidsoppgave.arbeidsoppgaveId}
     />
   );
@@ -86,7 +97,7 @@ export const ArbeidsoppgaveCard = ({
             {texts.arbeidsoppgaveList.cards.kan}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
-          <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+          <OpprettetAv opprettetAv={aktorNavn} />
           {!readonly && (
             <>
               <EditerArbeidsoppgaveForm />
@@ -108,7 +119,7 @@ export const ArbeidsoppgaveCard = ({
           <TilretteleggingsBeskrivelse
             gjennomfoering={arbeidsoppgave.gjennomfoering}
           />
-          <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+          <OpprettetAv opprettetAv={aktorNavn} />
           {!readonly && (
             <>
               <EditerArbeidsoppgaveForm />
@@ -128,7 +139,7 @@ export const ArbeidsoppgaveCard = ({
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
           <KanIkkeBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering} />
-          <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+          <OpprettetAv opprettetAv={aktorNavn} />
           {!readonly && (
             <>
               <EditerArbeidsoppgaveForm />
@@ -148,7 +159,7 @@ export const ArbeidsoppgaveCard = ({
               {texts.arbeidsoppgaveList.cards.ikkeVurdert}
             </CardHeader>
             <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
-            <OpprettetAv opprettetAv={arbeidsoppgave.opprettetAv.navn} />
+            <OpprettetAv opprettetAv={aktorNavn} />
             {!readonly && (
               <>
                 <VurderingFraSykmeldt />

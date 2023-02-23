@@ -144,7 +144,7 @@ export const LagretTiltak = ({
           <Dialog
             tiltakId={tiltak.tiltakId}
             kommentarer={tiltak.kommentarer}
-            aktorFnr={innloggetFnr}
+            arbeidstakerFnr={arbeidstakerFnr}
           />
 
           {displayNyKommentar && (

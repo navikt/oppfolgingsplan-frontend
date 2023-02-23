@@ -6,9 +6,14 @@ import { getFullDateFormat } from "utils/dateUtils";
 import { useSlettKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
+import { useAudience } from "../../../hooks/routeHooks";
+import {
+  aktorHarOpprettetElement,
+  getAktorNavn,
+} from "../../../utils/textContextUtils";
 
 interface Props {
-  aktorFnr: string;
+  arbeidstakerFnr: string;
   tiltakId: number;
   kommentarer?: Kommentar[] | null;
 }
@@ -28,10 +33,11 @@ const ButtonRightAligned = styled(Button)`
 `;
 
 export const Dialog = ({
-  aktorFnr,
+  arbeidstakerFnr,
   tiltakId,
   kommentarer,
 }: Props): ReactElement | null => {
+  const { isAudienceSykmeldt } = useAudience();
   const slettKommentar = useSlettKommentar();
   const aktivPlan = useAktivPlanSM();
 
@@ -40,13 +46,20 @@ export const Dialog = ({
   const alleKommentarer = kommentarer
     .sort((k1, k2) => k2.id - k1.id)
     .map((kommentar, index) => {
-      const isAktorsKommentar = kommentar.opprettetAv.fnr == aktorFnr;
+      const isAktorsKommentar = aktorHarOpprettetElement(
+        isAudienceSykmeldt,
+        arbeidstakerFnr,
+        kommentar.opprettetAv.fnr
+      );
 
       return (
         <StyledChat
           key={index}
-          avatar={hentAktoerNavnInitialer(kommentar.opprettetAv.navn)}
-          name={kommentar.opprettetAv.navn}
+          avatar={hentAktoerNavnInitialer(
+            kommentar.opprettetAv.navn,
+            isAudienceSykmeldt
+          )}
+          name={getAktorNavn(isAudienceSykmeldt, kommentar.opprettetAv.navn)}
           timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}
           position={isAktorsKommentar ? "right" : "left"}
         >

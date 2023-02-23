@@ -147,10 +147,16 @@ export const useDelOppfolgingsplanMedFastlege = () => {
 export const useAvbrytOppfolgingsplan = () => {
   const apiBasePath = useOppfolgingsplanApiPath();
   const queryClient = useQueryClient();
+  const landingPage = useLandingUrl();
+  const router = useRouter();
 
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
-    await post(`${apiBasePath}/${oppfolgingsplanId}/avbryt`);
+    const newOppfolgingsplanId = await post<number>(
+      `${apiBasePath}/${oppfolgingsplanId}/avbryt`
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
+    const arbeidsOppgaverPage = `${landingPage}/${newOppfolgingsplanId}/arbeidsoppgaver`;
+    await router.push(arbeidsOppgaverPage);
   };
 
   return useMutation(postAvbrytOppfolgingsplan);

@@ -24,7 +24,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
   const sykmeldtFnr = req.headers[NAV_PERSONIDENT_HEADER];
 
   if (isMockBackend) {
-    const activeMock = getMockDb();
+    const activeMock = getMockDb(req);
 
     return {
       person: activeMock.person,
@@ -46,6 +46,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
     const dineSykmeldteTokenX = await getDineSykmeldteTokenFromRequest(req);
 
     const oppfolgingsplaner = await getOppfolgingsplanerAG(
+      sykmeldtFnr,
       syfoOppfolgingsplanServiceTokenX
     );
     const dineSykmeldteMedSykmeldinger = await getDineSykmeldteMedSykmeldinger(
@@ -54,8 +55,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
 
     const validOppfolgingsplaner = filterValidOppfolgingsplaner(
       oppfolgingsplaner,
-      dineSykmeldteMedSykmeldinger,
-      sykmeldtFnr
+      dineSykmeldteMedSykmeldinger
     );
 
     if (validOppfolgingsplaner.length > 0) {

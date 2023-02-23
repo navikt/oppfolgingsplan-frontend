@@ -46,8 +46,8 @@ const SykmeldtSide = ({
     if (
       oppfolgingsplaner.isLoading ||
       sykmeldinger.isLoading ||
-      tilgang.isLoading ||
-      narmesteLedere.isLoading
+      tilgang.isFetching ||
+      narmesteLedere.isFetching
     ) {
       return <AppSpinner />;
     } else if (tilgang.data && tilgang.data.harTilgang === false) {

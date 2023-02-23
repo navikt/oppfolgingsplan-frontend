@@ -4,7 +4,7 @@ import {
   useTidligereOppfolgingsplanerAG,
 } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
-import OppfolgingsdialogTomImage from "components/blocks/images/oppfolgingsdialog-tom.svg";
+import OppfolgingsdialogTomImage from "components/blocks/images/oppfolgingsdialog-gray.svg";
 import { Button } from "@navikt/ds-react";
 
 export interface Props {

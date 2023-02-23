@@ -121,6 +121,13 @@ export const TestScenarioSelector = () => {
                 </RadioWithHelpText>
 
                 <RadioWithHelpText
+                  value={"GODKJENTPLAN"}
+                  helpText={"Jeg har en godkjent oppfølgingsplan"}
+                >
+                  Godkjent Oppfølgingsplan
+                </RadioWithHelpText>
+
+                <RadioWithHelpText
                   value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"}
                   helpText={
                     "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning, og arbeidsgiver har gått inn for å gjøre endringer"
@@ -155,7 +162,7 @@ export const TestScenarioSelector = () => {
                 variant={"primary"}
                 disabled={!setActiveTestScenario}
                 onClick={() => {
-                  setActiveTestScenario.mutate(selectedScenario);
+                  setActiveTestScenario.mutateAsync(selectedScenario);
                   setOpen(false);
                 }}
               >
