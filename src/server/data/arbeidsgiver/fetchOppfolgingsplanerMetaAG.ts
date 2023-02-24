@@ -15,13 +15,13 @@ import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
 import { fetchNaermesteLederForVirksomhet } from "./fetchNaermesteLederForVirksomhet";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 import { filterValidOppfolgingsplaner } from "../mapping/filterValidOppfolgingsplaner";
-import { NAV_PERSONIDENT_HEADER } from "../../../api/axios/axios";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
+import { getNarmesteLederIdFromRequest } from "../../utils/requestUtils";
 
 export const fetchOppfolgingsplanerMetaAG = async (
   req: NextApiRequest
 ): Promise<OppfolgingsplanMeta | undefined> => {
-  const sykmeldtFnr = req.headers[NAV_PERSONIDENT_HEADER];
+  const narmesteLederId = getNarmesteLederIdFromRequest(req);
 
   if (isMockBackend) {
     const activeMock = getMockDb(req);
@@ -34,28 +34,32 @@ export const fetchOppfolgingsplanerMetaAG = async (
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
-    if (!sykmeldtFnr || typeof sykmeldtFnr !== "string") {
-      throw new ApiErrorException(
-        generalError("Mangler fødselsnummer eller feil format")
-      );
+    const dineSykmeldteTokenX = await getDineSykmeldteTokenFromRequest(req);
+
+    const dineSykmeldteMedSykmeldinger = await getDineSykmeldteMedSykmeldinger(
+      dineSykmeldteTokenX
+    );
+
+    const sykmeldt = dineSykmeldteMedSykmeldinger.find(
+      (sykmeldt) => sykmeldt.narmestelederId == narmesteLederId
+    );
+
+    if (!sykmeldt) {
+      throw new ApiErrorException(generalError("Ikke tilgang"));
     }
 
     const syfoOppfolgingsplanServiceTokenX =
       await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
-    const dineSykmeldteTokenX = await getDineSykmeldteTokenFromRequest(req);
-
     const oppfolgingsplaner = await getOppfolgingsplanerAG(
-      sykmeldtFnr,
+      sykmeldt.fnr,
+      sykmeldt.orgnummer,
       syfoOppfolgingsplanServiceTokenX
-    );
-    const dineSykmeldteMedSykmeldinger = await getDineSykmeldteMedSykmeldinger(
-      dineSykmeldteTokenX
     );
 
     const validOppfolgingsplaner = filterValidOppfolgingsplaner(
       oppfolgingsplaner,
-      dineSykmeldteMedSykmeldinger
+      sykmeldt
     );
 
     if (validOppfolgingsplaner.length > 0) {

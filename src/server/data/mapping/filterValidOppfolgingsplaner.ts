@@ -37,68 +37,58 @@ const erOppfolgingsplanGyldigForOppfolgingMedGrensedato = (
   return new Date(tomOppfolgingsplan) >= tomGrenseDato;
 };
 
-const getLastSykefravar = (dineSykmeldteMedSykmeldinger: Sykmeldt[]) => {
+const getLastSykefravar = (sykmeldt: Sykmeldt) => {
   const sykefravarList: FravaerPeriode[] = [];
 
-  dineSykmeldteMedSykmeldinger.filter((dineSykmeldte) => {
-    dineSykmeldte.sykmeldinger?.filter((sykmelding) => {
-      const perioderDatesSorted = mapToPerioderDatesListSorted(sykmelding);
+  sykmeldt.sykmeldinger?.filter((sykmelding) => {
+    const perioderDatesSorted = mapToPerioderDatesListSorted(sykmelding);
 
-      const currentFravar = {
-        fom: perioderDatesSorted[0].fom,
-        tom: perioderDatesSorted[0].tom,
-      };
+    const currentFravar = {
+      fom: perioderDatesSorted[0].fom,
+      tom: perioderDatesSorted[0].tom,
+    };
 
-      if (perioderDatesSorted.length === 1) {
-        sykefravarList.push(currentFravar);
-        return sykefravarList;
-      }
+    if (perioderDatesSorted.length === 1) {
+      sykefravarList.push(currentFravar);
+      return sykefravarList;
+    }
 
-      for (let i = 1; i < perioderDatesSorted.length; i++) {
-        if (
-          differenceInDays(
-            perioderDatesSorted[i - 1].tom,
-            perioderDatesSorted[i].fom
-          ) < 16
-        ) {
-          currentFravar.tom = perioderDatesSorted[i].tom;
-          if (i === perioderDatesSorted.length - 1) {
-            sykefravarList.push({
-              fom: currentFravar.fom,
-              tom: currentFravar.tom,
-            });
-          }
-        } else {
+    for (let i = 1; i < perioderDatesSorted.length; i++) {
+      if (
+        differenceInDays(
+          perioderDatesSorted[i - 1].tom,
+          perioderDatesSorted[i].fom
+        ) < 16
+      ) {
+        currentFravar.tom = perioderDatesSorted[i].tom;
+        if (i === perioderDatesSorted.length - 1) {
           sykefravarList.push({
             fom: currentFravar.fom,
             tom: currentFravar.tom,
           });
-          currentFravar.fom = perioderDatesSorted[i].fom;
-          currentFravar.tom = perioderDatesSorted[i].tom;
         }
+      } else {
+        sykefravarList.push({
+          fom: currentFravar.fom,
+          tom: currentFravar.tom,
+        });
+        currentFravar.fom = perioderDatesSorted[i].fom;
+        currentFravar.tom = perioderDatesSorted[i].tom;
       }
-      return sykefravarList;
-    });
+    }
+    return sykefravarList;
   });
+
   return sykefravarList[sykefravarList.length - 1];
 };
 
 export const filterValidOppfolgingsplaner = (
   oppfolgingsplaner: OppfolgingsplanDTO[],
-  dineSykmeldteMedSykmeldinger: Sykmeldt[]
+  sykmeldt: Sykmeldt
 ): OppfolgingsplanDTO[] => {
   if (oppfolgingsplaner.length === 0) return [];
 
-  const virksomhetsnummer = oppfolgingsplaner[0].virksomhet?.virksomhetsnummer;
-
-  const dineSykmeldteMedSykmeldingerPaVirksomhet =
-    dineSykmeldteMedSykmeldinger.filter((sykmeldt) => {
-      return sykmeldt.orgnummer === virksomhetsnummer;
-    });
-
-  const lastSykefravar = getLastSykefravar(
-    dineSykmeldteMedSykmeldingerPaVirksomhet
-  );
+  const lastSykefravar = getLastSykefravar(sykmeldt);
 
   return oppfolgingsplaner.filter((oppfolgingsplan) => {
     if (

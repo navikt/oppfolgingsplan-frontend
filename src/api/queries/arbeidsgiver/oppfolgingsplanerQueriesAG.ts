@@ -3,6 +3,7 @@ import { get, post } from "api/axios/axios";
 import {
   useApiBasePath,
   useLandingUrl,
+  useNarmesteLederId,
   useOppfolgingsplanApiPath,
   useOppfolgingsplanRouteId,
 } from "hooks/routeHooks";
@@ -21,13 +22,14 @@ import { useRouter } from "next/router";
 export const useOppfolgingsplanerAG = () => {
   const apiBasePath = useApiBasePath();
   const sykmeldt = useDineSykmeldte();
+  const narmesteLederId = useNarmesteLederId();
 
   const sykmeldtFnr = sykmeldt.data?.fnr;
 
   const fetchOppfolgingsplaner = () =>
-    get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`, {
-      personIdent: sykmeldtFnr,
-    });
+    get<Oppfolgingsplan[]>(
+      `${apiBasePath}/${narmesteLederId}/oppfolgingsplaner`
+    );
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
