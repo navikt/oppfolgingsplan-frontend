@@ -119,11 +119,12 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
 
 export async function getOppfolgingsplanerAG(
   sykmeldtFnr: string,
+  virksomhetsnummer: string,
   accessToken: string
 ) {
   const response = array(oppfolgingsplanSchema).safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner/${sykmeldtFnr}`,
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner/${sykmeldtFnr}?virksomhetsnummer=${virksomhetsnummer}`,
       {
         accessToken,
       }

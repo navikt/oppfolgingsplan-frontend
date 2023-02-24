@@ -22,6 +22,16 @@ export const getSykmeldtFnrFromHeader = (req: NextApiRequest) => {
   return sykmeldtFnr;
 };
 
+export const getNarmesteLederIdFromRequest = (req: NextApiRequest): string => {
+  const { narmestelederid } = req.query;
+
+  if (typeof narmestelederid !== "string") {
+    return handleQueryParamError(narmestelederid);
+  }
+
+  return narmestelederid;
+};
+
 export const getOppfolgingsplanIdFromRequest = (
   req: NextApiRequest
 ): string => {
