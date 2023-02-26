@@ -9,24 +9,25 @@ interface Props {
 export const TilretteleggingsBeskrivelse = ({ gjennomfoering }: Props) => {
   if (!gjennomfoering) return null;
 
+  const { paaAnnetSted, medMerTid, medHjelp, kanBeskrivelse } = gjennomfoering;
+
   return (
     <>
-      <Label>{texts.arbeidsoppgaveList.labels.hvaSkalTil}</Label>
-      <ul>
-        {gjennomfoering.paaAnnetSted && (
-          <li>{texts.arbeidsoppgaveList.labels.sted}</li>
-        )}
-        {gjennomfoering.medMerTid && (
-          <li>{texts.arbeidsoppgaveList.labels.tid}</li>
-        )}
-        {gjennomfoering.medHjelp && (
-          <li>{texts.arbeidsoppgaveList.labels.hjelp}</li>
-        )}
-      </ul>
-      {gjennomfoering.kanBeskrivelse && (
+      {(paaAnnetSted || medMerTid || medHjelp) && (
+        <>
+          <Label>{texts.arbeidsoppgaveList.labels.hvaSkalTil}</Label>
+          <ul>
+            {paaAnnetSted && <li>{texts.arbeidsoppgaveList.labels.sted}</li>}
+            {medMerTid && <li>{texts.arbeidsoppgaveList.labels.tid}</li>}
+            {medHjelp && <li>{texts.arbeidsoppgaveList.labels.hjelp}</li>}
+          </ul>
+        </>
+      )}
+
+      {kanBeskrivelse && (
         <>
           <Label>{texts.arbeidsoppgaveList.labels.beskrivelse}</Label>
-          <BodyLong spacing={true}>{gjennomfoering.kanBeskrivelse}</BodyLong>
+          <BodyLong spacing={true}>{kanBeskrivelse}</BodyLong>
         </>
       )}
     </>
