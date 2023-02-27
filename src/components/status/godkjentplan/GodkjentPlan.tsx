@@ -35,7 +35,7 @@ export const GodkjentPlan = ({ oppfolgingsplan, children }: Props) => {
       {children}
 
       <GodkjennPlanTidspunkter
-        gyldighetstidspunkt={oppfolgingsplan.godkjentPlan.gyldighetstidspunkt!}
+        gyldighetstidspunkt={oppfolgingsplan.godkjentPlan.gyldighetstidspunkt}
       />
 
       <GodkjentPlanDeltBekreftelse
