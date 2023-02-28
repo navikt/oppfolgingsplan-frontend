@@ -159,6 +159,7 @@ export const TestScenarioSelector = () => {
 
             <Row>
               <Button
+                id="VelgScenarioButton"
                 variant={"primary"}
                 disabled={!setActiveTestScenario}
                 onClick={() => {
@@ -176,7 +177,7 @@ export const TestScenarioSelector = () => {
         </Modal.Content>
       </Modal>
 
-      <MockdataWrapper onClick={() => setOpen(!open)}>
+      <MockdataWrapper id="TestScenarioSelector" onClick={() => setOpen(!open)}>
         <ImageContainer width={"4rem"}>
           <Image src={Sun} fill={true} alt={""} color={"#FF0000"} />
         </ImageContainer>

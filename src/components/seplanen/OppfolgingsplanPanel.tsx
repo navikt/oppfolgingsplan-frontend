@@ -10,7 +10,7 @@ interface Props {
 export const OppfolgingsplanPanel = ({ children, href }: Props) => {
   if (href) {
     return (
-      <Link href={href}>
+      <Link id="OppfolgingsplanLink" href={href}>
         <LinkPanel as="div" border>
           {children}
         </LinkPanel>
