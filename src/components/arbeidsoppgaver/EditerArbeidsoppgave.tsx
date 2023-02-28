@@ -61,7 +61,7 @@ export const EditerArbeidsoppgave = ({
   return show ? (
     <ArbeidsoppgaveFormSM
       defaultFormValues={{
-        navnPaaArbeidsoppgaven: arbeidsoppgave.arbeidsoppgavenavn,
+        arbeidsoppgavenavn: arbeidsoppgave.arbeidsoppgavenavn,
         kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres || "",
         tilrettelegging: getTilretteleggingFormData(
           arbeidsoppgave.gjennomfoering
