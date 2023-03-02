@@ -44,7 +44,7 @@ export const NyArbeidsoppgaveSM = () => {
         <ArbeidsoppgaveFormHeadingSM />
         <Button
           id="leggTilNyArbeidsoppgaveButton"
-          data-testid={DataTestId.ARBEIDSOPPGAVE_LEGG_TIL_NY_BUTTON}
+          data-testid={DataTestId.ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON}
           variant={"secondary"}
           icon={<PlusIcon />}
           onClick={() => setLeggerTilOppgave(true)}

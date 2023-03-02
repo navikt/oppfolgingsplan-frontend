@@ -31,7 +31,7 @@ export const NyttTiltak = ({
         {!leggerTilNyttTiltak && (
           <Button
             id="leggTilNyttTiltakButton"
-            data-testid={DataTestId.TILTAK_LEGG_TIL_NYTT_BUTTON}
+            data-testid={DataTestId.TILTAK_LEGG_TIL_NYTT_TILTAK_BUTTON}
             variant={"secondary"}
             icon={<PlusIcon />}
             onClick={() => setLeggerTilNyttTiltak(true)}

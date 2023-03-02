@@ -16,17 +16,19 @@ describe("Create and submit plan happy-case", () => {
     });
 
     // Legger til arbeidsoppgave og går videre til tiltak
-    cy.getByDataTestId(DataTestId.ARBEIDSOPPGAVE_LEGG_TIL_NY_BUTTON).click();
-
     cy.getByDataTestId(
-      DataTestId.ARBEIDSOPPGAVE_BESKRIV_OPPGAVEN_TEXTAREA
-    ).type("Her er en ny arbeidsoppgave!");
+      DataTestId.ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON
+    ).click();
+
+    cy.getByDataTestId(DataTestId.ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA).type(
+      "Her er en ny arbeidsoppgave!"
+    );
 
     cy.getByDataTestId(
       DataTestId.ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_RADIO
     ).click();
 
-    cy.getByDataTestId(DataTestId.ARBEIDSOPPGAVE_LAGRE_BUTTON).click();
+    cy.getByDataTestId(DataTestId.ARBEIDSOPPGAVE_LAGRE_OPPGAVE_BUTTON).click();
 
     cy.getByDataTestId(DataTestId.NAVIGATION_NESTE_STEG_BUTTON)
       .contains("Neste steg")
@@ -37,13 +39,13 @@ describe("Create and submit plan happy-case", () => {
     });
 
     //Legger til tiltak og går videre til se planen
-    cy.getByDataTestId(DataTestId.TILTAK_LEGG_TIL_NYTT_BUTTON).click();
+    cy.getByDataTestId(DataTestId.TILTAK_LEGG_TIL_NYTT_TILTAK_BUTTON).click();
 
     cy.getByDataTestId(DataTestId.TILTAK_OVERSKRIFT_TEXTFIELD).type(
       "Et nytt og flott tiltak"
     );
 
-    cy.getByDataTestId(DataTestId.TILTAK_BESKRIV_TEXTAREA).type(
+    cy.getByDataTestId(DataTestId.TILTAK_BESKRIVELSE_TEXTAREA).type(
       "En beskrivelse av tiltaket.."
     );
 

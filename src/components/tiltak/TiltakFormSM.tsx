@@ -78,7 +78,7 @@ export const TiltakFormSM = ({
 
           <OverskriftTextarea
             id="beskrivTiltakTextArea"
-            data-testid={DataTestId.TILTAK_BESKRIV_TEXTAREA}
+            data-testid={DataTestId.TILTAK_BESKRIVELSE_TEXTAREA}
             label={"Beskriv hva som skal skje (obligatorisk)"}
             error={errors.beskrivelse?.message}
             description={

@@ -91,7 +91,7 @@ export const ArbeidsoppgaveFormSM = ({
           {navnIsEditable && (
             <StyledTextarea
               id="beskrivArbeidsoppgavenTextArea"
-              data-testid={DataTestId.ARBEIDSOPPGAVE_BESKRIV_OPPGAVEN_TEXTAREA}
+              data-testid={DataTestId.ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA}
               label={"Navn på arbeidsoppgaven (obligatorisk)"}
               error={errors.navnPaaArbeidsoppgaven?.message}
               description={"Beskriv arbeidsoppgaven med noen få ord"}
@@ -234,7 +234,7 @@ export const ArbeidsoppgaveFormSM = ({
           <Row>
             <Button
               id="lagreArbeidsoppgaveButton"
-              data-testid={DataTestId.ARBEIDSOPPGAVE_LAGRE_BUTTON}
+              data-testid={DataTestId.ARBEIDSOPPGAVE_LAGRE_OPPGAVE_BUTTON}
               loading={isSubmitting}
               variant={"primary"}
               type={"submit"}
