@@ -66,38 +66,38 @@ jobs:
           docker push ${IMAGE}
           echo ${IMAGE}
 
-cypress:
-  needs: build
-  runs-on: ubuntu-latest
-  strategy:
-    fail-fast: false
-    matrix:
-      containers: [ 0, 1, 2, 3 ]
-  steps:
-    - name: cache workspace
-      uses: actions/cache@v3
-      with:
-        path: ${{ github.workspace }}
-        key: ${{ github.sha }}
-    - name: cache cypress binary
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/Cypress
-        key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
-    - name: Kjør cypress
-      uses: cypress-io/github-action@v5.1.0
-      with:
-        start: npm run dev
-        wait-on: http://localhost:3000/${{inputs.base-path}}/api/internal/isAlive
-        config-file: cypress.config.ts
-        spec: cypress/e2e/run-${{ matrix.containers }}/**
-        install: false
-    - uses: actions/upload-artifact@v3
-      if: failure()
-      with:
-        name: cypress-screenshots
-        path: cypress/screenshots
-        if-no-files-found: ignore
+  cypress:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [ 0, 1, 2, 3 ]
+    steps:
+      - name: cache workspace
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ github.sha }}
+      - name: cache cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
+      - name: Kjør cypress
+        uses: cypress-io/github-action@v5.1.0
+        with:
+          start: npm run dev
+          wait-on: http://localhost:3000/${{inputs.base-path}}/api/internal/isAlive
+          config-file: cypress.config.ts
+          spec: cypress/e2e/run-${{ matrix.containers }}/**
+          install: false
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
 
   deploy-dev:
     if: github.ref == 'refs/heads/main'
