@@ -2,6 +2,7 @@ import Datepicker from "../blocks/datepicker/Datepicker";
 import { toDate } from "../../utils/dateUtils";
 import React from "react";
 import styled from "styled-components";
+import { DataTestId } from "../../../cypress/dataTestId";
 
 const DateRow = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ export const TiltakStartSluttDato = ({
   return (
     <DateRow>
       <Datepicker
+        testid={DataTestId.TILTAK_STARTDATO}
         name="fom"
         label="Startdato (obligatorisk)"
         defaultValue={defaultValueFom}
@@ -35,6 +37,7 @@ export const TiltakStartSluttDato = ({
       />
 
       <Datepicker
+        testid={DataTestId.TILTAK_SLUTTDATO}
         name="tom"
         label={"Sluttdato (obligatorisk)"}
         defaultValue={defaultValueTom}

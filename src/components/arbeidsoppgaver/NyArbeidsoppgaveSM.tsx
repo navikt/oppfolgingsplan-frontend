@@ -10,6 +10,7 @@ import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
+import { DataTestId } from "../../../cypress/dataTestId";
 
 export const NyArbeidsoppgaveSM = () => {
   const lagreOppgave = useLagreArbeidsoppgave();
@@ -42,6 +43,8 @@ export const NyArbeidsoppgaveSM = () => {
       <SpacedPanel border={true}>
         <ArbeidsoppgaveFormHeadingSM />
         <Button
+          id="leggTilNyArbeidsoppgaveButton"
+          data-testid={DataTestId.ARBEIDSOPPGAVE_LEGG_TIL_NY_BUTTON}
           variant={"secondary"}
           icon={<PlusIcon />}
           onClick={() => setLeggerTilOppgave(true)}

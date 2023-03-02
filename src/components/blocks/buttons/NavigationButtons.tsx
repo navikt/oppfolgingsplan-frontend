@@ -4,6 +4,7 @@ import { useLandingUrl, useOppfolgingsplanBasePath } from "hooks/routeHooks";
 import Link from "next/link";
 import { Row } from "../wrappers/Row";
 import { Page } from "../wrappers/OppfolgingsplanPageSM";
+import { DataTestId } from "../../../../cypress/dataTestId";
 
 const getPreviousHref = (basePath: string, activeStep: number) => {
   if (activeStep == Page.TILTAK.valueOf()) {
@@ -40,20 +41,30 @@ export const NavigationButtons = ({ activeStep }: Props) => {
       <Row marginTop={"2rem"} marginBottom={"1rem"}>
         {previousPage && (
           <Link href={previousPage}>
-            <Button variant={"secondary"}>Forrige steg</Button>
+            <Button id="forrigeStegButton" variant={"secondary"}>
+              Forrige steg
+            </Button>
           </Link>
         )}
 
         {nextPage && (
           <Link href={nextPage}>
-            <Button variant={"primary"}>Neste steg</Button>
+            <Button
+              id="nesteStegButton"
+              data-testid={DataTestId.NESTE_STEG_BUTTON}
+              variant={"primary"}
+            >
+              Neste steg
+            </Button>
           </Link>
         )}
       </Row>
 
       <Row marginBottom={"2rem"}>
         <Link href={landingUrl}>
-          <Button variant={"tertiary"}>Fortsett senere</Button>
+          <Button id="fortsettSenereButton" variant={"tertiary"}>
+            Fortsett senere
+          </Button>
         </Link>
       </Row>
     </>

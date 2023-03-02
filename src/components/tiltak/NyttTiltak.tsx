@@ -4,6 +4,7 @@ import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormHeading } from "./TiltakFormHeading";
 import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
 import PlusIcon from "components/blocks/icons/PlusIcon";
+import { DataTestId } from "../../../cypress/dataTestId";
 
 interface Props {
   children: ReactNode;
@@ -29,6 +30,8 @@ export const NyttTiltak = ({
 
         {!leggerTilNyttTiltak && (
           <Button
+            id="leggTilNyttTiltakButton"
+            data-testid={DataTestId.TILTAK_LEGG_TIL_NYTT_BUTTON}
             variant={"secondary"}
             icon={<PlusIcon />}
             onClick={() => setLeggerTilNyttTiltak(true)}

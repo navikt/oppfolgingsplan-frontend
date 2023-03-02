@@ -4,13 +4,14 @@ import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from "@navikt/ds-react";
 import { leggTilDagerPaDato, toDate } from "../../../utils/dateUtils";
 
 export interface Props {
+  testid: string;
   name: string;
   label?: string | ReactNode;
   defaultValue?: Date | null;
   validate?: Validate<Date> | Record<string, Validate<Date>>;
 }
 
-const Datepicker = ({ name, label, defaultValue, validate }: Props) => {
+const Datepicker = ({ testid, name, label, defaultValue, validate }: Props) => {
   const { field, fieldState } = useController({
     name: name,
     defaultValue: defaultValue,
@@ -31,6 +32,7 @@ const Datepicker = ({ name, label, defaultValue, validate }: Props) => {
     <UNSAFE_DatePicker {...datepickerProps}>
       <UNSAFE_DatePicker.Input
         id={field.name}
+        data-testid={testid}
         {...inputProps}
         label={label}
         placeholder="DD.MM.ÅÅÅÅ"

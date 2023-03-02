@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { LinkPanel, Panel } from "@navikt/ds-react";
+import { DataTestId } from "../../../cypress/dataTestId";
 
 interface Props {
   href?: string;
@@ -10,7 +11,11 @@ interface Props {
 export const OppfolgingsplanPanel = ({ children, href }: Props) => {
   if (href) {
     return (
-      <Link id="OppfolgingsplanLink" href={href}>
+      <Link
+        id="oppfolgingsplanTeaser"
+        data-testid={DataTestId.LANDING_OPPFOLGINGSPLAN_TEASER}
+        href={href}
+      >
         <LinkPanel as="div" border>
           {children}
         </LinkPanel>
