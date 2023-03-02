@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Arbeidsoppgave, Tiltak } from "../../../types/oppfolgingsplan";
+import { SEPLANEN_JEG_ER_FERDIG_BUTTON } from "../../../../cypress/dataTestId";
 
 const SpacedGuidePanel = styled(GuidePanel)`
   margin-bottom: 2rem;
@@ -44,6 +45,8 @@ export const SendTilGodkjenningToggle = ({
           Er du ferdig med denne planen og ønsker å sende den til godkjenning?
         </SpacedDiv>
         <Button
+          id="jegErFerdigButton"
+          data-testid={SEPLANEN_JEG_ER_FERDIG_BUTTON}
           variant={"primary"}
           type={"button"}
           onClick={() => {

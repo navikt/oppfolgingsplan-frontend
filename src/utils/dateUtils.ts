@@ -73,3 +73,7 @@ export function toDate(date: string | Date): Date {
 export const formatAsLocalDateTime = (date: Date) => {
   return format(date, "yyyy-MM-dd'T'HH:mm:ss.SSS");
 };
+
+export const minutesToMillis = (minutes: number) => {
+  return 1000 * 60 * minutes;
+};

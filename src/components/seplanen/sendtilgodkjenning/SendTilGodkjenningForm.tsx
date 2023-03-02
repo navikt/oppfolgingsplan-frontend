@@ -16,6 +16,13 @@ import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
 import Datepicker from "../../blocks/datepicker/Datepicker";
 import { toDate } from "../../../utils/dateUtils";
+import {
+  SEPLANEN_ENIG_I_PLANEN_CHECKBOX,
+  SEPLANEN_EVALUERES_INNEN,
+  SEPLANEN_SEND_TIL_GODKJENNING_BUTTON,
+  SEPLANEN_SLUTTDATO,
+  SEPLANEN_STARTDATO,
+} from "../../../../cypress/dataTestId";
 
 const Line = styled.hr`
   margin-top: 1rem;
@@ -100,6 +107,7 @@ export const SendTilGodkjenningForm = ({
 
         <Row gap={"2rem"} marginBottom={"2rem"}>
           <Datepicker
+            testid={SEPLANEN_STARTDATO}
             name="startDato"
             label="Startdato (obligatorisk)"
             defaultValue={
@@ -113,6 +121,7 @@ export const SendTilGodkjenningForm = ({
           />
 
           <Datepicker
+            testid={SEPLANEN_SLUTTDATO}
             name="sluttDato"
             label={"Sluttdato (obligatorisk)"}
             defaultValue={suggestedEndDate ? new Date(suggestedEndDate) : null}
@@ -129,6 +138,7 @@ export const SendTilGodkjenningForm = ({
         </Row>
 
         <Datepicker
+          testid={SEPLANEN_EVALUERES_INNEN}
           name="evalueresInnen"
           label={"Evalueres innen (obligatorisk)"}
           validate={(value: Date | undefined) => {
@@ -163,6 +173,7 @@ export const SendTilGodkjenningForm = ({
               (valgfritt)
             </Checkbox>
             <Checkbox
+              data-testid={SEPLANEN_ENIG_I_PLANEN_CHECKBOX}
               value={"true"}
               {...register("enigIPlanen", {
                 required: "Du må godkjenne planen for å komme videre",
@@ -178,7 +189,11 @@ export const SendTilGodkjenningForm = ({
         </SpacedDiv>
 
         <Row>
-          <Button type={"submit"} loading={isSubmitting}>
+          <Button
+            data-testid={SEPLANEN_SEND_TIL_GODKJENNING_BUTTON}
+            type={"submit"}
+            loading={isSubmitting}
+          >
             {isOwnLeder ? "Opprett plan" : "Send til godkjenning"}
           </Button>
           <Button variant={"tertiary"} onClick={cancel}>

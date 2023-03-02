@@ -21,25 +21,31 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.14.2"
+          cache: 'npm'
           registry-url: 'https://npm.pkg.github.com'
-      - name: Cache node modules
+      - name: next.js cache
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      - name: Cache Cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
       - name: Install deps
         run: |
-          npm install
-      - name: Build
-        run: npm run build
+          npm ci
       - name: Lint and TSC
         run: npm run lint && tsc
-      - name: Test
+      - name: Run Jest tests
         run: npm run test
+      - name: Run Cypress tests
+        run: npx cypress run --component
+      - name: Build
+        run: npm run build
       - name: Upload static files to NAV CDN
         uses: navikt/frontend/actions/cdn-upload/v1@main
         with:
@@ -58,11 +64,16 @@ jobs:
           docker build --tag ${IMAGE} .
           docker push ${IMAGE}
           echo ${IMAGE}
+      - name: cache workspace
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ github.sha }}
 
   deploy-dev:
     if: github.ref == 'refs/heads/main'
     name: Deploy to dev-gcp
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -75,7 +86,7 @@ jobs:
   deploy-labs:
     if: github.ref == 'refs/heads/main'
     name: Deploy to labs
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -89,7 +100,7 @@ jobs:
   deploy-prod:
     if: github.ref == 'refs/heads/main'
     name: Deploy to prod-gcp
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

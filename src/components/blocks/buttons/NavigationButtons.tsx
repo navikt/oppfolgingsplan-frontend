@@ -7,6 +7,11 @@ import {
 import Link from "next/link";
 import { Row } from "../wrappers/Row";
 import { Page } from "../wrappers/OppfolgingsplanPageSM";
+import {
+  NAVIGATION_FORRIGE_STEG_BUTTON,
+  NAVIGATION_FORTSETT_SENERE_BUTTON,
+  NAVIGATION_NESTE_STEG_BUTTON,
+} from "../../../../cypress/dataTestId";
 
 const getPreviousHref = (basePath: string, activeStep: number) => {
   if (activeStep == Page.TILTAK.valueOf()) {
@@ -43,20 +48,35 @@ export const NavigationButtons = ({ activeStep }: Props) => {
       <Row marginTop={"2rem"} marginBottom={"1rem"}>
         {previousPage && (
           <Link href={previousPage}>
-            <Button variant={"secondary"}>Forrige steg</Button>
+            <Button
+              data-testid={NAVIGATION_FORRIGE_STEG_BUTTON}
+              variant={"secondary"}
+            >
+              Forrige steg
+            </Button>
           </Link>
         )}
 
         {nextPage && (
           <Link href={nextPage}>
-            <Button variant={"primary"}>Neste steg</Button>
+            <Button
+              data-testid={NAVIGATION_NESTE_STEG_BUTTON}
+              variant={"primary"}
+            >
+              Neste steg
+            </Button>
           </Link>
         )}
       </Row>
 
       <Row marginBottom={"2rem"}>
         <Link href={landingUrl}>
-          <Button variant={"tertiary"}>Fortsett senere</Button>
+          <Button
+            data-testid={NAVIGATION_FORTSETT_SENERE_BUTTON}
+            variant={"tertiary"}
+          >
+            Fortsett senere
+          </Button>
         </Link>
       </Row>
     </>
