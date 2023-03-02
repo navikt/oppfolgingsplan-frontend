@@ -21,19 +21,23 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.14.2"
+          cache: 'npm'
           registry-url: 'https://npm.pkg.github.com'
-      - name: Cache node modules
+      - name: next.js cache
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      - name: Cache Cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
       - name: Install deps
         run: |
-          npm install
+          npm ci
       - name: Build
         run: npm run build
       - name: Lint and TSC
@@ -58,11 +62,49 @@ jobs:
           docker build --tag ${IMAGE} .
           docker push ${IMAGE}
           echo ${IMAGE}
+      - name: cache workspace
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ github.sha }}
+
+  cypress:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: cache workspace
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ github.sha }}
+      - name: cache cypress binary
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
+      - name: Kjør cypress
+        uses: cypress-io/github-action@v5.1.0
+        with:
+          start: npm run start-ingen-dekorator
+          config-file: cypress.config.ts
+          wait-on: http://localhost:8080/syk/oppfolgingsplaner/sykmeldt
+          config: baseUrl=http://localhost:8080
+          install: false
+        env:
+          MOCK_BACKEND: 'true'
+          DECORATOR_ENV: 'dev'
+          DISPLAY_TESTSCENARIO_SELECTOR: 'true'
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
 
   deploy-dev:
     if: github.ref == 'refs/heads/main'
     name: Deploy to dev-gcp
-    needs: build
+    needs: [build, cypress]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -75,7 +117,7 @@ jobs:
   deploy-labs:
     if: github.ref == 'refs/heads/main'
     name: Deploy to labs
-    needs: build
+    needs: [build, cypress]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -89,7 +131,7 @@ jobs:
   deploy-prod:
     if: github.ref == 'refs/heads/main'
     name: Deploy to prod-gcp
-    needs: build
+    needs: [build, cypress]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

@@ -61,7 +61,7 @@ export const TestScenarioSelector = () => {
 
   useEffect(() => {
     if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
+      Modal.setAppElement("body");
     }
   }, []);
 

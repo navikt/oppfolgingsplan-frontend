@@ -14,6 +14,13 @@ import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
 import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
+import {
+  ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA,
+  ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_RADIO,
+  ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_TILRETTELEGGING_RADIO,
+  ARBEIDSOPPGAVE_KAN_IKKE_GJENNOMFOERES_RADIO,
+  ARBEIDSOPPGAVE_LAGRE_OPPGAVE_BUTTON,
+} from "../../../cypress/dataTestId";
 
 export type OppgaveFormValues = {
   arbeidsoppgavenavn: string;
@@ -101,6 +108,7 @@ export const ArbeidsoppgaveFormSM = ({
                 return (
                   <StyledTextarea
                     {...field}
+                    data-testid={ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA}
                     label={"Navn på arbeidsoppgaven (obligatorisk)"}
                     error={errors.arbeidsoppgavenavn?.message}
                     description={"Beskriv arbeidsoppgaven med noen få ord"}
@@ -130,13 +138,27 @@ export const ArbeidsoppgaveFormSM = ({
                 ref={ref}
                 value={value}
               >
-                <Radio value={KANGJENNOMFOERES.KAN}>
+                <Radio
+                  id="oppgaveKanGjennomfoeresRadio"
+                  data-testid={ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_RADIO}
+                  value={KANGJENNOMFOERES.KAN}
+                >
                   Ja, den kan gjennomføres som normalt
                 </Radio>
-                <Radio value={KANGJENNOMFOERES.TILRETTELEGGING}>
+                <Radio
+                  id="OppgaveKanGjennomfoeresMedTilretteleggingRadio"
+                  data-testid={
+                    ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_TILRETTELEGGING_RADIO
+                  }
+                  value={KANGJENNOMFOERES.TILRETTELEGGING}
+                >
                   Ja, den kan gjennomføres med tilrettelegging
                 </Radio>
-                <Radio value={KANGJENNOMFOERES.KAN_IKKE}>
+                <Radio
+                  id="OppgaveKanIkkeGjennomfoeresRadio"
+                  data-testid={ARBEIDSOPPGAVE_KAN_IKKE_GJENNOMFOERES_RADIO}
+                  value={KANGJENNOMFOERES.KAN_IKKE}
+                >
                   Nei, den kan ikke gjennomføres
                 </Radio>
               </StyledRadioGroup>
@@ -240,7 +262,13 @@ export const ArbeidsoppgaveFormSM = ({
           )}
 
           <Row>
-            <Button loading={isSubmitting} variant={"primary"} type={"submit"}>
+            <Button
+              id="lagreArbeidsoppgaveButton"
+              data-testid={ARBEIDSOPPGAVE_LAGRE_OPPGAVE_BUTTON}
+              loading={isSubmitting}
+              variant={"primary"}
+              type={"submit"}
+            >
               Lagre
             </Button>
             <Button variant={"tertiary"} onClick={onCancel}>

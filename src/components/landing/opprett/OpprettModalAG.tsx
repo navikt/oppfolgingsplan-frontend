@@ -19,7 +19,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
 
   useEffect(() => {
     if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
+      Modal.setAppElement("body");
     }
   }, []);
 

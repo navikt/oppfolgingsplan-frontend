@@ -23,7 +23,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
 
   useEffect(() => {
     if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
+      Modal.setAppElement("body");
     }
   }, []);
 
