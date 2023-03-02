@@ -3,6 +3,8 @@ export enum DataTestId {
   ARBEIDSOPPGAVE_LEGG_TIL_NY_BUTTON = "leggTilNyArbeidsoppgaveButton",
   ARBEIDSOPPGAVE_BESKRIV_OPPGAVEN_TEXTAREA = "beskrivArbeidsoppgavenTextArea",
   ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_RADIO = "oppgaveKanGjennomfoeresRadio",
+  ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_TILRETTELEGGING_RADIO = "oppgaveKanGjennomfoeresMedTilretteleggingRadio",
+  ARBEIDSOPPGAVE_KAN_IKKE_GJENNOMFOERES_RADIO = "oppgaveKanIkkeGjennomfoeresRadio",
   ARBEIDSOPPGAVE_LAGRE_BUTTON = "lagreArbeidsoppgaveButton",
   TILTAK_LEGG_TIL_NYTT_BUTTON = "leggTilNyttTiltakButton",
   TILTAK_OVERSKRIFT_TEXTFIELD = "tiltakOverskriftTextField",

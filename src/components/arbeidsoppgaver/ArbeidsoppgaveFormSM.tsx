@@ -137,12 +137,18 @@ export const ArbeidsoppgaveFormSM = ({
                 </Radio>
                 <Radio
                   id="OppgaveKanGjennomfoeresMedTilretteleggingRadio"
+                  data-testid={
+                    DataTestId.ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_TILRETTELEGGING_RADIO
+                  }
                   value={KANGJENNOMFOERES.TILRETTELEGGING}
                 >
                   Ja, den kan gjennomføres med tilrettelegging
                 </Radio>
                 <Radio
                   id="OppgaveKanIkkeGjennomfoeresRadio"
+                  data-testid={
+                    DataTestId.ARBEIDSOPPGAVE_KAN_IKKE_GJENNOMFOERES_RADIO
+                  }
                   value={KANGJENNOMFOERES.KAN_IKKE}
                 >
                   Nei, den kan ikke gjennomføres
