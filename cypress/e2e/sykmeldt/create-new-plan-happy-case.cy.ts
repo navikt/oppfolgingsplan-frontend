@@ -28,7 +28,7 @@ describe("Create and submit plan happy-case", () => {
 
     cy.getByDataTestId(DataTestId.ARBEIDSOPPGAVE_LAGRE_BUTTON).click();
 
-    cy.getByDataTestId(DataTestId.NESTE_STEG_BUTTON)
+    cy.getByDataTestId(DataTestId.NAVIGATION_NESTE_STEG_BUTTON)
       .contains("Neste steg")
       .click();
 
@@ -53,14 +53,14 @@ describe("Create and submit plan happy-case", () => {
 
     cy.getByDataTestId(DataTestId.TILTAK_LAGRE_BUTTON).click();
 
-    cy.getByDataTestId(DataTestId.NESTE_STEG_BUTTON).click();
+    cy.getByDataTestId(DataTestId.NAVIGATION_NESTE_STEG_BUTTON).click();
 
     cy.location().should((location) => {
       expect(location.pathname).to.include("/seplanen");
     });
 
     //Sender inn planen og går til status-siden
-    cy.getByDataTestId(DataTestId.JEG_ER_FERDIG_BUTTON).click();
+    cy.getByDataTestId(DataTestId.SEPLANEN_JEG_ER_FERDIG_BUTTON).click();
 
     cy.getByDataTestId(DataTestId.SEPLANEN_EVALUERES_INNEN).click();
     cy.get(".navds-popover").get("button").contains("9").click();

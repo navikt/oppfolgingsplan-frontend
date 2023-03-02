@@ -41,7 +41,11 @@ export const NavigationButtons = ({ activeStep }: Props) => {
       <Row marginTop={"2rem"} marginBottom={"1rem"}>
         {previousPage && (
           <Link href={previousPage}>
-            <Button id="forrigeStegButton" variant={"secondary"}>
+            <Button
+              id="forrigeStegButton"
+              data-testid={DataTestId.NAVIGATION_FORRIGE_STEG_BUTTON}
+              variant={"secondary"}
+            >
               Forrige steg
             </Button>
           </Link>
@@ -51,7 +55,7 @@ export const NavigationButtons = ({ activeStep }: Props) => {
           <Link href={nextPage}>
             <Button
               id="nesteStegButton"
-              data-testid={DataTestId.NESTE_STEG_BUTTON}
+              data-testid={DataTestId.NAVIGATION_NESTE_STEG_BUTTON}
               variant={"primary"}
             >
               Neste steg
@@ -62,7 +66,11 @@ export const NavigationButtons = ({ activeStep }: Props) => {
 
       <Row marginBottom={"2rem"}>
         <Link href={landingUrl}>
-          <Button id="fortsettSenereButton" variant={"tertiary"}>
+          <Button
+            id="fortsettSenereButton"
+            data-testid={DataTestId.NAVIGATION_FORTSETT_SENERE_BUTTON}
+            variant={"tertiary"}
+          >
             Fortsett senere
           </Button>
         </Link>

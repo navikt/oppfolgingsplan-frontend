@@ -46,7 +46,7 @@ export const SendTilGodkjenningToggle = ({
         </SpacedDiv>
         <Button
           id="jegErFerdigButton"
-          data-testid={DataTestId.JEG_ER_FERDIG_BUTTON}
+          data-testid={DataTestId.SEPLANEN_JEG_ER_FERDIG_BUTTON}
           variant={"primary"}
           type={"button"}
           onClick={() => {
