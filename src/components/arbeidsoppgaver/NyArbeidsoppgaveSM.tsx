@@ -19,7 +19,7 @@ export const NyArbeidsoppgaveSM = () => {
     data: OppgaveFormValues
   ): Partial<Arbeidsoppgave> => {
     return {
-      arbeidsoppgavenavn: data.navnPaaArbeidsoppgaven,
+      arbeidsoppgavenavn: data.arbeidsoppgavenavn,
       gjennomfoering: {
         kanGjennomfoeres: data.kanGjennomfores,
         paaAnnetSted: data.tilrettelegging

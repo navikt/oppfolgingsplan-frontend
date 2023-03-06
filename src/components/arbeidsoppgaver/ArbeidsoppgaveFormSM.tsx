@@ -16,7 +16,7 @@ import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
 
 export type OppgaveFormValues = {
-  navnPaaArbeidsoppgaven: string;
+  arbeidsoppgavenavn: string;
   kanGjennomfores: string;
   tilrettelegging: string[];
   kanBeskrivelse: string;
@@ -59,7 +59,6 @@ export const ArbeidsoppgaveFormSM = ({
   const formFunctions = useForm<OppgaveFormValues>();
   const {
     handleSubmit,
-    register,
     watch,
     resetField,
     formState: { errors },
@@ -88,28 +87,35 @@ export const ArbeidsoppgaveFormSM = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         <LightGreyPanel border={true}>
           {navnIsEditable && (
-            <StyledTextarea
-              id="beskrivArbeidsoppgaven"
-              label={"Navn på arbeidsoppgaven (obligatorisk)"}
-              error={errors.navnPaaArbeidsoppgaven?.message}
-              description={"Beskriv arbeidsoppgaven med noen få ord"}
-              maxLength={100}
-              {...register("navnPaaArbeidsoppgaven", {
+            <Controller
+              name={"arbeidsoppgavenavn"}
+              rules={{
                 required: "Du må gi et navn på oppgaven",
                 maxLength: {
                   value: 100,
                   message:
                     "Navnet på arbeidsoppgaven må være på 100 tegn eller mindre",
                 },
-              })}
-              defaultValue={defaultFormValues?.navnPaaArbeidsoppgaven}
+              }}
+              render={({ field }) => {
+                return (
+                  <StyledTextarea
+                    {...field}
+                    label={"Navn på arbeidsoppgaven (obligatorisk)"}
+                    error={errors.arbeidsoppgavenavn?.message}
+                    description={"Beskriv arbeidsoppgaven med noen få ord"}
+                    maxLength={100}
+                    defaultValue={defaultFormValues?.arbeidsoppgavenavn}
+                  />
+                );
+              }}
             />
           )}
 
           <Controller
             name="kanGjennomfores"
             rules={{ required: "Du må velge om oppgaven kan gjennomføres" }}
-            defaultValue={defaultFormValues?.kanGjennomfores}
+            defaultValue={defaultFormValues?.kanGjennomfores ?? null}
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <StyledRadioGroup
                 legend="Kan oppgaven gjennomføres i sykeperioden? (obligatorisk)"
@@ -164,40 +170,62 @@ export const ArbeidsoppgaveFormSM = ({
                 )}
               />
 
-              <StyledTextarea
-                id="kanBeskrivelse"
-                label={"Beskrivelse (obligatorisk)"}
-                error={errors.kanBeskrivelse?.message}
-                description={
-                  "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-                }
-                maxLength={1000}
-                {...register("kanBeskrivelse", {
+              <Controller
+                name="kanBeskrivelse"
+                rules={{
                   required:
                     "Du må gi en beskrivelse av hva som skal til for å gjennomføre oppgaven",
-                  maxLength: 1000,
-                })}
-                defaultValue={defaultFormValues?.kanBeskrivelse}
+                  maxLength: {
+                    value: 1000,
+                    message: "Beskrivelsen må være på 1000 tegn eller mindre",
+                  },
+                }}
+                render={({ field }) => {
+                  return (
+                    <StyledTextarea
+                      {...field}
+                      label={"Beskrivelse (obligatorisk)"}
+                      error={errors.kanBeskrivelse?.message}
+                      description={
+                        "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+                      }
+                      maxLength={1000}
+                      defaultValue={defaultFormValues?.kanBeskrivelse}
+                    />
+                  );
+                }}
               />
             </div>
           )}
 
           {hasSelectedKanIkke() && (
-            <StyledTextarea
-              id="kanIkkeBeskrivelse"
-              label={
-                "Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"
-              }
-              error={errors.kanIkkeBeskrivelse?.message}
-              description={
-                "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
-              }
-              {...register("kanIkkeBeskrivelse", {
+            <Controller
+              render={({ field }) => {
+                return (
+                  <StyledTextarea
+                    {...field}
+                    id="kanIkkeBeskrivelse"
+                    label={
+                      "Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"
+                    }
+                    error={errors.kanIkkeBeskrivelse?.message}
+                    description={
+                      "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
+                    }
+                    maxLength={1000}
+                    defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
+                  />
+                );
+              }}
+              name="kanIkkeBeskrivelse"
+              rules={{
                 required:
                   "Du må gi en beskrivelse av hvorfor du ikke kan gjennomføre oppgaven",
-                maxLength: 1000,
-              })}
-              defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
+                maxLength: {
+                  value: 1000,
+                  message: "Beskrivelsen må være på 1000 tegn eller mindre",
+                },
+              }}
             />
           )}
 
