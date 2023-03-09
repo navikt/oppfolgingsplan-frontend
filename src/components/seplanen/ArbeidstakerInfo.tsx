@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "utils/stringUtils";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "./ContentWrapper";
 import { texts } from "./texts";

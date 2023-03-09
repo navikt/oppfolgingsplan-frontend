@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Row } from "components/blocks/wrappers/Row";
+import { Row } from "../blocks/wrappers/Row";
 
 interface Props {
   show: boolean;

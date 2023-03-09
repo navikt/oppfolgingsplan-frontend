@@ -2,8 +2,8 @@ import { Button, Textarea } from "@navikt/ds-react";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import styled from "styled-components";
-import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
-import { Row } from "components/blocks/wrappers/Row";
+import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
+import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
 

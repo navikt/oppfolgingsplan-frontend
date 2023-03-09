@@ -1,12 +1,12 @@
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
-import { Oppfolgingsplan } from "types/oppfolgingsplan";
+import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import {
   getStatusPageTitleAndHeading,
   StatusPageToDisplay,
   statusPageToDisplayAG,
-} from "utils/statusPageUtils";
-import { IngenPlanTilGodkjenning } from "components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
+} from "../../../../utils/statusPageUtils";
+import { IngenPlanTilGodkjenning } from "../../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import ArbeidsgiverSide from "../../../../components/blocks/wrappers/ArbeidsgiverSide";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";

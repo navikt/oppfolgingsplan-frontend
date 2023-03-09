@@ -1,6 +1,6 @@
 import { Back } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
-import { useLandingUrl } from "hooks/routeHooks";
+import { useLandingUrl } from "../../hooks/routeHooks";
 import NextLink from "next/link";
 
 export const TilLandingssideKnapp = () => {

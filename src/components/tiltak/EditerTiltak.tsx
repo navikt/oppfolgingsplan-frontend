@@ -1,4 +1,4 @@
-import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
+import { useLagreTiltak } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormSM } from "./TiltakFormSM";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";

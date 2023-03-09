@@ -1,4 +1,4 @@
-import { Sykmeldt } from "schema/sykmeldtSchema";
+import { Sykmeldt } from "../../../../../schema/sykmeldtSchema";
 
 export const defaultSykmeldtMockData: Sykmeldt = {
   narmestelederId: "123",

@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
 import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanContent";
-import { useOppfolgingsplanerSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { useOppfolgingsplanerSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useSykmeldingerSM } from "../../api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
 import SykmeldtSide from "../../components/blocks/wrappers/SykmeldtSide";
 import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";

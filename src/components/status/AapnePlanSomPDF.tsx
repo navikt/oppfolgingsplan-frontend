@@ -1,4 +1,4 @@
-import { usePdfApiUrl } from "hooks/routeHooks";
+import { usePdfApiUrl } from "../../hooks/routeHooks";
 import { FileContent } from "@navikt/ds-icons";
 import { Button } from "@navikt/ds-react";
 

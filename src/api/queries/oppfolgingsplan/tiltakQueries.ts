@@ -1,8 +1,8 @@
 import {
   useOppfolgingsplanApiPath,
   useOppfolgingsplanRouteId,
-} from "hooks/routeHooks";
-import { post } from "api/axios/axios";
+} from "../../../hooks/routeHooks";
+import { post } from "../../axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";

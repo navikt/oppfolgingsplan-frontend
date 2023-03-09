@@ -1,5 +1,5 @@
 import { BodyLong, Label } from "@navikt/ds-react";
-import { texts } from "components/seplanen/texts";
+import { texts } from "../seplanen/texts";
 import { Gjennomforing } from "../../types/oppfolgingsplan";
 
 interface Props {

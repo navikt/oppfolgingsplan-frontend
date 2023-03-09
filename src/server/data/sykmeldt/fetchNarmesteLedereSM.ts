@@ -1,4 +1,4 @@
-import { getNarmesteLedere } from "server/service/oppfolgingsplanService";
+import { getNarmesteLedere } from "../../service/oppfolgingsplanService";
 
 export const fetchNarmesteLedereSM = async (
   oppfolgingsplanTokenX: string,

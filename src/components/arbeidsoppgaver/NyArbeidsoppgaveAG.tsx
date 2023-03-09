@@ -1,8 +1,8 @@
 import { ArbeidsoppgaveFormHeadingAG } from "./ArbeidsoppgaveFormHeading";
 import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
-import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
-import PlusIcon from "components/blocks/icons/PlusIcon";
+import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
+import PlusIcon from "../../components/blocks/icons/PlusIcon";
 import {
   ArbeidsoppgaveFormAG,
   OppgaveFormValues,

@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 import { BodyLong, Button, Textarea } from "@navikt/ds-react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
-import { Row } from "components/blocks/wrappers/Row";
+import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
+import { Row } from "../blocks/wrappers/Row";
 import { useAudience } from "../../hooks/routeHooks";
 
 const SpacedTextarea = styled(Textarea)`

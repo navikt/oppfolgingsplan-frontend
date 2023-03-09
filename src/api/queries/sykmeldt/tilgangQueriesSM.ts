@@ -1,7 +1,7 @@
-import { useApiBasePath } from "hooks/routeHooks";
-import { get } from "api/axios/axios";
+import { useApiBasePath } from "../../../hooks/routeHooks";
+import { get } from "../../axios/axios";
 import { Tilgang } from "../../../schema/tilgangSchema";
-import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";

@@ -1,7 +1,7 @@
 import { Client, Issuer } from "openid-client";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { logger } from "@navikt/next-logger";
-import serverEnv from "server/utils/serverEnv";
+import serverEnv from "../../../server/utils/serverEnv";
 
 let _issuer: Issuer<Client>;
 let _remoteJWKSet: ReturnType<typeof createRemoteJWKSet>;

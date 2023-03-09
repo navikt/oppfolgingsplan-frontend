@@ -1,11 +1,11 @@
 import React from "react";
-import { erOppfolgingsplanOpprettbarDirekte } from "utils/oppfolgingplanUtils";
+import { erOppfolgingsplanOpprettbarDirekte } from "../../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogTomImage from "../../blocks/images/oppfolgingsdialog-gray.svg";
 import { Button } from "@navikt/ds-react";
-import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
-import { Oppfolgingsplan } from "types/oppfolgingsplan";
+import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
+import { useOpprettOppfolgingsplanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { OppfolgingsplanCard } from "../../seplanen/OppfolgingsplanCard";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];

@@ -1,20 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { get, post } from "api/axios/axios";
+import { get, post } from "../../axios/axios";
 import {
   useApiBasePath,
   useLandingUrl,
   useNarmesteLederId,
   useOppfolgingsplanApiPath,
   useOppfolgingsplanRouteId,
-} from "hooks/routeHooks";
-import { OpprettOppfoelgingsdialog } from "schema/opprettOppfoelgingsdialogSchema";
+} from "../../../hooks/routeHooks";
+import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import {
   erOppfolgingsplanAktiv,
   finnNyesteTidligereOppfolgingsplanMedVirksomhet,
   finnTidligereOppfolgingsplaner,
-} from "utils/oppfolgingplanUtils";
-import { ApiErrorException } from "api/axios/errors";
-import { useDineSykmeldte } from "api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
+} from "../../../utils/oppfolgingplanUtils";
+import { ApiErrorException } from "../../axios/errors";
+import { useDineSykmeldte } from "./dinesykmeldteQueriesAG";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useRouter } from "next/router";

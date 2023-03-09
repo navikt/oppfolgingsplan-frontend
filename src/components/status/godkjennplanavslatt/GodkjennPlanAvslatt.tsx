@@ -1,5 +1,5 @@
 import { BodyShort } from "@navikt/ds-react";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 

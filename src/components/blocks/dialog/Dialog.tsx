@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 import styled from "styled-components";
 import { Button, Chat } from "@navikt/ds-react";
-import { hentAktoerNavnInitialer } from "utils/stringUtils";
-import { getFullDateFormat } from "utils/dateUtils";
-import { useSlettKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { hentAktoerNavnInitialer } from "../../../utils/stringUtils";
+import { getFullDateFormat } from "../../../utils/dateUtils";
+import { useSlettKommentar } from "../../../api/queries/oppfolgingsplan/tiltakQueries";
+import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
 import { useAudience } from "../../../hooks/routeHooks";
 import {

@@ -1,6 +1,6 @@
 import { Heading } from "@navikt/ds-react";
-import { Row } from "components/blocks/wrappers/Row";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { Row } from "../../blocks/wrappers/Row";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { AapnePlanSomPDF } from "../AapnePlanSomPDF";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";

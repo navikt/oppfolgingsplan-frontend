@@ -1,5 +1,5 @@
-import { getKontaktinfo } from "server/service/oppfolgingsplanService";
-import { ApiErrorException, generalError } from "api/axios/errors";
+import { getKontaktinfo } from "../../service/oppfolgingsplanService";
+import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const fetchKontaktinfo = async (

@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { Button, Radio, RadioGroup } from "@navikt/ds-react";
 import styled from "styled-components";
-import { Row } from "components/blocks/wrappers/Row";
+import { Row } from "../../blocks/wrappers/Row";
 
 const texts = {
   question: "Ønsker du å basere den nye planen på den som gjaldt sist?",

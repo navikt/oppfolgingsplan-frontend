@@ -1,13 +1,13 @@
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import {
-  MotpartNavnForAltinn,
   GodkjennOppfolgingsplan,
+  MotpartNavnForAltinn,
 } from "../GodkjennOppfolgingsplan";
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { BodyLong } from "@navikt/ds-react";
 import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";

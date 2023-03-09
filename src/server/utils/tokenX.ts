@@ -1,6 +1,6 @@
-import { accessDeniedError, ApiErrorException } from "api/axios/errors";
-import { getTokenX } from "server/auth/tokenx";
-import serverEnv from "server/utils/serverEnv";
+import { accessDeniedError, ApiErrorException } from "../../api/axios/errors";
+import { getTokenX } from "../auth/tokenx";
+import serverEnv from "../../server/utils/serverEnv";
 
 export const getOppfolgingsplanTokenX = async (
   idportenToken: string | null

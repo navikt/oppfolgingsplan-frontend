@@ -1,13 +1,13 @@
 import React from "react";
-import { hentPlanStatus } from "utils/teaserUtils";
-import { useAudience, useOppfolgingsplanUrl } from "hooks/routeHooks";
+import { hentPlanStatus } from "../../../utils/teaserUtils";
+import { useAudience, useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import {
   StatusPageToDisplay,
   statusPageToDisplayAG,
   statusPageToDisplaySM,
-} from "utils/statusPageUtils";
-import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
+} from "../../../utils/statusPageUtils";
+import { OppfolgingsplanCard } from "../../seplanen/OppfolgingsplanCard";
 import { STATUS } from "../../../constants/konstanter";
 import { Detail } from "@navikt/ds-react";
 

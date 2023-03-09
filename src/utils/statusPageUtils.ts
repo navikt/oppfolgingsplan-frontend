@@ -1,4 +1,4 @@
-import { inneholderGodkjenninger } from "utils/oppfolgingplanUtils";
+import { inneholderGodkjenninger } from "./oppfolgingplanUtils";
 import { Godkjenning, Oppfolgingsplan } from "../types/oppfolgingsplan";
 
 export const getStatusPageTitleAndHeading = (

@@ -1,4 +1,4 @@
-import { z, object, boolean, string } from "zod";
+import { boolean, object, string, z } from "zod";
 
 export const tilgangSchema = object({
   harTilgang: boolean(),

@@ -1,4 +1,4 @@
-import { z, object, string, array } from "zod";
+import { array, object, string, z } from "zod";
 
 export const sykmeldingsperiodeSchema = object({
   fom: string(),

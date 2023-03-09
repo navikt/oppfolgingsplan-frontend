@@ -1,6 +1,6 @@
 import { BodyShort } from "@navikt/ds-react";
-import { Row } from "components/blocks/wrappers/Row";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { Row } from "../../blocks/wrappers/Row";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { AvvisPlanKnapp } from "../AvvisPlanKnapp";
 import {
   GodkjennOppfolgingsplan,

@@ -1,4 +1,4 @@
-import { getVirksomhet } from "server/service/oppfolgingsplanService";
+import { getVirksomhet } from "../../service/oppfolgingsplanService";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { notNull } from "../../utils/tsUtils";
 

@@ -1,5 +1,5 @@
 import { Accordion, Link } from "@navikt/ds-react";
-import { restdatoTildato } from "utils/dateUtils";
+import { restdatoTildato } from "../../utils/dateUtils";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { Avbruttplan } from "../../types/oppfolgingsplan";
 import { usePdfApiUrl } from "../../hooks/routeHooks";

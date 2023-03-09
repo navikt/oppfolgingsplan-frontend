@@ -1,4 +1,4 @@
-import { ApiErrorException, generalError } from "api/axios/errors";
+import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { grant } from "./tokenx.grant";
 
 export async function getTokenX(

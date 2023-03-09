@@ -3,7 +3,7 @@ import { BodyLong, Heading } from "@navikt/ds-react";
 import Image from "next/image";
 import React, { ReactNode } from "react";
 import { OppfolgingsplanPanel } from "./OppfolgingsplanPanel";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 
 const PanelContent = styled.div`
   display: flex;

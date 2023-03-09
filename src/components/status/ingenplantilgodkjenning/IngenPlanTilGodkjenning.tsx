@@ -1,8 +1,8 @@
 import { Alert, BodyLong } from "@navikt/ds-react";
 import Link from "next/link";
 import React from "react";
-import { useLandingUrl } from "hooks/routeHooks";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { useLandingUrl } from "../../../hooks/routeHooks";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 
 export const IngenPlanTilGodkjenning = () => {
   const landingUrl = useLandingUrl();

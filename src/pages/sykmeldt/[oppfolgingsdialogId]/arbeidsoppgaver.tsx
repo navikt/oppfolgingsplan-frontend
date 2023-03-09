@@ -1,15 +1,15 @@
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-
 import { NextPage } from "next";
 import React from "react";
+
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
+import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { NyArbeidsoppgaveSM } from "../../../components/arbeidsoppgaver/NyArbeidsoppgaveSM";
+import { LagredeArbeidsoppgaver } from "../../../components/arbeidsoppgaver/LagredeArbeidsoppgaver";
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "components/blocks/wrappers/OppfolgingsplanPageSM";
-import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeidsoppgaver";
-import { NyArbeidsoppgaveSM } from "components/arbeidsoppgaver/NyArbeidsoppgaveSM";
-import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
-import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
 
 const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useAktivPlanSM();

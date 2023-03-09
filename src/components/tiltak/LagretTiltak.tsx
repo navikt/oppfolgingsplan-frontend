@@ -7,19 +7,19 @@ import {
   Label,
   Tag,
 } from "@navikt/ds-react";
-import { toDateMedMaanedNavn } from "utils/dateUtils";
-import { STATUS_TILTAK } from "constants/konstanter";
+import { toDateMedMaanedNavn } from "../../utils/dateUtils";
+import { STATUS_TILTAK } from "../../constants/konstanter";
 import { NyKommentar } from "./NyKommentar";
 import { DialogDots, Edit } from "@navikt/ds-icons";
 import { SlettTiltakButton } from "./SlettTiltakButton";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { useLagreKommentar } from "api/queries/oppfolgingsplan/tiltakQueries";
+import { useLagreKommentar } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { EditerTiltak } from "./EditerTiltak";
 import { SpacedDetail } from "../blocks/SpacedDetail";
-import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
-import { Dialog } from "components/blocks/dialog/Dialog";
-import { Row } from "components/blocks/wrappers/Row";
+import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
+import { Dialog } from "../blocks/dialog/Dialog";
+import { Row } from "../blocks/wrappers/Row";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { VurderButton } from "../blocks/buttons/VurderButton";

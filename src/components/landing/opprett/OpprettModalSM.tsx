@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import ArbeidsgiverSkjemaForm from "./ArbeidsgiverSkjema";
 import BaserTidligereSkjema from "./BaserTidligereSkjema";
 import { Modal } from "@navikt/ds-react";
-import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
+import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
 import styled from "styled-components";
-import { useOpprettOppfolgingsplanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "utils/oppfolgingplanUtils";
-import Feilmelding from "components/blocks/error/Feilmelding";
-import { Oppfolgingsplan } from "types/oppfolgingsplan";
-import { useKopierOppfolgingsplan } from "api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useOpprettOppfolgingsplanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "../../../utils/oppfolgingplanUtils";
+import Feilmelding from "../../../components/blocks/error/Feilmelding";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { useKopierOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 const FormContainer = styled.div`
   padding: 2rem;

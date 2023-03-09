@@ -1,4 +1,4 @@
-import { post } from "api/axios/axios";
+import { post } from "../../axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   useApiBasePath,
@@ -6,7 +6,7 @@ import {
   useLandingUrl,
   useOppfolgingsplanApiPath,
   useOppfolgingsplanUrl,
-} from "hooks/routeHooks";
+} from "../../../hooks/routeHooks";
 import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";

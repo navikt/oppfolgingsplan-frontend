@@ -2,7 +2,7 @@ import { Delete } from "@navikt/ds-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { texts } from "components/seplanen/texts";
+import { texts } from "../seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";

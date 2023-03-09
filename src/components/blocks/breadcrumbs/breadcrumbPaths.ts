@@ -2,7 +2,7 @@ import {
   basePath,
   dineSykemeldteRoot,
   dittSykefravarRoot,
-} from "environments/publicEnv";
+} from "../../../environments/publicEnv";
 
 // Breadcrumbs for sykmeldt
 export function dittSykefravaerBreadcrumbSM() {

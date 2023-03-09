@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import {
   useAktiveOppfolgingsplanerAG,
   useTidligereOppfolgingsplanerAG,
-} from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-import { beskyttetSideUtenProps } from "auth/beskyttetSide";
-import OppfolgingsdialogerInfoPersonvern from "components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
-import VideoPanel from "components/blocks/video/VideoPanel";
-import ArbeidsgiverSide from "components/blocks/wrappers/ArbeidsgiverSide";
-import OppfolgingsdialogTeasere from "components/landing/teaser/OppfolgingsdialogTeasere";
-import IngenPlanerCardAG from "components/landing/opprett/IngenPlanerCardAG";
-import OpprettModalAG from "components/landing/opprett/OpprettModalAG";
+} from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMelding";
 import { SamtaleStotte } from "../../../components/blocks/samtalestotte/SamtaleStotte";
 import { useKontaktinfo } from "../../../api/queries/kontaktinfo/kontaktinfoQueries";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
+import OppfolgingsdialogTeasere from "../../../components/landing/teaser/OppfolgingsdialogTeasere";
+import OpprettModalAG from "../../../components/landing/opprett/OpprettModalAG";
+import ArbeidsgiverSide from "../../../components/blocks/wrappers/ArbeidsgiverSide";
+import IngenPlanerCardAG from "../../../components/landing/opprett/IngenPlanerCardAG";
+import OppfolgingsdialogerInfoPersonvern from "../../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
+import VideoPanel from "../../../components/blocks/video/VideoPanel";
 
 const Home: NextPage = () => {
   const narmesteLederId = useNarmesteLederId();

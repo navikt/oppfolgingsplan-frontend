@@ -4,7 +4,7 @@ import {
   erOppfolgingsplanOpprettbarMedArbeidsgiver,
   harTidligereOppfolgingsplanMedVirksomhet,
   hentAktivOppfolgingsplanOpprettetMedArbeidsgiver,
-} from "utils/oppfolgingplanUtils";
+} from "../../../utils/oppfolgingplanUtils";
 import {
   Alert,
   BodyShort,
@@ -15,10 +15,10 @@ import {
   Select,
 } from "@navikt/ds-react";
 import Link from "next/link";
-import { ArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import { useLandingUrl } from "hooks/routeHooks";
+import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
+import { useLandingUrl } from "../../../hooks/routeHooks";
 import styled from "styled-components";
-import { Row } from "components/blocks/wrappers/Row";
+import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
