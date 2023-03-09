@@ -9,8 +9,8 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import { Row } from "components/blocks/wrappers/Row";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
+import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
