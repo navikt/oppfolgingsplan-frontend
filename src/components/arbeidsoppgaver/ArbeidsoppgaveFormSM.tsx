@@ -9,9 +9,9 @@ import {
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import styled from "styled-components";
-import { KANGJENNOMFOERES, TILRETTELEGGING } from "constants/konstanter";
-import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
-import { Row } from "components/blocks/wrappers/Row";
+import { KANGJENNOMFOERES, TILRETTELEGGING } from "../../constants/konstanter";
+import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
+import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
 

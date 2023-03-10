@@ -1,5 +1,5 @@
 import React from "react";
-import { getPublicAsset } from "utils/getAssetPath";
+import { getPublicAsset } from "../../../utils/getAssetPath";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { SpacedDiv } from "../wrappers/SpacedDiv";
 

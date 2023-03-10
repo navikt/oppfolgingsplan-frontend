@@ -1,6 +1,6 @@
-import { useApiBasePath } from "hooks/routeHooks";
-import { get } from "api/axios/axios";
-import { useSykmeldtFnr } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { useApiBasePath } from "../../../hooks/routeHooks";
+import { get } from "../../axios/axios";
+import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
 import { NarmesteLeder } from "../../../schema/narmestelederSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";

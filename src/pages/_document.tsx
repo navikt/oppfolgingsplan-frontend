@@ -11,7 +11,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
-import serverEnv from "server/utils/serverEnv";
+import serverEnv from "../server/utils/serverEnv";
 
 // The 'head'-field of the document initialProps contains data from <head> (meta-tags etc)
 const getDocumentParameter = (

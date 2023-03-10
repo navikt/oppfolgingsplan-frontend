@@ -2,9 +2,9 @@ import React from "react";
 import {
   useOpprettOppfolgingsplanAG,
   useTidligereOppfolgingsplanerAG,
-} from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-import { OppfolgingsplanCard } from "components/seplanen/OppfolgingsplanCard";
-import OppfolgingsdialogTomImage from "components/blocks/images/oppfolgingsdialog-gray.svg";
+} from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { OppfolgingsplanCard } from "../../seplanen/OppfolgingsplanCard";
+import OppfolgingsdialogTomImage from "../../../components/blocks/images/oppfolgingsdialog-gray.svg";
 import { Button } from "@navikt/ds-react";
 
 export interface Props {

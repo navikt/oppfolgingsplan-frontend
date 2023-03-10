@@ -1,8 +1,8 @@
-import { KANGJENNOMFOERES } from "constants/konstanter";
+import { KANGJENNOMFOERES } from "../../../constants/konstanter";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "../ContentWrapper";
 import { texts } from "../texts";
-import { ArbeidsoppgaveCard } from "components/arbeidsoppgaver/ArbeidsoppgaveCard";
+import { ArbeidsoppgaveCard } from "../../arbeidsoppgaver/ArbeidsoppgaveCard";
 import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 interface Props {

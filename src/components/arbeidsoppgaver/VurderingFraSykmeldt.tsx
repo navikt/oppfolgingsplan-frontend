@@ -1,7 +1,7 @@
 import { CustomAlertWithoutIcon } from "./CustomAlertWithoutIcon";
-import { useAudience } from "hooks/routeHooks";
+import { useAudience } from "../../hooks/routeHooks";
 import styled from "styled-components";
-import { texts } from "components/seplanen/texts";
+import { texts } from "../seplanen/texts";
 
 const Space = styled.div`
   margin-bottom: 1rem;

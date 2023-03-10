@@ -1,4 +1,4 @@
-import { boolean, z, object, string } from "zod";
+import { boolean, object, string, z } from "zod";
 
 export const kontaktinfoSchema = object({
   fnr: string(),

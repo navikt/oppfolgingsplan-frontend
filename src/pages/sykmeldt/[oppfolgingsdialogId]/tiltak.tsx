@@ -1,12 +1,5 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
-import { NyttTiltak } from "components/tiltak/NyttTiltak";
-import {
-  OppfolgingsplanPageSM,
-  Page,
-} from "components/blocks/wrappers/OppfolgingsplanPageSM";
-import { LagredeTiltak } from "components/tiltak/LagredeTiltak";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import { TiltakFormSM } from "../../../components/tiltak/TiltakFormSM";
 import { STATUS_TILTAK } from "../../../constants/konstanter";
@@ -14,6 +7,13 @@ import { useLagreTiltak } from "../../../api/queries/oppfolgingsplan/tiltakQueri
 import { TiltakFormValues } from "../../../components/tiltak/utils/typer";
 import { Tiltak } from "../../../types/oppfolgingsplan";
 import { formatAsLocalDateTime } from "../../../utils/dateUtils";
+import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { NyttTiltak } from "../../../components/tiltak/NyttTiltak";
+import { LagredeTiltak } from "../../../components/tiltak/LagredeTiltak";
+import {
+  OppfolgingsplanPageSM,
+  Page,
+} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
 
 const formHeadingTexts = {
   title: "Hva kan gjøre det lettere å jobbe?",

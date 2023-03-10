@@ -3,11 +3,11 @@ import {
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormSM";
 import { ArbeidsoppgaveFormHeadingSM } from "./ArbeidsoppgaveFormHeading";
-import { TILRETTELEGGING } from "constants/konstanter";
+import { TILRETTELEGGING } from "../../constants/konstanter";
 import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
-import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
-import PlusIcon from "components/blocks/icons/PlusIcon";
+import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
+import PlusIcon from "../../components/blocks/icons/PlusIcon";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 

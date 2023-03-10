@@ -2,7 +2,7 @@ import {
   ArbeidsoppgaveFormSM,
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormSM";
-import { TILRETTELEGGING } from "constants/konstanter";
+import { TILRETTELEGGING } from "../../constants/konstanter";
 import { Arbeidsoppgave, Gjennomforing } from "../../types/oppfolgingsplan";
 import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 

@@ -1,4 +1,4 @@
-import { z, object, string } from "zod";
+import { object, string, z } from "zod";
 
 export const opprettOppfoelgingsdialogSchema = object({
   sykmeldtFnr: string(),

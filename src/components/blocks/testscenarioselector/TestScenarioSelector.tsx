@@ -6,11 +6,11 @@ import { ImageContainer } from "../wrappers/ImageContainer";
 import React, { useEffect, useState } from "react";
 import { Row } from "../wrappers/Row";
 import { SpacedDiv } from "../wrappers/SpacedDiv";
-import { TestScenario } from "server/data/mock/getMockDb";
+import { TestScenario } from "../../../server/data/mock/getMockDb";
 import {
   useActiveTestScenario,
   useSetActiveTestScenario,
-} from "api/queries/testScenarioQueries";
+} from "../../../api/queries/testScenarioQueries";
 
 const MockdataWrapper = styled.div`
   position: fixed;

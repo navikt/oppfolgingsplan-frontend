@@ -1,5 +1,5 @@
-import { useApiBasePath, useNarmesteLederId } from "hooks/routeHooks";
-import { get } from "api/axios/axios";
+import { useApiBasePath, useNarmesteLederId } from "../../../hooks/routeHooks";
+import { get } from "../../axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";

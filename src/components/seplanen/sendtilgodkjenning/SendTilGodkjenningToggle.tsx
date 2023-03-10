@@ -2,8 +2,8 @@ import { Alert, BodyLong, Button, GuidePanel } from "@navikt/ds-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useOppfolgingsplanUrl } from "hooks/routeHooks";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
+import { useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Arbeidsoppgave, Tiltak } from "../../../types/oppfolgingsplan";
 
 const SpacedGuidePanel = styled(GuidePanel)`

@@ -1,5 +1,5 @@
-import { useApiBasePath } from "hooks/routeHooks";
-import { get } from "api/axios/axios";
+import { useApiBasePath } from "../../../hooks/routeHooks";
+import { get } from "../../axios/axios";
 import { Sykmelding } from "../../../schema/sykmeldingSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";

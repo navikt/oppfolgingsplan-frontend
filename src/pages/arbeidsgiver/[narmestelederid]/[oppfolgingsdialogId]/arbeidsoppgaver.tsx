@@ -3,8 +3,8 @@ import React from "react";
 import {
   OppfolgingsplanPageAG,
   Page,
-} from "components/blocks/wrappers/OppfolgingsplanPageAG";
-import { LagredeArbeidsoppgaver } from "components/arbeidsoppgaver/LagredeArbeidsoppgaver";
+} from "../../../../components/blocks/wrappers/OppfolgingsplanPageAG";
+import { LagredeArbeidsoppgaver } from "../../../../components/arbeidsoppgaver/LagredeArbeidsoppgaver";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { NyArbeidsoppgaveAG } from "../../../../components/arbeidsoppgaver/NyArbeidsoppgaveAG";
 import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";

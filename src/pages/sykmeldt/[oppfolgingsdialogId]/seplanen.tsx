@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { SendTilGodkjenningSM } from "../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenningSM";
 import { OppfolgingsplanOversikt } from "../../../components/seplanen/OppfolgingsplanOversikt";
 import {

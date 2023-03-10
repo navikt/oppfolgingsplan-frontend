@@ -1,5 +1,5 @@
 import { SpacedDetail } from "../blocks/SpacedDetail";
-import { texts } from "components/seplanen/texts";
+import { texts } from "../seplanen/texts";
 
 interface Props {
   opprettetAv: string;

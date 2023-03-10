@@ -1,15 +1,9 @@
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
 import { GodkjennPlanMottatt } from "../../../components/status/godkjennmottatt/GodkjennPlanMottatt";
-import {
-  getStatusPageTitleAndHeading,
-  StatusPageToDisplay,
-  statusPageToDisplaySM,
-} from "utils/statusPageUtils";
 import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPlan";
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
@@ -18,6 +12,12 @@ import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { ApprovalInformationSM } from "../../../components/status/godkjentplan/ApprovalInformation";
+import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import {
+  getStatusPageTitleAndHeading,
+  StatusPageToDisplay,
+  statusPageToDisplaySM,
+} from "../../../utils/statusPageUtils";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;

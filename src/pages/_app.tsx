@@ -2,9 +2,9 @@ import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { createGlobalStyle } from "styled-components";
-import { useAudience } from "hooks/routeHooks";
-import { BreadcrumbsAppenderSM } from "components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
-import { BreadcrumbsAppenderAG } from "components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
+import { useAudience } from "../hooks/routeHooks";
+import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
+import { BreadcrumbsAppenderAG } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
 import React, { useState } from "react";
 import {
   DehydratedState,

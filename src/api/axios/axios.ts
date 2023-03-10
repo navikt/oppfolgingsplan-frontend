@@ -6,7 +6,7 @@ import {
   loginRequiredError,
   networkError,
 } from "./errors";
-import { loginUser } from "utils/urlUtils";
+import { loginUser } from "../../utils/urlUtils";
 import { displayTestScenarioSelector } from "../../environments/publicEnv";
 import { v4 as uuidv4 } from "uuid";
 

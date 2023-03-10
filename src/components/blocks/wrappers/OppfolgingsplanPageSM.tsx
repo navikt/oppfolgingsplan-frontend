@@ -1,14 +1,14 @@
 import { BodyLong, Heading } from "@navikt/ds-react";
 import React, { ReactElement, ReactNode } from "react";
-import { useSykmeldingerSM } from "api/queries/sykmeldt/sykmeldingerQueriesSM";
+import { useSykmeldingerSM } from "../../../api/queries/sykmeldt/sykmeldingerQueriesSM";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmelding,
   erOppfolgingsplanTidligere,
-} from "utils/oppfolgingplanUtils";
+} from "../../../utils/oppfolgingplanUtils";
 import { NavigationButtons } from "../buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBoks";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
-import { useAktivPlanSM } from "api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { statusPageToDisplaySM } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
 import SykmeldtSide from "./SykmeldtSide";

@@ -1,4 +1,4 @@
-import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
+import { useLagreTiltak } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { VurderTiltakForm } from "./VurderTiltakForm";
 import styled from "styled-components";

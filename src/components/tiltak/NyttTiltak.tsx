@@ -1,9 +1,9 @@
 import { Button } from "@navikt/ds-react";
 import { ReactNode } from "react";
-import { useLagreTiltak } from "api/queries/oppfolgingsplan/tiltakQueries";
+import { useLagreTiltak } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormHeading } from "./TiltakFormHeading";
-import { SpacedPanel } from "components/blocks/wrappers/SpacedPanel";
-import PlusIcon from "components/blocks/icons/PlusIcon";
+import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
+import PlusIcon from "../../components/blocks/icons/PlusIcon";
 
 interface Props {
   children: ReactNode;

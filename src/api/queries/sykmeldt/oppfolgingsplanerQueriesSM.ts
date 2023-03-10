@@ -1,9 +1,9 @@
-import { get, post } from "api/axios/axios";
+import { get, post } from "../../axios/axios";
 import {
   useApiBasePath,
   useLandingUrl,
   useOppfolgingsplanRouteId,
-} from "hooks/routeHooks";
+} from "../../../hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";

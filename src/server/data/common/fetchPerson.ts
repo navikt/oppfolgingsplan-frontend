@@ -1,5 +1,5 @@
-import { getPersonSM } from "server/service/oppfolgingsplanService";
-import { ApiErrorException, generalError } from "api/axios/errors";
+import { getPersonSM } from "../../service/oppfolgingsplanService";
+import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { PersonV3DTO } from "../../../schema/personSchemas";
 

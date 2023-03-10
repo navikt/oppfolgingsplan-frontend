@@ -3,16 +3,16 @@ import {
   finnAktiveOppfolgingsplaner,
   finnTidligereOppfolgingsplaner,
   harTidligereOppfolgingsplaner,
-} from "utils/oppfolgingplanUtils";
+} from "../../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
 import { Button } from "@navikt/ds-react";
-import { NarmesteLeder } from "schema/narmestelederSchema";
-import { Sykmelding } from "schema/sykmeldingSchema";
-import { finnArbeidsgivereForGyldigeSykmeldinger } from "utils/sykmeldingUtils";
-import OpprettModalSM from "components/landing/opprett/OpprettModalSM";
-import IngenPlanerCardSM from "components/landing/opprett/IngenPlanerCardSM";
-import { SpacedDiv } from "components/blocks/wrappers/SpacedDiv";
-import { Oppfolgingsplan } from "types/oppfolgingsplan";
+import { NarmesteLeder } from "../../../schema/narmestelederSchema";
+import { Sykmelding } from "../../../schema/sykmeldingSchema";
+import { finnArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
+import OpprettModalSM from "../../../components/landing/opprett/OpprettModalSM";
+import IngenPlanerCardSM from "../../../components/landing/opprett/IngenPlanerCardSM";
+import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
   oppfolgingsdialogNyKnapp: {

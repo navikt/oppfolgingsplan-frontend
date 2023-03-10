@@ -1,6 +1,6 @@
-import { leggTilDagerPaDato } from "utils/dateUtils";
-import { defaultNarmesteLedereMockData } from "server/data/mock/defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
-import { OppfolgingsplanDTO } from "schema/oppfolgingsplanSchema";
+import { leggTilDagerPaDato } from "../../../../../utils/dateUtils";
+import { defaultNarmesteLedereMockData } from "../../defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
+import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
 const today = new Date();
 

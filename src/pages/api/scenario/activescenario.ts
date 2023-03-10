@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { displayTestScenarioSelector } from "environments/publicEnv";
+import { displayTestScenarioSelector } from "../../../environments/publicEnv";
 import getMockDb, {
   assignNewDbSetup,
   TestScenario,
-} from "server/data/mock/getMockDb";
-import { getMockSetupForScenario } from "server/data/mock/activeMockData";
+} from "../../../server/data/mock/getMockDb";
+import { getMockSetupForScenario } from "../../../server/data/mock/activeMockData";
 import { TEST_SESSION_ID } from "../../../api/axios/axios";
 import { handleQueryParamError } from "../../../server/utils/errors";
 

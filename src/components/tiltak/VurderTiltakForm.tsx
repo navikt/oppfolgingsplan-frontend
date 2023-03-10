@@ -9,8 +9,8 @@ import {
 import styled from "styled-components";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
-import { LightGreyPanel } from "components/blocks/wrappers/LightGreyPanel";
-import { FormErrorSummary } from "components/blocks/error/FormErrorSummary";
+import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
+import { FormErrorSummary } from "../blocks/error/FormErrorSummary";
 import { Row } from "../blocks/wrappers/Row";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { TiltakFormValues } from "./utils/typer";

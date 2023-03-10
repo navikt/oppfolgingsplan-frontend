@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import BaserTidligereSkjema from "components/landing/opprett/BaserTidligereSkjema";
-import { useOpprettOppfolgingsplanAG } from "api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import BaserTidligereSkjema from "../../../components/landing/opprett/BaserTidligereSkjema";
+import { useOpprettOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { Modal } from "@navikt/ds-react";
 import styled from "styled-components";
 

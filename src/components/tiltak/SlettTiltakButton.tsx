@@ -2,7 +2,7 @@ import { Button, Heading, Modal } from "@navikt/ds-react";
 import { Delete } from "@navikt/ds-icons";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSlettTiltakSM } from "api/queries/oppfolgingsplan/tiltakQueries";
+import { useSlettTiltakSM } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { Row } from "../blocks/wrappers/Row";
 
 const ModalContent = styled.div`

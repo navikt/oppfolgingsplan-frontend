@@ -5,7 +5,7 @@ import { Oppfolgingsplan, Stilling } from "../../../types/oppfolgingsplan";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
   erOppfolgingsplanTidligere,
-} from "utils/oppfolgingplanUtils";
+} from "../../../utils/oppfolgingplanUtils";
 import { NavigationButtons } from "../buttons/NavigationButtons";
 import { IkkeTilgangTilPlanInfoBoks } from "../infoboks/IkkeTilgangTilPlanInfoBoks";
 import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";

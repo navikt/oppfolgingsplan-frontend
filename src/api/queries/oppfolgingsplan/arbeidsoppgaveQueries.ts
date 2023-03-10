@@ -1,10 +1,10 @@
-import { post } from "api/axios/axios";
+import { post } from "../../axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 import {
   useOppfolgingsplanApiPath,
   useOppfolgingsplanRouteId,
-} from "hooks/routeHooks";
+} from "../../../hooks/routeHooks";
 import { queryKeys } from "../queryKeys";
 
 export const useLagreArbeidsoppgave = () => {

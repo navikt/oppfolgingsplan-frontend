@@ -7,8 +7,8 @@ import { SlettArbeidsoppgaveButton } from "./SlettArbeidsoppgaveButton";
 import { TilretteleggingsBeskrivelse } from "./TilretteleggingsBeskrivelse";
 import { VurderButton } from "../blocks/buttons/VurderButton";
 import { VurderingFraSykmeldt } from "./VurderingFraSykmeldt";
-import { useAudience } from "hooks/routeHooks";
-import { KANGJENNOMFOERES } from "constants/konstanter";
+import { useAudience } from "../../hooks/routeHooks";
+import { KANGJENNOMFOERES } from "../../constants/konstanter";
 import {
   Edit,
   ErrorColored,
@@ -16,10 +16,10 @@ import {
   WarningColored,
 } from "@navikt/ds-icons";
 import { useState } from "react";
-import { Card } from "components/blocks/card/Card";
-import { CardHeader } from "components/blocks/card/CardHeader";
-import { texts } from "components/seplanen/texts";
-import { AddColored } from "components/blocks/icons/AddColored";
+import { Card } from "../blocks/card/Card";
+import { CardHeader } from "../blocks/card/CardHeader";
+import { texts } from "../seplanen/texts";
+import { AddColored } from "../blocks/icons/AddColored";
 import { Button } from "@navikt/ds-react";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import {

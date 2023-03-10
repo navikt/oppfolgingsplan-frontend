@@ -1,9 +1,9 @@
 import { ContentWrapper } from "../ContentWrapper";
 import { texts } from "../texts";
-import { STATUS_TILTAK } from "constants/konstanter";
+import { STATUS_TILTAK } from "../../../constants/konstanter";
 import { Heading } from "@navikt/ds-react";
 import React from "react";
-import { LagretTiltak } from "components/tiltak/LagretTiltak";
+import { LagretTiltak } from "../../tiltak/LagretTiltak";
 import { Oppfolgingsplan, Tiltak } from "../../../types/oppfolgingsplan";
 import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 

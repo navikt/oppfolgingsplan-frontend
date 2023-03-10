@@ -1,5 +1,5 @@
 import React from "react";
-import { hentStatusUtenAktivSykmelding } from "utils/teaserUtils";
+import { hentStatusUtenAktivSykmelding } from "../../utils/teaserUtils";
 import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { OppfolgingsplanCard } from "../seplanen/OppfolgingsplanCard";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";

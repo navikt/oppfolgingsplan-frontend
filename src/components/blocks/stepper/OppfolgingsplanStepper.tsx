@@ -1,6 +1,6 @@
 import { Stepper } from "@navikt/ds-react";
 import React from "react";
-import { useOppfolgingsplanBasePath } from "hooks/routeHooks";
+import { useOppfolgingsplanBasePath } from "../../../hooks/routeHooks";
 import styled from "styled-components";
 import Link from "next/link";
 

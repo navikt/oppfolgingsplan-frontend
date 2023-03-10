@@ -1,4 +1,4 @@
-import { STATUS } from "constants/konstanter";
+import { STATUS } from "../constants/konstanter";
 import { toDateMedMaanedNavn } from "./dateUtils";
 import PlanGodkjentImage from "../components/blocks/images/oppfolgingsdialog-green.svg";
 import PlanAvbruttImage from "../components/blocks/images//plan-avbrutt.svg";
