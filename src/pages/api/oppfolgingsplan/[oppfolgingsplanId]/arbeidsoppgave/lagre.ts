@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Sykmelding } from "../../../../../schema/sykmeldingSchema";
-import { isMockBackend } from "../../../../../environments/publicEnv";
 import { saveOppgave } from "../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../server/utils/requestUtils";
 import { Arbeidsoppgave } from "../../../../../types/oppfolgingsplan";
+import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

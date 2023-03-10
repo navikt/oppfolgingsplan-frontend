@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { avbrytOppfolgingsplan } from "../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
-import { isMockBackend } from "../../../../../environments/publicEnv";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../server/utils/requestUtils";
+import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

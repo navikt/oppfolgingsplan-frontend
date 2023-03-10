@@ -19,4 +19,6 @@ export interface IServerEnvironmentVariables {
 
 const serverEnv = process.env as unknown as IServerEnvironmentVariables;
 
+export const isMockBackend = serverEnv.MOCK_BACKEND === "true";
+
 export default serverEnv;

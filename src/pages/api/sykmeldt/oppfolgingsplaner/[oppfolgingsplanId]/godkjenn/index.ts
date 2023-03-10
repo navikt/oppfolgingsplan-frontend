@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../../../environments/publicEnv";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
 import { godkjennOppfolgingsplanSM } from "../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
 import { GodkjennPlanData } from "../../../../../../schema/godkjennPlanSchema";
+import { isMockBackend } from "../../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

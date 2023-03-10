@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Sykmelding } from "../../../../../../../schema/sykmeldingSchema";
-import { isMockBackend } from "../../../../../../../environments/publicEnv";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import {
   getArbeidsoppgaveIdFromRequest,
@@ -13,6 +12,7 @@ import {
   ApiErrorException,
   generalError,
 } from "../../../../../../../api/axios/errors";
+import { isMockBackend } from "../../../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

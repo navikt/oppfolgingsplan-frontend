@@ -8,7 +8,7 @@ import {
 export function dittSykefravaerBreadcrumbSM() {
   return [
     {
-      url: dittSykefravarRoot,
+      url: dittSykefravarRoot(),
       title: "Ditt sykefravær",
     },
   ];
@@ -40,14 +40,14 @@ export function dineSykemeldteBreadcrumbAG(
   narmestelederId: string
 ) {
   const dineSykemeldteBreadcrumb = {
-    url: dineSykemeldteRoot,
+    url: dineSykemeldteRoot(),
     title: "Dine sykmeldte",
   };
 
   return [
     dineSykemeldteBreadcrumb,
     {
-      url: `${dineSykemeldteRoot}/${narmestelederId}`,
+      url: `${dineSykemeldteRoot()}/${narmestelederId}`,
       title: sykmeldtName,
     },
   ];
