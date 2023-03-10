@@ -1,8 +1,8 @@
 import { logger } from "@navikt/next-logger";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 
-import { isMockBackend } from "../environments/publicEnv";
 import { validateToken } from "../server/auth/idporten/verifyIdportenToken";
+import { isMockBackend } from "../server/utils/serverEnv";
 
 export type PageHandler = (
   context: GetServerSidePropsContext

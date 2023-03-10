@@ -1,4 +1,3 @@
-import { isMockBackend } from "../../../environments/publicEnv";
 import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
 import {
@@ -17,6 +16,7 @@ import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 import { filterValidOppfolgingsplaner } from "../mapping/filterValidOppfolgingsplaner";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { getNarmesteLederIdFromRequest } from "../../utils/requestUtils";
+import { isMockBackend } from "../../utils/serverEnv";
 
 export const fetchOppfolgingsplanerMetaAG = async (
   req: NextApiRequest

@@ -1,7 +1,7 @@
 import { logger } from "@navikt/next-logger";
 import { NextApiRequest, NextApiResponse } from "next";
 import { validateToken } from "./idporten/verifyIdportenToken";
-import { isMockBackend } from "../../environments/publicEnv";
+import { isMockBackend } from "../utils/serverEnv";
 
 type ApiHandler = (
   req: NextApiRequest,

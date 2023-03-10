@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../environments/publicEnv";
 import getMockDb from "../../../../server/data/mock/getMockDb";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getSykmeldtFnrFromRequest } from "../../../../server/utils/requestUtils";
@@ -7,6 +6,7 @@ import { getTilgang } from "../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
 import { TEST_SESSION_ID } from "../../../../api/axios/axios";
 import { handleQueryParamError } from "../../../../server/utils/errors";
+import { isMockBackend } from "../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

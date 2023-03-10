@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../../../../../environments/publicEnv";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getKommentarIdFromRequest } from "../../../../../../../../server/utils/requestUtils";
 import { deleteTiltakComment } from "../../../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../../../server/auth/beskyttetApi";
+import { isMockBackend } from "../../../../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

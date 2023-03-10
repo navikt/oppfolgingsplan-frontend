@@ -58,5 +58,3 @@ spec:
       value: https://www.nav.no/syk/sykefravaer
     - name: MOCK_BACKEND
       value: "true"
-    - name: DISPLAY_TESTSCENARIO_SELECTOR
-      value: "true"

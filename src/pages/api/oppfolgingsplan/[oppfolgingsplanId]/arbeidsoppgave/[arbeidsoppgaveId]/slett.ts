@@ -4,7 +4,6 @@ import {
   getArbeidsoppgaveIdFromRequest,
   getOppfolgingsplanIdFromRequest,
 } from "../../../../../../server/utils/requestUtils";
-import { isMockBackend } from "../../../../../../environments/publicEnv";
 import getMockDb from "../../../../../../server/data/mock/getMockDb";
 import {
   ApiErrorException,
@@ -13,6 +12,7 @@ import {
 import { deleteOppgave } from "../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../../server/auth/tokenx/getTokenXFromRequest";
+import { isMockBackend } from "../../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

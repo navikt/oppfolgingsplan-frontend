@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../../environments/publicEnv";
 import { OpprettOppfoelgingsdialog } from "../../../../../schema/opprettOppfoelgingsdialogSchema";
 import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { createOppfolgingsplanAG } from "../../../../../server/service/oppfolgingsplanService";
+import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

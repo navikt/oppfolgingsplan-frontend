@@ -1,4 +1,3 @@
-import { isMockBackend } from "../../../environments/publicEnv";
 import { getOppfolgingsplanerSM } from "../../service/oppfolgingsplanService";
 import { fetchNarmesteLedereSM } from "./fetchNarmesteLedereSM";
 import getMockDb from "../mock/getMockDb";
@@ -8,6 +7,7 @@ import { fetchVirksomhet } from "../common/fetchVirksomhet";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { isMockBackend } from "../../utils/serverEnv";
 
 export const fetchOppfolgingsplanerMetaSM = async (
   req: NextApiRequest

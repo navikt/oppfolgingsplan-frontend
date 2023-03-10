@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { isMockBackend } from "../../../../environments/publicEnv";
 import { getDineSykmeldteTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
 import { getSykmeldt } from "../../../../server/service/oppfolgingsplanService";
 import getMockDb from "../../../../server/data/mock/getMockDb";
+import { isMockBackend } from "../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,

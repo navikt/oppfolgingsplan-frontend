@@ -62,12 +62,8 @@ spec:
       value: "prod-gcp:teamsykmelding:sykmeldinger-arbeidsgiver"
     - name: MOCK_BACKEND
       value: "false"
-    - name: DISPLAY_TESTSCENARIO_SELECTOR
-      value: "false"
     - name: ENVIRONMENT
       value: "prod"
-    - name: ASSET_PREFIX
-      value: "https://cdn.nav.no/team-esyfo/oppfolgingsplan-frontend"
   accessPolicy:
     outbound:
       external:
