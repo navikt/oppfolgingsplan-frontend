@@ -119,7 +119,7 @@ export type NarmesteLeder = {
   sistInnlogget: string | null;
   samtykke: boolean | null;
 };
-type Arbeidsgiver = {
+export type Arbeidsgiver = {
   naermesteLeder?: NarmesteLeder;
 };
 

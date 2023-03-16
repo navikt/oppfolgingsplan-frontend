@@ -1,6 +1,6 @@
 import { useApiBasePath } from "../../../hooks/routeHooks";
 import { get } from "../../axios/axios";
-import { Sykmelding } from "../../../schema/sykmeldingSchema";
+import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
@@ -9,9 +9,9 @@ export const useSykmeldingerSM = () => {
   const apiBasePath = useApiBasePath();
 
   const fetchSykmeldinger = () =>
-    get<Sykmelding[]>(`${apiBasePath}/sykmeldinger`);
+    get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`);
 
-  return useQuery<Sykmelding[], ApiErrorException>(
+  return useQuery<SykmeldingDTO[], ApiErrorException>(
     [queryKeys.SYKMELDINGER],
     fetchSykmeldinger,
     {

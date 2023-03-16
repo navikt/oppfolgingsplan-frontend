@@ -1,12 +1,12 @@
 import { ContentWrapper } from "./ContentWrapper";
 import { Heading } from "@navikt/ds-react";
 import { texts } from "./texts";
-import { NarmesteLeder } from "../../schema/narmestelederSchema";
+import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
 import { TextWithLabel } from "./TextWithLabel";
 import { Virksomhet } from "../../types/oppfolgingsplan";
 
 interface Props {
-  narmesteLeder?: NarmesteLeder | null;
+  narmesteLeder?: NarmesteLederDTO | null;
   virksomhet?: Virksomhet | null;
 }
 

@@ -7,8 +7,8 @@ import {
   finnArbeidsgivereForGyldigeSykmeldinger,
 } from "./sykmeldingUtils";
 import { erGyldigDatoIFortiden, getTime } from "./dateUtils";
-import { Sykmelding } from "../schema/sykmeldingSchema";
-import { NarmesteLeder } from "../schema/narmestelederSchema";
+import { SykmeldingDTO } from "../schema/sykmeldingSchema";
+import { NarmesteLederDTO } from "../schema/narmestelederSchema";
 import { Oppfolgingsplan } from "../types/oppfolgingsplan";
 
 export const inneholderGodkjenninger = (oppfolgingsplan: Oppfolgingsplan) => {
@@ -18,7 +18,7 @@ export const inneholderGodkjenninger = (oppfolgingsplan: Oppfolgingsplan) => {
 };
 
 export const erSykmeldingGyldigForOppfolgingMedGrensedato = (
-  sykmelding: Sykmelding,
+  sykmelding: SykmeldingDTO,
   dato: Date
 ) => {
   return (
@@ -42,7 +42,7 @@ export const erOppfolgingsplanKnyttetTilGyldigSykmeldingAG = (
 
 export const erOppfolgingsplanKnyttetTilGyldigSykmelding = (
   oppfolgingsplan: Oppfolgingsplan,
-  sykmeldinger: Sykmelding[]
+  sykmeldinger: SykmeldingDTO[]
 ) => {
   const dagensDato = new Date();
   return (
@@ -119,7 +119,7 @@ export const harTidligereOppfolgingsplanMedVirksomhet = (
 
 export const finnAktiveOppfolgingsplaner = (
   oppfolgingsplaner: Oppfolgingsplan[],
-  sykmeldinger?: Sykmelding[]
+  sykmeldinger?: SykmeldingDTO[]
 ) => {
   if (!sykmeldinger) {
     return oppfolgingsplaner.filter((plan) => {
@@ -172,8 +172,8 @@ export const erOppfolgingsplanOpprettbarMedArbeidsgiver = (
 
 export const erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere = (
   oppfolgingsplaner: Oppfolgingsplan[],
-  sykmeldinger: Sykmelding[],
-  naermesteLedere: NarmesteLeder[]
+  sykmeldinger: SykmeldingDTO[],
+  naermesteLedere: NarmesteLederDTO[]
 ) => {
   return (
     oppfolgingsplaner.length === 0 &&

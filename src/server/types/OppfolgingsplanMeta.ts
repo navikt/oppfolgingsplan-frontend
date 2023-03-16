@@ -3,7 +3,7 @@ import {
   VirksomhetDTO,
 } from "../../schema/oppfolgingsplanSchema";
 import { KontaktinfoDTO } from "../../schema/kontaktinfoSchema";
-import { NarmesteLeder } from "../../schema/narmestelederSchema";
+import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
 import { PersonV3DTO } from "../../schema/personSchemas";
 
 export interface OppfolgingsplanMeta {
@@ -11,5 +11,5 @@ export interface OppfolgingsplanMeta {
   oppfolgingsplaner: OppfolgingsplanDTO[];
   virksomhet: VirksomhetDTO[];
   kontaktinfo: KontaktinfoDTO;
-  narmesteLedere: NarmesteLeder[];
+  narmesteLedere: NarmesteLederDTO[];
 }

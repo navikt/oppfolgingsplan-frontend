@@ -6,8 +6,8 @@ import {
 } from "../../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
 import { Button } from "@navikt/ds-react";
-import { NarmesteLeder } from "../../../schema/narmestelederSchema";
-import { Sykmelding } from "../../../schema/sykmeldingSchema";
+import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
+import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
 import OpprettModalSM from "../../../components/landing/opprett/OpprettModalSM";
 import IngenPlanerCardSM from "../../../components/landing/opprett/IngenPlanerCardSM";
@@ -31,8 +31,8 @@ const texts = {
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
-  sykmeldinger: Sykmelding[];
-  narmesteLedere: NarmesteLeder[];
+  sykmeldinger: SykmeldingDTO[];
+  narmesteLedere: NarmesteLederDTO[];
 }
 
 const OppfolgingsdialogerVisning = ({

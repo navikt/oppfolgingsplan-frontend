@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Sykmelding } from "../../../../../../schema/sykmeldingSchema";
+import { SykmeldingDTO } from "../../../../../../schema/sykmeldingSchema";
 import {
   getArbeidsoppgaveIdFromRequest,
   getOppfolgingsplanIdFromRequest,
@@ -16,7 +16,7 @@ import { isMockBackend } from "../../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Sykmelding[]>
+  res: NextApiResponse<SykmeldingDTO[]>
 ): Promise<void> => {
   const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
   const arbeidsoppgaveId = getArbeidsoppgaveIdFromRequest(req);
