@@ -49,7 +49,6 @@ export const NavigationButtons = ({ activeStep }: Props) => {
         {previousPage && (
           <Link href={previousPage}>
             <Button
-              id="forrigeStegButton"
               data-testid={NAVIGATION_FORRIGE_STEG_BUTTON}
               variant={"secondary"}
             >
@@ -61,7 +60,6 @@ export const NavigationButtons = ({ activeStep }: Props) => {
         {nextPage && (
           <Link href={nextPage}>
             <Button
-              id="nesteStegButton"
               data-testid={NAVIGATION_NESTE_STEG_BUTTON}
               variant={"primary"}
             >
@@ -74,7 +72,6 @@ export const NavigationButtons = ({ activeStep }: Props) => {
       <Row marginBottom={"2rem"}>
         <Link href={landingUrl}>
           <Button
-            id="fortsettSenereButton"
             data-testid={NAVIGATION_FORTSETT_SENERE_BUTTON}
             variant={"tertiary"}
           >

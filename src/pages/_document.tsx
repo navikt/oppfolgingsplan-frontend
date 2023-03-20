@@ -62,10 +62,8 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
         <body>
           <Decorator.Header />
           <Main />
-          <>
-            <Decorator.Footer />
-            <Decorator.Scripts />
-          </>
+          <Decorator.Footer />
+          <Decorator.Scripts />
           <NextScript />
         </body>
       </Html>

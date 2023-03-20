@@ -139,14 +139,12 @@ export const ArbeidsoppgaveFormSM = ({
                 value={value}
               >
                 <Radio
-                  id="oppgaveKanGjennomfoeresRadio"
                   data-testid={ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_RADIO}
                   value={KANGJENNOMFOERES.KAN}
                 >
                   Ja, den kan gjennomføres som normalt
                 </Radio>
                 <Radio
-                  id="OppgaveKanGjennomfoeresMedTilretteleggingRadio"
                   data-testid={
                     ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_TILRETTELEGGING_RADIO
                   }
@@ -155,7 +153,6 @@ export const ArbeidsoppgaveFormSM = ({
                   Ja, den kan gjennomføres med tilrettelegging
                 </Radio>
                 <Radio
-                  id="OppgaveKanIkkeGjennomfoeresRadio"
                   data-testid={ARBEIDSOPPGAVE_KAN_IKKE_GJENNOMFOERES_RADIO}
                   value={KANGJENNOMFOERES.KAN_IKKE}
                 >
@@ -226,7 +223,6 @@ export const ArbeidsoppgaveFormSM = ({
                 return (
                   <StyledTextarea
                     {...field}
-                    id="kanIkkeBeskrivelse"
                     label={
                       "Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"
                     }
@@ -263,7 +259,6 @@ export const ArbeidsoppgaveFormSM = ({
 
           <Row>
             <Button
-              id="lagreArbeidsoppgaveButton"
               data-testid={ARBEIDSOPPGAVE_LAGRE_OPPGAVE_BUTTON}
               loading={isSubmitting}
               variant={"primary"}

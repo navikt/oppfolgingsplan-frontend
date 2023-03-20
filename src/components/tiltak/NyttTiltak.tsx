@@ -30,7 +30,6 @@ export const NyttTiltak = ({
 
         {!leggerTilNyttTiltak && (
           <Button
-            id="leggTilNyttTiltakButton"
             data-testid={TILTAK_LEGG_TIL_NYTT_TILTAK_BUTTON}
             variant={"secondary"}
             icon={<PlusIcon />}

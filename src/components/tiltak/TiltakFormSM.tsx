@@ -80,7 +80,6 @@ export const TiltakFormSM = ({
           />
 
           <OverskriftTextarea
-            id="beskrivTiltakTextArea"
             data-testid={TILTAK_BESKRIVELSE_TEXTAREA}
             label={"Beskriv hva som skal skje (obligatorisk)"}
             error={errors.beskrivelse?.message}
@@ -106,7 +105,6 @@ export const TiltakFormSM = ({
 
           <Row>
             <Button
-              id="lagreTiltakButton"
               data-testid={TILTAK_LAGRE_BUTTON}
               loading={isSubmitting}
               variant={"primary"}

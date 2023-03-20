@@ -43,7 +43,6 @@ export const NyArbeidsoppgaveSM = () => {
       <SpacedPanel border={true}>
         <ArbeidsoppgaveFormHeadingSM />
         <Button
-          id="leggTilNyArbeidsoppgaveButton"
           data-testid={ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON}
           variant={"secondary"}
           icon={<PlusIcon />}

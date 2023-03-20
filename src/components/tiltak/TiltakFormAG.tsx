@@ -106,7 +106,6 @@ export const TiltakFormAG = ({
           />
 
           <OverskriftTextarea
-            id="beskrivTiltakTextArea"
             data-testid={TILTAK_BESKRIVELSE_TEXTAREA}
             label={"Beskriv hva som skal skje (obligatorisk)"}
             error={errors.beskrivelse?.message}
@@ -207,7 +206,6 @@ export const TiltakFormAG = ({
 
           <Row>
             <Button
-              id="lagreTiltakButton"
               data-testid={TILTAK_LAGRE_BUTTON}
               loading={isSubmitting}
               variant={"primary"}

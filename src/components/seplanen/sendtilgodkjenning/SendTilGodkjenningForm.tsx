@@ -173,7 +173,6 @@ export const SendTilGodkjenningForm = ({
               (valgfritt)
             </Checkbox>
             <Checkbox
-              id="jegErEnigIPlanenCheckbox"
               data-testid={SEPLANEN_ENIG_I_PLANEN_CHECKBOX}
               value={"true"}
               {...register("enigIPlanen", {
@@ -191,7 +190,6 @@ export const SendTilGodkjenningForm = ({
 
         <Row>
           <Button
-            id="sendTilGodkjenningButton"
             data-testid={SEPLANEN_SEND_TIL_GODKJENNING_BUTTON}
             type={"submit"}
             loading={isSubmitting}

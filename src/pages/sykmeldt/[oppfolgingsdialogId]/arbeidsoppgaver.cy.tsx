@@ -11,7 +11,6 @@ import {
 describe("<Arbeidsoppgaver />", () => {
   const mockSetup = planUnderArbeidScenario;
 
-  // Usikker på om testing på page-nivå er riktig for komponent-test, man må uansett teste bestanddelene?
   it("Renders arbeidsoppgave page and adds a new arbeidsoppgave", () => {
     cy.intercept(
       {

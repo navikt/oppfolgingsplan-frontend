@@ -5,5 +5,5 @@
     "isolatedModules": false,
     "types": ["cypress", "node", "@testing-library/cypress"]
   },
-  "include": ["../cypress.config.ts", "../cypress", "**/*.cy.tsx"]
+  "include": ["../cypress.config.ts"]
 }
