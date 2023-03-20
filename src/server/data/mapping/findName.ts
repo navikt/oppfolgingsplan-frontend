@@ -1,8 +1,8 @@
-import { NarmesteLeder } from "../../../schema/narmestelederSchema";
+import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { PersonV3DTO } from "../../../schema/personSchemas";
 
 export const findName = (
-  narmesteLedere: NarmesteLeder[],
+  narmesteLedere: NarmesteLederDTO[],
   sykmeldt: PersonV3DTO,
   fnrToFind?: string | null
 ): string => {

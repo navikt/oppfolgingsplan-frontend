@@ -1,9 +1,9 @@
 import { BodyShort } from "@navikt/ds-react";
-import { NarmesteLeder } from "../../../schema/narmestelederSchema";
+import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 
 interface Props {
-  narmesteLeder: NarmesteLeder;
+  narmesteLeder: NarmesteLederDTO;
 }
 
 export const BothApprovedOppfolgingsplan = ({ narmesteLeder }: Props) => {

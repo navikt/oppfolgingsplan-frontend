@@ -1,7 +1,7 @@
 import { useApiBasePath } from "../../../hooks/routeHooks";
 import { get } from "../../axios/axios";
 import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
-import { NarmesteLeder } from "../../../schema/narmestelederSchema";
+import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
@@ -11,9 +11,9 @@ export const useNarmesteLedereSM = () => {
   const sykmeldtFnr = useSykmeldtFnr();
 
   const fetchNarmesteLedere = () =>
-    get<NarmesteLeder[]>(`${apiBasePath}/narmesteledere/${sykmeldtFnr}`);
+    get<NarmesteLederDTO[]>(`${apiBasePath}/narmesteledere/${sykmeldtFnr}`);
 
-  return useQuery<NarmesteLeder[], ApiErrorException>(
+  return useQuery<NarmesteLederDTO[], ApiErrorException>(
     [queryKeys.NARMESTELEDERE],
     fetchNarmesteLedere,
     {

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Sykmelding } from "../../../../../schema/sykmeldingSchema";
+import { SykmeldingDTO } from "../../../../../schema/sykmeldingSchema";
 import { saveOppgave } from "../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
@@ -9,7 +9,7 @@ import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Sykmelding[]>
+  res: NextApiResponse<SykmeldingDTO[]>
 ): Promise<void> => {
   if (isMockBackend) {
     res.status(200).end();

@@ -139,3 +139,5 @@ export const oppfolgingsplanSchema = object({
 export type OppfolgingsplanDTO = z.infer<typeof oppfolgingsplanSchema>;
 export type StillingDTO = z.infer<typeof stillingSchema>;
 export type VirksomhetDTO = z.infer<typeof virksomhetSchema>;
+export type PersonDTO = z.infer<typeof personSchema>;
+export type ArbeidsgiverDTO = z.infer<typeof arbeidsgiverSchema>;

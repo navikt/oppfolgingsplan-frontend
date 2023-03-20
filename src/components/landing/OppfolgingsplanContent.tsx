@@ -1,13 +1,13 @@
 import React from "react";
 import { erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere } from "../../utils/oppfolgingplanUtils";
-import { Sykmelding } from "../../schema/sykmeldingSchema";
+import { SykmeldingDTO } from "../../schema/sykmeldingSchema";
 import OppfolgingsdialogerVisning from "./teaser/OppfolgingsdialogerVisning";
 import { IngenLedereInfoBoks } from "../blocks/infoboks/IngenLedereInfoBoks";
 import { NarmesteLeder, Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplaner: Oppfolgingsplan[];
-  sykmeldinger: Sykmelding[];
+  sykmeldinger: SykmeldingDTO[];
   narmesteLedere: NarmesteLeder[];
 }
 

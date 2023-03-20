@@ -26,5 +26,5 @@ export const narmesteLederV3Schema = object({
   samtykke: boolean().nullable(),
 });
 
-export type NarmesteLeder = z.infer<typeof narmesteLederSchema>;
+export type NarmesteLederDTO = z.infer<typeof narmesteLederSchema>;
 export type NarmesteV3LederDTO = z.infer<typeof narmesteLederV3Schema>;
