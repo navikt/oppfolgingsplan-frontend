@@ -43,7 +43,7 @@ jobs:
       - name: Run Jest tests
         run: npm run test
       - name: Run Cypress tests
-        run: npx cypress run
+        run: npx cypress run --component
       - name: Build
         run: npm run build
       - name: Upload static files to NAV CDN
