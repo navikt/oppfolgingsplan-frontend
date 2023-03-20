@@ -46,12 +46,10 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
   render() {
     const { Decorator } = this.props;
 
-    const showDecorator = !serverEnv.NO_DECORATOR;
-
     return (
       <Html lang="nb">
         <Head>
-          {showDecorator && <Decorator.Styles />}
+          <Decorator.Styles />
           <link
             rel="preload"
             href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"
@@ -62,14 +60,12 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
         </Head>
 
         <body>
-          {showDecorator && <Decorator.Header />}
+          <Decorator.Header />
           <Main />
-          {showDecorator && (
-            <>
-              <Decorator.Footer />
-              <Decorator.Scripts />
-            </>
-          )}
+          <>
+            <Decorator.Footer />
+            <Decorator.Scripts />
+          </>
           <NextScript />
         </body>
       </Html>

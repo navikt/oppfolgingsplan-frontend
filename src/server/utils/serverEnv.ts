@@ -15,7 +15,6 @@ export interface IServerEnvironmentVariables {
   SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID: string;
   DITT_SYKEFRAVAER_ROOT: string;
   DINE_SYKMELDTE_ROOT: string;
-  NO_DECORATOR: string;
 }
 
 const serverEnv = process.env as unknown as IServerEnvironmentVariables;
