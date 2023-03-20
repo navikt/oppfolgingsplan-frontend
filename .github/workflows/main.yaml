@@ -30,11 +30,6 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - name: Cache Cypress binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
       - name: Install deps
         run: |
           npm ci
@@ -72,28 +67,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: cache workspace
-        uses: actions/cache@v3
+      - name: Run Cypress component tests
+        uses: cypress-io/github-action@v5
         with:
-          path: ${{ github.workspace }}
-          key: ${{ github.sha }}
-      - name: cache cypress binary
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-${{ hashFiles('package.json') }}
-      - name: Kjør cypress
-        uses: cypress-io/github-action@v5.1.0
-        with:
-          start: npm run start-ingen-dekorator
-          config-file: cypress.config.ts
-          wait-on: http://localhost:8080/syk/oppfolgingsplaner/sykmeldt
-          config: baseUrl=http://localhost:8080
-          install: false
-        env:
-          MOCK_BACKEND: 'true'
-          DECORATOR_ENV: 'dev'
-          DISPLAY_TESTSCENARIO_SELECTOR: 'true'
+          browser: chrome
+          component: true
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
