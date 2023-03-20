@@ -37,8 +37,10 @@ jobs:
         run: npm run build
       - name: Lint and TSC
         run: npm run lint && tsc
-      - name: Test
+      - name: Run Jest tests
         run: npm run test
+      - name: Run Cypress tests
+        run: npm run cypress
       - name: Upload static files to NAV CDN
         uses: navikt/frontend/actions/cdn-upload/v1@main
         with:
@@ -62,22 +64,6 @@ jobs:
         with:
           path: ${{ github.workspace }}
           key: ${{ github.sha }}
-
-  cypress:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Cypress component tests
-        uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
-          component: true
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore
 
   deploy-dev:
     if: github.ref == 'refs/heads/main'
