@@ -12,8 +12,8 @@
     "prettier": "prettier --write ./src/**",
     "prepare": "husky install",
     "test": "jest",
-    "test:component": "cypress run --component",
-    "test:e2e": "cypress run --e2e"
+    "cypress": "cypress run --component",
+    "cypress:open": "cypress open --component"
   },
   "dependencies": {
     "@navikt/dinesykmeldte-sidemeny": "^3.0.0",
