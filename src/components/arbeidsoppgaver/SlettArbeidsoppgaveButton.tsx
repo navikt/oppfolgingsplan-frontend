@@ -1,6 +1,6 @@
 import { Delete } from "@navikt/ds-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { texts } from "../seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
@@ -27,13 +27,6 @@ export const SlettArbeidsoppgaveButton = ({
 }: Props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const slettArbeidsoppgave = useSlettArbeidsoppgave();
-
-  useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
-  }, []);
-
   if (!show) {
     return null;
   }

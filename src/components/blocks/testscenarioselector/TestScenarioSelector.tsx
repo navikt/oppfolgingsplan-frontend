@@ -60,12 +60,6 @@ export const TestScenarioSelector = () => {
   >();
 
   useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
-  }, []);
-
-  useEffect(() => {
     if (activeTestScenario.isSuccess) {
       setSelectedScenario(activeTestScenario.data);
     }
