@@ -1,6 +1,6 @@
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import { Delete } from "@navikt/ds-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useSlettTiltakSM } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { Row } from "../blocks/wrappers/Row";
@@ -20,12 +20,6 @@ interface Props {
 export const SlettTiltakButton = ({ tiltakId }: Props) => {
   const [modelOpen, setModalOpen] = useState(false);
   const slettTiltak = useSlettTiltakSM();
-
-  useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
-  }, []);
 
   return (
     <>

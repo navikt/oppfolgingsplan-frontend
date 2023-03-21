@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ArbeidsgiverSkjemaForm from "./ArbeidsgiverSkjema";
 import BaserTidligereSkjema from "./BaserTidligereSkjema";
 import { Modal } from "@navikt/ds-react";
@@ -30,12 +30,6 @@ const OpprettModalSM = ({
 }: Props) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanSM();
   const kopierOppfolgingsplan = useKopierOppfolgingsplan();
-
-  useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
-  }, []);
 
   const manglerNarmesteLeder =
     arbeidsgivere.length === 1 && !arbeidsgivere[0].harNaermesteLeder;

@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { useAudience } from "../hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DehydratedState,
   Hydrate,
@@ -17,6 +17,7 @@ import { TestScenarioSelector } from "../components/blocks/testscenarioselector/
 import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
+import { Modal } from "@navikt/ds-react";
 
 const minutesToMillis = (minutes: number) => {
   return 1000 * 60 * minutes;
@@ -58,6 +59,12 @@ function MyApp({
         },
       })
   );
+
+  useEffect(() => {
+    if (Modal.setAppElement) {
+      Modal.setAppElement("#__next");
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

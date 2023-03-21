@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BaserTidligereSkjema from "../../../components/landing/opprett/BaserTidligereSkjema";
 import { useOpprettOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { Modal } from "@navikt/ds-react";
@@ -16,12 +16,6 @@ interface Props {
 
 const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
   const opprettOppfolgingsplan = useOpprettOppfolgingsplanAG();
-
-  useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
-  }, []);
 
   return (
     <Modal
