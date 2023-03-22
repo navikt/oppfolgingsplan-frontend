@@ -1,5 +1,5 @@
 import { NextApiRequest } from "next";
-import { handleQueryParamError } from "./errors";
+import { handleQueryParamError, handleRequestBodyError } from "./errors";
 import { NAV_PERSONIDENT_HEADER } from "../../api/axios/axios";
 
 export const getSykmeldtFnrFromRequest = (req: NextApiRequest) => {
@@ -72,4 +72,18 @@ export const getKommentarIdFromRequest = (req: NextApiRequest): string => {
   }
 
   return kommentarId;
+};
+
+export const getFerdigstillingFromBody = (req: NextApiRequest) => {
+  const ferdigstilling = req.body;
+  const { erSykmeldt, oppfolgingsplanId } = ferdigstilling;
+
+  if (
+    typeof erSykmeldt !== "boolean" ||
+    typeof oppfolgingsplanId !== "number"
+  ) {
+    return handleRequestBodyError(erSykmeldt, oppfolgingsplanId);
+  }
+
+  return ferdigstilling;
 };

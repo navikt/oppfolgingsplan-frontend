@@ -52,6 +52,18 @@ export const getStatusPageTitleAndHeading = (
   }
 };
 
+export const planTilGodkjenningSM = (
+  oppfolgingsplan: Oppfolgingsplan | undefined
+) => {
+  return oppfolgingsplan && erPlanTilGodkjenningSM(oppfolgingsplan);
+};
+
+export const planTilGodkjenningAG = (
+  oppfolgingsplan: Oppfolgingsplan | undefined
+) => {
+  return oppfolgingsplan && erPlanTilGodkjenningAG(oppfolgingsplan);
+};
+
 const harMottattGodkjenningerFraArbeidsgiver = (
   oppfolgingsplan: Oppfolgingsplan
 ): boolean => {
