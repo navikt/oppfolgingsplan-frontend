@@ -21,7 +21,7 @@
     "additional.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "cypress/index.d.ts"
+    "cypress/support/index.d.ts"
   ],
   "exclude": ["node_modules"]
 }
