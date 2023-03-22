@@ -36,7 +36,6 @@ const customRender = (
 };
 
 export async function openPlayground(screen: Screen): Promise<void> {
-  // eslint-disable-next-line testing-library/no-debugging-utils
   await open(screen.logTestingPlaygroundURL());
 }
 
