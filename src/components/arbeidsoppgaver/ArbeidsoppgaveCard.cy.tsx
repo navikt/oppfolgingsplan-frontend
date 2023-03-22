@@ -15,7 +15,6 @@ describe("<ArbeidsoppgaveCard />", () => {
       {
         mockReactQuery: true,
         mockRouter: true,
-        routerOptions: { pathname: "/sykmeldt" },
       }
     );
 
@@ -33,7 +32,7 @@ describe("<ArbeidsoppgaveCard />", () => {
       {
         mockReactQuery: true,
         mockRouter: true,
-        routerOptions: { pathname: "/arbeidsgiver" },
+        isArbeidsgiver: true,
       }
     );
 

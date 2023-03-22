@@ -20,12 +20,7 @@ describe("<NyArbeidsoppgaveSM />", () => {
     cy.mountWithMocks(<NyArbeidsoppgaveSM />, {
       mockReactQuery: true,
       mockRouter: true,
-      routerOptions: {
-        pathname: "/sykmeldt",
-        query: {
-          oppfolgingsdialogId: "123",
-        },
-      },
+      oppfolgingsplanRouteId: "123",
     });
 
     cy.getByTestid(ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON).click();

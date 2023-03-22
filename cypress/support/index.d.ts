@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 /// <reference types="@testing-library/cypress" />
-import { TestScenario } from "../src/server/data/mock/getMockDb";
-import { DataTestId } from "./dataTestId";
-import { MockOptions } from "./utils/mountWithMocks";
 import { mount, MountReturn } from "cypress/react18";
+import { DataTestId } from "../dataTestId";
+import { MockOptions } from "../utils/mountWithMocks";
+import { TestScenario } from "../../src/server/data/mock/getMockDb";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

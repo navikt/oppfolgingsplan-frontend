@@ -2,10 +2,10 @@ import { mount } from "cypress/react18";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { HeadManagerContext } from "next/dist/shared/lib/head-manager-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { NextRouter } from "next/dist/shared/lib/router/router";
 import { MockSetup } from "../../src/server/data/mock/getMockDb";
 import { interceptDataApis } from "./interceptDataApis";
 import { minutesToMillis } from "../../src/utils/dateUtils";
+import mockRouter from "next-router-mock";
 
 export interface MockOptions {
   mockHeadContext?: boolean;
@@ -13,7 +13,8 @@ export interface MockOptions {
   mockRouter?: boolean;
 
   interceptDataApis?: MockSetup;
-  routerOptions?: Partial<NextRouter>;
+  isArbeidsgiver?: boolean;
+  oppfolgingsplanRouteId?: string;
 }
 
 interface HeadProps {
@@ -45,45 +46,35 @@ const HeadProvider = ({
 
 interface RouterProps {
   children: JSX.Element;
-  mockRouter?: boolean;
-  routerOptions?: Partial<NextRouter>;
+  shouldMockRouter?: boolean;
+  isArbeidsgiver?: boolean;
+  oppfolgingsplanRouteId?: string;
 }
 
 const RouterProvider = ({
   children,
-  mockRouter,
-  routerOptions,
+  shouldMockRouter,
+  isArbeidsgiver,
+  oppfolgingsplanRouteId,
 }: RouterProps): JSX.Element => {
-  if (!mockRouter) return children;
-  const router = {
-    route: "/",
-    pathname: "/",
-    query: {},
-    asPath: "/",
-    basePath: "",
-    back: cy.spy().as("back"),
-    beforePopState: cy.spy().as("beforePopState"),
-    forward: cy.spy().as("forward"),
-    prefetch: cy.stub().as("prefetch").resolves(),
-    push: cy.spy().as("push"),
-    reload: cy.spy().as("reload"),
-    replace: cy.spy().as("replace"),
-    events: {
-      emit: cy.spy().as("emit"),
-      off: cy.spy().as("off"),
-      on: cy.spy().as("on"),
-    },
-    isFallback: false,
-    isLocaleDomain: false,
-    isReady: true,
-    defaultLocale: "en",
-    domainLocales: [],
-    isPreview: false,
-    ...routerOptions,
-  };
+  if (!shouldMockRouter) return children;
+
+  if (isArbeidsgiver) {
+    mockRouter.pathname = "/arbeidsgiver";
+  } else {
+    mockRouter.pathname = "/sykmeldt";
+  }
+
+  if (oppfolgingsplanRouteId) {
+    mockRouter.query = {
+      oppfolgingsdialogId: oppfolgingsplanRouteId,
+    };
+  }
 
   return (
-    <RouterContext.Provider value={router}>{children}</RouterContext.Provider>
+    <RouterContext.Provider value={mockRouter}>
+      {children}
+    </RouterContext.Provider>
   );
 };
 
@@ -128,8 +119,9 @@ export const mountWithMocks = (
     <HeadProvider mockHeadContext={options?.mockHeadContext}>
       <ReactQueryProvider mockReactQuery={options?.mockReactQuery}>
         <RouterProvider
-          mockRouter={options?.mockRouter}
-          routerOptions={options?.routerOptions}
+          shouldMockRouter={options?.mockRouter}
+          isArbeidsgiver={options?.isArbeidsgiver}
+          oppfolgingsplanRouteId={options?.oppfolgingsplanRouteId}
         >
           {componentUnderTest}
         </RouterProvider>

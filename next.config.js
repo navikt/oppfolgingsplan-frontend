@@ -8,7 +8,6 @@ const moduleExports = {
     // ssr and displayName are configured by default
     styledComponents: true,
   },
-  pageExtensions: ["!.cy.ts(x)"],
 };
 
 module.exports = moduleExports;

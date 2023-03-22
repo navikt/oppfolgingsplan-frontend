@@ -1,5 +1,4 @@
 import React from "react";
-import Arbeidsoppgaver from "./arbeidsoppgaver";
 import { planUnderArbeidScenario } from "../../../server/data/mock/testscenarios/planunderarbeid/planUnderArbeidScenario";
 import {
   ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA,
@@ -7,6 +6,7 @@ import {
   ARBEIDSOPPGAVE_LAGRE_OPPGAVE_BUTTON,
   ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON,
 } from "../../../../cypress/dataTestId";
+import Arbeidsoppgaver from "../../../pages/sykmeldt/[oppfolgingsdialogId]/arbeidsoppgaver";
 
 describe("<Arbeidsoppgaver />", () => {
   const mockSetup = planUnderArbeidScenario;
@@ -22,14 +22,9 @@ describe("<Arbeidsoppgaver />", () => {
 
     cy.mountWithMocks(<Arbeidsoppgaver />, {
       interceptDataApis: mockSetup,
-      mockRouter: true,
       mockReactQuery: true,
-      routerOptions: {
-        pathname: "/sykmeldt",
-        query: {
-          oppfolgingsdialogId: mockSetup.oppfolgingsplaner[0].id.toString(),
-        },
-      },
+      mockRouter: true,
+      oppfolgingsplanRouteId: mockSetup.oppfolgingsplaner[0].id.toString(),
     });
 
     cy.getByTestid(ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON).click();
