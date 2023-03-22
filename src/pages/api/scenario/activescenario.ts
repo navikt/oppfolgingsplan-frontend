@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { displayTestScenarioSelector } from "../../../environments/publicEnv";
 import getMockDb, {
   assignNewDbSetup,
   TestScenario,
@@ -7,9 +6,10 @@ import getMockDb, {
 import { getMockSetupForScenario } from "../../../server/data/mock/activeMockData";
 import { TEST_SESSION_ID } from "../../../api/axios/axios";
 import { handleQueryParamError } from "../../../server/utils/errors";
+import { isMockBackend } from "../../../server/utils/serverEnv";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!displayTestScenarioSelector) {
+  if (!isMockBackend) {
     return res.status(404).end();
   }
 
