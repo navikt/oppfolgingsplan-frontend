@@ -1,35 +1,49 @@
 export const basePath = process.env.NEXT_PUBLIC_BASEPATH;
 
-export const isLabs = () => {
-  if (typeof window === "undefined") return "";
+const devOrigin = "https://www-gcp.dev.nav.no";
+const demoOrigin = "https://oppfolgingsplaner.labs.nais.io";
 
-  return (
-    window.location.origin ===
-    process.env.NEXT_PUBLIC_OPPFOLGINGSPLAN_LABS_INGRESS
-  );
+export const isDemo = () => {
+  if (typeof window !== "undefined") {
+    return window.location.origin === demoOrigin;
+  }
+
+  return process.env.RUNTIME_ENVIRONMENT === "demo";
+};
+
+export const isDev = () => {
+  if (typeof window !== "undefined") {
+    return window.location.origin === devOrigin;
+  }
+
+  return process.env.RUNTIME_ENVIRONMENT === "dev";
 };
 
 export const dineSykemeldteRoot = (): string => {
-  if (typeof window === "undefined") return "";
-
-  if (isLabs()) {
-    return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_LABS_URL || "";
+  if (isDemo()) {
+    return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_DEMO_URL || "";
   }
 
-  return window.location.origin + process.env.NEXT_PUBLIC_DINE_SYKMELDTE_PATH;
+  if (isDev()) {
+    return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_DEV_URL || "";
+  }
+
+  return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_URL || "";
 };
 
 export const dittSykefravarRoot = (): string => {
-  if (typeof window === "undefined") return "";
-
-  if (isLabs()) {
-    return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_LABS_URL || "";
+  if (isDemo()) {
+    return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_DEMO_URL || "";
   }
 
-  return window.location.origin + process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_PATH;
+  if (isDev()) {
+    return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_DEV_URL || "";
+  }
+
+  return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_URL || "";
 };
 export const displayTestScenarioSelector =
-  process.env.NEXT_PUBLIC_IS_DEVELOPMENT == "true" || isLabs();
+  process.env.NEXT_PUBLIC_IS_DEVELOPMENT === "true" || isDemo();
 
 export const cdnPublicPath: string | undefined = process.env
   .NEXT_PUBLIC_ASSET_PREFIX

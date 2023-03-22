@@ -13,8 +13,6 @@ export interface IServerEnvironmentVariables {
   SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID: string;
   SYKMELDINGER_ARBEIDSGIVER_HOST: string;
   SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID: string;
-  DITT_SYKEFRAVAER_ROOT: string;
-  DINE_SYKMELDTE_ROOT: string;
 }
 
 const serverEnv = process.env as unknown as IServerEnvironmentVariables;

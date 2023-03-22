@@ -52,9 +52,7 @@ spec:
       value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
       value: syfooppfolgingsplanservice
-    - name: DINE_SYKMELDTE_ROOT
-      value: https://www.nav.no/arbeidsgiver/sykmeldte
-    - name: DITT_SYKEFRAVAER_ROOT
-      value: https://www.nav.no/syk/sykefravaer
     - name: MOCK_BACKEND
       value: "true"
+    - name: RUNTIME_ENVIRONMENT
+      value: demo
