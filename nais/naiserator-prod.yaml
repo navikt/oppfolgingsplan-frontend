@@ -52,18 +52,14 @@ spec:
       value: https://syfooppfolgingsplanservice.prod-fss-pub.nais.io
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
       value: prod-fss:team-esyfo:syfooppfolgingsplanservice
-    - name: DINE_SYKMELDTE_ROOT
-      value: https://www.nav.no/arbeidsgiver/sykmeldte
-    - name: DITT_SYKEFRAVAER_ROOT
-      value: https://www.nav.no/syk/sykefravaer
     - name: SYKMELDINGER_ARBEIDSGIVER_HOST
       value: https://sykmeldinger-arbeidsgiver.nav.no
     - name : SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
       value: "prod-gcp:teamsykmelding:sykmeldinger-arbeidsgiver"
     - name: MOCK_BACKEND
       value: "false"
-    - name: ENVIRONMENT
-      value: "prod"
+    - name: RUNTIME_ENVIRONMENT
+      value: prod
   accessPolicy:
     outbound:
       external:

@@ -34,6 +34,7 @@ export default class MyDocument extends Document<{ Decorator: Components }> {
       chatbot: true,
       redirectToApp: true,
       level: "Level4",
+      urlLookupTable: false,
     };
 
     const Decorator = await fetchDecoratorReact(decoratorParams);
