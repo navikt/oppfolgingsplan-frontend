@@ -26,6 +26,7 @@ import {
   aktorHarOpprettetElement,
   getAktorNavn,
 } from "../../utils/textContextUtils";
+import { ARBEIDSOPPGAVE_CARD } from "../../../cypress/dataTestId";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -89,7 +90,7 @@ export const ArbeidsoppgaveCard = ({
   );
 
   return (
-    <>
+    <div data-testid={ARBEIDSOPPGAVE_CARD}>
       {type === KANGJENNOMFOERES.KAN && (
         <Card>
           <CardHeader>
@@ -172,6 +173,6 @@ export const ArbeidsoppgaveCard = ({
             )}
           </Card>
         ))}
-    </>
+    </div>
   );
 };

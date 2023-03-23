@@ -15,6 +15,11 @@ import { Row } from "../blocks/wrappers/Row";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { TiltakFormValues } from "./utils/typer";
 import { TiltakStartSluttDato } from "./TiltakStartSluttDato";
+import {
+  TILTAK_BESKRIVELSE_TEXTAREA,
+  TILTAK_LAGRE_BUTTON,
+  TILTAK_OVERSKRIFT_TEXTFIELD,
+} from "../../../cypress/dataTestId";
 
 const OverskriftTextField = styled(TextField)`
   margin-bottom: 2rem;
@@ -89,7 +94,7 @@ export const TiltakFormAG = ({
           <FormErrorSummary errors={errors} ref={errorRef} />
 
           <OverskriftTextField
-            id="overskrift"
+            data-testid={TILTAK_OVERSKRIFT_TEXTFIELD}
             label={"Overskrift (obligatorisk)"}
             error={errors.overskrift?.message}
             defaultValue={defaultFormValues?.overskrift}
@@ -101,7 +106,7 @@ export const TiltakFormAG = ({
           />
 
           <OverskriftTextarea
-            id="beskrivelse"
+            data-testid={TILTAK_BESKRIVELSE_TEXTAREA}
             label={"Beskriv hva som skal skje (obligatorisk)"}
             error={errors.beskrivelse?.message}
             description={
@@ -201,6 +206,7 @@ export const TiltakFormAG = ({
 
           <Row>
             <Button
+              data-testid={TILTAK_LAGRE_BUTTON}
               loading={isSubmitting}
               variant={"primary"}
               type={"submit"}

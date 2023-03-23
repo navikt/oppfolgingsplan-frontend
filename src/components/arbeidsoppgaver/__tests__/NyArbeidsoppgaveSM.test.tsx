@@ -1,6 +1,7 @@
 import { render, screen } from "../../../utils/test/testUtils";
 import { NyArbeidsoppgaveSM } from "../NyArbeidsoppgaveSM";
 import { waitFor, within } from "@testing-library/react";
+import jExpect from "../../../../jestGlobals";
 
 describe("NyArbeidsoppgaveSM", () => {
   it("should post on lagre", async () => {
@@ -48,7 +49,7 @@ describe("NyArbeidsoppgaveSM", () => {
     );
 
     await waitFor(() =>
-      expect(requestBodySpy).toHaveBeenCalledWith({
+      jExpect(requestBodySpy).toHaveBeenCalledWith({
         arbeidsoppgavenavn: "Dette er en arbeidsoppgave",
         gjennomfoering: {
           kanBeskrivelse: "Dette er en beskrivelse",

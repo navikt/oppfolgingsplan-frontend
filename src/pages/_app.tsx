@@ -18,10 +18,7 @@ import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 import { Modal } from "@navikt/ds-react";
-
-const minutesToMillis = (minutes: number) => {
-  return 1000 * 60 * minutes;
-};
+import { minutesToMillis } from "../utils/dateUtils";
 
 configureLogger({
   basePath: "/syk/oppfolgingsplaner",
