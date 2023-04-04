@@ -40,7 +40,7 @@ spec:
       cpu: 200m
       memory: 256Mi
   ingresses:
-    - "https://oppfolgingsplaner.labs.nais.io/"
+    - "https://demo.ekstern.dev.nav.no/syk/oppfolgingsplaner"
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp

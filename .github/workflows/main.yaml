@@ -83,9 +83,9 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: nais/naiserator-dev.yaml
 
-  deploy-labs:
+  deploy-demo:
     if: github.ref == 'refs/heads/main'
-    name: Deploy to labs
+    name: Deploy to demo dev-gcp
     needs: [build]
     runs-on: ubuntu-latest
     steps:
@@ -93,9 +93,8 @@ jobs:
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: labs-gcp
-          RESOURCE: nais/naiserator-labs.yaml
-          DEPLOY_SERVER: deploy.nais.io:443
+          CLUSTER: dev-gcp
+          RESOURCE: nais/naiserator-demo.yaml
 
   deploy-prod:
     if: github.ref == 'refs/heads/main'
