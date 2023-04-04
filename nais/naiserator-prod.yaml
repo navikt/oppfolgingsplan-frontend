@@ -44,8 +44,6 @@ spec:
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp
-    - name: DECORATOR_URL
-      value: https://nav.no/dekoratoren
     - name: DECORATOR_ENV
       value: "prod"
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST

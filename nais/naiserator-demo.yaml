@@ -41,11 +41,14 @@ spec:
       memory: 256Mi
   ingresses:
     - "https://demo.ekstern.dev.nav.no/syk/oppfolgingsplaner"
+  accessPolicy:
+    outbound:
+      external:
+        - host: nav.no
+        - host: dekoratoren.nav.no
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp
-    - name: DECORATOR_URL
-      value: https://dekoratoren.dev.nav.no
     - name: DECORATOR_ENV
       value: "prod"
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
