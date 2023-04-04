@@ -1,7 +1,7 @@
 export const basePath = process.env.NEXT_PUBLIC_BASEPATH;
 
 const devOrigin = "https://www-gcp.dev.nav.no";
-const demoOrigin = "https://oppfolgingsplaner.labs.nais.io";
+const demoOrigin = "https://demo.ekstern.dev.nav.no";
 
 export const isDemo = () => {
   if (typeof window !== "undefined") {
