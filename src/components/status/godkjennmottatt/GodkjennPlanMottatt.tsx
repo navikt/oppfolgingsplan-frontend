@@ -11,6 +11,9 @@ import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { BodyLong } from "@navikt/ds-react";
 import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { useFerdigstillGodkjennPlanVarsel } from "../../../api/queries/varsel/ferdigstillingQueries";
+import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
+import { useEffect } from "react";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
@@ -25,6 +28,20 @@ export const GodkjennPlanMottatt = ({
 }: Props) => {
   const gyldighetstidspunkt =
     oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
+  const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
+  const oppfolgingsplanId = useOppfolgingsplanRouteId();
+
+  useEffect(() => {
+    if (oppfolgingsplanId && gyldighetstidspunkt) {
+      const varselKey = `ferdigstilt-varsel-${oppfolgingsplanId}`;
+      const alleredeFerdigstilt = sessionStorage.getItem(varselKey);
+      if (alleredeFerdigstilt) {
+        return;
+      }
+      ferdigstillVarsel.mutate(oppfolgingsplanId);
+      sessionStorage.setItem(varselKey, "true");
+    }
+  }, [ferdigstillVarsel, oppfolgingsplanId, gyldighetstidspunkt]);
 
   if (!gyldighetstidspunkt) {
     return null;

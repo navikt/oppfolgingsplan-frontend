@@ -24,7 +24,6 @@ import {
   Kommentar,
   Tiltak,
 } from "../../types/oppfolgingsplan";
-import { FerdigstillGodkjennVarsel } from "../../types/varsel";
 
 export async function getNarmesteLeder(
   accessToken: string,
@@ -452,16 +451,11 @@ export async function getPdf(accessToken: string, oppfolgingsplanId: string) {
 
 export async function ferdigstillVarsel(
   accessToken: string,
-  ferdigstilling: FerdigstillGodkjennVarsel
+  oppfolgingsplanId: string
 ) {
   return await post(
-    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/varsel/ferdigstill`,
-    {
-      erSykmeldt: ferdigstilling.erSykmeldt,
-      oppfolgingsplanId: ferdigstilling.oppfolgingsplanId,
-    },
-    {
-      accessToken: accessToken,
-    }
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/varsel/${oppfolgingsplanId}/ferdigstill`,
+    {},
+    { accessToken: accessToken }
   );
 }
