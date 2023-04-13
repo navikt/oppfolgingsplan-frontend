@@ -21,3 +21,11 @@ export const handleQueryParamError = (
     generalError(`Malformed query params: ${JSON.stringify(params)}`)
   );
 };
+
+export const handleRequestBodyError = (
+  ...params: (unknown | unknown[] | undefined)[]
+): never => {
+  throw new ApiErrorException(
+    generalError(`Invalid types in request body: ${JSON.stringify(params)}`)
+  );
+};
