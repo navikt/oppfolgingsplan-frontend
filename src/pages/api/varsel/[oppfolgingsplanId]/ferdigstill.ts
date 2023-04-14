@@ -15,7 +15,6 @@ const handler = async (
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
     await ferdigstillVarsel(tokenX, oppfolgingsplanId);
-    console.log("OPPFOLGINGSPLAN ID: ", oppfolgingsplanId);
     res.status(200).end();
   }
 };
