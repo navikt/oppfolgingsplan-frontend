@@ -1,9 +1,8 @@
 import { NextPage } from "next";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import {
   getStatusPageTitleAndHeading,
-  planTilGodkjenningAG,
   StatusPageToDisplay,
   statusPageToDisplayAG,
 } from "../../../../utils/statusPageUtils";
@@ -19,11 +18,6 @@ import { GodkjennPlanAvslatt } from "../../../../components/status/godkjennplana
 import { ApprovalInformationAG } from "../../../../components/status/godkjentplan/ApprovalInformation";
 import { GodkjentPlanAvbrutt } from "../../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjentPlan } from "../../../../components/status/godkjentplan/GodkjentPlan";
-import {
-  useOppfolgingsplanRouteId,
-  useNarmesteLederId,
-} from "../../../../hooks/routeHooks";
-import { useFerdigstillGodkjennPlanVarsel } from "../../../../api/queries/varsel/ferdigstillingQueries";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -101,37 +95,12 @@ const Content = ({
 
 const OppfolgingsplanStatusAG: NextPage = () => {
   const aktivPlan = useAktivPlanAG();
-  const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
-  const narmestelederId = useNarmesteLederId();
   const pageToDisplay = statusPageToDisplayAG(aktivPlan);
   const { title, heading } = getStatusPageTitleAndHeading(
     pageToDisplay,
     aktivPlan?.virksomhet?.navn,
     aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din"
   );
-
-  const erPlanTilGodkjenning = planTilGodkjenningAG(aktivPlan);
-
-  useEffect(() => {
-    if (oppfolgingsplanId && narmestelederId) {
-      const varselKey = `ferdigstiltVarselAG-${narmestelederId}`;
-      const ferdigstiltVarsel = sessionStorage.getItem(varselKey);
-      if (ferdigstiltVarsel || !erPlanTilGodkjenning) {
-        return;
-      }
-      ferdigstillVarsel.mutate({
-        erSykmeldt: false,
-        oppfolgingsplanId: oppfolgingsplanId,
-      });
-      sessionStorage.setItem(varselKey, "true");
-    }
-  }, [
-    erPlanTilGodkjenning,
-    ferdigstillVarsel,
-    oppfolgingsplanId,
-    narmestelederId,
-  ]);
 
   return (
     <ArbeidsgiverSide title={title} heading={heading}>

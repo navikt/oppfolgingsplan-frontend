@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import { GodkjentPlanAvbrutt } from "../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjennPlanAvslattOgGodkjent } from "../../../components/status/godkjennplanavslattoggodkjent/GodkjennPlanAvslattOgGodkjent";
 import { GodkjennPlanAvslatt } from "../../../components/status/godkjennplanavslatt/GodkjennPlanAvslatt";
@@ -17,10 +17,7 @@ import {
   getStatusPageTitleAndHeading,
   StatusPageToDisplay,
   statusPageToDisplaySM,
-  planTilGodkjenningSM,
 } from "../../../utils/statusPageUtils";
-import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
-import { useFerdigstillGodkjennPlanVarsel } from "../../../api/queries/varsel/ferdigstillingQueries";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -101,8 +98,6 @@ const Content = ({
 
 const OppfolgingsplanStatus: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
-  const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
 
   const pageToDisplay = statusPageToDisplaySM(aktivPlan);
   const { title, heading } = getStatusPageTitleAndHeading(
@@ -110,23 +105,6 @@ const OppfolgingsplanStatus: NextPage = () => {
     aktivPlan?.virksomhet?.navn,
     "Lederen din"
   );
-
-  const erPlanTilGodkjenning = planTilGodkjenningSM(aktivPlan);
-
-  useEffect(() => {
-    if (oppfolgingsplanId) {
-      const varselKey = `ferdigstiltVarselSM-${oppfolgingsplanId}`;
-      const ferdigstiltVarsel = sessionStorage.getItem(varselKey);
-      if (ferdigstiltVarsel || !erPlanTilGodkjenning) {
-        return;
-      }
-      ferdigstillVarsel.mutate({
-        erSykmeldt: true,
-        oppfolgingsplanId: oppfolgingsplanId,
-      });
-      sessionStorage.setItem(varselKey, "true");
-    }
-  }, [erPlanTilGodkjenning, ferdigstillVarsel, oppfolgingsplanId]);
 
   return (
     <SykmeldtSide title={title} heading={heading}>
