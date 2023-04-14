@@ -33,11 +33,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({
   const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
 
-  useFerdigstillVarsel(
-    ferdigstillVarsel,
-    oppfolgingsplanId,
-    gyldighetstidspunkt
-  );
+  useFerdigstillVarsel(ferdigstillVarsel, oppfolgingsplanId);
 
   if (!gyldighetstidspunkt) {
     return null;
