@@ -61,4 +61,5 @@ spec:
   accessPolicy:
     outbound:
       external:
+        - host: www.nav.no
         - host: syfooppfolgingsplanservice.prod-fss-pub.nais.io
