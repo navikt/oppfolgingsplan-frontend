@@ -51,7 +51,7 @@ spec:
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
       value: dev-fss:team-esyfo:syfooppfolgingsplanservice
     - name: SYKMELDINGER_ARBEIDSGIVER_HOST
-      value: https://sykmeldinger-arbeidsgiver.dev.nav.no
+      value: http://sykmeldinger-arbeidsgiver.teamsykmelding
     - name : SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
       value: "dev-gcp:teamsykmelding:sykmeldinger-arbeidsgiver"
     - name: MOCK_BACKEND
@@ -60,6 +60,9 @@ spec:
       value: dev
   accessPolicy:
     outbound:
+      rules:
+        - application: sykmeldinger-arbeidsgiver
+          namespace: teamsykmelding
       external:
         - host: dekoratoren.dev.nav.no
         - host: syfooppfolgingsplanservice.dev-fss-pub.nais.io
