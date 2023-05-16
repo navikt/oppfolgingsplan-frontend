@@ -4,12 +4,12 @@ import AppSpinner from "../spinner/AppSpinner";
 import { PageHeading } from "../heading/PageHeading";
 import { useOppfolgingsplanerAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG";
-import { AdresseSperreInfoBoks } from "../infoboks/AdresseSperreInfoBoks";
 import { ArbeidsgiverSideMenu } from "../sidemenu/ArbeidsgiverSideMenu";
 import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { People } from "@navikt/ds-icons";
+import { IkkeTilgangTilAnsattInfoBoks } from "../infoboks/IkkeTilgangTilAnsattInfoBoks";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -46,7 +46,7 @@ const PageContent = ({ title, heading, children }: SideProps) => {
   if (tilgang.isFetching || oppfolgingsplaner.isLoading || sykmeldt.isLoading) {
     return <AppSpinner />;
   } else if (tilgang.data && tilgang.data.harTilgang === false) {
-    return <AdresseSperreInfoBoks />;
+    return <IkkeTilgangTilAnsattInfoBoks />;
   } else {
     return (
       <>
