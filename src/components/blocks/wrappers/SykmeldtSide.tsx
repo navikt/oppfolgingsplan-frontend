@@ -1,6 +1,4 @@
 import React, { ReactElement, ReactNode } from "react";
-import { useTilgangSM } from "../../../api/queries/sykmeldt/tilgangQueriesSM";
-import { AdresseSperreInfoBoks } from "../infoboks/AdresseSperreInfoBoks";
 import { PageHeading } from "../heading/PageHeading";
 import styled from "styled-components";
 import AppSpinner from "../spinner/AppSpinner";
@@ -37,7 +35,6 @@ const SykmeldtSide = ({
   heading,
   children,
 }: SideProps): ReactElement => {
-  const tilgang = useTilgangSM();
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
@@ -46,12 +43,9 @@ const SykmeldtSide = ({
     if (
       oppfolgingsplaner.isLoading ||
       sykmeldinger.isLoading ||
-      tilgang.isFetching ||
       narmesteLedere.isFetching
     ) {
       return <AppSpinner />;
-    } else if (tilgang.data && tilgang.data.harTilgang === false) {
-      return <AdresseSperreInfoBoks />;
     } else {
       return (
         <>
