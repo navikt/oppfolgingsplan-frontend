@@ -3,7 +3,6 @@ name: Deploy to dev
 on: workflow_dispatch
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
   NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
 jobs:
