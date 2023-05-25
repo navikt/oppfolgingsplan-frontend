@@ -76,7 +76,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais/naiserator-dev.yaml
-          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
+          VAR: image=${{ needs.build.outputs.image }}
 
   deploy-demo:
     if: github.ref == 'refs/heads/main'
@@ -90,7 +90,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais/naiserator-demo.yaml
-          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
+          VAR: image=${{ needs.build.outputs.image }}
 
   deploy-prod:
     if: github.ref == 'refs/heads/main'
@@ -104,4 +104,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
           RESOURCE: nais/naiserator-prod.yaml
-          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
+          VAR: image=${{ needs.build.outputs.image }}
