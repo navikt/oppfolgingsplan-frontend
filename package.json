@@ -2,10 +2,14 @@
   "name": "oppfolgingsplan-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 8080",
+    "start:watch": "NODE_OPTIONS='--inspect' next dev | pino-pretty",
+    "start:prod": "NODE_OPTIONS='-r next-logger' next start",
     "lint": "next lint",
     "prettier": "prettier --write ./src/**",
     "prepare": "husky install",

@@ -11,7 +11,7 @@ spec:
     min: 2
     max: 4
     cpuThresholdPercentage: 90
-  port: 8080
+  port: 3000
   tokenx:
     enabled: true
   idporten:

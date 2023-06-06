@@ -1,23 +1,24 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: oppfolgingsplan-frontend
+  name: {{appname}}-demo
   namespace: team-esyfo
   labels:
     team: team-esyfo
+    branchState: {{branchState}}
 spec:
   image: {{ image }}
   replicas:
-    min: 2
-    max: 4
+    min: 1
+    max: 1
     cpuThresholdPercentage: 90
-  port: 8080
+  port: 3000
   tokenx:
-    enabled: true
+    enabled: false
   idporten:
-    enabled: true
+    enabled: false
     sidecar:
-      enabled: true
+      enabled: false
   liveness:
     path: syk/oppfolgingsplaner/api/isAlive
     initialDelay: 20
@@ -31,7 +32,7 @@ spec:
     timeout: 5
   prometheus:
     enabled: true
-    path: actuator/metrics
+    path: /actuator/metrics
   resources:
     limits:
       cpu: 500m
@@ -40,29 +41,22 @@ spec:
       cpu: 200m
       memory: 256Mi
   ingresses:
-    - "https://www.nav.no/syk/oppfolgingsplaner"
+    - {{ingress}}
+  accessPolicy:
+    outbound:
+      external:
+        - host: nav.no
+        - host: dekoratoren.nav.no
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp
     - name: DECORATOR_ENV
       value: "prod"
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
-      value: https://syfooppfolgingsplanservice.prod-fss-pub.nais.io
+      value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
-      value: prod-fss:team-esyfo:syfooppfolgingsplanservice
-    - name: SYKMELDINGER_ARBEIDSGIVER_HOST
-      value: http://sykmeldinger-arbeidsgiver.teamsykmelding
-    - name : SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
-      value: "prod-gcp:teamsykmelding:sykmeldinger-arbeidsgiver"
+      value: syfooppfolgingsplanservice
     - name: MOCK_BACKEND
-      value: "false"
+      value: "true"
     - name: RUNTIME_ENVIRONMENT
-      value: prod
-  accessPolicy:
-    outbound:
-      rules:
-        - application: sykmeldinger-arbeidsgiver
-          namespace: teamsykmelding
-      external:
-        - host: www.nav.no
-        - host: syfooppfolgingsplanservice.prod-fss-pub.nais.io
+      value: demo

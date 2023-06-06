@@ -1,13 +1,13 @@
-FROM node:16-alpine
+FROM gcr.io/distroless/nodejs:18 as runtime
 
-ENV NODE_ENV production
+WORKDIR /app
 
-COPY /next.config.js ./
-COPY /.next ./.next
-COPY /public ./public
-COPY /node_modules ./node_modules
-COPY /package.json ./package.json
+COPY package.json /app/
+COPY .next/standalone /app/
+COPY public /app/public/
 
-CMD ["npm", "start"]
+EXPOSE 3000
 
-EXPOSE 8080
+ENV NODE_ENV=production
+
+CMD ["server.js"]
