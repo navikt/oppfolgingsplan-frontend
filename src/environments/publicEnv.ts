@@ -20,26 +20,10 @@ export const isDev = () => {
 };
 
 export const dineSykemeldteRoot = (): string => {
-  if (isDemo()) {
-    return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_DEMO_URL || "";
-  }
-
-  if (isDev()) {
-    return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_DEV_URL || "";
-  }
-
   return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_URL || "";
 };
 
 export const dittSykefravarRoot = (): string => {
-  if (isDemo()) {
-    return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_DEMO_URL || "";
-  }
-
-  if (isDev()) {
-    return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_DEV_URL || "";
-  }
-
   return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_URL || "";
 };
 export const displayTestScenarioSelector =

@@ -1,0 +1,10 @@
+name: Demo delete
+on: delete
+
+jobs:
+  branch-delete:
+    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/next-app-demo-delete.yaml@main
+    secrets: inherit
+    with:
+      app: oppfolgingsplan-frontend
+      base-path: /syk/oppfolgingsplaner
