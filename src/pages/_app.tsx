@@ -27,7 +27,7 @@ declare const window: any;
 configureLogger({
   basePath: "/syk/oppfolgingsplaner",
   onLog: (log) => {
-    if (typeof window !== "undefined" && window.faro !== "undefind") {
+    if (typeof window !== "undefined" && window.faro !== "undefined") {
       window.faro.api.pushLog(log.messages, {
         level: pinoLevelToFaroLevel(log.level.label),
       });
