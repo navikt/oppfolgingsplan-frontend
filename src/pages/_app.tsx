@@ -20,14 +20,19 @@ import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 import { Modal } from "@navikt/ds-react";
 import { minutesToMillis } from "../utils/dateUtils";
 import { initFaro, pinoLevelToFaroLevel } from "../faro/initFaro";
-import { faro } from "@grafana/faro-core";
+
+// eslint-disable-next-line
+declare const window: any;
 
 configureLogger({
   basePath: "/syk/oppfolgingsplaner",
-  onLog: (log) =>
-    faro?.api.pushLog(log.messages, {
-      level: pinoLevelToFaroLevel(log.level.label),
-    }),
+  onLog: (log) => {
+    if (typeof window !== "undefined" && window.faro !== "undefind") {
+      window.faro.api.pushLog(log.messages, {
+        level: pinoLevelToFaroLevel(log.level.label),
+      });
+    }
+  },
 });
 
 const GlobalStyle = createGlobalStyle`
