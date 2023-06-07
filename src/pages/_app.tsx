@@ -19,9 +19,15 @@ import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 import { Modal } from "@navikt/ds-react";
 import { minutesToMillis } from "../utils/dateUtils";
+import { initFaro, pinoLevelToFaroLevel } from "../faro/initFaro";
+import { faro } from "@grafana/faro-core";
 
 configureLogger({
   basePath: "/syk/oppfolgingsplaner",
+  onLog: (log) =>
+    faro?.api.pushLog(log.messages, {
+      level: pinoLevelToFaroLevel(log.level.label),
+    }),
 });
 
 const GlobalStyle = createGlobalStyle`
@@ -61,6 +67,7 @@ function MyApp({
     if (Modal.setAppElement) {
       Modal.setAppElement("#__next");
     }
+    initFaro();
   }, []);
 
   return (
