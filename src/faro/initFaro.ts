@@ -6,7 +6,8 @@ import {
 } from "@grafana/faro-web-sdk";
 
 export const initFaro = (): Faro | null => {
-  if (!process.env.NEXT_PUBLIC_TELEMETRY_URL) return null;
+  if (!process.env.NEXT_PUBLIC_TELEMETRY_URL || typeof window === "undefined")
+    return null;
 
   return initializeFaro({
     url: process.env.NEXT_PUBLIC_TELEMETRY_URL,
