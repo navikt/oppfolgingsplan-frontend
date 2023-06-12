@@ -21,6 +21,7 @@
     "workerDirectory": "public"
   },
   "dependencies": {
+    "@grafana/faro-web-sdk": "^1.0.5",
     "@navikt/dinesykmeldte-sidemeny": "^3.0.0",
     "@navikt/ds-css": "^2.0.1",
     "@navikt/ds-icons": "^2.0.1",
