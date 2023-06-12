@@ -22,6 +22,7 @@ const VideoPanel = () => {
         width="100%"
         height="auto"
         controls
+        crossOrigin="anonymous"
         poster={getPublicAsset("/video/poster.jpg")}
       >
         <source src={getPublicAsset("/video/film.mp4")} type="video/mp4" />
