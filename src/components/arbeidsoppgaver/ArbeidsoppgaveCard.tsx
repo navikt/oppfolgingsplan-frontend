@@ -27,6 +27,7 @@ import {
   PencilIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
+import { IconWrapper } from "../blocks/icons/IconWrapper";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -94,7 +95,14 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.KAN && (
         <Card>
           <CardHeader>
-            <CheckmarkCircleFillIcon aria-hidden color={"var(--a-green-600)"} />
+            <IconWrapper>
+              <CheckmarkCircleFillIcon
+                aria-hidden
+                color={"var(--a-green-600)"}
+                width={30}
+                height={30}
+              />
+            </IconWrapper>
             {texts.arbeidsoppgaveList.cards.kan}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -135,10 +143,14 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.KAN_IKKE && (
         <Card>
           <CardHeader>
-            <XMarkOctagonFillIcon
-              aria-hidden
-              color={"var(--ac-alert-icon-error-color,var(--a-icon-danger))"}
-            />
+            <IconWrapper>
+              <XMarkOctagonFillIcon
+                aria-hidden
+                color={"var(--ac-alert-icon-error-color,var(--a-icon-danger))"}
+                width={30}
+                height={30}
+              />
+            </IconWrapper>
             {texts.arbeidsoppgaveList.cards.kanIkke}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -159,10 +171,14 @@ export const ArbeidsoppgaveCard = ({
         (!type && (
           <Card>
             <CardHeader>
-              <ExclamationmarkTriangleFillIcon
-                color="var(--ac-alert-icon-warning-color,var(--a-icon-warning))"
-                aria-hidden
-              />{" "}
+              <IconWrapper>
+                <ExclamationmarkTriangleFillIcon
+                  color="var(--ac-alert-icon-warning-color,var(--a-icon-warning))"
+                  aria-hidden
+                  width={30}
+                  height={30}
+                />
+              </IconWrapper>{" "}
               {texts.arbeidsoppgaveList.cards.ikkeVurdert}
             </CardHeader>
             <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
