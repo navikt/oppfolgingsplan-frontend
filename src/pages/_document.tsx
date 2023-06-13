@@ -1,7 +1,6 @@
 import {
-  Components,
+  DecoratorComponents,
   fetchDecoratorReact,
-  Props,
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 import Document, {
   DocumentContext,
@@ -22,22 +21,28 @@ const getDocumentParameter = (
     ?.props?.content;
 };
 
-export default class MyDocument extends Document<{ Decorator: Components }> {
+interface Props {
+  Decorator: DecoratorComponents;
+  language: string;
+}
+
+export default class MyDocument extends Document<Props> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
 
     const isAudienceSykmeldt = ctx.pathname.startsWith("/sykmeldt");
 
-    const decoratorParams: Props = {
+    const Decorator = await fetchDecoratorReact({
       env: serverEnv.DECORATOR_ENV,
-      context: isAudienceSykmeldt ? "privatperson" : "arbeidsgiver",
-      chatbot: true,
-      redirectToApp: true,
-      level: "Level4",
-      urlLookupTable: false,
-    };
-
-    const Decorator = await fetchDecoratorReact(decoratorParams);
+      params: {
+        context: isAudienceSykmeldt ? "privatperson" : "arbeidsgiver",
+        chatbot: true,
+        feedback: false,
+        redirectToApp: true,
+        level: "Level4",
+        urlLookupTable: false,
+      },
+    });
 
     const language = getDocumentParameter(initialProps, "lang");
 

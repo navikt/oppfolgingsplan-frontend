@@ -1,6 +1,8 @@
 import { DS_COLOR_FEEDBACK_WARNING_ICON } from "../../../styles/colors/ColorConstants";
-import { AddCircleFilled } from "@navikt/ds-icons";
+import { PlusCircleFillIcon } from "@navikt/aksel-icons";
 
 export const AddColored = () => {
-  return <AddCircleFilled color={DS_COLOR_FEEDBACK_WARNING_ICON} aria-hidden />;
+  return (
+    <PlusCircleFillIcon color={DS_COLOR_FEEDBACK_WARNING_ICON} aria-hidden />
+  );
 };

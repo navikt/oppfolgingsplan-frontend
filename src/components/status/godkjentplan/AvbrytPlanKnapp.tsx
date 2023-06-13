@@ -1,4 +1,4 @@
-import { Edit } from "@navikt/ds-icons";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { BodyLong, Button, Heading, Modal } from "@navikt/ds-react";
 import { useState } from "react";
 import { useAvbrytOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
@@ -15,7 +15,7 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
     <>
       <Button
         onClick={() => setVisBekreftelse(true)}
-        icon={<Edit aria-hidden />}
+        icon={<PencilIcon aria-hidden />}
         variant="tertiary"
       >
         Gjør endringer

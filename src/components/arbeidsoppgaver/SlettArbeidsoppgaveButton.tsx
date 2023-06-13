@@ -1,4 +1,4 @@
-import { Delete } from "@navikt/ds-icons";
+import { TrashIcon } from "@navikt/aksel-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -76,7 +76,7 @@ export const SlettArbeidsoppgaveButton = ({
 
       <Button
         variant={"tertiary"}
-        icon={<Delete aria-hidden />}
+        icon={<TrashIcon aria-hidden />}
         onClick={() => setModalOpen(true)}
       >
         {texts.arbeidsoppgaveList.buttons.slett}

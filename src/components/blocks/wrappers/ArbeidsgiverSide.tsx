@@ -8,7 +8,7 @@ import { ArbeidsgiverSideMenu } from "../sidemenu/ArbeidsgiverSideMenu";
 import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
-import { People } from "@navikt/ds-icons";
+import { PersonIcon } from "@navikt/aksel-icons";
 import { IkkeTilgangTilAnsattInfoBoks } from "../infoboks/IkkeTilgangTilAnsattInfoBoks";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
@@ -16,7 +16,7 @@ const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
     return {
       title: sykmeldt.navn,
       subtitle: `Fødselsnr: ${addSpaceAfterEverySixthCharacter(sykmeldt?.fnr)}`,
-      Icon: People,
+      Icon: PersonIcon,
     };
   }
 

@@ -1,7 +1,6 @@
 import { Button, Heading, Modal, Radio, RadioGroup } from "@navikt/ds-react";
 import styled from "styled-components";
-import Sun from "@navikt/ds-icons/svg/Sun.svg";
-import Image from "next/image";
+import SunImage from "../../blocks/images/sun.svg";
 import { ImageContainer } from "../wrappers/ImageContainer";
 import React, { useEffect, useState } from "react";
 import { Row } from "../wrappers/Row";
@@ -11,6 +10,7 @@ import {
   useActiveTestScenario,
   useSetActiveTestScenario,
 } from "../../../api/queries/testScenarioQueries";
+import Image from "next/image";
 
 const MockdataWrapper = styled.div`
   position: fixed;
@@ -172,8 +172,8 @@ export const TestScenarioSelector = () => {
       </Modal>
 
       <MockdataWrapper id="TestScenarioSelector" onClick={() => setOpen(!open)}>
-        <ImageContainer width={"4rem"}>
-          <Image src={Sun} fill={true} alt={""} color={"#FF0000"} />
+        <ImageContainer>
+          <Image src={SunImage} alt="" width={40} height={40} />
         </ImageContainer>
       </MockdataWrapper>
     </>

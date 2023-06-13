@@ -9,12 +9,6 @@ import { VurderButton } from "../blocks/buttons/VurderButton";
 import { VurderingFraSykmeldt } from "./VurderingFraSykmeldt";
 import { useAudience } from "../../hooks/routeHooks";
 import { KANGJENNOMFOERES } from "../../constants/konstanter";
-import {
-  Edit,
-  ErrorColored,
-  SuccessColored,
-  WarningColored,
-} from "@navikt/ds-icons";
 import { useState } from "react";
 import { Card } from "../blocks/card/Card";
 import { CardHeader } from "../blocks/card/CardHeader";
@@ -27,6 +21,12 @@ import {
   getAktorNavn,
 } from "../../utils/textContextUtils";
 import { ARBEIDSOPPGAVE_CARD } from "../../../cypress/dataTestId";
+import {
+  CheckmarkCircleFillIcon,
+  ExclamationmarkTriangleFillIcon,
+  PencilIcon,
+  XMarkOctagonFillIcon,
+} from "@navikt/aksel-icons";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -66,7 +66,7 @@ export const ArbeidsoppgaveCard = ({
       return (
         <Button
           variant={"tertiary"}
-          icon={<Edit aria-hidden />}
+          icon={<PencilIcon aria-hidden />}
           onClick={() => setEditererArbeidsoppgave(true)}
         >
           Endre
@@ -94,7 +94,7 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.KAN && (
         <Card>
           <CardHeader>
-            <SuccessColored aria-hidden />
+            <CheckmarkCircleFillIcon aria-hidden color={"var(--a-green-600)"} />
             {texts.arbeidsoppgaveList.cards.kan}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -135,7 +135,10 @@ export const ArbeidsoppgaveCard = ({
       {type === KANGJENNOMFOERES.KAN_IKKE && (
         <Card>
           <CardHeader>
-            <ErrorColored aria-hidden />
+            <XMarkOctagonFillIcon
+              aria-hidden
+              color={"var(--ac-alert-icon-error-color,var(--a-icon-danger))"}
+            />
             {texts.arbeidsoppgaveList.cards.kanIkke}
           </CardHeader>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
@@ -156,7 +159,10 @@ export const ArbeidsoppgaveCard = ({
         (!type && (
           <Card>
             <CardHeader>
-              <WarningColored aria-hidden />
+              <ExclamationmarkTriangleFillIcon
+                color="var(--ac-alert-icon-warning-color,var(--a-icon-warning))"
+                aria-hidden
+              />{" "}
               {texts.arbeidsoppgaveList.cards.ikkeVurdert}
             </CardHeader>
             <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
