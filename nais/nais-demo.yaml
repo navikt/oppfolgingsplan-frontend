@@ -46,7 +46,6 @@ spec:
     outbound:
       external:
         - host: nav.no
-        - host: dekoratoren.nav.no
       rules:
         - application: nav-dekoratoren
           namespace: personbruker
