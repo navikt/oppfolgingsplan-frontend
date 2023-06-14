@@ -1,4 +1,4 @@
-@import "~@navikt/ds-css/dist/index.css";
+@import "@navikt/ds-css";
 
 html {
   /* Will be set programatically by dekoratøren */

@@ -1,4 +1,4 @@
-import { Edit } from "@navikt/ds-icons";
+import { PencilIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
 import { useRouter } from "next/router";
@@ -24,7 +24,7 @@ export const NullstillGodkjenningKnapp = ({ oppfolgingsplanId }: Props) => {
           router.push(arbeidsoppgaverUrl);
         })
       }
-      icon={<Edit aria-hidden />}
+      icon={<PencilIcon aria-hidden />}
       variant="tertiary"
     >
       Rediger planen

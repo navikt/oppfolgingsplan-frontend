@@ -1,4 +1,4 @@
-import { FileContent } from "@navikt/ds-icons";
+import { FileSearchIcon } from "@navikt/aksel-icons";
 import { Button, Modal } from "@navikt/ds-react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -19,7 +19,7 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
   return (
     <>
       <Button
-        icon={<FileContent aria-hidden />}
+        icon={<FileSearchIcon aria-hidden />}
         variant="tertiary"
         onClick={() => setOpen(true)}
       >

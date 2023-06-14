@@ -10,7 +10,6 @@ import {
 import { toDateMedMaanedNavn } from "../../utils/dateUtils";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { NyKommentar } from "./NyKommentar";
-import { DialogDots, Edit } from "@navikt/ds-icons";
 import { SlettTiltakButton } from "./SlettTiltakButton";
 import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
@@ -24,6 +23,7 @@ import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { VurderButton } from "../blocks/buttons/VurderButton";
 import { VurderTiltak } from "./VurderTiltak";
+import { Chat2Icon, PencilIcon } from "@navikt/aksel-icons";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -184,7 +184,7 @@ export const LagretTiltak = ({
                 (!isAudienceSykmeldt || !isVurdert()) && (
                   <Button
                     variant={"tertiary"}
-                    icon={<Edit aria-hidden />}
+                    icon={<PencilIcon aria-hidden />}
                     onClick={() => setEditererTiltak(true)}
                   >
                     Endre
@@ -199,7 +199,7 @@ export const LagretTiltak = ({
 
               <Button
                 variant={"tertiary"}
-                icon={<DialogDots aria-hidden />}
+                icon={<Chat2Icon aria-hidden />}
                 onClick={() => setDisplayNyKommentar(true)}
               >
                 Kommenter

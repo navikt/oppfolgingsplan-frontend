@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useController, Validate } from "react-hook-form";
-import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from "@navikt/ds-react";
+import { DatePicker, useDatepicker } from "@navikt/ds-react";
 import { leggTilDagerPaDato, toDate } from "../../../utils/dateUtils";
 
 export interface Props {
@@ -20,7 +20,7 @@ const Datepicker = ({ testid, name, label, defaultValue, validate }: Props) => {
     },
   });
 
-  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = useDatepicker({
     defaultSelected: field.value ? toDate(field.value) : undefined,
     toDate: leggTilDagerPaDato(new Date(), 365 * 5),
     onDateChange: (date: Date | undefined) => {
@@ -29,8 +29,8 @@ const Datepicker = ({ testid, name, label, defaultValue, validate }: Props) => {
   });
 
   return (
-    <UNSAFE_DatePicker {...datepickerProps}>
-      <UNSAFE_DatePicker.Input
+    <DatePicker {...datepickerProps}>
+      <DatePicker.Input
         id={field.name}
         data-testid={testid}
         {...inputProps}
@@ -38,7 +38,7 @@ const Datepicker = ({ testid, name, label, defaultValue, validate }: Props) => {
         placeholder="DD.MM.ÅÅÅÅ"
         error={fieldState.error?.message}
       />
-    </UNSAFE_DatePicker>
+    </DatePicker>
   );
 };
 

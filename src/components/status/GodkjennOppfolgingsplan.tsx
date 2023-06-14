@@ -1,16 +1,8 @@
-import { BodyLong, Button, Checkbox, Heading } from "@navikt/ds-react";
+import { Alert, BodyLong, Button, Checkbox, Heading } from "@navikt/ds-react";
 import { useState } from "react";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import { Godkjenning } from "../../types/oppfolgingsplan";
-import { InformationColored } from "@navikt/ds-icons";
-import styled from "styled-components";
-
-const AlignedContent = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-`;
 
 export type MotpartNavnForAltinn = "arbeidstakeren" | "arbeidsgiveren din";
 
@@ -40,10 +32,9 @@ export const GodkjennOppfolgingsplan = ({
       </BodyLong>
       <SpacedDiv>
         {godkjenninger.find((godkjenning) => godkjenning.delMedNav) ? (
-          <AlignedContent>
-            <InformationColored />
+          <Alert variant="info">
             Planen vil bli delt med NAV når du godkjenner den.
-          </AlignedContent>
+          </Alert>
         ) : (
           <Checkbox
             onChange={() => setDelMedNav(!delMedNav)}

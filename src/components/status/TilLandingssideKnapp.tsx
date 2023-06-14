@@ -1,4 +1,4 @@
-import { Back } from "@navikt/ds-icons";
+import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { useLandingUrl } from "../../hooks/routeHooks";
 import NextLink from "next/link";
@@ -8,7 +8,7 @@ export const TilLandingssideKnapp = () => {
 
   return (
     <NextLink href={landingPage}>
-      <Button variant="tertiary" icon={<Back aria-hidden />}>
+      <Button variant="tertiary" icon={<ChevronLeftIcon aria-hidden />}>
         Tilbake til oppfølgingsplaner
       </Button>
     </NextLink>
