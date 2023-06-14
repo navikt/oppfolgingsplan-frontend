@@ -15,39 +15,31 @@ const GodkjennPlanSendtInfoBox = ({ godkjennPlanTargetAudience }: Props) => {
           Hva skjer nå?
         </Heading>
 
-        <BodyShort>
+        <BodyShort spacing>
           {godkjennPlanTargetAudience} din kan godkjenne eller gjøre endringer i
           oppfølgingsplanen.
         </BodyShort>
 
-        <ul>
+        <ul role="list">
           <li>
-            <BodyShort>
-              Hvis {targetAudienceLowerCase} din godkjenner, så har dere
-              opprettet en plan.
-            </BodyShort>
+            Hvis {targetAudienceLowerCase} din godkjenner, så har dere opprettet
+            en plan.
           </li>
 
           <li>
-            <BodyShort>
-              Hvis {targetAudienceLowerCase} din gjør endringer og sender planen
-              til deg for godkjenning på nytt, vil du få en melding fra NAV.
-            </BodyShort>
+            Hvis {targetAudienceLowerCase} din gjør endringer og sender planen
+            til deg for godkjenning på nytt, vil du få en melding fra NAV.
           </li>
 
           <li>
-            <BodyShort>
-              Hvis du ikke får noen melding fra NAV, er det mulig at{" "}
-              {targetAudienceLowerCase} din ikke har tatt stilling til planen
-              ennå.
-            </BodyShort>
+            Hvis du ikke får noen melding fra NAV, er det mulig at{" "}
+            {targetAudienceLowerCase} din ikke har tatt stilling til planen
+            ennå.
           </li>
 
           <li>
-            <BodyShort>
-              Du kan når som helst gå inn her på NAV.no for å se om{" "}
-              {targetAudienceLowerCase} din har gjort endringer.
-            </BodyShort>
+            Du kan når som helst gå inn her på NAV.no for å se om{" "}
+            {targetAudienceLowerCase} din har gjort endringer.
           </li>
         </ul>
       </Alert>

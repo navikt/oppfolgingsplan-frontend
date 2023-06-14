@@ -1,7 +1,6 @@
 import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { createGlobalStyle } from "styled-components";
 import { useAudience } from "../hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
@@ -34,14 +33,6 @@ configureLogger({
     }
   },
 });
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-`;
 
 const TestScenarioDevTools = () => {
   if (displayTestScenarioSelector) {
@@ -79,7 +70,6 @@ function MyApp({
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <>
-          <GlobalStyle />
           {isAudienceSykmeldt ? (
             <BreadcrumbsAppenderSM />
           ) : (
