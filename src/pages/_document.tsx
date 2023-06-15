@@ -11,6 +11,10 @@ import Document, {
   NextScript,
 } from "next/document";
 import serverEnv from "../server/utils/serverEnv";
+import {
+  createBreadcrumbsAG,
+  createBreadcrumbsSM,
+} from "../components/blocks/breadcrumbs";
 
 // The 'head'-field of the document initialProps contains data from <head> (meta-tags etc)
 const getDocumentParameter = (
@@ -41,6 +45,13 @@ export default class MyDocument extends Document<Props> {
         redirectToApp: true,
         level: "Level4",
         urlLookupTable: false,
+        breadcrumbs: isAudienceSykmeldt
+          ? createBreadcrumbsSM(ctx.pathname)
+          : createBreadcrumbsAG(
+              ctx.pathname,
+              "Den sykmeldte",
+              ctx.query.narmestelederid as string
+            ),
       },
     });
 
