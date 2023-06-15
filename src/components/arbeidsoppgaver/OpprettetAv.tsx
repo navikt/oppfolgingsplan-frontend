@@ -1,5 +1,5 @@
-import { SpacedDetail } from "../blocks/SpacedDetail";
 import { texts } from "../seplanen/texts";
+import { Detail } from "@navikt/ds-react";
 
 interface Props {
   opprettetAv: string;
@@ -7,6 +7,8 @@ interface Props {
 
 export const OpprettetAv = ({ opprettetAv }: Props) => {
   return (
-    <SpacedDetail>{`${texts.arbeidsoppgaveList.labels.lagtTilAv} ${opprettetAv}`}</SpacedDetail>
+    <Detail
+      spacing
+    >{`${texts.arbeidsoppgaveList.labels.lagtTilAv} ${opprettetAv}`}</Detail>
   );
 };

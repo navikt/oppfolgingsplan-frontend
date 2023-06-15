@@ -1,33 +1,33 @@
-import { ArbeidsoppgaveHeading } from "./ArbeidsoppgaveHeading";
-import { EditerArbeidsoppgave } from "./EditerArbeidsoppgave";
-import { KanIkkeBeskrivelse } from "./KanIkkeBeskrivelse";
-import { ArbeidsoppgaveKnapper } from "./ArbeidsoppgaveKnapper";
-import { OpprettetAv } from "./OpprettetAv";
-import { SlettArbeidsoppgaveButton } from "./SlettArbeidsoppgaveButton";
-import { TilretteleggingsBeskrivelse } from "./TilretteleggingsBeskrivelse";
-import { VurderButton } from "../blocks/buttons/VurderButton";
-import { VurderingFraSykmeldt } from "./VurderingFraSykmeldt";
-import { useAudience } from "../../hooks/routeHooks";
-import { KANGJENNOMFOERES } from "../../constants/konstanter";
+import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
+import { useAudience } from "../../../hooks/routeHooks";
 import { useState } from "react";
-import { Card } from "../blocks/card/Card";
-import { CardHeader } from "../blocks/card/CardHeader";
-import { texts } from "../seplanen/texts";
-import { AddColored } from "../blocks/icons/AddColored";
-import { Button } from "@navikt/ds-react";
-import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import {
   aktorHarOpprettetElement,
   getAktorNavn,
-} from "../../utils/textContextUtils";
-import { ARBEIDSOPPGAVE_CARD } from "../../../cypress/dataTestId";
+} from "../../../utils/textContextUtils";
+import { EditerArbeidsoppgave } from "../EditerArbeidsoppgave";
+import { Button } from "@navikt/ds-react";
 import {
   CheckmarkCircleFillIcon,
   ExclamationmarkTriangleFillIcon,
   PencilIcon,
   XMarkOctagonFillIcon,
 } from "@navikt/aksel-icons";
-import { IconWrapper } from "../blocks/icons/IconWrapper";
+import { SlettArbeidsoppgaveButton } from "../SlettArbeidsoppgaveButton";
+import { VurderButton } from "../../blocks/buttons/VurderButton";
+import { texts } from "../../seplanen/texts";
+import { ARBEIDSOPPGAVE_CARD } from "../../../../cypress/dataTestId";
+import { KANGJENNOMFOERES } from "../../../constants/konstanter";
+import styles from "./arbeidsoppgavecard.module.css";
+import { IconWrapper } from "../../blocks/icons/IconWrapper";
+import { ArbeidsoppgaveHeading } from "../ArbeidsoppgaveHeading";
+import { OpprettetAv } from "../OpprettetAv";
+import { ArbeidsoppgaveKnapper } from "../ArbeidsoppgaveKnapper";
+import { AddColored } from "../../blocks/icons/AddColored";
+import { TilretteleggingsBeskrivelse } from "../TilretteleggingsBeskrivelse";
+import { KanIkkeBeskrivelse } from "../KanIkkeBeskrivelse";
+import { VurderingFraSykmeldt } from "../VurderingFraSykmeldt";
+import { SpacedPanel } from "../../blocks/wrappers/SpacedPanel";
 
 interface Props {
   arbeidstakerFnr: string;
@@ -93,8 +93,8 @@ export const ArbeidsoppgaveCard = ({
   return (
     <div data-testid={ARBEIDSOPPGAVE_CARD}>
       {type === KANGJENNOMFOERES.KAN && (
-        <Card>
-          <CardHeader>
+        <SpacedPanel border={true}>
+          <div className={styles.cardheader}>
             <IconWrapper>
               <CheckmarkCircleFillIcon
                 aria-hidden
@@ -104,7 +104,7 @@ export const ArbeidsoppgaveCard = ({
               />
             </IconWrapper>
             {texts.arbeidsoppgaveList.cards.kan}
-          </CardHeader>
+          </div>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
           <OpprettetAv opprettetAv={aktorNavn} />
           {!readonly && (
@@ -116,14 +116,14 @@ export const ArbeidsoppgaveCard = ({
               </ArbeidsoppgaveKnapper>
             </>
           )}
-        </Card>
+        </SpacedPanel>
       )}
       {type === KANGJENNOMFOERES.TILRETTELEGGING && (
-        <Card>
-          <CardHeader>
+        <SpacedPanel border={true}>
+          <div className={styles.cardheader}>
             <AddColored aria-hidden />
             {texts.arbeidsoppgaveList.cards.tilrettelegging}
-          </CardHeader>
+          </div>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
           <TilretteleggingsBeskrivelse
             gjennomfoering={arbeidsoppgave.gjennomfoering}
@@ -138,11 +138,11 @@ export const ArbeidsoppgaveCard = ({
               </ArbeidsoppgaveKnapper>
             </>
           )}
-        </Card>
+        </SpacedPanel>
       )}
       {type === KANGJENNOMFOERES.KAN_IKKE && (
-        <Card>
-          <CardHeader>
+        <SpacedPanel border={true}>
+          <div className={styles.cardheader}>
             <IconWrapper>
               <XMarkOctagonFillIcon
                 aria-hidden
@@ -152,7 +152,7 @@ export const ArbeidsoppgaveCard = ({
               />
             </IconWrapper>
             {texts.arbeidsoppgaveList.cards.kanIkke}
-          </CardHeader>
+          </div>
           <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
           <KanIkkeBeskrivelse gjennomfoering={arbeidsoppgave.gjennomfoering} />
           <OpprettetAv opprettetAv={aktorNavn} />
@@ -165,12 +165,12 @@ export const ArbeidsoppgaveCard = ({
               </ArbeidsoppgaveKnapper>
             </>
           )}
-        </Card>
+        </SpacedPanel>
       )}
       {type === KANGJENNOMFOERES.IKKE_VURDERT ||
         (!type && (
-          <Card>
-            <CardHeader>
+          <SpacedPanel border={true}>
+            <div className={styles.cardheader}>
               <IconWrapper>
                 <ExclamationmarkTriangleFillIcon
                   color="var(--ac-alert-icon-warning-color,var(--a-icon-warning))"
@@ -180,7 +180,7 @@ export const ArbeidsoppgaveCard = ({
                 />
               </IconWrapper>{" "}
               {texts.arbeidsoppgaveList.cards.ikkeVurdert}
-            </CardHeader>
+            </div>
             <ArbeidsoppgaveHeading navn={arbeidsoppgave.arbeidsoppgavenavn} />
             <OpprettetAv opprettetAv={aktorNavn} />
             {!readonly && (
@@ -193,7 +193,7 @@ export const ArbeidsoppgaveCard = ({
                 </ArbeidsoppgaveKnapper>
               </>
             )}
-          </Card>
+          </SpacedPanel>
         ))}
     </div>
   );

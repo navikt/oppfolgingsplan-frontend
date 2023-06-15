@@ -6,7 +6,6 @@ import {
   RadioGroup,
   Textarea,
 } from "@navikt/ds-react";
-import styled from "styled-components";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
@@ -15,14 +14,6 @@ import { Row } from "../blocks/wrappers/Row";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { TiltakFormValues } from "./utils/typer";
 import { TiltakStartSluttDato } from "./TiltakStartSluttDato";
-
-const StyledTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
-
-const StyledRadioGroup = styled(RadioGroup)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   isSubmitting: boolean;
@@ -81,8 +72,9 @@ export const VurderTiltakForm = ({
             rules={{ required: "Du må oppgi din vurdering" }}
             defaultValue={defaultFormValues?.status}
             render={({ field: { onChange, onBlur, value, ref } }) => (
-              <StyledRadioGroup
+              <RadioGroup
                 legend="Din vurdering (obligatorisk)"
+                className="mb-8"
                 onBlur={onBlur}
                 onChange={(e) => {
                   onChange(e);
@@ -96,13 +88,14 @@ export const VurderTiltakForm = ({
                 <Radio value={STATUS_TILTAK.FORSLAG}>Forslag</Radio>
                 <Radio value={STATUS_TILTAK.AVTALT}>Avtalt</Radio>
                 <Radio value={STATUS_TILTAK.IKKE_AKTUELT}>Ikke aktuelt</Radio>
-              </StyledRadioGroup>
+              </RadioGroup>
             )}
           />
 
           {hasSelectedAvtalt() && (
-            <StyledTextarea
+            <Textarea
               id="gjennomfoering"
+              className="mb-8"
               label={"Hvordan skal dette følges opp underveis? (obligatorisk)"}
               error={errors.gjennomfoering?.message}
               description={
@@ -118,8 +111,9 @@ export const VurderTiltakForm = ({
           )}
 
           {hasSelectedIkkeAktuelt() && (
-            <StyledTextarea
+            <Textarea
               id="beskrivelseIkkeAktuelt"
+              className="mb-8"
               label={
                 "Beskriv hvorfor tiltaket ikke er aktuelt akkurat nå (obligatorisk)"
               }

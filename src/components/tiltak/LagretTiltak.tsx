@@ -3,6 +3,7 @@ import {
   BodyLong,
   BodyShort,
   Button,
+  Detail,
   Heading,
   Label,
   Tag,
@@ -15,7 +16,6 @@ import React, { ReactElement, useState } from "react";
 import styled from "styled-components";
 import { useLagreKommentar } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { EditerTiltak } from "./EditerTiltak";
-import { SpacedDetail } from "../blocks/SpacedDetail";
 import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
 import { Dialog } from "../blocks/dialog/Dialog";
 import { Row } from "../blocks/wrappers/Row";
@@ -137,7 +137,9 @@ export const LagretTiltak = ({
         </>
       )}
 
-      <SpacedDetail>{`Foreslått av ${tiltak.opprettetAv.navn}`}</SpacedDetail>
+      <Detail
+        spacing={true}
+      >{`Foreslått av ${tiltak.opprettetAv.navn}`}</Detail>
 
       {!readonly && (
         <>

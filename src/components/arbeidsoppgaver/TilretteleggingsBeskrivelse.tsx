@@ -25,10 +25,10 @@ export const TilretteleggingsBeskrivelse = ({ gjennomfoering }: Props) => {
       )}
 
       {kanBeskrivelse && (
-        <>
+        <div className="mt-4">
           <Label>{texts.arbeidsoppgaveList.labels.beskrivelse}</Label>
           <BodyLong spacing={true}>{kanBeskrivelse}</BodyLong>
-        </>
+        </div>
       )}
     </>
   );

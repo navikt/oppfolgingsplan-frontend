@@ -41,7 +41,7 @@ export const SendTilGodkjenningToggle = ({
   return (
     <div>
       <SpacedGuidePanel>
-        <SpacedDiv marginBottom={"1rem"}>
+        <SpacedDiv className="mb-4">
           Er du ferdig med denne planen og ønsker å sende den til godkjenning?
         </SpacedDiv>
         <Button
@@ -69,7 +69,7 @@ export const SendTilGodkjenningToggle = ({
           </BodyLong>
 
           {!arbeidsoppgaveListe?.length && (
-            <SpacedDiv marginBottom={"1rem"}>
+            <SpacedDiv className="mb-4">
               <Link href={arbeidsoppgaveUrl}>Legg til en arbeidsoppgave</Link>
             </SpacedDiv>
           )}

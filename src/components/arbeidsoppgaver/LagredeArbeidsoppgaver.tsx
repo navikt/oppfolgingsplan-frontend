@@ -1,6 +1,6 @@
-import { ArbeidsoppgaveCard } from "./ArbeidsoppgaveCard";
 import React from "react";
 import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
+import { ArbeidsoppgaveCard } from "./arbeidsoppgavecard/ArbeidsoppgaveCard";
 
 interface Props {
   arbeidsoppgaver: Arbeidsoppgave[];

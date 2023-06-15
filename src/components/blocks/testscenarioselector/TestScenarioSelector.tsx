@@ -1,5 +1,4 @@
 import { Button, Heading, Modal, Radio, RadioGroup } from "@navikt/ds-react";
-import styled from "styled-components";
 import SunImage from "../../blocks/images/sun.svg";
 import { ImageContainer } from "../wrappers/ImageContainer";
 import React, { useEffect, useState } from "react";
@@ -11,27 +10,7 @@ import {
   useSetActiveTestScenario,
 } from "../../../api/queries/testScenarioQueries";
 import Image from "next/image";
-
-const MockdataWrapper = styled.div`
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 999999;
-  height: 3rem;
-  width: 3rem;
-  background-color: #9bd0b0;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #8bbb9e;
-  }
-`;
+import styles from "./testscenarioselector.module.css";
 
 interface RadioProps {
   value: TestScenario;
@@ -46,10 +25,6 @@ const RadioWithHelpText = ({ value, helpText, children }: RadioProps) => {
     </div>
   );
 };
-
-const Content = styled.div`
-  padding: 3rem;
-`;
 
 export const TestScenarioSelector = () => {
   const activeTestScenario = useActiveTestScenario();
@@ -75,12 +50,12 @@ export const TestScenarioSelector = () => {
         onClose={() => setOpen(false)}
       >
         <Modal.Content>
-          <Content>
+          <div className="p-12">
             <Heading spacing level="1" size="large">
               Velg testscenario
             </Heading>
 
-            <SpacedDiv marginBottom={"1rem"}>
+            <SpacedDiv>
               <RadioGroup
                 legend="Velg testscenario"
                 value={selectedScenario}
@@ -167,15 +142,19 @@ export const TestScenarioSelector = () => {
                 Avbryt
               </Button>
             </Row>
-          </Content>
+          </div>
         </Modal.Content>
       </Modal>
 
-      <MockdataWrapper id="TestScenarioSelector" onClick={() => setOpen(!open)}>
+      <div
+        id="TestScenarioSelector"
+        onClick={() => setOpen(!open)}
+        className={styles.testscenariocontainer}
+      >
         <ImageContainer>
           <Image src={SunImage} alt="" width={40} height={40} />
         </ImageContainer>
-      </MockdataWrapper>
+      </div>
     </>
   );
 };

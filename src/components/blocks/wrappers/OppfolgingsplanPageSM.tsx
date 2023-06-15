@@ -11,7 +11,7 @@ import { OppfolgingsplanStepper } from "../stepper/OppfolgingsplanStepper";
 import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { statusPageToDisplaySM } from "../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../error/CantEditPlanError";
-import SykmeldtSide from "./SykmeldtSide";
+import SykmeldtSide from "./sykmeldtside/SykmeldtSide";
 import { Oppfolgingsplan, Stilling } from "../../../types/oppfolgingsplan";
 
 const textOverskrift = (arbeidsgiver?: string) => {

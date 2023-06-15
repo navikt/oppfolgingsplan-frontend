@@ -1,0 +1,20 @@
+.testscenariocontainer {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999999;
+  height: 3rem;
+  width: 3rem;
+  background-color: #9bd0b0;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  cursor: pointer;
+}
+
+.testscenariocontainer:hover {
+  background-color: #8bbb9e;
+}

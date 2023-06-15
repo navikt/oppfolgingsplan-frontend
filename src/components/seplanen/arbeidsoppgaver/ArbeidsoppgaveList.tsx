@@ -2,8 +2,8 @@ import { KANGJENNOMFOERES } from "../../../constants/konstanter";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "../ContentWrapper";
 import { texts } from "../texts";
-import { ArbeidsoppgaveCard } from "../../arbeidsoppgaver/ArbeidsoppgaveCard";
 import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
+import { ArbeidsoppgaveCard } from "../../arbeidsoppgaver/arbeidsoppgavecard/ArbeidsoppgaveCard";
 
 interface Props {
   arbeidstakerFnr: string;

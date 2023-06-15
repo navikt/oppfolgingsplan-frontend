@@ -26,7 +26,7 @@ export const GodkjentPlan = ({ oppfolgingsplan, children }: Props) => {
 
   return (
     <SpacedDiv>
-      <SpacedDiv marginTop={"2rem"}>
+      <SpacedDiv className="mt-8">
         <Heading size={"medium"} level={"2"} spacing>
           Godkjent plan for {oppfolgingsplan.virksomhet?.navn}
         </Heading>

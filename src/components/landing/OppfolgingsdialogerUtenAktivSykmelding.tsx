@@ -16,7 +16,7 @@ const OppfolgingsdialogerUtenAktivSykmelding = ({
       <Heading size={"medium"} level={"2"}>
         Tidligere oppfølgingsplaner
       </Heading>
-      <SpacedDiv marginTop={"1rem"}>
+      <SpacedDiv className="mt-4">
         {oppfolgingsplanerUtenAktivSykmelding.map((oppfolgingsplan, idx) => {
           return (
             <OppfolgingsdialogTidligereUtenSykmelding

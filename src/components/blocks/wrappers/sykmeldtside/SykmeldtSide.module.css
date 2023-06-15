@@ -1,0 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.innercontent {
+  display: flex;
+  flex-direction: column;
+  width: 50rem;
+  max-width: 100%;
+  flex-grow: 1;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}

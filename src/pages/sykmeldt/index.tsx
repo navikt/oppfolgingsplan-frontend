@@ -4,7 +4,7 @@ import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanCont
 import { useOppfolgingsplanerSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "../../api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
-import SykmeldtSide from "../../components/blocks/wrappers/SykmeldtSide";
+import SykmeldtSide from "../../components/blocks/wrappers/sykmeldtside/SykmeldtSide";
 import OppfolgingsdialogerInfoPersonvern from "../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../components/blocks/video/VideoPanel";
 import { useNarmesteLedereSM } from "../../api/queries/sykmeldt/narmesteLedereQueriesSM";
