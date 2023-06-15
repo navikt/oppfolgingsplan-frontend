@@ -12,10 +12,10 @@ interface Props {
 
 const OppfolgingsdialogerInfoPersonvern = ({ ingress }: Props) => {
   return (
-    <div>
+    <div className="mb-8">
       <Ingress>{ingress}</Ingress>
       <IngressMarginTop>Les mer om:</IngressMarginTop>
-      <ul>
+      <ul role="list">
         <li>
           <Link
             target="_blank"

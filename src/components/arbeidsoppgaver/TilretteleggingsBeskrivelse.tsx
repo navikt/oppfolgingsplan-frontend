@@ -16,7 +16,7 @@ export const TilretteleggingsBeskrivelse = ({ gjennomfoering }: Props) => {
       {(paaAnnetSted || medMerTid || medHjelp) && (
         <>
           <Label>{texts.arbeidsoppgaveList.labels.hvaSkalTil}</Label>
-          <ul>
+          <ul role="list">
             {paaAnnetSted && <li>{texts.arbeidsoppgaveList.labels.sted}</li>}
             {medMerTid && <li>{texts.arbeidsoppgaveList.labels.tid}</li>}
             {medHjelp && <li>{texts.arbeidsoppgaveList.labels.hjelp}</li>}

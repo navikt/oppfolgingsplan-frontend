@@ -19,7 +19,6 @@ interface Props {
   subtitle?: string;
   description?: string;
   image: string;
-  spacing?: boolean;
   children?: ReactNode;
 }
 

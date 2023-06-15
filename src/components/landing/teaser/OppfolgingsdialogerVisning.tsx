@@ -11,7 +11,6 @@ import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
 import { finnArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
 import OpprettModalSM from "../../../components/landing/opprett/OpprettModalSM";
 import IngenPlanerCardSM from "../../../components/landing/opprett/IngenPlanerCardSM";
-import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
@@ -69,7 +68,7 @@ const OppfolgingsdialogerVisning = ({
       {aktiveOppfolgingsplaner.length > 0 && (
         <div>
           {arbeidsgivereForSykmeldinger.length > 1 && (
-            <SpacedDiv marginTop={"1rem"}>
+            <div className="mb-8">
               <Button
                 variant={"secondary"}
                 size={"medium"}
@@ -79,7 +78,7 @@ const OppfolgingsdialogerVisning = ({
               >
                 {texts.oppfolgingsdialogNyKnapp.button}
               </Button>
-            </SpacedDiv>
+            </div>
           )}
           <OppfolgingsdialogTeasere
             oppfolgingsplaner={aktiveOppfolgingsplaner}
