@@ -1,5 +1,4 @@
 import { Alert, Button, Textarea, TextField } from "@navikt/ds-react";
-import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
@@ -12,18 +11,6 @@ import {
   TILTAK_LAGRE_BUTTON,
   TILTAK_OVERSKRIFT_TEXTFIELD,
 } from "../../../cypress/dataTestId";
-
-const OverskriftTextField = styled(TextField)`
-  margin-bottom: 2rem;
-`;
-
-const OverskriftTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
-
-const SpacedAlert = styled(Alert)`
-  margin-bottom: 2rem;
-`;
 
 const arbeidstakerInfoText =
   "Husk at arbeidsgiveren din kan se det du skriver her. Derfor må du\n" +
@@ -67,7 +54,8 @@ export const TiltakFormSM = ({
         <LightGreyPanel border={true}>
           <FormErrorSummary errors={errors} ref={errorRef} />
 
-          <OverskriftTextField
+          <TextField
+            className="mb-8"
             data-testid={TILTAK_OVERSKRIFT_TEXTFIELD}
             label={"Overskrift (obligatorisk)"}
             error={errors.overskrift?.message}
@@ -79,7 +67,8 @@ export const TiltakFormSM = ({
             })}
           />
 
-          <OverskriftTextarea
+          <Textarea
+            className="mb-8"
             data-testid={TILTAK_BESKRIVELSE_TEXTAREA}
             label={"Beskriv hva som skal skje (obligatorisk)"}
             error={errors.beskrivelse?.message}
@@ -95,7 +84,9 @@ export const TiltakFormSM = ({
             value={beskrivelseValue}
           />
 
-          <SpacedAlert variant={"info"}>{arbeidstakerInfoText}</SpacedAlert>
+          <Alert className="mb-8" variant={"info"}>
+            {arbeidstakerInfoText}
+          </Alert>
 
           <TiltakStartSluttDato
             startDate={startDate}

@@ -1,7 +1,6 @@
 import { useLagreTiltak } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { Tiltak } from "../../types/oppfolgingsplan";
 import { VurderTiltakForm } from "./VurderTiltakForm";
-import styled from "styled-components";
 import { TiltakFormValues } from "./utils/typer";
 import { formatAsLocalDateTime } from "../../utils/dateUtils";
 
@@ -10,10 +9,6 @@ interface Props {
 
   doneEditing(): void;
 }
-
-const VurderTiltakFormWrapper = styled.div`
-  margin-bottom: 1rem;
-`;
 
 export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
   const lagreTiltak = useLagreTiltak();
@@ -51,7 +46,7 @@ export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
   const beskrivelse = createDefaultFormValues()?.beskrivelse;
 
   return (
-    <VurderTiltakFormWrapper>
+    <div className="mb-4">
       <VurderTiltakForm
         defaultFormValues={createDefaultFormValues()}
         isSubmitting={lagreTiltak.isLoading}
@@ -67,6 +62,6 @@ export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
         }}
         onCancel={doneEditing}
       />
-    </VurderTiltakFormWrapper>
+    </div>
   );
 };

@@ -1,0 +1,25 @@
+.errorcontainer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+@media only screen and (max-width: 960px) {
+  .errorcontainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.errorimage {
+  margin-right: var(--a-spacing-8);
+  flex: 1 1 50%;
+}
+
+@media only screen and (max-width: 960px) {
+  .errorimage {
+    max-height: 240px;
+    margin-bottom: var(--a-spacing-4);
+  }
+}

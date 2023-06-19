@@ -20,7 +20,7 @@ const GodkjennPlanSendtInfoBox = ({ godkjennPlanTargetAudience }: Props) => {
           oppfølgingsplanen.
         </BodyShort>
 
-        <ul role="list">
+        <ul role="list" className="list-disc list-inside">
           <li>
             Hvis {targetAudienceLowerCase} din godkjenner, så har dere opprettet
             en plan.

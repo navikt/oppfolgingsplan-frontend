@@ -1,17 +1,12 @@
 import { FileSearchIcon } from "@navikt/aksel-icons";
 import { Button, Modal } from "@navikt/ds-react";
 import { useState } from "react";
-import styled from "styled-components";
 import { OppfolgingsplanOversikt } from "../seplanen/OppfolgingsplanOversikt";
 import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 
 interface Props {
   oppfolgingsplan: Oppfolgingsplan;
 }
-
-const ModalContentContainer = styled.div`
-  width: 40rem;
-`;
 
 export const SePlan = ({ oppfolgingsplan }: Props) => {
   const [open, setOpen] = useState(false);
@@ -31,9 +26,7 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
         onClose={() => setOpen((x) => !x)}
       >
         <Modal.Content>
-          <ModalContentContainer>
-            <OppfolgingsplanOversikt oppfolgingsplan={oppfolgingsplan} />
-          </ModalContentContainer>
+          <OppfolgingsplanOversikt oppfolgingsplan={oppfolgingsplan} />
         </Modal.Content>
       </Modal>
     </>

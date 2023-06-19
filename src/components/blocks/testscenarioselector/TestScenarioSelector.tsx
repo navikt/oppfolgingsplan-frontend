@@ -1,6 +1,5 @@
 import { Button, Heading, Modal, Radio, RadioGroup } from "@navikt/ds-react";
 import SunImage from "../../blocks/images/sun.svg";
-import { ImageContainer } from "../wrappers/ImageContainer";
 import React, { useEffect, useState } from "react";
 import { Row } from "../wrappers/Row";
 import { SpacedDiv } from "../wrappers/SpacedDiv";
@@ -151,9 +150,7 @@ export const TestScenarioSelector = () => {
         onClick={() => setOpen(!open)}
         className={styles.testscenariocontainer}
       >
-        <ImageContainer>
-          <Image src={SunImage} alt="" width={40} height={40} />
-        </ImageContainer>
+        <Image src={SunImage} alt="" width={40} height={40} />
       </div>
     </>
   );

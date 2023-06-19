@@ -9,3 +9,9 @@
   justify-content: center;
   margin-right: 1rem;
 }
+
+.iconwrapper {
+  height: 100%;
+  align-content: center;
+  display: flex;
+}

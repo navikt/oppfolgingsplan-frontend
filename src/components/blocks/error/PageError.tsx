@@ -4,28 +4,7 @@ import { BodyLong, Heading, Link } from "@navikt/ds-react";
 
 import pageErrorDad from "../images/page-error-dad.svg";
 import notFoundMom from "../images/not-found-mom.svg";
-import styled from "styled-components";
-
-const ErrorContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  --navds-content-container-max-width: 50rem;
-  padding: 1rem;
-
-  @media only screen and (max-width: 960px) {
-    flex-direction: column;
-  }
-`;
-
-const ErrorImage = styled(Image)`
-  margin-right: var(--a-spacing-8);
-  flex: 1 1 50%;
-
-  @media only screen and (max-width: 960px) {
-    max-height: 240px;
-    margin-bottom: var(--a-spacing-4);
-  }
-`;
+import styles from "./error.module.css";
 
 interface Props {
   graphic?: "dad" | "mom";
@@ -44,11 +23,11 @@ const PageError = ({
   const errorText = text ?? "Det har oppstått en uventet feil";
 
   return (
-    <ErrorContainer role="status" aria-live="polite">
+    <div className={styles.errorcontainer} role="status" aria-live="polite">
       {graphic === "dad" ? (
-        <ErrorImage src={pageErrorDad} alt="" />
+        <Image className={styles.errorimage} src={pageErrorDad} alt="" />
       ) : (
-        <ErrorImage src={notFoundMom} alt="" />
+        <Image className={styles.errorimage} src={notFoundMom} alt="" />
       )}
       <div>
         <Heading spacing size="large" level="1">
@@ -69,7 +48,7 @@ const PageError = ({
           <BodyLong spacing>Vi jobber allerede med å fikse feilen.</BodyLong>
         )}
       </div>
-    </ErrorContainer>
+    </div>
   );
 };
 

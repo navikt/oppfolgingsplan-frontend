@@ -6,7 +6,6 @@ import {
   Textarea,
   TextField,
 } from "@navikt/ds-react";
-import styled from "styled-components";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import React, { useRef } from "react";
 import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
@@ -21,28 +20,8 @@ import {
   TILTAK_OVERSKRIFT_TEXTFIELD,
 } from "../../../cypress/dataTestId";
 
-const OverskriftTextField = styled(TextField)`
-  margin-bottom: 2rem;
-`;
-
-const OverskriftTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
-
-const SpacedAlert = styled(Alert)`
-  margin-bottom: 2rem;
-`;
-
 const arbeidsgiverInfoText =
   "Husk at arbeidstakeren din kan se det du skriver her. Du må ikke gi sensitive personopplysninger.";
-
-const StyledTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
-
-const StyledRadioGroup = styled(RadioGroup)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   isSubmitting: boolean;
@@ -93,7 +72,8 @@ export const TiltakFormAG = ({
         <LightGreyPanel border={true}>
           <FormErrorSummary errors={errors} ref={errorRef} />
 
-          <OverskriftTextField
+          <TextField
+            className="mb-8"
             data-testid={TILTAK_OVERSKRIFT_TEXTFIELD}
             label={"Overskrift (obligatorisk)"}
             error={errors.overskrift?.message}
@@ -105,7 +85,8 @@ export const TiltakFormAG = ({
             })}
           />
 
-          <OverskriftTextarea
+          <Textarea
+            className="mb-8"
             data-testid={TILTAK_BESKRIVELSE_TEXTAREA}
             label={"Beskriv hva som skal skje (obligatorisk)"}
             error={errors.beskrivelse?.message}
@@ -124,14 +105,17 @@ export const TiltakFormAG = ({
             value={beskrivelseValue}
           />
 
-          <SpacedAlert variant={"info"}>{arbeidsgiverInfoText}</SpacedAlert>
+          <Alert className="mb-8" variant={"info"}>
+            {arbeidsgiverInfoText}
+          </Alert>
 
           <Controller
             name="status"
             rules={{ required: "Du må oppgi din vurdering" }}
             defaultValue={defaultFormValues?.status}
             render={({ field: { onChange, onBlur, value, ref } }) => (
-              <StyledRadioGroup
+              <RadioGroup
+                className="mb-8"
                 legend="Din vurdering (obligatorisk)"
                 onBlur={onBlur}
                 onChange={(e) => {
@@ -146,13 +130,14 @@ export const TiltakFormAG = ({
                 <Radio value={STATUS_TILTAK.FORSLAG}>Forslag</Radio>
                 <Radio value={STATUS_TILTAK.AVTALT}>Avtalt</Radio>
                 <Radio value={STATUS_TILTAK.IKKE_AKTUELT}>Ikke aktuelt</Radio>
-              </StyledRadioGroup>
+              </RadioGroup>
             )}
           />
 
           {hasSelectedAvtalt() && (
-            <StyledTextarea
+            <Textarea
               id="gjennomfoering"
+              className="mb-8"
               label={"Hvordan skal dette følges opp underveis? (obligatorisk)"}
               error={errors.gjennomfoering?.message}
               description={
@@ -173,8 +158,9 @@ export const TiltakFormAG = ({
           )}
 
           {hasSelectedIkkeAktuelt() && (
-            <StyledTextarea
+            <Textarea
               id="beskrivelseIkkeAktuelt"
+              className="mb-8"
               label={
                 "Beskriv hvorfor tiltaket ikke er aktuelt akkurat nå (obligatorisk)"
               }

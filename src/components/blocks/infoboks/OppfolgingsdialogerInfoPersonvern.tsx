@@ -1,10 +1,6 @@
 import React from "react";
 import { Ingress, Link } from "@navikt/ds-react";
-import styled from "styled-components";
-
-const IngressMarginTop = styled(Ingress)`
-  margin-top: 1rem;
-`;
+import { SpacedDiv } from "../wrappers/SpacedDiv";
 
 interface Props {
   ingress: string;
@@ -13,9 +9,11 @@ interface Props {
 const OppfolgingsdialogerInfoPersonvern = ({ ingress }: Props) => {
   return (
     <div className="mb-8">
-      <Ingress>{ingress}</Ingress>
-      <IngressMarginTop>Les mer om:</IngressMarginTop>
-      <ul role="list">
+      <SpacedDiv className="mb-4">
+        <Ingress>{ingress}</Ingress>
+      </SpacedDiv>
+      <Ingress>Les mer om:</Ingress>
+      <ul role="list" className="list-disc list-inside">
         <li>
           <Link
             target="_blank"
