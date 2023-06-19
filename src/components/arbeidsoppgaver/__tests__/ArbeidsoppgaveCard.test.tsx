@@ -1,9 +1,9 @@
 import { render, screen } from "../../../utils/test/testUtils";
 import mockRouter from "next-router-mock";
-import { ArbeidsoppgaveCard } from "../ArbeidsoppgaveCard";
 import { SYKMELDT } from "../../../mocks/data/constants";
 import { arbeidsoppgaveCreatedBySM } from "../../../mocks/data/fixtures/arbeidsoppgave";
 import jExpect from "../../../../jestGlobals";
+import { ArbeidsoppgaveCard } from "../arbeidsoppgavecard/ArbeidsoppgaveCard";
 
 describe("ArbeidsoppgaveCard", () => {
   describe("logged in as sykmeldt and arbeidsoppgave is created by sykmeldt", () => {

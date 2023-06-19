@@ -8,7 +8,7 @@ import { GodkjentPlan } from "../../../components/status/godkjentplan/GodkjentPl
 import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
-import SykmeldtSide from "../../../components/blocks/wrappers/SykmeldtSide";
+import SykmeldtSide from "../../../components/blocks/wrappers/sykmeldtside/SykmeldtSide";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { ApprovalInformationSM } from "../../../components/status/godkjentplan/ApprovalInformation";

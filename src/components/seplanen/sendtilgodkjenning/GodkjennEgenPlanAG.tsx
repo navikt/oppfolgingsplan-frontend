@@ -38,7 +38,7 @@ export const GodkjennEgenPlanAG = ({
       <Heading spacing size={"medium"} level={"2"}>
         Jeg er ferdig med planen
       </Heading>
-      <SpacedDiv marginBottom={"1rem"}>
+      <SpacedDiv className="mb-4">
         <Alert variant={"info"}>
           Fordi du er din egen leder, kan du opprette planen nå.
         </Alert>

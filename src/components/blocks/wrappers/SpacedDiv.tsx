@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import { ReactNode } from "react";
 
 interface Props {
-  marginTop?: string;
-  marginBottom?: string;
+  children: ReactNode;
+  className?: string;
 }
+export const SpacedDiv = ({ children, className }: Props) => {
+  const contatinatedClassName = `mb-8 ${className}`;
 
-export const SpacedDiv = styled.div<Props>`
-  margin-top: ${(p) => p.marginTop || 0};
-  margin-bottom: ${(p) => p.marginBottom || "2rem"};
-`;
+  return <div className={contatinatedClassName}>{children}</div>;
+};

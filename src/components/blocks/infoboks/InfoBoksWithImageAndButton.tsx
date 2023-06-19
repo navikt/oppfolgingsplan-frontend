@@ -1,20 +1,7 @@
 import Image from "next/image";
 import { BodyLong, Button, Heading, Panel } from "@navikt/ds-react";
 import React from "react";
-import styled from "styled-components";
-
-const StyledPanel = styled(Panel)`
-  margin-bottom: 2rem;
-`;
-
-const PanelContent = styled.div`
-  display: flex;
-  padding: 1rem;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  text-align: center;
-`;
+import styles from "./infoboks.module.css";
 
 interface Props {
   imageSrc: string;
@@ -32,8 +19,8 @@ export const InfoBoksWithImageAndButton = ({
   onClose,
 }: Props) => {
   return (
-    <StyledPanel border={true}>
-      <PanelContent>
+    <Panel className="mb-8" border={true}>
+      <div className={styles.panelcontent}>
         <Image src={imageSrc} width={64} height={64} alt={""} />
         <Heading size={"medium"} level={"2"}>
           {heading}
@@ -43,7 +30,7 @@ export const InfoBoksWithImageAndButton = ({
         <Button variant={"secondary"} onClick={() => onClose(false)}>
           {buttonText}
         </Button>
-      </PanelContent>
-    </StyledPanel>
+      </div>
+    </Panel>
   );
 };

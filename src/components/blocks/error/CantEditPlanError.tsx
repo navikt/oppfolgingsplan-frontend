@@ -2,14 +2,9 @@ import { BodyLong, Button, GuidePanel } from "@navikt/ds-react";
 import Link from "next/link";
 import { logger } from "@navikt/next-logger";
 import React from "react";
-import styled from "styled-components";
 import { useLandingUrl } from "../../../hooks/routeHooks";
 import { StatusPageToDisplay } from "../../../utils/statusPageUtils";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
-
-const SpacedGuidePanel = styled(GuidePanel)`
-  padding-bottom: 2rem;
-`;
 
 const errorText = (planStatus: StatusPageToDisplay) => {
   switch (planStatus) {
@@ -33,7 +28,7 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
   const landingUrl = useLandingUrl();
 
   return (
-    <SpacedGuidePanel>
+    <GuidePanel className="pb-8">
       <BodyLong spacing>{errorText(planStatus)}</BodyLong>
 
       <Link href={`${landingUrl}/${aktivPlan?.id}`}>
@@ -46,6 +41,6 @@ export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {
           Gå til oppfølgingsplanen
         </Button>
       </Link>
-    </SpacedGuidePanel>
+    </GuidePanel>
   );
 };

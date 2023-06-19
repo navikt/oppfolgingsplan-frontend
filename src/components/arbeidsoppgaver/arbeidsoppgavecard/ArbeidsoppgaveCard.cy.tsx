@@ -1,6 +1,6 @@
 import React from "react";
 import { ArbeidsoppgaveCard } from "./ArbeidsoppgaveCard";
-import { defaultOppfolgingsplanerMockData } from "../../server/data/mock/defaultData/oppfolgingsplanservice/defaultOppfolgingsplanerMockData";
+import { defaultOppfolgingsplanerMockData } from "../../../server/data/mock/defaultData/oppfolgingsplanservice/defaultOppfolgingsplanerMockData";
 
 describe("<ArbeidsoppgaveCard />", () => {
   const testPlan = defaultOppfolgingsplanerMockData[0];
