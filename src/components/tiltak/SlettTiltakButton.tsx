@@ -1,17 +1,8 @@
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import { TrashIcon } from "@navikt/aksel-icons";
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useSlettTiltakSM } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { Row } from "../blocks/wrappers/Row";
-
-const ModalContent = styled.div`
-  padding: 2rem;
-`;
-
-const HeadingWithExtraSpacing = styled(Heading)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   tiltakId: number;
@@ -29,10 +20,10 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
         onClose={() => setModalOpen((x) => !x)}
       >
         <Modal.Content>
-          <ModalContent>
-            <HeadingWithExtraSpacing level="2" size="medium">
+          <div className="p-8">
+            <Heading level="2" size="medium" className="mb-8">
               Er du sikker på at du vil slette tiltaket?
-            </HeadingWithExtraSpacing>
+            </Heading>
 
             <Row>
               <Button
@@ -50,7 +41,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
                 Avbryt
               </Button>
             </Row>
-          </ModalContent>
+          </div>
         </Modal.Content>
       </Modal>
 

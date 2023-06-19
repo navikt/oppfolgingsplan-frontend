@@ -1,18 +1,10 @@
 import Datepicker from "../blocks/datepicker/Datepicker";
 import { toDate } from "../../utils/dateUtils";
 import React from "react";
-import styled from "styled-components";
 import {
   TILTAK_SLUTTDATO,
   TILTAK_STARTDATO,
 } from "../../../cypress/dataTestId";
-
-const DateRow = styled.div`
-  display: flex;
-  gap: 2rem;
-  flex-direction: row;
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   defaultValueFom?: Date | null;
@@ -26,7 +18,7 @@ export const TiltakStartSluttDato = ({
   startDate,
 }: Props) => {
   return (
-    <DateRow>
+    <div className="flex flex-row gap-8 mb-8">
       <Datepicker
         testid={TILTAK_STARTDATO}
         name="fom"
@@ -54,6 +46,6 @@ export const TiltakStartSluttDato = ({
           }
         }}
       />
-    </DateRow>
+    </div>
   );
 };

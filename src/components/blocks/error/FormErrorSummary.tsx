@@ -2,15 +2,10 @@ import React, { ForwardedRef } from "react";
 import { ErrorSummary } from "@navikt/ds-react";
 import { FieldErrors } from "react-hook-form/dist/types/errors";
 import { FieldValues } from "react-hook-form";
-import styled from "styled-components";
 
 interface Props<T extends FieldValues> {
   errors: FieldErrors<T>;
 }
-
-const StyledErrorSummary = styled(ErrorSummary)`
-  margin-bottom: 1rem;
-`;
 
 export const FormErrorSummary = React.forwardRef(
   <T extends FieldValues>(
@@ -22,7 +17,8 @@ export const FormErrorSummary = React.forwardRef(
     if (errorCount == 0) return null;
 
     return (
-      <StyledErrorSummary
+      <ErrorSummary
+        className="mb-4"
         heading={`Du har ${errorCount} feil som må rettes opp i`}
         ref={ref}
       >
@@ -31,7 +27,7 @@ export const FormErrorSummary = React.forwardRef(
             {err.message}
           </ErrorSummary.Item>
         ))}
-      </StyledErrorSummary>
+      </ErrorSummary>
     );
   }
 );

@@ -1,7 +1,5 @@
-import styled from "styled-components";
+import styles from "./icons.module.css";
 
-export const IconWrapper = styled.div`
-  height: 100%;
-  align-content: center;
-  display: flex;
-`;
+export const IconWrapper = () => {
+  return <div className={styles.iconwrapper}></div>;
+};

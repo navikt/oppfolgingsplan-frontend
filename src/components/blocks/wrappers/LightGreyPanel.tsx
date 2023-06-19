@@ -1,6 +1,9 @@
-import styled from "styled-components";
-import { Panel } from "@navikt/ds-react";
+import { Panel, PanelProps } from "@navikt/ds-react";
 
-export const LightGreyPanel = styled(Panel)`
-  background: #f7f7f7;
-`;
+export const LightGreyPanel = ({ children, border }: PanelProps) => {
+  return (
+    <Panel border={border} className="bg-ds-gray-50">
+      {children}
+    </Panel>
+  );
+};

@@ -1,16 +1,16 @@
 import { DS_COLOR_FEEDBACK_WARNING_ICON } from "../../../styles/colors/ColorConstants";
 import { PlusCircleFillIcon } from "@navikt/aksel-icons";
-import { IconWrapper } from "./IconWrapper";
+import iconstyles from "./icons.module.css";
 
-export const AddColored = () => {
+export const FilledPlusIcon = () => {
   return (
-    <IconWrapper>
+    <div className={iconstyles.iconwrapper}>
       <PlusCircleFillIcon
         color={DS_COLOR_FEEDBACK_WARNING_ICON}
         aria-hidden
         width={30}
         height={30}
       />
-    </IconWrapper>
+    </div>
   );
 };

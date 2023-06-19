@@ -8,7 +8,6 @@ import {
 } from "@navikt/ds-react";
 import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement, useState } from "react";
-import styled from "styled-components";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
@@ -23,11 +22,6 @@ import {
   SEPLANEN_SLUTTDATO,
   SEPLANEN_STARTDATO,
 } from "../../../../cypress/dataTestId";
-
-const Line = styled.hr`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-`;
 
 export type SendTilGodkjenningFormValues = {
   startDato: Date;
@@ -95,7 +89,7 @@ export const SendTilGodkjenningForm = ({
           Alle felt må fylles ut, bortsett fra de som er markert som valgfrie.
         </BodyLong>
 
-        <Line />
+        <hr className="my-4" />
 
         <Heading spacing size={"small"} level={"3"}>
           Hvor lenge skal planen vare?
@@ -156,7 +150,8 @@ export const SendTilGodkjenningForm = ({
           }}
         />
 
-        <Line />
+        <hr className="my-4" />
+
         <div {...register("tvungenGodkjenning")} />
 
         {visTvungenGodkjenningToggle && (
