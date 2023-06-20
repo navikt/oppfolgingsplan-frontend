@@ -1,10 +1,5 @@
 import { Alert, Radio, RadioGroup } from "@navikt/ds-react";
 import React from "react";
-import styled from "styled-components";
-
-const SpacedAlert = styled(Alert)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   tvungenGodkjenning: boolean | null;
@@ -32,17 +27,17 @@ export const TvungenGodkjenningToggle = ({
       </RadioGroup>
 
       {tvungenGodkjenning && (
-        <SpacedAlert variant={"info"}>
+        <Alert className="mb-8" variant={"info"}>
           Du kan bare velge dette hvis arbeidstakeren ikke kan eller ønsker å
           delta. Dette vil bli synlig i planen.
-        </SpacedAlert>
+        </Alert>
       )}
 
       {!tvungenGodkjenning && (
-        <SpacedAlert variant={"info"}>
+        <Alert className="mb-8" variant={"info"}>
           Arbeidstakeren kan deretter godkjenne eller gjøre endringer og sende
           planen tilbake deg.
-        </SpacedAlert>
+        </Alert>
       )}
     </>
   );

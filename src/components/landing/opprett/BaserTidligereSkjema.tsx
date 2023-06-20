@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from "react";
 import { Button, Radio, RadioGroup } from "@navikt/ds-react";
-import styled from "styled-components";
 import { Row } from "../../blocks/wrappers/Row";
 
 const texts = {
@@ -11,10 +10,6 @@ const texts = {
   },
   buttonSubmit: "Start",
 };
-
-const SpacedRadioGroup = styled(RadioGroup)`
-  margin-bottom: 1rem;
-`;
 
 interface Props {
   isLoading: boolean;
@@ -33,14 +28,15 @@ export const BaserTidligereSkjema = ({
 
   return (
     <>
-      <SpacedRadioGroup
+      <RadioGroup
+        className="mb-4"
         legend={texts.question}
         onChange={(val: boolean) => setBaserTidligere(val)}
         value={baserTidligere}
       >
         <Radio value={true}>{texts.answer.yes}</Radio>
         <Radio value={false}>{texts.answer.no}</Radio>
-      </SpacedRadioGroup>
+      </RadioGroup>
 
       <Row>
         <Button

@@ -32,7 +32,7 @@ export const DelMedNavOgFastlegeButtons = ({
 
   return (
     <>
-      <Row marginBottom={"2rem"}>
+      <Row className="mb-8">
         {!godkjentPlan.deltMedNAV && (
           <Button
             variant={"secondary"}

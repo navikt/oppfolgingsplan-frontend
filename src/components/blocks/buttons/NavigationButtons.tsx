@@ -45,7 +45,7 @@ export const NavigationButtons = ({ activeStep }: Props) => {
 
   return (
     <>
-      <Row marginTop={"2rem"} marginBottom={"1rem"}>
+      <Row className="mt-8 mb-4">
         {previousPage && (
           <Link href={previousPage}>
             <Button
@@ -69,7 +69,7 @@ export const NavigationButtons = ({ activeStep }: Props) => {
         )}
       </Row>
 
-      <Row marginBottom={"2rem"}>
+      <Row className="mb-8">
         <Link href={landingUrl}>
           <Button
             data-testid={NAVIGATION_FORTSETT_SENERE_BUTTON}

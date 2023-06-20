@@ -13,7 +13,6 @@ import { STATUS_TILTAK } from "../../constants/konstanter";
 import { NyKommentar } from "./NyKommentar";
 import { SlettTiltakButton } from "./SlettTiltakButton";
 import React, { ReactElement, useState } from "react";
-import styled from "styled-components";
 import { useLagreKommentar } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { EditerTiltak } from "./EditerTiltak";
 import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
@@ -55,17 +54,6 @@ const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   return null;
 };
 
-const HeadingWithLabel = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-direction: row;
-  margin-bottom: 1rem;
-`;
-
-export const SpacedAlert = styled(Alert)`
-  margin-bottom: 1rem;
-`;
-
 interface Props {
   arbeidstakerFnr: string;
   innloggetFnr: string;
@@ -101,12 +89,12 @@ export const LagretTiltak = ({
 
   return (
     <SpacedPanel border={true}>
-      <HeadingWithLabel>
+      <div className="flex flex-row gap-4 mb-4">
         {createStatusLabel(tiltak.status)}
         <Heading size={"medium"} level={"4"}>
           {tiltak.tiltaknavn}
         </Heading>
-      </HeadingWithLabel>
+      </div>
 
       {tiltak.fom && tiltak.tom && (
         <BodyShort spacing={true}>
@@ -125,9 +113,9 @@ export const LagretTiltak = ({
       )}
 
       {!readonly && isAudienceSykmeldt && !isVurdert() && (
-        <SpacedAlert variant={"warning"}>
+        <Alert className="mb-4" variant={"warning"}>
           Dette tiltaket mangler vurdering fra lederen din
-        </SpacedAlert>
+        </Alert>
       )}
 
       {tiltak.gjennomfoering && tiltak.status === STATUS_TILTAK.AVTALT && (
@@ -181,7 +169,7 @@ export const LagretTiltak = ({
           )}
 
           {!displayNyKommentar && !editererTiltak && !vurdererTiltak && (
-            <Row marginTop={"2rem"}>
+            <Row className="mt-8">
               {isTiltakCreatedByInnloggetRole() &&
                 (!isAudienceSykmeldt || !isVurdert()) && (
                   <Button

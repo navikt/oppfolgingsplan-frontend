@@ -99,7 +99,7 @@ export const SendTilGodkjenningForm = ({
           Vi har foreslått datoer basert på tiltakene dere har skrevet:
         </BodyLong>
 
-        <Row gap={"2rem"} marginBottom={"2rem"}>
+        <Row className="gap-8 mb-8">
           <Datepicker
             testid={SEPLANEN_STARTDATO}
             name="startDato"
