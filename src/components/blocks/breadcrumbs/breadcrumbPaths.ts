@@ -2,13 +2,18 @@ import {
   basePath,
   dineSykemeldteRoot,
   dittSykefravarRoot,
+  minSideRoot,
 } from "../../../environments/publicEnv";
 
 // Breadcrumbs for sykmeldt
-export function dittSykefravaerBreadcrumbSM() {
+export function baseBreadcrumbSM() {
   return [
     {
-      url: dittSykefravarRoot(),
+      url: minSideRoot,
+      title: "Min side",
+    },
+    {
+      url: dittSykefravarRoot,
       title: "Ditt sykefravær",
     },
   ];
@@ -16,7 +21,7 @@ export function dittSykefravaerBreadcrumbSM() {
 
 export function landingBreadcrumbSM() {
   return [
-    ...dittSykefravaerBreadcrumbSM(),
+    ...baseBreadcrumbSM(),
     {
       url: `${basePath}/sykmeldt`,
       title: "Oppfølgingsplaner",
@@ -40,14 +45,14 @@ export function dineSykemeldteBreadcrumbAG(
   narmestelederId: string
 ) {
   const dineSykemeldteBreadcrumb = {
-    url: dineSykemeldteRoot(),
+    url: dineSykemeldteRoot,
     title: "Dine sykmeldte",
   };
 
   return [
     dineSykemeldteBreadcrumb,
     {
-      url: `${dineSykemeldteRoot()}/${narmestelederId}`,
+      url: `${dineSykemeldteRoot}/${narmestelederId}`,
       title: sykmeldtName,
     },
   ];

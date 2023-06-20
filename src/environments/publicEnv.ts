@@ -1,12 +1,13 @@
 export const basePath = process.env.NEXT_PUBLIC_BASEPATH;
 
-export const dineSykemeldteRoot = (): string => {
-  return process.env.NEXT_PUBLIC_DINE_SYKMELDTE_URL || "";
-};
+export const minSideRoot = process.env.NEXT_PUBLIC_MIN_SIDE_ROOT as string;
 
-export const dittSykefravarRoot = (): string => {
-  return process.env.NEXT_PUBLIC_DITT_SYKEFRAVAER_URL || "";
-};
+export const dineSykemeldteRoot = process.env
+  .NEXT_PUBLIC_DINE_SYKMELDTE_URL as string;
+
+export const dittSykefravarRoot = process.env
+  .NEXT_PUBLIC_DITT_SYKEFRAVAER_URL as string;
+
 export const displayTestScenarioSelector =
   process.env.NEXT_PUBLIC_IS_DEVELOPMENT === "true" ||
   process.env.NEXT_PUBLIC_RUNTIME_ENVIRONMENT === "demo";
