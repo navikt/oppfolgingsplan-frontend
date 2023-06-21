@@ -1,15 +1,12 @@
-import styled from "styled-components";
+import { ReactNode } from "react";
 
 interface Props {
-  marginTop?: string;
-  marginBottom?: string;
-  gap?: string;
+  className?: string;
+  children: ReactNode;
 }
 
-export const Row = styled.div<Props>`
-  display: flex;
-  flex-flow: row wrap;
-  gap: ${(p) => p.gap || "1rem"};
-  margin-top: ${(p) => p.marginTop || 0};
-  margin-bottom: ${(p) => p.marginBottom || 0};
-`;
+export const Row = ({ className, children }: Props) => {
+  return (
+    <div className={`flex flex-row flex-wrap ${className}`}>{children}</div>
+  );
+};

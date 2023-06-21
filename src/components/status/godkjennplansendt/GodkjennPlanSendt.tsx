@@ -32,7 +32,7 @@ function GodkjennPlanSendt({ oppfolgingsplan, description, children }: Props) {
         }
       />
 
-      <Row marginBottom={"2rem"}>
+      <Row className="mb-8">
         <SePlan oppfolgingsplan={oppfolgingsplan} />
 
         <NullstillGodkjenningKnapp oppfolgingsplanId={oppfolgingsplan.id} />

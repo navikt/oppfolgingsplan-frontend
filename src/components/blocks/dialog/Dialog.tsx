@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import styled from "styled-components";
 import { Button, Chat } from "@navikt/ds-react";
 import { hentAktoerNavnInitialer } from "../../../utils/stringUtils";
 import { getFullDateFormat } from "../../../utils/dateUtils";
@@ -17,20 +16,6 @@ interface Props {
   tiltakId: number;
   kommentarer?: Kommentar[] | null;
 }
-
-const StyledChat = styled(Chat)`
-  margin-bottom: 1rem;
-`;
-
-const DialogContent = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ButtonRightAligned = styled(Button)`
-  display: flex;
-  align-self: flex-end;
-`;
 
 export const Dialog = ({
   arbeidstakerFnr,
@@ -53,7 +38,8 @@ export const Dialog = ({
       );
 
       return (
-        <StyledChat
+        <Chat
+          className="mb-4"
           key={index}
           avatar={hentAktoerNavnInitialer(
             kommentar.opprettetAv.navn,
@@ -64,10 +50,11 @@ export const Dialog = ({
           position={isAktorsKommentar ? "right" : "left"}
         >
           <Chat.Bubble>
-            <DialogContent>
+            <div className="flex flex-col">
               {kommentar.tekst}
               {isAktorsKommentar && (
-                <ButtonRightAligned
+                <Button
+                  className="flex self-end"
                   variant="tertiary"
                   loading={slettKommentar.isLoading}
                   onClick={() =>
@@ -78,11 +65,11 @@ export const Dialog = ({
                   }
                 >
                   Slett
-                </ButtonRightAligned>
+                </Button>
               )}
-            </DialogContent>
+            </div>
           </Chat.Bubble>
-        </StyledChat>
+        </Chat>
       );
     });
 

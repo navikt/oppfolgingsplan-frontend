@@ -1,14 +1,9 @@
 import { ReactElement } from "react";
 import { BodyLong, Button, Textarea } from "@navikt/ds-react";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
 import { Row } from "../blocks/wrappers/Row";
 import { useAudience } from "../../hooks/routeHooks";
-
-const SpacedTextarea = styled(Textarea)`
-  padding-bottom: 2rem;
-`;
 
 interface Props {
   lagre(kommentar: string): void;
@@ -46,7 +41,8 @@ export const NyKommentar = ({
           ferdige oppfølgingsplanen dere kan dele med fastlegen eller NAV.`}
         </BodyLong>
 
-        <SpacedTextarea
+        <Textarea
+          className="pb-8"
           maxLength={1000}
           error={errors.kommentar?.message}
           label={"Kommenter (obligatorisk)"}

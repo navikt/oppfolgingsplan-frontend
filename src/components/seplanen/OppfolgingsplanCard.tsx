@@ -1,16 +1,8 @@
-import styled from "styled-components";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import Image from "next/image";
 import React, { ReactNode } from "react";
 import { OppfolgingsplanPanel } from "./OppfolgingsplanPanel";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
-
-const PanelContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-`;
 
 interface Props {
   href?: string;
@@ -40,7 +32,7 @@ export const OppfolgingsplanCard = ({
       )}
 
       <OppfolgingsplanPanel href={href}>
-        <PanelContent>
+        <div className="flex flex-row items-center gap-8">
           <Image src={image} width={64} height={64} alt={""} />
 
           <div>
@@ -58,7 +50,7 @@ export const OppfolgingsplanCard = ({
 
             <div>{children}</div>
           </div>
-        </PanelContent>
+        </div>
       </OppfolgingsplanPanel>
     </SpacedDiv>
   );

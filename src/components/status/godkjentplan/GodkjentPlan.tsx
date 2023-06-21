@@ -42,7 +42,7 @@ export const GodkjentPlan = ({ oppfolgingsplan, children }: Props) => {
         godkjentPlan={oppfolgingsplan.godkjentPlan}
       />
 
-      <Row marginBottom={"2rem"}>
+      <Row className="mb-8">
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <AapnePlanSomPDF oppfolgingsplanId={oppfolgingsplan.id} />
         {!erOppfolgingsplanTidligere(oppfolgingsplan) && (

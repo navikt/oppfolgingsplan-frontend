@@ -1,20 +1,11 @@
 import { TrashIcon } from "@navikt/aksel-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import React, { useState } from "react";
-import styled from "styled-components";
 import { texts } from "../seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import Feilmelding from "../blocks/error/Feilmelding";
 import { useSlettArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
-
-const ModalContent = styled.div`
-  padding: 2rem;
-`;
-
-const HeadingWithExtraSpacing = styled(Heading)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   show: boolean;
@@ -39,10 +30,10 @@ export const SlettArbeidsoppgaveButton = ({
         onClose={() => setModalOpen((x) => !x)}
       >
         <Modal.Content>
-          <ModalContent>
-            <HeadingWithExtraSpacing level="2" size="medium">
+          <div className="p-8">
+            <Heading className="mb-8" level="2" size="medium">
               {texts.arbeidsoppgaveList.sletting.erDuSikker}
-            </HeadingWithExtraSpacing>
+            </Heading>
 
             {slettArbeidsoppgave.isError && (
               <SpacedDiv>
@@ -70,7 +61,7 @@ export const SlettArbeidsoppgaveButton = ({
                 {texts.arbeidsoppgaveList.buttons.avbryt}
               </Button>
             </Row>
-          </ModalContent>
+          </div>
         </Modal.Content>
       </Modal>
 

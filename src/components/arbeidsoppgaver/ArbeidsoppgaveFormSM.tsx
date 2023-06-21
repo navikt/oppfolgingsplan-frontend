@@ -8,7 +8,6 @@ import {
 } from "@navikt/ds-react";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import styled from "styled-components";
 import { KANGJENNOMFOERES, TILRETTELEGGING } from "../../constants/konstanter";
 import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
 import { Row } from "../blocks/wrappers/Row";
@@ -29,18 +28,6 @@ export type OppgaveFormValues = {
   kanBeskrivelse: string;
   kanIkkeBeskrivelse: string;
 };
-
-const StyledTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
-
-const StyledRadioGroup = styled(RadioGroup)`
-  margin-bottom: 2rem;
-`;
-
-const StyledCheckboxGroup = styled(CheckboxGroup)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   onSubmit(data: OppgaveFormValues): void;
@@ -106,7 +93,8 @@ export const ArbeidsoppgaveFormSM = ({
               }}
               render={({ field }) => {
                 return (
-                  <StyledTextarea
+                  <Textarea
+                    className="mb-8"
                     {...field}
                     data-testid={ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA}
                     label={"Navn på arbeidsoppgaven (obligatorisk)"}
@@ -125,7 +113,8 @@ export const ArbeidsoppgaveFormSM = ({
             rules={{ required: "Du må velge om oppgaven kan gjennomføres" }}
             defaultValue={defaultFormValues?.kanGjennomfores ?? null}
             render={({ field: { onChange, onBlur, value, ref } }) => (
-              <StyledRadioGroup
+              <RadioGroup
+                className="mb-8"
                 legend="Kan oppgaven gjennomføres i sykeperioden? (obligatorisk)"
                 onBlur={onBlur}
                 onChange={(e) => {
@@ -158,7 +147,7 @@ export const ArbeidsoppgaveFormSM = ({
                 >
                   Nei, den kan ikke gjennomføres
                 </Radio>
-              </StyledRadioGroup>
+              </RadioGroup>
             )}
           />
 
@@ -168,7 +157,8 @@ export const ArbeidsoppgaveFormSM = ({
                 name="tilrettelegging"
                 defaultValue={defaultFormValues?.tilrettelegging}
                 render={({ field: { onChange, onBlur, value, ref } }) => (
-                  <StyledCheckboxGroup
+                  <CheckboxGroup
+                    className="mb-8"
                     legend="Hva skal til for å gjennomføre oppgaven?"
                     onBlur={onBlur}
                     onChange={onChange}
@@ -185,7 +175,7 @@ export const ArbeidsoppgaveFormSM = ({
                     <Checkbox value={TILRETTELEGGING.MED_HJELP}>
                       Med hjelp/hjelpemidler
                     </Checkbox>
-                  </StyledCheckboxGroup>
+                  </CheckboxGroup>
                 )}
               />
 
@@ -201,7 +191,8 @@ export const ArbeidsoppgaveFormSM = ({
                 }}
                 render={({ field }) => {
                   return (
-                    <StyledTextarea
+                    <Textarea
+                      className="mb-8"
                       {...field}
                       label={"Beskrivelse (obligatorisk)"}
                       error={errors.kanBeskrivelse?.message}
@@ -221,7 +212,8 @@ export const ArbeidsoppgaveFormSM = ({
             <Controller
               render={({ field }) => {
                 return (
-                  <StyledTextarea
+                  <Textarea
+                    className="mb-8"
                     {...field}
                     label={
                       "Hva står i veien for å kunne gjennomføre oppgaven? (obligatorisk)"

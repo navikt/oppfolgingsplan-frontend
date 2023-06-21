@@ -1,25 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import Image from "next/image";
-
-const StyledText = styled.p`
-  font-size: 1em;
-  font-weight: 100;
-  margin: 0;
-  margin-left: 1em;
-`;
-
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1em;
-  align-items: flex-start;
-`;
-
-const ImageContainer = styled.div`
-  width: 1.5em;
-  min-width: 1.5em;
-`;
+import { BodyShort } from "@navikt/ds-react";
 
 interface Props {
   imgUrl: string;
@@ -28,11 +9,11 @@ interface Props {
 
 export const BildeTekstLinje = ({ imgUrl, tekst }: Props) => {
   return (
-    <StyledWrapper>
-      <ImageContainer>
+    <div className="flex flex-row mb-4 items-start">
+      <div className="w-6">
         <Image alt={""} src={imgUrl} />
-      </ImageContainer>
-      <StyledText>{tekst}</StyledText>
-    </StyledWrapper>
+      </div>
+      <BodyShort className="ml-4">{tekst}</BodyShort>
+    </div>
   );
 };

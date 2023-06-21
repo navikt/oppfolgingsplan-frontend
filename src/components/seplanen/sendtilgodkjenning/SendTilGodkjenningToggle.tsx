@@ -1,19 +1,10 @@
 import { Alert, BodyLong, Button, GuidePanel } from "@navikt/ds-react";
 import Link from "next/link";
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Arbeidsoppgave, Tiltak } from "../../../types/oppfolgingsplan";
 import { SEPLANEN_JEG_ER_FERDIG_BUTTON } from "../../../../cypress/dataTestId";
-
-const SpacedGuidePanel = styled(GuidePanel)`
-  margin-bottom: 2rem;
-`;
-
-const SpacedAlert = styled(Alert)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   oppfolgingsplanId: number;
@@ -40,7 +31,7 @@ export const SendTilGodkjenningToggle = ({
 
   return (
     <div>
-      <SpacedGuidePanel>
+      <GuidePanel className="mb-8">
         <SpacedDiv className="mb-4">
           Er du ferdig med denne planen og ønsker å sende den til godkjenning?
         </SpacedDiv>
@@ -59,10 +50,10 @@ export const SendTilGodkjenningToggle = ({
         >
           Jeg er ferdig
         </Button>
-      </SpacedGuidePanel>
+      </GuidePanel>
 
       {displayMissingInfoMessage && (
-        <SpacedAlert variant={"warning"}>
+        <Alert className="mb-8" variant={"warning"}>
           <BodyLong spacing>
             Ups, her mangler det litt før du kan sende planen. Den må inneholde
             minst én oppgave og ett tiltak. Kanskje lederen din kan hjelpe til?
@@ -78,7 +69,7 @@ export const SendTilGodkjenningToggle = ({
               <Link href={tiltakUrl}>Legg til et tiltak</Link>
             </div>
           )}
-        </SpacedAlert>
+        </Alert>
       )}
     </div>
   );

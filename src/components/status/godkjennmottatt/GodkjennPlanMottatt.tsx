@@ -43,7 +43,7 @@ export const GodkjennPlanMottatt = ({
 
       <GodkjennPlanTidspunkter gyldighetstidspunkt={gyldighetstidspunkt} />
 
-      <Row marginBottom={"2rem"}>
+      <Row className="mb-8">
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <AvvisPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
       </Row>

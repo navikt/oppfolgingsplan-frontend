@@ -2,11 +2,6 @@ import React from "react";
 import BaserTidligereSkjema from "../../../components/landing/opprett/BaserTidligereSkjema";
 import { useOpprettOppfolgingsplanAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { Modal } from "@navikt/ds-react";
-import styled from "styled-components";
-
-const FormContainer = styled.div`
-  padding: 2rem;
-`;
 
 interface Props {
   visOpprettModal: boolean;
@@ -25,7 +20,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
         setVisOpprettModal(false);
       }}
     >
-      <FormContainer>
+      <div className="p-8">
         <Modal.Content>
           <BaserTidligereSkjema
             isLoading={opprettOppfolgingsplan.isLoading}
@@ -35,7 +30,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
             handleClose={() => setVisOpprettModal(false)}
           />
         </Modal.Content>
-      </FormContainer>
+      </div>
     </Modal>
   );
 };

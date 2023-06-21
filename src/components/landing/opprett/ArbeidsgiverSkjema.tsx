@@ -17,7 +17,6 @@ import {
 import Link from "next/link";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
 import { useLandingUrl } from "../../../hooks/routeHooks";
-import styled from "styled-components";
 import { Row } from "../../blocks/wrappers/Row";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
@@ -43,18 +42,6 @@ const texts = {
     buttonSubmit: "Start",
   },
 };
-
-const SpacedDiv = styled.div`
-  margin-bottom: 2.5rem;
-`;
-
-const SpacedSelect = styled(Select)`
-  margin-bottom: 1rem;
-`;
-
-const SpacedRadioGroup = styled(RadioGroup)`
-  margin-bottom: 1rem;
-`;
 
 interface ArbeidsgiverUndertekstProps {
   oppfolgingsplaner: Oppfolgingsplan[];
@@ -131,7 +118,8 @@ export const ArbeidsgiverSkjema = ({
         {texts.arbeidsgiverSkjema.question}
       </Heading>
 
-      <SpacedSelect
+      <Select
+        className="pb-4"
         label={texts.arbeidsgiverSkjema.question}
         hideLabel={true}
         onChange={(e) =>
@@ -150,16 +138,16 @@ export const ArbeidsgiverSkjema = ({
             </option>
           );
         })}
-      </SpacedSelect>
+      </Select>
 
       {selectedVirksomhet && (
         <>
-          <SpacedDiv>
+          <div className="mb-10">
             <VelgArbeidsgiverUndertekst
               oppfolgingsplaner={oppfolgingsplaner}
               arbeidsgiver={selectedVirksomhet}
             />
-          </SpacedDiv>
+          </div>
           {harTidligereOppfolgingsplanMedVirksomhet(
             oppfolgingsplaner,
             selectedVirksomhet.virksomhetsnummer
@@ -168,8 +156,9 @@ export const ArbeidsgiverSkjema = ({
               oppfolgingsplaner,
               selectedVirksomhet.virksomhetsnummer
             ) && (
-              <SpacedDiv>
-                <SpacedRadioGroup
+              <div className="mb-10">
+                <RadioGroup
+                  className="pb-4"
                   legend={texts.baserPaTidligereText.question}
                   onChange={(val: boolean) => setKopierTidligerePlan(val)}
                   value={kopierTidligerePlan}
@@ -180,8 +169,8 @@ export const ArbeidsgiverSkjema = ({
                   <Radio value={false}>
                     {texts.baserPaTidligereText.answer.no}
                   </Radio>
-                </SpacedRadioGroup>
-              </SpacedDiv>
+                </RadioGroup>
+              </div>
             )}
         </>
       )}

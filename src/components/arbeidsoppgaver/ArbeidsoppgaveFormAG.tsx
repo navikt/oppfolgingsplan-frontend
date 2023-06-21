@@ -1,7 +1,6 @@
 import { Button, Textarea } from "@navikt/ds-react";
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import styled from "styled-components";
 import { LightGreyPanel } from "../blocks/wrappers/LightGreyPanel";
 import { Row } from "../blocks/wrappers/Row";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
@@ -10,10 +9,6 @@ import Feilmelding from "../blocks/error/Feilmelding";
 export type OppgaveFormValues = {
   arbeidsoppgaveNavn: string;
 };
-
-const StyledTextarea = styled(Textarea)`
-  margin-bottom: 2rem;
-`;
 
 interface Props {
   onSubmit(data: OppgaveFormValues): void;
@@ -50,7 +45,8 @@ export const ArbeidsoppgaveFormAG = ({
             <Controller
               name="arbeidsoppgaveNavn"
               render={({ field }) => (
-                <StyledTextarea
+                <Textarea
+                  className="mb-4"
                   {...field}
                   label={"Navn på arbeidsoppgaven (obligatorisk)"}
                   error={errors.arbeidsoppgaveNavn?.message}
