@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanContent";
 import { useOppfolgingsplanerSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "../../api/queries/sykmeldt/sykmeldingerQueriesSM";
@@ -18,11 +18,20 @@ import {
   harTidligereOppfolgingsplaner,
 } from "../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogerUtenAktivSykmelding from "../../components/landing/OppfolgingsdialogerUtenAktivSykmelding";
+import { OPSkeleton } from "../../components/blocks/skeleton/OPSkeleton";
 
 const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
+
+  if (
+    oppfolgingsplaner.isLoading ||
+    sykmeldinger.isLoading ||
+    narmesteLedere.isLoading
+  ) {
+    return <OPSkeleton />;
+  }
 
   if (
     oppfolgingsplaner.isSuccess &&
@@ -78,7 +87,9 @@ const Home: NextPage = () => {
         Alle godkjente planer kan ses i Altinn av de på arbeidsplassen din som har tilgang."
       />
 
-      <PageContent />
+      <Suspense fallback={<OPSkeleton />}>
+        <PageContent />
+      </Suspense>
 
       <VideoPanel />
     </SykmeldtSide>
