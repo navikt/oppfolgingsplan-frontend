@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import {
   useAktiveOppfolgingsplanerAG,
+  useOppfolgingsplanerAG,
   useTidligereOppfolgingsplanerAG,
 } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
@@ -15,14 +16,46 @@ import ArbeidsgiverSide from "../../../components/blocks/wrappers/ArbeidsgiverSi
 import IngenPlanerCardAG from "../../../components/landing/opprett/IngenPlanerCardAG";
 import OppfolgingsdialogerInfoPersonvern from "../../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../../components/blocks/video/VideoPanel";
+import { OPSkeleton } from "../../../components/blocks/skeleton/OPSkeleton";
 
-const Home: NextPage = () => {
-  const narmesteLederId = useNarmesteLederId();
+const PageContent = () => {
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
     useAktiveOppfolgingsplanerAG();
   const { harTidligereOppfolgingsplaner, tidligereOppfolgingsplaner } =
     useTidligereOppfolgingsplanerAG();
   const [visOpprettModal, setVisOpprettModal] = useState(false);
+
+  return (
+    <>
+      {!harAktiveOppfolgingsplaner && (
+        <>
+          <OpprettModalAG
+            visOpprettModal={visOpprettModal}
+            setVisOpprettModal={setVisOpprettModal}
+          />
+          <IngenPlanerCardAG setVisOpprettModal={setVisOpprettModal} />
+        </>
+      )}
+      {harAktiveOppfolgingsplaner && (
+        <OppfolgingsdialogTeasere
+          oppfolgingsplaner={aktiveOppfolgingsplaner}
+          tittel={"Aktiv oppfølgingsplan"}
+        />
+      )}
+      {harTidligereOppfolgingsplaner && (
+        <OppfolgingsdialogTeasere
+          oppfolgingsplaner={tidligereOppfolgingsplaner}
+          harTidligerOppfolgingsdialoger
+          tittel={"Tidligere oppfølgingsplaner"}
+        />
+      )}
+    </>
+  );
+};
+
+const Home: NextPage = () => {
+  const allePlaner = useOppfolgingsplanerAG();
+  const narmesteLederId = useNarmesteLederId();
   const sykmeldtesKontaktinfo = useKontaktinfo();
   const [visReservertInfoboks, setVisReservertInfoboks] = useState(false);
 
@@ -64,29 +97,10 @@ const Home: NextPage = () => {
                           Alle godkjente planer kan ses i Altinn av de hos dere som har tilgang."
           />
 
-          {!harAktiveOppfolgingsplaner && (
-            <>
-              <OpprettModalAG
-                visOpprettModal={visOpprettModal}
-                setVisOpprettModal={setVisOpprettModal}
-              />
-              <IngenPlanerCardAG setVisOpprettModal={setVisOpprettModal} />
-            </>
-          )}
-          {harAktiveOppfolgingsplaner && (
-            <OppfolgingsdialogTeasere
-              oppfolgingsplaner={aktiveOppfolgingsplaner}
-              tittel={"Aktiv oppfølgingsplan"}
-            />
-          )}
-          {harTidligereOppfolgingsplaner && (
-            <OppfolgingsdialogTeasere
-              oppfolgingsplaner={tidligereOppfolgingsplaner}
-              harTidligerOppfolgingsdialoger
-              tittel={"Tidligere oppfølgingsplaner"}
-            />
-          )}
+          {allePlaner.isLoading ? <OPSkeleton /> : <PageContent />}
+
           <SamtaleStotte />
+
           <VideoPanel />
         </>
       )}

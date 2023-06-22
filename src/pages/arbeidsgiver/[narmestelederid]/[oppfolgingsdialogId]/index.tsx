@@ -7,7 +7,7 @@ import {
   statusPageToDisplayAG,
 } from "../../../../utils/statusPageUtils";
 import { IngenPlanTilGodkjenning } from "../../../../components/status/ingenplantilgodkjenning/IngenPlanTilGodkjenning";
-import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import ArbeidsgiverSide from "../../../../components/blocks/wrappers/ArbeidsgiverSide";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import GodkjennPlanSendt from "../../../../components/status/godkjennplansendt/GodkjennPlanSendt";
@@ -18,6 +18,9 @@ import { GodkjennPlanAvslatt } from "../../../../components/status/godkjennplana
 import { ApprovalInformationAG } from "../../../../components/status/godkjentplan/ApprovalInformation";
 import { GodkjentPlanAvbrutt } from "../../../../components/status/godkjentplanavbrutt/GodkjentPlanAvbrutt";
 import { GodkjentPlan } from "../../../../components/status/godkjentplan/GodkjentPlan";
+import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
+import { OPSkeleton } from "../../../../components/blocks/skeleton/OPSkeleton";
+import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -94,19 +97,34 @@ const Content = ({
 };
 
 const OppfolgingsplanStatusAG: NextPage = () => {
-  const aktivPlan = useAktivPlanAG();
-  const pageToDisplay = statusPageToDisplayAG(aktivPlan);
-  const { title, heading } = getStatusPageTitleAndHeading(
-    pageToDisplay,
-    aktivPlan?.virksomhet?.navn,
-    aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din"
-  );
+  const allePlaner = useOppfolgingsplanerAG();
+  const aktivPlanId = useOppfolgingsplanRouteId();
 
-  return (
-    <ArbeidsgiverSide title={title} heading={heading}>
-      <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
-    </ArbeidsgiverSide>
-  );
+  if (allePlaner.isLoading) {
+    return (
+      <ArbeidsgiverSide title={"Oppfølgingsplan"} heading={"Oppfølgingsplan"}>
+        <OPSkeleton />
+      </ArbeidsgiverSide>
+    );
+  }
+  if (allePlaner.isSuccess) {
+    const aktivPlan = findAktivPlan(aktivPlanId, allePlaner.data);
+
+    const pageToDisplay = statusPageToDisplayAG(aktivPlan);
+    const { title, heading } = getStatusPageTitleAndHeading(
+      pageToDisplay,
+      aktivPlan?.virksomhet?.navn,
+      aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din"
+    );
+
+    return (
+      <ArbeidsgiverSide title={title} heading={heading}>
+        <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
+      </ArbeidsgiverSide>
+    );
+  }
+
+  return null;
 };
 
 export const getServerSideProps = beskyttetSideUtenProps;
