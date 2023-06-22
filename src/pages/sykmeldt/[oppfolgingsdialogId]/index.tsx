@@ -12,12 +12,15 @@ import SykmeldtSide from "../../../components/blocks/wrappers/sykmeldtside/Sykme
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { ApprovalInformationSM } from "../../../components/status/godkjentplan/ApprovalInformation";
-import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
+import { useOppfolgingsplanerSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import {
   getStatusPageTitleAndHeading,
   StatusPageToDisplay,
   statusPageToDisplaySM,
 } from "../../../utils/statusPageUtils";
+import { findAktivPlan } from "../../../utils/oppfolgingplanUtils";
+import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
+import { OPSkeleton } from "../../../components/blocks/skeleton/OPSkeleton";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -97,20 +100,35 @@ const Content = ({
 };
 
 const OppfolgingsplanStatus: NextPage = () => {
-  const aktivPlan = useAktivPlanSM();
+  const allePlaner = useOppfolgingsplanerSM();
+  const aktivPlanId = useOppfolgingsplanRouteId();
 
-  const pageToDisplay = statusPageToDisplaySM(aktivPlan);
-  const { title, heading } = getStatusPageTitleAndHeading(
-    pageToDisplay,
-    aktivPlan?.virksomhet?.navn,
-    "Lederen din"
-  );
+  if (allePlaner.isLoading) {
+    return (
+      <SykmeldtSide title={"Oppfølgingsplan"} heading={"Oppfølgingsplan"}>
+        <OPSkeleton />
+      </SykmeldtSide>
+    );
+  }
 
-  return (
-    <SykmeldtSide title={title} heading={heading}>
-      <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
-    </SykmeldtSide>
-  );
+  if (allePlaner.isSuccess) {
+    const aktivPlan = findAktivPlan(aktivPlanId, allePlaner.data);
+
+    const pageToDisplay = statusPageToDisplaySM(aktivPlan);
+    const { title, heading } = getStatusPageTitleAndHeading(
+      pageToDisplay,
+      aktivPlan?.virksomhet?.navn,
+      "Lederen din"
+    );
+
+    return (
+      <SykmeldtSide title={title} heading={heading}>
+        <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
+      </SykmeldtSide>
+    );
+  }
+
+  return null;
 };
 
 export const getServerSideProps = beskyttetSideUtenProps;
