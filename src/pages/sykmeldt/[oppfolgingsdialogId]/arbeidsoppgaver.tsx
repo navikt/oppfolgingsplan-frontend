@@ -11,9 +11,8 @@ import {
   Page,
 } from "../../../components/blocks/wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
 const Arbeidsoppgaver: NextPage = () => {
-  //hent alle planer og sjekk aktiv state
-  const aktivPlan = useAktivPlanSM(); //denne burde sikkert være en utility metode og ikke hook, for å få loading state
-  const innloggetFnr = useInnloggetFnr(aktivPlan); //samme med denne
+  const aktivPlan = useAktivPlanSM();
+  const innloggetFnr = useInnloggetFnr(aktivPlan);
 
   return (
     <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
