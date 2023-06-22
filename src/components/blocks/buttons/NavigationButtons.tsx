@@ -6,12 +6,12 @@ import {
 } from "../../../hooks/routeHooks";
 import Link from "next/link";
 import { Row } from "../wrappers/Row";
-import { Page } from "../wrappers/OppfolgingsplanPageSM";
 import {
   NAVIGATION_FORRIGE_STEG_BUTTON,
   NAVIGATION_FORTSETT_SENERE_BUTTON,
   NAVIGATION_NESTE_STEG_BUTTON,
 } from "../../../../cypress/dataTestId";
+import { Page } from "../wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
 
 const getPreviousHref = (basePath: string, activeStep: number) => {
   if (activeStep == Page.TILTAK.valueOf()) {

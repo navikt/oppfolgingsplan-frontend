@@ -75,7 +75,7 @@ function MyApp({
           ) : (
             <BreadcrumbsAppenderAG />
           )}
-          <main tabIndex={-1} id="maincontent">
+          <main tabIndex={-1} id="maincontent" className="min-h-screen">
             <OPErrorBoundary>
               <Component {...pageProps} />
             </OPErrorBoundary>

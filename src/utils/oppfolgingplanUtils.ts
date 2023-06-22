@@ -217,3 +217,10 @@ export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (
     }
   );
 };
+
+export const findAktivPlan = (
+  aktivPlanId: number,
+  allePlaner: Oppfolgingsplan[]
+) => {
+  return allePlaner.find((plan) => plan.id === aktivPlanId);
+};

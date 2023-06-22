@@ -13,7 +13,7 @@ import { LagredeTiltak } from "../../../components/tiltak/LagredeTiltak";
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
+} from "../../../components/blocks/wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
 
 const formHeadingTexts = {
   title: "Hva kan gjøre det lettere å jobbe?",

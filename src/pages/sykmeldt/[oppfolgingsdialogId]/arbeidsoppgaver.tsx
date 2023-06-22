@@ -9,11 +9,11 @@ import { LagredeArbeidsoppgaver } from "../../../components/arbeidsoppgaver/Lagr
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
-
+} from "../../../components/blocks/wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
 const Arbeidsoppgaver: NextPage = () => {
-  const aktivPlan = useAktivPlanSM();
-  const innloggetFnr = useInnloggetFnr(aktivPlan);
+  //hent alle planer og sjekk aktiv state
+  const aktivPlan = useAktivPlanSM(); //denne burde sikkert være en utility metode og ikke hook, for å få loading state
+  const innloggetFnr = useInnloggetFnr(aktivPlan); //samme med denne
 
   return (
     <OppfolgingsplanPageSM page={Page.ARBEIDSOPPGAVER}>
