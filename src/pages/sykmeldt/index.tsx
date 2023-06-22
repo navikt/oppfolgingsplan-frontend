@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { Suspense } from "react";
+import React from "react";
 import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanContent";
 import { useOppfolgingsplanerSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "../../api/queries/sykmeldt/sykmeldingerQueriesSM";
@@ -87,9 +87,7 @@ const Home: NextPage = () => {
         Alle godkjente planer kan ses i Altinn av de på arbeidsplassen din som har tilgang."
       />
 
-      <Suspense fallback={<OPSkeleton />}>
-        <PageContent />
-      </Suspense>
+      <PageContent />
 
       <VideoPanel />
     </SykmeldtSide>
