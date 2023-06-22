@@ -2,10 +2,6 @@ import { NextPage } from "next";
 import React, { useState } from "react";
 import { NyttTiltak } from "../../../../components/tiltak/NyttTiltak";
 import { LagredeTiltak } from "../../../../components/tiltak/LagredeTiltak";
-import {
-  OppfolgingsplanPageAG,
-  Page,
-} from "../../../../components/blocks/wrappers/OppfolgingsplanPageAG";
 import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { useLagreTiltak } from "../../../../api/queries/oppfolgingsplan/tiltakQueries";
@@ -13,6 +9,10 @@ import { TiltakFormValues } from "../../../../components/tiltak/utils/typer";
 import { Tiltak } from "../../../../types/oppfolgingsplan";
 import { TiltakFormAG } from "../../../../components/tiltak/TiltakFormAG";
 import { formatAsLocalDateTime } from "../../../../utils/dateUtils";
+import {
+  OppfolgingsplanPageAG,
+  Page,
+} from "../../../../components/blocks/wrappers/oppfolgingsplanpageag/OppfolgingsplanPageAG";
 
 const formHeadingTexts = {
   title: "Hva kan dere gjøre som arbeidsgiver?",

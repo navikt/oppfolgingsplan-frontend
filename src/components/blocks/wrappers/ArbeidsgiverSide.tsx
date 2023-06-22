@@ -1,15 +1,11 @@
 import React, { ReactElement, ReactNode } from "react";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
 import { PageHeading } from "../heading/PageHeading";
-import { useOppfolgingsplanerAG } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG";
 import { ArbeidsgiverSideMenu } from "../sidemenu/ArbeidsgiverSideMenu";
 import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
-import { IkkeTilgangTilAnsattInfoBoks } from "../infoboks/IkkeTilgangTilAnsattInfoBoks";
-import { OPSkeleton } from "../skeleton/OPSkeleton";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -42,25 +38,6 @@ interface SideProps {
   children: ReactNode;
 }
 
-const PageContent = ({ title, heading, children }: SideProps) => {
-  const sykmeldt = useDineSykmeldte();
-  const oppfolgingsplaner = useOppfolgingsplanerAG();
-  const tilgang = useTilgangAG();
-
-  if (tilgang.isFetching || oppfolgingsplaner.isLoading || sykmeldt.isLoading) {
-    return <OPSkeleton />;
-  } else if (tilgang.data && tilgang.data.harTilgang === false) {
-    return <IkkeTilgangTilAnsattInfoBoks />;
-  } else {
-    return (
-      <>
-        <PageHeading title={title} heading={heading} />
-        {children}
-      </>
-    );
-  }
-};
-
 const ArbeidsgiverSide = ({
   title,
   heading,
@@ -74,9 +51,10 @@ const ArbeidsgiverSide = ({
       header={getSykmeldtHeader(sykmeldt.data)}
       navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
     >
-      <PageContent title={title} heading={heading}>
+      <>
+        <PageHeading title={title} heading={heading} />
         {children}
-      </PageContent>
+      </>
     </PageContainer>
   );
 };
