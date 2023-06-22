@@ -2,7 +2,7 @@ import { VirksomhetDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
 export const defaultVirksomhetMockData: VirksomhetDTO = {
   virksomhetsnummer: "110110110",
-  navn: "Tømmer A/S",
+  navn: "Hogwarts School of Witchcraft and Wizardry",
 };
 
 export const otherVirksomhetMockData: VirksomhetDTO = {

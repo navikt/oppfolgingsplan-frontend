@@ -16,7 +16,7 @@ export const defaultSykmeldingerMockData: SykmeldingDTO[] = [
     ],
     organisasjonsinformasjon: {
       orgnummer: "110110110",
-      orgNavn: "Tømmer A/S",
+      orgNavn: "Hogwarts School of Witchcraft and Wizardry",
     },
   },
   {
