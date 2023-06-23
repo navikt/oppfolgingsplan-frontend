@@ -21,6 +21,8 @@ import { GodkjentPlan } from "../../../../components/status/godkjentplan/Godkjen
 import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
 import { OPSkeleton } from "../../../../components/blocks/skeleton/OPSkeleton";
 import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
+import { useTilgangAG } from "../../../../api/queries/arbeidsgiver/tilgangQueriesAG";
+import { IkkeTilgangTilAnsattInfoBoks } from "../../../../components/blocks/infoboks/IkkeTilgangTilAnsattInfoBoks";
 
 interface ContentProps {
   oppfolgingsplan?: Oppfolgingsplan;
@@ -99,15 +101,16 @@ const Content = ({
 const OppfolgingsplanStatusAG: NextPage = () => {
   const allePlaner = useOppfolgingsplanerAG();
   const aktivPlanId = useOppfolgingsplanRouteId();
+  const tilgang = useTilgangAG();
 
-  if (allePlaner.isLoading) {
+  if (allePlaner.isLoading || tilgang.isFetching) {
     return (
       <ArbeidsgiverSide title={"Oppfølgingsplan"} heading={"Oppfølgingsplan"}>
         <OPSkeleton />
       </ArbeidsgiverSide>
     );
   }
-  if (allePlaner.isSuccess) {
+  if (allePlaner.isSuccess && tilgang.isSuccess) {
     const aktivPlan = findAktivPlan(aktivPlanId, allePlaner.data);
 
     const pageToDisplay = statusPageToDisplayAG(aktivPlan);
@@ -119,7 +122,11 @@ const OppfolgingsplanStatusAG: NextPage = () => {
 
     return (
       <ArbeidsgiverSide title={title} heading={heading}>
-        <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
+        {tilgang.data.harTilgang === true ? (
+          <Content oppfolgingsplan={aktivPlan} pageToDisplay={pageToDisplay} />
+        ) : (
+          <IkkeTilgangTilAnsattInfoBoks />
+        )}
       </ArbeidsgiverSide>
     );
   }

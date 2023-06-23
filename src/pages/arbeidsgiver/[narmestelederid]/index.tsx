@@ -17,13 +17,25 @@ import IngenPlanerCardAG from "../../../components/landing/opprett/IngenPlanerCa
 import OppfolgingsdialogerInfoPersonvern from "../../../components/blocks/infoboks/OppfolgingsdialogerInfoPersonvern";
 import VideoPanel from "../../../components/blocks/video/VideoPanel";
 import { OPSkeleton } from "../../../components/blocks/skeleton/OPSkeleton";
+import { IkkeTilgangTilAnsattInfoBoks } from "../../../components/blocks/infoboks/IkkeTilgangTilAnsattInfoBoks";
+import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG";
 
 const PageContent = () => {
+  const allePlaner = useOppfolgingsplanerAG();
+  const tilgang = useTilgangAG();
   const { harAktiveOppfolgingsplaner, aktiveOppfolgingsplaner } =
     useAktiveOppfolgingsplanerAG();
   const { harTidligereOppfolgingsplaner, tidligereOppfolgingsplaner } =
     useTidligereOppfolgingsplanerAG();
   const [visOpprettModal, setVisOpprettModal] = useState(false);
+
+  if (allePlaner.isLoading || tilgang.isFetching) {
+    return <OPSkeleton />;
+  }
+
+  if (tilgang.data?.harTilgang === false) {
+    return <IkkeTilgangTilAnsattInfoBoks />;
+  }
 
   return (
     <>
@@ -54,7 +66,6 @@ const PageContent = () => {
 };
 
 const Home: NextPage = () => {
-  const allePlaner = useOppfolgingsplanerAG();
   const narmesteLederId = useNarmesteLederId();
   const sykmeldtesKontaktinfo = useKontaktinfo();
   const [visReservertInfoboks, setVisReservertInfoboks] = useState(false);
@@ -97,7 +108,7 @@ const Home: NextPage = () => {
                           Alle godkjente planer kan ses i Altinn av de hos dere som har tilgang."
           />
 
-          {allePlaner.isLoading ? <OPSkeleton /> : <PageContent />}
+          <PageContent />
 
           <SamtaleStotte />
 
