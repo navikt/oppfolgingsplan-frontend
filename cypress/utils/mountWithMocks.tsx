@@ -4,7 +4,6 @@ import { HeadManagerContext } from "next/dist/shared/lib/head-manager-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MockSetup } from "../../src/server/data/mock/getMockDb";
 import { interceptDataApis } from "./interceptDataApis";
-import { minutesToMillis } from "../../src/utils/dateUtils";
 import mockRouter from "next-router-mock";
 
 export interface MockOptions {
@@ -14,6 +13,7 @@ export interface MockOptions {
 
   interceptDataApis?: MockSetup;
   isArbeidsgiver?: boolean;
+  narmestelederRouteId?: string;
   oppfolgingsplanRouteId?: string;
 }
 
@@ -49,6 +49,7 @@ interface RouterProps {
   shouldMockRouter?: boolean;
   isArbeidsgiver?: boolean;
   oppfolgingsplanRouteId?: string;
+  narmestelederRouteId?: string;
 }
 
 const RouterProvider = ({
@@ -56,6 +57,7 @@ const RouterProvider = ({
   shouldMockRouter,
   isArbeidsgiver,
   oppfolgingsplanRouteId,
+  narmestelederRouteId,
 }: RouterProps): JSX.Element => {
   if (!shouldMockRouter) return children;
 
@@ -65,11 +67,10 @@ const RouterProvider = ({
     mockRouter.pathname = "/sykmeldt";
   }
 
-  if (oppfolgingsplanRouteId) {
-    mockRouter.query = {
-      oppfolgingsdialogId: oppfolgingsplanRouteId,
-    };
-  }
+  mockRouter.query = {
+    narmestelederid: narmestelederRouteId,
+    oppfolgingsdialogId: oppfolgingsplanRouteId,
+  };
 
   return (
     <RouterContext.Provider value={mockRouter}>
@@ -96,8 +97,6 @@ const ReactQueryProvider = ({
           defaultOptions: {
             queries: {
               refetchOnWindowFocus: false,
-              cacheTime: minutesToMillis(60),
-              staleTime: minutesToMillis(30),
             },
           },
         })
@@ -122,6 +121,7 @@ export const mountWithMocks = (
           shouldMockRouter={options?.mockRouter}
           isArbeidsgiver={options?.isArbeidsgiver}
           oppfolgingsplanRouteId={options?.oppfolgingsplanRouteId}
+          narmestelederRouteId={options?.narmestelederRouteId}
         >
           {componentUnderTest}
         </RouterProvider>

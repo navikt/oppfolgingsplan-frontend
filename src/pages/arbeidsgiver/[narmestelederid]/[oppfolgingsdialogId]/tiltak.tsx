@@ -1,26 +1,25 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { NyttTiltak } from "../../../../components/tiltak/NyttTiltak";
-import { Page } from "../../../../components/blocks/wrappers/OppfolgingsplanPageSM";
 import { LagredeTiltak } from "../../../../components/tiltak/LagredeTiltak";
-import { OppfolgingsplanPageAG } from "../../../../components/blocks/wrappers/OppfolgingsplanPageAG";
-import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
-import { useLagreTiltak } from "../../../../api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormValues } from "../../../../components/tiltak/utils/typer";
 import { Tiltak } from "../../../../types/oppfolgingsplan";
 import { TiltakFormAG } from "../../../../components/tiltak/TiltakFormAG";
 import { formatAsLocalDateTime } from "../../../../utils/dateUtils";
+import {
+  OppfolgingsplanPageAG,
+  Page,
+} from "../../../../components/blocks/wrappers/oppfolgingsplanpageag/OppfolgingsplanPageAG";
+import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
+import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
+import { useLagreTiltak } from "../../../../api/queries/oppfolgingsplan/tiltakQueries";
 
-const formHeadingTexts = {
-  title: "Hva kan dere gjøre som arbeidsgiver?",
-  body: "",
-};
-
-const Tiltak: NextPage = () => {
-  const aktivPlan = useAktivPlanAG();
+const NyttTiltakPanel = () => {
   const lagreTiltak = useLagreTiltak();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
+
   const nyttTiltakInformasjon = (data: TiltakFormValues): Partial<Tiltak> => {
     return {
       tiltaknavn: data.overskrift,
@@ -32,32 +31,39 @@ const Tiltak: NextPage = () => {
       gjennomfoering: data.gjennomfoering,
     };
   };
+
+  return (
+    <NyttTiltak
+      formHeadingTitle={"Hva kan dere gjøre som arbeidsgiver?"}
+      formHeadingBody={""}
+      leggerTilNyttTiltak={leggerTilNyttTiltak}
+      setLeggerTilNyttTiltak={setLeggerTilNyttTiltak}
+    >
+      <TiltakFormAG
+        isSubmitting={lagreTiltak.isLoading}
+        onSubmit={(data) => {
+          lagreTiltak.mutateAsync(nyttTiltakInformasjon(data)).then(() => {
+            setLeggerTilNyttTiltak(false);
+          });
+        }}
+        onCancel={() => setLeggerTilNyttTiltak(false)}
+      />
+    </NyttTiltak>
+  );
+};
+
+const Tiltak: NextPage = () => {
+  const allePlaner = useOppfolgingsplanerAG();
+  const id = useOppfolgingsplanRouteId();
+
   return (
     <OppfolgingsplanPageAG page={Page.TILTAK}>
-      {aktivPlan && (
+      {allePlaner.isSuccess ? (
         <div>
-          <NyttTiltak
-            formHeadingTitle={formHeadingTexts.title}
-            formHeadingBody={formHeadingTexts.body}
-            leggerTilNyttTiltak={leggerTilNyttTiltak}
-            setLeggerTilNyttTiltak={setLeggerTilNyttTiltak}
-          >
-            <TiltakFormAG
-              isSubmitting={lagreTiltak.isLoading}
-              onSubmit={(data) => {
-                lagreTiltak
-                  .mutateAsync(nyttTiltakInformasjon(data))
-                  .then(() => {
-                    setLeggerTilNyttTiltak(false);
-                  });
-              }}
-              onCancel={() => setLeggerTilNyttTiltak(false)}
-            />
-          </NyttTiltak>
-
-          <LagredeTiltak oppfolgingsplan={aktivPlan} />
+          <NyttTiltakPanel />
+          <LagredeTiltak oppfolgingsplan={findAktivPlan(id, allePlaner.data)} />
         </div>
-      )}
+      ) : null}
     </OppfolgingsplanPageAG>
   );
 };

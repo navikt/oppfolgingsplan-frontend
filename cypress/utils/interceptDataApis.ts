@@ -19,4 +19,20 @@ export const interceptDataApis = (mockSetup: MockSetup) => {
     `/api/sykmeldt/narmesteledere/${mockSetup.sykmeldinger[0].fnr}`,
     mockSetup.narmesteLedere
   ).as("hentNarmesteledere");
+
+  // ARBEIDSGIVER
+
+  cy.intercept(
+    `/api/arbeidsgiver/${mockSetup.sykmeldt.narmestelederId}/oppfolgingsplaner`,
+    mockSetup.oppfolgingsplaner
+  ).as("hentOppfolgingsplanerAG");
+
+  cy.intercept(
+    `/api/arbeidsgiver/dinesykmeldte/${mockSetup.sykmeldt.narmestelederId}`,
+    mockSetup.sykmeldt
+  ).as("hentDineSykmeldteAG");
+
+  cy.intercept(`/api/arbeidsgiver/tilgang/*`, mockSetup.tilgang).as(
+    "hentTilgangAG"
+  );
 };

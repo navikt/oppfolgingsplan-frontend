@@ -2,12 +2,12 @@ import { NextPage } from "next";
 import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { SendTilGodkjenningSM } from "../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenningSM";
 import { OppfolgingsplanOversikt } from "../../../components/seplanen/OppfolgingsplanOversikt";
+import { Alert } from "@navikt/ds-react";
+import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
-import { Alert } from "@navikt/ds-react";
-import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
+} from "../../../components/blocks/wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
 
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();

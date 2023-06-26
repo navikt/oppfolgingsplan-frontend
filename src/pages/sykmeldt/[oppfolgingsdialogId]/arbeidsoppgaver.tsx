@@ -9,8 +9,7 @@ import { LagredeArbeidsoppgaver } from "../../../components/arbeidsoppgaver/Lagr
 import {
   OppfolgingsplanPageSM,
   Page,
-} from "../../../components/blocks/wrappers/OppfolgingsplanPageSM";
-
+} from "../../../components/blocks/wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
 const Arbeidsoppgaver: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
   const innloggetFnr = useInnloggetFnr(aktivPlan);

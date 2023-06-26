@@ -18,11 +18,20 @@ import {
   harTidligereOppfolgingsplaner,
 } from "../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogerUtenAktivSykmelding from "../../components/landing/OppfolgingsdialogerUtenAktivSykmelding";
+import { OPSkeleton } from "../../components/blocks/skeleton/OPSkeleton";
 
 const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
+
+  if (
+    oppfolgingsplaner.isLoading ||
+    sykmeldinger.isLoading ||
+    narmesteLedere.isLoading
+  ) {
+    return <OPSkeleton />;
+  }
 
   if (
     oppfolgingsplaner.isSuccess &&
