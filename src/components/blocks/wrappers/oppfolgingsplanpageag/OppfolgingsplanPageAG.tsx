@@ -51,8 +51,8 @@ interface Props {
 }
 
 export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
-  const allePlaner = useOppfolgingsplanerAG();
   const sykmeldt = useDineSykmeldte();
+  const allePlaner = useOppfolgingsplanerAG();
   const tilgang = useTilgangAG();
   const aktivPlanId = useOppfolgingsplanRouteId();
 

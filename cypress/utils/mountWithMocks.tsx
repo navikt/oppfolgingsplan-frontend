@@ -13,6 +13,7 @@ export interface MockOptions {
 
   interceptDataApis?: MockSetup;
   isArbeidsgiver?: boolean;
+  narmestelederRouteId: string;
   oppfolgingsplanRouteId?: string;
 }
 
@@ -48,6 +49,7 @@ interface RouterProps {
   shouldMockRouter?: boolean;
   isArbeidsgiver?: boolean;
   oppfolgingsplanRouteId?: string;
+  narmestelederRouteId?: string;
 }
 
 const RouterProvider = ({
@@ -55,6 +57,7 @@ const RouterProvider = ({
   shouldMockRouter,
   isArbeidsgiver,
   oppfolgingsplanRouteId,
+  narmestelederRouteId,
 }: RouterProps): JSX.Element => {
   if (!shouldMockRouter) return children;
 
@@ -64,11 +67,10 @@ const RouterProvider = ({
     mockRouter.pathname = "/sykmeldt";
   }
 
-  if (oppfolgingsplanRouteId) {
-    mockRouter.query = {
-      oppfolgingsdialogId: oppfolgingsplanRouteId,
-    };
-  }
+  mockRouter.query = {
+    narmestelederid: narmestelederRouteId,
+    oppfolgingsdialogId: oppfolgingsplanRouteId,
+  };
 
   return (
     <RouterContext.Provider value={mockRouter}>
@@ -119,6 +121,7 @@ export const mountWithMocks = (
           shouldMockRouter={options?.mockRouter}
           isArbeidsgiver={options?.isArbeidsgiver}
           oppfolgingsplanRouteId={options?.oppfolgingsplanRouteId}
+          narmestelederRouteId={options?.narmestelederRouteId}
         >
           {componentUnderTest}
         </RouterProvider>

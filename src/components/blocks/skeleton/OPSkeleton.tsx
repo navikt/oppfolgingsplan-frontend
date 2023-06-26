@@ -2,7 +2,7 @@ import { Button, Heading, Skeleton } from "@navikt/ds-react";
 
 export const OPSkeleton = () => {
   return (
-    <div>
+    <div id="ny-oppfolgingsplan-skeleton">
       <Button as={Skeleton} size={"medium"}>
         Lag en ny oppfølgingsplan
       </Button>
