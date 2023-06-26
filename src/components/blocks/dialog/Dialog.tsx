@@ -3,7 +3,6 @@ import { Button, Chat } from "@navikt/ds-react";
 import { hentAktoerNavnInitialer } from "../../../utils/stringUtils";
 import { getFullDateFormat } from "../../../utils/dateUtils";
 import { useSlettKommentar } from "../../../api/queries/oppfolgingsplan/tiltakQueries";
-import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { Kommentar } from "../../../types/oppfolgingsplan";
 import { useAudience } from "../../../hooks/routeHooks";
 import {
@@ -24,9 +23,8 @@ export const Dialog = ({
 }: Props): ReactElement | null => {
   const { isAudienceSykmeldt } = useAudience();
   const slettKommentar = useSlettKommentar();
-  const aktivPlan = useAktivPlanSM();
 
-  if (!kommentarer || !aktivPlan) return null;
+  if (!kommentarer) return null;
 
   const alleKommentarer = kommentarer
     .sort((k1, k2) => k2.id - k1.id)

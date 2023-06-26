@@ -4,7 +4,7 @@ import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { useInnloggetFnr } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan?: Oppfolgingsplan;
 }
 
 export const LagredeTiltak = ({
@@ -13,7 +13,12 @@ export const LagredeTiltak = ({
   const arbeidstakerFnr = oppfolgingsplan?.arbeidstaker?.fnr;
   const innloggetFnr = useInnloggetFnr(oppfolgingsplan);
 
-  if (!oppfolgingsplan.tiltakListe || !arbeidstakerFnr || !innloggetFnr)
+  if (
+    !oppfolgingsplan ||
+    !oppfolgingsplan.tiltakListe ||
+    !arbeidstakerFnr ||
+    !innloggetFnr
+  )
     return null;
 
   const alleTiltak = oppfolgingsplan.tiltakListe

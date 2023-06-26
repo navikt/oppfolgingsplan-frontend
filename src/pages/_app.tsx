@@ -17,7 +17,6 @@ import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 import { Modal } from "@navikt/ds-react";
-import { minutesToMillis } from "../utils/dateUtils";
 import { initFaro, pinoLevelToFaroLevel } from "../faro/initFaro";
 
 // eslint-disable-next-line
@@ -52,8 +51,6 @@ function MyApp({
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
-            cacheTime: minutesToMillis(60),
-            staleTime: minutesToMillis(30),
           },
         },
       })
