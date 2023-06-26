@@ -9,8 +9,6 @@ export const useDineSykmeldte = () => {
   const apiBasePath = useApiBasePath();
   const narmestelederId = useNarmesteLederId();
 
-  console.log(narmestelederId);
-
   const fetchDineSykmeldte = () =>
     get<Sykmeldt>(`${apiBasePath}/dinesykmeldte/${narmestelederId}`);
 
