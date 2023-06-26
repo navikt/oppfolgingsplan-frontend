@@ -13,7 +13,7 @@ export interface MockOptions {
 
   interceptDataApis?: MockSetup;
   isArbeidsgiver?: boolean;
-  narmestelederRouteId: string;
+  narmestelederRouteId?: string;
   oppfolgingsplanRouteId?: string;
 }
 
