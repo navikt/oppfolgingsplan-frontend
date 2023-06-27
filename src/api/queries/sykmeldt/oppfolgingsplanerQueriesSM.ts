@@ -26,7 +26,7 @@ export const useOppfolgingsplanerSM = () => {
     {
       useErrorBoundary: true,
       onError: (err) => {
-        logger.error(`useOppfolgingsplanerSM feiler ${err}}`);
+        logger.error(`useOppfolgingsplanerSM feiler ${err}`);
       },
     }
   );

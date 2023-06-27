@@ -39,7 +39,7 @@ export const useOppfolgingsplanerAG = () => {
       enabled: !!sykmeldtFnr,
       useErrorBoundary: true,
       onError: (err) => {
-        logger.error(`useOppfolgingsplanerAG feiler ${err}}`);
+        logger.error(`useOppfolgingsplanerAG feiler ${err}`);
       },
     }
   );

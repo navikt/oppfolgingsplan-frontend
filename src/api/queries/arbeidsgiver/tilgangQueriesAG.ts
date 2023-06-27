@@ -21,7 +21,7 @@ export const useTilgangAG = () => {
       enabled: !!sykmeldtData.data?.fnr,
       useErrorBoundary: true,
       onError: (err) => {
-        logger.error(`useTilgangAG feiler ${err}}`);
+        logger.error(`useTilgangAG feiler ${err}`);
       },
     }
   );

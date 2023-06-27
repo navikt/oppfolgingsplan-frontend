@@ -19,7 +19,7 @@ export const useDineSykmeldte = () => {
       enabled: !!narmestelederId,
       useErrorBoundary: true,
       onError: (err) => {
-        logger.error(`useDineSykmeldte feiler ${err}}`);
+        logger.error(`useDineSykmeldte feiler ${err}`);
       },
     }
   );

@@ -21,7 +21,7 @@ export const useNarmesteLedereSM = () => {
       enabled: !!sykmeldtFnr,
       useErrorBoundary: true,
       onError: (err) => {
-        logger.error(`useNarmesteLedereSM feiler ${err}}`);
+        logger.error(`useNarmesteLedereSM feiler ${err}`);
       },
     }
   );

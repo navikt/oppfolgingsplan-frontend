@@ -18,7 +18,7 @@ export const useSykmeldingerSM = () => {
     {
       useErrorBoundary: true,
       onError: (err) => {
-        logger.error(`useSykmeldingerSM feiler ${err}}`);
+        logger.error(`useSykmeldingerSM feiler ${err}`);
       },
     }
   );
