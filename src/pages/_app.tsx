@@ -70,14 +70,16 @@ function MyApp({
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <>
-          {isAudienceSykmeldt ? (
-            <BreadcrumbsAppenderSM />
-          ) : (
-            <BreadcrumbsAppenderAG />
-          )}
           <main tabIndex={-1} id="maincontent" className="min-h-screen">
             <OPErrorBoundary>
-              <Component {...pageProps} />
+              <>
+                {isAudienceSykmeldt ? (
+                  <BreadcrumbsAppenderSM />
+                ) : (
+                  <BreadcrumbsAppenderAG />
+                )}
+                <Component {...pageProps} />
+              </>
             </OPErrorBoundary>
           </main>
         </>
