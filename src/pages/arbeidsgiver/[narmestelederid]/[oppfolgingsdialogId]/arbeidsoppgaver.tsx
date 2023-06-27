@@ -3,30 +3,44 @@ import React from "react";
 import { LagredeArbeidsoppgaver } from "../../../../components/arbeidsoppgaver/LagredeArbeidsoppgaver";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { NyArbeidsoppgaveAG } from "../../../../components/arbeidsoppgaver/NyArbeidsoppgaveAG";
-import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-import { useInnloggetFnr } from "../../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import {
   OppfolgingsplanPageAG,
   Page,
 } from "../../../../components/blocks/wrappers/oppfolgingsplanpageag/OppfolgingsplanPageAG";
+import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
+import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
+import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
+
+interface ContentProps {
+  aktivPlan?: Oppfolgingsplan;
+}
+
+const ArbeidsoppgaveContent = ({ aktivPlan }: ContentProps) => {
+  if (!aktivPlan) return null;
+
+  return (
+    <div>
+      <NyArbeidsoppgaveAG />
+      {aktivPlan.arbeidsoppgaveListe && (
+        <LagredeArbeidsoppgaver
+          arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}
+          arbeidstakerFnr={aktivPlan.arbeidstaker.fnr}
+        />
+      )}
+    </div>
+  );
+};
 
 const Arbeidsoppgaver: NextPage = () => {
-  const aktivPlan = useAktivPlanAG();
-  const innloggetFnr = useInnloggetFnr(aktivPlan);
+  const allePlaner = useOppfolgingsplanerAG();
+  const id = useOppfolgingsplanRouteId();
 
   return (
     <OppfolgingsplanPageAG page={Page.ARBEIDSOPPGAVER}>
-      {innloggetFnr && aktivPlan && (
-        <div>
-          <NyArbeidsoppgaveAG />
-          {aktivPlan.arbeidsoppgaveListe && (
-            <LagredeArbeidsoppgaver
-              arbeidsoppgaver={aktivPlan.arbeidsoppgaveListe}
-              arbeidstakerFnr={aktivPlan.arbeidstaker.fnr}
-            />
-          )}
-        </div>
-      )}
+      {allePlaner.isSuccess ? (
+        <ArbeidsoppgaveContent aktivPlan={findAktivPlan(id, allePlaner.data)} />
+      ) : null}
     </OppfolgingsplanPageAG>
   );
 };
