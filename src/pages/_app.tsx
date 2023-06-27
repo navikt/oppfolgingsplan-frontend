@@ -26,7 +26,7 @@ declare const window: any;
 configureLogger({
   basePath: "/syk/oppfolgingsplaner",
   onLog: (log) => {
-    if (typeof window !== "undefined" && window.faro !== "undefined") {
+    if (typeof window !== "undefined" && !!window.faro) {
       window.faro.api.pushLog(log.messages, {
         level: pinoLevelToFaroLevel(log.level.label),
       });
@@ -67,26 +67,24 @@ function MyApp({
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <>
+    <OPErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
           <main tabIndex={-1} id="maincontent" className="min-h-screen">
-            <OPErrorBoundary>
-              <>
-                {isAudienceSykmeldt ? (
-                  <BreadcrumbsAppenderSM />
-                ) : (
-                  <BreadcrumbsAppenderAG />
-                )}
-                <Component {...pageProps} />
-              </>
-            </OPErrorBoundary>
+            <>
+              {isAudienceSykmeldt ? (
+                <BreadcrumbsAppenderSM />
+              ) : (
+                <BreadcrumbsAppenderAG />
+              )}
+              <Component {...pageProps} />
+            </>
           </main>
-        </>
-      </Hydrate>
-      <TestScenarioDevTools />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+        </Hydrate>
+        <TestScenarioDevTools />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </OPErrorBoundary>
   );
 }
 
