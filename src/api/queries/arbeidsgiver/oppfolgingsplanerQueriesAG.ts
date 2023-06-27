@@ -5,7 +5,6 @@ import {
   useLandingUrl,
   useNarmesteLederId,
   useOppfolgingsplanApiPath,
-  useOppfolgingsplanRouteId,
 } from "../../../hooks/routeHooks";
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import {
@@ -129,15 +128,4 @@ export const useOpprettOppfolgingsplanAG = () => {
   };
 
   return useMutation(opprettOppfolgingsplanAG);
-};
-
-export const useAktivPlanAG = (): Oppfolgingsplan | undefined => {
-  const id = useOppfolgingsplanRouteId();
-  const allePlaner = useOppfolgingsplanerAG();
-
-  if (allePlaner.isSuccess) {
-    return allePlaner.data.find((plan) => plan.id === id);
-  }
-
-  return undefined;
 };

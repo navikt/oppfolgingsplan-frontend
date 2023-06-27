@@ -2,15 +2,23 @@ import { NextPage } from "next";
 import { OppfolgingsplanOversikt } from "../../../../components/seplanen/OppfolgingsplanOversikt";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { SendTilGodkjenningAG } from "../../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenningAG";
-import { useAktivPlanAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
+import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { GodkjennEgenPlanAG } from "../../../../components/seplanen/sendtilgodkjenning/GodkjennEgenPlanAG";
 import {
   OppfolgingsplanPageAG,
   Page,
 } from "../../../../components/blocks/wrappers/oppfolgingsplanpageag/OppfolgingsplanPageAG";
+import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
+import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
+import React from "react";
+import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
 
-const Seplanen: NextPage = () => {
-  const aktivPlan = useAktivPlanAG();
+interface ContentProps {
+  aktivPlan?: Oppfolgingsplan;
+}
+
+const SePlanenContent = ({ aktivPlan }: ContentProps) => {
+  if (!aktivPlan) return null;
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
   const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr;
 
@@ -18,7 +26,7 @@ const Seplanen: NextPage = () => {
     narmesteLederFnr && arbeidstakerFnr && narmesteLederFnr === arbeidstakerFnr;
 
   return (
-    <OppfolgingsplanPageAG page={Page.SEPLANEN}>
+    <>
       <OppfolgingsplanOversikt oppfolgingsplan={aktivPlan} />
       {!isOwnLeader && aktivPlan && (
         <SendTilGodkjenningAG oppfolgingsplan={aktivPlan} />
@@ -26,6 +34,19 @@ const Seplanen: NextPage = () => {
       {isOwnLeader && aktivPlan && (
         <GodkjennEgenPlanAG oppfolgingsplan={aktivPlan} />
       )}
+    </>
+  );
+};
+
+const Seplanen: NextPage = () => {
+  const allePlaner = useOppfolgingsplanerAG();
+  const id = useOppfolgingsplanRouteId();
+
+  return (
+    <OppfolgingsplanPageAG page={Page.SEPLANEN}>
+      {allePlaner.isSuccess ? (
+        <SePlanenContent aktivPlan={findAktivPlan(id, allePlaner.data)} />
+      ) : null}
     </OppfolgingsplanPageAG>
   );
 };
