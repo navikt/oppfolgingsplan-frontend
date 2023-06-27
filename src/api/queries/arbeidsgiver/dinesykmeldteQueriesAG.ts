@@ -3,7 +3,6 @@ import { get } from "../../axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { queryKeys } from "../queryKeys";
-import { logger } from "@navikt/next-logger";
 
 export const useDineSykmeldte = () => {
   const apiBasePath = useApiBasePath();
@@ -18,9 +17,6 @@ export const useDineSykmeldte = () => {
     {
       enabled: !!narmestelederId,
       useErrorBoundary: true,
-      onError: (err) => {
-        logger.error(`useDineSykmeldte feiler ${err}`);
-      },
     }
   );
 };

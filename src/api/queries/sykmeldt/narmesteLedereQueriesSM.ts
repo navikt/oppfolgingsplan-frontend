@@ -5,7 +5,6 @@ import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
-import { logger } from "@navikt/next-logger";
 
 export const useNarmesteLedereSM = () => {
   const apiBasePath = useApiBasePath();
@@ -20,9 +19,6 @@ export const useNarmesteLedereSM = () => {
     {
       enabled: !!sykmeldtFnr,
       useErrorBoundary: true,
-      onError: (err) => {
-        logger.error(`useNarmesteLedereSM feiler ${err}`);
-      },
     }
   );
 };
