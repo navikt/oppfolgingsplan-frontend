@@ -45,7 +45,7 @@ export const NavigationButtons = ({ activeStep }: Props) => {
 
   return (
     <>
-      <Row className="mt-8 mb-4">
+      <Row className="mt-8 mb-4 gap-8">
         {previousPage && (
           <Link href={previousPage}>
             <Button
