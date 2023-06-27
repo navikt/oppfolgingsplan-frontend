@@ -1,3 +1,5 @@
+"use client";
+
 import { ErrorBoundary } from "react-error-boundary";
 import { ReactNode } from "react";
 import { logger } from "@navikt/next-logger";

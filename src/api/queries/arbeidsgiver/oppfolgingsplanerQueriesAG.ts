@@ -18,6 +18,7 @@ import { useDineSykmeldte } from "./dinesykmeldteQueriesAG";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useRouter } from "next/router";
+import { logger } from "@navikt/next-logger";
 
 export const useOppfolgingsplanerAG = () => {
   const apiBasePath = useApiBasePath();
@@ -34,7 +35,13 @@ export const useOppfolgingsplanerAG = () => {
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner,
-    { enabled: !!sykmeldtFnr, useErrorBoundary: true }
+    {
+      enabled: !!sykmeldtFnr,
+      useErrorBoundary: true,
+      onError: (err) => {
+        logger.error(`useOppfolgingsplanerAG feiler ${err}`);
+      },
+    }
   );
 };
 
