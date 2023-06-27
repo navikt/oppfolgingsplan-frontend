@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { useDineSykmeldte } from "./dinesykmeldteQueriesAG";
 import { queryKeys } from "../queryKeys";
+import { logger } from "@navikt/next-logger";
 
 export const useTilgangAG = () => {
   const apiBasePath = useApiBasePath();
@@ -19,6 +20,9 @@ export const useTilgangAG = () => {
     {
       enabled: !!sykmeldtData.data?.fnr,
       useErrorBoundary: true,
+      onError: (err) => {
+        logger.error(`useTilgangAG feiler ${err}}`);
+      },
     }
   );
 };

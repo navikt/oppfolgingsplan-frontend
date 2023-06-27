@@ -12,6 +12,7 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
 import { useRouter } from "next/router";
+import { logger } from "@navikt/next-logger";
 
 export const useOppfolgingsplanerSM = () => {
   const apiBasePath = useApiBasePath();
@@ -24,6 +25,9 @@ export const useOppfolgingsplanerSM = () => {
     fetchOppfolgingsplaner,
     {
       useErrorBoundary: true,
+      onError: (err) => {
+        logger.error(`useOppfolgingsplanerSM feiler ${err}}`);
+      },
     }
   );
 };

@@ -1,14 +1,8 @@
 import axios, { AxiosError, ResponseType } from "axios";
-import {
-  accessDeniedError,
-  ApiErrorException,
-  generalError,
-  loginRequiredError,
-  networkError,
-} from "./errors";
 import { loginUser } from "../../utils/urlUtils";
 import { displayTestScenarioSelector } from "../../environments/publicEnv";
 import { v4 as uuidv4 } from "uuid";
+import { logApiError } from "../../server/utils/logUtils";
 
 interface AxiosOptions {
   accessToken?: string;
@@ -53,31 +47,13 @@ const defaultRequestHeaders = (
   return headers;
 };
 
-function handleAxiosError(error: AxiosError) {
-  if (error.response) {
-    switch (error.response.status) {
-      case 401: {
-        loginUser();
-        throw new ApiErrorException(
-          loginRequiredError(),
-          error.response.status
-        );
-      }
-      case 403: {
-        throw new ApiErrorException(accessDeniedError(), error.response.status);
-      }
-      default: {
-        throw new ApiErrorException(
-          generalError(error.message),
-          error.response.status
-        );
-      }
-    }
-  } else if (error.request) {
-    throw new ApiErrorException(networkError(error.message));
-  } else {
-    throw new ApiErrorException(generalError(error.message));
+function handleError(error: AxiosError, url: string, httpMethod: string) {
+  logApiError(error, url, httpMethod);
+
+  if (error.response && error.response.status === 401) {
+    loginUser();
   }
+  throw error;
 }
 
 export const get = <ResponseData>(
@@ -92,11 +68,7 @@ export const get = <ResponseData>(
     })
     .then((response) => response.data)
     .catch(function (error) {
-      if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
-      } else {
-        throw new ApiErrorException(generalError(error.message), error.code);
-      }
+      handleError(error, url, "GET");
     });
 };
 
@@ -113,10 +85,6 @@ export const post = <ResponseData>(
     })
     .then((response) => response.data)
     .catch(function (error) {
-      if (axios.isAxiosError(error)) {
-        handleAxiosError(error);
-      } else {
-        throw new ApiErrorException(generalError(error.message), error.code);
-      }
+      handleError(error, url, "POST");
     });
 };

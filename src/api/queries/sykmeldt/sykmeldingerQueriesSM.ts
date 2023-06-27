@@ -4,6 +4,7 @@ import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
 import { useQuery } from "@tanstack/react-query";
 import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
+import { logger } from "@navikt/next-logger";
 
 export const useSykmeldingerSM = () => {
   const apiBasePath = useApiBasePath();
@@ -16,6 +17,9 @@ export const useSykmeldingerSM = () => {
     fetchSykmeldinger,
     {
       useErrorBoundary: true,
+      onError: (err) => {
+        logger.error(`useSykmeldingerSM feiler ${err}}`);
+      },
     }
   );
 };
