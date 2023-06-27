@@ -22,7 +22,6 @@ export const logApiError = (
   const logPrefix = typeof window === "undefined" ? "Backend:" : "Frontend:";
 
   if (error.code) {
-    if (error.code === "401") return;
     logger.error(
       `${logPrefix} ${httpMethod} ${cleanPathForMetric(url)} returned code: ${
         error.code
