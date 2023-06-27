@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MockSetup } from "../../src/server/data/mock/getMockDb";
 import { interceptDataApis } from "./interceptDataApis";
 import mockRouter from "next-router-mock";
+import { minutesToMillis } from "../../src/utils/dateUtils";
 
 export interface MockOptions {
   mockHeadContext?: boolean;
@@ -97,6 +98,8 @@ const ReactQueryProvider = ({
           defaultOptions: {
             queries: {
               refetchOnWindowFocus: false,
+              cacheTime: minutesToMillis(60),
+              staleTime: minutesToMillis(30),
             },
           },
         })
