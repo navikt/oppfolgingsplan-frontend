@@ -73,7 +73,7 @@ export const OppfolgingsplanPageAG = ({ page, children }: Props) => {
         </Heading>
       )}
 
-      {(allePlaner.isLoading || sykmeldt.isLoading || tilgang.isFetching) && (
+      {(allePlaner.isLoading || sykmeldt.isLoading || tilgang.isLoading) && (
         <OPSkeleton />
       )}
 
