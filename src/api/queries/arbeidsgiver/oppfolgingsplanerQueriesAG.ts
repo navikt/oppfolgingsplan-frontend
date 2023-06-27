@@ -34,7 +34,7 @@ export const useOppfolgingsplanerAG = () => {
     [queryKeys.OPPFOLGINGSPLANER],
     fetchOppfolgingsplaner,
     {
-      enabled: !!sykmeldtFnr && !!narmesteLederId,
+      enabled: !!sykmeldtFnr,
       useErrorBoundary: true,
     }
   );
