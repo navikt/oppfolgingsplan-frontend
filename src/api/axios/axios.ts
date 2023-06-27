@@ -48,12 +48,12 @@ const defaultRequestHeaders = (
 };
 
 function handleError(error: AxiosError, url: string, httpMethod: string) {
-  logApiError(error, url, httpMethod);
-
   if (error.response && error.response.status === 401) {
     loginUser();
+  } else {
+    logApiError(error, url, httpMethod);
+    throw error;
   }
-  throw error;
 }
 
 export const get = <ResponseData>(
