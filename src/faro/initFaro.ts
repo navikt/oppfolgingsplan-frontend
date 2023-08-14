@@ -27,7 +27,9 @@ export const initFaro = (): Faro | null => {
 };
 
 export const logFaroError = (err: Error) => {
+  console.log("Før: Logger feil til faro..");
   if (typeof window !== "undefined" && !!window.faro) {
+    console.log("Logger feil til faro..");
     window.faro.api.pushError(err);
   }
 };
