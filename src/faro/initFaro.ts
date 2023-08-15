@@ -5,6 +5,9 @@ import {
   LogLevel,
 } from "@grafana/faro-web-sdk";
 
+// eslint-disable-next-line
+declare const window: any;
+
 export const initFaro = (): Faro | null => {
   if (!process.env.NEXT_PUBLIC_TELEMETRY_URL || typeof window === "undefined")
     return null;
@@ -21,6 +24,12 @@ export const initFaro = (): Faro | null => {
       }),
     ],
   });
+};
+
+export const logFaroError = (err: Error) => {
+  if (typeof window !== "undefined" && !!window.faro) {
+    window.faro.api.pushError(err);
+  }
 };
 
 export function pinoLevelToFaroLevel(pinoLevel: string): LogLevel {
