@@ -2,8 +2,7 @@ import {
   Faro,
   getWebInstrumentations,
   initializeFaro,
-  LogLevel,
-} from "@grafana/faro-web-sdk";
+} from "@grafana/faro-react";
 
 // eslint-disable-next-line
 declare const window: any;
@@ -32,19 +31,8 @@ export const logFaroError = (err: Error) => {
   }
 };
 
-export function pinoLevelToFaroLevel(pinoLevel: string): LogLevel {
-  switch (pinoLevel) {
-    case "trace":
-      return LogLevel.TRACE;
-    case "debug":
-      return LogLevel.DEBUG;
-    case "info":
-      return LogLevel.INFO;
-    case "warn":
-      return LogLevel.WARN;
-    case "error":
-      return LogLevel.ERROR;
-    default:
-      throw new Error(`Unknown level: ${pinoLevel}`);
+export const logFaroErrorMessage = (message: string) => {
+  if (typeof window !== "undefined" && !!window.faro) {
+    window.faro.api.pushError(new Error(message));
   }
-}
+};

@@ -17,21 +17,11 @@ import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 import { Modal } from "@navikt/ds-react";
-import { initFaro, pinoLevelToFaroLevel } from "../faro/initFaro";
+import { initFaro } from "../faro/initFaro";
 import { minutesToMillis } from "../utils/dateUtils";
-
-// eslint-disable-next-line
-declare const window: any;
 
 configureLogger({
   basePath: "/syk/oppfolgingsplaner",
-  onLog: (log) => {
-    if (typeof window !== "undefined" && !!window.faro) {
-      window.faro.api.pushLog(log.messages, {
-        level: pinoLevelToFaroLevel(log.level.label),
-      });
-    }
-  },
 });
 
 const TestScenarioDevTools = () => {

@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { logger } from "@navikt/next-logger";
+import { logError } from "../../utils/logUtils";
 
 const UUID =
   /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g;
@@ -19,19 +19,17 @@ export const logApiError = (
   url: string,
   httpMethod: string
 ) => {
-  const logPrefix = typeof window === "undefined" ? "Backend:" : "Frontend:";
-
   if (error.code) {
-    logger.error(
-      `${logPrefix} ${httpMethod} ${cleanPathForMetric(url)} returned code: ${
+    logError(
+      `${httpMethod} ${cleanPathForMetric(url)} returned code: ${
         error.code
       }, message: ${error.message}`
     );
   } else {
-    logger.error(
-      `${logPrefix} ${httpMethod} ${cleanPathForMetric(
-        url
-      )} returned error message: ${error.message}`
+    logError(
+      `${httpMethod} ${cleanPathForMetric(url)} returned error message: ${
+        error.message
+      }`
     );
   }
 };
