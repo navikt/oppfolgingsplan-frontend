@@ -11,7 +11,10 @@ export const useTilgangAG = () => {
   const sykmeldtData = useDineSykmeldte();
 
   const fetchTilgang = () =>
-    get<Tilgang>(`${apiBasePath}/tilgang/${sykmeldtData.data?.fnr}`);
+    get<Tilgang>(
+      `${apiBasePath}/tilgang/${sykmeldtData.data?.fnr}`,
+      "fetchTilgangAG"
+    );
 
   return useQuery<Tilgang, ApiErrorException>(
     [queryKeys.TILGANG],

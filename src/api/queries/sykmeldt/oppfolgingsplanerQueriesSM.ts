@@ -17,7 +17,10 @@ export const useOppfolgingsplanerSM = () => {
   const apiBasePath = useApiBasePath();
 
   const fetchOppfolgingsplaner = () =>
-    get<Oppfolgingsplan[]>(`${apiBasePath}/oppfolgingsplaner`);
+    get<Oppfolgingsplan[]>(
+      `${apiBasePath}/oppfolgingsplaner`,
+      "fetchOppfolgingsplanerSM"
+    );
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
@@ -77,6 +80,7 @@ export const useOpprettOppfolgingsplanSM = () => {
 
     const oppfolgingsplanId = await post<number>(
       `${apiBasePath}/oppfolgingsplaner/opprett`,
+      "opprettOppfolgingsplanSM",
       data
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);

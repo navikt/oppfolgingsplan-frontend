@@ -25,14 +25,15 @@ export const useOppfolgingsplanerAG = () => {
 
   const sykmeldtFnr = sykmeldt.data?.fnr;
 
-  const fetchOppfolgingsplaner = () =>
+  const fetchOppfolgingsplanerAG = () =>
     get<Oppfolgingsplan[]>(
-      `${apiBasePath}/${narmesteLederId}/oppfolgingsplaner`
+      `${apiBasePath}/${narmesteLederId}/oppfolgingsplaner`,
+      "fetchOppfolgingsplanerAG"
     );
 
   return useQuery<Oppfolgingsplan[], ApiErrorException>(
     [queryKeys.OPPFOLGINGSPLANER],
-    fetchOppfolgingsplaner,
+    fetchOppfolgingsplanerAG,
     {
       enabled: !!sykmeldtFnr,
       useErrorBoundary: true,
@@ -103,18 +104,21 @@ export const useOpprettOppfolgingsplanAG = () => {
       );
       if (oppfolgingsplan) {
         oppfolgingsplanId = await post(
-          `${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`
+          `${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`,
+          "kopierOppfolgingsplanAG"
         );
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
         oppfolgingsplanId = await post(
           `${apiBasePath}/oppfolgingsplaner/opprett`,
+          "opprettOppfolgingsplanAG",
           opprettOppfoelgingsplan
         );
       }
     } else {
       oppfolgingsplanId = await post(
         `${apiBasePath}/oppfolgingsplaner/opprett`,
+        "opprettOppfolgingsplanAG",
         opprettOppfoelgingsplan
       );
     }

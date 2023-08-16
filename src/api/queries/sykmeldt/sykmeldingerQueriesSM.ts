@@ -9,7 +9,7 @@ export const useSykmeldingerSM = () => {
   const apiBasePath = useApiBasePath();
 
   const fetchSykmeldinger = () =>
-    get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`);
+    get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`, "fetchSykmeldingerSM");
 
   return useQuery<SykmeldingDTO[], ApiErrorException>(
     [queryKeys.SYKMELDINGER],

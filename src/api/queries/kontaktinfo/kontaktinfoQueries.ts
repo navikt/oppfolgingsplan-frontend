@@ -11,9 +11,13 @@ export const useKontaktinfo = () => {
   const sykmeldtData = useDineSykmeldte();
 
   const fetchKontaktinfo = () =>
-    get<KontaktinfoDTO>(`${router.basePath}/api/kontaktinfo`, {
-      personIdent: sykmeldtData.data?.fnr,
-    });
+    get<KontaktinfoDTO>(
+      `${router.basePath}/api/kontaktinfo`,
+      "fetchKontaktinfo",
+      {
+        personIdent: sykmeldtData.data?.fnr,
+      }
+    );
 
   return useQuery<KontaktinfoDTO, ApiErrorException>(
     [queryKeys.KONTAKTINFO],

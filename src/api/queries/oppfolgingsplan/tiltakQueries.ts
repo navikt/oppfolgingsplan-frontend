@@ -13,7 +13,11 @@ export const useLagreTiltak = () => {
   const queryClient = useQueryClient();
 
   const lagreTiltak = async (tiltak: Partial<Tiltak>) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/tiltak/lagre`, tiltak);
+    await post(
+      `${apiPath}/${oppfolgingsplanId}/tiltak/lagre`,
+      "useLagreTiltak",
+      tiltak
+    );
   };
 
   return useMutation({
@@ -33,7 +37,10 @@ export const useSlettTiltakSM = () => {
   const queryClient = useQueryClient();
 
   const slettTiltak = async (tiltakId: number) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`);
+    await post(
+      `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`,
+      "useSlettTiltakSM"
+    );
   };
 
   return useMutation({
@@ -63,6 +70,7 @@ export const useLagreKommentar = () => {
   }: LagreKommentarProps) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
+      "useLagreKommentar",
       kommentar
     );
   };
@@ -93,7 +101,8 @@ export const useSlettKommentar = () => {
     kommentarId,
   }: SlettKommentarProps) => {
     await post(
-      `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`
+      `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`,
+      "useSlettKommentar"
     );
   };
 

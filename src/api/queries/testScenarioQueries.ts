@@ -10,7 +10,11 @@ export const useSetActiveTestScenario = () => {
   const queryClient = useQueryClient();
 
   const setActiveTestScenario = async (mockSetup: TestScenario) => {
-    await post(`${router.basePath}/api/scenario/activescenario`, mockSetup);
+    await post(
+      `${router.basePath}/api/scenario/activescenario`,
+      "setActiveTestScenario",
+      mockSetup
+    );
     await queryClient.invalidateQueries();
   };
 
@@ -21,7 +25,10 @@ export const useActiveTestScenario = () => {
   const router = useRouter();
 
   const fetchActiveTestScenario = () =>
-    get<TestScenario>(`${router.basePath}/api/scenario/activescenario`);
+    get<TestScenario>(
+      `${router.basePath}/api/scenario/activescenario`,
+      "fetchActiveTestScenario"
+    );
 
   return useQuery<TestScenario, ApiErrorException>(
     [queryKeys.ACTIVE_TEST_SCENARIO],

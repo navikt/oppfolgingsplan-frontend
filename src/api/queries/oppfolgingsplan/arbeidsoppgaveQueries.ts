@@ -13,7 +13,11 @@ export const useLagreArbeidsoppgave = () => {
   const queryClient = useQueryClient();
 
   const lagreOppgave = async (oppgave: Partial<Arbeidsoppgave>) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/lagre`, oppgave);
+    await post(
+      `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/lagre`,
+      "lagreOppgave",
+      oppgave
+    );
   };
 
   return useMutation({
@@ -34,7 +38,8 @@ export const useSlettArbeidsoppgave = () => {
 
   const slettOppgave = async (arbeidsoppgaveId: number) => {
     await post(
-      `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/${arbeidsoppgaveId}/slett`
+      `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/${arbeidsoppgaveId}/slett`,
+      "slettOppgave"
     );
   };
 

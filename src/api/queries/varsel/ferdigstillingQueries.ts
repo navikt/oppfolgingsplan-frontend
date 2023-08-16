@@ -7,7 +7,10 @@ export const useFerdigstillGodkjennPlanVarsel = () => {
   const basePath = router.basePath;
 
   const ferdigstillVarsel = async (oppfolgingsplanId: number) => {
-    await post(`${basePath}/api/varsel/${oppfolgingsplanId}/ferdigstill`);
+    await post(
+      `${basePath}/api/varsel/${oppfolgingsplanId}/ferdigstill`,
+      "useFerdigstillGodkjennPlanVarsel"
+    );
   };
 
   return useMutation(ferdigstillVarsel);
