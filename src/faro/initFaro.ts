@@ -2,7 +2,8 @@ import {
   Faro,
   getWebInstrumentations,
   initializeFaro,
-} from "@grafana/faro-react";
+} from "@grafana/faro-web-sdk";
+import { TracingInstrumentation } from "@grafana/faro-web-tracing";
 
 export const initFaro = (): Faro | null => {
   if (!process.env.NEXT_PUBLIC_TELEMETRY_URL || typeof window === "undefined")
@@ -18,6 +19,7 @@ export const initFaro = (): Faro | null => {
       ...getWebInstrumentations({
         captureConsole: false,
       }),
+      new TracingInstrumentation(),
     ],
   });
 };

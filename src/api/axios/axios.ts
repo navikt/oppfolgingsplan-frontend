@@ -2,7 +2,10 @@ import axios, { AxiosError, ResponseType } from "axios";
 import { loginUser } from "../../utils/urlUtils";
 import { displayTestScenarioSelector } from "../../environments/publicEnv";
 import { v4 as uuidv4 } from "uuid";
-import { logApiError } from "../../server/utils/logUtils";
+import { logError, RequestOrigin } from "../../utils/logUtils";
+import axiosBetterStacktrace from "axios-better-stacktrace";
+
+axiosBetterStacktrace(axios);
 
 interface AxiosOptions {
   accessToken?: string;
@@ -47,17 +50,17 @@ const defaultRequestHeaders = (
   return headers;
 };
 
-function handleError(error: AxiosError, url: string, httpMethod: string) {
+function handleError(error: AxiosError, requestOrigin: RequestOrigin) {
   if (error.response && error.response.status === 401) {
     loginUser();
-  } else {
-    logApiError(error, url, httpMethod);
-    throw error;
   }
+  logError(error, requestOrigin);
+  throw error;
 }
 
 export const get = <ResponseData>(
   url: string,
+  requestOrigin: RequestOrigin,
   options?: AxiosOptions
 ): Promise<ResponseData> => {
   return axios
@@ -68,12 +71,13 @@ export const get = <ResponseData>(
     })
     .then((response) => response.data)
     .catch(function (error) {
-      handleError(error, url, "GET");
+      handleError(error, requestOrigin);
     });
 };
 
 export const post = <ResponseData>(
   url: string,
+  requestOrigin: RequestOrigin,
   data?: unknown,
   options?: AxiosOptions
 ): Promise<ResponseData> => {
@@ -85,6 +89,6 @@ export const post = <ResponseData>(
     })
     .then((response) => response.data)
     .catch(function (error) {
-      handleError(error, url, "POST");
+      handleError(error, requestOrigin);
     });
 };

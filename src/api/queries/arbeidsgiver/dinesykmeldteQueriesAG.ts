@@ -9,7 +9,10 @@ export const useDineSykmeldte = () => {
   const narmestelederId = useNarmesteLederId();
 
   const fetchDineSykmeldte = () =>
-    get<Sykmeldt>(`${apiBasePath}/dinesykmeldte/${narmestelederId}`);
+    get<Sykmeldt>(
+      `${apiBasePath}/dinesykmeldte/${narmestelederId}`,
+      "fetchDineSykmeldte"
+    );
 
   return useQuery<Sykmeldt, Error>(
     [queryKeys.DINESYKMELDTE],

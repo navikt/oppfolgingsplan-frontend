@@ -24,7 +24,8 @@ export const useKopierOppfolgingsplan = () => {
 
   const postKopierOppfolgingsplan = async (oppfolgingsplanIdToCopy: number) => {
     const oppfolgingsplanId = await post<number>(
-      `${apiPath}/${oppfolgingsplanIdToCopy}/kopier`
+      `${apiPath}/${oppfolgingsplanIdToCopy}/kopier`,
+      "postKopierOppfolgingsplan"
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
@@ -39,7 +40,10 @@ export const useNullstillGodkjenning = () => {
   const queryClient = useQueryClient();
 
   const nullstillGodkjenning = async (oppfolgingsplanId: number) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/nullstillgodkjenning`);
+    await post(
+      `${apiPath}/${oppfolgingsplanId}/nullstillgodkjenning`,
+      "useNullstillGodkjenning"
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -55,6 +59,7 @@ export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
   const godkjennsistPlan = async (data: GodkjennsistPlanData) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
+      "useGodkjennsistOppfolgingsplan",
       data
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
@@ -73,6 +78,7 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
   const godkjennPlan = async (data: GodkjennPlanData) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
+      "useGodkjennOppfolgingsplan",
       data
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
@@ -95,6 +101,7 @@ export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
   const godkjennEgenPlan = async (data: GodkjennEgenPlan) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
+      "useGodkjennEgenOppfolgingsplanAG",
       data
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
@@ -113,7 +120,10 @@ export const useAvvisOppfolgingsplan = () => {
   const queryClient = useQueryClient();
 
   const postAvvisOppfolgingsplan = async (oppfolgingsplanId: number) => {
-    await post(`${apiPath}/${oppfolgingsplanId}/avvis`);
+    await post(
+      `${apiPath}/${oppfolgingsplanId}/avvis`,
+      "useAvvisOppfolgingsplan"
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -125,7 +135,10 @@ export const useDelOppfolgingsplanMedNav = () => {
   const queryClient = useQueryClient();
 
   const delPlanMedNAV = async (oppfolgingsplanId: number) => {
-    await post(`${apiBasePath}/${oppfolgingsplanId}/delmednav`);
+    await post(
+      `${apiBasePath}/${oppfolgingsplanId}/delmednav`,
+      "useDelOppfolgingsplanMedNav"
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -137,7 +150,10 @@ export const useDelOppfolgingsplanMedFastlege = () => {
   const queryClient = useQueryClient();
 
   const delPlanMedFastlege = async (oppfolgingsplanId: number) => {
-    await post(`${apiBasePath}/${oppfolgingsplanId}/delmedfastlege`);
+    await post(
+      `${apiBasePath}/${oppfolgingsplanId}/delmedfastlege`,
+      "useDelOppfolgingsplanMedFastlege"
+    );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
@@ -152,7 +168,8 @@ export const useAvbrytOppfolgingsplan = () => {
 
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
     const newOppfolgingsplanId = await post<number>(
-      `${apiBasePath}/${oppfolgingsplanId}/avbryt`
+      `${apiBasePath}/${oppfolgingsplanId}/avbryt`,
+      "useAvbrytOppfolgingsplan"
     );
     await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     const arbeidsOppgaverPage = `${landingPage}/${newOppfolgingsplanId}/arbeidsoppgaver`;

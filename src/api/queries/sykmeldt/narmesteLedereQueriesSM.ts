@@ -11,7 +11,10 @@ export const useNarmesteLedereSM = () => {
   const sykmeldtFnr = useSykmeldtFnr();
 
   const fetchNarmesteLedere = () =>
-    get<NarmesteLederDTO[]>(`${apiBasePath}/narmesteledere/${sykmeldtFnr}`);
+    get<NarmesteLederDTO[]>(
+      `${apiBasePath}/narmesteledere/${sykmeldtFnr}`,
+      "fetchNarmesteLedereSM"
+    );
 
   return useQuery<NarmesteLederDTO[], ApiErrorException>(
     [queryKeys.NARMESTELEDERE],
