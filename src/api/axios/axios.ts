@@ -53,9 +53,10 @@ const defaultRequestHeaders = (
 function handleError(error: AxiosError, requestOrigin: RequestOrigin) {
   if (error.response && error.response.status === 401) {
     loginUser();
+  } else {
+    logError(error, requestOrigin);
+    throw error;
   }
-  logError(error, requestOrigin);
-  throw error;
 }
 
 export const get = <ResponseData>(
