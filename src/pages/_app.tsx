@@ -16,7 +16,6 @@ import { TestScenarioSelector } from "../components/blocks/testscenarioselector/
 import { displayTestScenarioSelector } from "../environments/publicEnv";
 import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
-import { Modal } from "@navikt/ds-react";
 import { initFaro } from "../faro/initFaro";
 import { minutesToMillis } from "../utils/dateUtils";
 
@@ -50,9 +49,6 @@ function MyApp({
   );
 
   useEffect(() => {
-    if (Modal.setAppElement) {
-      Modal.setAppElement("#__next");
-    }
     initFaro();
   }, []);
 

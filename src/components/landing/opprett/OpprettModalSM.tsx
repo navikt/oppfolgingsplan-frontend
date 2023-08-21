@@ -55,7 +55,7 @@ const OpprettModalSM = ({
       }}
     >
       <div className="p-8">
-        <Modal.Content>
+        <Modal.Body>
           {(() => {
             if (manglerNarmesteLeder) {
               return (
@@ -96,7 +96,7 @@ const OpprettModalSM = ({
               );
             }
           })()}
-        </Modal.Content>
+        </Modal.Body>
       </div>
     </Modal>
   );

@@ -21,7 +21,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
       }}
     >
       <div className="p-8">
-        <Modal.Content>
+        <Modal.Body>
           <BaserTidligereSkjema
             isLoading={opprettOppfolgingsplan.isLoading}
             onSubmit={(kopierplan) =>
@@ -29,7 +29,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
             }
             handleClose={() => setVisOpprettModal(false)}
           />
-        </Modal.Content>
+        </Modal.Body>
       </div>
     </Modal>
   );
