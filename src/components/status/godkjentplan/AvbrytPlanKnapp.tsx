@@ -25,7 +25,7 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
         aria-label="Er du sikker?"
         onClose={() => setVisBekreftelse(false)}
       >
-        <Modal.Content>
+        <Modal.Body>
           <Heading size={"medium"} level={"3"} spacing>
             Ønsker du å endre planen?
           </Heading>
@@ -42,7 +42,7 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
           >
             Gjør endringer
           </Button>
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
     </>
   );

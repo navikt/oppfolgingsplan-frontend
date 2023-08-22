@@ -29,7 +29,7 @@ export const SlettArbeidsoppgaveButton = ({
         aria-label={texts.arbeidsoppgaveList.sletting.bekreftSletting}
         onClose={() => setModalOpen((x) => !x)}
       >
-        <Modal.Content>
+        <Modal.Body>
           <div className="p-8">
             <Heading className="mb-8" level="2" size="medium">
               {texts.arbeidsoppgaveList.sletting.erDuSikker}
@@ -62,7 +62,7 @@ export const SlettArbeidsoppgaveButton = ({
               </Button>
             </Row>
           </div>
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
 
       <Button

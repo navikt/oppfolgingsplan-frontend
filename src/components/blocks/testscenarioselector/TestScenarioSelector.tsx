@@ -48,7 +48,7 @@ export const TestScenarioSelector = () => {
         aria-label="Testdatavelger"
         onClose={() => setOpen(false)}
       >
-        <Modal.Content>
+        <Modal.Body>
           <div className="p-12">
             <Heading spacing level="1" size="large">
               Velg testscenario
@@ -142,7 +142,7 @@ export const TestScenarioSelector = () => {
               </Button>
             </Row>
           </div>
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
 
       <div

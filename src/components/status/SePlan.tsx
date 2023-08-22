@@ -25,9 +25,9 @@ export const SePlan = ({ oppfolgingsplan }: Props) => {
         aria-label="Oppfolgingsplan oversikt"
         onClose={() => setOpen((x) => !x)}
       >
-        <Modal.Content>
+        <Modal.Body>
           <OppfolgingsplanOversikt oppfolgingsplan={oppfolgingsplan} />
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
     </>
   );

@@ -19,7 +19,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
         aria-label="Bekreft sletting av tiltak"
         onClose={() => setModalOpen((x) => !x)}
       >
-        <Modal.Content>
+        <Modal.Body>
           <div className="p-8">
             <Heading level="2" size="medium" className="mb-8">
               Er du sikker på at du vil slette tiltaket?
@@ -42,7 +42,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
               </Button>
             </Row>
           </div>
-        </Modal.Content>
+        </Modal.Body>
       </Modal>
 
       <Button
