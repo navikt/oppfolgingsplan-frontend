@@ -45,6 +45,7 @@ export default class MyDocument extends Document<Props> {
         redirectToApp: true,
         level: "Level4",
         urlLookupTable: false,
+        logoutWarning: true,
         breadcrumbs: isAudienceSykmeldt
           ? createBreadcrumbsSM(ctx.pathname)
           : createBreadcrumbsAG(
