@@ -13,7 +13,7 @@
     "lint": "next lint",
     "prettier": "prettier --write ./src/**",
     "prepare": "husky install",
-    "test": "jest",
+    "test": "jest && npm run cypress",
     "cypress": "cypress run --component",
     "cypress:open": "cypress open --component"
   },
