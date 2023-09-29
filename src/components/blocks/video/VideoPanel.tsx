@@ -2,17 +2,21 @@ import React from "react";
 import { getPublicAsset } from "../../../utils/getAssetPath";
 import { BodyLong, Heading, Link } from "@navikt/ds-react";
 import { SpacedDiv } from "../wrappers/SpacedDiv";
+import { useAudience } from "../../../hooks/routeHooks";
 
 const texts = {
   title: "Om oppfølgingsplanen",
   linkHeader: "Har du noen spørsmål?",
   linkText: "Les gjerne mer om oppfølgingsplanen her",
-  link: "https://www.nav.no/oppfolgingsplan",
+  linkSM: "https://www.nav.no/oppfolgingsplan",
+  linkAG: "https://www.nav.no/arbeidsgiver/oppfolgingsplan",
   browserNotSupported: "Nettleseren din støtter ikke denne videoavspillingen.",
   navigateToMovie: "Gå direkte til filmen!",
 };
 
 const VideoPanel = () => {
+  const { isAudienceSykmeldt } = useAudience();
+
   return (
     <SpacedDiv>
       <Heading spacing={true} size={"medium"} level={"2"}>
@@ -42,7 +46,11 @@ const VideoPanel = () => {
       </video>
       <BodyLong>
         {texts.linkHeader}{" "}
-        <Link rel="noopener noreferrer" target="_blank" href={texts.link}>
+        <Link
+          rel="noopener noreferrer"
+          target="_blank"
+          href={isAudienceSykmeldt ? texts.linkSM : texts.linkAG}
+        >
           {texts.linkText}
         </Link>
         .
