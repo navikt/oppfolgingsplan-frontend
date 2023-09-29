@@ -7,7 +7,7 @@ const texts = {
   title: "Om oppfølgingsplanen",
   linkHeader: "Har du noen spørsmål?",
   linkText: "Les gjerne mer om oppfølgingsplanen her",
-  link: "https://www.nav.no/no/bedrift/oppfolging/sykmeldt-arbeidstaker/relatert-informasjon/slik-folger-du-opp-sykmeldte/oppfolgingsplan_kap",
+  link: "https://www.nav.no/oppfolgingsplan",
   browserNotSupported: "Nettleseren din støtter ikke denne videoavspillingen.",
   navigateToMovie: "Gå direkte til filmen!",
 };
