@@ -1,6 +1,6 @@
 import { mount } from "cypress/react18";
-import { RouterContext } from "next/dist/shared/lib/router-context";
-import { HeadManagerContext } from "next/dist/shared/lib/head-manager-context";
+import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
+import { HeadManagerContext } from "next/dist/shared/lib/head-manager-context.shared-runtime";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MockSetup } from "../../src/server/data/mock/getMockDb";
 import { interceptDataApis } from "./interceptDataApis";
