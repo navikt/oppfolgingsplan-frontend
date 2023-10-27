@@ -4,13 +4,8 @@ import type { AppProps } from "next/app";
 import { useAudience } from "../hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
-import React, { useEffect, useState } from "react";
-import {
-  DehydratedState,
-  HydrationBoundary,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import React, { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TestScenarioSelector } from "../components/blocks/testscenarioselector/TestScenarioSelector";
 import { displayTestScenarioSelector } from "../environments/publicEnv";
@@ -30,23 +25,17 @@ const TestScenarioDevTools = () => {
   return null;
 };
 
-function MyApp({
-  Component,
-  pageProps,
-}: AppProps<{ dehydratedState: DehydratedState }>) {
+function MyApp({ Component, pageProps }: AppProps) {
   const { isAudienceSykmeldt } = useAudience();
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            refetchOnWindowFocus: false,
-            gcTime: minutesToMillis(60),
-            staleTime: minutesToMillis(30),
-          },
-        },
-      })
-  );
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        gcTime: minutesToMillis(60),
+        staleTime: minutesToMillis(30),
+      },
+    },
+  });
 
   useEffect(() => {
     initFaro();
@@ -55,18 +44,17 @@ function MyApp({
   return (
     <OPErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <HydrationBoundary state={pageProps.dehydratedState}>
-          <main tabIndex={-1} id="maincontent" className="min-h-screen">
-            <>
-              {isAudienceSykmeldt ? (
-                <BreadcrumbsAppenderSM />
-              ) : (
-                <BreadcrumbsAppenderAG />
-              )}
-              <Component {...pageProps} />
-            </>
-          </main>
-        </HydrationBoundary>
+        <main tabIndex={-1} id="maincontent" className="min-h-screen">
+          <>
+            {isAudienceSykmeldt ? (
+              <BreadcrumbsAppenderSM />
+            ) : (
+              <BreadcrumbsAppenderAG />
+            )}
+            <Component {...pageProps} />
+          </>
+        </main>
+
         <TestScenarioDevTools />
         <ReactQueryDevtools
           initialIsOpen={false}
