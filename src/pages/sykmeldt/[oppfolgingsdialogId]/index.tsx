@@ -103,7 +103,7 @@ const OppfolgingsplanStatus: NextPage = () => {
   const allePlaner = useOppfolgingsplanerSM();
   const aktivPlanId = useOppfolgingsplanRouteId();
 
-  if (allePlaner.isLoading) {
+  if (allePlaner.isPending) {
     return (
       <SykmeldtSide title={"Oppfølgingsplan"} heading={"Oppfølgingsplan"}>
         <OPSkeleton />

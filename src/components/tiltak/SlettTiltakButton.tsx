@@ -28,7 +28,7 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
             <Row>
               <Button
                 variant={"danger"}
-                loading={slettTiltak.isLoading}
+                loading={slettTiltak.isPending}
                 onClick={() => {
                   slettTiltak.mutateAsync(tiltakId).then(() => {
                     setModalOpen(false);
