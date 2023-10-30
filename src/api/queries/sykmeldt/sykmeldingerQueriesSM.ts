@@ -2,7 +2,6 @@ import { useApiBasePath } from "../../../hooks/routeHooks";
 import { get } from "../../axios/axios";
 import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
 import { useQuery } from "@tanstack/react-query";
-import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
 
 export const useSykmeldingerSM = () => {
@@ -11,13 +10,11 @@ export const useSykmeldingerSM = () => {
   const fetchSykmeldinger = () =>
     get<SykmeldingDTO[]>(`${apiBasePath}/sykmeldinger`, "fetchSykmeldingerSM");
 
-  return useQuery<SykmeldingDTO[], ApiErrorException>(
-    [queryKeys.SYKMELDINGER],
-    fetchSykmeldinger,
-    {
-      useErrorBoundary: true,
-    }
-  );
+  return useQuery({
+    queryKey: [queryKeys.SYKMELDINGER],
+    queryFn: fetchSykmeldinger,
+    throwOnError: true,
+  });
 };
 
 export const useSykmeldtFnr = (): string | null => {

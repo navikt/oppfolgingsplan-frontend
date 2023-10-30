@@ -3,7 +3,6 @@ import { get } from "../../axios/axios";
 import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
 import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { useQuery } from "@tanstack/react-query";
-import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
 
 export const useNarmesteLedereSM = () => {
@@ -16,12 +15,10 @@ export const useNarmesteLedereSM = () => {
       "fetchNarmesteLedereSM"
     );
 
-  return useQuery<NarmesteLederDTO[], ApiErrorException>(
-    [queryKeys.NARMESTELEDERE],
-    fetchNarmesteLedere,
-    {
-      enabled: !!sykmeldtFnr,
-      useErrorBoundary: true,
-    }
-  );
+  return useQuery({
+    queryKey: [queryKeys.NARMESTELEDERE],
+    queryFn: fetchNarmesteLedere,
+    enabled: !!sykmeldtFnr,
+    throwOnError: true,
+  });
 };
