@@ -9,7 +9,6 @@ import {
   Alert,
   BodyShort,
   Button,
-  Heading,
   Radio,
   RadioGroup,
   Select,
@@ -114,10 +113,6 @@ export const ArbeidsgiverSkjema = ({
 
   return (
     <>
-      <Heading spacing size={"medium"} level={"2"}>
-        {texts.arbeidsgiverSkjema.question}
-      </Heading>
-
       <Select
         className="pb-4"
         label={texts.arbeidsgiverSkjema.question}

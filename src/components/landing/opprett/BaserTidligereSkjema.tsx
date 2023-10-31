@@ -31,6 +31,7 @@ export const BaserTidligereSkjema = ({
       <RadioGroup
         className="mb-4"
         legend={texts.question}
+        hideLegend={true}
         onChange={(val: boolean) => setBaserTidligere(val)}
         value={baserTidligere}
       >

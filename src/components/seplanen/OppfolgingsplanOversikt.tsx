@@ -9,9 +9,13 @@ import { useInnloggetFnr } from "../../api/queries/oppfolgingsplan/oppfolgingspl
 
 interface Props {
   oppfolgingsplan?: Oppfolgingsplan;
+  hideHeading?: boolean;
 }
 
-export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
+export const OppfolgingsplanOversikt = ({
+  oppfolgingsplan,
+  hideHeading,
+}: Props) => {
   const innloggetFnr = useInnloggetFnr(oppfolgingsplan);
 
   if (!oppfolgingsplan) {
@@ -23,9 +27,11 @@ export const OppfolgingsplanOversikt = ({ oppfolgingsplan }: Props) => {
 
   return (
     <div>
-      <Heading level="2" size="large">
-        {texts.oppfolgingsplanOversikt.title}
-      </Heading>
+      {!hideHeading && (
+        <Heading level="2" size="large">
+          {texts.oppfolgingsplanOversikt.title}
+        </Heading>
+      )}
       {atNavn && agNavn && (
         <BodyShort>
           {`${texts.oppfolgingsplanOversikt.mellom} ${atNavn} ${texts.oppfolgingsplanOversikt.og} ${agNavn}`}

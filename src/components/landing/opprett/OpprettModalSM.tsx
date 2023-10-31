@@ -46,6 +46,54 @@ const OpprettModalSM = ({
     }
   };
 
+  const getHeaderText = () => {
+    if (manglerNarmesteLeder) {
+      return "Kan ikke opprette ny plan";
+    } else if (arbeidsgivere.length > 1) {
+      return "Hvilken arbeidsgiver skal du lage en plan med?";
+    } else {
+      return "Ønsker du å basere den nye planen på den som gjaldt sist?";
+    }
+  };
+
+  const ModalContent = () => {
+    if (manglerNarmesteLeder) {
+      return (
+        <Feilmelding
+          title={"Kan ikke opprette ny plan"}
+          description={
+            "Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn"
+          }
+        />
+      );
+    } else if (arbeidsgivere.length > 1) {
+      return (
+        <ArbeidsgiverSkjemaForm
+          arbeidsgivere={arbeidsgivere}
+          oppfolgingsplaner={oppfolgingsplaner}
+          isSubmitting={opprettOppfolgingsplan.isLoading}
+          handleSubmit={(
+            kopierTidligerePlan: boolean,
+            virksomhetsnummer: string
+          ) => {
+            opprett(kopierTidligerePlan, virksomhetsnummer);
+          }}
+          handleClose={() => setVisOpprettModal(false)}
+        />
+      );
+    } else {
+      return (
+        <BaserTidligereSkjema
+          isLoading={opprettOppfolgingsplan.isLoading}
+          onSubmit={(kopierTidligerePlan) =>
+            opprett(kopierTidligerePlan, arbeidsgivere[0].virksomhetsnummer)
+          }
+          handleClose={() => setVisOpprettModal(false)}
+        />
+      );
+    }
+  };
+
   return (
     <Modal
       open={visOpprettModal}
@@ -53,51 +101,11 @@ const OpprettModalSM = ({
       onClose={() => {
         setVisOpprettModal(false);
       }}
+      header={{ heading: getHeaderText() }}
     >
-      <div className="p-8">
-        <Modal.Body>
-          {(() => {
-            if (manglerNarmesteLeder) {
-              return (
-                <Feilmelding
-                  title={"Kan ikke opprette ny plan"}
-                  description={
-                    "Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn"
-                  }
-                />
-              );
-            } else if (arbeidsgivere.length > 1) {
-              return (
-                <ArbeidsgiverSkjemaForm
-                  arbeidsgivere={arbeidsgivere}
-                  oppfolgingsplaner={oppfolgingsplaner}
-                  isSubmitting={opprettOppfolgingsplan.isLoading}
-                  handleSubmit={(
-                    kopierTidligerePlan: boolean,
-                    virksomhetsnummer: string
-                  ) => {
-                    opprett(kopierTidligerePlan, virksomhetsnummer);
-                  }}
-                  handleClose={() => setVisOpprettModal(false)}
-                />
-              );
-            } else {
-              return (
-                <BaserTidligereSkjema
-                  isLoading={opprettOppfolgingsplan.isLoading}
-                  onSubmit={(kopierTidligerePlan) =>
-                    opprett(
-                      kopierTidligerePlan,
-                      arbeidsgivere[0].virksomhetsnummer
-                    )
-                  }
-                  handleClose={() => setVisOpprettModal(false)}
-                />
-              );
-            }
-          })()}
-        </Modal.Body>
-      </div>
+      <Modal.Body>
+        <ModalContent />
+      </Modal.Body>
     </Modal>
   );
 };
