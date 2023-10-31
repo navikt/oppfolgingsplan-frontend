@@ -54,7 +54,7 @@ export const Dialog = ({
                 <Button
                   className="flex self-end"
                   variant="tertiary"
-                  loading={slettKommentar.isPending}
+                  loading={slettKommentar.isLoading}
                   onClick={() =>
                     slettKommentar.mutateAsync({
                       tiltakId: tiltakId,

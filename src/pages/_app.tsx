@@ -7,7 +7,7 @@ import { BreadcrumbsAppenderAG } from "../components/blocks/breadcrumbs/Breadcru
 import React, { useEffect, useState } from "react";
 import {
   DehydratedState,
-  HydrationBoundary,
+  Hydrate,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
@@ -41,7 +41,7 @@ function MyApp({
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
-            gcTime: minutesToMillis(60),
+            cacheTime: minutesToMillis(60),
             staleTime: minutesToMillis(30),
           },
         },
@@ -55,7 +55,7 @@ function MyApp({
   return (
     <OPErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <HydrationBoundary state={pageProps.dehydratedState}>
+        <Hydrate state={pageProps.dehydratedState}>
           <main tabIndex={-1} id="maincontent" className="min-h-screen">
             <>
               {isAudienceSykmeldt ? (
@@ -66,7 +66,7 @@ function MyApp({
               <Component {...pageProps} />
             </>
           </main>
-        </HydrationBoundary>
+        </Hydrate>
         <TestScenarioDevTools />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

@@ -23,14 +23,10 @@ export const useLagreTiltak = () => {
   return useMutation({
     mutationFn: lagreTiltak,
     onSuccess: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
     onError: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -50,14 +46,10 @@ export const useSlettTiltakSM = () => {
   return useMutation({
     mutationFn: slettTiltak,
     onSuccess: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
     onError: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -86,14 +78,10 @@ export const useLagreKommentar = () => {
   return useMutation({
     mutationFn: lagreKommentar,
     onSuccess: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
     onError: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -121,14 +109,10 @@ export const useSlettKommentar = () => {
   return useMutation({
     mutationFn: slettKommentar,
     onSuccess: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
     onError: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };

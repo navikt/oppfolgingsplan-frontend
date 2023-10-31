@@ -65,7 +65,7 @@ export const NyArbeidsoppgaveSM = () => {
               setLeggerTilOppgave(false);
             });
         }}
-        isSubmitting={lagreOppgave.isPending}
+        isSubmitting={lagreOppgave.isLoading}
         isErrorSavingOppgave={lagreOppgave.isError}
         onCancel={() => setLeggerTilOppgave(false)}
       />

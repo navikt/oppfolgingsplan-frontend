@@ -16,10 +16,12 @@ export const useTilgangAG = () => {
       "fetchTilgangAG"
     );
 
-  return useQuery<Tilgang, ApiErrorException>({
-    queryKey: [queryKeys.TILGANG],
-    queryFn: fetchTilgang,
-    enabled: !!sykmeldtData.data?.fnr,
-    throwOnError: true,
-  });
+  return useQuery<Tilgang, ApiErrorException>(
+    [queryKeys.TILGANG],
+    fetchTilgang,
+    {
+      enabled: !!sykmeldtData.data?.fnr,
+      useErrorBoundary: true,
+    }
+  );
 };

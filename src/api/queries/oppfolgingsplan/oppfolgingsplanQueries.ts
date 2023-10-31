@@ -27,14 +27,12 @@ export const useKopierOppfolgingsplan = () => {
       `${apiPath}/${oppfolgingsplanIdToCopy}/kopier`,
       "postKopierOppfolgingsplan"
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
     await router.push(arbeidsOppgaverPage);
   };
 
-  return useMutation({ mutationFn: postKopierOppfolgingsplan });
+  return useMutation(postKopierOppfolgingsplan);
 };
 
 export const useNullstillGodkjenning = () => {
@@ -46,12 +44,10 @@ export const useNullstillGodkjenning = () => {
       `${apiPath}/${oppfolgingsplanId}/nullstillgodkjenning`,
       "useNullstillGodkjenning"
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation({ mutationFn: nullstillGodkjenning });
+  return useMutation(nullstillGodkjenning);
 };
 
 export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
@@ -66,13 +62,11 @@ export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
       "useGodkjennsistOppfolgingsplan",
       data
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     await router.push(statusUrl);
   };
 
-  return useMutation({ mutationFn: godkjennsistPlan });
+  return useMutation(godkjennsistPlan);
 };
 
 export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
@@ -87,18 +81,13 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
       "useGodkjennOppfolgingsplan",
       data
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     await router.push(statusUrl);
   };
 
-  return useMutation({
-    mutationFn: godkjennPlan,
+  return useMutation(godkjennPlan, {
     onError: () => {
-      queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -115,18 +104,13 @@ export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
       "useGodkjennEgenOppfolgingsplanAG",
       data
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     await router.push(statusUrl);
   };
 
-  return useMutation({
-    mutationFn: godkjennEgenPlan,
+  return useMutation(godkjennEgenPlan, {
     onError: () => {
-      queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -140,12 +124,10 @@ export const useAvvisOppfolgingsplan = () => {
       `${apiPath}/${oppfolgingsplanId}/avvis`,
       "useAvvisOppfolgingsplan"
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation({ mutationFn: postAvvisOppfolgingsplan });
+  return useMutation(postAvvisOppfolgingsplan);
 };
 
 export const useDelOppfolgingsplanMedNav = () => {
@@ -157,12 +139,10 @@ export const useDelOppfolgingsplanMedNav = () => {
       `${apiBasePath}/${oppfolgingsplanId}/delmednav`,
       "useDelOppfolgingsplanMedNav"
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation({ mutationFn: delPlanMedNAV });
+  return useMutation(delPlanMedNAV);
 };
 
 export const useDelOppfolgingsplanMedFastlege = () => {
@@ -174,12 +154,10 @@ export const useDelOppfolgingsplanMedFastlege = () => {
       `${apiBasePath}/${oppfolgingsplanId}/delmedfastlege`,
       "useDelOppfolgingsplanMedFastlege"
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
   };
 
-  return useMutation({ mutationFn: delPlanMedFastlege });
+  return useMutation(delPlanMedFastlege);
 };
 
 export const useAvbrytOppfolgingsplan = () => {
@@ -193,14 +171,12 @@ export const useAvbrytOppfolgingsplan = () => {
       `${apiBasePath}/${oppfolgingsplanId}/avbryt`,
       "useAvbrytOppfolgingsplan"
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     const arbeidsOppgaverPage = `${landingPage}/${newOppfolgingsplanId}/arbeidsoppgaver`;
     await router.push(arbeidsOppgaverPage);
   };
 
-  return useMutation({ mutationFn: postAvbrytOppfolgingsplan });
+  return useMutation(postAvbrytOppfolgingsplan);
 };
 
 export const useInnloggetFnr = (

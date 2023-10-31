@@ -71,7 +71,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
         </Heading>
       )}
 
-      {(allePlaner.isPending || sykmeldinger.isPending) && <OPSkeleton />}
+      {(allePlaner.isLoading || sykmeldinger.isLoading) && <OPSkeleton />}
 
       {allePlaner.isSuccess && sykmeldinger.isSuccess && (
         <OppfolgingsplanPageContentSM

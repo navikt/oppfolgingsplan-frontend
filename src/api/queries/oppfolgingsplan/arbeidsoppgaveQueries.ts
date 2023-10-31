@@ -23,14 +23,10 @@ export const useLagreArbeidsoppgave = () => {
   return useMutation({
     mutationFn: lagreOppgave,
     onSuccess: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
     onError: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };
@@ -50,14 +46,10 @@ export const useSlettArbeidsoppgave = () => {
   return useMutation({
     mutationFn: slettOppgave,
     onSuccess: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
     onError: () => {
-      return queryClient.invalidateQueries({
-        queryKey: [queryKeys.OPPFOLGINGSPLANER],
-      });
+      return queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     },
   });
 };

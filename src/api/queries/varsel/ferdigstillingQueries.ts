@@ -13,5 +13,5 @@ export const useFerdigstillGodkjennPlanVarsel = () => {
     );
   };
 
-  return useMutation({ mutationFn: ferdigstillVarsel });
+  return useMutation(ferdigstillVarsel);
 };

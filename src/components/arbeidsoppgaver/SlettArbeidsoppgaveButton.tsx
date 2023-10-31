@@ -47,7 +47,7 @@ export const SlettArbeidsoppgaveButton = ({
 
             <Row>
               <Button
-                loading={slettArbeidsoppgave.isPending}
+                loading={slettArbeidsoppgave.isLoading}
                 variant={"danger"}
                 onClick={() => {
                   slettArbeidsoppgave.mutateAsync(arbeidsoppgaveId).then(() => {
