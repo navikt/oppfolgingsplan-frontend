@@ -12,6 +12,7 @@ import {
   finnNyesteTidligereOppfolgingsplanMedVirksomhet,
   finnTidligereOppfolgingsplaner,
 } from "../../../utils/oppfolgingplanUtils";
+import { ApiErrorException } from "../../axios/errors";
 import { useDineSykmeldte } from "./dinesykmeldteQueriesAG";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
@@ -30,12 +31,14 @@ export const useOppfolgingsplanerAG = () => {
       "fetchOppfolgingsplanerAG"
     );
 
-  return useQuery({
-    queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    queryFn: fetchOppfolgingsplanerAG,
-    enabled: !!sykmeldtFnr,
-    throwOnError: true,
-  });
+  return useQuery<Oppfolgingsplan[], ApiErrorException>(
+    [queryKeys.OPPFOLGINGSPLANER],
+    fetchOppfolgingsplanerAG,
+    {
+      enabled: !!sykmeldtFnr,
+      useErrorBoundary: true,
+    }
+  );
 };
 
 export const useAktiveOppfolgingsplanerAG = () => {
@@ -119,12 +122,10 @@ export const useOpprettOppfolgingsplanAG = () => {
         opprettOppfoelgingsplan
       );
     }
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
     await router.push(arbeidsOppgaverPage);
   };
 
-  return useMutation({ mutationFn: opprettOppfolgingsplanAG });
+  return useMutation(opprettOppfolgingsplanAG);
 };

@@ -36,7 +36,7 @@ export const DelMedNavOgFastlegeButtons = ({
         {!godkjentPlan.deltMedNAV && (
           <Button
             variant={"secondary"}
-            loading={delOppfolgingsplanMedNAV.isPending}
+            loading={delOppfolgingsplanMedNAV.isLoading}
             onClick={() => delOppfolgingsplanMedNAV.mutate(oppfolgingsplanId)}
           >
             Del med NAV
@@ -45,7 +45,7 @@ export const DelMedNavOgFastlegeButtons = ({
         {!godkjentPlan.deltMedFastlege && (
           <Button
             variant={"secondary"}
-            loading={delOppfolgingsplanMedFastlege.isPending}
+            loading={delOppfolgingsplanMedFastlege.isLoading}
             onClick={() =>
               delOppfolgingsplanMedFastlege.mutate(oppfolgingsplanId)
             }

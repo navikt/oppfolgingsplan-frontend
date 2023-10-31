@@ -98,7 +98,7 @@ const ReactQueryProvider = ({
           defaultOptions: {
             queries: {
               refetchOnWindowFocus: false,
-              gcTime: minutesToMillis(60),
+              cacheTime: minutesToMillis(60),
               staleTime: minutesToMillis(30),
             },
           },

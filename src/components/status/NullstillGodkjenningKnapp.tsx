@@ -18,7 +18,7 @@ export const NullstillGodkjenningKnapp = ({ oppfolgingsplanId }: Props) => {
 
   return (
     <Button
-      loading={nullstillGodkjenning.isPending}
+      loading={nullstillGodkjenning.isLoading}
       onClick={() =>
         nullstillGodkjenning.mutateAsync(oppfolgingsplanId).then(() => {
           router.push(arbeidsoppgaverUrl);

@@ -35,7 +35,7 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
           </BodyLong>
           <Button
             variant={"danger"}
-            loading={avbrytDialog.isPending}
+            loading={avbrytDialog.isLoading}
             onClick={() => {
               avbrytDialog.mutateAsync(oppfolgingsplanId);
             }}

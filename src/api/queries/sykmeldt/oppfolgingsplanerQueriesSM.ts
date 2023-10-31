@@ -7,6 +7,7 @@ import {
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
+import { ApiErrorException } from "../../axios/errors";
 import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
@@ -21,11 +22,13 @@ export const useOppfolgingsplanerSM = () => {
       "fetchOppfolgingsplanerSM"
     );
 
-  return useQuery({
-    queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    queryFn: fetchOppfolgingsplaner,
-    throwOnError: true,
-  });
+  return useQuery<Oppfolgingsplan[], ApiErrorException>(
+    [queryKeys.OPPFOLGINGSPLANER],
+    fetchOppfolgingsplaner,
+    {
+      useErrorBoundary: true,
+    }
+  );
 };
 
 export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
@@ -80,12 +83,10 @@ export const useOpprettOppfolgingsplanSM = () => {
       "opprettOppfolgingsplanSM",
       data
     );
-    await queryClient.invalidateQueries({
-      queryKey: [queryKeys.OPPFOLGINGSPLANER],
-    });
+    await queryClient.invalidateQueries([queryKeys.OPPFOLGINGSPLANER]);
     const arbeidsOppgaverPage = `${landingPage}/${oppfolgingsplanId}/arbeidsoppgaver`;
     await router.push(arbeidsOppgaverPage);
   };
 
-  return useMutation({ mutationFn: opprettOppfolgingsplan });
+  return useMutation(opprettOppfolgingsplan);
 };

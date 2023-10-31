@@ -45,7 +45,7 @@ export const GodkjennOppfolgingsplan = ({
         )}
       </SpacedDiv>
       <Button
-        loading={godkjennOppfolgingsplan.isPending}
+        loading={godkjennOppfolgingsplan.isLoading}
         onClick={() =>
           godkjennOppfolgingsplan.mutate({
             delmednav: delMedNav,

@@ -51,7 +51,7 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
       {isAudienceSykmeldt ? (
         <TiltakFormSM
           defaultFormValues={createDefaultFormValues()}
-          isSubmitting={lagreTiltak.isPending}
+          isSubmitting={lagreTiltak.isLoading}
           onSubmit={(data) => {
             data.status = STATUS_TILTAK.FORSLAG;
             lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
@@ -63,7 +63,7 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
       ) : (
         <TiltakFormAG
           defaultFormValues={createDefaultFormValues()}
-          isSubmitting={lagreTiltak.isPending}
+          isSubmitting={lagreTiltak.isLoading}
           onSubmit={(data) => {
             lagreTiltak.mutateAsync(tiltakInformasjon(data)).then(() => {
               doneEditing();

@@ -47,7 +47,7 @@ const Tiltak: NextPage = () => {
             setLeggerTilNyttTiltak={setLeggerTilNyttTiltak}
           >
             <TiltakFormSM
-              isSubmitting={lagreTiltak.isPending}
+              isSubmitting={lagreTiltak.isLoading}
               onSubmit={(data) => {
                 data.status = STATUS_TILTAK.FORSLAG;
                 lagreTiltak

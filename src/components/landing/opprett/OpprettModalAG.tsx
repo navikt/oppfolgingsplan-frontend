@@ -23,7 +23,7 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
       <div className="p-8">
         <Modal.Body>
           <BaserTidligereSkjema
-            isLoading={opprettOppfolgingsplan.isPending}
+            isLoading={opprettOppfolgingsplan.isLoading}
             onSubmit={(kopierplan) =>
               opprettOppfolgingsplan.mutateAsync(kopierplan)
             }
