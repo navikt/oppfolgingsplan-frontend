@@ -42,7 +42,7 @@ export const SendTilGodkjenningAG = ({
         cancel={() => setVisOppfolgingsplanSkjema(false)}
         visTvungenGodkjenningToggle={true}
         navnPaaMotpart={oppfolgingsplan.arbeidstaker.navn}
-        isSubmitting={sendTilGodkjenning.isLoading}
+        isSubmitting={sendTilGodkjenning.isPending}
         sendTilGodkjenning={(data) => {
           sendTilGodkjenning.mutate({
             gyldighetstidspunkt: {

@@ -14,12 +14,10 @@ export const useDineSykmeldte = () => {
       "fetchDineSykmeldte"
     );
 
-  return useQuery<Sykmeldt, Error>(
-    [queryKeys.DINESYKMELDTE],
-    fetchDineSykmeldte,
-    {
-      enabled: !!narmestelederId,
-      useErrorBoundary: true,
-    }
-  );
+  return useQuery({
+    queryKey: [queryKeys.DINESYKMELDTE],
+    queryFn: fetchDineSykmeldte,
+    enabled: !!narmestelederId,
+    throwOnError: true,
+  });
 };

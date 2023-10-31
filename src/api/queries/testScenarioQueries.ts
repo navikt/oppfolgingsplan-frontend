@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { get, post } from "../axios/axios";
-import { ApiErrorException } from "../axios/errors";
 import { TestScenario } from "../../server/data/mock/getMockDb";
 import { useRouter } from "next/router";
 import { queryKeys } from "./queryKeys";
@@ -18,7 +17,7 @@ export const useSetActiveTestScenario = () => {
     await queryClient.invalidateQueries();
   };
 
-  return useMutation(setActiveTestScenario);
+  return useMutation({ mutationFn: setActiveTestScenario });
 };
 
 export const useActiveTestScenario = () => {
@@ -30,8 +29,8 @@ export const useActiveTestScenario = () => {
       "fetchActiveTestScenario"
     );
 
-  return useQuery<TestScenario, ApiErrorException>(
-    [queryKeys.ACTIVE_TEST_SCENARIO],
-    fetchActiveTestScenario
-  );
+  return useQuery({
+    queryKey: [queryKeys.ACTIVE_TEST_SCENARIO],
+    queryFn: fetchActiveTestScenario,
+  });
 };

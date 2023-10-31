@@ -139,7 +139,7 @@ export const LagretTiltak = ({
 
           {displayNyKommentar && (
             <NyKommentar
-              isLoading={lagreKommentar.isLoading}
+              isLoading={lagreKommentar.isPending}
               lagre={(kommentar: string) => {
                 lagreKommentar
                   .mutateAsync({

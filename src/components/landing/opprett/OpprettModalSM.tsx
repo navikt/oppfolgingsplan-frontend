@@ -71,7 +71,7 @@ const OpprettModalSM = ({
         <ArbeidsgiverSkjemaForm
           arbeidsgivere={arbeidsgivere}
           oppfolgingsplaner={oppfolgingsplaner}
-          isSubmitting={opprettOppfolgingsplan.isLoading}
+          isSubmitting={opprettOppfolgingsplan.isPending}
           handleSubmit={(
             kopierTidligerePlan: boolean,
             virksomhetsnummer: string
@@ -84,7 +84,7 @@ const OpprettModalSM = ({
     } else {
       return (
         <BaserTidligereSkjema
-          isLoading={opprettOppfolgingsplan.isLoading}
+          isLoading={opprettOppfolgingsplan.isPending}
           onSubmit={(kopierTidligerePlan) =>
             opprett(kopierTidligerePlan, arbeidsgivere[0].virksomhetsnummer)
           }

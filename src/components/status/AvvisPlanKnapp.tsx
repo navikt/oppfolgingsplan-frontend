@@ -18,7 +18,7 @@ export const AvvisPlanKnapp = ({ oppfolgingsplanId }: Props) => {
 
   return (
     <Button
-      loading={avvisDialog.isLoading}
+      loading={avvisDialog.isPending}
       onClick={() =>
         avvisDialog.mutateAsync(oppfolgingsplanId).then(() => {
           router.push(arbeidsOppgaverPage);
