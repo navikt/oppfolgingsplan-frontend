@@ -48,7 +48,7 @@ export const SendTilGodkjenningSM = ({
         navnPaaMotpart={
           oppfolgingsplan.arbeidsgiver?.naermesteLeder?.navn || "lederen min"
         }
-        isSubmitting={sendTilGodkjenning.isLoading}
+        isSubmitting={sendTilGodkjenning.isPending}
         sendTilGodkjenning={(data) => {
           sendTilGodkjenning.mutate({
             gyldighetstidspunkt: {

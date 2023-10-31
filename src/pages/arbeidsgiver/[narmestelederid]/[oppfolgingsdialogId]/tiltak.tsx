@@ -40,7 +40,7 @@ const NyttTiltakPanel = () => {
       setLeggerTilNyttTiltak={setLeggerTilNyttTiltak}
     >
       <TiltakFormAG
-        isSubmitting={lagreTiltak.isLoading}
+        isSubmitting={lagreTiltak.isPending}
         onSubmit={(data) => {
           lagreTiltak.mutateAsync(nyttTiltakInformasjon(data)).then(() => {
             setLeggerTilNyttTiltak(false);

@@ -77,7 +77,7 @@ export const EditerArbeidsoppgave = ({
             doneEditing();
           });
       }}
-      isSubmitting={lagreArbeidsoppgave.isLoading}
+      isSubmitting={lagreArbeidsoppgave.isPending}
       isErrorSavingOppgave={lagreArbeidsoppgave.isError}
       onCancel={doneEditing}
       navnIsEditable={false}

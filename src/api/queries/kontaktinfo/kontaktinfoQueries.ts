@@ -1,7 +1,6 @@
 import { useDineSykmeldte } from "../arbeidsgiver/dinesykmeldteQueriesAG";
 import { get } from "../../axios/axios";
 import { useQuery } from "@tanstack/react-query";
-import { ApiErrorException } from "../../axios/errors";
 import { queryKeys } from "../queryKeys";
 import { useRouter } from "next/router";
 import { KontaktinfoDTO } from "../../../schema/kontaktinfoSchema";
@@ -19,11 +18,9 @@ export const useKontaktinfo = () => {
       }
     );
 
-  return useQuery<KontaktinfoDTO, ApiErrorException>(
-    [queryKeys.KONTAKTINFO],
-    fetchKontaktinfo,
-    {
-      enabled: !!sykmeldtData.data?.fnr,
-    }
-  );
+  return useQuery({
+    queryKey: [queryKeys.KONTAKTINFO],
+    queryFn: fetchKontaktinfo,
+    enabled: !!sykmeldtData.data?.fnr,
+  });
 };

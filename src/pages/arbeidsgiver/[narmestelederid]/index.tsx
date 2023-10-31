@@ -29,7 +29,7 @@ const PageContent = () => {
     useTidligereOppfolgingsplanerAG();
   const [visOpprettModal, setVisOpprettModal] = useState(false);
 
-  if (allePlaner.isLoading || tilgang.isLoading) {
+  if (allePlaner.isPending || tilgang.isPending) {
     return <OPSkeleton />;
   }
 
