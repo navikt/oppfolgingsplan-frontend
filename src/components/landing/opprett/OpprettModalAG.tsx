@@ -19,18 +19,19 @@ const OpprettModalAG = ({ visOpprettModal, setVisOpprettModal }: Props) => {
       onClose={() => {
         setVisOpprettModal(false);
       }}
+      header={{
+        heading: "Ønsker du å basere den nye planen på den som gjaldt sist?",
+      }}
     >
-      <div className="p-8">
-        <Modal.Body>
-          <BaserTidligereSkjema
-            isLoading={opprettOppfolgingsplan.isLoading}
-            onSubmit={(kopierplan) =>
-              opprettOppfolgingsplan.mutateAsync(kopierplan)
-            }
-            handleClose={() => setVisOpprettModal(false)}
-          />
-        </Modal.Body>
-      </div>
+      <Modal.Body>
+        <BaserTidligereSkjema
+          isLoading={opprettOppfolgingsplan.isLoading}
+          onSubmit={(kopierplan) =>
+            opprettOppfolgingsplan.mutateAsync(kopierplan)
+          }
+          handleClose={() => setVisOpprettModal(false)}
+        />
+      </Modal.Body>
     </Modal>
   );
 };

@@ -1,5 +1,5 @@
 import { TrashIcon } from "@navikt/aksel-icons";
-import { Button, Heading, Modal } from "@navikt/ds-react";
+import { Button, Modal } from "@navikt/ds-react";
 import React, { useState } from "react";
 import { texts } from "../seplanen/texts";
 import { Row } from "../blocks/wrappers/Row";
@@ -16,7 +16,7 @@ export const SlettArbeidsoppgaveButton = ({
   show,
   arbeidsoppgaveId,
 }: Props) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const slettArbeidsoppgave = useSlettArbeidsoppgave();
   if (!show) {
     return null;
@@ -27,41 +27,38 @@ export const SlettArbeidsoppgaveButton = ({
       <Modal
         open={modalOpen}
         aria-label={texts.arbeidsoppgaveList.sletting.bekreftSletting}
-        onClose={() => setModalOpen((x) => !x)}
+        onClose={() => setModalOpen(false)}
+        header={{
+          heading: texts.arbeidsoppgaveList.sletting.erDuSikker,
+        }}
       >
         <Modal.Body>
-          <div className="p-8">
-            <Heading className="mb-8" level="2" size="medium">
-              {texts.arbeidsoppgaveList.sletting.erDuSikker}
-            </Heading>
+          {slettArbeidsoppgave.isError && (
+            <SpacedDiv>
+              <Feilmelding
+                description={
+                  "Vi klarte ikke å slette arbeidsoppgaven din. Vennligst prøv igjen senere."
+                }
+              />
+            </SpacedDiv>
+          )}
 
-            {slettArbeidsoppgave.isError && (
-              <SpacedDiv>
-                <Feilmelding
-                  description={
-                    "Vi klarte ikke å slette arbeidsoppgaven din. Vennligst prøv igjen senere."
-                  }
-                />
-              </SpacedDiv>
-            )}
-
-            <Row>
-              <Button
-                loading={slettArbeidsoppgave.isLoading}
-                variant={"danger"}
-                onClick={() => {
-                  slettArbeidsoppgave.mutateAsync(arbeidsoppgaveId).then(() => {
-                    setModalOpen(false);
-                  });
-                }}
-              >
-                {texts.arbeidsoppgaveList.buttons.slett}
-              </Button>
-              <Button variant={"tertiary"} onClick={() => setModalOpen(false)}>
-                {texts.arbeidsoppgaveList.buttons.avbryt}
-              </Button>
-            </Row>
-          </div>
+          <Row>
+            <Button
+              loading={slettArbeidsoppgave.isLoading}
+              variant={"danger"}
+              onClick={() => {
+                slettArbeidsoppgave.mutateAsync(arbeidsoppgaveId).then(() => {
+                  setModalOpen(false);
+                });
+              }}
+            >
+              {texts.arbeidsoppgaveList.buttons.slett}
+            </Button>
+            <Button variant={"tertiary"} onClick={() => setModalOpen(false)}>
+              {texts.arbeidsoppgaveList.buttons.avbryt}
+            </Button>
+          </Row>
         </Modal.Body>
       </Modal>
 

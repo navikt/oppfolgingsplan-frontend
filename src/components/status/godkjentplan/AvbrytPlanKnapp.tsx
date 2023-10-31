@@ -25,10 +25,13 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
         aria-label="Er du sikker?"
         onClose={() => setVisBekreftelse(false)}
       >
-        <Modal.Body>
+        <Modal.Header>
           <Heading size={"medium"} level={"3"} spacing>
             Ønsker du å endre planen?
           </Heading>
+        </Modal.Header>
+
+        <Modal.Body>
           <BodyLong spacing>
             Hvis du endrer planen, må du sende den til godkjenning hos den
             andre. Etter godkjenning blir den en gjeldende plan.

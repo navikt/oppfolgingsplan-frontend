@@ -48,100 +48,99 @@ export const TestScenarioSelector = () => {
         aria-label="Testdatavelger"
         onClose={() => setOpen(false)}
       >
+        <Modal.Header>
+          <Heading spacing level="1" size="large">
+            Velg testscenario
+          </Heading>
+        </Modal.Header>
         <Modal.Body>
-          <div className="p-12">
-            <Heading spacing level="1" size="large">
-              Velg testscenario
-            </Heading>
-
-            <SpacedDiv>
-              <RadioGroup
-                legend="Velg testscenario"
-                value={selectedScenario}
-                hideLegend={true}
-                onChange={(val: TestScenario) => {
-                  setSelectedScenario(val);
-                }}
+          <SpacedDiv>
+            <RadioGroup
+              legend="Velg testscenario"
+              value={selectedScenario}
+              hideLegend={true}
+              onChange={(val: TestScenario) => {
+                setSelectedScenario(val);
+              }}
+            >
+              <RadioWithHelpText
+                value={"INGENPLAN"}
+                helpText={
+                  "Jeg har ingen oppfølgingsplan, og ønsker å kunne opprette ny plan"
+                }
               >
-                <RadioWithHelpText
-                  value={"INGENPLAN"}
-                  helpText={
-                    "Jeg har ingen oppfølgingsplan, og ønsker å kunne opprette ny plan"
-                  }
-                >
-                  Ingen oppfølgingsplan
-                </RadioWithHelpText>
+                Ingen oppfølgingsplan
+              </RadioWithHelpText>
 
-                <RadioWithHelpText
-                  value={"TIDLIGEREPLANER"}
-                  helpText={
-                    "Jeg har ingen aktiv oppfølgingsplan, men har tidligere planer"
-                  }
-                >
-                  Tidligere planer
-                </RadioWithHelpText>
-
-                <RadioWithHelpText
-                  value={"UNDERARBEID"}
-                  helpText={"Jeg har en plan under arbeid"}
-                >
-                  Oppfølgingsplan under arbeid
-                </RadioWithHelpText>
-
-                <RadioWithHelpText
-                  value={"GODKJENTPLAN"}
-                  helpText={"Jeg har en godkjent oppfølgingsplan"}
-                >
-                  Godkjent Oppfølgingsplan
-                </RadioWithHelpText>
-
-                <RadioWithHelpText
-                  value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"}
-                  helpText={
-                    "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning, og arbeidsgiver har gått inn for å gjøre endringer"
-                  }
-                >
-                  Sykmeldt har sendt plan til godkjenning, arbeidsgiver har
-                  gjort endringer
-                </RadioWithHelpText>
-
-                <RadioWithHelpText
-                  value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING"}
-                  helpText={
-                    "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning"
-                  }
-                >
-                  Sykmeldt har sendt plan til godkjenning
-                </RadioWithHelpText>
-
-                <RadioWithHelpText
-                  value={"ARBEIDSGIVER_HAR_SENDT_TIL_GODKJENNING"}
-                  helpText={
-                    "Arbeidsgiver har sendt oppfølgingsplanen til den sykmeldte for godkjenning"
-                  }
-                >
-                  Arbeidsgiver har sendt plan til godkjenning
-                </RadioWithHelpText>
-              </RadioGroup>
-            </SpacedDiv>
-
-            <Row>
-              <Button
-                id="VelgScenarioButton"
-                variant={"primary"}
-                disabled={!setActiveTestScenario}
-                onClick={() => {
-                  setActiveTestScenario.mutateAsync(selectedScenario);
-                  setOpen(false);
-                }}
+              <RadioWithHelpText
+                value={"TIDLIGEREPLANER"}
+                helpText={
+                  "Jeg har ingen aktiv oppfølgingsplan, men har tidligere planer"
+                }
               >
-                Velg scenario
-              </Button>
-              <Button variant={"tertiary"} onClick={() => setOpen(false)}>
-                Avbryt
-              </Button>
-            </Row>
-          </div>
+                Tidligere planer
+              </RadioWithHelpText>
+
+              <RadioWithHelpText
+                value={"UNDERARBEID"}
+                helpText={"Jeg har en plan under arbeid"}
+              >
+                Oppfølgingsplan under arbeid
+              </RadioWithHelpText>
+
+              <RadioWithHelpText
+                value={"GODKJENTPLAN"}
+                helpText={"Jeg har en godkjent oppfølgingsplan"}
+              >
+                Godkjent Oppfølgingsplan
+              </RadioWithHelpText>
+
+              <RadioWithHelpText
+                value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"}
+                helpText={
+                  "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning, og arbeidsgiver har gått inn for å gjøre endringer"
+                }
+              >
+                Sykmeldt har sendt plan til godkjenning, arbeidsgiver har gjort
+                endringer
+              </RadioWithHelpText>
+
+              <RadioWithHelpText
+                value={"SYKMELDT_HAR_SENDT_TIL_GODKJENNING"}
+                helpText={
+                  "Den sykmeldte har sendt oppfølgingsplanen til arbeidsgiver for godkjenning"
+                }
+              >
+                Sykmeldt har sendt plan til godkjenning
+              </RadioWithHelpText>
+
+              <RadioWithHelpText
+                value={"ARBEIDSGIVER_HAR_SENDT_TIL_GODKJENNING"}
+                helpText={
+                  "Arbeidsgiver har sendt oppfølgingsplanen til den sykmeldte for godkjenning"
+                }
+              >
+                Arbeidsgiver har sendt plan til godkjenning
+              </RadioWithHelpText>
+            </RadioGroup>
+          </SpacedDiv>
+
+          <Row>
+            <Button
+              id="VelgScenarioButton"
+              variant={"primary"}
+              disabled={!setActiveTestScenario}
+              onClick={() => {
+                setActiveTestScenario.mutateAsync(selectedScenario);
+                setOpen(false);
+              }}
+            >
+              Velg scenario
+            </Button>
+            <Button variant={"tertiary"} onClick={() => setOpen(false)}>
+              Avbryt
+            </Button>
+          </Row>
         </Modal.Body>
       </Modal>
 

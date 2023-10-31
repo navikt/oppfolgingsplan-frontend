@@ -193,7 +193,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: "Labben Rekemester",
-          fnr: "12011011012",
+          fnr: "110110110110",
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -203,7 +203,7 @@ export const planUnderArbeidOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: "Labben Rekemester",
-          fnr: "12011011012",
+          fnr: "110110110110",
           epost: null,
           tlf: null,
           sistInnlogget: null,

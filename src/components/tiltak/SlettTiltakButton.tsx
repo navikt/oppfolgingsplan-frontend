@@ -1,4 +1,4 @@
-import { Button, Heading, Modal } from "@navikt/ds-react";
+import { Button, Modal } from "@navikt/ds-react";
 import { TrashIcon } from "@navikt/aksel-icons";
 import React, { useState } from "react";
 import { useSlettTiltakSM } from "../../api/queries/oppfolgingsplan/tiltakQueries";
@@ -17,31 +17,28 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
       <Modal
         open={modelOpen}
         aria-label="Bekreft sletting av tiltak"
-        onClose={() => setModalOpen((x) => !x)}
+        onClose={() => setModalOpen(false)}
+        header={{
+          heading: "Er du sikker på at du vil slette tiltaket?",
+        }}
       >
         <Modal.Body>
-          <div className="p-8">
-            <Heading level="2" size="medium" className="mb-8">
-              Er du sikker på at du vil slette tiltaket?
-            </Heading>
-
-            <Row>
-              <Button
-                variant={"danger"}
-                loading={slettTiltak.isLoading}
-                onClick={() => {
-                  slettTiltak.mutateAsync(tiltakId).then(() => {
-                    setModalOpen(false);
-                  });
-                }}
-              >
-                Slett
-              </Button>
-              <Button variant={"tertiary"} onClick={() => setModalOpen(false)}>
-                Avbryt
-              </Button>
-            </Row>
-          </div>
+          <Row>
+            <Button
+              variant={"danger"}
+              loading={slettTiltak.isLoading}
+              onClick={() => {
+                slettTiltak.mutateAsync(tiltakId).then(() => {
+                  setModalOpen(false);
+                });
+              }}
+            >
+              Slett
+            </Button>
+            <Button variant={"tertiary"} onClick={() => setModalOpen(false)}>
+              Avbryt
+            </Button>
+          </Row>
         </Modal.Body>
       </Modal>
 
