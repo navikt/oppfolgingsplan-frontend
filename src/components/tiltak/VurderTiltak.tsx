@@ -49,7 +49,7 @@ export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
     <div className="mb-4">
       <VurderTiltakForm
         defaultFormValues={createDefaultFormValues()}
-        isSubmitting={lagreTiltak.isLoading}
+        isSubmitting={lagreTiltak.isPending}
         onSubmit={(data) => {
           if (tiltaknavn && beskrivelse) {
             data.overskrift = tiltaknavn;

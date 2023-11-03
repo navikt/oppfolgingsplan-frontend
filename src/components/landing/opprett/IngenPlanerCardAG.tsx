@@ -25,7 +25,7 @@ const IngenPlanerCardAG = ({ setVisOpprettModal }: Props) => {
     >
       <Button
         variant={"primary"}
-        loading={opprettOppfolgingsplan.isLoading}
+        loading={opprettOppfolgingsplan.isPending}
         onClick={() =>
           !harTidligereOppfolgingsplaner
             ? opprettOppfolgingsplan.mutate(false)

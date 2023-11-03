@@ -26,9 +26,9 @@ const PageContent = () => {
   const narmesteLedere = useNarmesteLedereSM();
 
   if (
-    oppfolgingsplaner.isLoading ||
-    sykmeldinger.isLoading ||
-    narmesteLedere.isLoading
+    oppfolgingsplaner.isPending ||
+    sykmeldinger.isPending ||
+    narmesteLedere.isPending
   ) {
     return <OPSkeleton />;
   }

@@ -103,7 +103,7 @@ const OppfolgingsplanStatusAG: NextPage = () => {
   const aktivPlanId = useOppfolgingsplanRouteId();
   const tilgang = useTilgangAG();
 
-  if (allePlaner.isLoading || tilgang.isLoading) {
+  if (allePlaner.isPending || tilgang.isPending) {
     return (
       <ArbeidsgiverSide title={"Oppfølgingsplan"} heading={"Oppfølgingsplan"}>
         <OPSkeleton />

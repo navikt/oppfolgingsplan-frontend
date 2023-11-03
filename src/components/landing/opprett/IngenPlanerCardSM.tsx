@@ -30,7 +30,7 @@ const IngenPlanerCardSM = ({
     >
       <Button
         variant={"primary"}
-        loading={opprettOppfolgingsplan.isLoading}
+        loading={opprettOppfolgingsplan.isPending}
         onClick={() => {
           if (
             erOppfolgingsplanOpprettbarDirekte(arbeidsgivere, oppfolgingsplaner)
