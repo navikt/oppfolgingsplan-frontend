@@ -3,7 +3,7 @@
 const moduleExports = {
   reactStrictMode: true,
   basePath: "/syk/oppfolgingsplaner",
-  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || null,
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
   output: "standalone",
   productionBrowserSourceMaps: true,
 };
