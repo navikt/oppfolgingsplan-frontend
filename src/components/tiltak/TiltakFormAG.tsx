@@ -51,6 +51,7 @@ export const TiltakFormAG = ({
   const beskrivelseIkkeAktueltValue = watch("beskrivelseIkkeAktuelt");
   const statusValue = watch("status");
   const startDate = watch("fom");
+  const beskrivelseMaxLength = 1000;
 
   const hasSelectedIkkeAktuelt = () => {
     if (!statusValue) {
@@ -93,12 +94,12 @@ export const TiltakFormAG = ({
             description={
               "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
             }
-            maxLength={600}
+            maxLength={beskrivelseMaxLength}
             {...register("beskrivelse", {
               required: "Du må gi en beskrivelse av tiltaket",
               maxLength: {
-                value: 600,
-                message: "Beskrivelse må være på 600 tegn eller mindre",
+                value: beskrivelseMaxLength,
+                message: `Beskrivelse må være på ${beskrivelseMaxLength} tegn eller mindre`,
               },
             })}
             defaultValue={defaultFormValues?.beskrivelse}
