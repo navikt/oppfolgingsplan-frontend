@@ -48,6 +48,8 @@ export const TiltakFormSM = ({
 
   const startDate = watch("fom");
 
+  const beskrivelseMaxLength = 1000;
+
   return (
     <FormProvider {...formFunctions}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,10 +77,10 @@ export const TiltakFormSM = ({
             description={
               "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
             }
-            maxLength={600}
+            maxLength={beskrivelseMaxLength}
             {...register("beskrivelse", {
               required: "Du må gi en beskrivelse av tiltaket",
-              maxLength: 600,
+              maxLength: beskrivelseMaxLength,
             })}
             defaultValue={defaultFormValues?.beskrivelse}
             value={beskrivelseValue}
