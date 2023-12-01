@@ -16,9 +16,7 @@ export const SamtaleStotte = () => {
       </BodyLong>
 
       <Link
-        href={
-          "https://arbeidsgiver.nav.no/samtalestotte?referer=oppfolgingsplanarbeidsgiver"
-        }
+        href={"https://www.nav.no/arbeidsgiver/samtalestotte-arbeidsgiver"}
         target="_blank"
       >
         Gå til samtalestøtten
