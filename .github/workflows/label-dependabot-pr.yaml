@@ -5,6 +5,6 @@ on:
 
 jobs:
   label-dependabot-pr:
-    uses: navikt/flex-github-actions-workflows/.github/workflows/label-dependabot-pr.yml@main
+    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/label-dependabot-pr.yml@main
     permissions:
       pull-requests: write
