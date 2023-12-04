@@ -16,6 +16,7 @@ updates:
     directory: '/'
     schedule:
       interval: daily
+    registries: '*'
     groups:
       aksel-dependencies:
         patterns:
