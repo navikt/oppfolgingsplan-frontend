@@ -8,7 +8,7 @@ import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { findName } from "./findName";
 
 export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
-  oppfolgingplanerMeta: OppfolgingsplanMeta | undefined
+  oppfolgingplanerMeta: OppfolgingsplanMeta | undefined,
 ): Oppfolgingsplan[] => {
   return (
     oppfolgingplanerMeta?.oppfolgingsplaner.map((oppfolgingsplan) => {
@@ -22,7 +22,7 @@ export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
         godkjenninger: mapGodkjenninger(oppfolgingsplan, oppfolgingplanerMeta),
         arbeidsoppgaveListe: mapArbeidsoppgaveListe(
           oppfolgingsplan,
-          oppfolgingplanerMeta
+          oppfolgingplanerMeta,
         ),
         tiltakListe: mapTiltakListe(oppfolgingsplan, oppfolgingplanerMeta),
         avbruttPlanListe: oppfolgingsplan.avbruttPlanListe,
@@ -40,7 +40,7 @@ export const mapOppfolgingsplanMetaToOppfolgingsplaner = (
           navn: findName(
             oppfolgingplanerMeta.narmesteLedere,
             oppfolgingplanerMeta.person,
-            oppfolgingsplan.sistEndretAv.fnr
+            oppfolgingsplan.sistEndretAv.fnr,
           ),
         },
         skalHaVarsel: oppfolgingplanerMeta?.kontaktinfo?.skalHaVarsel,

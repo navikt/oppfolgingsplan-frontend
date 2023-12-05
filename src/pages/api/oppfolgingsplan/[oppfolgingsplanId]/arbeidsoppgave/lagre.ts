@@ -9,7 +9,7 @@ import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<SykmeldingDTO[]>
+  res: NextApiResponse<SykmeldingDTO[]>,
 ): Promise<void> => {
   if (isMockBackend) {
     res.status(200).end();

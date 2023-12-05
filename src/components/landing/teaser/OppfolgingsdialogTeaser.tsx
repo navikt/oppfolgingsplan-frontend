@@ -39,7 +39,7 @@ const OppfolgingsdialogTeaser = ({
 
   const newOppfolgingsplanUrl = useOppfolgingsplanUrl(
     oppfolgingsplan.id,
-    "arbeidsoppgaver"
+    "arbeidsoppgaver",
   );
   const statusUrl = useOppfolgingsplanUrl(oppfolgingsplan.id, "status");
 

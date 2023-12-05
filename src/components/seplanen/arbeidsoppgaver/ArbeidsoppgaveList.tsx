@@ -15,7 +15,7 @@ export const ArbeidsoppgaveList = ({
   arbeidsoppgaver,
 }: Props) => {
   const sorterArbeidsoppgaverEtterTypeOgOpprettet = (
-    arbeidsoppgaver: Arbeidsoppgave[]
+    arbeidsoppgaver: Arbeidsoppgave[],
   ) => {
     const order = [
       KANGJENNOMFOERES.KAN,
@@ -59,7 +59,7 @@ export const ArbeidsoppgaveList = ({
                 readonly={true}
                 key={`arbeidsoppgaver-list-${idx}`}
               />
-            )
+            ),
           )}
         </div>
       ) : (

@@ -56,12 +56,12 @@ export const VelgArbeidsgiverUndertekst = ({
   if (
     erAktivOppfolgingsplanOpprettetMedArbeidsgiver(
       oppfolgingsplaner,
-      arbeidsgiver.virksomhetsnummer
+      arbeidsgiver.virksomhetsnummer,
     )
   ) {
     const oppfolgingsdialog = hentAktivOppfolgingsplanOpprettetMedArbeidsgiver(
       oppfolgingsplaner,
-      arbeidsgiver.virksomhetsnummer
+      arbeidsgiver.virksomhetsnummer,
     );
     return (
       <Alert variant="info">
@@ -120,8 +120,8 @@ export const ArbeidsgiverSkjema = ({
         onChange={(e) =>
           setSelectedVirksomhet(
             arbeidsgivere.find(
-              (ag) => ag.virksomhetsnummer === e.target.value
-            ) ?? null
+              (ag) => ag.virksomhetsnummer === e.target.value,
+            ) ?? null,
           )
         }
       >
@@ -145,11 +145,11 @@ export const ArbeidsgiverSkjema = ({
           </div>
           {harTidligereOppfolgingsplanMedVirksomhet(
             oppfolgingsplaner,
-            selectedVirksomhet.virksomhetsnummer
+            selectedVirksomhet.virksomhetsnummer,
           ) &&
             !erAktivOppfolgingsplanOpprettetMedArbeidsgiver(
               oppfolgingsplaner,
-              selectedVirksomhet.virksomhetsnummer
+              selectedVirksomhet.virksomhetsnummer,
             ) && (
               <div className="mb-10">
                 <RadioGroup
@@ -174,7 +174,7 @@ export const ArbeidsgiverSkjema = ({
         {selectedVirksomhet &&
           harTidligereOppfolgingsplanMedVirksomhet(
             oppfolgingsplaner,
-            selectedVirksomhet.virksomhetsnummer
+            selectedVirksomhet.virksomhetsnummer,
           ) && (
             <Button
               variant={"primary"}
@@ -182,7 +182,7 @@ export const ArbeidsgiverSkjema = ({
                 selectedVirksomhet?.virksomhetsnummer
                   ? handleSubmit(
                       kopierTidligerePlan,
-                      selectedVirksomhet?.virksomhetsnummer
+                      selectedVirksomhet?.virksomhetsnummer,
                     )
                   : {}
               }
@@ -191,7 +191,7 @@ export const ArbeidsgiverSkjema = ({
                 !selectedVirksomhet ||
                 !erOppfolgingsplanOpprettbarMedArbeidsgiver(
                   oppfolgingsplaner,
-                  selectedVirksomhet
+                  selectedVirksomhet,
                 )
               }
             >
@@ -202,7 +202,7 @@ export const ArbeidsgiverSkjema = ({
         {selectedVirksomhet &&
           !harTidligereOppfolgingsplanMedVirksomhet(
             oppfolgingsplaner,
-            selectedVirksomhet.virksomhetsnummer
+            selectedVirksomhet.virksomhetsnummer,
           ) && (
             <Button
               variant={"primary"}
@@ -216,7 +216,7 @@ export const ArbeidsgiverSkjema = ({
                 !selectedVirksomhet ||
                 !erOppfolgingsplanOpprettbarMedArbeidsgiver(
                   oppfolgingsplaner,
-                  selectedVirksomhet
+                  selectedVirksomhet,
                 )
               }
             >

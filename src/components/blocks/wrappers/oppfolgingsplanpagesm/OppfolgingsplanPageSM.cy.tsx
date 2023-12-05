@@ -16,7 +16,7 @@ describe("<OppfolgingsplanPageAG />", () => {
         mockReactQuery: true,
         mockRouter: true,
         oppfolgingsplanRouteId: mockSetup.oppfolgingsplaner[0].id.toString(),
-      }
+      },
     );
 
     cy.contains("Some content here").should("not.exist");

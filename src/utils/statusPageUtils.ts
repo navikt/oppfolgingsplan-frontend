@@ -4,7 +4,7 @@ import { Godkjenning, Oppfolgingsplan } from "../types/oppfolgingsplan";
 export const getStatusPageTitleAndHeading = (
   godkjenningsStatus: StatusPageToDisplay | null,
   virksomhetsNavn: string | undefined,
-  navnPaaMotpart: string
+  navnPaaMotpart: string,
 ) => {
   switch (godkjenningsStatus) {
     case "SENDTPLANTILGODKJENNING": {
@@ -53,7 +53,7 @@ export const getStatusPageTitleAndHeading = (
 };
 
 const harMottattGodkjenningerFraArbeidsgiver = (
-  oppfolgingsplan: Oppfolgingsplan
+  oppfolgingsplan: Oppfolgingsplan,
 ): boolean => {
   const godkjenninger = oppfolgingsplan.godkjenninger;
   const aktoer = oppfolgingsplan.arbeidstaker;
@@ -66,7 +66,7 @@ const harMottattGodkjenningerFraArbeidsgiver = (
 };
 
 const harMottattGodkjenningerFraArbeidstaker = (
-  oppfolgingsplan: Oppfolgingsplan
+  oppfolgingsplan: Oppfolgingsplan,
 ): boolean => {
   const godkjenninger = oppfolgingsplan.godkjenninger;
   const aktoer = oppfolgingsplan.arbeidstaker;
@@ -84,7 +84,7 @@ const harNaermesteLeder = (oppfolgingsplan: Oppfolgingsplan): boolean => {
 
 const erAvvistAvAktor = (
   oppfolgingsplan: Oppfolgingsplan,
-  aktor: string
+  aktor: string,
 ): boolean => {
   return (
     oppfolgingsplan.godkjenninger?.length === 1 &&
@@ -98,7 +98,7 @@ const harFlereEnnEnGodkjenning = (godkjenninger: Godkjenning[] | null) => {
 };
 
 const erForsteGodkjenningGodkjent = (
-  oppfolgingsplan: Oppfolgingsplan
+  oppfolgingsplan: Oppfolgingsplan,
 ): boolean => {
   return (
     oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger[0].godkjent
@@ -120,7 +120,7 @@ const erPlanTilGodkjenningAG = (oppfolgingsplan: Oppfolgingsplan) => {
     oppfolgingsplan.arbeidsgiver?.naermesteLeder?.fnr &&
     !erAvvistAvAktor(
       oppfolgingsplan,
-      oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr
+      oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr,
     )
   );
 };
@@ -135,7 +135,7 @@ export type StatusPageToDisplay =
   | "INGENPLANTILGODKJENNING";
 
 export const statusPageToDisplaySM = (
-  oppfolgingsplan?: Oppfolgingsplan
+  oppfolgingsplan?: Oppfolgingsplan,
 ): StatusPageToDisplay | null => {
   if (!oppfolgingsplan) return null;
 
@@ -166,7 +166,7 @@ export const statusPageToDisplaySM = (
 };
 
 export const statusPageToDisplayAG = (
-  oppfolgingsplan?: Oppfolgingsplan
+  oppfolgingsplan?: Oppfolgingsplan,
 ): StatusPageToDisplay | null => {
   if (!oppfolgingsplan) return null;
 

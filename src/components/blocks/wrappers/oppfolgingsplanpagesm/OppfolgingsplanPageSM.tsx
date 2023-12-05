@@ -60,7 +60,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
       heading={textOverskrift(
         (allePlaner.isSuccess &&
           findAktivPlan(aktivPlanId, allePlaner.data)?.virksomhet.navn) ||
-          "arbeidsgiveren din"
+          "arbeidsgiveren din",
       )}
     >
       <OppfolgingsplanStepper activeStep={page.valueOf()} />

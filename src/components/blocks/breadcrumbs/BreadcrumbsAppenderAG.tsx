@@ -13,7 +13,7 @@ export const BreadcrumbsAppenderAG = (): ReactElement => {
   useEffect(() => {
     if (narmestelederId && sykmeldtInfo.data?.navn) {
       setBreadcrumbs(
-        createBreadcrumbsAG(pathname, sykmeldtInfo.data?.navn, narmestelederId)
+        createBreadcrumbsAG(pathname, sykmeldtInfo.data?.navn, narmestelederId),
       );
     }
   }, [sykmeldtInfo.data?.navn, narmestelederId, pathname]);

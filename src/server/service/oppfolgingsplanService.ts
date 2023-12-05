@@ -28,7 +28,7 @@ import {
 export async function getNarmesteLeder(
   accessToken: string,
   fnr: string,
-  virksomhetsnummer: string
+  virksomhetsnummer: string,
 ) {
   const response = narmesteLederSchema.safeParse(
     await get(
@@ -36,8 +36,8 @@ export async function getNarmesteLeder(
       "getNarmesteLeder",
       {
         accessToken,
-      }
-    )
+      },
+    ),
   );
 
   if (response.success) {
@@ -54,8 +54,8 @@ export async function getNarmesteLedere(accessToken: string, fnr: string) {
       "getNarmesteLedere",
       {
         accessToken,
-      }
-    )
+      },
+    ),
   );
 
   if (response.success) {
@@ -72,8 +72,8 @@ export async function getSykmeldingerSM(accessToken: string) {
       "getSykmeldingerSM",
       {
         accessToken,
-      }
-    )
+      },
+    ),
   );
 
   if (response.success) {
@@ -85,7 +85,7 @@ export async function getSykmeldingerSM(accessToken: string) {
 
 export async function getVirksomhet(
   accessToken: string,
-  virksomhetsnummer: string
+  virksomhetsnummer: string,
 ) {
   const response = virksomhetSchema.safeParse(
     await get(
@@ -93,8 +93,8 @@ export async function getVirksomhet(
       "getVirksomhet",
       {
         accessToken,
-      }
-    )
+      },
+    ),
   );
 
   if (response.success) {
@@ -111,8 +111,8 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
       "getOppfolgingsplanerSM",
       {
         accessToken,
-      }
-    )
+      },
+    ),
   );
 
   if (response.success) {
@@ -125,7 +125,7 @@ export async function getOppfolgingsplanerSM(accessToken: string) {
 export async function getOppfolgingsplanerAG(
   sykmeldtFnr: string,
   virksomhetsnummer: string,
-  accessToken: string
+  accessToken: string,
 ) {
   const response = array(oppfolgingsplanSchema).safeParse(
     await get(
@@ -133,8 +133,8 @@ export async function getOppfolgingsplanerAG(
       "getOppfolgingsplanerAG",
       {
         accessToken,
-      }
-    )
+      },
+    ),
   );
 
   if (response.success) {
@@ -145,14 +145,14 @@ export async function getOppfolgingsplanerAG(
 }
 
 export async function getDineSykmeldteMedSykmeldinger(
-  accessToken: string
+  accessToken: string,
 ): Promise<Sykmeldt[]> {
   const response = array(sykmeldtSchema).safeParse(
     await get(
       `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte`,
       "getDineSykmeldteMedSykmeldinger",
-      { accessToken }
-    )
+      { accessToken },
+    ),
   );
 
   if (response.success) {
@@ -164,14 +164,14 @@ export async function getDineSykmeldteMedSykmeldinger(
 
 export async function getSykmeldt(
   narmestelederid: string,
-  accessToken: string
+  accessToken: string,
 ): Promise<Sykmeldt> {
   const response = sykmeldtSchema.safeParse(
     await get(
       `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte/${narmestelederid}`,
       "getSykmeldt",
-      { accessToken }
-    )
+      { accessToken },
+    ),
   );
   if (response.success) {
     return response.data;
@@ -185,8 +185,8 @@ export async function getTilgang(accessToken: string, fnr: string) {
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tilgang?fnr=${fnr}`,
       "getTilgang",
-      { accessToken }
-    )
+      { accessToken },
+    ),
   );
 
   if (response.success) {
@@ -201,8 +201,8 @@ export async function getPersonSM(accessToken: string, fnr: string) {
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person/${fnr}`,
       "getPersonSM",
-      { accessToken }
-    )
+      { accessToken },
+    ),
   );
 
   if (response.success) {
@@ -217,8 +217,8 @@ export async function getKontaktinfo(accessToken: string, fnr: string) {
     await get(
       `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/kontaktinfo/${fnr}`,
       "getKontaktinfo",
-      { accessToken }
-    )
+      { accessToken },
+    ),
   );
 
   if (response.success) {
@@ -230,117 +230,117 @@ export async function getKontaktinfo(accessToken: string, fnr: string) {
 
 export async function createOppfolgingsplanSM(
   accessToken: string,
-  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
+  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog,
 ) {
   return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidstaker/oppfolgingsplaner`,
     "createOppfolgingsplanSM",
     opprettOppfolgingsplanData,
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function createOppfolgingsplanAG(
   accessToken: string,
-  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog
+  opprettOppfolgingsplanData: OpprettOppfoelgingsdialog,
 ) {
   return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner`,
     "createOppfolgingsplanAG",
     opprettOppfolgingsplanData,
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function kopierOppfolgingsplan(
   accessToken: string,
-  oppfolgingsplanIdToCopy: string
+  oppfolgingsplanIdToCopy: string,
 ) {
   return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanIdToCopy}/kopier`,
     "kopierOppfolgingsplan",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function avbrytOppfolgingsplan(
   accessToken: string,
-  oppfolgingsplanId: string
+  oppfolgingsplanId: string,
 ) {
   return await post<number>(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/avbryt`,
     "avbrytOppfolgingsplan",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function avvisOppfolgingsplan(
   accessToken: string,
-  oppfolgingsplanId: string
+  oppfolgingsplanId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/avvis`,
     "avvisOppfolgingsplan",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function nullstillGodkjenning(
   accessToken: string,
-  oppfolgingsplanId: string
+  oppfolgingsplanId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/nullstillGodkjenning`,
     "nullstillGodkjenning",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function delMedNav(
   accessToken: string,
-  oppfolgingsplanId: string
+  oppfolgingsplanId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/delmednav`,
     "delMedNav",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function delMedFastlege(
   accessToken: string,
-  oppfolgingsplanId: string
+  oppfolgingsplanId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/delmedfastlege`,
     "delMedFastlege",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function godkjennOppfolgingsplanSM(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennPlanData
+  data: GodkjennPlanData,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjenn?status=makrell&aktoer=arbeidstaker&delmednav=${data.delmednav}`,
     "godkjennOppfolgingsplanSM",
     data.gyldighetstidspunkt,
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function godkjennOppfolgingsplanAG(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennPlanData
+  data: GodkjennPlanData,
 ) {
   return await post(
     `${
@@ -350,71 +350,71 @@ export async function godkjennOppfolgingsplanAG(
     }&aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
     "godkjennOppfolgingsplanAG",
     data.gyldighetstidspunkt,
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function godkjennEgenOppfolgingsplanAG(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennEgenPlan
+  data: GodkjennEgenPlan,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?delmednav=${data.delMedNav}`,
     "godkjennEgenOppfolgingsplanAG",
     data.gyldighetstidspunkt,
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function godkjennsistOppfolgingsplanSM(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennsistPlanData
+  data: GodkjennsistPlanData,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjennsist?aktoer=arbeidstaker&delmednav=${data.delmednav}`,
     "godkjennsistOppfolgingsplanSM",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function godkjennsistOppfolgingsplanAG(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennsistPlanData
+  data: GodkjennsistPlanData,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/godkjennsist?aktoer=arbeidsgiver&delmednav=${data.delmednav}`,
     "godkjennsistOppfolgingsplanAG",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function deleteTiltakComment(
   accessToken: string,
-  kommentarId: string
+  kommentarId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/kommentar/actions/${kommentarId}/slett`,
     "deleteTiltakComment",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function saveTiltakComment(
   accessToken: string,
   tiltakId: string,
-  kommentar: Partial<Kommentar>
+  kommentar: Partial<Kommentar>,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/lagreKommentar`,
     "saveTiltakComment",
     kommentar,
-    { accessToken }
+    { accessToken },
   );
 }
 
@@ -423,14 +423,14 @@ export async function deleteTiltak(accessToken: string, tiltakId: string) {
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/slett`,
     "deleteTiltak",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function saveTiltak(
   accessToken: string,
   oppfolgingsplanId: string,
-  tiltak: Tiltak
+  tiltak: Tiltak,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreTiltak`,
@@ -438,26 +438,26 @@ export async function saveTiltak(
     tiltak,
     {
       accessToken: accessToken,
-    }
+    },
   );
 }
 
 export async function deleteOppgave(
   accessToken: string,
-  arbeidsoppgaveId: string
+  arbeidsoppgaveId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsoppgave/actions/${arbeidsoppgaveId}/slett`,
     "deleteOppgave",
     {},
-    { accessToken }
+    { accessToken },
   );
 }
 
 export async function saveOppgave(
   accessToken: string,
   oppfolgingsplanId: string,
-  oppgave: Arbeidsoppgave
+  oppgave: Arbeidsoppgave,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreArbeidsoppgave`,
@@ -465,7 +465,7 @@ export async function saveOppgave(
     oppgave,
     {
       accessToken: accessToken,
-    }
+    },
   );
 }
 
@@ -476,18 +476,18 @@ export async function getPdf(accessToken: string, oppfolgingsplanId: string) {
     {
       accessToken: accessToken,
       responseType: "arraybuffer",
-    }
+    },
   );
 }
 
 export async function ferdigstillVarsel(
   accessToken: string,
-  oppfolgingsplanId: string
+  oppfolgingsplanId: string,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/varsel/${oppfolgingsplanId}/ferdigstill`,
     "ferdigstillVarsel",
     {},
-    { accessToken: accessToken }
+    { accessToken: accessToken },
   );
 }

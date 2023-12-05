@@ -9,7 +9,7 @@ const ORGNR = /\b[0-9a-f]{9}\b/g;
 const FNR = /\b[0-9]{11}\b/g;
 
 export function cleanPathForMetric(
-  value: string | undefined
+  value: string | undefined,
 ): string | undefined {
   return value
     ?.replace(UUID, "[uuid]")

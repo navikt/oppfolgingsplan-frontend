@@ -12,7 +12,7 @@ export const useSetActiveTestScenario = () => {
     await post(
       `${router.basePath}/api/scenario/activescenario`,
       "setActiveTestScenario",
-      mockSetup
+      mockSetup,
     );
     await queryClient.invalidateQueries();
   };
@@ -26,7 +26,7 @@ export const useActiveTestScenario = () => {
   const fetchActiveTestScenario = () =>
     get<TestScenario>(
       `${router.basePath}/api/scenario/activescenario`,
-      "fetchActiveTestScenario"
+      "fetchActiveTestScenario",
     );
 
   return useQuery({

@@ -43,11 +43,11 @@ export const ArbeidsoppgaveCard = ({
   const isAktorHarOpprettetElement = aktorHarOpprettetElement(
     isAudienceSykmeldt,
     arbeidstakerFnr,
-    arbeidsoppgave.opprettetAv.fnr
+    arbeidsoppgave.opprettetAv.fnr,
   );
   const aktorNavn = getAktorNavn(
     isAudienceSykmeldt,
-    arbeidsoppgave.opprettetAv.navn
+    arbeidsoppgave.opprettetAv.navn,
   );
 
   const EditerArbeidsoppgaveForm = () => (

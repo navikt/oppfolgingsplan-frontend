@@ -13,7 +13,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
   oppfolgingsplanUtenAktivSykmelding,
 }: Props) => {
   const planStatus = hentStatusUtenAktivSykmelding(
-    oppfolgingsplanUtenAktivSykmelding
+    oppfolgingsplanUtenAktivSykmelding,
   );
 
   const virksomhetsnavn =
@@ -22,7 +22,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
 
   const statusUrl = useOppfolgingsplanUrl(
     oppfolgingsplanUtenAktivSykmelding.id,
-    "status"
+    "status",
   );
 
   return (

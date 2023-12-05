@@ -33,7 +33,7 @@ const OpprettModalSM = ({
     if (kopierTidligerePlan) {
       const oppfolgingsplan = finnNyesteTidligereOppfolgingsplanMedVirksomhet(
         oppfolgingsplaner,
-        virksomhetsnummer
+        virksomhetsnummer,
       );
       if (oppfolgingsplan) {
         kopierOppfolgingsplan.mutate(oppfolgingsplan.id);
@@ -74,7 +74,7 @@ const OpprettModalSM = ({
           isSubmitting={opprettOppfolgingsplan.isPending}
           handleSubmit={(
             kopierTidligerePlan: boolean,
-            virksomhetsnummer: string
+            virksomhetsnummer: string,
           ) => {
             opprett(kopierTidligerePlan, virksomhetsnummer);
           }}

@@ -3,7 +3,7 @@ import { grant } from "./tokenx.grant";
 
 export async function getTokenX(
   subjectToken: string,
-  audience: string
+  audience: string,
 ): Promise<string> {
   let tokenX;
 
@@ -12,14 +12,14 @@ export async function getTokenX(
   } catch (e) {
     throw new ApiErrorException(
       generalError(
-        `Failed grant for client id: ${audience}. Error message: ${e}`
-      )
+        `Failed grant for client id: ${audience}. Error message: ${e}`,
+      ),
     );
   }
 
   if (!tokenX.access_token) {
     throw new ApiErrorException(
-      generalError(`Token X missing access token for client id: ${audience}`)
+      generalError(`Token X missing access token for client id: ${audience}`),
     );
   }
 

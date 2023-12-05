@@ -5,7 +5,7 @@ import {
 import { ORGANISASJONSINFORMASJON } from "../constants";
 
 export function createOrganisasjonsinformasjonDTO(
-  props?: Partial<OrganisasjonsinformasjonDTO>
+  props?: Partial<OrganisasjonsinformasjonDTO>,
 ): OrganisasjonsinformasjonDTO {
   return {
     orgnummer: ORGANISASJONSINFORMASJON.orgnummer,
@@ -14,7 +14,7 @@ export function createOrganisasjonsinformasjonDTO(
   };
 }
 export function createSykmeldingDTO(
-  props?: Partial<SykmeldingDTO>
+  props?: Partial<SykmeldingDTO>,
 ): SykmeldingDTO {
   return {
     id: "123",

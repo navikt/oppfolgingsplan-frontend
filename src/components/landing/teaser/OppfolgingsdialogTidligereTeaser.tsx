@@ -15,7 +15,7 @@ const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsplan }: Props) => {
 
   const oppfolgingsplanUrl = useOppfolgingsplanUrl(
     oppfolgingsplan.id,
-    "status"
+    "status",
   );
 
   return (

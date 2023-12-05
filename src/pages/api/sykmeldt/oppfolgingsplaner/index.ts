@@ -5,7 +5,7 @@ import { mapOppfolgingsplanMetaToOppfolgingsplaner } from "../../../../server/da
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   const oppfolgingplanerMeta = await fetchOppfolgingsplanerMetaSM(req);
 

@@ -4,14 +4,14 @@ import { Virksomhet } from "../../../types/oppfolgingsplan";
 
 export const mapVirksomhet = (
   oppfolgingsplan: OppfolgingsplanDTO,
-  oppfolgingplanerMeta: OppfolgingsplanMeta
+  oppfolgingplanerMeta: OppfolgingsplanMeta,
 ): Virksomhet => {
   return {
     virksomhetsnummer: oppfolgingsplan.virksomhet.virksomhetsnummer,
     navn:
       oppfolgingplanerMeta.virksomhet.find(
         (v) =>
-          v.virksomhetsnummer === oppfolgingsplan.virksomhet?.virksomhetsnummer
+          v.virksomhetsnummer === oppfolgingsplan.virksomhet?.virksomhetsnummer,
       )?.navn || "",
   };
 };

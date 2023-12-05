@@ -15,7 +15,7 @@ export const GodkjentPlanDeltBekreftelse = ({ godkjentPlan }: Props) => {
         <BildeTekstLinje
           imgUrl={NavLogoImage}
           tekst={`Planen ble delt med NAV ${toDateMedMaanedNavn(
-            godkjentPlan.deltMedNAVTidspunkt
+            godkjentPlan.deltMedNAVTidspunkt,
           )}`}
         />
       )}
@@ -24,7 +24,7 @@ export const GodkjentPlanDeltBekreftelse = ({ godkjentPlan }: Props) => {
           <BildeTekstLinje
             imgUrl={MedicalBoxImage}
             tekst={`Planen ble delt med fastlegen ${toDateMedMaanedNavn(
-              godkjentPlan.deltMedFastlegeTidspunkt
+              godkjentPlan.deltMedFastlegeTidspunkt,
             )}`}
           />
         )}

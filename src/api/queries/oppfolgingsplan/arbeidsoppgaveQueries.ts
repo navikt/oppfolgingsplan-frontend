@@ -16,7 +16,7 @@ export const useLagreArbeidsoppgave = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/lagre`,
       "lagreOppgave",
-      oppgave
+      oppgave,
     );
   };
 
@@ -43,7 +43,7 @@ export const useSlettArbeidsoppgave = () => {
   const slettOppgave = async (arbeidsoppgaveId: number) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/arbeidsoppgave/${arbeidsoppgaveId}/slett`,
-      "slettOppgave"
+      "slettOppgave",
     );
   };
 

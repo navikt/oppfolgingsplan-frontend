@@ -15,7 +15,7 @@ describe("<ArbeidsoppgaveCard />", () => {
       {
         mockReactQuery: true,
         mockRouter: true,
-      }
+      },
     );
 
     cy.findByRole("button", { name: /Endre/i }).should("exist");
@@ -33,7 +33,7 @@ describe("<ArbeidsoppgaveCard />", () => {
         mockReactQuery: true,
         mockRouter: true,
         isArbeidsgiver: true,
-      }
+      },
     );
 
     cy.findByRole("button", { name: /Endre/i }).should("not.exist");

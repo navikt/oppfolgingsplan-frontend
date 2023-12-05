@@ -15,7 +15,7 @@ export const useKontaktinfo = () => {
       "fetchKontaktinfo",
       {
         personIdent: sykmeldtData.data?.fnr,
-      }
+      },
     );
 
   return useQuery({

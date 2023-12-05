@@ -8,7 +8,7 @@ import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   if (isMockBackend) {
     const encoder = new TextEncoder();
@@ -21,7 +21,7 @@ const handler = async (
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      'inline; filename="oppfolgingsplan.pdf"'
+      'inline; filename="oppfolgingsplan.pdf"',
     );
     res.end(pdf);
   }

@@ -12,7 +12,7 @@ interface Props {
 
 export const TilGjeldendePlanKnapp = ({ oppfolgingsplan }: Props) => {
   const gjeldendePlan = useGjeldendePlanSM(
-    oppfolgingsplan.virksomhet?.virksomhetsnummer
+    oppfolgingsplan.virksomhet?.virksomhetsnummer,
   );
   const basePath = useLandingUrl();
 

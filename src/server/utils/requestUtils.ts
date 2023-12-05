@@ -33,7 +33,7 @@ export const getNarmesteLederIdFromRequest = (req: NextApiRequest): string => {
 };
 
 export const getOppfolgingsplanIdFromRequest = (
-  req: NextApiRequest
+  req: NextApiRequest,
 ): string => {
   const { oppfolgingsplanId } = req.query;
 

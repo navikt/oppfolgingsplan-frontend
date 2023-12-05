@@ -72,7 +72,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const hasSeenReservertInfo = sessionStorage?.getItem(
-      `${narmesteLederId}-seen-varsel`
+      `${narmesteLederId}-seen-varsel`,
     );
     if (
       sykmeldtesKontaktinfo.isSuccess &&

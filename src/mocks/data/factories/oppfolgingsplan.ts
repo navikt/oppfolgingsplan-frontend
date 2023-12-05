@@ -14,7 +14,7 @@ export function createPerson(props?: Partial<Person>): Person {
 }
 
 export function createGjennomforing(
-  props?: Partial<Gjennomforing>
+  props?: Partial<Gjennomforing>,
 ): Gjennomforing {
   return {
     kanGjennomfoeres: "TILRETTELEGGING",
@@ -27,7 +27,7 @@ export function createGjennomforing(
   };
 }
 export function createArbeidsoppgave(
-  props?: Partial<Arbeidsoppgave>
+  props?: Partial<Arbeidsoppgave>,
 ): Arbeidsoppgave {
   return {
     arbeidsoppgaveId: 123,

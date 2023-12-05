@@ -25,7 +25,7 @@ export const SendTilGodkjenningToggle = ({
 
   const arbeidsoppgaveUrl = useOppfolgingsplanUrl(
     oppfolgingsplanId,
-    "arbeidsoppgaver"
+    "arbeidsoppgaver",
   );
   const tiltakUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "tiltak");
 

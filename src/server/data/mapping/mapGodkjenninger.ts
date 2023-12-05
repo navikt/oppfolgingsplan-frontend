@@ -5,7 +5,7 @@ import { Godkjenning } from "../../../types/oppfolgingsplan";
 
 export const mapGodkjenninger = (
   oppfolgingsplan: OppfolgingsplanDTO,
-  oppfolgingplanerMeta: OppfolgingsplanMeta
+  oppfolgingplanerMeta: OppfolgingsplanMeta,
 ): Godkjenning[] => {
   return oppfolgingsplan.godkjenninger.map((godkjenning) => {
     return {
@@ -15,7 +15,7 @@ export const mapGodkjenninger = (
         navn: findName(
           oppfolgingplanerMeta.narmesteLedere,
           oppfolgingplanerMeta.person,
-          godkjenning.godkjentAv.fnr
+          godkjenning.godkjentAv.fnr,
         ),
       },
     };

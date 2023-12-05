@@ -42,7 +42,7 @@ const PageContent = () => {
       <div>
         <OppfolgingsplanUtenGyldigSykmelding
           sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(
-            sykmeldinger.data
+            sykmeldinger.data,
           )}
         />
 
@@ -50,7 +50,7 @@ const PageContent = () => {
           harTidligereOppfolgingsplaner(oppfolgingsplaner.data) && (
             <OppfolgingsdialogerUtenAktivSykmelding
               oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsplaner(
-                oppfolgingsplaner.data
+                oppfolgingsplaner.data,
               )}
             />
           )}

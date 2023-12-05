@@ -21,7 +21,7 @@ export const EditerArbeidsoppgave = ({
   const lagreArbeidsoppgave = useLagreArbeidsoppgave();
 
   const arbeidsoppgaveInformasjon = (
-    data: OppgaveFormValues
+    data: OppgaveFormValues,
   ): Arbeidsoppgave => {
     return {
       ...arbeidsoppgave,
@@ -64,7 +64,7 @@ export const EditerArbeidsoppgave = ({
         arbeidsoppgavenavn: arbeidsoppgave.arbeidsoppgavenavn,
         kanGjennomfores: arbeidsoppgave.gjennomfoering?.kanGjennomfoeres || "",
         tilrettelegging: getTilretteleggingFormData(
-          arbeidsoppgave.gjennomfoering
+          arbeidsoppgave.gjennomfoering,
         ),
         kanBeskrivelse: arbeidsoppgave.gjennomfoering?.kanBeskrivelse || "",
         kanIkkeBeskrivelse:

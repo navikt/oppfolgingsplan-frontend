@@ -32,7 +32,7 @@ export const Dialog = ({
       const isAktorsKommentar = aktorHarOpprettetElement(
         isAudienceSykmeldt,
         arbeidstakerFnr,
-        kommentar.opprettetAv.fnr
+        kommentar.opprettetAv.fnr,
       );
 
       return (
@@ -41,7 +41,7 @@ export const Dialog = ({
           key={index}
           avatar={hentAktoerNavnInitialer(
             kommentar.opprettetAv.navn,
-            isAudienceSykmeldt
+            isAudienceSykmeldt,
           )}
           name={getAktorNavn(isAudienceSykmeldt, kommentar.opprettetAv.navn)}
           timestamp={getFullDateFormat(kommentar.opprettetTidspunkt)}

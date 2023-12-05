@@ -13,7 +13,7 @@ export const NullstillGodkjenningKnapp = ({ oppfolgingsplanId }: Props) => {
   const nullstillGodkjenning = useNullstillGodkjenning();
   const arbeidsoppgaverUrl = useOppfolgingsplanUrl(
     oppfolgingsplanId,
-    "arbeidsoppgaver"
+    "arbeidsoppgaver",
   );
 
   return (

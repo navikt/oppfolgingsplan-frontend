@@ -20,7 +20,7 @@ const OppfolgingsplanContent = ({
     erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere(
       oppfolgingsplaner,
       sykmeldinger,
-      narmesteLedere
+      narmesteLedere,
     )
   ) {
     return <IngenLedereInfoBoks />;

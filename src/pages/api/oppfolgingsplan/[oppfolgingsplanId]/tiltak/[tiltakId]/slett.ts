@@ -15,7 +15,7 @@ import { isMockBackend } from "../../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
   const tiltakId = getTiltakIdFromRequest(req);
@@ -24,19 +24,19 @@ const handler = async (
     const activeMock = getMockDb(req);
 
     const aktivPlan = activeMock.oppfolgingsplaner.find(
-      (plan) => plan.id === Number(oppfolgingsplanId)
+      (plan) => plan.id === Number(oppfolgingsplanId),
     );
     if (!aktivPlan) {
       throw new ApiErrorException(
         generalError(
-          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`
-        )
+          `Det finnes ikke oppfølgingsplan med id ${oppfolgingsplanId} i mockdata`,
+        ),
       );
     }
     const aktivPlanIndex = activeMock.oppfolgingsplaner.indexOf(aktivPlan);
     activeMock.oppfolgingsplaner[aktivPlanIndex].tiltakListe =
       aktivPlan.tiltakListe?.filter(
-        (tiltak) => tiltak.tiltakId !== Number(tiltakId)
+        (tiltak) => tiltak.tiltakId !== Number(tiltakId),
       );
     res.status(200).end();
   } else {

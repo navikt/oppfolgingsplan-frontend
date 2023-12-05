@@ -14,7 +14,7 @@ const findAllVirksomhetsnummer = (oppfolgingsplaner: OppfolgingsplanDTO[]) => {
 
 export const fetchVirksomhet = async (
   oppfolgingsplanTokenX: string,
-  oppfolgingsplaner: OppfolgingsplanDTO[]
+  oppfolgingsplaner: OppfolgingsplanDTO[],
 ) => {
   const alleVirksomhetsnummer = findAllVirksomhetsnummer(oppfolgingsplaner);
 

@@ -10,7 +10,7 @@ import { isMockBackend } from "../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   if (isMockBackend) {
     const sessionId = req.headers[TEST_SESSION_ID];

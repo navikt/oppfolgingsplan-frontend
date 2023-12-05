@@ -15,7 +15,7 @@ export const NyArbeidsoppgaveAG = () => {
   const [leggerTilOppgave, setLeggerTilOppgave] = useState(false);
 
   const nyArbeidsoppgaveInformasjon = (
-    data: OppgaveFormValues
+    data: OppgaveFormValues,
   ): Partial<Arbeidsoppgave> => {
     return {
       arbeidsoppgavenavn: data.arbeidsoppgaveNavn,

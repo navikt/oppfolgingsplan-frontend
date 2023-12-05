@@ -16,7 +16,7 @@ export const useLagreTiltak = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/lagre`,
       "useLagreTiltak",
-      tiltak
+      tiltak,
     );
   };
 
@@ -43,7 +43,7 @@ export const useSlettTiltakSM = () => {
   const slettTiltak = async (tiltakId: number) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/slett`,
-      "useSlettTiltakSM"
+      "useSlettTiltakSM",
     );
   };
 
@@ -79,7 +79,7 @@ export const useLagreKommentar = () => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/lagre`,
       "useLagreKommentar",
-      kommentar
+      kommentar,
     );
   };
 
@@ -114,7 +114,7 @@ export const useSlettKommentar = () => {
   }: SlettKommentarProps) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/${tiltakId}/kommentar/${kommentarId}/slett`,
-      "useSlettKommentar"
+      "useSlettKommentar",
     );
   };
 

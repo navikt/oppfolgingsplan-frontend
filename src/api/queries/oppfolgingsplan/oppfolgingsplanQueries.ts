@@ -25,7 +25,7 @@ export const useKopierOppfolgingsplan = () => {
   const postKopierOppfolgingsplan = async (oppfolgingsplanIdToCopy: number) => {
     const oppfolgingsplanId = await post<number>(
       `${apiPath}/${oppfolgingsplanIdToCopy}/kopier`,
-      "postKopierOppfolgingsplan"
+      "postKopierOppfolgingsplan",
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -44,7 +44,7 @@ export const useNullstillGodkjenning = () => {
   const nullstillGodkjenning = async (oppfolgingsplanId: number) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/nullstillgodkjenning`,
-      "useNullstillGodkjenning"
+      "useNullstillGodkjenning",
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -64,7 +64,7 @@ export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
       "useGodkjennsistOppfolgingsplan",
-      data
+      data,
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -85,7 +85,7 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjenn`,
       "useGodkjennOppfolgingsplan",
-      data
+      data,
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -113,7 +113,7 @@ export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
       "useGodkjennEgenOppfolgingsplanAG",
-      data
+      data,
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -138,7 +138,7 @@ export const useAvvisOppfolgingsplan = () => {
   const postAvvisOppfolgingsplan = async (oppfolgingsplanId: number) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/avvis`,
-      "useAvvisOppfolgingsplan"
+      "useAvvisOppfolgingsplan",
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -155,7 +155,7 @@ export const useDelOppfolgingsplanMedNav = () => {
   const delPlanMedNAV = async (oppfolgingsplanId: number) => {
     await post(
       `${apiBasePath}/${oppfolgingsplanId}/delmednav`,
-      "useDelOppfolgingsplanMedNav"
+      "useDelOppfolgingsplanMedNav",
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -172,7 +172,7 @@ export const useDelOppfolgingsplanMedFastlege = () => {
   const delPlanMedFastlege = async (oppfolgingsplanId: number) => {
     await post(
       `${apiBasePath}/${oppfolgingsplanId}/delmedfastlege`,
-      "useDelOppfolgingsplanMedFastlege"
+      "useDelOppfolgingsplanMedFastlege",
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -191,7 +191,7 @@ export const useAvbrytOppfolgingsplan = () => {
   const postAvbrytOppfolgingsplan = async (oppfolgingsplanId: number) => {
     const newOppfolgingsplanId = await post<number>(
       `${apiBasePath}/${oppfolgingsplanId}/avbryt`,
-      "useAvbrytOppfolgingsplan"
+      "useAvbrytOppfolgingsplan",
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],
@@ -204,7 +204,7 @@ export const useAvbrytOppfolgingsplan = () => {
 };
 
 export const useInnloggetFnr = (
-  oppfolgingsplan: Oppfolgingsplan | undefined
+  oppfolgingsplan: Oppfolgingsplan | undefined,
 ): string | null | undefined => {
   const { isAudienceSykmeldt } = useAudience();
 

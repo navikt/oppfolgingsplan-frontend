@@ -4,7 +4,7 @@ import { Person } from "../../../types/oppfolgingsplan";
 
 export const mapArbeidstaker = (
   oppfolgingsplan: OppfolgingsplanDTO,
-  oppfolgingplanerMeta: OppfolgingsplanMeta
+  oppfolgingplanerMeta: OppfolgingsplanMeta,
 ): Person => {
   return {
     ...oppfolgingsplan.arbeidstaker,

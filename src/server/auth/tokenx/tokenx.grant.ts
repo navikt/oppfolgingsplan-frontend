@@ -3,7 +3,7 @@ import { getClient } from "./tokenx.client";
 
 export const grant = async (
   subject_token: string,
-  audience: string
+  audience: string,
 ): Promise<TokenSet> => {
   const client = await getClient();
 

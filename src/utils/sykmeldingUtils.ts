@@ -4,7 +4,7 @@ import { NarmesteLederDTO } from "../schema/narmestelederSchema";
 
 export const sykmeldtHarNaermestelederHosArbeidsgiver = (
   virksomhetsnummer: string,
-  naermesteLedere: NarmesteLederDTO[]
+  naermesteLedere: NarmesteLederDTO[],
 ) => {
   return (
     naermesteLedere.filter((leder) => {
@@ -15,7 +15,7 @@ export const sykmeldtHarNaermestelederHosArbeidsgiver = (
 
 export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (
   virksomhetsnummer: string,
-  naermesteLedere: NarmesteLederDTO[]
+  naermesteLedere: NarmesteLederDTO[],
 ) => {
   const naermesteLeder = naermesteLedere.filter((leder) => {
     return virksomhetsnummer === leder.virksomhetsnummer && leder.erAktiv;
@@ -24,7 +24,7 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (
 };
 
 export const sykmeldtHarIngenSendteSykmeldinger = (
-  sykmeldinger: SykmeldingDTO[]
+  sykmeldinger: SykmeldingDTO[],
 ) => {
   return sykmeldinger.length === 0;
 };
@@ -39,7 +39,7 @@ export const sykmeldtHarGyldigSykmelding = (sykmeldinger: SykmeldingDTO[]) => {
       .filter((sykmelding) => {
         return erSykmeldingGyldigForOppfolgingMedGrensedato(
           sykmelding,
-          tomGrenseDato
+          tomGrenseDato,
         );
       }).length > 0
   );
@@ -54,14 +54,14 @@ export interface ArbeidsgivereForGyldigeSykmeldinger {
 
 export const finnArbeidsgivereForGyldigeSykmeldinger = (
   sykmeldinger: SykmeldingDTO[],
-  naermesteLedere: NarmesteLederDTO[]
+  naermesteLedere: NarmesteLederDTO[],
 ): ArbeidsgivereForGyldigeSykmeldinger[] => {
   const dagensDato = new Date();
   return sykmeldinger
     .filter((sykmelding) => {
       return erSykmeldingGyldigForOppfolgingMedGrensedato(
         sykmelding,
-        dagensDato
+        dagensDato,
       );
     })
     .map((sykmelding) => {
@@ -70,11 +70,11 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
         navn: sykmelding.organisasjonsinformasjon.orgNavn,
         harNaermesteLeder: sykmeldtHarNaermestelederHosArbeidsgiver(
           sykmelding.organisasjonsinformasjon.orgnummer,
-          naermesteLedere
+          naermesteLedere,
         ),
         naermesteLeder: finnSykmeldtSinNaermestelederNavnHosArbeidsgiver(
           sykmelding.organisasjonsinformasjon.orgnummer,
-          naermesteLedere
+          naermesteLedere,
         ),
       };
     })

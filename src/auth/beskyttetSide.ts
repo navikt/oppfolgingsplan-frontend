@@ -5,12 +5,12 @@ import { validateToken } from "../server/auth/idporten/verifyIdportenToken";
 import { isMockBackend } from "../server/utils/serverEnv";
 
 export type PageHandler = (
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext,
 ) => Promise<GetServerSidePropsResult<Record<string, unknown>>>;
 
 const beskyttetSide = (handler: PageHandler) => {
   return async function withBearerTokenHandler(
-    context: GetServerSidePropsContext
+    context: GetServerSidePropsContext,
   ): Promise<ReturnType<NonNullable<typeof handler>>> {
     if (isMockBackend) {
       return handler(context);
@@ -50,5 +50,5 @@ export const beskyttetSideUtenProps = beskyttetSide(
     return {
       props: {},
     };
-  }
+  },
 );

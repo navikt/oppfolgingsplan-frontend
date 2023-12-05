@@ -71,7 +71,7 @@ export const useOppfolgingsplanBasePath = (): string => {
 
 export const useOppfolgingsplanUrl = (
   oppfolgingsplanId: number,
-  page: "arbeidsoppgaver" | "tiltak" | "seplanen" | "status"
+  page: "arbeidsoppgaver" | "tiltak" | "seplanen" | "status",
 ) => {
   const landingPage = useLandingUrl();
   switch (page) {

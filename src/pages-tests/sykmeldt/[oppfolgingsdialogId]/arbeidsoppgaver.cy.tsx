@@ -17,7 +17,7 @@ describe("<Arbeidsoppgaver />", () => {
         method: "POST",
         url: `/api/oppfolgingsplan/${mockSetup.oppfolgingsplaner[0].id}/arbeidsoppgave/lagre`,
       },
-      []
+      [],
     ).as("lagreArbeidsoppgave");
 
     cy.mountWithMocks(<Arbeidsoppgaver />, {
@@ -30,7 +30,7 @@ describe("<Arbeidsoppgaver />", () => {
     cy.getByTestid(ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON).click();
 
     cy.getByTestid(ARBEIDSOPPGAVE_BESKRIVELSE_TEXTAREA).type(
-      "Enda en arbeidsoppgave.."
+      "Enda en arbeidsoppgave..",
     );
 
     cy.getByTestid(ARBEIDSOPPGAVE_KAN_GJENNOMFOERES_RADIO).click();

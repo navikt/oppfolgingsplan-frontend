@@ -15,7 +15,7 @@ export const GodkjentPlanAvbruttTidspunkt = ({ godkjentPlan }: Props) => {
     <BildeTekstLinje
       imgUrl={CalendarImage}
       tekst={`Planens varighet: ${toDateMedMaanedNavn(
-        godkjentPlan.gyldighetstidspunkt.fom
+        godkjentPlan.gyldighetstidspunkt.fom,
       )} - ${toDateMedMaanedNavn(godkjentPlan.avbruttPlan.tidspunkt)}`}
     />
   );

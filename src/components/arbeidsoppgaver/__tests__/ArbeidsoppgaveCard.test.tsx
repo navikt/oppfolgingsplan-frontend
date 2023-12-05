@@ -17,14 +17,14 @@ describe("ArbeidsoppgaveCard", () => {
           arbeidstakerFnr={SYKMELDT.fnr}
           arbeidsoppgave={arbeidsoppgaveCreatedBySM}
           readonly={false}
-        />
+        />,
       );
 
       jExpect(
-        screen.getByRole("button", { name: "Slett" })
+        screen.getByRole("button", { name: "Slett" }),
       ).toBeInTheDocument();
       jExpect(
-        screen.getByRole("button", { name: "Endre" })
+        screen.getByRole("button", { name: "Endre" }),
       ).toBeInTheDocument();
     });
   });
@@ -39,15 +39,15 @@ describe("ArbeidsoppgaveCard", () => {
           arbeidstakerFnr={SYKMELDT.fnr}
           arbeidsoppgave={arbeidsoppgaveCreatedBySM}
           readonly={false}
-        />
+        />,
       );
 
       jExpect(
-        screen.queryByRole("button", { name: "Slett" })
+        screen.queryByRole("button", { name: "Slett" }),
       ).not.toBeInTheDocument();
 
       jExpect(
-        screen.queryByRole("button", { name: "Endre" })
+        screen.queryByRole("button", { name: "Endre" }),
       ).not.toBeInTheDocument();
     });
   });

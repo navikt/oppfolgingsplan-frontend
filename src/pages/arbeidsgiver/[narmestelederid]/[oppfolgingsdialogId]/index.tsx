@@ -117,7 +117,7 @@ const OppfolgingsplanStatusAG: NextPage = () => {
     const { title, heading } = getStatusPageTitleAndHeading(
       pageToDisplay,
       aktivPlan?.virksomhet?.navn,
-      aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din"
+      aktivPlan?.arbeidstaker.navn || "Arbeidstakeren din",
     );
 
     return (

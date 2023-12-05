@@ -13,7 +13,7 @@ export const useTilgangAG = () => {
   const fetchTilgang = () =>
     get<Tilgang>(
       `${apiBasePath}/tilgang/${sykmeldtData.data?.fnr}`,
-      "fetchTilgangAG"
+      "fetchTilgangAG",
     );
 
   return useQuery<Tilgang, ApiErrorException>({

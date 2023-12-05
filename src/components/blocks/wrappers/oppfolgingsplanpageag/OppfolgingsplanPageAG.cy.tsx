@@ -17,7 +17,7 @@ describe("<OppfolgingsplanPageAG />", () => {
         mockRouter: true,
         narmestelederRouteId: mockSetup.sykmeldt.narmestelederId,
         oppfolgingsplanRouteId: mockSetup.oppfolgingsplaner[0].id.toString(),
-      }
+      },
     );
 
     cy.contains("Some content here").should("not.exist");

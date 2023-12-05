@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export const useFerdigstillVarsel = (
   ferdigstillVarsel: UseMutationResult<void, unknown, number, unknown>,
-  oppfolgingsplanId: number
+  oppfolgingsplanId: number,
 ) => {
   useEffect(() => {
     if (oppfolgingsplanId) {

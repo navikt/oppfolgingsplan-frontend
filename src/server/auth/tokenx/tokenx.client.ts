@@ -15,7 +15,7 @@ export async function getClient(): Promise<Client> {
       token_endpoint_auth_method: "private_key_jwt",
       token_endpoint_auth_signing_alg: "RS256",
     },
-    { keys: [JSON.parse(serverEnv.TOKEN_X_PRIVATE_JWK)] }
+    { keys: [JSON.parse(serverEnv.TOKEN_X_PRIVATE_JWK)] },
   );
 
   return _client;

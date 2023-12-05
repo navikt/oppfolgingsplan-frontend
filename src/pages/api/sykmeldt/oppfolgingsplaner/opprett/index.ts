@@ -7,7 +7,7 @@ import { isMockBackend } from "../../../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   if (isMockBackend) {
     res.status(200).send(123);
@@ -16,7 +16,7 @@ const handler = async (
     const opprettOppfolgingsplanData: OpprettOppfoelgingsdialog = req.body;
     const id: number = await createOppfolgingsplanSM(
       tokenX,
-      opprettOppfolgingsplanData
+      opprettOppfolgingsplanData,
     );
 
     res.status(200).send(id);
