@@ -26,7 +26,7 @@ const AllTheProviders = ({ children }: { children: ReactNode }) => {
 
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">
+  options?: Omit<RenderOptions, "wrapper">,
 ) => {
   return {
     requestBodySpy,

@@ -5,7 +5,7 @@ import { isMockBackend } from "../utils/serverEnv";
 
 type ApiHandler = (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) => void | Promise<void>;
 
 const UUID =
@@ -13,7 +13,7 @@ const UUID =
 const ORGNR = /\b[0-9a-f]{9}\b/g;
 const FNR = /\b[0-9]{11}\b/g;
 export function cleanPathForMetric(
-  value: string | undefined
+  value: string | undefined,
 ): string | undefined {
   return value
     ?.replace(UUID, "[uuid]")
@@ -48,13 +48,13 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
           logger.error(
             `${req.method} ${cleanPathForMetric(req.url)} returned code: ${
               error.code
-            }, message: ${error.message}`
+            }, message: ${error.message}`,
           );
         } else {
           logger.error(
             `${req.method} ${cleanPathForMetric(
-              req.url
-            )} returned error message: ${error.message}`
+              req.url,
+            )} returned error message: ${error.message}`,
           );
         }
 

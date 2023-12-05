@@ -9,7 +9,7 @@ import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { sykmeldtPersonDTO } from "../fixtures/personDTO";
 
 export function createVirksomhetDTO(
-  props?: Partial<VirksomhetDTO>
+  props?: Partial<VirksomhetDTO>,
 ): VirksomhetDTO {
   return {
     navn: VIRKSOMHET.navn,
@@ -19,7 +19,7 @@ export function createVirksomhetDTO(
 }
 
 export function createNarmesteLederDTO(
-  props?: Partial<NarmesteLederDTO>
+  props?: Partial<NarmesteLederDTO>,
 ): NarmesteLederDTO {
   return {
     virksomhetsnummer: VIRKSOMHET.virksomhetsnummer,
@@ -34,7 +34,7 @@ export function createNarmesteLederDTO(
 }
 
 export function createArbeidsgiverDTO(
-  props?: Partial<ArbeidsgiverDTO>
+  props?: Partial<ArbeidsgiverDTO>,
 ): ArbeidsgiverDTO {
   return {
     narmesteLeder: createNarmesteLederDTO(),
@@ -52,7 +52,7 @@ export function createPersonDTO(props?: Partial<PersonDTO>): PersonDTO {
 }
 
 export const createOppfolgingsplanDTO = (
-  props?: Partial<OppfolgingsplanDTO>
+  props?: Partial<OppfolgingsplanDTO>,
 ): OppfolgingsplanDTO => {
   return {
     id: 123,

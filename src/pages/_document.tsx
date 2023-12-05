@@ -19,7 +19,7 @@ import {
 // The 'head'-field of the document initialProps contains data from <head> (meta-tags etc)
 const getDocumentParameter = (
   initialProps: DocumentInitialProps,
-  name: string
+  name: string,
 ): string => {
   return initialProps.head?.find((element) => element?.props?.name === name)
     ?.props?.content;
@@ -51,7 +51,7 @@ export default class MyDocument extends Document<Props> {
           : createBreadcrumbsAG(
               ctx.pathname,
               "Den sykmeldte",
-              ctx.query.narmestelederid as string
+              ctx.query.narmestelederid as string,
             ),
       },
     });

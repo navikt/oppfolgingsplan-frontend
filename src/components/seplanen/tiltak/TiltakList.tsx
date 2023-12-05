@@ -35,7 +35,7 @@ export const TiltakList = ({ oppfolgingsplan }: Props) => {
   };
 
   const sortedTiltak = sorterTiltakEtterTypeOgOpprettet(
-    oppfolgingsplan.tiltakListe
+    oppfolgingsplan.tiltakListe,
   );
 
   const alleTiltak = sortedTiltak.map((tiltak, index) => {

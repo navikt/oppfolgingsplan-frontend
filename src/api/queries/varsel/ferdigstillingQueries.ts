@@ -9,7 +9,7 @@ export const useFerdigstillGodkjennPlanVarsel = () => {
   const ferdigstillVarsel = async (oppfolgingsplanId: number) => {
     await post(
       `${basePath}/api/varsel/${oppfolgingsplanId}/ferdigstill`,
-      "useFerdigstillGodkjennPlanVarsel"
+      "useFerdigstillGodkjennPlanVarsel",
     );
   };
 

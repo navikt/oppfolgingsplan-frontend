@@ -20,7 +20,7 @@ export const ORGNUMMER_HEADER = "orgnummer";
 export const TEST_SESSION_ID = "testscenario-session-id";
 
 const defaultRequestHeaders = (
-  options?: AxiosOptions
+  options?: AxiosOptions,
 ): Record<string, string> => {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function handleError(error: AxiosError, requestOrigin: RequestOrigin) {
 export const get = <ResponseData>(
   url: string,
   requestOrigin: RequestOrigin,
-  options?: AxiosOptions
+  options?: AxiosOptions,
 ): Promise<ResponseData> => {
   return axios
     .get(encodeURI(url), {
@@ -80,7 +80,7 @@ export const post = <ResponseData>(
   url: string,
   requestOrigin: RequestOrigin,
   data?: unknown,
-  options?: AxiosOptions
+  options?: AxiosOptions,
 ): Promise<ResponseData> => {
   return axios
     .post(url, data, {

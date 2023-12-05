@@ -5,13 +5,13 @@ import { PersonV3DTO } from "../../../schema/personSchemas";
 
 export const fetchPerson = async (
   oppfolgingsplanTokenX: string,
-  oppfolgingsplaner: OppfolgingsplanDTO[]
+  oppfolgingsplaner: OppfolgingsplanDTO[],
 ): Promise<PersonV3DTO> | never => {
   const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 
   if (!sykmeldtFnr) {
     throw new ApiErrorException(
-      generalError("fetchPersonSM: No FNR found in oppfolgingsplan")
+      generalError("fetchPersonSM: No FNR found in oppfolgingsplan"),
     );
   }
 

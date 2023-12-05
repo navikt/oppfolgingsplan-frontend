@@ -14,7 +14,7 @@ describe("<NyArbeidsoppgaveSM />", () => {
         method: "POST",
         url: "/api/oppfolgingsplan/123/arbeidsoppgave/lagre",
       },
-      []
+      [],
     ).as("lagreArbeidsoppgave");
 
     cy.mountWithMocks(<NyArbeidsoppgaveSM />, {

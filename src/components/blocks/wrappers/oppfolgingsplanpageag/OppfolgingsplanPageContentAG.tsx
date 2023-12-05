@@ -44,7 +44,7 @@ export const OppfolgingsplanPageContentAG = ({
     (erOppfolgingsplanTidligere(aktivPlan) ||
       erOppfolgingsplanKnyttetTilGyldigSykmeldingAG(
         aktivPlan,
-        sykmeldt.orgnummer
+        sykmeldt.orgnummer,
       ));
 
   if (!erOppfolgingsdialogTilgjengelig) {

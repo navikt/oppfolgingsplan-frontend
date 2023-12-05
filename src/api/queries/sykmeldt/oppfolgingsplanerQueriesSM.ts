@@ -18,7 +18,7 @@ export const useOppfolgingsplanerSM = () => {
   const fetchOppfolgingsplaner = () =>
     get<Oppfolgingsplan[]>(
       `${apiBasePath}/oppfolgingsplaner`,
-      "fetchOppfolgingsplanerSM"
+      "fetchOppfolgingsplanerSM",
     );
 
   return useQuery({
@@ -40,7 +40,7 @@ export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
 };
 
 export const useGjeldendePlanSM = (
-  virksomhetsnummer?: string | null
+  virksomhetsnummer?: string | null,
 ): Oppfolgingsplan | null => {
   const allePlaner = useOppfolgingsplanerSM();
 
@@ -52,7 +52,7 @@ export const useGjeldendePlanSM = (
     return (
       finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
         allePlaner.data,
-        virksomhetsnummer
+        virksomhetsnummer,
       ) || null
     );
   }
@@ -78,7 +78,7 @@ export const useOpprettOppfolgingsplanSM = () => {
     const oppfolgingsplanId = await post<number>(
       `${apiBasePath}/oppfolgingsplaner/opprett`,
       "opprettOppfolgingsplanSM",
-      data
+      data,
     );
     await queryClient.invalidateQueries({
       queryKey: [queryKeys.OPPFOLGINGSPLANER],

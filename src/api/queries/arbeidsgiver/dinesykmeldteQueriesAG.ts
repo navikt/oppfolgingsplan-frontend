@@ -11,7 +11,7 @@ export const useDineSykmeldte = () => {
   const fetchDineSykmeldte = () =>
     get<Sykmeldt>(
       `${apiBasePath}/dinesykmeldte/${narmestelederId}`,
-      "fetchDineSykmeldte"
+      "fetchDineSykmeldte",
     );
 
   return useQuery({

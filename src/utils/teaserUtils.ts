@@ -26,15 +26,15 @@ const textStatusDefault = (oppfolgingsplan: Oppfolgingsplan): string => {
     oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.fom &&
     oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
     ? `${toDateMedMaanedNavn(
-        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.fom
+        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.fom,
       )} - ${toDateMedMaanedNavn(
-        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
+        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom,
       )}`
     : "";
 };
 
 export const hentPlanStatus = (
-  oppfolgingsplan: Oppfolgingsplan
+  oppfolgingsplan: Oppfolgingsplan,
 ): {
   img: string;
   tekst: string;
@@ -64,7 +64,7 @@ export const hentPlanStatus = (
     case STATUS.UNDER_ARBEID:
       status.tekstUnderArbeid = textStatusUnderArbeid(
         toDateMedMaanedNavn(oppfolgingsplan.sistEndretDato),
-        oppfolgingsplan.sistEndretAv.navn
+        oppfolgingsplan.sistEndretAv.navn,
       );
       status.img = OppfolgingsdialogUnderArbeidImage;
       break;
@@ -81,7 +81,7 @@ export const hentPlanStatus = (
 };
 
 export const hentStatusUtenAktivSykmelding = (
-  oppfolgingsdialog: Oppfolgingsplan
+  oppfolgingsdialog: Oppfolgingsplan,
 ): { img: string; tekst: string } => {
   return {
     tekst: textStatusDefault(oppfolgingsdialog),

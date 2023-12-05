@@ -46,7 +46,7 @@ const OppfolgingsdialogerVisning = ({
 
   const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(
     sykmeldinger,
-    narmesteLedere
+    narmesteLedere,
   );
 
   return (

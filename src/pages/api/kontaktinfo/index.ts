@@ -8,7 +8,7 @@ import { isMockBackend } from "../../../server/utils/serverEnv";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   if (isMockBackend) {
     res.status(200).json(getMockDb(req).kontaktinfo);
@@ -18,7 +18,7 @@ const handler = async (
     const sykmeldtFnr = getSykmeldtFnrFromHeader(req);
     const kontaktinfo = await getKontaktinfo(
       syfoOppfolgingsplanServiceTokenX,
-      sykmeldtFnr
+      sykmeldtFnr,
     );
 
     res.status(200).json(kontaktinfo);

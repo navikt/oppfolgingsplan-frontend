@@ -13,7 +13,10 @@ export enum ErrorType {
 }
 
 export class ApiErrorException extends Error {
-  constructor(public readonly error: ApiError, public readonly code?: number) {
+  constructor(
+    public readonly error: ApiError,
+    public readonly code?: number,
+  ) {
     super(error.message);
   }
 }

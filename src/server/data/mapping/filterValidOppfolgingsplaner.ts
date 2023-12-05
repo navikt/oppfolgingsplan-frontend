@@ -22,17 +22,17 @@ const mapToPerioderDatesListSorted = (sykmelding: DineSykmeldteSykmelding) => {
 
 const erOppfolgingsplanGyldigForOppfolgingMedGrensedato = (
   fomLastSykefravar: Date,
-  tomOppfolgingsplan: string
+  tomOppfolgingsplan: string,
 ) => {
   const tomGrenseDato = new Date(
     fomLastSykefravar.getFullYear(),
     fomLastSykefravar.getMonth(),
-    fomLastSykefravar.getDate()
+    fomLastSykefravar.getDate(),
   );
 
   tomGrenseDato.setHours(0, 0, 0, 0);
   tomGrenseDato.setMonth(
-    fomLastSykefravar.getMonth() - MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING
+    fomLastSykefravar.getMonth() - MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING,
   );
   return new Date(tomOppfolgingsplan) >= tomGrenseDato;
 };
@@ -57,7 +57,7 @@ const getLastSykefravar = (sykmeldt: Sykmeldt) => {
       if (
         differenceInDays(
           perioderDatesSorted[i - 1].tom,
-          perioderDatesSorted[i].fom
+          perioderDatesSorted[i].fom,
         ) < 16
       ) {
         currentFravar.tom = perioderDatesSorted[i].tom;
@@ -84,7 +84,7 @@ const getLastSykefravar = (sykmeldt: Sykmeldt) => {
 
 export const filterValidOppfolgingsplaner = (
   oppfolgingsplaner: OppfolgingsplanDTO[],
-  sykmeldt: Sykmeldt
+  sykmeldt: Sykmeldt,
 ): OppfolgingsplanDTO[] => {
   if (oppfolgingsplaner.length === 0) return [];
 
@@ -97,7 +97,7 @@ export const filterValidOppfolgingsplaner = (
     ) {
       return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(
         lastSykefravar.fom,
-        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
+        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom,
       );
     }
     return true;

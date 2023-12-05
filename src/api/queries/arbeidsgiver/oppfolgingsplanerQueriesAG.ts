@@ -27,7 +27,7 @@ export const useOppfolgingsplanerAG = () => {
   const fetchOppfolgingsplanerAG = () =>
     get<Oppfolgingsplan[]>(
       `${apiBasePath}/${narmesteLederId}/oppfolgingsplaner`,
-      "fetchOppfolgingsplanerAG"
+      "fetchOppfolgingsplanerAG",
     );
 
   return useQuery({
@@ -43,7 +43,7 @@ export const useAktiveOppfolgingsplanerAG = () => {
 
   if (allePlaner.isSuccess) {
     const planer = allePlaner.data.filter((oppfolgingsplan) =>
-      erOppfolgingsplanAktiv(oppfolgingsplan)
+      erOppfolgingsplanAktiv(oppfolgingsplan),
     );
 
     return {
@@ -97,26 +97,26 @@ export const useOpprettOppfolgingsplanAG = () => {
     if (kopierTidligerePlan) {
       const oppfolgingsplan = finnNyesteTidligereOppfolgingsplanMedVirksomhet(
         oppfolgingsplaner.data,
-        sykmeldt.data.orgnummer
+        sykmeldt.data.orgnummer,
       );
       if (oppfolgingsplan) {
         oppfolgingsplanId = await post(
           `${apiOppfolgingsplanPath}/${oppfolgingsplan.id}/kopier`,
-          "kopierOppfolgingsplanAG"
+          "kopierOppfolgingsplanAG",
         );
       } else {
         //Om det skjedde noe rart og man ikke fikk opp den tidligere planen, så bare lag en ny.
         oppfolgingsplanId = await post(
           `${apiBasePath}/oppfolgingsplaner/opprett`,
           "opprettOppfolgingsplanAG",
-          opprettOppfoelgingsplan
+          opprettOppfoelgingsplan,
         );
       }
     } else {
       oppfolgingsplanId = await post(
         `${apiBasePath}/oppfolgingsplaner/opprett`,
         "opprettOppfolgingsplanAG",
-        opprettOppfoelgingsplan
+        opprettOppfoelgingsplan,
       );
     }
     await queryClient.invalidateQueries({

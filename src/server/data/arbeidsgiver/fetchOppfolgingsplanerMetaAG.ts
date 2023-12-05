@@ -19,7 +19,7 @@ import { getNarmesteLederIdFromRequest } from "../../utils/requestUtils";
 import { isMockBackend } from "../../utils/serverEnv";
 
 export const fetchOppfolgingsplanerMetaAG = async (
-  req: NextApiRequest
+  req: NextApiRequest,
 ): Promise<OppfolgingsplanMeta | undefined> => {
   const narmesteLederId = getNarmesteLederIdFromRequest(req);
 
@@ -36,12 +36,11 @@ export const fetchOppfolgingsplanerMetaAG = async (
   } else {
     const dineSykmeldteTokenX = await getDineSykmeldteTokenFromRequest(req);
 
-    const dineSykmeldteMedSykmeldinger = await getDineSykmeldteMedSykmeldinger(
-      dineSykmeldteTokenX
-    );
+    const dineSykmeldteMedSykmeldinger =
+      await getDineSykmeldteMedSykmeldinger(dineSykmeldteTokenX);
 
     const sykmeldt = dineSykmeldteMedSykmeldinger.find(
-      (sykmeldt) => sykmeldt.narmestelederId == narmesteLederId
+      (sykmeldt) => sykmeldt.narmestelederId == narmesteLederId,
     );
 
     if (!sykmeldt) {
@@ -54,30 +53,30 @@ export const fetchOppfolgingsplanerMetaAG = async (
     const oppfolgingsplaner = await getOppfolgingsplanerAG(
       sykmeldt.fnr,
       sykmeldt.orgnummer,
-      syfoOppfolgingsplanServiceTokenX
+      syfoOppfolgingsplanServiceTokenX,
     );
 
     const validOppfolgingsplaner = filterValidOppfolgingsplaner(
       oppfolgingsplaner,
-      sykmeldt
+      sykmeldt,
     );
 
     if (validOppfolgingsplaner.length > 0) {
       const virksomhetPromise = fetchVirksomhet(
         syfoOppfolgingsplanServiceTokenX,
-        validOppfolgingsplaner
+        validOppfolgingsplaner,
       );
       const personPromise = fetchPerson(
         syfoOppfolgingsplanServiceTokenX,
-        validOppfolgingsplaner
+        validOppfolgingsplaner,
       );
       const kontaktinfoPromise = fetchKontaktinfo(
         syfoOppfolgingsplanServiceTokenX,
-        validOppfolgingsplaner
+        validOppfolgingsplaner,
       );
       const narmesteLederPromise = fetchNaermesteLederForVirksomhet(
         syfoOppfolgingsplanServiceTokenX,
-        validOppfolgingsplaner
+        validOppfolgingsplaner,
       );
 
       const [virksomhet, person, kontaktinfo, narmesteLeder] =

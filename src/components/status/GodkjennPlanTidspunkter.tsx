@@ -22,13 +22,13 @@ export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {
       <BildeTekstLinje
         imgUrl={CalendarImage}
         tekst={`Planens varighet: ${toDateMedMaanedNavn(
-          gyldighetstidspunkt.fom
+          gyldighetstidspunkt.fom,
         )} - ${toDateMedMaanedNavn(gyldighetstidspunkt.tom)}`}
       />
       <BildeTekstLinje
         imgUrl={StjerneImage}
         tekst={`Planen evalueres: ${toDateMedMaanedNavn(
-          gyldighetstidspunkt.evalueres
+          gyldighetstidspunkt.evalueres,
         )}`}
       />
     </>

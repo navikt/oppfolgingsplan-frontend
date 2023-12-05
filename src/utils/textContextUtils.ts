@@ -1,7 +1,7 @@
 export const aktorHarOpprettetElement = (
   isAudienceSykmeldt: boolean,
   arbeidstakerFnr: string,
-  opprettetAvFnr: string
+  opprettetAvFnr: string,
 ): boolean => {
   if (isAudienceSykmeldt) {
     return opprettetAvFnr === arbeidstakerFnr;
@@ -11,7 +11,7 @@ export const aktorHarOpprettetElement = (
 
 export const getAktorNavn = (
   isAudienceSykmeldt: boolean,
-  opprettetAvNavn: string
+  opprettetAvNavn: string,
 ) => {
   if (isAudienceSykmeldt) {
     return opprettetAvNavn ? opprettetAvNavn : "Arbeidstaker";

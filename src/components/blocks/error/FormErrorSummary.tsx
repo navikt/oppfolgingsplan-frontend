@@ -10,7 +10,7 @@ interface Props<T extends FieldValues> {
 export const FormErrorSummary = React.forwardRef(
   <T extends FieldValues>(
     { errors }: Props<T>,
-    ref: ForwardedRef<HTMLDivElement>
+    ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const errorCount: number = Object.keys(errors).length;
 
@@ -29,7 +29,7 @@ export const FormErrorSummary = React.forwardRef(
         ))}
       </ErrorSummary>
     );
-  }
+  },
 );
 
 FormErrorSummary.displayName = "FormErrorSummary";

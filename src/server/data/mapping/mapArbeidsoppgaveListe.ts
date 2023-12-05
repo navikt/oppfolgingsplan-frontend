@@ -5,7 +5,7 @@ import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 export const mapArbeidsoppgaveListe = (
   oppfolgingsplan: OppfolgingsplanDTO,
-  oppfolgingplanerMeta: OppfolgingsplanMeta
+  oppfolgingplanerMeta: OppfolgingsplanMeta,
 ): Arbeidsoppgave[] => {
   return oppfolgingsplan.arbeidsoppgaveListe.map((oppgave) => {
     return {
@@ -15,7 +15,7 @@ export const mapArbeidsoppgaveListe = (
         navn: findName(
           oppfolgingplanerMeta.narmesteLedere,
           oppfolgingplanerMeta.person,
-          oppgave.opprettetAv.fnr
+          oppgave.opprettetAv.fnr,
         ),
       },
       sistEndretAv: {
@@ -23,7 +23,7 @@ export const mapArbeidsoppgaveListe = (
         navn: findName(
           oppfolgingplanerMeta.narmesteLedere,
           oppfolgingplanerMeta.person,
-          oppgave.sistEndretAv.fnr
+          oppgave.sistEndretAv.fnr,
         ),
       },
     };

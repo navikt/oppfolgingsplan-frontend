@@ -12,7 +12,7 @@ export const AvvisPlanKnapp = ({ oppfolgingsplanId }: Props) => {
   const avvisDialog = useAvvisOppfolgingsplan();
   const arbeidsOppgaverPage = useOppfolgingsplanUrl(
     oppfolgingsplanId,
-    "arbeidsoppgaver"
+    "arbeidsoppgaver",
   );
   const router = useRouter();
 

@@ -10,7 +10,7 @@ import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
 import { isMockBackend } from "../../utils/serverEnv";
 
 export const fetchOppfolgingsplanerMetaSM = async (
-  req: NextApiRequest
+  req: NextApiRequest,
 ): Promise<OppfolgingsplanMeta | undefined> => {
   if (isMockBackend) {
     const activeMock = getMockDb(req);
@@ -33,7 +33,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
       const kontaktinfoPromise = fetchKontaktinfo(tokenX, oppfolgingsplaner);
       const narmesteLederePromise = fetchNarmesteLedereSM(
         tokenX,
-        oppfolgingsplaner[0].arbeidstaker.fnr
+        oppfolgingsplaner[0].arbeidstaker.fnr,
       );
 
       const [virksomhet, person, kontaktinfo, narmesteLedere] =

@@ -12,7 +12,7 @@ export const useNarmesteLedereSM = () => {
   const fetchNarmesteLedere = () =>
     get<NarmesteLederDTO[]>(
       `${apiBasePath}/narmesteledere/${sykmeldtFnr}`,
-      "fetchNarmesteLedereSM"
+      "fetchNarmesteLedereSM",
     );
 
   return useQuery({

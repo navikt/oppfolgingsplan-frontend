@@ -8,7 +8,7 @@ import {
 export function createBreadcrumbsAG(
   pathname: string,
   sykmeldtName: string,
-  narmestelederid: string
+  narmestelederid: string,
 ) {
   switch (pathname) {
     case "/arbeidsgiver/[narmestelederid]":

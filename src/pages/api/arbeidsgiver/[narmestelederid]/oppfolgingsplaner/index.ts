@@ -5,7 +5,7 @@ import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> => {
   const oppfolgingplanerMeta = await fetchOppfolgingsplanerMetaAG(req);
 

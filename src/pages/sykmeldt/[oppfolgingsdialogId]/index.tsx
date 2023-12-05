@@ -118,7 +118,7 @@ const OppfolgingsplanStatus: NextPage = () => {
     const { title, heading } = getStatusPageTitleAndHeading(
       pageToDisplay,
       aktivPlan?.virksomhet?.navn,
-      "Lederen din"
+      "Lederen din",
     );
 
     return (

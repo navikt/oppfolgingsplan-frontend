@@ -5,7 +5,7 @@ import { Tiltak } from "../../../types/oppfolgingsplan";
 
 export const mapTiltakListe = (
   oppfolgingsplan: OppfolgingsplanDTO,
-  oppfolgingplanerMeta: OppfolgingsplanMeta
+  oppfolgingplanerMeta: OppfolgingsplanMeta,
 ): Tiltak[] => {
   return oppfolgingsplan.tiltakListe.map((tiltak) => {
     return {
@@ -15,7 +15,7 @@ export const mapTiltakListe = (
         navn: findName(
           oppfolgingplanerMeta.narmesteLedere,
           oppfolgingplanerMeta.person,
-          tiltak.opprettetAv.fnr
+          tiltak.opprettetAv.fnr,
         ),
       },
       sistEndretAv: {
@@ -23,7 +23,7 @@ export const mapTiltakListe = (
         navn: findName(
           oppfolgingplanerMeta.narmesteLedere,
           oppfolgingplanerMeta.person,
-          tiltak.sistEndretAv.fnr
+          tiltak.sistEndretAv.fnr,
         ),
       },
       kommentarer:
@@ -36,7 +36,7 @@ export const mapTiltakListe = (
               navn: findName(
                 oppfolgingplanerMeta.narmesteLedere,
                 oppfolgingplanerMeta.person,
-                kommentar.opprettetAv.fnr
+                kommentar.opprettetAv.fnr,
               ),
             },
             sistEndretAv: {
@@ -44,7 +44,7 @@ export const mapTiltakListe = (
               navn: findName(
                 oppfolgingplanerMeta.narmesteLedere,
                 oppfolgingplanerMeta.person,
-                kommentar.sistEndretAv.fnr
+                kommentar.sistEndretAv.fnr,
               ),
             },
           };

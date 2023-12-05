@@ -20,9 +20,9 @@ async function getIdportenToken(req: NextApiRequest) {
   if (!(await validateToken(bearerToken))) {
     throw new ApiErrorException(
       loginRequiredError(
-        "Failed to validate bearer token, redirecting to login"
+        "Failed to validate bearer token, redirecting to login",
       ),
-      401
+      401,
     );
   }
 

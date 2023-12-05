@@ -28,7 +28,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({
   const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.find(
     (godkjenning: Godkjenning) => {
       return godkjenning.godkjent;
-    }
+    },
   )?.gyldighetstidspunkt;
   const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();

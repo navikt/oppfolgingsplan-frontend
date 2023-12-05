@@ -6,14 +6,14 @@ import {
 } from "../../utils/tokenX";
 
 export const getSyfoOppfolgingsplanserviceTokenFromRequest = async (
-  req: NextApiRequest
+  req: NextApiRequest,
 ): Promise<string> => {
   const idPortenToken = await getIdportenToken(req);
   return await getOppfolgingsplanTokenX(idPortenToken);
 };
 
 export const getDineSykmeldteTokenFromRequest = async (
-  req: NextApiRequest
+  req: NextApiRequest,
 ): Promise<string> => {
   const idPortenToken = await getIdportenToken(req);
   return await getSykmeldingerArbeidsgiverTokenX(idPortenToken);
