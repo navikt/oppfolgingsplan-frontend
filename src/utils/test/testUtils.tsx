@@ -4,6 +4,7 @@ import React, { ReactElement, ReactNode } from "react";
 import open from "open";
 import userEvent from "@testing-library/user-event";
 import { testServer } from "../../mocks/testServer";
+import { jest } from "@jest/globals";
 
 const requestBodySpy = jest.fn();
 testServer.events.on("request:match", (req) => {
