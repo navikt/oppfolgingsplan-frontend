@@ -36,7 +36,9 @@ export const TiltakFormSM = ({
 }: Props) => {
   const errorRef = useRef<HTMLDivElement>(null);
 
-  const formFunctions = useForm<TiltakFormValues>();
+  const formFunctions = useForm<TiltakFormValues>({
+    defaultValues: defaultFormValues,
+  });
   const {
     handleSubmit,
     register,
@@ -61,7 +63,6 @@ export const TiltakFormSM = ({
             data-testid={TILTAK_OVERSKRIFT_TEXTFIELD}
             label={"Overskrift (obligatorisk)"}
             error={errors.overskrift?.message}
-            defaultValue={defaultFormValues?.overskrift}
             maxLength={80}
             {...register("overskrift", {
               required: "Du må gi en overskrift av tiltaket",
@@ -82,7 +83,6 @@ export const TiltakFormSM = ({
               required: "Du må gi en beskrivelse av tiltaket",
               maxLength: beskrivelseMaxLength,
             })}
-            defaultValue={defaultFormValues?.beskrivelse}
             value={beskrivelseValue}
           />
 

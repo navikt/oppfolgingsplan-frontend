@@ -31,7 +31,9 @@ export const ArbeidsoppgaveFormAG = ({
   defaultFormValues,
   navnIsEditable = true,
 }: Props) => {
-  const formFunctions = useForm<OppgaveFormValues>();
+  const formFunctions = useForm<OppgaveFormValues>({
+    defaultValues: defaultFormValues,
+  });
   const {
     handleSubmit,
     formState: { errors },
@@ -52,7 +54,6 @@ export const ArbeidsoppgaveFormAG = ({
                   error={errors.arbeidsoppgaveNavn?.message}
                   description={"Beskriv arbeidsoppgaven med noen få ord"}
                   maxLength={100}
-                  defaultValue={defaultFormValues?.arbeidsoppgaveNavn}
                 />
               )}
               rules={{
