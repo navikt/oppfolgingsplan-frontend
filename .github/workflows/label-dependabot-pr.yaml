@@ -1,10 +1,13 @@
 name: label-dependabot-pr
 on:
-  pull_request:
-    types: [ opened, unlabeled ]
+  pull_request_target:
+    types:
+      - opened
+      - unlabeled
 
 jobs:
   label-dependabot-pr:
-    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/label-dependabot-pr.yaml@main
+    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/label-dependabot-pr.yaml@auto-approve-pr
     permissions:
       pull-requests: write
+    secrets: inherit
