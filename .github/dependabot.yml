@@ -18,6 +18,7 @@ updates:
       interval: daily
     open-pull-requests-limit: 20
     registries: '*'
+    reviewers:
     groups:
       aksel-dependencies:
         patterns:
