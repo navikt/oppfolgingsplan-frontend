@@ -21,6 +21,7 @@ updates:
     open-pull-requests-limit: 20
     registries: '*'
     reviewers:
+      - ''
     groups:
       aksel-dependencies:
         patterns:
