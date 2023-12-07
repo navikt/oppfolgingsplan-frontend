@@ -16,8 +16,12 @@ updates:
     directory: '/'
     schedule:
       interval: daily
+      time: '14:30'
+      timezone: Europe/Oslo
     open-pull-requests-limit: 20
     registries: '*'
+    reviewers:
+      - ''
     groups:
       aksel-dependencies:
         patterns:
