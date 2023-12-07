@@ -50,7 +50,9 @@ export const ArbeidsoppgaveFormSM = ({
   defaultFormValues,
   navnIsEditable = true,
 }: Props) => {
-  const formFunctions = useForm<OppgaveFormValues>();
+  const formFunctions = useForm<OppgaveFormValues>({
+    defaultValues: defaultFormValues,
+  });
   const {
     handleSubmit,
     watch,
@@ -101,7 +103,6 @@ export const ArbeidsoppgaveFormSM = ({
                     error={errors.arbeidsoppgavenavn?.message}
                     description={"Beskriv arbeidsoppgaven med noen få ord"}
                     maxLength={100}
-                    defaultValue={defaultFormValues?.arbeidsoppgavenavn}
                   />
                 );
               }}
@@ -155,7 +156,6 @@ export const ArbeidsoppgaveFormSM = ({
             <div>
               <Controller
                 name="tilrettelegging"
-                defaultValue={defaultFormValues?.tilrettelegging}
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <CheckboxGroup
                     className="mb-8"
@@ -200,7 +200,6 @@ export const ArbeidsoppgaveFormSM = ({
                         "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
                       }
                       maxLength={1000}
-                      defaultValue={defaultFormValues?.kanBeskrivelse}
                     />
                   );
                 }}
@@ -223,7 +222,6 @@ export const ArbeidsoppgaveFormSM = ({
                       "Ikke skriv sensitiv informasjon, for eksempel detaljerte opplysninger om helse."
                     }
                     maxLength={1000}
-                    defaultValue={defaultFormValues?.kanIkkeBeskrivelse}
                   />
                 );
               }}

@@ -37,7 +37,9 @@ export const TiltakFormAG = ({
   defaultFormValues,
 }: Props) => {
   const errorRef = useRef<HTMLDivElement>(null);
-  const formFunctions = useForm<TiltakFormValues>();
+  const formFunctions = useForm<TiltakFormValues>({
+    defaultValues: defaultFormValues,
+  });
   const {
     handleSubmit,
     register,
@@ -78,7 +80,6 @@ export const TiltakFormAG = ({
             data-testid={TILTAK_OVERSKRIFT_TEXTFIELD}
             label={"Overskrift (obligatorisk)"}
             error={errors.overskrift?.message}
-            defaultValue={defaultFormValues?.overskrift}
             maxLength={80}
             {...register("overskrift", {
               required: "Du må gi en overskrift av tiltaket",
@@ -102,7 +103,6 @@ export const TiltakFormAG = ({
                 message: `Beskrivelse må være på ${beskrivelseMaxLength} tegn eller mindre`,
               },
             })}
-            defaultValue={defaultFormValues?.beskrivelse}
             value={beskrivelseValue}
           />
 
@@ -113,7 +113,6 @@ export const TiltakFormAG = ({
           <Controller
             name="status"
             rules={{ required: "Du må oppgi din vurdering" }}
-            defaultValue={defaultFormValues?.status}
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <RadioGroup
                 className="mb-8"
@@ -153,7 +152,6 @@ export const TiltakFormAG = ({
                   message: "Beskrivelse må være på 1000 tegn eller mindre",
                 },
               })}
-              defaultValue={defaultFormValues?.gjennomfoering}
               value={gjennomfoeringValue}
             />
           )}
@@ -178,7 +176,6 @@ export const TiltakFormAG = ({
                   message: "Beskrivelse må være på 1000 tegn eller mindre",
                 },
               })}
-              defaultValue={defaultFormValues?.beskrivelseIkkeAktuelt}
               value={beskrivelseIkkeAktueltValue}
             />
           )}
