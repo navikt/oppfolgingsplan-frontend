@@ -16,6 +16,8 @@ updates:
     directory: '/'
     schedule:
       interval: daily
+      time: '14:15'
+      timezone: Europe/Oslo
     open-pull-requests-limit: 20
     registries: '*'
     reviewers:
