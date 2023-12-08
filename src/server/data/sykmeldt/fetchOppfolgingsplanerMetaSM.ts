@@ -2,7 +2,10 @@ import { getOppfolgingsplanerSM } from "../../service/oppfolgingsplanService";
 import { fetchNarmesteLedereSM } from "./fetchNarmesteLedereSM";
 import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
-import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../auth/tokenx/getTokenXFromRequest";
+import {
+  getOppfolgingsplanBackendTokenFromRequest,
+  getSyfoOppfolgingsplanserviceTokenFromRequest,
+} from "../../auth/tokenx/getTokenXFromRequest";
 import { fetchVirksomhet } from "../common/fetchVirksomhet";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
@@ -23,16 +26,30 @@ export const fetchOppfolgingsplanerMetaSM = async (
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
-    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const syfoOppfolgingsplanServiceTokenX =
+      await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const oppfolgingsplanBackendTokenX =
+      await getOppfolgingsplanBackendTokenFromRequest(req);
 
-    const oppfolgingsplaner = await getOppfolgingsplanerSM(tokenX);
+    const oppfolgingsplaner = await getOppfolgingsplanerSM(
+      syfoOppfolgingsplanServiceTokenX,
+    );
 
     if (oppfolgingsplaner.length > 0) {
-      const virksomhetPromise = fetchVirksomhet(tokenX, oppfolgingsplaner);
-      const personPromise = fetchPerson(tokenX, oppfolgingsplaner);
-      const kontaktinfoPromise = fetchKontaktinfo(tokenX, oppfolgingsplaner);
+      const virksomhetPromise = fetchVirksomhet(
+        syfoOppfolgingsplanServiceTokenX,
+        oppfolgingsplaner,
+      );
+      const personPromise = fetchPerson(
+        syfoOppfolgingsplanServiceTokenX,
+        oppfolgingsplaner,
+      );
+      const kontaktinfoPromise = fetchKontaktinfo(
+        oppfolgingsplanBackendTokenX,
+        oppfolgingsplaner,
+      );
       const narmesteLederePromise = fetchNarmesteLedereSM(
-        tokenX,
+        syfoOppfolgingsplanServiceTokenX,
         oppfolgingsplaner[0].arbeidstaker.fnr,
       );
 
