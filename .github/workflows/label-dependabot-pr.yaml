@@ -7,7 +7,7 @@ on:
 
 jobs:
   label-dependabot-pr:
-    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/label-dependabot-pr.yaml@auto-approve-pr
+    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/label-dependabot-pr.yaml@main
     permissions:
       pull-requests: write
     secrets: inherit
