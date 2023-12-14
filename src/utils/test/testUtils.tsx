@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, RenderOptions, screen, Screen } from "@testing-library/react";
+import { render, RenderOptions } from "@testing-library/react";
 import React, { ReactElement, ReactNode } from "react";
-import open from "open";
 import userEvent from "@testing-library/user-event";
 import { testServer } from "../../mocks/testServer";
 import { jest } from "@jest/globals";
@@ -36,14 +35,4 @@ const customRender = (
   };
 };
 
-export async function openPlayground(screen: Screen): Promise<void> {
-  await open(screen.logTestingPlaygroundURL());
-}
-
-const customScreen = {
-  ...screen,
-  openPlayground: () => openPlayground(screen),
-};
-
-export { customScreen as screen };
 export { customRender as render };
