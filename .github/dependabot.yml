@@ -18,34 +18,10 @@ updates:
       interval: daily
       time: '14:30'
       timezone: Europe/Oslo
-    ignore:
-      - update-types: [ "version-update:semver-major" ]
-    open-pull-requests-limit: 20
-    registries: '*'
-    groups:
-      aksel-dependencies:
-        patterns:
-          - '@navikt/aksel*'
-          - '@navikt/ds*'
-      react-dependencies:
-        patterns:
-          - 'react'
-          - 'react-dom'
-          - '@types/react'
-          - '@types/react-dom'
-
-  - package-ecosystem: npm
-    directory: '/'
-    schedule:
-      interval: daily
-      time: '14:30'
-      timezone: Europe/Oslo
-    ignore:
-      - update-types: [ "version-update:semver-patch","version-update:semver-minor" ]
     open-pull-requests-limit: 20
     registries: '*'
     reviewers:
-      - 'team-esyfo'
+      - ''
     groups:
       aksel-dependencies:
         patterns:
