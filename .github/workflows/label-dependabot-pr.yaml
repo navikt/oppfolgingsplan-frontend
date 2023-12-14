@@ -22,7 +22,7 @@ jobs:
             const response = await github.rest.pulls.requestReviewers({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.payload.pull_id,
+              pull_number: context.payload.pull_request.number,
               team_reviewers: [team],
               token
             });
