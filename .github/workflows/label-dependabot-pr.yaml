@@ -19,7 +19,7 @@ jobs:
             const team = 'team-esyfo';
             const token = process.env.GITHUB_TOKEN;
 
-            const response = await github.rest.pulls.addReviewers({
+            const response = await github.rest.pulls.requestReviewers({
               pull_id: context.payload.pull_id,
               team_reviewers: [team],
               token
