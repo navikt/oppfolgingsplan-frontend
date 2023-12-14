@@ -20,6 +20,8 @@ jobs:
             const token = process.env.GITHUB_TOKEN;
 
             const response = await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               pull_id: context.payload.pull_id,
               team_reviewers: [team],
               token
