@@ -16,3 +16,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           reviewers: team-esyfo
+          re-request-when-changes-requested: true
+          re-request-when-approved: true
+          debug-mode: true
