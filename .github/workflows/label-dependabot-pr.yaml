@@ -24,6 +24,6 @@ jobs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/$owner/$name/pulls/PULL_NUMBER/requested_reviewers \
+          /repos/$OWNER/$NAME/pulls/$PULL_NUMBER/requested_reviewers \
           -f "team_reviewers[]=team-esyfo"
 
