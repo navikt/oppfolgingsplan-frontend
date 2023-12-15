@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - name: Tagg
-        uses: actions/github-script@v7
-        with:
-          debug: true
-          github-token: ${{secrets.READER_TOKEN}}
-          script: |
-            const team = 'team-esyfo';
-            const token = process.env.GITHUB_TOKEN;
+      - name: Fetch Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1
+      - env:
+          GH_TOKEN: ${{ secrets.READER_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          PULL_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/$owner/$name/pulls/PULL_NUMBER/requested_reviewers \
+          -f "team_reviewers[]=team-esyfo"
 
-            const response = await github.rest.pulls.requestReviewers({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              team_reviewers: [team],
-              token
-            });
