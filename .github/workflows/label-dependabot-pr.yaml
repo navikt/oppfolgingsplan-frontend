@@ -24,7 +24,7 @@ jobs:
           -f "team_reviewers[]=team-esyfo"
         env:
           GH_TOKEN: ${{ secrets.READER_TOKEN }}
-          GITHUB_TOKEN: : ${{ secrets.READER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.READER_TOKEN }}
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.repository.name }}
           PULL_NUMBER: ${{ github.event.pull_request.number }}
