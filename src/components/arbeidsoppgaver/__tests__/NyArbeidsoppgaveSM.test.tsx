@@ -1,7 +1,8 @@
-import { render, screen } from "../../../utils/test/testUtils";
+import { render } from "../../../utils/test/testUtils";
 import { NyArbeidsoppgaveSM } from "../NyArbeidsoppgaveSM";
 import { waitFor, within } from "@testing-library/react";
 import jExpect from "../../../../jestGlobals";
+import { screen } from "@testing-library/react";
 
 describe("NyArbeidsoppgaveSM", () => {
   it("should post on lagre", async () => {

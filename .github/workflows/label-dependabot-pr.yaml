@@ -1,13 +1,48 @@
 name: label-dependabot-pr
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
       - unlabeled
 
 jobs:
-  label-dependabot-pr:
-    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/label-dependabot-pr.yaml@auto-approve-pr
-    permissions:
-      pull-requests: write
-    secrets: inherit
+  label-pr:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+    steps:
+      - name: Fetch Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1
+      - name: Label patch
+        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' }}
+        run: |
+          gh pr review $PR_URL --approve -b "I'm **approving** this pull request because **it includes a patch update**"
+          gh pr edit "$PR_URL" --add-label automerge --repo $GITHUB_REPOSITORY
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Label minor
+        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor' }}
+        run: |
+          gh pr review $PR_URL --approve -b "I'm **approving** this pull request because **it includes a minor update**"
+          gh pr edit "$PR_URL" --add-label automerge --repo $GITHUB_REPOSITORY
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Add team-esyfo as reviewer
+        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major'}}
+        uses: actions/github-script@v7
+        with:
+          debug: true
+          script: |
+            const team = 'team-esyfo';
+            const token = process.env.GITHUB_TOKEN;
+
+            const response = await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              team_reviewers: [team],
+              token
+            });
