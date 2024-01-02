@@ -213,20 +213,19 @@ export async function getPersonSM(accessToken: string, fnr: string) {
 }
 
 export async function getKontaktinfo(accessToken: string, fnr: string) {
-  const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/kontaktinfo`;
+  const response = kontaktinfoSchema.safeParse(
+    await get(
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/kontaktinfo/${fnr}`,
+      "getKontaktinfo",
+      { accessToken },
+    ),
+  );
 
-  const kontaktInfo = await get(apiUrl, "getKontaktinfo", {
-    accessToken: accessToken,
-    personIdent: fnr,
-  });
-
-  const parsedResponse = kontaktinfoSchema.safeParse(kontaktInfo);
-
-  if (parsedResponse.success) {
-    return parsedResponse.data;
+  if (response.success) {
+    return response.data;
   }
 
-  handleSchemaParsingError("Sykmeldt", "Kontaktinfo", parsedResponse.error);
+  handleSchemaParsingError("Sykmeldt", "Kontaktinfo", response.error);
 }
 
 export async function createOppfolgingsplanSM(

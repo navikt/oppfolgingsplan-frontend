@@ -2,10 +2,7 @@ import { getOppfolgingsplanerSM } from "../../service/oppfolgingsplanService";
 import { fetchNarmesteLedereSM } from "./fetchNarmesteLedereSM";
 import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
-import {
-  getOppfolgingsplanBackendTokenFromRequest,
-  getSyfoOppfolgingsplanserviceTokenFromRequest,
-} from "../../auth/tokenx/getTokenXFromRequest";
+import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../auth/tokenx/getTokenXFromRequest";
 import { fetchVirksomhet } from "../common/fetchVirksomhet";
 import { fetchPerson } from "../common/fetchPerson";
 import { fetchKontaktinfo } from "../common/fetchKontaktinfo";
@@ -26,30 +23,16 @@ export const fetchOppfolgingsplanerMetaSM = async (
       narmesteLedere: activeMock.narmesteLedere,
     };
   } else {
-    const syfoOppfolgingsplanServiceTokenX =
-      await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
-    const oppfolgingsplanBackendTokenX =
-      await getOppfolgingsplanBackendTokenFromRequest(req);
+    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
-    const oppfolgingsplaner = await getOppfolgingsplanerSM(
-      syfoOppfolgingsplanServiceTokenX,
-    );
+    const oppfolgingsplaner = await getOppfolgingsplanerSM(tokenX);
 
     if (oppfolgingsplaner.length > 0) {
-      const virksomhetPromise = fetchVirksomhet(
-        syfoOppfolgingsplanServiceTokenX,
-        oppfolgingsplaner,
-      );
-      const personPromise = fetchPerson(
-        syfoOppfolgingsplanServiceTokenX,
-        oppfolgingsplaner,
-      );
-      const kontaktinfoPromise = fetchKontaktinfo(
-        oppfolgingsplanBackendTokenX,
-        oppfolgingsplaner,
-      );
+      const virksomhetPromise = fetchVirksomhet(tokenX, oppfolgingsplaner);
+      const personPromise = fetchPerson(tokenX, oppfolgingsplaner);
+      const kontaktinfoPromise = fetchKontaktinfo(tokenX, oppfolgingsplaner);
       const narmesteLederePromise = fetchNarmesteLedereSM(
-        syfoOppfolgingsplanServiceTokenX,
+        tokenX,
         oppfolgingsplaner[0].arbeidstaker.fnr,
       );
 

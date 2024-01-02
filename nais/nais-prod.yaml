@@ -49,11 +49,7 @@ spec:
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.prod-fss-pub.nais.io
     - name: SYFOOPPFOLGINGSPLANSERVICE_CLIENT_ID
-      value: "prod-fss:team-esyfo:syfooppfolgingsplanservice"
-    - name: OPPFOLGINGSPLAN_BACKEND_HOST
-      value: http://oppfolgingsplan-backend
-    - name: OPPFOLGINGSPLAN_BACKEND_CLIENT_ID
-      value: "prod-gcp:team-esyfo:oppfolgingsplan-backend"
+      value: prod-fss:team-esyfo:syfooppfolgingsplanservice
     - name: SYKMELDINGER_ARBEIDSGIVER_HOST
       value: http://sykmeldinger-arbeidsgiver.teamsykmelding
     - name : SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
@@ -69,7 +65,6 @@ spec:
           namespace: teamsykmelding
         - application: nav-dekoratoren
           namespace: personbruker
-        - application: oppfolgingsplan-backend
       external:
         - host: www.nav.no
         - host: syfooppfolgingsplanservice.prod-fss-pub.nais.io
