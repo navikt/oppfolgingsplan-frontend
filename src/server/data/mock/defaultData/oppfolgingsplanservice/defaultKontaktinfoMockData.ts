@@ -5,4 +5,5 @@ export const defaultKontaktinfoMockData: KontaktinfoDTO = {
   epost: null,
   tlf: null,
   skalHaVarsel: true,
+  feilAarsak: "KONTAKTINFO_IKKE_FUNNET",
 };
