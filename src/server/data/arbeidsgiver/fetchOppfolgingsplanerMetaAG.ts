@@ -2,6 +2,7 @@ import getMockDb from "../mock/getMockDb";
 import { NextApiRequest } from "next";
 import {
   getDineSykmeldteTokenFromRequest,
+  getOppfolgingsplanBackendTokenFromRequest,
   getSyfoOppfolgingsplanserviceTokenFromRequest,
 } from "../../auth/tokenx/getTokenXFromRequest";
 import {
@@ -50,6 +51,9 @@ export const fetchOppfolgingsplanerMetaAG = async (
     const syfoOppfolgingsplanServiceTokenX =
       await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
 
+    const oppfolgingsplanBackendTokenX =
+      await getOppfolgingsplanBackendTokenFromRequest(req);
+
     const oppfolgingsplaner = await getOppfolgingsplanerAG(
       sykmeldt.fnr,
       sykmeldt.orgnummer,
@@ -71,7 +75,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
         validOppfolgingsplaner,
       );
       const kontaktinfoPromise = fetchKontaktinfo(
-        syfoOppfolgingsplanServiceTokenX,
+        oppfolgingsplanBackendTokenX,
         validOppfolgingsplaner,
       );
       const narmesteLederPromise = fetchNaermesteLederForVirksomhet(
