@@ -1,48 +1,31 @@
 name: label-dependabot-pr
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - unlabeled
 
 jobs:
-  label-pr:
+  label-dependabot-pr:
+    name: Add team as reviewers on major updates
     runs-on: ubuntu-latest
     permissions: write-all
-    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
     steps:
       - name: Fetch Dependabot metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@v1
-      - name: Label patch
-        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' }}
+      - name: Add reviewer
         run: |
-          gh pr review $PR_URL --approve -b "I'm **approving** this pull request because **it includes a patch update**"
-          gh pr edit "$PR_URL" --add-label automerge --repo $GITHUB_REPOSITORY
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/${{ github.repository_owner }}/${{ github.event.repository.name }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers \
+          -f "team_reviewers[]=team-esyfo"
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Label minor
-        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor' }}
-        run: |
-          gh pr review $PR_URL --approve -b "I'm **approving** this pull request because **it includes a minor update**"
-          gh pr edit "$PR_URL" --add-label automerge --repo $GITHUB_REPOSITORY
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Add team-esyfo as reviewer
-        if: ${{ steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major'}}
-        uses: actions/github-script@v7
-        with:
-          debug: true
-          script: |
-            const team = 'team-esyfo';
-            const token = process.env.GITHUB_TOKEN;
+          GH_TOKEN: ${{ secrets.READER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.READER_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          PULL_NUMBER: ${{ github.event.pull_request.number }}
 
-            const response = await github.rest.pulls.requestReviewers({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              team_reviewers: [team],
-              token
-            });
