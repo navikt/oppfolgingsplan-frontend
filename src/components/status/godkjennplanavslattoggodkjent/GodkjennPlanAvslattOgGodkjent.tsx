@@ -9,13 +9,16 @@ import {
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
-import { Godkjenning, Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { useFerdigstillVarsel } from "../utils/varselHooks";
 import { useFerdigstillGodkjennPlanVarsel } from "../../../api/queries/varsel/ferdigstillingQueries";
 import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
+import {
+  GodkjenningDTO,
+  OppfolgingsplanDTO,
+} from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
   description: string;
   motpartNavnForAltinn: MotpartNavnForAltinn;
 }
@@ -26,7 +29,7 @@ export const GodkjennPlanAvslattOgGodkjent = ({
   motpartNavnForAltinn,
 }: Props) => {
   const gyldighetstidspunkt = oppfolgingsplan.godkjenninger?.find(
-    (godkjenning: Godkjenning) => {
+    (godkjenning: GodkjenningDTO) => {
       return godkjenning.godkjent;
     },
   )?.gyldighetstidspunkt;

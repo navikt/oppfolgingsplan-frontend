@@ -1,5 +1,4 @@
 import SykmeldtSide from "../sykmeldtside/SykmeldtSide";
-import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import { ReactNode } from "react";
 import { useOppfolgingsplanerSM } from "../../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "../../../../api/queries/sykmeldt/sykmeldingerQueriesSM";
@@ -10,6 +9,7 @@ import { Heading } from "@navikt/ds-react";
 import { OPSkeleton } from "../../skeleton/OPSkeleton";
 import { OppfolgingsplanPageContentSM } from "./OppfolgingsplanPageContentSM";
 import { NavigationButtons } from "../../buttons/NavigationButtons";
+import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -45,7 +45,7 @@ const titleText = (page: Page) => {
 
 interface Props {
   page: Page;
-  oppfolgingsplan?: Oppfolgingsplan;
+  oppfolgingsplan?: OppfolgingsplanDTO;
   children: ReactNode;
 }
 

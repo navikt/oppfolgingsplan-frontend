@@ -2,10 +2,10 @@ import { useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
 import { hentPlanStatus } from "../../../utils/teaserUtils";
 import React from "react";
 import { OppfolgingsplanCard } from "../../seplanen/OppfolgingsplanCard";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsplan }: Props) => {

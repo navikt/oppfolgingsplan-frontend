@@ -1,11 +1,11 @@
 import { useLagreTiltak } from "../../api/queries/oppfolgingsplan/tiltakQueries";
-import { Tiltak } from "../../types/oppfolgingsplan";
 import { VurderTiltakForm } from "./VurderTiltakForm";
 import { TiltakFormValues } from "./utils/typer";
 import { formatAsLocalDateTime } from "../../utils/dateUtils";
+import { TiltakDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  tiltak: Tiltak;
+  tiltak: TiltakDTO;
 
   doneEditing(): void;
 }
@@ -13,7 +13,7 @@ interface Props {
 export const VurderTiltak = ({ tiltak, doneEditing }: Props) => {
   const lagreTiltak = useLagreTiltak();
 
-  const tiltakInformasjon = (data: TiltakFormValues): Tiltak => {
+  const tiltakInformasjon = (data: TiltakFormValues): TiltakDTO => {
     return {
       ...tiltak,
       tiltaknavn: data.overskrift,

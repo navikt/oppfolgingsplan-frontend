@@ -79,7 +79,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
         validOppfolgingsplaner,
       );
       const narmesteLederPromise = fetchNaermesteLederForVirksomhet(
-        syfoOppfolgingsplanServiceTokenX,
+        oppfolgingsplanBackendTokenX,
         validOppfolgingsplaner,
       );
 

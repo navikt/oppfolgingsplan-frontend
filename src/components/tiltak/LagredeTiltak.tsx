@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
 import { LagretTiltak } from "./LagretTiltak";
-import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { useInnloggetFnr } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan?: Oppfolgingsplan;
+  oppfolgingsplan?: OppfolgingsplanDTO;
 }
 
 export const LagredeTiltak = ({

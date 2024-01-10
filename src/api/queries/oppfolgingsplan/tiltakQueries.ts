@@ -4,15 +4,15 @@ import {
 } from "../../../hooks/routeHooks";
 import { post } from "../../axios/axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Kommentar, Tiltak } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
+import { KommentarDTO, TiltakDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const useLagreTiltak = () => {
   const apiPath = useOppfolgingsplanApiPath();
   const oppfolgingsplanId = useOppfolgingsplanRouteId();
   const queryClient = useQueryClient();
 
-  const lagreTiltak = async (tiltak: Partial<Tiltak>) => {
+  const lagreTiltak = async (tiltak: Partial<TiltakDTO>) => {
     await post(
       `${apiPath}/${oppfolgingsplanId}/tiltak/lagre`,
       "useLagreTiltak",
@@ -64,7 +64,7 @@ export const useSlettTiltakSM = () => {
 
 interface LagreKommentarProps {
   tiltakId: number;
-  kommentar: Partial<Kommentar>;
+  kommentar: Partial<KommentarDTO>;
 }
 
 export const useLagreKommentar = () => {

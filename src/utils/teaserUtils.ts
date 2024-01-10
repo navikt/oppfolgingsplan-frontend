@@ -4,7 +4,7 @@ import PlanGodkjentImage from "../components/blocks/images/oppfolgingsdialog-gre
 import PlanAvbruttImage from "../components/blocks/images//plan-avbrutt.svg";
 import OppfolgingsdialogUnderArbeidImage from "../components/blocks/images//oppfolgingsdialog-beige.svg";
 import PlanIkkeAktivSykmeldingImage from "../components/blocks/images//oppfolgingsdialog-gray.svg";
-import { Oppfolgingsplan } from "../types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "../schema/oppfolgingsplanSchema";
 
 const texts = {
   hentPlanStatus: {
@@ -19,7 +19,7 @@ const textStatusUnderArbeid = (date: string, personName: string) => {
   };
 };
 
-const textStatusDefault = (oppfolgingsplan: Oppfolgingsplan): string => {
+const textStatusDefault = (oppfolgingsplan: OppfolgingsplanDTO): string => {
   return oppfolgingsplan &&
     oppfolgingsplan.godkjentPlan &&
     oppfolgingsplan.godkjentPlan.gyldighetstidspunkt &&
@@ -34,7 +34,7 @@ const textStatusDefault = (oppfolgingsplan: Oppfolgingsplan): string => {
 };
 
 export const hentPlanStatus = (
-  oppfolgingsplan: Oppfolgingsplan,
+  oppfolgingsplan: OppfolgingsplanDTO,
 ): {
   img: string;
   tekst: string;
@@ -81,7 +81,7 @@ export const hentPlanStatus = (
 };
 
 export const hentStatusUtenAktivSykmelding = (
-  oppfolgingsdialog: Oppfolgingsplan,
+  oppfolgingsdialog: OppfolgingsplanDTO,
 ): { img: string; tekst: string } => {
   return {
     tekst: textStatusDefault(oppfolgingsdialog),
