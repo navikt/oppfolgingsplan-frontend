@@ -65,7 +65,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
         oppfolgingsplaner: oppfolgingsplaner,
         virksomhet: virksomhet,
         kontaktinfo: kontaktinfo,
-        narmesteLedere: narmesteLedere,
+        narmesteLedere: narmesteLedere || [],
       };
     }
   }
