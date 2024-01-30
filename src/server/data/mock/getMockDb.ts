@@ -4,6 +4,7 @@ import {
   VirksomhetDTO,
 } from "../../../schema/oppfolgingsplanSchema";
 import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
+import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { KontaktinfoDTO } from "../../../schema/kontaktinfoSchema";
 import { Tilgang } from "../../../schema/tilgangSchema";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
@@ -11,7 +12,6 @@ import { PersonV3DTO } from "../../../schema/personSchemas";
 import { TEST_SESSION_ID } from "../../../api/axios/axios";
 import { handleQueryParamError } from "../../utils/errors";
 import { NextApiRequest } from "next";
-import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 
 export type TestScenario =
   | "INGENPLAN"

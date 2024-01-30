@@ -8,12 +8,10 @@ import {
 } from "./sykmeldingUtils";
 import { erGyldigDatoIFortiden, getTime } from "./dateUtils";
 import { SykmeldingDTO } from "../schema/sykmeldingSchema";
-import { OppfolgingsplanDTO } from "../schema/oppfolgingsplanSchema";
 import { NarmesteLederDTO } from "../schema/narmestelederSchema";
+import { Oppfolgingsplan } from "../types/oppfolgingsplan";
 
-export const inneholderGodkjenninger = (
-  oppfolgingsplan: OppfolgingsplanDTO,
-) => {
+export const inneholderGodkjenninger = (oppfolgingsplan: Oppfolgingsplan) => {
   return (
     oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger.length > 0
   );
@@ -36,14 +34,14 @@ export const erSykmeldingGyldigForOppfolgingMedGrensedato = (
 };
 
 export const erOppfolgingsplanKnyttetTilGyldigSykmeldingAG = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
   orgnummer: string,
 ) => {
   return oppfolgingsplan.virksomhet?.virksomhetsnummer === orgnummer;
 };
 
 export const erOppfolgingsplanKnyttetTilGyldigSykmelding = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
   sykmeldinger: SykmeldingDTO[],
 ) => {
   const dagensDato = new Date();
@@ -58,7 +56,7 @@ export const erOppfolgingsplanKnyttetTilGyldigSykmelding = (
   );
 };
 
-export const erOppfolgingsplanAktiv = (oppfolgingsplan: OppfolgingsplanDTO) => {
+export const erOppfolgingsplanAktiv = (oppfolgingsplan: Oppfolgingsplan) => {
   return (
     !oppfolgingsplan.godkjentPlan ||
     (oppfolgingsplan.status !== STATUS.AVBRUTT &&
@@ -70,7 +68,7 @@ export const erOppfolgingsplanAktiv = (oppfolgingsplan: OppfolgingsplanDTO) => {
 };
 
 export const erOppfolgingsplanTidligere = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
 ) => {
   return (
     oppfolgingsplan.godkjentPlan &&
@@ -81,8 +79,8 @@ export const erOppfolgingsplanTidligere = (
 };
 
 export const sorterOppfolgingsplanerEtterSluttdato = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
-): OppfolgingsplanDTO[] => {
+  oppfolgingsplaner: Oppfolgingsplan[],
+): Oppfolgingsplan[] => {
   return oppfolgingsplaner.sort((o1, o2) => {
     const plan1Tom = o1.godkjentPlan?.gyldighetstidspunkt?.tom;
     const plan2Tom = o2.godkjentPlan?.gyldighetstidspunkt?.tom;
@@ -92,7 +90,7 @@ export const sorterOppfolgingsplanerEtterSluttdato = (
 };
 
 export const finnTidligereOppfolgingsplaner = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
 ) => {
   return sorterOppfolgingsplanerEtterSluttdato(
     oppfolgingsplaner.filter((oppfolgingsplan) => {
@@ -102,13 +100,13 @@ export const finnTidligereOppfolgingsplaner = (
 };
 
 export const harTidligereOppfolgingsplaner = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
 ) => {
   return finnTidligereOppfolgingsplaner(oppfolgingsplaner).length > 0;
 };
 
 export const harTidligereOppfolgingsplanMedVirksomhet = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   virksomhetsnummer: string,
 ): boolean => {
   return (
@@ -120,7 +118,7 @@ export const harTidligereOppfolgingsplanMedVirksomhet = (
 };
 
 export const finnAktiveOppfolgingsplaner = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   sykmeldinger?: SykmeldingDTO[],
 ) => {
   if (!sykmeldinger) {
@@ -140,7 +138,7 @@ export const finnAktiveOppfolgingsplaner = (
 };
 
 export const erAktivOppfolgingsplanOpprettetMedArbeidsgiver = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   virksomhetsnummer: string,
 ) => {
   return (
@@ -151,7 +149,7 @@ export const erAktivOppfolgingsplanOpprettetMedArbeidsgiver = (
 };
 
 export const hentAktivOppfolgingsplanOpprettetMedArbeidsgiver = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   virksomhetsnummer: string,
 ) => {
   return finnAktiveOppfolgingsplaner(oppfolgingsplaner).filter((plan) => {
@@ -160,7 +158,7 @@ export const hentAktivOppfolgingsplanOpprettetMedArbeidsgiver = (
 };
 
 export const erOppfolgingsplanOpprettbarMedArbeidsgiver = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   arbeidsgiver: ArbeidsgivereForGyldigeSykmeldinger,
 ) => {
   return (
@@ -173,7 +171,7 @@ export const erOppfolgingsplanOpprettbarMedArbeidsgiver = (
 };
 
 export const erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   sykmeldinger: SykmeldingDTO[],
   naermesteLedere: NarmesteLederDTO[],
 ) => {
@@ -190,7 +188,7 @@ export const erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere = (
 
 export const erOppfolgingsplanOpprettbarDirekte = (
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[],
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
 ) => {
   return (
     arbeidsgivere.length === 1 &&
@@ -199,7 +197,7 @@ export const erOppfolgingsplanOpprettbarDirekte = (
 };
 
 export const finnNyesteTidligereOppfolgingsplanMedVirksomhet = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   virksomhetsnummer: string,
 ) => {
   return finnTidligereOppfolgingsplaner(oppfolgingsplaner).filter((plan) => {
@@ -208,7 +206,7 @@ export const finnNyesteTidligereOppfolgingsplanMedVirksomhet = (
 };
 
 export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
+  oppfolgingsplaner: Oppfolgingsplan[],
   virksomhetsnummer: string,
 ) => {
   return finnAktiveOppfolgingsplaner(oppfolgingsplaner).find(
@@ -222,7 +220,7 @@ export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (
 
 export const findAktivPlan = (
   aktivPlanId: number,
-  allePlaner: OppfolgingsplanDTO[],
+  allePlaner: Oppfolgingsplan[],
 ) => {
   return allePlaner.find((plan) => plan.id === aktivPlanId);
 };

@@ -3,8 +3,8 @@ import {
   VirksomhetDTO,
 } from "../../schema/oppfolgingsplanSchema";
 import { KontaktinfoDTO } from "../../schema/kontaktinfoSchema";
-import { PersonV3DTO } from "../../schema/personSchemas";
 import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
+import { PersonV3DTO } from "../../schema/personSchemas";
 
 export interface OppfolgingsplanMeta {
   person: PersonV3DTO;

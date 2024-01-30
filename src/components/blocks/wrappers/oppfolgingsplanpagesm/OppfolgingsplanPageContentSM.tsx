@@ -1,6 +1,7 @@
 import { BodyLong } from "@navikt/ds-react";
 import React, { ReactNode } from "react";
 import { CantEditPlanError } from "../../error/CantEditPlanError";
+import { Oppfolgingsplan, Stilling } from "../../../../types/oppfolgingsplan";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmelding,
   erOppfolgingsplanTidligere,
@@ -9,19 +10,15 @@ import {
 import { SykmeldingDTO } from "../../../../schema/sykmeldingSchema";
 import { IkkeTilgangTilPlanInfoBoks } from "../../infoboks/IkkeTilgangTilPlanInfoBoks";
 import { statusPageToDisplaySM } from "../../../../utils/statusPageUtils";
-import {
-  OppfolgingsplanDTO,
-  StillingDTO,
-} from "../../../../schema/oppfolgingsplanSchema";
 
-const textStilling = (stilling: StillingDTO) => {
+const textStilling = (stilling: Stilling) => {
   return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${
     stilling.prosent
   } %`;
 };
 
 interface Props {
-  allePlaner: OppfolgingsplanDTO[];
+  allePlaner: Oppfolgingsplan[];
   sykmeldinger: SykmeldingDTO[];
   aktivPlanId: number;
   isOppgaverOrTiltak: boolean;
@@ -36,8 +33,7 @@ export const OppfolgingsplanPageContentSM = ({
   children,
 }: Props) => {
   const aktivPlan = findAktivPlan(aktivPlanId, allePlaner);
-  const stilling: StillingDTO | undefined =
-    aktivPlan?.arbeidstaker.stillinger[0];
+  const stilling: Stilling | undefined = aktivPlan?.arbeidstaker.stillinger[0];
 
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&

@@ -4,7 +4,7 @@ import { logger } from "@navikt/next-logger";
 import React from "react";
 import { useLandingUrl } from "../../../hooks/routeHooks";
 import { StatusPageToDisplay } from "../../../utils/statusPageUtils";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const errorText = (planStatus: StatusPageToDisplay) => {
   switch (planStatus) {
@@ -21,7 +21,7 @@ const errorText = (planStatus: StatusPageToDisplay) => {
 
 interface Props {
   planStatus: StatusPageToDisplay;
-  aktivPlan?: OppfolgingsplanDTO;
+  aktivPlan?: Oppfolgingsplan;
 }
 
 export const CantEditPlanError = ({ planStatus, aktivPlan }: Props) => {

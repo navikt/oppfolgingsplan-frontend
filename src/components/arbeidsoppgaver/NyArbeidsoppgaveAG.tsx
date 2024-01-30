@@ -7,8 +7,8 @@ import {
   ArbeidsoppgaveFormAG,
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormAG";
+import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
-import { ArbeidsOppgaveDTO } from "../../schema/oppfolgingsplanSchema";
 
 export const NyArbeidsoppgaveAG = () => {
   const lagreOppgave = useLagreArbeidsoppgave();
@@ -16,7 +16,7 @@ export const NyArbeidsoppgaveAG = () => {
 
   const nyArbeidsoppgaveInformasjon = (
     data: OppgaveFormValues,
-  ): Partial<ArbeidsOppgaveDTO> => {
+  ): Partial<Arbeidsoppgave> => {
     return {
       arbeidsoppgavenavn: data.arbeidsoppgaveNavn,
       gjennomfoering: {

@@ -123,7 +123,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.319",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -133,7 +133,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -151,7 +151,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.322",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -161,7 +161,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -191,7 +191,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.352",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr!,
+              fnr: defaultNarmesteLedereMockData[0].fnr,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -201,7 +201,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr!,
+              fnr: defaultNarmesteLedereMockData[0].fnr,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -252,7 +252,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.376",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr!,
+              fnr: defaultNarmesteLedereMockData[0].fnr,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -262,7 +262,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr!,
+              fnr: defaultNarmesteLedereMockData[0].fnr,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -329,7 +329,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
           "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -339,7 +339,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -364,7 +364,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -374,7 +374,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr!,
+          fnr: defaultNarmesteLedereMockData[0].fnr,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -395,7 +395,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
       },
     ],
     arbeidsgiver: {
-      naermesteLeder: {
+      narmesteLeder: {
         navn: "Labben Rekemester",
         fnr: "20405060718",
         epost: null,
@@ -425,7 +425,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
     },
     sistEndretAv: {
       navn: defaultNarmesteLedereMockData[0].navn,
-      fnr: defaultNarmesteLedereMockData[0].fnr!,
+      fnr: defaultNarmesteLedereMockData[0].fnr,
       epost: null,
       tlf: null,
       sistInnlogget: null,

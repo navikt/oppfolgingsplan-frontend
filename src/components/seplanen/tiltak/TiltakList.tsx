@@ -4,14 +4,11 @@ import { STATUS_TILTAK } from "../../../constants/konstanter";
 import { Heading } from "@navikt/ds-react";
 import React from "react";
 import { LagretTiltak } from "../../tiltak/LagretTiltak";
+import { Oppfolgingsplan, Tiltak } from "../../../types/oppfolgingsplan";
 import { useInnloggetFnr } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
-import {
-  OppfolgingsplanDTO,
-  TiltakDTO,
-} from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
 }
 
 export const TiltakList = ({ oppfolgingsplan }: Props) => {
@@ -22,7 +19,7 @@ export const TiltakList = ({ oppfolgingsplan }: Props) => {
     return null;
   }
 
-  const sorterTiltakEtterTypeOgOpprettet = (arbeidsoppgaver: TiltakDTO[]) => {
+  const sorterTiltakEtterTypeOgOpprettet = (arbeidsoppgaver: Tiltak[]) => {
     const order = [
       STATUS_TILTAK.AVTALT,
       STATUS_TILTAK.FORSLAG,

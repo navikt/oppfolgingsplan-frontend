@@ -5,6 +5,7 @@ import { TiltakFormSM } from "../../../components/tiltak/TiltakFormSM";
 import { STATUS_TILTAK } from "../../../constants/konstanter";
 import { useLagreTiltak } from "../../../api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormValues } from "../../../components/tiltak/utils/typer";
+import { Tiltak } from "../../../types/oppfolgingsplan";
 import { formatAsLocalDateTime } from "../../../utils/dateUtils";
 import { useAktivPlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { NyttTiltak } from "../../../components/tiltak/NyttTiltak";
@@ -13,7 +14,6 @@ import {
   OppfolgingsplanPageSM,
   Page,
 } from "../../../components/blocks/wrappers/oppfolgingsplanpagesm/OppfolgingsplanPageSM";
-import { TiltakDTO } from "../../../schema/oppfolgingsplanSchema";
 
 const formHeadingTexts = {
   title: "Hva kan gjøre det lettere å jobbe?",
@@ -24,9 +24,7 @@ const Tiltak: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
   const lagreTiltak = useLagreTiltak();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
-  const nyttTiltakInformasjon = (
-    data: TiltakFormValues,
-  ): Partial<TiltakDTO> => {
+  const nyttTiltakInformasjon = (data: TiltakFormValues): Partial<Tiltak> => {
     return {
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,

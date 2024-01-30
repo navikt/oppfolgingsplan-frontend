@@ -1,14 +1,14 @@
 import { useLagreTiltak } from "../../api/queries/oppfolgingsplan/tiltakQueries";
 import { TiltakFormSM } from "./TiltakFormSM";
+import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { TiltakFormAG } from "./TiltakFormAG";
 import { STATUS_TILTAK } from "../../constants/konstanter";
 import { TiltakFormValues } from "./utils/typer";
 import { formatAsLocalDateTime } from "../../utils/dateUtils";
-import { TiltakDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  tiltak: TiltakDTO;
+  tiltak: Tiltak;
 
   doneEditing(): void;
 }
@@ -17,7 +17,7 @@ export const EditerTiltak = ({ tiltak, doneEditing }: Props) => {
   const lagreTiltak = useLagreTiltak();
   const { isAudienceSykmeldt } = useAudience();
 
-  const tiltakInformasjon = (data: TiltakFormValues): TiltakDTO => {
+  const tiltakInformasjon = (data: TiltakFormValues): Tiltak => {
     return {
       ...tiltak,
       tiltaknavn: data.overskrift,

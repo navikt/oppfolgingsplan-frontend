@@ -2,14 +2,14 @@ import { Alert, BodyLong, Button, Checkbox, Heading } from "@navikt/ds-react";
 import { useState } from "react";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
-import { GodkjenningDTO } from "../../schema/oppfolgingsplanSchema";
+import { Godkjenning } from "../../types/oppfolgingsplan";
 
 export type MotpartNavnForAltinn = "arbeidstakeren" | "arbeidsgiveren din";
 
 interface Props {
   oppfolgingsplanId: number;
   motpartNavnForAltinn: MotpartNavnForAltinn;
-  godkjenninger: GodkjenningDTO[];
+  godkjenninger: Godkjenning[];
 }
 
 export const GodkjennOppfolgingsplan = ({

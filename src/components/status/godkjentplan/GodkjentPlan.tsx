@@ -11,11 +11,11 @@ import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
 import { DelMedNavOgFastlegeButtons } from "./DelMedNavOgFastlegeButtons";
 import { erOppfolgingsplanTidligere } from "../../../utils/oppfolgingplanUtils";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { ReactNode } from "react";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
   children: ReactNode;
 }
 

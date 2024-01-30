@@ -111,7 +111,7 @@ export const arbeidsoppgaveSchema = object({
 });
 
 export const arbeidsgiverSchema = object({
-  naermesteLeder: narmesteLederSchema.nullish(),
+  narmesteLeder: narmesteLederSchema,
 });
 
 export const avbruttplanSchema = object({
@@ -141,11 +141,3 @@ export type StillingDTO = z.infer<typeof stillingSchema>;
 export type VirksomhetDTO = z.infer<typeof virksomhetSchema>;
 export type PersonDTO = z.infer<typeof personSchema>;
 export type ArbeidsgiverDTO = z.infer<typeof arbeidsgiverSchema>;
-export type ArbeidsOppgaveDTO = z.infer<typeof arbeidsoppgaveSchema>;
-export type GodkjenningDTO = z.infer<typeof godkjenningSchema>;
-export type TiltakDTO = z.infer<typeof tiltakSchema>;
-export type KommentarDTO = z.infer<typeof kommentarSchema>;
-export type GjennomforingDTO = z.infer<typeof gjennomforingSchema>;
-export type GodkjentPlanDTO = z.infer<typeof godkjentPlanSchema>;
-export type GyldighetstidspunktDTO = z.infer<typeof gyldighetstidspunktSchema>;
-export type AvbruttplanDTO = z.infer<typeof avbruttplanSchema>;

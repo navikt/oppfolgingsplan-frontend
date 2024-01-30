@@ -3,8 +3,8 @@ import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../..
 import { getOppfolgingsplanIdFromRequest } from "../../../../../../server/utils/requestUtils";
 import { godkjennEgenOppfolgingsplanAG } from "../../../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../../../server/auth/beskyttetApi";
+import { GodkjennEgenPlan } from "../../../../../../types/oppfolgingsplan";
 import { isMockBackend } from "../../../../../../server/utils/serverEnv";
-import { GodkjennPlanData } from "../../../../../../schema/godkjennPlanSchema";
 
 const handler = async (
   req: NextApiRequest,
@@ -15,7 +15,7 @@ const handler = async (
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
-    const data: GodkjennPlanData = req.body;
+    const data: GodkjennEgenPlan = req.body;
 
     await godkjennEgenOppfolgingsplanAG(tokenX, oppfolgingsplanId, data);
     res.status(200).end();

@@ -8,9 +8,9 @@ import { Button } from "@navikt/ds-react";
 import React, { useState } from "react";
 import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
 import PlusIcon from "../../components/blocks/icons/PlusIcon";
+import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
 import { ARBEIDSOPPGAVE_LEGG_TIL_NY_OPPGAVE_BUTTON } from "../../../cypress/dataTestId";
-import { ArbeidsOppgaveDTO } from "../../schema/oppfolgingsplanSchema";
 
 export const NyArbeidsoppgaveSM = () => {
   const lagreOppgave = useLagreArbeidsoppgave();
@@ -18,7 +18,7 @@ export const NyArbeidsoppgaveSM = () => {
 
   const nyArbeidsoppgaveInformasjon = (
     data: OppgaveFormValues,
-  ): Partial<ArbeidsOppgaveDTO> => {
+  ): Partial<Arbeidsoppgave> => {
     return {
       arbeidsoppgavenavn: data.arbeidsoppgavenavn,
       gjennomfoering: {

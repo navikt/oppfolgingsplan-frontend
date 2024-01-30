@@ -1,14 +1,12 @@
-import {
-  OppfolgingsplanDTO,
-  TiltakDTO,
-} from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { findName } from "./findName";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { Tiltak } from "../../../types/oppfolgingsplan";
 
 export const mapTiltakListe = (
   oppfolgingsplan: OppfolgingsplanDTO,
   oppfolgingplanerMeta: OppfolgingsplanMeta,
-): TiltakDTO[] => {
+): Tiltak[] => {
   return oppfolgingsplan.tiltakListe.map((tiltak) => {
     return {
       ...tiltak,

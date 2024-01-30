@@ -2,12 +2,12 @@ import { KANGJENNOMFOERES } from "../../../constants/konstanter";
 import { BodyLong, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "../ContentWrapper";
 import { texts } from "../texts";
+import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 import { ArbeidsoppgaveCard } from "../../arbeidsoppgaver/arbeidsoppgavecard/ArbeidsoppgaveCard";
-import { ArbeidsOppgaveDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   arbeidstakerFnr: string;
-  arbeidsoppgaver: ArbeidsOppgaveDTO[];
+  arbeidsoppgaver: Arbeidsoppgave[];
 }
 
 export const ArbeidsoppgaveList = ({
@@ -15,7 +15,7 @@ export const ArbeidsoppgaveList = ({
   arbeidsoppgaver,
 }: Props) => {
   const sorterArbeidsoppgaverEtterTypeOgOpprettet = (
-    arbeidsoppgaver: ArbeidsOppgaveDTO[],
+    arbeidsoppgaver: Arbeidsoppgave[],
   ) => {
     const order = [
       KANGJENNOMFOERES.KAN,
@@ -52,7 +52,7 @@ export const ArbeidsoppgaveList = ({
       {sortedArbeidsoppgaver.length > 0 ? (
         <div>
           {arbeidsoppgaver.map(
-            (arbeidsoppgave: ArbeidsOppgaveDTO, idx: number) => (
+            (arbeidsoppgave: Arbeidsoppgave, idx: number) => (
               <ArbeidsoppgaveCard
                 arbeidsoppgave={arbeidsoppgave}
                 arbeidstakerFnr={arbeidstakerFnr}

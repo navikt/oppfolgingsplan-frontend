@@ -4,11 +4,11 @@ import { ArbeidsoppgaveList } from "./arbeidsoppgaver/ArbeidsoppgaveList";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import { texts } from "./texts";
 import { TiltakList } from "./tiltak/TiltakList";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { useInnloggetFnr } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
-import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan?: OppfolgingsplanDTO;
+  oppfolgingsplan?: Oppfolgingsplan;
   hideHeading?: boolean;
 }
 
