@@ -17,10 +17,8 @@ import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
 import { personV3Schema } from "../../schema/personSchemas";
-import {
-  NarmesteLederDTO,
-  narmesteLederSchema,
-} from "../../schema/narmestelederSchema";
+import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
+import { logger } from "@navikt/next-logger";
 
 export async function getNarmesteLeder(
   accessToken: string,
@@ -29,23 +27,27 @@ export async function getNarmesteLeder(
 ): Promise<NarmesteLederDTO | undefined | null> {
   const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/virksomhet`;
 
-  const parsedResponse = narmesteLederSchema.safeParse(
-    await get<NarmesteLederDTO>(apiUrl, "getNarmesteLedere", {
-      accessToken: accessToken,
-      personIdent: fnr,
-      orgnummer: virksomhetsnummer,
-    }),
-  );
+  const leder = await get<NarmesteLederDTO>(apiUrl, "getNarmesteLedere", {
+    accessToken: accessToken,
+    personIdent: fnr,
+    orgnummer: virksomhetsnummer,
+  });
 
-  if (parsedResponse.success) {
-    return parsedResponse.data;
-  }
+  logger.info(leder);
 
-  handleSchemaParsingError(
-    "Arbeidsgiver",
-    "NarmesteLeder",
-    parsedResponse.error,
-  );
+  return leder;
+  //
+  // const parsedResponse = narmesteLederSchema.safeParse(leder);
+  //
+  // if (parsedResponse.success) {
+  //   return parsedResponse.data;
+  // }
+  //
+  // handleSchemaParsingError(
+  //   "Arbeidsgiver",
+  //   "NarmesteLeder",
+  //   parsedResponse.error,
+  // );
 }
 
 export async function getNarmesteLedere(
@@ -61,15 +63,19 @@ export async function getNarmesteLedere(
     },
   );
 
-  if (!narmesteLedere) return [];
+  logger.info(narmesteLedere);
 
-  const response = array(narmesteLederSchema).safeParse(narmesteLedere);
-
-  if (response.success) {
-    return response.data;
-  }
-
-  handleSchemaParsingError("Sykmeldt", "NarmesteLedere", response.error);
+  return narmesteLedere;
+  //
+  // if (!narmesteLedere) return [];
+  //
+  // const response = array(narmesteLederSchema).safeParse(narmesteLedere);
+  //
+  // if (response.success) {
+  //   return response.data;
+  // }
+  //
+  // handleSchemaParsingError("Sykmeldt", "NarmesteLedere", response.error);
 }
 
 export async function getSykmeldingerSM(accessToken: string) {
