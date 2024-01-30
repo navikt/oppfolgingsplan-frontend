@@ -57,7 +57,7 @@ export async function getNarmesteLedere(
   const parsedResponse = array(narmesteLederSchema).nullish().safeParse(data);
 
   if (!parsedResponse.success) {
-    logger.error("Parsing error - getNarmesteLeder: " + parsedResponse.error);
+    logger.error("Parsing error - getNarmesteLedere: " + parsedResponse.error);
     return [];
   } else {
     return parsedResponse.data || [];
