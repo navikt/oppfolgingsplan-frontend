@@ -17,7 +17,7 @@ import Link from "next/link";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
 import { useLandingUrl } from "../../../hooks/routeHooks";
 import { Row } from "../../blocks/wrappers/Row";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 const texts = {
   arbeidsgiverSkjema: {
@@ -43,7 +43,7 @@ const texts = {
 };
 
 interface ArbeidsgiverUndertekstProps {
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
   arbeidsgiver: ArbeidsgivereForGyldigeSykmeldinger;
 }
 
@@ -92,7 +92,7 @@ export const VelgArbeidsgiverUndertekst = ({
 
 interface ArbeidsgiverSkjemaProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
   isSubmitting: boolean;
 
   handleClose(): void;

@@ -1,14 +1,14 @@
 import { Accordion, Link } from "@navikt/ds-react";
 import { restdatoTildato } from "../../utils/dateUtils";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
+import { Avbruttplan } from "../../types/oppfolgingsplan";
 import { usePdfApiUrl } from "../../hooks/routeHooks";
-import { AvbruttplanDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  avbruttOppfolgingsplaner: AvbruttplanDTO[] | null;
+  avbruttOppfolgingsplaner: Avbruttplan[] | null;
 }
 
-function PdfLink({ plan }: { plan: AvbruttplanDTO }) {
+function PdfLink({ plan }: { plan: Avbruttplan }) {
   const pdfUrl = usePdfApiUrl(plan.id);
 
   return (
@@ -33,13 +33,11 @@ export const TidligereOppfolgingsplaner = ({
             Se tidligere utgaver av denne planen
           </Accordion.Header>
           <Accordion.Content>
-            {avbruttOppfolgingsplaner.map(
-              (plan: AvbruttplanDTO, idx: number) => (
-                <div key={`avbrutt-plan-${idx}`}>
-                  <PdfLink plan={plan} />
-                </div>
-              ),
-            )}
+            {avbruttOppfolgingsplaner.map((plan: Avbruttplan, idx: number) => (
+              <div key={`avbrutt-plan-${idx}`}>
+                <PdfLink plan={plan} />
+              </div>
+            ))}
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>

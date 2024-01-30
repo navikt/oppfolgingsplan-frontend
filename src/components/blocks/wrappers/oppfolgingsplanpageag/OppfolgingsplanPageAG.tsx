@@ -3,6 +3,7 @@ import { OPSkeleton } from "../../skeleton/OPSkeleton";
 import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
 import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
 import { Heading } from "@navikt/ds-react";
+import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import React, { ReactNode } from "react";
 import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { useDineSykmeldte } from "../../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
@@ -10,7 +11,6 @@ import ArbeidsgiverSide from "../ArbeidsgiverSide";
 import { OppfolgingsplanStepper } from "../../stepper/OppfolgingsplanStepper";
 import { NavigationButtons } from "../../buttons/NavigationButtons";
 import { useTilgangAG } from "../../../../api/queries/arbeidsgiver/tilgangQueriesAG";
-import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
 
 const textOverskrift = (arbeidstakerNavn?: string) => {
   return `Oppfølgingsplan for ${arbeidstakerNavn}`;
@@ -46,7 +46,7 @@ const titleText = (page: Page) => {
 
 interface Props {
   page: Page;
-  oppfolgingsplan?: OppfolgingsplanDTO;
+  oppfolgingsplan?: Oppfolgingsplan;
   children: ReactNode;
 }
 

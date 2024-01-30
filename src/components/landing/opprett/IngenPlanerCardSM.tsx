@@ -5,11 +5,11 @@ import { Button } from "@navikt/ds-react";
 import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
 import { useOpprettOppfolgingsplanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { OppfolgingsplanCard } from "../../seplanen/OppfolgingsplanCard";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface OppfolgingsdialogerIngenplanProps {
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
 
   setVisOpprettModal(vis: boolean): void;
 }

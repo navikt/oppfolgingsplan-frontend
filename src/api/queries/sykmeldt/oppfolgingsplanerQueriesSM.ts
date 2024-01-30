@@ -7,16 +7,16 @@ import {
 import { OpprettOppfoelgingsdialog } from "../../../schema/opprettOppfoelgingsdialogSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from "../../../utils/oppfolgingplanUtils";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useSykmeldtFnr } from "./sykmeldingerQueriesSM";
 import { useRouter } from "next/router";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const useOppfolgingsplanerSM = () => {
   const apiBasePath = useApiBasePath();
 
   const fetchOppfolgingsplaner = () =>
-    get<OppfolgingsplanDTO[]>(
+    get<Oppfolgingsplan[]>(
       `${apiBasePath}/oppfolgingsplaner`,
       "fetchOppfolgingsplanerSM",
     );
@@ -28,7 +28,7 @@ export const useOppfolgingsplanerSM = () => {
   });
 };
 
-export const useAktivPlanSM = (): OppfolgingsplanDTO | undefined => {
+export const useAktivPlanSM = (): Oppfolgingsplan | undefined => {
   const id = useOppfolgingsplanRouteId();
   const allePlaner = useOppfolgingsplanerSM();
 
@@ -41,7 +41,7 @@ export const useAktivPlanSM = (): OppfolgingsplanDTO | undefined => {
 
 export const useGjeldendePlanSM = (
   virksomhetsnummer?: string | null,
-): OppfolgingsplanDTO | null => {
+): Oppfolgingsplan | null => {
   const allePlaner = useOppfolgingsplanerSM();
 
   if (!virksomhetsnummer) {

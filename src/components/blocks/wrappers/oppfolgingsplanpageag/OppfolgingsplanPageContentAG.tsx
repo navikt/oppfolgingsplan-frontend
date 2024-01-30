@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { Oppfolgingsplan, Stilling } from "../../../../types/oppfolgingsplan";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
   erOppfolgingsplanTidligere,
@@ -9,19 +10,15 @@ import { IkkeTilgangTilPlanInfoBoks } from "../../infoboks/IkkeTilgangTilPlanInf
 import { statusPageToDisplayAG } from "../../../../utils/statusPageUtils";
 import { CantEditPlanError } from "../../error/CantEditPlanError";
 import { BodyLong } from "@navikt/ds-react";
-import {
-  OppfolgingsplanDTO,
-  StillingDTO,
-} from "../../../../schema/oppfolgingsplanSchema";
 
-const textStilling = (stilling: StillingDTO) => {
+const textStilling = (stilling: Stilling) => {
   return `Den sykmeldte jobber som ${stilling?.yrke?.toLowerCase()} ${
     stilling.prosent
   } %`;
 };
 
 interface Props {
-  allePlaner: OppfolgingsplanDTO[];
+  allePlaner: Oppfolgingsplan[];
   sykmeldt: Sykmeldt;
   aktivPlanId: number;
   isOppgaverOrTiltak: boolean;
@@ -38,8 +35,7 @@ export const OppfolgingsplanPageContentAG = ({
   children,
 }: Props) => {
   const aktivPlan = findAktivPlan(aktivPlanId, allePlaner);
-  const stilling: StillingDTO | undefined =
-    aktivPlan?.arbeidstaker.stillinger[0];
+  const stilling: Stilling | undefined = aktivPlan?.arbeidstaker.stillinger[0];
 
   const erOppfolgingsdialogTilgjengelig =
     harTilgang &&

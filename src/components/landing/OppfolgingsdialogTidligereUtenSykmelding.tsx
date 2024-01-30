@@ -1,12 +1,12 @@
 import React from "react";
 import { hentStatusUtenAktivSykmelding } from "../../utils/teaserUtils";
+import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { OppfolgingsplanCard } from "../seplanen/OppfolgingsplanCard";
 import { useOppfolgingsplanUrl } from "../../hooks/routeHooks";
 import { Detail } from "@navikt/ds-react";
-import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplanUtenAktivSykmelding: OppfolgingsplanDTO;
+  oppfolgingsplanUtenAktivSykmelding: Oppfolgingsplan;
 }
 
 const OppfolgingsdialogTidligereUtenSykmelding = ({

@@ -7,11 +7,11 @@ import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { GodkjentPlanAvbruttTidspunkt } from "./GodkjentPlanAvbruttTidspunkt";
 import { TilGjeldendePlanKnapp } from "./TilGjeldendePlanKnapp";
 import { DelMedNavOgFastlegeButtons } from "../godkjentplan/DelMedNavOgFastlegeButtons";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { ReactNode } from "react";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
   children: ReactNode;
 }
 

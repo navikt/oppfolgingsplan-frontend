@@ -1,6 +1,7 @@
 import React from "react";
 import { hentPlanStatus } from "../../../utils/teaserUtils";
 import { useAudience, useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import {
   StatusPageToDisplay,
   statusPageToDisplayAG,
@@ -9,10 +10,9 @@ import {
 import { OppfolgingsplanCard } from "../../seplanen/OppfolgingsplanCard";
 import { STATUS } from "../../../constants/konstanter";
 import { Detail } from "@navikt/ds-react";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface OppfolgingsdialogTeaserProps {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
   rootUrlPlaner?: string;
 }
 

@@ -4,10 +4,10 @@ import {
   defaultVirksomhetMockData,
   otherVirksomhetMockData,
 } from "./oppfolgingsplanservice/defaultVirksomhetMockData";
+import { defaultNarmesteLedereMockData } from "./oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { defaultPersonMockData } from "./oppfolgingsplanservice/defaultPersonMockData";
 import { defaultKontaktinfoMockData } from "./oppfolgingsplanservice/defaultKontaktinfoMockData";
 import { defaultSykmeldtMockData } from "./sykmeldinger-arbeidsgiver/defaultSykmeldtMockData";
-import { defaultNarmesteLedereMockData } from "./oppfolgingsplanservice/defaultNarmesteLedereMockData";
 
 export const defaultMockSetup: MockSetup = {
   oppfolgingsplaner: [],

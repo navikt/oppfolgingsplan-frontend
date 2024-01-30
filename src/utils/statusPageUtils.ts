@@ -1,8 +1,5 @@
 import { inneholderGodkjenninger } from "./oppfolgingplanUtils";
-import {
-  GodkjenningDTO,
-  OppfolgingsplanDTO,
-} from "../schema/oppfolgingsplanSchema";
+import { Godkjenning, Oppfolgingsplan } from "../types/oppfolgingsplan";
 
 export const getStatusPageTitleAndHeading = (
   godkjenningsStatus: StatusPageToDisplay | null,
@@ -56,7 +53,7 @@ export const getStatusPageTitleAndHeading = (
 };
 
 const harMottattGodkjenningerFraArbeidsgiver = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
 ): boolean => {
   const godkjenninger = oppfolgingsplan.godkjenninger;
   const aktoer = oppfolgingsplan.arbeidstaker;
@@ -69,7 +66,7 @@ const harMottattGodkjenningerFraArbeidsgiver = (
 };
 
 const harMottattGodkjenningerFraArbeidstaker = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
 ): boolean => {
   const godkjenninger = oppfolgingsplan.godkjenninger;
   const aktoer = oppfolgingsplan.arbeidstaker;
@@ -81,12 +78,12 @@ const harMottattGodkjenningerFraArbeidstaker = (
   );
 };
 
-const harNaermesteLeder = (oppfolgingsplan: OppfolgingsplanDTO): boolean => {
+const harNaermesteLeder = (oppfolgingsplan: Oppfolgingsplan): boolean => {
   return !!oppfolgingsplan.arbeidsgiver?.naermesteLeder?.fnr;
 };
 
 const erAvvistAvAktor = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
   aktor: string,
 ): boolean => {
   return (
@@ -96,19 +93,19 @@ const erAvvistAvAktor = (
   );
 };
 
-const harFlereEnnEnGodkjenning = (godkjenninger: GodkjenningDTO[] | null) => {
+const harFlereEnnEnGodkjenning = (godkjenninger: Godkjenning[] | null) => {
   return godkjenninger && godkjenninger.length > 1;
 };
 
 const erForsteGodkjenningGodkjent = (
-  oppfolgingsplan: OppfolgingsplanDTO,
+  oppfolgingsplan: Oppfolgingsplan,
 ): boolean => {
   return (
     oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger[0].godkjent
   );
 };
 
-const erPlanTilGodkjenningSM = (oppfolgingsplan: OppfolgingsplanDTO) => {
+const erPlanTilGodkjenningSM = (oppfolgingsplan: Oppfolgingsplan) => {
   return (
     harNaermesteLeder(oppfolgingsplan) &&
     inneholderGodkjenninger(oppfolgingsplan) &&
@@ -117,7 +114,7 @@ const erPlanTilGodkjenningSM = (oppfolgingsplan: OppfolgingsplanDTO) => {
   );
 };
 
-const erPlanTilGodkjenningAG = (oppfolgingsplan: OppfolgingsplanDTO) => {
+const erPlanTilGodkjenningAG = (oppfolgingsplan: Oppfolgingsplan) => {
   return (
     inneholderGodkjenninger(oppfolgingsplan) &&
     oppfolgingsplan.arbeidsgiver?.naermesteLeder?.fnr &&
@@ -138,7 +135,7 @@ export type StatusPageToDisplay =
   | "INGENPLANTILGODKJENNING";
 
 export const statusPageToDisplaySM = (
-  oppfolgingsplan?: OppfolgingsplanDTO,
+  oppfolgingsplan?: Oppfolgingsplan,
 ): StatusPageToDisplay | null => {
   if (!oppfolgingsplan) return null;
 
@@ -169,7 +166,7 @@ export const statusPageToDisplaySM = (
 };
 
 export const statusPageToDisplayAG = (
-  oppfolgingsplan?: OppfolgingsplanDTO,
+  oppfolgingsplan?: Oppfolgingsplan,
 ): StatusPageToDisplay | null => {
   if (!oppfolgingsplan) return null;
 

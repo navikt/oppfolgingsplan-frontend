@@ -2,11 +2,11 @@ import React from "react";
 import OppfolgingsdialogTeaser from "./OppfolgingsdialogTeaser";
 import OppfolgingsdialogTidligereTeaser from "./OppfolgingsdialogTidligereTeaser";
 import { Heading } from "@navikt/ds-react";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 
 interface Props {
   tittel: string;
-  oppfolgingsplaner: OppfolgingsplanDTO[];
+  oppfolgingsplaner: Oppfolgingsplan[];
   className?: string;
   harTidligerOppfolgingsdialoger?: boolean;
 }

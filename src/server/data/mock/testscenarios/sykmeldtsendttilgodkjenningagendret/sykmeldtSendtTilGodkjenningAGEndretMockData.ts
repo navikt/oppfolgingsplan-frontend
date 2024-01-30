@@ -12,7 +12,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
       opprettetDato: "2020-02-20",
       status: "UNDER_ARBEID",
       virksomhet: {
-        virksomhetsnummer: aktivNarmesteLeder.virksomhetsnummer!,
+        virksomhetsnummer: aktivNarmesteLeder.virksomhetsnummer,
         navn: "",
       },
       godkjentPlan: null,
@@ -21,7 +21,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           godkjent: false,
           godkjentAv: {
             navn: "Albus Dumbledore",
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -127,7 +127,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           sistEndretDato: "2020-02-20T11:31:30.319",
           sistEndretAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -137,7 +137,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           },
           opprettetAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -155,7 +155,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           sistEndretDato: "2020-02-20T11:31:30.322",
           sistEndretAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -165,7 +165,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           },
           opprettetAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -196,7 +196,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
               sistEndretDato: "2020-02-20T11:31:30.352",
               opprettetAv: {
                 navn: aktivNarmesteLeder.navn,
-                fnr: aktivNarmesteLeder.fnr!,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -206,7 +206,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
               },
               sistEndretAv: {
                 navn: aktivNarmesteLeder.navn,
-                fnr: aktivNarmesteLeder.fnr!,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -257,7 +257,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
               sistEndretDato: "2020-02-20T11:31:30.376",
               opprettetAv: {
                 navn: aktivNarmesteLeder.navn,
-                fnr: aktivNarmesteLeder.fnr!,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -267,7 +267,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
               },
               sistEndretAv: {
                 navn: aktivNarmesteLeder.navn,
-                fnr: aktivNarmesteLeder.fnr!,
+                fnr: aktivNarmesteLeder.fnr,
                 epost: null,
                 tlf: null,
                 sistInnlogget: null,
@@ -334,7 +334,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
             "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
           opprettetAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -344,7 +344,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           },
           sistEndretAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -369,7 +369,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           gjennomfoering: null,
           opprettetAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -379,7 +379,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
           },
           sistEndretAv: {
             navn: aktivNarmesteLeder.navn,
-            fnr: aktivNarmesteLeder.fnr!,
+            fnr: aktivNarmesteLeder.fnr,
             epost: null,
             tlf: null,
             sistInnlogget: null,
@@ -400,9 +400,9 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
         },
       ],
       arbeidsgiver: {
-        naermesteLeder: {
+        narmesteLeder: {
           navn: aktivNarmesteLeder.navn,
-          fnr: aktivNarmesteLeder.fnr!,
+          fnr: aktivNarmesteLeder.fnr,
           epost: null,
           tlf: null,
           sistInnlogget: "2020-02-24T08:57:46.747",
@@ -430,7 +430,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
       },
       sistEndretAv: {
         navn: aktivNarmesteLeder.navn,
-        fnr: aktivNarmesteLeder.fnr!,
+        fnr: aktivNarmesteLeder.fnr,
         epost: null,
         tlf: null,
         sistInnlogget: null,

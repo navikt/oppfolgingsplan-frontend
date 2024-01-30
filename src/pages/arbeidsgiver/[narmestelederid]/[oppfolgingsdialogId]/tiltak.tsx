@@ -5,6 +5,7 @@ import { LagredeTiltak } from "../../../../components/tiltak/LagredeTiltak";
 import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { TiltakFormValues } from "../../../../components/tiltak/utils/typer";
+import { Tiltak } from "../../../../types/oppfolgingsplan";
 import { TiltakFormAG } from "../../../../components/tiltak/TiltakFormAG";
 import { formatAsLocalDateTime } from "../../../../utils/dateUtils";
 import {
@@ -14,15 +15,12 @@ import {
 import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
 import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
 import { useLagreTiltak } from "../../../../api/queries/oppfolgingsplan/tiltakQueries";
-import { TiltakDTO } from "../../../../schema/oppfolgingsplanSchema";
 
 const NyttTiltakPanel = () => {
   const lagreTiltak = useLagreTiltak();
   const [leggerTilNyttTiltak, setLeggerTilNyttTiltak] = useState(false);
 
-  const nyttTiltakInformasjon = (
-    data: TiltakFormValues,
-  ): Partial<TiltakDTO> => {
+  const nyttTiltakInformasjon = (data: TiltakFormValues): Partial<Tiltak> => {
     return {
       tiltaknavn: data.overskrift,
       beskrivelse: data.beskrivelse,

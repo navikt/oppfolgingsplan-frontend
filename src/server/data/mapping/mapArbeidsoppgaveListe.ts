@@ -1,14 +1,12 @@
-import {
-  ArbeidsOppgaveDTO,
-  OppfolgingsplanDTO,
-} from "../../../schema/oppfolgingsplanSchema";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 import { findName } from "./findName";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
+import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 
 export const mapArbeidsoppgaveListe = (
   oppfolgingsplan: OppfolgingsplanDTO,
   oppfolgingplanerMeta: OppfolgingsplanMeta,
-): ArbeidsOppgaveDTO[] => {
+): Arbeidsoppgave[] => {
   return oppfolgingsplan.arbeidsoppgaveListe.map((oppgave) => {
     return {
       ...oppgave,

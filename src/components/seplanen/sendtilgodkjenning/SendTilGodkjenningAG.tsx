@@ -1,14 +1,14 @@
 import React, { ReactElement, useState } from "react";
 import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
 import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
+import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
 import { Heading } from "@navikt/ds-react";
 import { formatAsLocalDateTime } from "../../../utils/dateUtils";
 import { useGodkjennOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: OppfolgingsplanDTO;
+  oppfolgingsplan: Oppfolgingsplan;
 }
 
 export const SendTilGodkjenningAG = ({
