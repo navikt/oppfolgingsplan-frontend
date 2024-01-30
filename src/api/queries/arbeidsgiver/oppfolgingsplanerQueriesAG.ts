@@ -13,9 +13,9 @@ import {
   finnTidligereOppfolgingsplaner,
 } from "../../../utils/oppfolgingplanUtils";
 import { useDineSykmeldte } from "./dinesykmeldteQueriesAG";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { queryKeys } from "../queryKeys";
 import { useRouter } from "next/router";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const useOppfolgingsplanerAG = () => {
   const apiBasePath = useApiBasePath();
@@ -25,7 +25,7 @@ export const useOppfolgingsplanerAG = () => {
   const sykmeldtFnr = sykmeldt.data?.fnr;
 
   const fetchOppfolgingsplanerAG = () =>
-    get<Oppfolgingsplan[]>(
+    get<OppfolgingsplanDTO[]>(
       `${apiBasePath}/${narmesteLederId}/oppfolgingsplaner`,
       "fetchOppfolgingsplanerAG",
     );

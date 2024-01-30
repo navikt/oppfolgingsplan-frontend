@@ -9,11 +9,11 @@ import {
   Page,
 } from "../../../../components/blocks/wrappers/oppfolgingsplanpageag/OppfolgingsplanPageAG";
 import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
-import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
+import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
 
 interface ContentProps {
-  aktivPlan?: Oppfolgingsplan;
+  aktivPlan?: OppfolgingsplanDTO;
 }
 
 const ArbeidsoppgaveContent = ({ aktivPlan }: ContentProps) => {

@@ -3,13 +3,16 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useOppfolgingsplanUrl } from "../../../hooks/routeHooks";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
-import { Arbeidsoppgave, Tiltak } from "../../../types/oppfolgingsplan";
 import { SEPLANEN_JEG_ER_FERDIG_BUTTON } from "../../../../cypress/dataTestId";
+import {
+  ArbeidsOppgaveDTO,
+  TiltakDTO,
+} from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   oppfolgingsplanId: number;
-  arbeidsoppgaveListe?: Arbeidsoppgave[] | null;
-  tiltakListe?: Tiltak[] | null;
+  arbeidsoppgaveListe?: ArbeidsOppgaveDTO[] | null;
+  tiltakListe?: TiltakDTO[] | null;
 
   visInnsendingsSkjema(): void;
 }

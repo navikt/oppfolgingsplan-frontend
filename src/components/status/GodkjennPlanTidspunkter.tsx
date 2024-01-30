@@ -2,10 +2,10 @@ import { toDateMedMaanedNavn } from "../../utils/dateUtils";
 import CalendarImage from "../blocks/images/calendar.svg";
 import StjerneImage from "../blocks/images/stjerne.svg";
 import { BildeTekstLinje } from "./BildeTekstLinje";
-import { Gyldighetstidspunkt } from "../../types/oppfolgingsplan";
+import { GyldighetstidspunktDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  gyldighetstidspunkt: Gyldighetstidspunkt;
+  gyldighetstidspunkt: GyldighetstidspunktDTO;
 }
 
 export const GodkjennPlanTidspunkter = ({ gyldighetstidspunkt }: Props) => {

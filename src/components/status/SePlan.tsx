@@ -2,11 +2,11 @@ import { FileSearchIcon } from "@navikt/aksel-icons";
 import { Button, Heading, Modal } from "@navikt/ds-react";
 import { useState } from "react";
 import { OppfolgingsplanOversikt } from "../seplanen/OppfolgingsplanOversikt";
-import { Oppfolgingsplan } from "../../types/oppfolgingsplan";
 import { texts } from "../seplanen/texts";
+import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 export const SePlan = ({ oppfolgingsplan }: Props) => {

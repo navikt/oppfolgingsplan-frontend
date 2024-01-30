@@ -6,11 +6,11 @@ import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
 import { Row } from "../../blocks/wrappers/Row";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { ReactNode } from "react";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
   description: string;
   children?: ReactNode;
 }

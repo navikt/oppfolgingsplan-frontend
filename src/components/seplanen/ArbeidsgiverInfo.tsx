@@ -1,13 +1,13 @@
 import { ContentWrapper } from "./ContentWrapper";
 import { Heading } from "@navikt/ds-react";
 import { texts } from "./texts";
-import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
 import { TextWithLabel } from "./TextWithLabel";
-import { Virksomhet } from "../../types/oppfolgingsplan";
+import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
+import { VirksomhetDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
   narmesteLeder?: NarmesteLederDTO | null;
-  virksomhet?: Virksomhet | null;
+  virksomhet?: VirksomhetDTO | null;
 }
 
 export const ArbeidsgiverInfo = ({ narmesteLeder, virksomhet }: Props) => {

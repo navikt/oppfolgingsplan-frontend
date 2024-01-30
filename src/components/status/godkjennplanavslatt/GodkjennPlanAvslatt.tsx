@@ -1,10 +1,10 @@
 import { BodyShort } from "@navikt/ds-react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 export const GodkjennPlanAvslatt = ({ oppfolgingsplan }: Props) => {

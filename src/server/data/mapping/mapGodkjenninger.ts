@@ -1,12 +1,14 @@
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import {
+  GodkjenningDTO,
+  OppfolgingsplanDTO,
+} from "../../../schema/oppfolgingsplanSchema";
 import { findName } from "./findName";
 import { OppfolgingsplanMeta } from "../../types/OppfolgingsplanMeta";
-import { Godkjenning } from "../../../types/oppfolgingsplan";
 
 export const mapGodkjenninger = (
   oppfolgingsplan: OppfolgingsplanDTO,
   oppfolgingplanerMeta: OppfolgingsplanMeta,
-): Godkjenning[] => {
+): GodkjenningDTO[] => {
   return oppfolgingsplan.godkjenninger.map((godkjenning) => {
     return {
       ...godkjenning,

@@ -129,7 +129,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.319",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -139,7 +139,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -157,7 +157,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.322",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -167,7 +167,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -197,7 +197,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.352",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -207,7 +207,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -258,7 +258,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.376",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -268,7 +268,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -335,7 +335,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
           "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -345,7 +345,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -370,7 +370,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -380,7 +380,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -401,7 +401,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
     ],
     arbeidsgiver: {
-      narmesteLeder: {
+      naermesteLeder: {
         navn: "Labben Rekemester",
         fnr: "20405060718",
         epost: null,
@@ -431,7 +431,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     },
     sistEndretAv: {
       navn: defaultNarmesteLedereMockData[0].navn,
-      fnr: defaultNarmesteLedereMockData[0].fnr,
+      fnr: defaultNarmesteLedereMockData[0].fnr!,
       epost: null,
       tlf: null,
       sistInnlogget: null,
@@ -555,7 +555,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.319",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -565,7 +565,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -583,7 +583,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.322",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -593,7 +593,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -623,7 +623,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.352",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -633,7 +633,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -684,7 +684,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.376",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -694,7 +694,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -761,7 +761,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
           "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -771,7 +771,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -796,7 +796,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -806,7 +806,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -827,7 +827,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
     ],
     arbeidsgiver: {
-      narmesteLeder: {
+      naermesteLeder: {
         navn: "Albus Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
@@ -857,7 +857,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     },
     sistEndretAv: {
       navn: defaultNarmesteLedereMockData[1].navn,
-      fnr: defaultNarmesteLedereMockData[1].fnr,
+      fnr: defaultNarmesteLedereMockData[1].fnr!,
       epost: null,
       tlf: null,
       sistInnlogget: null,
@@ -1001,7 +1001,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.319",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1011,7 +1011,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1029,7 +1029,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-20T11:31:30.322",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1039,7 +1039,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1069,7 +1069,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.352",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1079,7 +1079,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1130,7 +1130,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-20T11:31:30.376",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1140,7 +1140,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1207,7 +1207,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
           "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1217,7 +1217,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1242,7 +1242,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1252,7 +1252,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1273,7 +1273,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
     ],
     arbeidsgiver: {
-      narmesteLeder: {
+      naermesteLeder: {
         navn: "Albus Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
@@ -1303,7 +1303,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     },
     sistEndretAv: {
       navn: defaultNarmesteLedereMockData[0].navn,
-      fnr: defaultNarmesteLedereMockData[0].fnr,
+      fnr: defaultNarmesteLedereMockData[0].fnr!,
       epost: null,
       tlf: null,
       sistInnlogget: null,
@@ -1402,7 +1402,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1450,7 +1450,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     ],
     avbruttPlanListe: [],
     arbeidsgiver: {
-      narmesteLeder: {
+      naermesteLeder: {
         navn: "Labben Rekemester",
         fnr: "20405060718",
         epost: null,
@@ -1488,7 +1488,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     },
     sistEndretAv: {
       navn: defaultNarmesteLedereMockData[0].navn,
-      fnr: defaultNarmesteLedereMockData[0].fnr,
+      fnr: defaultNarmesteLedereMockData[0].fnr!,
       epost: null,
       tlf: null,
       sistInnlogget: null,
@@ -1623,7 +1623,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1641,7 +1641,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         sistEndretDato: "2020-02-17T09:04:59.149",
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1651,7 +1651,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1681,7 +1681,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-17T14:19:02.32",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1691,7 +1691,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1742,7 +1742,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             sistEndretDato: "2020-02-17T14:29:11.568",
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1752,7 +1752,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
             },
             sistEndretAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
-              fnr: defaultNarmesteLedereMockData[0].fnr,
+              fnr: defaultNarmesteLedereMockData[0].fnr!,
               epost: null,
               tlf: null,
               sistInnlogget: null,
@@ -1793,7 +1793,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
           "Vi ser hvordan det går denne perioden og øker gradvis hvis aktuelt. ",
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1803,7 +1803,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1828,7 +1828,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         gjennomfoering: null,
         opprettetAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1838,7 +1838,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
         },
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
-          fnr: defaultNarmesteLedereMockData[0].fnr,
+          fnr: defaultNarmesteLedereMockData[0].fnr!,
           epost: null,
           tlf: null,
           sistInnlogget: null,
@@ -1855,7 +1855,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
       },
     ],
     arbeidsgiver: {
-      narmesteLeder: {
+      naermesteLeder: {
         navn: defaultNarmesteLedereMockData[0].navn,
         fnr: "20405060718",
         epost: null,
@@ -1893,7 +1893,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     },
     sistEndretAv: {
       navn: defaultNarmesteLedereMockData[0].navn,
-      fnr: defaultNarmesteLedereMockData[0].fnr,
+      fnr: defaultNarmesteLedereMockData[0].fnr!,
       epost: null,
       tlf: null,
       sistInnlogget: null,
