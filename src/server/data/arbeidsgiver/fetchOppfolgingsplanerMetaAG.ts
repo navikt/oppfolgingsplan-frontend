@@ -96,7 +96,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
         oppfolgingsplaner: validOppfolgingsplaner,
         virksomhet: virksomhet,
         kontaktinfo: kontaktinfo,
-        narmesteLedere: [narmesteLeder],
+        narmesteLedere: narmesteLeder ? [narmesteLeder] : [],
       };
     }
   }
