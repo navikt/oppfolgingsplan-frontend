@@ -29,8 +29,8 @@ export async function getNarmesteLeder(
 ) {
   const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/virksomhet`;
 
-  const parsedResponse = narmesteLederSchema.safeParse(
-    await get<NarmesteLederDTO>(apiUrl, "getNarmesteLedere", {
+  const parsedResponse = narmesteLederSchema.nullish().safeParse(
+    await get<NarmesteLederDTO | null>(apiUrl, "getNarmesteLedere", {
       accessToken: accessToken,
       personIdent: fnr,
       orgnummer: virksomhetsnummer,
@@ -59,7 +59,9 @@ export async function getNarmesteLedere(accessToken: string) {
     },
   );
 
-  const response = array(narmesteLederSchema).safeParse(narmesteLedere);
+  const response = array(narmesteLederSchema)
+    .nullish()
+    .safeParse(narmesteLedere);
 
   if (response.success) {
     return response.data;
