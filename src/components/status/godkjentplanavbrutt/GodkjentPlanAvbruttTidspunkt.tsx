@@ -1,10 +1,10 @@
 import { toDateMedMaanedNavn } from "../../../utils/dateUtils";
 import CalendarImage from "../../blocks/images/calendar.svg";
 import { BildeTekstLinje } from "../BildeTekstLinje";
-import { GodkjentPlan } from "../../../types/oppfolgingsplan";
+import { GodkjentPlanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  godkjentPlan: GodkjentPlan;
+  godkjentPlan: GodkjentPlanDTO;
 }
 
 export const GodkjentPlanAvbruttTidspunkt = ({ godkjentPlan }: Props) => {

@@ -6,11 +6,11 @@ import { ArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUt
 import { useOpprettOppfolgingsplanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { finnNyesteTidligereOppfolgingsplanMedVirksomhet } from "../../../utils/oppfolgingplanUtils";
 import Feilmelding from "../../../components/blocks/error/Feilmelding";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { useKopierOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplaner: Oppfolgingsplan[];
+  oppfolgingsplaner: OppfolgingsplanDTO[];
   arbeidsgivere: ArbeidsgivereForGyldigeSykmeldinger[];
   visOpprettModal: boolean;
 

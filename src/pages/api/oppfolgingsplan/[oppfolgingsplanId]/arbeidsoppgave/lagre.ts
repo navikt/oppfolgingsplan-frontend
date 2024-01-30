@@ -4,8 +4,8 @@ import { saveOppgave } from "../../../../../server/service/oppfolgingsplanServic
 import { beskyttetApi } from "../../../../../server/auth/beskyttetApi";
 import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getOppfolgingsplanIdFromRequest } from "../../../../../server/utils/requestUtils";
-import { Arbeidsoppgave } from "../../../../../types/oppfolgingsplan";
 import { isMockBackend } from "../../../../../server/utils/serverEnv";
+import { ArbeidsOppgaveDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
 const handler = async (
   req: NextApiRequest,
@@ -16,7 +16,7 @@ const handler = async (
   } else {
     const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
     const oppfolgingsplanId = getOppfolgingsplanIdFromRequest(req);
-    const oppgave: Arbeidsoppgave = req.body;
+    const oppgave: ArbeidsOppgaveDTO = req.body;
 
     await saveOppgave(tokenX, oppfolgingsplanId, oppgave);
     res.status(200).end();

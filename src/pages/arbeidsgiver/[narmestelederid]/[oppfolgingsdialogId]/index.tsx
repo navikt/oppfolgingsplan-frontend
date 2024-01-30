@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import React, { ReactElement } from "react";
-import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import {
   getStatusPageTitleAndHeading,
   StatusPageToDisplay,
@@ -23,9 +22,10 @@ import { OPSkeleton } from "../../../../components/blocks/skeleton/OPSkeleton";
 import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
 import { useTilgangAG } from "../../../../api/queries/arbeidsgiver/tilgangQueriesAG";
 import { IkkeTilgangTilAnsattInfoBoks } from "../../../../components/blocks/infoboks/IkkeTilgangTilAnsattInfoBoks";
+import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
 
 interface ContentProps {
-  oppfolgingsplan?: Oppfolgingsplan;
+  oppfolgingsplan?: OppfolgingsplanDTO;
   pageToDisplay: StatusPageToDisplay | null;
 }
 

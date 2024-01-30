@@ -1,15 +1,15 @@
 import React, { ReactElement, useState } from "react";
 import { SendTilGodkjenningToggle } from "./SendTilGodkjenningToggle";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { LightGreyPanel } from "../../blocks/wrappers/LightGreyPanel";
 import { Alert, Heading } from "@navikt/ds-react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { formatAsLocalDateTime } from "../../../utils/dateUtils";
 import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
 import { useGodkjennEgenOppfolgingsplanAG } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 export const GodkjennEgenPlanAG = ({
@@ -58,7 +58,7 @@ export const GodkjennEgenPlanAG = ({
               tom: formatAsLocalDateTime(data.sluttDato),
               evalueres: formatAsLocalDateTime(data.evalueresInnen),
             },
-            delMedNav: data.delMedNAV === "true",
+            delmednav: data.delMedNAV === "true",
           });
         }}
       />

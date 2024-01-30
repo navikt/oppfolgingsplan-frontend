@@ -9,18 +9,18 @@ import {
   Page,
 } from "../../../../components/blocks/wrappers/oppfolgingsplanpageag/OppfolgingsplanPageAG";
 import { useOppfolgingsplanRouteId } from "../../../../hooks/routeHooks";
-import { Oppfolgingsplan } from "../../../../types/oppfolgingsplan";
 import React from "react";
 import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
+import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
 
 interface ContentProps {
-  aktivPlan?: Oppfolgingsplan;
+  aktivPlan?: OppfolgingsplanDTO;
 }
 
 const SePlanenContent = ({ aktivPlan }: ContentProps) => {
   if (!aktivPlan) return null;
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
-  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr;
+  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.navn;
 
   const isOwnLeader =
     narmesteLederFnr && arbeidstakerFnr && narmesteLederFnr === arbeidstakerFnr;

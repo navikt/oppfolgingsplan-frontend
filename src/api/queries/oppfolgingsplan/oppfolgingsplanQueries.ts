@@ -11,10 +11,7 @@ import { useRouter } from "next/router";
 import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
-import {
-  GodkjennEgenPlan,
-  Oppfolgingsplan,
-} from "../../../types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -109,7 +106,7 @@ export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const godkjennEgenPlan = async (data: GodkjennEgenPlan) => {
+  const godkjennEgenPlan = async (data: GodkjennPlanData) => {
     await post(
       `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
       "useGodkjennEgenOppfolgingsplanAG",
@@ -204,7 +201,7 @@ export const useAvbrytOppfolgingsplan = () => {
 };
 
 export const useInnloggetFnr = (
-  oppfolgingsplan: Oppfolgingsplan | undefined,
+  oppfolgingsplan: OppfolgingsplanDTO | undefined,
 ): string | null | undefined => {
   const { isAudienceSykmeldt } = useAudience();
 

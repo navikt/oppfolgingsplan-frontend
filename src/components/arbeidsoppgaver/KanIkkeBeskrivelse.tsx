@@ -1,9 +1,9 @@
 import { BodyLong, Label } from "@navikt/ds-react";
 import { texts } from "../seplanen/texts";
-import { Gjennomforing } from "../../types/oppfolgingsplan";
+import { GjennomforingDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  gjennomfoering?: Gjennomforing | null;
+  gjennomfoering?: GjennomforingDTO | null;
 }
 
 export const KanIkkeBeskrivelse = ({ gjennomfoering }: Props) => {

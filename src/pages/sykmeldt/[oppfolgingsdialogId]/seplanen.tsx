@@ -12,7 +12,7 @@ import {
 const Seplanen: NextPage = () => {
   const aktivPlan = useAktivPlanSM();
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
-  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr;
+  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.navn;
 
   const isOwnLeader =
     narmesteLederFnr && arbeidstakerFnr && narmesteLederFnr === arbeidstakerFnr;

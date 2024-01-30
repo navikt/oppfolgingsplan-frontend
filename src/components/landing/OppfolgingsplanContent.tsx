@@ -3,12 +3,13 @@ import { erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere } from "../../utils/op
 import { SykmeldingDTO } from "../../schema/sykmeldingSchema";
 import OppfolgingsdialogerVisning from "./teaser/OppfolgingsdialogerVisning";
 import { IngenLedereInfoBoks } from "../blocks/infoboks/IngenLedereInfoBoks";
-import { NarmesteLeder, Oppfolgingsplan } from "../../types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
+import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
 
 interface Props {
-  oppfolgingsplaner: Oppfolgingsplan[];
+  oppfolgingsplaner: OppfolgingsplanDTO[];
   sykmeldinger: SykmeldingDTO[];
-  narmesteLedere: NarmesteLeder[];
+  narmesteLedere: NarmesteLederDTO[];
 }
 
 const OppfolgingsplanContent = ({

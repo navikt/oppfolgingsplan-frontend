@@ -5,11 +5,10 @@ import { GodkjennsistPlanData } from "../../schema/godkjennsistPlanSchema";
 import { tilgangSchema } from "../../schema/tilgangSchema";
 import { sykmeldingSchema } from "../../schema/sykmeldingSchema";
 import {
-  narmesteLederSchema,
-  narmesteLederV3Schema,
-} from "../../schema/narmestelederSchema";
-import {
+  ArbeidsOppgaveDTO,
+  KommentarDTO,
   oppfolgingsplanSchema,
+  TiltakDTO,
   virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
 import { OpprettOppfoelgingsdialog } from "../../schema/opprettOppfoelgingsdialogSchema";
@@ -19,44 +18,48 @@ import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
 import { personV3Schema } from "../../schema/personSchemas";
 import {
-  Arbeidsoppgave,
-  GodkjennEgenPlan,
-  Kommentar,
-  Tiltak,
-} from "../../types/oppfolgingsplan";
+  NarmesteLederDTO,
+  narmesteLederSchema,
+} from "../../schema/narmestelederSchema";
 
 export async function getNarmesteLeder(
   accessToken: string,
   fnr: string,
   virksomhetsnummer: string,
 ) {
-  const response = narmesteLederSchema.safeParse(
-    await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/narmesteleder/${fnr}?virksomhetsnummer=${virksomhetsnummer}`,
-      "getNarmesteLeder",
-      {
-        accessToken,
-      },
-    ),
+  const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/virksomhet`;
+
+  const parsedResponse = narmesteLederSchema.safeParse(
+    await get<NarmesteLederDTO>(apiUrl, "getNarmesteLedere", {
+      accessToken: accessToken,
+      personIdent: fnr,
+      orgnummer: virksomhetsnummer,
+    }),
   );
 
-  if (response.success) {
-    return response.data;
+  if (parsedResponse.success) {
+    return parsedResponse.data;
   }
 
-  handleSchemaParsingError("Arbeidsgiver", "NarmesteLeder", response.error);
+  handleSchemaParsingError(
+    "Arbeidsgiver",
+    "NarmesteLeder",
+    parsedResponse.error,
+  );
 }
 
-export async function getNarmesteLedere(accessToken: string, fnr: string) {
-  const response = array(narmesteLederV3Schema).safeParse(
-    await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/narmesteledere/${fnr}`,
-      "getNarmesteLedere",
-      {
-        accessToken,
-      },
-    ),
+export async function getNarmesteLedere(accessToken: string) {
+  const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/alle`;
+
+  const narmesteLedere = await get<NarmesteLederDTO[]>(
+    apiUrl,
+    "getNarmesteLedere",
+    {
+      accessToken: accessToken,
+    },
   );
+
+  const response = array(narmesteLederSchema).safeParse(narmesteLedere);
 
   if (response.success) {
     return response.data;
@@ -358,10 +361,10 @@ export async function godkjennOppfolgingsplanAG(
 export async function godkjennEgenOppfolgingsplanAG(
   accessToken: string,
   oppfolgingsplanId: string,
-  data: GodkjennEgenPlan,
+  data: GodkjennPlanData,
 ) {
   return await post(
-    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?delmednav=${data.delMedNav}`,
+    `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/egenarbedsgiver/godkjenn?delmednav=${data.delmednav}`,
     "godkjennEgenOppfolgingsplanAG",
     data.gyldighetstidspunkt,
     { accessToken },
@@ -409,7 +412,7 @@ export async function deleteTiltakComment(
 export async function saveTiltakComment(
   accessToken: string,
   tiltakId: string,
-  kommentar: Partial<Kommentar>,
+  kommentar: Partial<KommentarDTO>,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tiltak/actions/${tiltakId}/lagreKommentar`,
@@ -431,7 +434,7 @@ export async function deleteTiltak(accessToken: string, tiltakId: string) {
 export async function saveTiltak(
   accessToken: string,
   oppfolgingsplanId: string,
-  tiltak: Tiltak,
+  tiltak: TiltakDTO,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreTiltak`,
@@ -458,7 +461,7 @@ export async function deleteOppgave(
 export async function saveOppgave(
   accessToken: string,
   oppfolgingsplanId: string,
-  oppgave: Arbeidsoppgave,
+  oppgave: ArbeidsOppgaveDTO,
 ) {
   return await post(
     `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/oppfolgingsplan/actions/${oppfolgingsplanId}/lagreArbeidsoppgave`,

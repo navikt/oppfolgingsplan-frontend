@@ -10,7 +10,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import React, { ReactElement, useState } from "react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { Row } from "../../blocks/wrappers/Row";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import { TvungenGodkjenningToggle } from "./TvungenGodkjenningToggle";
 import { notNullish } from "../../../server/utils/tsUtils";
 import Datepicker from "../../blocks/datepicker/Datepicker";
@@ -22,6 +21,7 @@ import {
   SEPLANEN_SLUTTDATO,
   SEPLANEN_STARTDATO,
 } from "../../../../cypress/dataTestId";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 export type SendTilGodkjenningFormValues = {
   startDato: Date;
@@ -33,7 +33,7 @@ export type SendTilGodkjenningFormValues = {
 };
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
   isOwnLeder?: boolean;
   visTvungenGodkjenningToggle: boolean;
   navnPaaMotpart: string;

@@ -3,10 +3,10 @@ import { BodyShort, Heading } from "@navikt/ds-react";
 import { ContentWrapper } from "./ContentWrapper";
 import { texts } from "./texts";
 import { TextWithLabel } from "./TextWithLabel";
-import { Person, Stilling } from "../../types/oppfolgingsplan";
+import { PersonDTO, StillingDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  arbeidstaker?: Person;
+  arbeidstaker?: PersonDTO;
 }
 
 export const ArbeidstakerInfo = ({ arbeidstaker }: Props) => {
@@ -39,17 +39,23 @@ export const ArbeidstakerInfo = ({ arbeidstaker }: Props) => {
 
         {arbeidstaker?.stillinger && arbeidstaker.stillinger?.length > 0 && (
           <div>
-            {arbeidstaker.stillinger.map((stilling: Stilling, idx: number) => {
-              if (stilling.yrke && stilling.prosent && stilling.prosent > -1) {
-                return (
-                  <BodyShort key={`arbeidstaker-informasjon-${idx}`}>
-                    {`${capitalizeFirstLetter(stilling.yrke.toLowerCase())}: ${
-                      stilling.prosent
-                    }%`}
-                  </BodyShort>
-                );
-              }
-            })}
+            {arbeidstaker.stillinger.map(
+              (stilling: StillingDTO, idx: number) => {
+                if (
+                  stilling.yrke &&
+                  stilling.prosent &&
+                  stilling.prosent > -1
+                ) {
+                  return (
+                    <BodyShort key={`arbeidstaker-informasjon-${idx}`}>
+                      {`${capitalizeFirstLetter(stilling.yrke.toLowerCase())}: ${
+                        stilling.prosent
+                      }%`}
+                    </BodyShort>
+                  );
+                }
+              },
+            )}
           </div>
         )}
       </div>

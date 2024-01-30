@@ -3,17 +3,17 @@ import { Button, Chat } from "@navikt/ds-react";
 import { hentAktoerNavnInitialer } from "../../../utils/stringUtils";
 import { getFullDateFormat } from "../../../utils/dateUtils";
 import { useSlettKommentar } from "../../../api/queries/oppfolgingsplan/tiltakQueries";
-import { Kommentar } from "../../../types/oppfolgingsplan";
 import { useAudience } from "../../../hooks/routeHooks";
 import {
   aktorHarOpprettetElement,
   getAktorNavn,
 } from "../../../utils/textContextUtils";
+import { KommentarDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   arbeidstakerFnr: string;
   tiltakId: number;
-  kommentarer?: Kommentar[] | null;
+  kommentarer?: KommentarDTO[] | null;
 }
 
 export const Dialog = ({
