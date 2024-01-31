@@ -1,10 +1,10 @@
 import {
-  Arbeidsoppgave,
-  Gjennomforing,
-  Person,
-} from "../../../types/oppfolgingsplan";
+  ArbeidsOppgaveDTO,
+  GjennomforingDTO,
+  PersonDTO,
+} from "../../../schema/oppfolgingsplanSchema";
 
-export function createPerson(props?: Partial<Person>): Person {
+export function createPerson(props?: Partial<PersonDTO>): PersonDTO {
   return {
     navn: "Person Navn",
     fnr: "12345678901",
@@ -14,8 +14,8 @@ export function createPerson(props?: Partial<Person>): Person {
 }
 
 export function createGjennomforing(
-  props?: Partial<Gjennomforing>,
-): Gjennomforing {
+  props?: Partial<GjennomforingDTO>,
+): GjennomforingDTO {
   return {
     kanGjennomfoeres: "TILRETTELEGGING",
     paaAnnetSted: false,
@@ -27,8 +27,8 @@ export function createGjennomforing(
   };
 }
 export function createArbeidsoppgave(
-  props?: Partial<Arbeidsoppgave>,
-): Arbeidsoppgave {
+  props?: Partial<ArbeidsOppgaveDTO>,
+): ArbeidsOppgaveDTO {
   return {
     arbeidsoppgaveId: 123,
     arbeidsoppgavenavn: "Arbeidsoppgave navn",

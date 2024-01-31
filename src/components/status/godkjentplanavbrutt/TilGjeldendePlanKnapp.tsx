@@ -4,10 +4,10 @@ import { useLandingUrl } from "../../../hooks/routeHooks";
 import NextLink from "next/link";
 import { useGjeldendePlanSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  oppfolgingsplan: Oppfolgingsplan;
+  oppfolgingsplan: OppfolgingsplanDTO;
 }
 
 export const TilGjeldendePlanKnapp = ({ oppfolgingsplan }: Props) => {

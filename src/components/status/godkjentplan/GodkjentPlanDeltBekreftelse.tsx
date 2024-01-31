@@ -2,10 +2,10 @@ import MedicalBoxImage from "../../blocks/images/medical-box.svg";
 import NavLogoImage from "../../blocks/images/nav-logo.svg";
 import { toDateMedMaanedNavn } from "../../../utils/dateUtils";
 import { BildeTekstLinje } from "../BildeTekstLinje";
-import { GodkjentPlan } from "../../../types/oppfolgingsplan";
+import { GodkjentPlanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  godkjentPlan: GodkjentPlan;
+  godkjentPlan: GodkjentPlanDTO;
 }
 
 export const GodkjentPlanDeltBekreftelse = ({ godkjentPlan }: Props) => {

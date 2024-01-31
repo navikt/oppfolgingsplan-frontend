@@ -1,12 +1,12 @@
-import { GodkjentPlan } from "../../../types/oppfolgingsplan";
 import { BildeTekstLinje } from "../BildeTekstLinje";
 import ReportProblemCircleImage from "../../blocks/images/report-problem-circle.svg";
 import { BodyShort } from "@navikt/ds-react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
+import { GodkjentPlanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface ApprovalInformationSMProps {
-  godkjentPlan: GodkjentPlan | null;
-  narmesteLederNavn: string | undefined;
+  godkjentPlan: GodkjentPlanDTO | null;
+  narmesteLederNavn: string | undefined | null;
 }
 
 export const ApprovalInformationSM = ({
@@ -30,7 +30,7 @@ export const ApprovalInformationSM = ({
 };
 
 interface ApprovalInformationAGProps {
-  godkjentPlan: GodkjentPlan | null;
+  godkjentPlan: GodkjentPlanDTO | null;
   sykmeldtNavn: string | undefined;
 }
 

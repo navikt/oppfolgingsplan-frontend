@@ -1,5 +1,5 @@
-import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 import { PersonV3DTO } from "../../../schema/personSchemas";
+import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 
 export const findName = (
   narmesteLedere: NarmesteLederDTO[],
@@ -12,7 +12,5 @@ export const findName = (
 
   const lederWithFnr = narmesteLedere.find((leder) => leder.fnr === fnrToFind);
 
-  if (lederWithFnr) return lederWithFnr.navn;
-
-  return "";
+  return lederWithFnr?.navn || "";
 };

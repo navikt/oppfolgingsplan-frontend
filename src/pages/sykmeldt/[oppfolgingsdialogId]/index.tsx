@@ -9,7 +9,6 @@ import { IngenPlanTilGodkjenning } from "../../../components/status/ingenplantil
 import GodkjennPlanSendt from "../../../components/status/godkjennplansendt/GodkjennPlanSendt";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import SykmeldtSide from "../../../components/blocks/wrappers/sykmeldtside/SykmeldtSide";
-import { Oppfolgingsplan } from "../../../types/oppfolgingsplan";
 import GodkjennPlanSendtInfoBox from "../../../components/status/godkjennplansendt/GodkjennPlanSendtInfoBox";
 import { ApprovalInformationSM } from "../../../components/status/godkjentplan/ApprovalInformation";
 import { useOppfolgingsplanerSM } from "../../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
@@ -21,9 +20,10 @@ import {
 import { findAktivPlan } from "../../../utils/oppfolgingplanUtils";
 import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
 import { OPSkeleton } from "../../../components/blocks/skeleton/OPSkeleton";
+import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface ContentProps {
-  oppfolgingsplan?: Oppfolgingsplan;
+  oppfolgingsplan?: OppfolgingsplanDTO;
   pageToDisplay: StatusPageToDisplay | null;
 }
 const Content = ({

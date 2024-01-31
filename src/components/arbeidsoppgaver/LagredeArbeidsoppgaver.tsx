@@ -1,9 +1,9 @@
 import React from "react";
-import { Arbeidsoppgave } from "../../types/oppfolgingsplan";
 import { ArbeidsoppgaveCard } from "./arbeidsoppgavecard/ArbeidsoppgaveCard";
+import { ArbeidsOppgaveDTO } from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
-  arbeidsoppgaver: Arbeidsoppgave[];
+  arbeidsoppgaver: ArbeidsOppgaveDTO[];
   arbeidstakerFnr: string;
 }
 
@@ -17,7 +17,7 @@ export const LagredeArbeidsoppgaver = ({
 
   return (
     <>
-      {arbeidsoppgaver.map((arbeidsoppgave: Arbeidsoppgave, idx: number) => (
+      {arbeidsoppgaver.map((arbeidsoppgave: ArbeidsOppgaveDTO, idx: number) => (
         <ArbeidsoppgaveCard
           arbeidstakerFnr={arbeidstakerFnr}
           arbeidsoppgave={arbeidsoppgave}

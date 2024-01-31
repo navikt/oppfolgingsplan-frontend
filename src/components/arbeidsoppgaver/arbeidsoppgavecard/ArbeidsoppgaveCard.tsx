@@ -1,4 +1,3 @@
-import { Arbeidsoppgave } from "../../../types/oppfolgingsplan";
 import { useAudience } from "../../../hooks/routeHooks";
 import { useState } from "react";
 import {
@@ -25,10 +24,11 @@ import { SpacedPanel } from "../../blocks/wrappers/SpacedPanel";
 import { FilledCheckmarkIcon } from "../../blocks/icons/FilledCheckmarkIcon";
 import { FilledCrossIcon } from "../../blocks/icons/FilledCrossIcon";
 import { FilledWarningIcon } from "../../blocks/icons/FilledWarningIcon";
+import { ArbeidsOppgaveDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   arbeidstakerFnr: string;
-  arbeidsoppgave: Arbeidsoppgave;
+  arbeidsoppgave: ArbeidsOppgaveDTO;
   readonly?: boolean;
 }
 

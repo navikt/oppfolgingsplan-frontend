@@ -3,12 +3,15 @@ import {
   OppgaveFormValues,
 } from "./ArbeidsoppgaveFormSM";
 import { TILRETTELEGGING } from "../../constants/konstanter";
-import { Arbeidsoppgave, Gjennomforing } from "../../types/oppfolgingsplan";
 import { useLagreArbeidsoppgave } from "../../api/queries/oppfolgingsplan/arbeidsoppgaveQueries";
+import {
+  ArbeidsOppgaveDTO,
+  GjennomforingDTO,
+} from "../../schema/oppfolgingsplanSchema";
 
 interface Props {
   show: boolean;
-  arbeidsoppgave: Arbeidsoppgave;
+  arbeidsoppgave: ArbeidsOppgaveDTO;
 
   doneEditing(): void;
 }
@@ -22,7 +25,7 @@ export const EditerArbeidsoppgave = ({
 
   const arbeidsoppgaveInformasjon = (
     data: OppgaveFormValues,
-  ): Arbeidsoppgave => {
+  ): ArbeidsOppgaveDTO => {
     return {
       ...arbeidsoppgave,
       gjennomfoering: {
@@ -42,7 +45,9 @@ export const EditerArbeidsoppgave = ({
     };
   };
 
-  const getTilretteleggingFormData = (gjennomforing?: Gjennomforing | null) => {
+  const getTilretteleggingFormData = (
+    gjennomforing?: GjennomforingDTO | null,
+  ) => {
     const tilrettelegging: string[] = [];
 
     if (gjennomforing?.medHjelp) {

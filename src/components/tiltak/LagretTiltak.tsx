@@ -18,11 +18,11 @@ import { EditerTiltak } from "./EditerTiltak";
 import { SpacedPanel } from "../blocks/wrappers/SpacedPanel";
 import { Dialog } from "../blocks/dialog/Dialog";
 import { Row } from "../blocks/wrappers/Row";
-import { Tiltak } from "../../types/oppfolgingsplan";
 import { useAudience } from "../../hooks/routeHooks";
 import { VurderButton } from "../blocks/buttons/VurderButton";
 import { VurderTiltak } from "./VurderTiltak";
 import { Chat2Icon, PencilIcon } from "@navikt/aksel-icons";
+import { TiltakDTO } from "../../schema/oppfolgingsplanSchema";
 
 const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
@@ -57,7 +57,7 @@ const createStatusLabel = (statusText?: string | null): ReactElement | null => {
 interface Props {
   arbeidstakerFnr: string;
   innloggetFnr: string;
-  tiltak: Tiltak;
+  tiltak: TiltakDTO;
   readonly?: boolean;
 }
 
