@@ -8,7 +8,9 @@ export const sykmeldtHarNaermestelederHosArbeidsgiver = (
 ) => {
   return (
     naermesteLedere.filter((leder) => {
-      return virksomhetsnummer === leder.virksomhetsnummer;
+      return (
+        virksomhetsnummer === leder.virksomhetsnummer && leder.aktivTom == null
+      );
     }).length > 0
   );
 };
@@ -18,7 +20,9 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (
   naermesteLedere: NarmesteLederDTO[],
 ) => {
   const naermesteLeder = naermesteLedere.filter((leder) => {
-    return virksomhetsnummer === leder.virksomhetsnummer;
+    return (
+      virksomhetsnummer === leder.virksomhetsnummer && leder.aktivTom == null
+    );
   })[0];
   return naermesteLeder ? naermesteLeder.navn : undefined;
 };
