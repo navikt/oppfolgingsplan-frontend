@@ -10,6 +10,7 @@ import { OPSkeleton } from "../../skeleton/OPSkeleton";
 import { OppfolgingsplanPageContentSM } from "./OppfolgingsplanPageContentSM";
 import { NavigationButtons } from "../../buttons/NavigationButtons";
 import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
+import { useNarmesteLedereSM } from "../../../../api/queries/sykmeldt/narmesteLedereQueriesSM";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -53,6 +54,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
   const allePlaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const aktivPlanId = useOppfolgingsplanRouteId();
+  const narmesteLedere = useNarmesteLedereSM();
 
   return (
     <SykmeldtSide
@@ -73,16 +75,19 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
 
       {(allePlaner.isPending || sykmeldinger.isPending) && <OPSkeleton />}
 
-      {allePlaner.isSuccess && sykmeldinger.isSuccess && (
-        <OppfolgingsplanPageContentSM
-          allePlaner={allePlaner.data}
-          sykmeldinger={sykmeldinger.data}
-          aktivPlanId={aktivPlanId}
-          isOppgaverOrTiltak={page !== Page.SEPLANEN}
-        >
-          {children}
-        </OppfolgingsplanPageContentSM>
-      )}
+      {allePlaner.isSuccess &&
+        sykmeldinger.isSuccess &&
+        narmesteLedere.isSuccess && (
+          <OppfolgingsplanPageContentSM
+            allePlaner={allePlaner.data}
+            sykmeldinger={sykmeldinger.data}
+            narmesteLedere={narmesteLedere.data}
+            aktivPlanId={aktivPlanId}
+            isOppgaverOrTiltak={page !== Page.SEPLANEN}
+          >
+            {children}
+          </OppfolgingsplanPageContentSM>
+        )}
 
       <NavigationButtons activeStep={page.valueOf()} />
     </SykmeldtSide>

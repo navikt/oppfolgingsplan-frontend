@@ -74,7 +74,7 @@ export const VelgArbeidsgiverUndertekst = ({
         </Link>
       </Alert>
     );
-  } else if (!arbeidsgiver.harNaermesteLeder) {
+  } else if (!arbeidsgiver.erAktivLederIVirksomhet) {
     return (
       <Alert variant="warning">
         {texts.velgArbeidsgiverUndertekst.noLeader}

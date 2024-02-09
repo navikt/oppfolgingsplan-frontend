@@ -27,7 +27,7 @@ const OpprettModalSM = ({
   const kopierOppfolgingsplan = useKopierOppfolgingsplan();
 
   const manglerNarmesteLeder =
-    arbeidsgivere.length === 1 && !arbeidsgivere[0].harNaermesteLeder;
+    arbeidsgivere.length === 1 && !arbeidsgivere[0].erAktivLederIVirksomhet;
 
   const opprett = (kopierTidligerePlan: boolean, virksomhetsnummer: string) => {
     if (kopierTidligerePlan) {
@@ -48,7 +48,7 @@ const OpprettModalSM = ({
 
   const getHeaderText = () => {
     if (manglerNarmesteLeder) {
-      return "Kan ikke opprette ny plan";
+      return "Kan ikke opprette ny plan fordi vi mangler informasjon om din nærmeste leder. Be arbeidsgiveren registrere det i Altinn.";
     } else if (arbeidsgivere.length > 1) {
       return "Hvilken arbeidsgiver skal du lage en plan med?";
     } else {

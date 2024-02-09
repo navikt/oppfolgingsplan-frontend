@@ -157,7 +157,7 @@ export const statusPageToDisplaySM = (
   }
 
   //Godkjent plan-sider
-  if (harNaermesteLeder(oppfolgingsplan) && oppfolgingsplan.godkjentPlan) {
+  if (oppfolgingsplan.godkjentPlan) {
     if (oppfolgingsplan.godkjentPlan.avbruttPlan) {
       return "GODKJENTPLANAVBRUTT";
     } else {

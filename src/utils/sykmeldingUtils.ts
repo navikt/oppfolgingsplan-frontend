@@ -2,7 +2,7 @@ import { erSykmeldingGyldigForOppfolgingMedGrensedato } from "./oppfolgingplanUt
 import { SykmeldingDTO } from "../schema/sykmeldingSchema";
 import { NarmesteLederDTO } from "../schema/narmestelederSchema";
 
-export const sykmeldtHarNaermestelederHosArbeidsgiver = (
+export const sykmeldtHarAktivNaermestelederHosArbeidsgiver = (
   virksomhetsnummer: string,
   naermesteLedere: NarmesteLederDTO[],
 ) => {
@@ -49,7 +49,7 @@ export interface ArbeidsgivereForGyldigeSykmeldinger {
   navn: string;
   virksomhetsnummer: string;
   naermesteLeder: string | undefined | null;
-  harNaermesteLeder: boolean;
+  erAktivLederIVirksomhet: boolean;
 }
 
 export const finnArbeidsgivereForGyldigeSykmeldinger = (
@@ -68,7 +68,7 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
       return {
         virksomhetsnummer: sykmelding.organisasjonsinformasjon.orgnummer,
         navn: sykmelding.organisasjonsinformasjon.orgNavn,
-        harNaermesteLeder: sykmeldtHarNaermestelederHosArbeidsgiver(
+        erAktivLederIVirksomhet: sykmeldtHarAktivNaermestelederHosArbeidsgiver(
           sykmelding.organisasjonsinformasjon.orgnummer,
           naermesteLedere,
         ),

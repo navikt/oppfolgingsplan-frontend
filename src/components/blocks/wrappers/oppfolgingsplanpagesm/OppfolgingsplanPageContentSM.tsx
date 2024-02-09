@@ -13,6 +13,9 @@ import {
   OppfolgingsplanDTO,
   StillingDTO,
 } from "../../../../schema/oppfolgingsplanSchema";
+import { NarmesteLederDTO } from "../../../../schema/narmestelederSchema";
+import { sykmeldtHarAktivNaermestelederHosArbeidsgiver } from "../../../../utils/sykmeldingUtils";
+import { ManglerLederForVirksomhetInfoBoks } from "../../infoboks/ManglerLederForVirksomhetInfoBoks";
 
 const textStilling = (stilling: StillingDTO) => {
   return `Du jobber hos denne arbeidsgiveren som ${stilling?.yrke?.toLowerCase()} ${
@@ -23,6 +26,7 @@ const textStilling = (stilling: StillingDTO) => {
 interface Props {
   allePlaner: OppfolgingsplanDTO[];
   sykmeldinger: SykmeldingDTO[];
+  narmesteLedere: NarmesteLederDTO[];
   aktivPlanId: number;
   isOppgaverOrTiltak: boolean;
   children: ReactNode;
@@ -31,6 +35,7 @@ interface Props {
 export const OppfolgingsplanPageContentSM = ({
   allePlaner,
   sykmeldinger,
+  narmesteLedere,
   aktivPlanId,
   isOppgaverOrTiltak,
   children,
@@ -47,6 +52,15 @@ export const OppfolgingsplanPageContentSM = ({
 
   if (!erOppfolgingsdialogTilgjengelig) {
     return <IkkeTilgangTilPlanInfoBoks />;
+  }
+
+  if (
+    !sykmeldtHarAktivNaermestelederHosArbeidsgiver(
+      aktivPlan?.virksomhet.virksomhetsnummer,
+      narmesteLedere,
+    )
+  ) {
+    return <ManglerLederForVirksomhetInfoBoks />;
   }
 
   const planStatus = statusPageToDisplaySM(aktivPlan);
