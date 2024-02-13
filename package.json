@@ -29,7 +29,7 @@
     "@navikt/ds-react": "^5.18.1",
     "@navikt/nav-dekoratoren-moduler": "^2.1.5",
     "@navikt/next-logger": "^1.21.0",
-    "@tanstack/react-query": "^5.20.1",
+    "@tanstack/react-query": "^5.20.4",
     "@tanstack/react-query-devtools": "^5.20.1",
     "@types/http-errors": "^2.0.4",
     "@types/react-datepicker": "^4.19.5",
