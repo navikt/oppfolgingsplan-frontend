@@ -1,5 +1,5 @@
 import React from "react";
-import OppfolgingsdialogTidligereUtenSykmelding from "./OppfolgingsdialogTidligereUtenSykmelding";
+import OppfolgingsdialogTidligereUtenSykmeldingSM from "./OppfolgingsdialogTidligereUtenSykmeldingSM";
 import { Heading } from "@navikt/ds-react";
 import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
@@ -8,7 +8,7 @@ interface Props {
   oppfolgingsplanerUtenAktivSykmelding: OppfolgingsplanDTO[];
 }
 
-const OppfolgingsdialogerUtenAktivSykmelding = ({
+const OppfolgingsdialogerUtenAktivSykmeldingSM = ({
   oppfolgingsplanerUtenAktivSykmelding,
 }: Props) => {
   return (
@@ -19,7 +19,7 @@ const OppfolgingsdialogerUtenAktivSykmelding = ({
       <SpacedDiv className="mt-4">
         {oppfolgingsplanerUtenAktivSykmelding.map((oppfolgingsplan, idx) => {
           return (
-            <OppfolgingsdialogTidligereUtenSykmelding
+            <OppfolgingsdialogTidligereUtenSykmeldingSM
               oppfolgingsplanUtenAktivSykmelding={oppfolgingsplan}
               key={idx}
             />
@@ -30,4 +30,4 @@ const OppfolgingsdialogerUtenAktivSykmelding = ({
   );
 };
 
-export default OppfolgingsdialogerUtenAktivSykmelding;
+export default OppfolgingsdialogerUtenAktivSykmeldingSM;

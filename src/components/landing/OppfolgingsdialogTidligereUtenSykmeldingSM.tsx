@@ -9,7 +9,7 @@ interface Props {
   oppfolgingsplanUtenAktivSykmelding: OppfolgingsplanDTO;
 }
 
-const OppfolgingsdialogTidligereUtenSykmelding = ({
+const OppfolgingsdialogTidligereUtenSykmeldingSM = ({
   oppfolgingsplanUtenAktivSykmelding,
 }: Props) => {
   const planStatus = hentStatusUtenAktivSykmelding(
@@ -36,4 +36,4 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({
   );
 };
 
-export default OppfolgingsdialogTidligereUtenSykmelding;
+export default OppfolgingsdialogTidligereUtenSykmeldingSM;

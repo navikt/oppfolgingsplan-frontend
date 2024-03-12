@@ -11,9 +11,7 @@ import { SykmeldingDTO } from "../schema/sykmeldingSchema";
 import { OppfolgingsplanDTO } from "../schema/oppfolgingsplanSchema";
 import { NarmesteLederDTO } from "../schema/narmestelederSchema";
 
-export const inneholderGodkjenninger = (
-  oppfolgingsplan: OppfolgingsplanDTO,
-) => {
+export const planErTilGodkjenning = (oppfolgingsplan: OppfolgingsplanDTO) => {
   return (
     oppfolgingsplan.godkjenninger && oppfolgingsplan.godkjenninger.length > 0
   );
@@ -69,10 +67,10 @@ export const erOppfolgingsplanAktiv = (oppfolgingsplan: OppfolgingsplanDTO) => {
   );
 };
 
-export const erOppfolgingsplanTidligere = (
+export const erUtloptGodkjentPlan = (
   oppfolgingsplan: OppfolgingsplanDTO,
-) => {
-  return (
+): boolean => {
+  return !!(
     oppfolgingsplan.godkjentPlan &&
     oppfolgingsplan.status !== STATUS.AVBRUTT &&
     oppfolgingsplan.godkjentPlan.gyldighetstidspunkt?.tom &&
@@ -96,16 +94,16 @@ export const finnTidligereOppfolgingsplaner = (
 ) => {
   return sorterOppfolgingsplanerEtterSluttdato(
     oppfolgingsplaner.filter((oppfolgingsplan) => {
-      return erOppfolgingsplanTidligere(oppfolgingsplan);
+      return erUtloptGodkjentPlan(oppfolgingsplan);
     }),
   );
 };
 
 export const harTidligereOppfolgingsplaner = (
-  oppfolgingsplaner: OppfolgingsplanDTO[],
-) => {
-  return finnTidligereOppfolgingsplaner(oppfolgingsplaner).length > 0;
-};
+  oppfolgingsplaner?: OppfolgingsplanDTO[],
+) =>
+  oppfolgingsplaner &&
+  finnTidligereOppfolgingsplaner(oppfolgingsplaner).length > 0;
 
 export const harTidligereOppfolgingsplanMedVirksomhet = (
   oppfolgingsplaner: OppfolgingsplanDTO[],
@@ -123,20 +121,21 @@ export const finnAktiveOppfolgingsplaner = (
   oppfolgingsplaner: OppfolgingsplanDTO[],
   sykmeldinger?: SykmeldingDTO[],
 ) => {
-  if (!sykmeldinger) {
+  if (sykmeldinger) {
     return oppfolgingsplaner.filter((plan) => {
-      return !plan.godkjentPlan || erOppfolgingsplanAktiv(plan);
+      return (
+        erOppfolgingsplanKnyttetTilGyldigSykmelding(plan, sykmeldinger) &&
+        (!plan.godkjentPlan ||
+          (plan.status !== STATUS.AVBRUTT &&
+            plan.godkjentPlan.gyldighetstidspunkt?.tom &&
+            !erGyldigDatoIFortiden(plan.godkjentPlan.gyldighetstidspunkt.tom)))
+      );
+    });
+  } else {
+    return oppfolgingsplaner.filter((plan) => {
+      return erOppfolgingsplanAktiv(plan);
     });
   }
-  return oppfolgingsplaner.filter((plan) => {
-    return (
-      erOppfolgingsplanKnyttetTilGyldigSykmelding(plan, sykmeldinger) &&
-      (!plan.godkjentPlan ||
-        (plan.status !== STATUS.AVBRUTT &&
-          plan.godkjentPlan.gyldighetstidspunkt?.tom &&
-          !erGyldigDatoIFortiden(plan.godkjentPlan.gyldighetstidspunkt.tom)))
-    );
-  });
 };
 
 export const erAktivOppfolgingsplanOpprettetMedArbeidsgiver = (

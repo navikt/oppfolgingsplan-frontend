@@ -58,12 +58,9 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
 ): ArbeidsgivereForGyldigeSykmeldinger[] => {
   const dagensDato = new Date();
   return sykmeldinger
-    .filter((sykmelding) => {
-      return erSykmeldingGyldigForOppfolgingMedGrensedato(
-        sykmelding,
-        dagensDato,
-      );
-    })
+    .filter((sykmelding) =>
+      erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato),
+    )
     .map((sykmelding) => {
       return {
         virksomhetsnummer: sykmelding.organisasjonsinformasjon.orgnummer,
@@ -78,14 +75,10 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
         ),
       };
     })
-    .filter((sykmelding, idx, self) => {
-      return (
-        self.findIndex((t) => {
-          return (
-            t.virksomhetsnummer === sykmelding.virksomhetsnummer &&
-            sykmelding.virksomhetsnummer !== null
-          );
-        }) === idx
-      );
-    });
+    .filter(
+      (sykmelding, idx, self) =>
+        self.findIndex(
+          (t) => t.virksomhetsnummer === sykmelding.virksomhetsnummer,
+        ) === idx,
+    );
 };

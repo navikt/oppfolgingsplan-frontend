@@ -1,10 +1,10 @@
 import React from "react";
 import { erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere } from "../../utils/oppfolgingplanUtils";
 import { SykmeldingDTO } from "../../schema/sykmeldingSchema";
-import OppfolgingsdialogerVisning from "./teaser/OppfolgingsdialogerVisning";
 import { IngenLedereInfoBoks } from "../blocks/infoboks/IngenLedereInfoBoks";
 import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
 import { NarmesteLederDTO } from "../../schema/narmestelederSchema";
+import OppfolgingsdialogerVisningSM from "./teaser/sykmeldt/OppfolgingsdialogerVisningSM";
 
 interface Props {
   oppfolgingsplaner: OppfolgingsplanDTO[];
@@ -12,7 +12,7 @@ interface Props {
   narmesteLedere: NarmesteLederDTO[];
 }
 
-const OppfolgingsplanContent = ({
+const OppfolgingsplanContentSM = ({
   oppfolgingsplaner,
   sykmeldinger,
   narmesteLedere,
@@ -27,7 +27,7 @@ const OppfolgingsplanContent = ({
     return <IngenLedereInfoBoks />;
   } else {
     return (
-      <OppfolgingsdialogerVisning
+      <OppfolgingsdialogerVisningSM
         oppfolgingsplaner={oppfolgingsplaner}
         sykmeldinger={sykmeldinger}
         narmesteLedere={narmesteLedere}
@@ -36,4 +36,4 @@ const OppfolgingsplanContent = ({
   }
 };
 
-export default OppfolgingsplanContent;
+export default OppfolgingsplanContentSM;

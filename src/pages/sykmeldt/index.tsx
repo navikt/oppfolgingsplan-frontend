@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import OppfolgingsplanContent from "../../components/landing/OppfolgingsplanContent";
+import OppfolgingsplanContentSM from "../../components/landing/OppfolgingsplanContentSM";
 import { useOppfolgingsplanerSM } from "../../api/queries/sykmeldt/oppfolgingsplanerQueriesSM";
 import { useSykmeldingerSM } from "../../api/queries/sykmeldt/sykmeldingerQueriesSM";
 import { beskyttetSideUtenProps } from "../../auth/beskyttetSide";
@@ -12,12 +12,12 @@ import {
   sykmeldtHarGyldigSykmelding,
   sykmeldtHarIngenSendteSykmeldinger,
 } from "../../utils/sykmeldingUtils";
-import OppfolgingsplanUtenGyldigSykmelding from "../../components/landing/OppfolgingsplanUtenGyldigSykmelding";
+import OppfolgingsplanUtenGyldigSykmeldingSM from "../../components/landing/OppfolgingsplanUtenGyldigSykmeldingSM";
 import {
   finnTidligereOppfolgingsplaner,
   harTidligereOppfolgingsplaner,
 } from "../../utils/oppfolgingplanUtils";
-import OppfolgingsdialogerUtenAktivSykmelding from "../../components/landing/OppfolgingsdialogerUtenAktivSykmelding";
+import OppfolgingsdialogerUtenAktivSykmeldingSM from "../../components/landing/OppfolgingsdialogerUtenAktivSykmeldingSM";
 import { OPSkeleton } from "../../components/blocks/skeleton/OPSkeleton";
 
 const PageContent = () => {
@@ -40,20 +40,19 @@ const PageContent = () => {
   ) {
     return (
       <div>
-        <OppfolgingsplanUtenGyldigSykmelding
+        <OppfolgingsplanUtenGyldigSykmeldingSM
           sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(
             sykmeldinger.data,
           )}
         />
 
-        {oppfolgingsplaner.data &&
-          harTidligereOppfolgingsplaner(oppfolgingsplaner.data) && (
-            <OppfolgingsdialogerUtenAktivSykmelding
-              oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsplaner(
-                oppfolgingsplaner.data,
-              )}
-            />
-          )}
+        {harTidligereOppfolgingsplaner(oppfolgingsplaner.data) && (
+          <OppfolgingsdialogerUtenAktivSykmeldingSM
+            oppfolgingsplanerUtenAktivSykmelding={finnTidligereOppfolgingsplaner(
+              oppfolgingsplaner.data,
+            )}
+          />
+        )}
       </div>
     );
   }
@@ -64,7 +63,7 @@ const PageContent = () => {
     narmesteLedere.isSuccess
   ) {
     return (
-      <OppfolgingsplanContent
+      <OppfolgingsplanContentSM
         oppfolgingsplaner={oppfolgingsplaner.data}
         sykmeldinger={sykmeldinger.data}
         narmesteLedere={narmesteLedere.data}

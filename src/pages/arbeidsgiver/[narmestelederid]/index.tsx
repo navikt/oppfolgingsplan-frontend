@@ -6,11 +6,9 @@ import {
   useTidligereOppfolgingsplanerAG,
 } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
-import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMelding";
 import { SamtaleStotte } from "../../../components/blocks/samtalestotte/SamtaleStotte";
 import { useKontaktinfo } from "../../../api/queries/kontaktinfo/kontaktinfoQueries";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
-import OppfolgingsdialogTeasere from "../../../components/landing/teaser/OppfolgingsdialogTeasere";
 import OpprettModalAG from "../../../components/landing/opprett/OpprettModalAG";
 import ArbeidsgiverSide from "../../../components/blocks/wrappers/ArbeidsgiverSide";
 import IngenPlanerCardAG from "../../../components/landing/opprett/IngenPlanerCardAG";
@@ -19,6 +17,8 @@ import VideoPanel from "../../../components/blocks/video/VideoPanel";
 import { OPSkeleton } from "../../../components/blocks/skeleton/OPSkeleton";
 import { IkkeTilgangTilAnsattInfoBoks } from "../../../components/blocks/infoboks/IkkeTilgangTilAnsattInfoBoks";
 import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG";
+import OppfolgingsdialogTeasereAG from "../../../components/landing/teaser/arbeidsgiver/OppfolgingsdialogTeasereAG";
+import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMeldingAG";
 
 const PageContent = () => {
   const allePlaner = useOppfolgingsplanerAG();
@@ -49,13 +49,13 @@ const PageContent = () => {
         </>
       )}
       {harAktiveOppfolgingsplaner && (
-        <OppfolgingsdialogTeasere
+        <OppfolgingsdialogTeasereAG
           oppfolgingsplaner={aktiveOppfolgingsplaner}
           tittel={"Aktiv oppfølgingsplan"}
         />
       )}
       {harTidligereOppfolgingsplaner && (
-        <OppfolgingsdialogTeasere
+        <OppfolgingsdialogTeasereAG
           oppfolgingsplaner={tidligereOppfolgingsplaner}
           harTidligerOppfolgingsdialoger
           tittel={"Tidligere oppfølgingsplaner"}

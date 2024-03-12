@@ -6,7 +6,7 @@ interface Props {
   sykmeldtHarIngenSendteSykmeldinger: boolean;
 }
 
-const OppfolgingsplanUtenGyldigSykmelding = ({
+const OppfolgingsplanUtenGyldigSykmeldingSM = ({
   sykmeldtHarIngenSendteSykmeldinger,
 }: Props) => {
   return (
@@ -22,4 +22,4 @@ const OppfolgingsplanUtenGyldigSykmelding = ({
   );
 };
 
-export default OppfolgingsplanUtenGyldigSykmelding;
+export default OppfolgingsplanUtenGyldigSykmeldingSM;

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmeldingAG,
-  erOppfolgingsplanTidligere,
+  erUtloptGodkjentPlan,
   findAktivPlan,
 } from "../../../../utils/oppfolgingplanUtils";
 import { Sykmeldt } from "../../../../schema/sykmeldtSchema";
@@ -45,7 +45,7 @@ export const OppfolgingsplanPageContentAG = ({
     harTilgang &&
     aktivPlan &&
     sykmeldt &&
-    (erOppfolgingsplanTidligere(aktivPlan) ||
+    (erUtloptGodkjentPlan(aktivPlan) ||
       erOppfolgingsplanKnyttetTilGyldigSykmeldingAG(
         aktivPlan,
         sykmeldt.orgnummer,

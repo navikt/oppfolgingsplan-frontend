@@ -1,17 +1,17 @@
 import React, { useState } from "react";
+import OppfolgingsdialogTeasereSM from "./OppfolgingsdialogTeasereSM";
+import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
+import { SykmeldingDTO } from "../../../../schema/sykmeldingSchema";
+import { NarmesteLederDTO } from "../../../../schema/narmestelederSchema";
 import {
   finnAktiveOppfolgingsplaner,
   finnTidligereOppfolgingsplaner,
   harTidligereOppfolgingsplaner,
-} from "../../../utils/oppfolgingplanUtils";
-import OppfolgingsdialogTeasere from "./OppfolgingsdialogTeasere";
+} from "../../../../utils/oppfolgingplanUtils";
+import { finnArbeidsgivereForGyldigeSykmeldinger } from "../../../../utils/sykmeldingUtils";
+import OpprettModalSM from "../../opprett/OpprettModalSM";
+import IngenPlanerCardSM from "../../opprett/IngenPlanerCardSM";
 import { Button } from "@navikt/ds-react";
-import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
-import { finnArbeidsgivereForGyldigeSykmeldinger } from "../../../utils/sykmeldingUtils";
-import OpprettModalSM from "../../../components/landing/opprett/OpprettModalSM";
-import IngenPlanerCardSM from "../../../components/landing/opprett/IngenPlanerCardSM";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
-import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 
 const texts = {
   oppfolgingsdialogNyKnapp: {
@@ -34,7 +34,7 @@ interface Props {
   narmesteLedere: NarmesteLederDTO[];
 }
 
-const OppfolgingsdialogerVisning = ({
+const OppfolgingsdialogerVisningSM = ({
   oppfolgingsplaner,
   sykmeldinger,
   narmesteLedere,
@@ -80,7 +80,7 @@ const OppfolgingsdialogerVisning = ({
               </Button>
             </div>
           )}
-          <OppfolgingsdialogTeasere
+          <OppfolgingsdialogTeasereSM
             oppfolgingsplaner={aktiveOppfolgingsplaner}
             tittel={
               aktiveOppfolgingsplaner.length > 1
@@ -92,7 +92,7 @@ const OppfolgingsdialogerVisning = ({
         </div>
       )}
       {harTidligereOppfolgingsplaner(oppfolgingsplaner) && (
-        <OppfolgingsdialogTeasere
+        <OppfolgingsdialogTeasereSM
           oppfolgingsplaner={finnTidligereOppfolgingsplaner(oppfolgingsplaner)}
           harTidligerOppfolgingsdialoger
           tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
@@ -102,4 +102,4 @@ const OppfolgingsdialogerVisning = ({
   );
 };
 
-export default OppfolgingsdialogerVisning;
+export default OppfolgingsdialogerVisningSM;

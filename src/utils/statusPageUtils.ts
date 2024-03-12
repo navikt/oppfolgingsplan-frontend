@@ -1,4 +1,4 @@
-import { inneholderGodkjenninger } from "./oppfolgingplanUtils";
+import { planErTilGodkjenning } from "./oppfolgingplanUtils";
 import {
   GodkjenningDTO,
   OppfolgingsplanDTO,
@@ -55,20 +55,7 @@ export const getStatusPageTitleAndHeading = (
   }
 };
 
-const harMottattGodkjenningerFraArbeidsgiver = (
-  oppfolgingsplan: OppfolgingsplanDTO,
-): boolean => {
-  const godkjenninger = oppfolgingsplan.godkjenninger;
-  const aktoer = oppfolgingsplan.arbeidstaker;
-  return !!(
-    godkjenninger &&
-    godkjenninger.length > 0 &&
-    godkjenninger[0].godkjentAv.fnr &&
-    godkjenninger[0].godkjentAv.fnr !== aktoer.fnr
-  );
-};
-
-const harMottattGodkjenningerFraArbeidstaker = (
+const arbeidstakerHarSendtPlanTilGodkjenning = (
   oppfolgingsplan: OppfolgingsplanDTO,
 ): boolean => {
   const godkjenninger = oppfolgingsplan.godkjenninger;
@@ -81,19 +68,10 @@ const harMottattGodkjenningerFraArbeidstaker = (
   );
 };
 
-const harNaermesteLeder = (oppfolgingsplan: OppfolgingsplanDTO): boolean => {
-  return !!oppfolgingsplan.arbeidsgiver?.naermesteLeder?.fnr;
-};
-
-const erAvvistAvAktor = (
+export const harNaermesteLeder = (
   oppfolgingsplan: OppfolgingsplanDTO,
-  aktor: string,
 ): boolean => {
-  return (
-    oppfolgingsplan.godkjenninger?.length === 1 &&
-    !oppfolgingsplan.godkjenninger[0].godkjent &&
-    aktor === oppfolgingsplan.godkjenninger[0].godkjentAv.fnr
-  );
+  return !!oppfolgingsplan.arbeidsgiver?.naermesteLeder?.fnr;
 };
 
 const harFlereEnnEnGodkjenning = (godkjenninger: GodkjenningDTO[] | null) => {
@@ -108,26 +86,6 @@ const erForsteGodkjenningGodkjent = (
   );
 };
 
-const erPlanTilGodkjenningSM = (oppfolgingsplan: OppfolgingsplanDTO) => {
-  return (
-    harNaermesteLeder(oppfolgingsplan) &&
-    inneholderGodkjenninger(oppfolgingsplan) &&
-    oppfolgingsplan.arbeidstaker.fnr &&
-    !erAvvistAvAktor(oppfolgingsplan, oppfolgingsplan.arbeidstaker.fnr)
-  );
-};
-
-const erPlanTilGodkjenningAG = (oppfolgingsplan: OppfolgingsplanDTO) => {
-  return (
-    inneholderGodkjenninger(oppfolgingsplan) &&
-    oppfolgingsplan.arbeidsgiver?.naermesteLeder?.fnr &&
-    !erAvvistAvAktor(
-      oppfolgingsplan,
-      oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr,
-    )
-  );
-};
-
 export type StatusPageToDisplay =
   | "SENDTPLANTILGODKJENNING"
   | "MOTTATTFLEREGODKJENNINGER"
@@ -135,66 +93,49 @@ export type StatusPageToDisplay =
   | "GODKJENNPLANAVSLATT"
   | "GODKJENTPLANAVBRUTT"
   | "GODKJENTPLAN"
-  | "INGENPLANTILGODKJENNING";
+  | "PLANUNDERARBEID";
 
 export const statusPageToDisplaySM = (
-  oppfolgingsplan?: OppfolgingsplanDTO,
-): StatusPageToDisplay | null => {
-  if (!oppfolgingsplan) return null;
-
-  //Til-godkjenning sider
-  if (erPlanTilGodkjenningSM(oppfolgingsplan)) {
-    if (!harMottattGodkjenningerFraArbeidsgiver(oppfolgingsplan)) {
-      return "SENDTPLANTILGODKJENNING";
-    }
-    if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
-      return "MOTTATTFLEREGODKJENNINGER";
-    } else if (erForsteGodkjenningGodkjent(oppfolgingsplan)) {
-      return "GODKJENNPLANMOTTATT";
-    } else {
-      return "GODKJENNPLANAVSLATT";
-    }
-  }
-
-  //Godkjent plan-sider
-  if (harNaermesteLeder(oppfolgingsplan) && oppfolgingsplan.godkjentPlan) {
-    if (oppfolgingsplan.godkjentPlan.avbruttPlan) {
-      return "GODKJENTPLANAVBRUTT";
-    } else {
-      return "GODKJENTPLAN";
-    }
-  }
-
-  return "INGENPLANTILGODKJENNING";
+  oppfolgingsplan: OppfolgingsplanDTO,
+): StatusPageToDisplay => {
+  return statusPageToDisplay(
+    oppfolgingsplan,
+    arbeidstakerHarSendtPlanTilGodkjenning,
+  );
 };
 
 export const statusPageToDisplayAG = (
-  oppfolgingsplan?: OppfolgingsplanDTO,
-): StatusPageToDisplay | null => {
-  if (!oppfolgingsplan) return null;
+  oppfolgingsplan: OppfolgingsplanDTO,
+): StatusPageToDisplay => {
+  return statusPageToDisplay(
+    oppfolgingsplan,
+    (oppfolgingsplan) =>
+      !arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan),
+  );
+};
+const statusPageToDisplay = (
+  oppfolgingsplan: OppfolgingsplanDTO,
+  aktoerHarSendtPlanTilGodkjenning: (
+    oppfolgingsplan: OppfolgingsplanDTO,
+  ) => boolean,
+): StatusPageToDisplay => {
+  if (oppfolgingsplan.godkjentPlan) {
+    return oppfolgingsplan.godkjentPlan.avbruttPlan
+      ? "GODKJENTPLANAVBRUTT"
+      : "GODKJENTPLAN";
+  }
 
-  //Til-godkjenning sider
-  if (erPlanTilGodkjenningAG(oppfolgingsplan)) {
-    if (!harMottattGodkjenningerFraArbeidstaker(oppfolgingsplan)) {
+  if (planErTilGodkjenning(oppfolgingsplan)) {
+    if (aktoerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
       return "SENDTPLANTILGODKJENNING";
     }
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
       return "MOTTATTFLEREGODKJENNINGER";
-    } else if (erForsteGodkjenningGodkjent(oppfolgingsplan)) {
-      return "GODKJENNPLANMOTTATT";
-    } else {
-      return "GODKJENNPLANAVSLATT";
     }
+    return erForsteGodkjenningGodkjent(oppfolgingsplan)
+      ? "GODKJENNPLANMOTTATT"
+      : "GODKJENNPLANAVSLATT";
   }
 
-  //Godkjent plan-sider
-  if (oppfolgingsplan.godkjentPlan) {
-    if (oppfolgingsplan.godkjentPlan.avbruttPlan) {
-      return "GODKJENTPLANAVBRUTT";
-    } else {
-      return "GODKJENTPLAN";
-    }
-  }
-
-  return "INGENPLANTILGODKJENNING";
+  return "PLANUNDERARBEID";
 };

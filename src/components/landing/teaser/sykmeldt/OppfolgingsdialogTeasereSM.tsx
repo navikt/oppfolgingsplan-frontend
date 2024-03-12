@@ -1,8 +1,8 @@
 import React from "react";
-import OppfolgingsdialogTeaser from "./OppfolgingsdialogTeaser";
-import OppfolgingsdialogTidligereTeaser from "./OppfolgingsdialogTidligereTeaser";
 import { Heading } from "@navikt/ds-react";
-import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import OppfolgingsdialogTeaserSM from "./OppfolgingsdialogTeaserSM";
+import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
+import OppfolgingsdialogTidligereTeaser from "../OppfolgingsdialogTidligereTeaser";
 
 interface Props {
   tittel: string;
@@ -11,7 +11,7 @@ interface Props {
   harTidligerOppfolgingsdialoger?: boolean;
 }
 
-const OppfolgingsdialogTeasere = ({
+const OppfolgingsdialogTeasereSM = ({
   oppfolgingsplaner,
   tittel = "",
   harTidligerOppfolgingsdialoger,
@@ -25,7 +25,9 @@ const OppfolgingsdialogTeasere = ({
       <div>
         {!harTidligerOppfolgingsdialoger &&
           oppfolgingsplaner.map((plan, idx) => {
-            return <OppfolgingsdialogTeaser oppfolgingsplan={plan} key={idx} />;
+            return (
+              <OppfolgingsdialogTeaserSM oppfolgingsplan={plan} key={idx} />
+            );
           })}
         {harTidligerOppfolgingsdialoger &&
           oppfolgingsplaner.map((plan, idx) => {
@@ -41,4 +43,4 @@ const OppfolgingsdialogTeasere = ({
   );
 };
 
-export default OppfolgingsdialogTeasere;
+export default OppfolgingsdialogTeasereSM;

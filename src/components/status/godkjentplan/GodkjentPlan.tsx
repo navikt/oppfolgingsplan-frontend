@@ -10,7 +10,7 @@ import { AvbrytPlanKnapp } from "./AvbrytPlanKnapp";
 import { GodkjentPlanDeltBekreftelse } from "./GodkjentPlanDeltBekreftelse";
 import { HvaSkjerNa } from "./HvaSkjerNa";
 import { DelMedNavOgFastlegeButtons } from "./DelMedNavOgFastlegeButtons";
-import { erOppfolgingsplanTidligere } from "../../../utils/oppfolgingplanUtils";
+import { erUtloptGodkjentPlan } from "../../../utils/oppfolgingplanUtils";
 import { ReactNode } from "react";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
@@ -45,7 +45,7 @@ export const GodkjentPlan = ({ oppfolgingsplan, children }: Props) => {
       <Row className="mb-8">
         <SePlan oppfolgingsplan={oppfolgingsplan} />
         <AapnePlanSomPDF oppfolgingsplanId={oppfolgingsplan.id} />
-        {!erOppfolgingsplanTidligere(oppfolgingsplan) && (
+        {!erUtloptGodkjentPlan(oppfolgingsplan) && (
           <AvbrytPlanKnapp oppfolgingsplanId={oppfolgingsplan.id} />
         )}
       </Row>
