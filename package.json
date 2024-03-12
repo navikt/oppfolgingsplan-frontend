@@ -30,7 +30,7 @@
     "@navikt/nav-dekoratoren-moduler": "^2.1.6",
     "@navikt/next-logger": "^1.23.0",
     "@tanstack/react-query": "^5.26.3",
-    "@tanstack/react-query-devtools": "^5.26.3",
+    "@tanstack/react-query-devtools": "^5.27.5",
     "@types/http-errors": "^2.0.4",
     "@types/react-datepicker": "^4.19.5",
     "axios": "^1.6.7",
