@@ -46,9 +46,9 @@ export const sykmeldtHarGyldigSykmelding = (sykmeldinger: SykmeldingDTO[]) => {
 };
 
 export interface ArbeidsgivereForGyldigeSykmeldinger {
-  navn: string;
+  organisasjonsnavn: string;
   virksomhetsnummer: string;
-  naermesteLeder: string | undefined | null;
+  naermesteLederNavn: string | undefined | null;
   erAktivLederIVirksomhet: boolean;
 }
 
@@ -56,29 +56,37 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
   sykmeldinger: SykmeldingDTO[],
   naermesteLedere: NarmesteLederDTO[],
 ): ArbeidsgivereForGyldigeSykmeldinger[] => {
-  const dagensDato = new Date();
-  return sykmeldinger
+  const uniqueSykmeldinger = findUniqueSykmeldinger(sykmeldinger);
+
+  return uniqueSykmeldinger
     .filter((sykmelding) =>
-      erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato),
+      erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, new Date()),
     )
-    .map((sykmelding) => {
-      return {
-        virksomhetsnummer: sykmelding.organisasjonsinformasjon.orgnummer,
-        navn: sykmelding.organisasjonsinformasjon.orgNavn,
-        erAktivLederIVirksomhet: sykmeldtHarNaermestelederHosArbeidsgiver(
-          sykmelding.organisasjonsinformasjon.orgnummer,
-          naermesteLedere,
-        ),
-        naermesteLeder: finnSykmeldtSinNaermestelederNavnHosArbeidsgiver(
-          sykmelding.organisasjonsinformasjon.orgnummer,
-          naermesteLedere,
-        ),
-      };
-    })
-    .filter(
-      (sykmelding, idx, self) =>
-        self.findIndex(
-          (t) => t.virksomhetsnummer === sykmelding.virksomhetsnummer,
-        ) === idx,
-    );
+    .map((sykmelding) => ({
+      virksomhetsnummer: sykmelding.organisasjonsinformasjon.orgnummer,
+      organisasjonsnavn: sykmelding.organisasjonsinformasjon.orgNavn,
+      erAktivLederIVirksomhet: sykmeldtHarNaermestelederHosArbeidsgiver(
+        sykmelding.organisasjonsinformasjon.orgnummer,
+        naermesteLedere,
+      ),
+      naermesteLederNavn: finnSykmeldtSinNaermestelederNavnHosArbeidsgiver(
+        sykmelding.organisasjonsinformasjon.orgnummer,
+        naermesteLedere,
+      ),
+    }));
 };
+
+function findUniqueSykmeldinger(sykmeldinger: SykmeldingDTO[]) {
+  const uniqueOrgnumbersInSykmeldinger = new Set(
+    sykmeldinger.map((s) => s.organisasjonsinformasjon.orgnummer),
+  );
+  return Array.from(uniqueOrgnumbersInSykmeldinger)
+    .map((orgnummer) =>
+      sykmeldinger.find(
+        (s) => s.organisasjonsinformasjon.orgnummer === orgnummer,
+      ),
+    )
+    .filter(
+      (sykmelding): sykmelding is SykmeldingDTO => sykmelding !== undefined,
+    );
+}
