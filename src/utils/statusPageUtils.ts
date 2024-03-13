@@ -81,12 +81,23 @@ const arbeidstakerHarSendtPlanTilGodkjenning = (
   oppfolgingsplan: OppfolgingsplanDTO,
 ): boolean => {
   const godkjenninger = oppfolgingsplan.godkjenninger;
-  const aktoer = oppfolgingsplan.arbeidstaker;
   return !!(
     godkjenninger &&
     godkjenninger.length > 0 &&
     godkjenninger[0].godkjentAv.fnr &&
-    godkjenninger[0].godkjentAv.fnr === aktoer.fnr
+    godkjenninger[0].godkjentAv.fnr === oppfolgingsplan.arbeidstaker.fnr
+  );
+};
+
+const arbeidsgiverHarSendtPlanTilGodkjenning = (
+  oppfolgingsplan: OppfolgingsplanDTO,
+): boolean => {
+  const godkjenninger = oppfolgingsplan.godkjenninger;
+  return !!(
+    godkjenninger &&
+    godkjenninger.length > 0 &&
+    godkjenninger[0].godkjentAv.fnr &&
+    godkjenninger[0].godkjentAv.fnr !== oppfolgingsplan.arbeidstaker.fnr
   );
 };
 
@@ -157,7 +168,7 @@ export const statusPageToDisplayAG = (
     planErTilGodkjenning(oppfolgingsplan) &&
     !erPlanMottattTilGodkjenningAvvistAvArbeidsgiver(oppfolgingsplan)
   ) {
-    if (!arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
+    if (arbeidsgiverHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
       return "SENDTPLANTILGODKJENNING";
     }
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
