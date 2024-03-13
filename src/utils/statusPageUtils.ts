@@ -55,6 +55,28 @@ export const getStatusPageTitleAndHeading = (
   }
 };
 
+const erPlanMottattTilGodkjenningAvvistAvSykmeldt = (
+  oppfolgingsplan: OppfolgingsplanDTO,
+): boolean => {
+  return (
+    oppfolgingsplan.godkjenninger?.length === 1 &&
+    !oppfolgingsplan.godkjenninger[0].godkjent &&
+    oppfolgingsplan.arbeidstaker.fnr ===
+      oppfolgingsplan.godkjenninger[0].godkjentAv.fnr
+  );
+};
+
+const erPlanMottattTilGodkjenningAvvistAvArbeidsgiver = (
+  oppfolgingsplan: OppfolgingsplanDTO,
+): boolean => {
+  return (
+    oppfolgingsplan.godkjenninger?.length === 1 &&
+    !oppfolgingsplan.godkjenninger[0].godkjent &&
+    oppfolgingsplan.arbeidstaker.fnr !==
+      oppfolgingsplan.godkjenninger[0].godkjentAv.fnr
+  );
+};
+
 const arbeidstakerHarSendtPlanTilGodkjenning = (
   oppfolgingsplan: OppfolgingsplanDTO,
 ): boolean => {
@@ -98,26 +120,32 @@ export type StatusPageToDisplay =
 export const statusPageToDisplaySM = (
   oppfolgingsplan: OppfolgingsplanDTO,
 ): StatusPageToDisplay => {
-  return statusPageToDisplay(
-    oppfolgingsplan,
-    arbeidstakerHarSendtPlanTilGodkjenning,
-  );
+  if (oppfolgingsplan.godkjentPlan) {
+    return oppfolgingsplan.godkjentPlan.avbruttPlan
+      ? "GODKJENTPLANAVBRUTT"
+      : "GODKJENTPLAN";
+  }
+
+  if (
+    planErTilGodkjenning(oppfolgingsplan) &&
+    !erPlanMottattTilGodkjenningAvvistAvSykmeldt(oppfolgingsplan)
+  ) {
+    if (arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
+      return "SENDTPLANTILGODKJENNING";
+    }
+    if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
+      return "MOTTATTFLEREGODKJENNINGER";
+    }
+    return erForsteGodkjenningGodkjent(oppfolgingsplan)
+      ? "GODKJENNPLANMOTTATT"
+      : "GODKJENNPLANAVSLATT";
+  }
+
+  return "PLANUNDERARBEID";
 };
 
 export const statusPageToDisplayAG = (
   oppfolgingsplan: OppfolgingsplanDTO,
-): StatusPageToDisplay => {
-  return statusPageToDisplay(
-    oppfolgingsplan,
-    (oppfolgingsplan) =>
-      !arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan),
-  );
-};
-const statusPageToDisplay = (
-  oppfolgingsplan: OppfolgingsplanDTO,
-  aktoerHarSendtPlanTilGodkjenning: (
-    oppfolgingsplan: OppfolgingsplanDTO,
-  ) => boolean,
 ): StatusPageToDisplay => {
   if (oppfolgingsplan.godkjentPlan) {
     return oppfolgingsplan.godkjentPlan.avbruttPlan
@@ -125,8 +153,11 @@ const statusPageToDisplay = (
       : "GODKJENTPLAN";
   }
 
-  if (planErTilGodkjenning(oppfolgingsplan)) {
-    if (aktoerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
+  if (
+    planErTilGodkjenning(oppfolgingsplan) &&
+    !erPlanMottattTilGodkjenningAvvistAvArbeidsgiver(oppfolgingsplan)
+  ) {
+    if (arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
       return "SENDTPLANTILGODKJENNING";
     }
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
