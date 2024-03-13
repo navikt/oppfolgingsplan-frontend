@@ -157,7 +157,7 @@ export const statusPageToDisplayAG = (
     planErTilGodkjenning(oppfolgingsplan) &&
     !erPlanMottattTilGodkjenningAvvistAvArbeidsgiver(oppfolgingsplan)
   ) {
-    if (arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
+    if (!arbeidstakerHarSendtPlanTilGodkjenning(oppfolgingsplan)) {
       return "SENDTPLANTILGODKJENNING";
     }
     if (harFlereEnnEnGodkjenning(oppfolgingsplan.godkjenninger)) {
