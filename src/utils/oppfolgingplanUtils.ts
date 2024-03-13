@@ -163,7 +163,7 @@ export const erOppfolgingsplanOpprettbarMedArbeidsgiver = (
   arbeidsgiver: ArbeidsgivereForGyldigeSykmeldinger,
 ) => {
   return (
-    arbeidsgiver.harNaermesteLeder &&
+    arbeidsgiver.erAktivLederIVirksomhet &&
     !erAktivOppfolgingsplanOpprettetMedArbeidsgiver(
       oppfolgingsplaner,
       arbeidsgiver.virksomhetsnummer,
@@ -182,7 +182,7 @@ export const erSykmeldtUtenOppfolgingsplanerOgNaermesteLedere = (
       sykmeldinger,
       naermesteLedere,
     ).filter((arbeidsgiver) => {
-      return arbeidsgiver.harNaermesteLeder;
+      return arbeidsgiver.erAktivLederIVirksomhet;
     }).length === 0
   );
 };

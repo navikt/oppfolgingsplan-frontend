@@ -49,7 +49,7 @@ export interface ArbeidsgivereForGyldigeSykmeldinger {
   navn: string;
   virksomhetsnummer: string;
   naermesteLeder: string | undefined | null;
-  harNaermesteLeder: boolean;
+  erAktivLederIVirksomhet: boolean;
 }
 
 export const finnArbeidsgivereForGyldigeSykmeldinger = (
@@ -65,7 +65,7 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
       return {
         virksomhetsnummer: sykmelding.organisasjonsinformasjon.orgnummer,
         navn: sykmelding.organisasjonsinformasjon.orgNavn,
-        harNaermesteLeder: sykmeldtHarNaermestelederHosArbeidsgiver(
+        erAktivLederIVirksomhet: sykmeldtHarNaermestelederHosArbeidsgiver(
           sykmelding.organisasjonsinformasjon.orgnummer,
           naermesteLedere,
         ),
