@@ -27,7 +27,7 @@ const OpprettModalSM = ({
   const kopierOppfolgingsplan = useKopierOppfolgingsplan();
 
   const manglerNarmesteLeder =
-    arbeidsgivere.length === 1 && !arbeidsgivere[0].harNaermesteLeder;
+    arbeidsgivere.length === 1 && !arbeidsgivere[0].erAktivLederIVirksomhet;
 
   const opprett = (kopierTidligerePlan: boolean, virksomhetsnummer: string) => {
     if (kopierTidligerePlan) {

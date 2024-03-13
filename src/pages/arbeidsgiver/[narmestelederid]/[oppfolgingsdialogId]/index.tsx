@@ -113,6 +113,8 @@ const OppfolgingsplanStatusAG: NextPage = () => {
   if (allePlaner.isSuccess && tilgang.isSuccess) {
     const aktivPlan = findAktivPlan(aktivPlanId, allePlaner.data);
 
+    if (!aktivPlan) return null;
+
     const pageToDisplay = statusPageToDisplayAG(aktivPlan);
     const { title, heading } = getStatusPageTitleAndHeading(
       pageToDisplay,

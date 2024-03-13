@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import { CantEditPlanError } from "../../error/CantEditPlanError";
 import {
   erOppfolgingsplanKnyttetTilGyldigSykmelding,
-  erOppfolgingsplanTidligere,
+  erUtloptGodkjentPlan,
   findAktivPlan,
 } from "../../../../utils/oppfolgingplanUtils";
 import { SykmeldingDTO } from "../../../../schema/sykmeldingSchema";
@@ -42,7 +42,7 @@ export const OppfolgingsplanPageContentSM = ({
   const erOppfolgingsdialogTilgjengelig =
     aktivPlan &&
     sykmeldinger &&
-    (erOppfolgingsplanTidligere(aktivPlan) ||
+    (erUtloptGodkjentPlan(aktivPlan) ||
       erOppfolgingsplanKnyttetTilGyldigSykmelding(aktivPlan, sykmeldinger));
 
   if (!erOppfolgingsdialogTilgjengelig) {

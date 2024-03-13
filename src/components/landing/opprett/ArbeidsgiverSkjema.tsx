@@ -74,16 +74,16 @@ export const VelgArbeidsgiverUndertekst = ({
         </Link>
       </Alert>
     );
-  } else if (!arbeidsgiver.harNaermesteLeder) {
+  } else if (!arbeidsgiver.erAktivLederIVirksomhet) {
     return (
       <Alert variant="warning">
         {texts.velgArbeidsgiverUndertekst.noLeader}
       </Alert>
     );
-  } else if (arbeidsgiver.naermesteLeder) {
+  } else if (arbeidsgiver.naermesteLederNavn) {
     return (
       <BodyShort size={"small"} spacing>
-        {`${texts.velgArbeidsgiverUndertekst.leader}${arbeidsgiver.naermesteLeder}`}
+        {`${texts.velgArbeidsgiverUndertekst.leader}${arbeidsgiver.naermesteLederNavn}`}
       </BodyShort>
     );
   }
@@ -129,7 +129,7 @@ export const ArbeidsgiverSkjema = ({
         {arbeidsgivere.map((arbeidsgiver, index) => {
           return (
             <option key={index} value={arbeidsgiver.virksomhetsnummer}>
-              {arbeidsgiver.navn}
+              {arbeidsgiver.organisasjonsnavn}
             </option>
           );
         })}

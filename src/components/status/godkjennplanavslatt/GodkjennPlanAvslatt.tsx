@@ -13,7 +13,7 @@ export const GodkjennPlanAvslatt = ({ oppfolgingsplan }: Props) => {
       <BodyShort spacing>
         Du kan gjøre endringer slik at dere får en god plan.
       </BodyShort>
-      <NullstillGodkjenningKnapp oppfolgingsplanId={oppfolgingsplan.id} />
+      <NullstillGodkjenningKnapp oppfolgingsplan={oppfolgingsplan} />
     </SpacedDiv>
   );
 };

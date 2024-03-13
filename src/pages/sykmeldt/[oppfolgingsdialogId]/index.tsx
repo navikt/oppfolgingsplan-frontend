@@ -102,18 +102,18 @@ const Content = ({
 const OppfolgingsplanStatus: NextPage = () => {
   const allePlaner = useOppfolgingsplanerSM();
   const aktivPlanId = useOppfolgingsplanRouteId();
+  const aktivPlan =
+    allePlaner.isSuccess && findAktivPlan(aktivPlanId, allePlaner.data);
 
   if (allePlaner.isPending) {
     return (
-      <SykmeldtSide title={"Oppfølgingsplan"} heading={"Oppfølgingsplan"}>
+      <SykmeldtSide title="Oppfølgingsplan" heading="Oppfølgingsplan">
         <OPSkeleton />
       </SykmeldtSide>
     );
   }
 
-  if (allePlaner.isSuccess) {
-    const aktivPlan = findAktivPlan(aktivPlanId, allePlaner.data);
-
+  if (aktivPlan) {
     const pageToDisplay = statusPageToDisplaySM(aktivPlan);
     const { title, heading } = getStatusPageTitleAndHeading(
       pageToDisplay,
