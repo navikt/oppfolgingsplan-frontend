@@ -53,9 +53,8 @@ export const GodkjennPlanMottatt = ({
       />
 
       <GodkjennOppfolgingsplan
-        oppfolgingsplanId={oppfolgingsplan.id}
+        oppfolgingsplan={oppfolgingsplan}
         motpartNavnForAltinn={motpartNavnForAltinn}
-        godkjenninger={oppfolgingsplan.godkjenninger}
       />
 
       <TilLandingssideKnapp />

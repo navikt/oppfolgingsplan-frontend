@@ -12,6 +12,12 @@ import { GodkjennsistPlanData } from "../../../schema/godkjennsistPlanSchema";
 import { queryKeys } from "../queryKeys";
 import { GodkjennPlanData } from "../../../schema/godkjennPlanSchema";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
+import { logger } from "@navikt/next-logger";
+import { AxiosError } from "axios";
+import {
+  statusPageToDisplayAG,
+  statusPageToDisplaySM,
+} from "../../../utils/statusPageUtils";
 
 export const useKopierOppfolgingsplan = () => {
   const apiPath = useOppfolgingsplanApiPath();
@@ -51,15 +57,22 @@ export const useNullstillGodkjenning = () => {
   return useMutation({ mutationFn: nullstillGodkjenning });
 };
 
-export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
+export const useGodkjennsistOppfolgingsplan = (
+  oppfolgingsplan: OppfolgingsplanDTO,
+) => {
   const apiBasePath = useApiBasePath();
-  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
+  const statusUrl = useOppfolgingsplanUrl(oppfolgingsplan.id, "status");
   const queryClient = useQueryClient();
   const router = useRouter();
+  const audience = useAudience();
+  const pageToDisplay = audience.isAudienceSykmeldt
+    ? statusPageToDisplaySM(oppfolgingsplan)
+    : statusPageToDisplayAG(oppfolgingsplan);
+  const currentUrl = window.location.href;
 
   const godkjennsistPlan = async (data: GodkjennsistPlanData) => {
     await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennsist`,
+      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplan.id}/godkjennsist`,
       "useGodkjennsistOppfolgingsplan",
       data,
     );
@@ -69,7 +82,26 @@ export const useGodkjennsistOppfolgingsplan = (oppfolgingsplanId: number) => {
     await router.push(statusUrl);
   };
 
-  return useMutation({ mutationFn: godkjennsistPlan });
+  return useMutation({
+    mutationFn: godkjennsistPlan,
+    onError: (error: AxiosError) => {
+      if (error.response?.status === 409) {
+        logger.error(
+          "Got 409 for godkjennsist. Audience: " +
+            audience.audience +
+            " PageToDisplay: " +
+            pageToDisplay +
+            " currentUrl: " +
+            currentUrl +
+            " id: " +
+            oppfolgingsplan.id,
+        );
+        window.location.reload();
+      } else {
+        throw error;
+      }
+    },
+  });
 };
 
 export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
