@@ -3,7 +3,7 @@ import { OppfolgingsplanOversikt } from "../../../../components/seplanen/Oppfolg
 import { beskyttetSideUtenProps } from "../../../../auth/beskyttetSide";
 import { SendTilGodkjenningAG } from "../../../../components/seplanen/sendtilgodkjenning/SendTilGodkjenningAG";
 import { useOppfolgingsplanerAG } from "../../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
-import { GodkjennEgenPlanAG } from "../../../../components/seplanen/sendtilgodkjenning/GodkjennEgenPlanAG";
+import { GodkjennEgenPlan } from "../../../../components/seplanen/sendtilgodkjenning/GodkjennEgenPlan";
 import {
   OppfolgingsplanPageAG,
   Page,
@@ -32,7 +32,7 @@ const SePlanenContent = ({ aktivPlan }: ContentProps) => {
         <SendTilGodkjenningAG oppfolgingsplan={aktivPlan} />
       )}
       {isOwnLeader && aktivPlan && (
-        <GodkjennEgenPlanAG oppfolgingsplan={aktivPlan} />
+        <GodkjennEgenPlan oppfolgingsplan={aktivPlan} />
       )}
     </>
   );
