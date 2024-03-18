@@ -5,20 +5,20 @@ import { Alert, Heading } from "@navikt/ds-react";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { formatAsLocalDateTime } from "../../../utils/dateUtils";
 import { SendTilGodkjenningForm } from "./SendTilGodkjenningForm";
-import { useGodkjennEgenOppfolgingsplanAG } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
+import { useGodkjennEgenOppfolgingsplan } from "../../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
   oppfolgingsplan: OppfolgingsplanDTO;
 }
 
-export const GodkjennEgenPlanAG = ({
+export const GodkjennEgenPlan = ({
   oppfolgingsplan,
 }: Props): ReactElement | null => {
   const [visOppfolgingsplanSkjema, setVisOppfolgingsplanSkjema] =
     useState(false);
 
-  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplanAG(oppfolgingsplan.id);
+  const godkjennEgenPlan = useGodkjennEgenOppfolgingsplan(oppfolgingsplan.id);
 
   if (!oppfolgingsplan) return null;
 

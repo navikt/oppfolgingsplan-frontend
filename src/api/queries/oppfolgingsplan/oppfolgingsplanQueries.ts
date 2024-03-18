@@ -132,16 +132,16 @@ export const useGodkjennOppfolgingsplan = (oppfolgingsplanId: number) => {
   });
 };
 
-export const useGodkjennEgenOppfolgingsplanAG = (oppfolgingsplanId: number) => {
-  const apiBasePath = useApiBasePath();
+export const useGodkjennEgenOppfolgingsplan = (oppfolgingsplanId: number) => {
+  const apiBasePath = useOppfolgingsplanApiPath();
   const statusUrl = useOppfolgingsplanUrl(oppfolgingsplanId, "status");
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const godkjennEgenPlan = async (data: GodkjennPlanData) => {
     await post(
-      `${apiBasePath}/oppfolgingsplaner/${oppfolgingsplanId}/godkjennegenplan`,
-      "useGodkjennEgenOppfolgingsplanAG",
+      `${apiBasePath}/${oppfolgingsplanId}/godkjennegenplan`,
+      "useGodkjennEgenOppfolgingsplan",
       data,
     );
     await queryClient.invalidateQueries({

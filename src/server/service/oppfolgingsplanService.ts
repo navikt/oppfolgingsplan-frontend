@@ -356,7 +356,7 @@ export async function godkjennOppfolgingsplanAG(
   );
 }
 
-export async function godkjennEgenOppfolgingsplanAG(
+export async function godkjennEgenOppfolgingsplan(
   accessToken: string,
   oppfolgingsplanId: string,
   data: GodkjennPlanData,

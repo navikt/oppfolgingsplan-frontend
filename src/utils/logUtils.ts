@@ -68,7 +68,7 @@ export type RequestOrigin =
   | "useNullstillGodkjenning"
   | "useGodkjennsistOppfolgingsplan"
   | "useGodkjennOppfolgingsplan"
-  | "useGodkjennEgenOppfolgingsplanAG"
+  | "useGodkjennEgenOppfolgingsplan"
   | "useAvvisOppfolgingsplan"
   | "useDelOppfolgingsplanMedNav"
   | "useDelOppfolgingsplanMedFastlege"
