@@ -56,9 +56,7 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
   sykmeldinger: SykmeldingDTO[],
   naermesteLedere: NarmesteLederDTO[],
 ): ArbeidsgivereForGyldigeSykmeldinger[] => {
-  const uniqueSykmeldinger = findUniqueSykmeldinger(sykmeldinger);
-
-  return uniqueSykmeldinger
+  const arbeidsgivereForGyldigeSykmeldinger = sykmeldinger
     .filter((sykmelding) =>
       erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, new Date()),
     )
@@ -74,19 +72,24 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (
         naermesteLedere,
       ),
     }));
+
+  return uniqueArbeidsgivereForSykmeldinger(
+    arbeidsgivereForGyldigeSykmeldinger,
+  );
 };
 
-function findUniqueSykmeldinger(sykmeldinger: SykmeldingDTO[]) {
+function uniqueArbeidsgivereForSykmeldinger(
+  sykmeldinger: ArbeidsgivereForGyldigeSykmeldinger[],
+) {
   const uniqueOrgnumbersInSykmeldinger = new Set(
-    sykmeldinger.map((s) => s.organisasjonsinformasjon.orgnummer),
+    sykmeldinger.map((s) => s.virksomhetsnummer),
   );
   return Array.from(uniqueOrgnumbersInSykmeldinger)
     .map((orgnummer) =>
-      sykmeldinger.find(
-        (s) => s.organisasjonsinformasjon.orgnummer === orgnummer,
-      ),
+      sykmeldinger.find((s) => s.virksomhetsnummer === orgnummer),
     )
     .filter(
-      (sykmelding): sykmelding is SykmeldingDTO => sykmelding !== undefined,
+      (sykmelding): sykmelding is ArbeidsgivereForGyldigeSykmeldinger =>
+        sykmelding !== undefined,
     );
 }
