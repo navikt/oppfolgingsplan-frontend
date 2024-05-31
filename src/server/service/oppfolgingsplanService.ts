@@ -184,12 +184,12 @@ export async function getSykmeldt(
 export async function getTilgang(accessToken: string, fnr: string) {
   const response = tilgangSchema.safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/tilgang?fnr=${fnr}`,
+      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/brukertilgang?fnr=${fnr}`,
       "getTilgang",
       { accessToken },
     ),
   );
-
+  console.log(response);
   if (response.success) {
     return response.data;
   } else {
