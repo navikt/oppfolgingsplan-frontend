@@ -184,9 +184,9 @@ export async function getSykmeldt(
 export async function getTilgang(accessToken: string, fnr: string) {
   const response = tilgangSchema.safeParse(
     await get(
-      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/brukertilgang?fnr=${fnr}`,
+      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/brukertilgang`,
       "getTilgang",
-      { accessToken },
+      { accessToken, personIdent: fnr },
     ),
   );
   console.log(response);
