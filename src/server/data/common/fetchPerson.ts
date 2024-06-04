@@ -1,12 +1,12 @@
-import { getPersonSM } from "../../service/oppfolgingsplanService";
+import { getPerson } from "../../service/oppfolgingsplanService";
 import { ApiErrorException, generalError } from "../../../api/axios/errors";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
-import { PersonV3DTO } from "../../../schema/personSchemas";
+import { PersonDTO } from "../../../schema/personSchemas";
 
 export const fetchPerson = async (
   oppfolgingsplanTokenX: string,
   oppfolgingsplaner: OppfolgingsplanDTO[],
-): Promise<PersonV3DTO> | never => {
+): Promise<PersonDTO> | never => {
   const sykmeldtFnr = oppfolgingsplaner.find((plan) => plan)?.arbeidstaker.fnr;
 
   if (!sykmeldtFnr) {
@@ -15,5 +15,5 @@ export const fetchPerson = async (
     );
   }
 
-  return await getPersonSM(oppfolgingsplanTokenX, sykmeldtFnr);
+  return await getPerson(oppfolgingsplanTokenX, sykmeldtFnr);
 };
