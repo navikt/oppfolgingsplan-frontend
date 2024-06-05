@@ -11,10 +11,9 @@ export const useTilgangAG = () => {
   const sykmeldtData = useDineSykmeldte();
 
   const fetchTilgang = () =>
-    get<Tilgang>(
-      `${apiBasePath}/tilgang/${sykmeldtData.data?.fnr}`,
-      "fetchTilgangAG",
-    );
+    get<Tilgang>(`${apiBasePath}/tilgang`, "fetchTilgangAG", {
+      personIdent: sykmeldtData.data?.fnr,
+    });
 
   return useQuery<Tilgang, ApiErrorException>({
     queryKey: [queryKeys.TILGANG],
