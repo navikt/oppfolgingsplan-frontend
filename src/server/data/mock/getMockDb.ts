@@ -7,7 +7,7 @@ import { SykmeldingDTO } from "../../../schema/sykmeldingSchema";
 import { KontaktinfoDTO } from "../../../schema/kontaktinfoSchema";
 import { Tilgang } from "../../../schema/tilgangSchema";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
-import { PersonDTO } from "../../../schema/personSchemas";
+import { PersonV3DTO } from "../../../schema/personSchemas";
 import { TEST_SESSION_ID } from "../../../api/axios/axios";
 import { handleQueryParamError } from "../../utils/errors";
 import { NextApiRequest } from "next";
@@ -27,7 +27,7 @@ export interface MockSetup {
   sykmeldinger: SykmeldingDTO[];
   virksomhet: VirksomhetDTO[];
   narmesteLedere: NarmesteLederDTO[];
-  person: PersonDTO;
+  person: PersonV3DTO;
   kontaktinfo: KontaktinfoDTO;
   tilgang: Tilgang;
   sykmeldt: Sykmeldt;
