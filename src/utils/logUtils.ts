@@ -39,7 +39,7 @@ export type RequestOrigin =
   | "getOppfolgingsplanerAG"
   | "getSykmeldt"
   | "getTilgang"
-  | "getPersonSM"
+  | "getPerson"
   | "getKontaktinfo"
   | "createOppfolgingsplanSM"
   | "createOppfolgingsplanAG"

@@ -16,7 +16,7 @@ import { kontaktinfoSchema } from "../../schema/kontaktinfoSchema";
 import { GodkjennPlanData } from "../../schema/godkjennPlanSchema";
 import { handleSchemaParsingError } from "../utils/errors";
 import { Sykmeldt, sykmeldtSchema } from "../../schema/sykmeldtSchema";
-import { personV3Schema } from "../../schema/personSchemas";
+import { personSchema } from "../../schema/personSchemas";
 import {
   NarmesteLederDTO,
   narmesteLederSchema,
@@ -197,12 +197,15 @@ export async function getTilgang(accessToken: string, fnr: string) {
   }
 }
 
-export async function getPersonSM(accessToken: string, fnr: string) {
-  const response = personV3Schema.safeParse(
+export async function getPerson(accessToken: string, fnr: string) {
+  const response = personSchema.safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/person/${fnr}`,
-      "getPersonSM",
-      { accessToken },
+      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/person`,
+      "getPerson",
+      {
+        accessToken: accessToken,
+        personIdent: fnr,
+      },
     ),
   );
 
