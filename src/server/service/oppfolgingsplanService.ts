@@ -130,9 +130,10 @@ export async function getOppfolgingsplanerAG(
 ) {
   const response = array(oppfolgingsplanSchema).safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner/${sykmeldtFnr}?virksomhetsnummer=${virksomhetsnummer}`,
+      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v2/arbeidsgiver/oppfolgingsplaner?virksomhetsnummer=${virksomhetsnummer}`,
       "getOppfolgingsplanerAG",
       {
+        personIdent: sykmeldtFnr,
         accessToken,
       },
     ),
