@@ -189,7 +189,6 @@ export async function getTilgang(accessToken: string, fnr: string) {
       { accessToken, personIdent: fnr },
     ),
   );
-  console.log(response);
   if (response.success) {
     return response.data;
   } else {
