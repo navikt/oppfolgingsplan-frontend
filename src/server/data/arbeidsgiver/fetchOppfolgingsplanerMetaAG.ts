@@ -71,7 +71,7 @@ export const fetchOppfolgingsplanerMetaAG = async (
         validOppfolgingsplaner,
       );
       const personPromise = fetchPerson(
-        oppfolgingsplanBackendTokenX,
+        syfoOppfolgingsplanServiceTokenX,
         validOppfolgingsplaner,
       );
       const kontaktinfoPromise = fetchKontaktinfo(
