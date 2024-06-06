@@ -41,7 +41,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
         oppfolgingsplaner,
       );
       const personPromise = fetchPerson(
-        syfoOppfolgingsplanServiceTokenX,
+        oppfolgingsplanBackendTokenX,
         oppfolgingsplaner,
       );
       const kontaktinfoPromise = fetchKontaktinfo(
