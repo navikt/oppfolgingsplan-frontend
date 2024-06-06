@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getMockDb from "../../../../server/data/mock/getMockDb";
-import { getSyfoOppfolgingsplanserviceTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
+import { getOppfolgingsplanBackendTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
 import { getSykmeldtFnrFromHeader } from "../../../../server/utils/requestUtils";
 import { getTilgang } from "../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
@@ -21,7 +21,7 @@ const handler = async (
 
     res.status(200).json(getMockDb(req).tilgang);
   } else {
-    const tokenX = await getSyfoOppfolgingsplanserviceTokenFromRequest(req);
+    const tokenX = await getOppfolgingsplanBackendTokenFromRequest(req);
     const sykmeldtFnr = getSykmeldtFnrFromHeader(req);
     const tilgangResponse = await getTilgang(tokenX, sykmeldtFnr);
 
