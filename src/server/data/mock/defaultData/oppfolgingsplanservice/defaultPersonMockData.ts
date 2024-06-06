@@ -1,6 +1,6 @@
-import { PersonV3DTO } from "../../../../../schema/personSchemas";
+import { PersonDTO } from "../../../../../schema/personSchemas";
 
-export const defaultPersonMockData: PersonV3DTO = {
+export const defaultPersonMockData: PersonDTO = {
   navn: "Kreativ Hatt",
   fnr: "110110110110",
 };

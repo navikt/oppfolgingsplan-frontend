@@ -1,8 +1,8 @@
 import { object, string, z } from "zod";
 
-export const personV3Schema = object({
+export const personSchema = object({
   navn: string(),
   fnr: string(),
 });
 
-export type PersonV3DTO = z.infer<typeof personV3Schema>;
+export type PersonDTO = z.infer<typeof personSchema>;
