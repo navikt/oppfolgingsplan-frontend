@@ -37,7 +37,7 @@ export const fetchOppfolgingsplanerMetaSM = async (
 
     if (oppfolgingsplaner.length > 0) {
       const virksomhetPromise = fetchVirksomhet(
-        syfoOppfolgingsplanServiceTokenX,
+        oppfolgingsplanBackendTokenX,
         oppfolgingsplaner,
       );
       const personPromise = fetchPerson(
