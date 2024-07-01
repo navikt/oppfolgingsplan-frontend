@@ -90,7 +90,7 @@ export async function getVirksomhet(
 ) {
   const response = virksomhetSchema.safeParse(
     await get(
-      `${serverEnv.SYFOOPPFOLGINGSPLANSERVICE_HOST}/syfooppfolgingsplanservice/api/v3/virksomhet/${virksomhetsnummer}`,
+      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/virksomhet/${virksomhetsnummer}`,
       "getVirksomhet",
       {
         accessToken,
