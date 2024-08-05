@@ -20,7 +20,7 @@ interface ContentProps {
 const SePlanenContent = ({ aktivPlan }: ContentProps) => {
   if (!aktivPlan) return null;
   const arbeidstakerFnr = aktivPlan?.arbeidstaker.fnr;
-  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.navn;
+  const narmesteLederFnr = aktivPlan?.arbeidsgiver?.naermesteLeder?.fnr;
 
   const isOwnLeader =
     narmesteLederFnr && arbeidstakerFnr && narmesteLederFnr === arbeidstakerFnr;
