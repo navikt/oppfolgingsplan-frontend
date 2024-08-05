@@ -1,6 +1,7 @@
 import { erSykmeldingGyldigForOppfolgingMedGrensedato } from "./oppfolgingplanUtils";
 import { SykmeldingDTO } from "../schema/sykmeldingSchema";
 import { NarmesteLederDTO } from "../schema/narmestelederSchema";
+import { capitalizeEachWord } from "./textContextUtils";
 
 export const sykmeldtHarNaermestelederHosArbeidsgiver = (
   virksomhetsnummer: string,
@@ -20,7 +21,7 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (
   const naermesteLeder = naermesteLedere.filter((leder) => {
     return virksomhetsnummer === leder.virksomhetsnummer && leder.erAktiv;
   })[0];
-  return naermesteLeder ? naermesteLeder.navn : undefined;
+  return naermesteLeder ? capitalizeEachWord(naermesteLeder.navn) : undefined;
 };
 
 export const sykmeldtHarIngenSendteSykmeldinger = (

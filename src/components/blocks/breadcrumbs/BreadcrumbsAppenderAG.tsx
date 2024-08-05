@@ -4,6 +4,7 @@ import { setBreadcrumbs } from "@navikt/nav-dekoratoren-moduler";
 import { createBreadcrumbsAG } from "./index";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
 import { useDineSykmeldte } from "../../../api/queries/arbeidsgiver/dinesykmeldteQueriesAG";
+import { capitalizeEachWord } from "../../../utils/textContextUtils";
 
 export const BreadcrumbsAppenderAG = (): ReactElement => {
   const { pathname } = useRouter();
@@ -13,7 +14,11 @@ export const BreadcrumbsAppenderAG = (): ReactElement => {
   useEffect(() => {
     if (narmestelederId && sykmeldtInfo.data?.navn) {
       setBreadcrumbs(
-        createBreadcrumbsAG(pathname, sykmeldtInfo.data?.navn, narmestelederId),
+        createBreadcrumbsAG(
+          pathname,
+          capitalizeEachWord(sykmeldtInfo.data.navn),
+          narmestelederId,
+        ),
       );
     }
   }, [sykmeldtInfo.data?.navn, narmestelederId, pathname]);

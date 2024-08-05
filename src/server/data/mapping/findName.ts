@@ -1,5 +1,6 @@
 import { PersonDTO } from "../../../schema/personSchemas";
 import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
+import { capitalizeEachWord } from "../../../utils/textContextUtils";
 
 export const findName = (
   narmesteLedere: NarmesteLederDTO[],
@@ -7,10 +8,10 @@ export const findName = (
   fnrToFind?: string | null,
 ): string => {
   if (sykmeldt.fnr === fnrToFind) {
-    return sykmeldt.navn;
+    return capitalizeEachWord(sykmeldt.navn);
   }
 
   const lederWithFnr = narmesteLedere.find((leder) => leder.fnr === fnrToFind);
 
-  return lederWithFnr?.navn || "";
+  return lederWithFnr?.navn ? capitalizeEachWord(lederWithFnr.navn) : "";
 };
