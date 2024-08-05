@@ -14,7 +14,7 @@ export const defaultNarmesteLedereMockData: NarmesteLederDTO[] = [
     aktivTom: "2016-10-18T12:00:00+02:00",
   },
   {
-    navn: "Albus Dumbledore",
+    navn: "Albus sjokkobabb Dumbledore",
     fnr: "11011011011",
     epost: "albus@hogwarts.ac.uk",
     tlf: "110",

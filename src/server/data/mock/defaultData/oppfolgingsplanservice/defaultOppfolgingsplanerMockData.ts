@@ -21,7 +21,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
           {
             godkjent: false,
             godkjentAv: {
-              navn: "Albus Dumbledore",
+              navn: "Albus sjokkobabb Dumbledore",
               fnr: "11011011011",
               epost: null,
               tlf: null,
@@ -828,7 +828,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     ],
     arbeidsgiver: {
       naermesteLeder: {
-        navn: "Albus Dumbledore",
+        navn: "Albus sjokkobabb Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
         tlf: "110",
@@ -1274,7 +1274,7 @@ export const defaultOppfolgingsplanerMockData: OppfolgingsplanDTO[] = [
     ],
     arbeidsgiver: {
       naermesteLeder: {
-        navn: "Albus Dumbledore",
+        navn: "Albus sjokkobabb Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
         tlf: "110",
