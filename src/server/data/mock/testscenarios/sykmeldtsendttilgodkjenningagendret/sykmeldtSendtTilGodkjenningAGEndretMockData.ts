@@ -20,7 +20,7 @@ export const sykmeldtSendtTilGodkjenningAGEndretMockData: OppfolgingsplanDTO[] =
         {
           godkjent: false,
           godkjentAv: {
-            navn: "Albus sjokkobabb Dumbledore",
+            navn: "Albus Dumbledore",
             fnr: aktivNarmesteLeder.fnr!,
             epost: null,
             tlf: null,

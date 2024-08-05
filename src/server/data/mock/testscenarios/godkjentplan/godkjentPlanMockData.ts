@@ -391,7 +391,7 @@ export const godkjentPlanMockData: OppfolgingsplanDTO[] = [
     ],
     arbeidsgiver: {
       naermesteLeder: {
-        navn: "Albus sjokkobabb Dumbledore",
+        navn: "Albus Dumbledore",
         fnr: "11011011011",
         epost: "albus@hogwarts.ac.uk",
         tlf: "110",

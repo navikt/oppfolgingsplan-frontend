@@ -16,7 +16,7 @@ export const arbeidsgiverSendtTilGodkjenningMockData: OppfolgingsplanDTO[] = [
       {
         godkjent: true,
         godkjentAv: {
-          navn: "Albus sjokkobabb Dumbledore",
+          navn: "Albus Dumbledore",
           fnr: "11011011011",
           epost: null,
           tlf: null,
