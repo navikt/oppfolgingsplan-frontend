@@ -33,7 +33,7 @@
     "@tanstack/react-query-devtools": "^5.51.23",
     "@types/http-errors": "^2.0.4",
     "@types/react-datepicker": "^4.19.5",
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "axios-better-stacktrace": "^2.1.7",
     "classnames": "^2.5.1",
     "date-fns": "^2.29.3",
