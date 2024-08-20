@@ -78,7 +78,8 @@ export type RequestOrigin =
   | "useLagreKommentar"
   | "useSlettKommentar"
   | "useFerdigstillGodkjennPlanVarsel"
-  | "ErrorBoundary";
+  | "ErrorBoundary"
+  | "fetchArbeidsforhold";
 
 export const logError = (error: Error, requestOrigin: RequestOrigin) => {
   if (typeof window !== "undefined" && !!window.faro) {

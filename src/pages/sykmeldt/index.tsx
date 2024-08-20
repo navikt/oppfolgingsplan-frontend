@@ -19,11 +19,14 @@ import {
 } from "../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogerUtenAktivSykmeldingSM from "../../components/landing/OppfolgingsdialogerUtenAktivSykmeldingSM";
 import { OPSkeleton } from "../../components/blocks/skeleton/OPSkeleton";
+import { useArbeidsforhold } from "../../api/queries/arbeidsforhold/arbeidsforholdQueries";
 
 const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const narmesteLedere = useNarmesteLedereSM();
+  const stillinger = useArbeidsforhold();
+  console.log("Stillinger", stillinger);
 
   if (
     oppfolgingsplaner.isPending ||
