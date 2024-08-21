@@ -11,7 +11,7 @@ export const useArbeidsforhold = () => {
 
   const fetchArbeidsforhold = () =>
     get<StillingDTO[]>(
-      `${router.basePath}/api/arbeidsforhold`,
+      `${router.basePath}/api/v1/arbeidsforhold`,
       "fetchArbeidsforhold",
       {
         personIdent: sykmeldtData.data?.fnr,
