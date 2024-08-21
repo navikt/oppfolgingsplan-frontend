@@ -3,7 +3,6 @@ import { get } from "../../axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../queryKeys";
 import { StillingDTO } from "../../../schema/oppfolgingsplanSchema";
-import serverEnv from "../../../server/utils/serverEnv";
 
 export const useArbeidsforhold = () => {
   //const router = useRouter();
@@ -15,7 +14,7 @@ export const useArbeidsforhold = () => {
   const fetchArbeidsforhold = () =>
     get<StillingDTO[]>(
       // `${router.basePath}/api/v1/arbeidsforhold`,
-      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/arbeidsforhold`,
+      `http://oppfolgingsplan-backend/api/v1/arbeidsforhold`,
       "fetchArbeidsforhold",
       {
         personIdent: sykmeldtData.data?.fnr,
