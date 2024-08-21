@@ -2,16 +2,20 @@ import { useDineSykmeldte } from "../arbeidsgiver/dinesykmeldteQueriesAG";
 import { get } from "../../axios/axios";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../queryKeys";
-import { useRouter } from "next/router";
 import { StillingDTO } from "../../../schema/oppfolgingsplanSchema";
+import serverEnv from "../../../server/utils/serverEnv";
 
 export const useArbeidsforhold = () => {
-  const router = useRouter();
+  //const router = useRouter();
   const sykmeldtData = useDineSykmeldte();
+  console.log("sykmeldtData", sykmeldtData.data);
+  console.log("enabled", !!sykmeldtData.data?.fnr);
+  // ${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}
 
   const fetchArbeidsforhold = () =>
     get<StillingDTO[]>(
-      `${router.basePath}/api/v1/arbeidsforhold`,
+      // `${router.basePath}/api/v1/arbeidsforhold`,
+      `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/arbeidsforhold`,
       "fetchArbeidsforhold",
       {
         personIdent: sykmeldtData.data?.fnr,
@@ -19,7 +23,7 @@ export const useArbeidsforhold = () => {
     );
 
   return useQuery({
-    queryKey: [queryKeys.KONTAKTINFO],
+    queryKey: [queryKeys.ARBEIDSFORHOLD],
     queryFn: fetchArbeidsforhold,
     enabled: !!sykmeldtData.data?.fnr,
   });

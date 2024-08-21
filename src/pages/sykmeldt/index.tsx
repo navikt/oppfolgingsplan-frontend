@@ -27,6 +27,7 @@ const PageContent = () => {
   const narmesteLedere = useNarmesteLedereSM();
   const stillinger = useArbeidsforhold();
   console.log("Stillinger", stillinger);
+  console.log("StillingerisSuccess", stillinger.isSuccess);
 
   if (
     oppfolgingsplaner.isPending ||
