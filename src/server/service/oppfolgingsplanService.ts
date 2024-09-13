@@ -8,6 +8,7 @@ import {
   ArbeidsOppgaveDTO,
   KommentarDTO,
   oppfolgingsplanSchema,
+  StillingDTO,
   TiltakDTO,
   virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
@@ -52,6 +53,23 @@ export async function getNarmesteLeder(
 export async function getNarmesteLedere(accessToken: string) {
   const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/alle`;
   const data = await get<NarmesteLederDTO[]>(apiUrl, "getNarmesteLedere", {
+    accessToken: accessToken,
+  });
+
+  if (!data) return [];
+
+  const response = array(narmesteLederSchema).safeParse(data);
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "NarmesteLedere", response.error);
+}
+
+export async function fetchArbeidsforhold(accessToken: string) {
+  const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/arbeidsforhold`;
+  const data = await get<StillingDTO[]>(apiUrl, "fetchArbeidsforhold", {
     accessToken: accessToken,
   });
 
