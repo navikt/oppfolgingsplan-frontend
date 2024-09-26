@@ -15,7 +15,7 @@ export const useArbeidsforhold = () => {
     get<StillingDTO[]>(
       // `${router.basePath}/api/v1/arbeidsforhold`,
       `http://oppfolgingsplan-backend/api/v1/arbeidsforhold`,
-      "fetchArbeidsforhold",
+      "getArbeidsforhold",
       {
         personIdent: sykmeldtData.data?.fnr,
       },
@@ -24,6 +24,6 @@ export const useArbeidsforhold = () => {
   return useQuery({
     queryKey: [queryKeys.ARBEIDSFORHOLD],
     queryFn: fetchArbeidsforhold,
-    enabled: !!sykmeldtData.data?.fnr,
+    enabled: true,
   });
 };

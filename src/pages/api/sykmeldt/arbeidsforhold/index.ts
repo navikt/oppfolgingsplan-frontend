@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { isMockBackend } from "../../../../server/utils/serverEnv";
 import { getOppfolgingsplanBackendTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
-import { fetchArbeidsforhold } from "../../../../server/service/oppfolgingsplanService";
+import { getArbeidsforhold } from "../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
 
 const handler = async (
@@ -12,7 +12,7 @@ const handler = async (
     res.status(200).json({});
   } else {
     const tokenX = await getOppfolgingsplanBackendTokenFromRequest(req);
-    const arbeidsforholdResponse = await fetchArbeidsforhold(tokenX);
+    const arbeidsforholdResponse = await getArbeidsforhold(tokenX);
 
     res.status(200).json(arbeidsforholdResponse);
   }

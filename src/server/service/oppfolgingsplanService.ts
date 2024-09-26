@@ -67,9 +67,9 @@ export async function getNarmesteLedere(accessToken: string) {
   handleSchemaParsingError("Sykmeldt", "NarmesteLedere", response.error);
 }
 
-export async function fetchArbeidsforhold(accessToken: string) {
+export async function getArbeidsforhold(accessToken: string) {
   const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/arbeidsforhold`;
-  const data = await get<StillingDTO[]>(apiUrl, "fetchArbeidsforhold", {
+  const data = await get<StillingDTO[]>(apiUrl, "getArbeidsforhold", {
     accessToken: accessToken,
   });
 
