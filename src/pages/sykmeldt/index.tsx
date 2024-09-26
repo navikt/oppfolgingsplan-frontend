@@ -19,7 +19,19 @@ import {
 } from "../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogerUtenAktivSykmeldingSM from "../../components/landing/OppfolgingsdialogerUtenAktivSykmeldingSM";
 import { OPSkeleton } from "../../components/blocks/skeleton/OPSkeleton";
+import { useArbeidsforhold } from "../../api/queries/oppfolgingsplan/arbeidsforholdQueries";
+import { SykmeldingDTO } from "../../schema/sykmeldingSchema";
 
+const ArbeidsforholdComponent = ({
+  sykmeldinger,
+}: {
+  sykmeldinger: SykmeldingDTO;
+}) => {
+  console.log("sykmeldinger:", sykmeldinger);
+  const arbeidsforhold = useArbeidsforhold(sykmeldinger.fnr);
+  console.log(arbeidsforhold);
+  return <div>Arbeidsforhold</div>;
+};
 const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
@@ -40,6 +52,7 @@ const PageContent = () => {
   ) {
     return (
       <div>
+        <ArbeidsforholdComponent sykmeldinger={sykmeldinger.data[0]} />
         <OppfolgingsplanUtenGyldigSykmeldingSM
           sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(
             sykmeldinger.data,
@@ -63,11 +76,14 @@ const PageContent = () => {
     narmesteLedere.isSuccess
   ) {
     return (
-      <OppfolgingsplanContentSM
-        oppfolgingsplaner={oppfolgingsplaner.data}
-        sykmeldinger={sykmeldinger.data}
-        narmesteLedere={narmesteLedere.data}
-      />
+      <>
+        <ArbeidsforholdComponent sykmeldinger={sykmeldinger.data[0]} />
+        <OppfolgingsplanContentSM
+          oppfolgingsplaner={oppfolgingsplaner.data}
+          sykmeldinger={sykmeldinger.data}
+          narmesteLedere={narmesteLedere.data}
+        />
+      </>
     );
   }
 

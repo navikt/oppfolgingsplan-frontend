@@ -6,4 +6,5 @@ export const queryKeys = {
   DINESYKMELDTE: "dinesykmeldte",
   ACTIVE_TEST_SCENARIO: "active-test-scenario",
   KONTAKTINFO: "kontaktinfo",
+  ARBEIDSFORHOLD: "arbeidsforhold",
 };

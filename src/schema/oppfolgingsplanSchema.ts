@@ -27,6 +27,14 @@ export const stillingSchema = object({
   prosent: number(),
 });
 
+export const stillingArbeidsforholdSchema = object({
+  yrke: string(),
+  prosent: number(),
+  fom: string().nullable(),
+  tom: string().nullable(),
+  orgnummer: string().nullable(),
+});
+
 export const personSchema = object({
   navn: string(),
   fnr: string(),
@@ -138,6 +146,9 @@ export const oppfolgingsplanSchema = object({
 
 export type OppfolgingsplanDTO = z.infer<typeof oppfolgingsplanSchema>;
 export type StillingDTO = z.infer<typeof stillingSchema>;
+export type StillingArbeidsforholdDTO = z.infer<
+  typeof stillingArbeidsforholdSchema
+>;
 export type VirksomhetDTO = z.infer<typeof virksomhetSchema>;
 export type PersonDTO = z.infer<typeof personSchema>;
 export type ArbeidsgiverDTO = z.infer<typeof arbeidsgiverSchema>;

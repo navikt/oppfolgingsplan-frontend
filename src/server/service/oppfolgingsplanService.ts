@@ -8,6 +8,8 @@ import {
   ArbeidsOppgaveDTO,
   KommentarDTO,
   oppfolgingsplanSchema,
+  StillingArbeidsforholdDTO,
+  stillingArbeidsforholdSchema,
   TiltakDTO,
   virksomhetSchema,
 } from "../../schema/oppfolgingsplanSchema";
@@ -64,6 +66,27 @@ export async function getNarmesteLedere(accessToken: string) {
   }
 
   handleSchemaParsingError("Sykmeldt", "NarmesteLedere", response.error);
+}
+
+export async function getArbeidsforhold(accessToken: string, fnr: string) {
+  const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/arbeidsforhold`;
+  const data = await get<StillingArbeidsforholdDTO[]>(
+    apiUrl,
+    "getArbeidsforhold",
+    {
+      accessToken: accessToken,
+      personIdent: fnr,
+    },
+  );
+  if (!data) return [];
+
+  const response = array(stillingArbeidsforholdSchema).safeParse(data);
+
+  if (response.success) {
+    return response.data;
+  }
+
+  handleSchemaParsingError("Sykmeldt", "Arbeidsforhold", response.error);
 }
 
 export async function getSykmeldingerSM(accessToken: string) {
