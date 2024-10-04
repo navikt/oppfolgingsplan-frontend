@@ -52,7 +52,7 @@ function handleError(error: AxiosError, requestOrigin: RequestOrigin) {
     loginUser();
   } else {
     logError(error, requestOrigin);
-    throw error;
+    throw new Error(error.message);
   }
 }
 
