@@ -3,9 +3,6 @@ import { loginUser } from "../../utils/urlUtils";
 import { displayTestScenarioSelector } from "../../environments/publicEnv";
 import { v4 as uuidv4 } from "uuid";
 import { logError, RequestOrigin } from "../../utils/logUtils";
-import axiosBetterStacktrace from "axios-better-stacktrace";
-
-axiosBetterStacktrace(axios);
 
 interface AxiosOptions {
   accessToken?: string;
@@ -55,7 +52,7 @@ function handleError(error: AxiosError, requestOrigin: RequestOrigin) {
     loginUser();
   } else {
     logError(error, requestOrigin);
-    throw error;
+    throw new Error(error.message);
   }
 }
 
