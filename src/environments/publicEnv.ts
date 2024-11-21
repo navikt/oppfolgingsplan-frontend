@@ -15,4 +15,4 @@ export const displayTestScenarioSelector =
 export const cdnPublicPath: string | undefined = process.env
   .NEXT_PUBLIC_ASSET_PREFIX
   ? `${process.env.NEXT_PUBLIC_ASSET_PREFIX}/public`
-  : process.env.NEXT_PUBLIC_BASEPATH ?? "";
+  : (process.env.NEXT_PUBLIC_BASEPATH ?? "");
