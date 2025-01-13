@@ -1,4 +1,8 @@
 import { NarmesteLederDTO } from "../../../../../schema/narmestelederSchema";
+import {
+  createDateMonthsAgo,
+  createDateMonthsFromNow,
+} from "../../../../../utils/dateUtils";
 
 export const defaultNarmesteLedereMockData: NarmesteLederDTO[] = [
   {
@@ -10,8 +14,8 @@ export const defaultNarmesteLedereMockData: NarmesteLederDTO[] = [
     samtykke: null,
     virksomhetsnummer: "110110110",
     erAktiv: false,
-    aktivFom: "2015-10-18T12:00:00+02:00",
-    aktivTom: "2016-10-18T12:00:00+02:00",
+    aktivFom: createDateMonthsAgo(12).toISOString(),
+    aktivTom: createDateMonthsFromNow(12).toISOString(),
   },
   {
     navn: "Albus Dumbledore",
@@ -22,7 +26,7 @@ export const defaultNarmesteLedereMockData: NarmesteLederDTO[] = [
     samtykke: null,
     virksomhetsnummer: "110110110",
     erAktiv: true,
-    aktivFom: "2018-10-18T12:00:00+02:00",
+    aktivFom: createDateMonthsAgo(12).toISOString(),
     aktivTom: null,
   },
   {
@@ -34,7 +38,7 @@ export const defaultNarmesteLedereMockData: NarmesteLederDTO[] = [
     samtykke: null,
     virksomhetsnummer: "123456789",
     erAktiv: true,
-    aktivFom: "2018-10-18T12:00:00+02:00",
+    aktivFom: createDateMonthsAgo(12).toISOString(),
     aktivTom: null,
   },
 ];

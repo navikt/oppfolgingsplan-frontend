@@ -1,4 +1,8 @@
-import { leggTilDagerPaDato } from "../../../../../utils/dateUtils";
+import {
+  createDateMonthsAgo,
+  createDateMonthsFromNow,
+  leggTilDagerPaDato,
+} from "../../../../../utils/dateUtils";
 import { defaultNarmesteLedereMockData } from "../../defaultData/oppfolgingsplanservice/defaultNarmesteLedereMockData";
 import { OppfolgingsplanDTO } from "../../../../../schema/oppfolgingsplanSchema";
 
@@ -7,8 +11,8 @@ const today = new Date();
 export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
   {
     id: 7777,
-    sistEndretDato: "2020-02-20T11:31:29.837",
-    opprettetDato: "2020-02-20",
+    sistEndretDato: createDateMonthsAgo(8).toISOString(),
+    opprettetDato: createDateMonthsAgo(8).toISOString(),
     status: "UTDATERT",
     virksomhet: {
       virksomhetsnummer: "110110110",
@@ -17,8 +21,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
     godkjentPlan: {
       opprettetTidspunkt: leggTilDagerPaDato(today, -7).toJSON(),
       gyldighetstidspunkt: {
-        fom: "2015-09-11T11:31:29.837",
-        tom: "2015-11-16T11:31:29.837",
+        fom: createDateMonthsAgo(12).toISOString(),
+        tom: createDateMonthsFromNow(12).toISOString(),
         evalueres: leggTilDagerPaDato(today, 14).toJSON(),
       },
       tvungenGodkjenning: true,
@@ -66,8 +70,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
             "Trenger mer tid til de faste oppgavene og kan utføre noen av disse hjemmefra. ",
           kanIkkeBeskrivelse: null,
         },
-        opprettetDato: "2020-02-20T11:31:30.305",
-        sistEndretDato: "2020-02-20T11:31:30.305",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         sistEndretAv: {
           navn: "Labben Rekemester",
           fnr: "110110110110",
@@ -101,8 +105,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
           kanBeskrivelse: null,
           kanIkkeBeskrivelse: null,
         },
-        opprettetDato: "2020-02-20T11:31:30.318",
-        sistEndretDato: "2020-02-20T11:31:30.318",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         sistEndretAv: {
           navn: "Labben Rekemester",
           fnr: "110110110110",
@@ -136,8 +140,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
           kanBeskrivelse: null,
           kanIkkeBeskrivelse: "Blir for krevende ",
         },
-        opprettetDato: "2020-02-20T11:31:30.319",
-        sistEndretDato: "2020-02-20T11:31:30.319",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
           fnr: defaultNarmesteLedereMockData[0].fnr!,
@@ -164,8 +168,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
         arbeidsoppgavenavn: "Undervisning ",
         erVurdertAvSykmeldt: false,
         gjennomfoering: null,
-        opprettetDato: "2020-02-20T11:31:30.322",
-        sistEndretDato: "2020-02-20T11:31:30.322",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         sistEndretAv: {
           navn: defaultNarmesteLedereMockData[0].navn,
           fnr: defaultNarmesteLedereMockData[0].fnr!,
@@ -198,14 +202,14 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
         beskrivelse:
           "Lage og rette prøver, forberede utviklingssamtaler, samt andre enklere oppgaver ",
         beskrivelseIkkeAktuelt: null,
-        opprettetDato: "2020-02-20T11:31:30.338",
-        sistEndretDato: "2020-02-20T11:31:30.338",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         kommentarer: [
           {
             id: 782,
             tekst: "Her må vi bli enige om antall timer og hvor mange dager. ",
-            opprettetTidspunkt: "2020-02-20T11:31:30.352",
-            sistEndretDato: "2020-02-20T11:31:30.352",
+            opprettetTidspunkt: createDateMonthsAgo(8).toISOString(),
+            sistEndretDato: createDateMonthsAgo(8).toISOString(),
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
               fnr: defaultNarmesteLedereMockData[0].fnr!,
@@ -259,14 +263,14 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
         tom: "2020-02-21",
         beskrivelse: "Undervise i ett fag for å unngå overbelastning ",
         beskrivelseIkkeAktuelt: null,
-        opprettetDato: "2020-02-20T11:31:30.373",
-        sistEndretDato: "2020-02-20T11:31:30.373",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         kommentarer: [
           {
             id: 783,
             tekst: "Hvilket fag passer det best å starte med? ",
-            opprettetTidspunkt: "2020-02-20T11:31:30.376",
-            sistEndretDato: "2020-02-20T11:31:30.376",
+            opprettetTidspunkt: createDateMonthsAgo(8).toISOString(),
+            sistEndretDato: createDateMonthsAgo(8).toISOString(),
             opprettetAv: {
               navn: defaultNarmesteLedereMockData[0].navn,
               fnr: defaultNarmesteLedereMockData[0].fnr!,
@@ -291,8 +295,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
           {
             id: 784,
             tekst: "Gjerne KRLE eller samfunnsfag.",
-            opprettetTidspunkt: "2020-02-20T11:31:30.378",
-            sistEndretDato: "2020-02-20T11:31:30.378",
+            opprettetTidspunkt: createDateMonthsAgo(8).toISOString(),
+            sistEndretDato: createDateMonthsAgo(8).toISOString(),
             opprettetAv: {
               navn: "Labben Rekemester",
               fnr: "110110110110",
@@ -317,8 +321,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
           {
             id: 785,
             tekst: "Men, ønsker kun å undervise digitalt.",
-            opprettetTidspunkt: "2020-02-21T12:33:12.378",
-            sistEndretDato: "2020-02-21T12:33:12.378",
+            opprettetTidspunkt: createDateMonthsAgo(8).toISOString(),
+            sistEndretDato: createDateMonthsAgo(8).toISOString(),
             opprettetAv: {
               navn: "Labben Rekemester",
               fnr: "110110110110",
@@ -374,8 +378,8 @@ export const tidligerePlanerMockData: OppfolgingsplanDTO[] = [
         beskrivelse: "Assistent til å bistå i undervisningen.",
         beskrivelseIkkeAktuelt:
           "Skolen har ikke ressurser til å kunne tilby dette. ",
-        opprettetDato: "2020-02-20T11:31:30.38",
-        sistEndretDato: "2020-02-20T11:31:30.38",
+        opprettetDato: createDateMonthsAgo(8).toISOString(),
+        sistEndretDato: createDateMonthsAgo(8).toISOString(),
         kommentarer: [],
         status: "IKKE_AKTUELT",
         gjennomfoering: null,
