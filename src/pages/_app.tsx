@@ -1,4 +1,4 @@
-import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
+import "@navikt/dinesykmeldte-sidemeny/dist/dinesykmeldte-sidemeny.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useAudience } from "../hooks/routeHooks";

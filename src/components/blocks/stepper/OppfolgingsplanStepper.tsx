@@ -13,15 +13,15 @@ export const OppfolgingsplanStepper = ({ activeStep }: Props) => {
   return (
     <Stepper activeStep={activeStep} orientation="horizontal" className="my-8">
       <Link href={`${basePath}/arbeidsoppgaver`} passHref={true} legacyBehavior>
-        <Stepper.Step unsafe_index={0}>Arbeidsoppgaver</Stepper.Step>
+        <Stepper.Step>Arbeidsoppgaver</Stepper.Step>
       </Link>
 
       <Link href={`${basePath}/tiltak`} passHref={true} legacyBehavior>
-        <Stepper.Step unsafe_index={1}>Tiltak</Stepper.Step>
+        <Stepper.Step>Tiltak</Stepper.Step>
       </Link>
 
       <Link href={`${basePath}/seplanen`} passHref={true} legacyBehavior>
-        <Stepper.Step unsafe_index={2}>Se planen</Stepper.Step>
+        <Stepper.Step>Se planen</Stepper.Step>
       </Link>
     </Stepper>
   );
