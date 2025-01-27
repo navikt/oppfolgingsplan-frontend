@@ -10,9 +10,7 @@ import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { SpacedDiv } from "../../blocks/wrappers/SpacedDiv";
 import { BodyLong } from "@navikt/ds-react";
 import { Row } from "../../blocks/wrappers/Row";
-import { useFerdigstillGodkjennPlanVarsel } from "../../../api/queries/varsel/ferdigstillingQueries";
-import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
-import { useFerdigstillVarsel } from "../utils/varselHooks";
+import { useFerdigstillVarselForPlan } from "../utils/varselHooks";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
@@ -28,10 +26,8 @@ export const GodkjennPlanMottatt = ({
 }: Props) => {
   const gyldighetstidspunkt =
     oppfolgingsplan?.godkjenninger?.[0]?.gyldighetstidspunkt;
-  const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
 
-  useFerdigstillVarsel(ferdigstillVarsel, oppfolgingsplanId);
+  useFerdigstillVarselForPlan();
 
   if (!gyldighetstidspunkt) {
     return null;

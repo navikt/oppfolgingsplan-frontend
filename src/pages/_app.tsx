@@ -27,15 +27,19 @@ const TestScenarioDevTools = () => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { isAudienceSykmeldt } = useAudience();
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        gcTime: minutesToMillis(60),
-        staleTime: minutesToMillis(30),
-      },
-    },
-  });
+
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            gcTime: minutesToMillis(60),
+            staleTime: minutesToMillis(30),
+          },
+        },
+      }),
+  );
 
   useEffect(() => {
     initFaro();
