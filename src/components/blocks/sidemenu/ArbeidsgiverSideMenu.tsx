@@ -2,6 +2,7 @@ import React from "react";
 import { RootPages, SideMenu } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import Link from "next/link";
+import { dineSykemeldteRoot } from "../../../environments/publicEnv";
 
 export const ArbeidsgiverSideMenu = ({
   sykmeldt,
@@ -67,7 +68,12 @@ export const ArbeidsgiverSideMenu = ({
         DineSykmeldte: {
           notifications: 0,
           internalRoute: ({ children, ...rest }) => (
-            <Link href="/" passHref legacyBehavior scroll={false}>
+            <Link
+              href={dineSykemeldteRoot}
+              passHref
+              legacyBehavior
+              scroll={false}
+            >
               <a {...rest}>{children}</a>
             </Link>
           ),
