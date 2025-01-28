@@ -1,5 +1,6 @@
 import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import {
   useAktiveOppfolgingsplanerAG,
   useOppfolgingsplanerAG,
@@ -7,8 +8,6 @@ import {
 } from "../../../api/queries/arbeidsgiver/oppfolgingsplanerQueriesAG";
 import { beskyttetSideUtenProps } from "../../../auth/beskyttetSide";
 import { SamtaleStotte } from "../../../components/blocks/samtalestotte/SamtaleStotte";
-import { useKontaktinfo } from "../../../api/queries/kontaktinfo/kontaktinfoQueries";
-import { useNarmesteLederId } from "../../../hooks/routeHooks";
 import OpprettModalAG from "../../../components/landing/opprett/OpprettModalAG";
 import ArbeidsgiverSide from "../../../components/blocks/wrappers/ArbeidsgiverSide";
 import IngenPlanerCardAG from "../../../components/landing/opprett/IngenPlanerCardAG";
@@ -19,6 +18,7 @@ import { IkkeTilgangTilAnsattInfoBoks } from "../../../components/blocks/infobok
 import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG";
 import OppfolgingsdialogTeasereAG from "../../../components/landing/teaser/arbeidsgiver/OppfolgingsdialogTeasereAG";
 import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMeldingAG";
+import useShowSMIsReservertInfoForAG from "../../../components/status/utils/useShowSMIsReservertInfoForAG";
 
 const PageContent = () => {
   const allePlaner = useOppfolgingsplanerAG();
@@ -66,41 +66,17 @@ const PageContent = () => {
 };
 
 const Home: NextPage = () => {
-  const narmesteLederId = useNarmesteLederId();
-  const sykmeldtesKontaktinfo = useKontaktinfo();
-  const [visReservertInfoboks, setVisReservertInfoboks] = useState(false);
-
-  useEffect(() => {
-    const hasSeenReservertInfo = sessionStorage?.getItem(
-      `${narmesteLederId}-seen-varsel`,
-    );
-    if (
-      sykmeldtesKontaktinfo.isSuccess &&
-      !sykmeldtesKontaktinfo.data.skalHaVarsel &&
-      !hasSeenReservertInfo
-    ) {
-      setVisReservertInfoboks(true);
-    }
-  }, [
-    narmesteLederId,
-    sykmeldtesKontaktinfo.data?.skalHaVarsel,
-    sykmeldtesKontaktinfo.isSuccess,
-  ]);
-
-  const setHasReadReservertInfoBoks = () => {
-    sessionStorage?.setItem(`${narmesteLederId}-seen-varsel`, "true");
-    setVisReservertInfoboks(false);
-  };
+  const { showSMIsReservertInfo, dismissSMIsReservertInfo } =
+    useShowSMIsReservertInfoForAG();
 
   return (
     <ArbeidsgiverSide
       title="Oppfølgingsplaner - Oversikt"
       heading="Oppfølgingsplaner"
     >
-      {visReservertInfoboks && (
-        <ReservertSykmeldtMelding onClose={setHasReadReservertInfoBoks} />
-      )}
-      {!visReservertInfoboks && (
+      {showSMIsReservertInfo ? (
+        <ReservertSykmeldtMelding onClose={dismissSMIsReservertInfo} />
+      ) : (
         <>
           <OppfolgingsdialogerInfoPersonvern
             ingress="Oppfølgingsplanen skal gjøre det lettere å bli i jobben. Hensikten er å finne ut hvilke oppgaver som kan gjøres hvis det blir lagt til rette for det.
