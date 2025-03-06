@@ -151,7 +151,7 @@ export async function getDineSykmeldteMedSykmeldinger(
 ): Promise<Sykmeldt[]> {
   const response = array(sykmeldtSchema).safeParse(
     await get(
-      `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte`,
+      `${serverEnv.DINESYKMELDTE_BACKEND_HOST}/api/v2/dinesykmeldte`,
       "getDineSykmeldteMedSykmeldinger",
       { accessToken },
     ),
@@ -170,7 +170,7 @@ export async function getSykmeldt(
 ): Promise<Sykmeldt> {
   const response = sykmeldtSchema.safeParse(
     await get(
-      `${serverEnv.SYKMELDINGER_ARBEIDSGIVER_HOST}/api/v2/dinesykmeldte/${narmestelederid}`,
+      `${serverEnv.DINESYKMELDTE_BACKEND_HOST}/api/v2/dinesykmeldte/${narmestelederid}`,
       "getSykmeldt",
       { accessToken },
     ),
