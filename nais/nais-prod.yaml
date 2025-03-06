@@ -58,10 +58,10 @@ spec:
       value: http://oppfolgingsplan-backend
     - name: OPPFOLGINGSPLAN_BACKEND_CLIENT_ID
       value: "prod-gcp:team-esyfo:oppfolgingsplan-backend"
-    - name: SYKMELDINGER_ARBEIDSGIVER_HOST
-      value: http://sykmeldinger-arbeidsgiver.teamsykmelding
-    - name : SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
-      value: "prod-gcp:teamsykmelding:sykmeldinger-arbeidsgiver"
+    - name: DINESYKMELDTE_BACKEND_HOST
+      value: http://dinesykmeldte-backend
+    - name : DINESYKMELDTE_BACKEND_CLIENT_ID
+      value: "prod-gcp:team-esyfo:dinesykmeldte-backend"
     - name: MOCK_BACKEND
       value: "false"
     - name: RUNTIME_ENVIRONMENT
@@ -74,6 +74,7 @@ spec:
         - application: nav-dekoratoren
           namespace: personbruker
         - application: oppfolgingsplan-backend
+        - application: dinesykmeldte-backend
       external:
         - host: www.nav.no
         - host: syfooppfolgingsplanservice.prod-fss-pub.nais.io
