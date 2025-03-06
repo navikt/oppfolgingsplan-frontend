@@ -1,10 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getNarmesteLedere } from "../../../../server/service/oppfolgingsplanService";
 import { beskyttetApi } from "../../../../server/auth/beskyttetApi";
 import getMockDb from "../../../../server/data/mock/getMockDb";
 import { getOppfolgingsplanBackendTokenFromRequest } from "../../../../server/auth/tokenx/getTokenXFromRequest";
-import { isMockBackend } from "../../../../server/utils/serverEnv";
+import serverEnv, { isMockBackend } from "../../../../server/utils/serverEnv";
 import { logger } from "@navikt/next-logger";
+import { get } from "../../../../api/axios/axios";
+import {
+  NarmesteLederDTO,
+  narmesteLederSchema,
+} from "../../../../schema/narmestelederSchema";
+import { handleSchemaParsingError } from "../../../../server/utils/errors";
+import { array } from "zod";
 
 const handler = async (
   req: NextApiRequest,
@@ -18,13 +24,13 @@ const handler = async (
     logger.info(`Fikk token: ${tokenX}`);
     const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/alle`;
     logger.info(`Kaller url: ${apiUrl}`);
-    const data = await get<NarmesteLederDTO[]>(apiUrl, getNarmesteLedere, {
+    const data = await get<NarmesteLederDTO[]>(apiUrl, "getNarmesteLedere", {
       accessToken: tokenX,
     });
     logger.info(`Fikk respons: ${JSON.stringify(data)}`);
 
-    if (!data) return [];
-    logger.info("Skal parse data");
+    if (!data) res.status(404).end();
+    logger.info("Skal til å parse data");
 
     const response = array(narmesteLederSchema).safeParse(data);
     logger.info(`Respons: ${JSON.stringify(response)}`);
