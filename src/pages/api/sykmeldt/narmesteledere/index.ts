@@ -18,7 +18,7 @@ const handler = async (
     logger.info(`Fikk token: ${tokenX}`);
     const apiUrl = `${serverEnv.OPPFOLGINGSPLAN_BACKEND_HOST}/api/v1/narmesteleder/alle`;
     logger.info(`Kaller url: ${apiUrl}`);
-    const data = await get<NarmesteLederDTO[]>(apiUrl, "getNarmesteLedere", {
+    const data = await get<NarmesteLederDTO[]>(apiUrl, getNarmesteLedere, {
       accessToken: tokenX,
     });
     logger.info(`Fikk respons: ${JSON.stringify(data)}`);
