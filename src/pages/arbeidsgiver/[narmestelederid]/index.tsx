@@ -19,6 +19,7 @@ import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG
 import OppfolgingsdialogTeasereAG from "../../../components/landing/teaser/arbeidsgiver/OppfolgingsdialogTeasereAG";
 import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMeldingAG";
 import useShowSMIsReservertInfoForAG from "../../../components/status/utils/useShowSMIsReservertInfoForAG";
+import { FlexJarModal } from "../../../components/flexjar/FlexJarModal";
 
 const PageContent = () => {
   const allePlaner = useOppfolgingsplanerAG();
@@ -85,6 +86,8 @@ const Home: NextPage = () => {
           />
 
           <PageContent />
+
+          <FlexJarModal />
 
           <SamtaleStotte />
 

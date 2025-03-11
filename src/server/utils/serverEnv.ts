@@ -15,6 +15,8 @@ export interface IServerEnvironmentVariables {
   OPPFOLGINGSPLAN_BACKEND_CLIENT_ID: string;
   DINESYKMELDTE_BACKEND_HOST: string;
   DINESYKMELDTE_BACKEND_CLIENT_ID: string;
+  FLEXJAR_HOST: string;
+  FLEXJAR_BACKEND_CLIENT_ID: string;
 }
 
 const serverEnv = process.env as unknown as IServerEnvironmentVariables;
