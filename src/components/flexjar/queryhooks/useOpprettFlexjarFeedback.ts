@@ -11,7 +11,7 @@ export function useOpprettFlexjarFeedback(): UseMutationResult<
     data: FlexjarFormValues,
   ): Promise<OpprettFeedbackResponse> => {
     return post<OpprettFeedbackResponse>(
-      `/syk/meroppfolging/api/flexjar`,
+      `/syk/oppfolgingsplaner/api/flexjar`,
       data,
     );
   };
