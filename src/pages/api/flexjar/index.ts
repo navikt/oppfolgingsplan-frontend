@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { logger } from "@navikt/next-logger";
 
 import { beskyttetApi } from "../../../server/auth/beskyttetApi";
-import { OpprettFeedbackData } from "../../../components/flexjar/queryhooks/useOpprettFlexjarFeedback";
 import getIdportenToken from "../../../server/auth/idporten/idportenToken";
 import serverEnv, { isMockBackend } from "../../../server/utils/serverEnv";
 import { requestOboToken } from "@navikt/oasis";
 import { post } from "../../../api/axios/axios";
+import { FlexjarFormValues } from "../../../components/flexjar/FlexJarModal";
 
 const handler = async (
   req: NextApiRequest,
@@ -18,7 +18,7 @@ const handler = async (
 
   const { FLEXJAR_BACKEND_CLIENT_ID, FLEXJAR_HOST } = serverEnv;
   const idportenToken = await getIdportenToken(req);
-  const data: OpprettFeedbackData = req.body;
+  const data: FlexjarFormValues = req.body;
   const url = FLEXJAR_HOST + "/api/v2/feedback";
 
   const tokenX = await requestOboToken(

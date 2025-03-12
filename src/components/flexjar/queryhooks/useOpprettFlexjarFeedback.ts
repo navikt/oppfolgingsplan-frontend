@@ -1,14 +1,14 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { post } from "../../../utils/fetch";
-import { FormValues } from "../FlexJarModal";
+import { FlexjarFormValues } from "../FlexJarModal";
 
 export function useOpprettFlexjarFeedback(): UseMutationResult<
   OpprettFeedbackResponse,
   unknown,
-  FormValues
+  FlexjarFormValues
 > {
   const mutationFn = async (
-    data: FormValues,
+    data: FlexjarFormValues,
   ): Promise<OpprettFeedbackResponse> => {
     return post<OpprettFeedbackResponse>(
       `/syk/meroppfolging/api/flexjar`,
@@ -16,7 +16,7 @@ export function useOpprettFlexjarFeedback(): UseMutationResult<
     );
   };
 
-  return useMutation<OpprettFeedbackResponse, unknown, FormValues>({
+  return useMutation<OpprettFeedbackResponse, unknown, FlexjarFormValues>({
     mutationFn,
   });
 }

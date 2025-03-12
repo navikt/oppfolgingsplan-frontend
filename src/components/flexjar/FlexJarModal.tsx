@@ -13,7 +13,7 @@ import { TakkForTilbakemeldingen } from "./TakkForTilbakemeldingen";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useOpprettFlexjarFeedback } from "./queryhooks/useOpprettFlexjarFeedback";
 
-export type FormValues = {
+export type FlexjarFormValues = {
   endretFraDagensOppfolgingsplan: string;
   hvordanFolgeOppSykmeldte: string;
   delingMedFastlegeOgNav: string;
@@ -26,10 +26,10 @@ export const FlexJarModal = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
-  } = useForm<FormValues>();
+  } = useForm<FlexjarFormValues>();
   const sendFeedbackMutation = useOpprettFlexjarFeedback();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FlexjarFormValues> = (data) => {
     sendFeedbackMutation.mutate(data);
   };
 
