@@ -12,6 +12,7 @@ import {
 import { TakkForTilbakemeldingen } from "./TakkForTilbakemeldingen";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useOpprettFlexjarFeedback } from "./queryhooks/useOpprettFlexjarFeedback";
+import { OpprettFeedbackData } from "../../pages/api/flexjar";
 
 export type FlexjarFormValues = {
   endretFraDagensOppfolgingsplan: string;
@@ -30,7 +31,14 @@ export const FlexJarModal = () => {
   const sendFeedbackMutation = useOpprettFlexjarFeedback();
 
   const onSubmit: SubmitHandler<FlexjarFormValues> = (data) => {
-    sendFeedbackMutation.mutate(data);
+    const feedbackData: OpprettFeedbackData = {
+      endretFraDagensOppfolgingsplan: data.endretFraDagensOppfolgingsplan,
+      hvordanFolgeOppSykmeldte: data.hvordanFolgeOppSykmeldte,
+      delingMedFastlegeOgNav: data.delingMedFastlegeOgNav,
+      andreOnsker: data.andreOnsker,
+      feedbackId: "oppfolgingsplan-arbeidsgiver",
+    };
+    sendFeedbackMutation.mutate(feedbackData);
   };
 
   return (
