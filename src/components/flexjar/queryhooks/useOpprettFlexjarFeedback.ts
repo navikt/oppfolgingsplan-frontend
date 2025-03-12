@@ -1,6 +1,6 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { post } from "../../../utils/fetch";
-import { FormValues } from "../flexjar";
+import { FormValues } from "../FlexJarModal";
 
 export function useOpprettFlexjarFeedback(): UseMutationResult<
   OpprettFeedbackResponse,

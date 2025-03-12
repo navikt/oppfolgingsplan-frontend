@@ -13,7 +13,6 @@ import { DelMedNavOgFastlegeButtons } from "./DelMedNavOgFastlegeButtons";
 import { erUtloptGodkjentPlan } from "../../../utils/oppfolgingplanUtils";
 import { ReactNode } from "react";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
-import { Flexjar } from "../../flexjar/flexjar";
 
 interface Props {
   oppfolgingsplan: OppfolgingsplanDTO;
@@ -63,8 +62,6 @@ export const GodkjentPlan = ({ oppfolgingsplan, children }: Props) => {
       <HvaSkjerNa />
 
       <TilLandingssideKnapp />
-
-      <Flexjar feedbackId="godkjentplan-ag" sporsmal="Hei" />
     </SpacedDiv>
   );
 };

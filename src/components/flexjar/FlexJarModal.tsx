@@ -3,7 +3,6 @@ import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import {
   Alert,
   BodyLong,
-  BodyShort,
   Button,
   GuidePanel,
   HStack,
@@ -65,7 +64,10 @@ export const FlexJarModal = () => {
                 className="w-full"
               >
                 <div>
-                  <BodyShort>Anonym tilbakemelding på tjenesten</BodyShort>
+                  <BodyLong>
+                    Svarene du sender inn er anonyme, og blir sendt til
+                    utviklingsteamet i Nav som har ansvaret for oppfølgingsplan.
+                  </BodyLong>
 
                   <div className="py-4">
                     <div className="mt-6 w-full space-y-6">
@@ -85,7 +87,7 @@ export const FlexJarModal = () => {
                           required:
                             "Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.",
                         })}
-                        label="Hva trenger du for at oppfølgingsplanen hjelper deg til å følge opp sykmeldte?"
+                        label="Hva trenger du for at oppfølgingsplanen skal være til hjelp med å følge opp dine sykmeldte?"
                         error={errors.hvordanFolgeOppSykmeldte?.message}
                         maxLength={1000}
                         minRows={2}
