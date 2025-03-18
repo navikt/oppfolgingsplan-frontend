@@ -6,6 +6,7 @@ import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
+import { FlexJarModal } from "../../flexjar/FlexJarModal";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -36,12 +37,14 @@ interface SideProps {
   title: string;
   heading: string;
   children: ReactNode;
+  displayFlexjar?: boolean;
 }
 
 const ArbeidsgiverSide = ({
   title,
   heading,
   children,
+  displayFlexjar = false,
 }: SideProps): ReactElement => {
   const sykmeldt = useDineSykmeldte();
 
@@ -52,6 +55,7 @@ const ArbeidsgiverSide = ({
       navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
     >
       <>
+        {displayFlexjar && <FlexJarModal />}
         <PageHeading title={title} heading={heading} />
         {children}
       </>
