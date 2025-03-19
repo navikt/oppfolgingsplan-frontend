@@ -7,6 +7,7 @@ import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
 import { FlexJarModal } from "../../flexjar/FlexJarModal";
+import { FlexJarTextAreaQuestion } from "../../flexjar/FlexJarTextAreaQuestion";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -55,7 +56,18 @@ const ArbeidsgiverSide = ({
       navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
     >
       <>
-        {displayFlexjar && <FlexJarModal />}
+        {displayFlexjar && (
+          <FlexJarModal
+            feedbackId="oppfolgingsplan-arbeidsgiver"
+            ratingSporsmal="Hvordan opplever du dagens oppfølgingsplan?"
+            hovedSporsmal="Hvis du kunne endre på noe i dagens oppfølgingsplan, hva ville det vært?"
+          >
+            <FlexJarTextAreaQuestion
+              name="hvordanFolgeOppSykmeldte"
+              label="Hva trenger du for at oppfølgingsplanen skal være til hjelp med å følge opp dine sykmeldte?"
+            />
+          </FlexJarModal>
+        )}
         <PageHeading title={title} heading={heading} />
         {children}
       </>

@@ -10,32 +10,42 @@ import {
   Textarea,
 } from "@navikt/ds-react";
 import { TakkForTilbakemeldingen } from "./TakkForTilbakemeldingen";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { useOpprettFlexjarFeedback } from "./queryhooks/useOpprettFlexjarFeedback";
 import { OpprettFeedbackData } from "../../pages/api/flexjar";
 import { EmoQuestion } from "./emoji/EmoQuestion";
 
-export type FlexjarFormValues = {
-  endretFraDagensOppfolgingsplan: string;
-  hvordanFolgeOppSykmeldte: string;
-};
+export interface FlexjarFormValues extends Record<string, string | number> {
+  feedback: string;
+}
 
-export const FlexJarModal = () => {
+interface Props {
+  feedbackId: string;
+  ratingSporsmal: string;
+  hovedSporsmal: string;
+  children?: React.ReactNode;
+}
+
+export const FlexJarModal = ({
+  feedbackId,
+  ratingSporsmal,
+  hovedSporsmal,
+  children,
+}: Props) => {
   const ref = useRef<HTMLDialogElement>(null);
+  const methods = useForm<FlexjarFormValues>();
   const {
-    register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm<FlexjarFormValues>();
+    formState: { isSubmitSuccessful },
+  } = methods;
   const [activeRating, setActiveRating] = React.useState<number | null>(null);
   const sendFeedbackMutation = useOpprettFlexjarFeedback();
 
   const onSubmit: SubmitHandler<FlexjarFormValues> = (data) => {
     const feedbackData: OpprettFeedbackData = {
-      feedback: data.endretFraDagensOppfolgingsplan,
       svar: activeRating!,
-      hvordanFolgeOppSykmeldte: data.hvordanFolgeOppSykmeldte,
-      feedbackId: "oppfolgingsplan-arbeidsgiver",
+      feedbackId: feedbackId,
+      ...data,
     };
     sendFeedbackMutation.mutate(feedbackData);
   };
@@ -65,63 +75,52 @@ export const FlexJarModal = () => {
         <Modal.Body>
           <section>
             {!isSubmitSuccessful && (
-              <form
-                id="flexjar-skjema"
-                onSubmit={handleSubmit(onSubmit)}
-                className="w-full"
-              >
-                <div>
-                  <BodyLong>
-                    Svarene du sender inn er anonyme, og blir sendt til
-                    utviklingsteamet i Nav som har ansvaret for
-                    oppfølgingsplanen.
-                  </BodyLong>
+              <FormProvider {...methods}>
+                <form
+                  id="flexjar-skjema"
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="w-full"
+                >
+                  <div>
+                    <BodyLong>
+                      Svarene du sender inn er anonyme, og blir sendt til
+                      utviklingsteamet i Nav som har ansvaret for
+                      oppfølgingsplanen.
+                    </BodyLong>
 
-                  <div className="py-4">
-                    <div className="mt-6 w-full space-y-6">
-                      <EmoQuestion
-                        question="Hvordan opplever du dagens oppfølgingsplan?"
-                        activeState={activeRating}
-                        setActiveState={setActiveRating}
-                      />
+                    <div className="py-4">
+                      <div className="mt-6 w-full space-y-6">
+                        <EmoQuestion
+                          question={ratingSporsmal}
+                          activeState={activeRating}
+                          setActiveState={setActiveRating}
+                        />
 
-                      {activeRating != null && (
-                        <>
-                          <Textarea
-                            {...register("endretFraDagensOppfolgingsplan", {
-                              required:
-                                "Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.",
-                            })}
-                            label="Hvis du kunne endre på noe i dagens oppfølgingsplan, hva ville det vært?"
-                            error={
-                              errors.endretFraDagensOppfolgingsplan?.message
-                            }
-                            maxLength={1000}
-                            minRows={2}
-                          />
-
-                          <Textarea
-                            {...register("hvordanFolgeOppSykmeldte", {
-                              required:
-                                "Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.",
-                            })}
-                            label="Hva trenger du for at oppfølgingsplanen skal være til hjelp med å følge opp dine sykmeldte?"
-                            error={errors.hvordanFolgeOppSykmeldte?.message}
-                            maxLength={1000}
-                            minRows={2}
-                          />
-
-                          <Alert variant="warning" className="mt-4">
-                            Ikke skriv inn navn eller andre personopplysninger.
-                            Dette blir kun brukt til å lage en best mulig ny
-                            oppfølgingsplan.
-                          </Alert>
-                        </>
-                      )}
+                        {activeRating != null && (
+                          <>
+                            <Textarea
+                              {...methods.register("feedback", {
+                                required:
+                                  "Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.",
+                              })}
+                              label={hovedSporsmal}
+                              error={methods.formState.errors.feedback?.message}
+                              maxLength={1000}
+                              minRows={2}
+                            />
+                            {children}
+                            <Alert variant="warning" className="mt-4">
+                              Ikke skriv inn navn eller andre
+                              personopplysninger. Dette blir kun brukt til å
+                              lage en best mulig ny oppfølgingsplan.
+                            </Alert>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </FormProvider>
             )}
             {isSubmitSuccessful && <TakkForTilbakemeldingen />}
           </section>

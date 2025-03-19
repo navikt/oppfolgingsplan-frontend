@@ -79,6 +79,7 @@ const Home: NextPage = () => {
     <SykmeldtSide
       title="Oppfølgingsplaner - Oversikt"
       heading="Oppfølgingsplaner"
+      displayFlexjar={true}
     >
       <OppfolgingsdialogerInfoPersonvern
         ingress="Oppfølgingsplanen skal gjøre det lettere for deg å bli i jobben. Hensikten er å finne ut hvilke oppgaver du kan gjøre hvis lederen din legger til rette for det.

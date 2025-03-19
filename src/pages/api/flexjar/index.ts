@@ -7,10 +7,9 @@ import serverEnv, { isMockBackend } from "../../../server/utils/serverEnv";
 import { requestOboToken } from "@navikt/oasis";
 import { post } from "../../../api/axios/axios";
 
-export interface OpprettFeedbackData {
+export interface OpprettFeedbackData extends Record<string, string | number> {
   feedback: string;
   svar: number;
-  hvordanFolgeOppSykmeldte: string;
   feedbackId: string;
 }
 
