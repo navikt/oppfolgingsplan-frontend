@@ -20,7 +20,7 @@ export const EmoQuestion = ({
   return (
     <VStack gap="4" className={className}>
       <Label>{question}</Label>
-      <HStack gap="4" justify="space-evenly" className="my-4">
+      <HStack gap="4" justify="start" className="my-4">
         <EmojiButton
           feedback={1}
           text="Veldig dårlig"
