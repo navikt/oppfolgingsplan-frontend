@@ -73,7 +73,6 @@ const Home: NextPage = () => {
     <ArbeidsgiverSide
       title="Oppfølgingsplaner - Oversikt"
       heading="Oppfølgingsplaner"
-      displayFlexjar={true}
     >
       {showSMIsReservertInfo ? (
         <ReservertSykmeldtMelding onClose={dismissSMIsReservertInfo} />
