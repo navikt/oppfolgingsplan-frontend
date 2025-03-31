@@ -170,7 +170,7 @@ export async function getSykmeldt(
 ): Promise<Sykmeldt> {
   const response = sykmeldtSchema.safeParse(
     await get(
-      `${serverEnv.DINESYKMELDTE_BACKEND_HOST}/api/v2/dinesykmeldte/${narmestelederid}`,
+      `${serverEnv.DINESYKMELDTE_BACKEND_HOST}/api/v2/dinesykmeldte/`,
       "getSykmeldt",
       { accessToken },
     ),
