@@ -19,7 +19,7 @@ const PageError = ({
   text,
   details,
   noReload = false,
-}: Props): JSX.Element => {
+}: Props): React.JSX.Element => {
   const errorText = text ?? "Det har oppstått en uventet feil";
 
   return (

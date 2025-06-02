@@ -2,7 +2,9 @@ import React from "react";
 import { RootPages, SideMenu } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 
-export const ArbeidsgiverSideMenu = ({ sykmeldt }: Props): JSX.Element => {
+export const ArbeidsgiverSideMenu = ({
+  sykmeldt,
+}: Props): React.JSX.Element => {
   return (
     <SideMenu
       sykmeldtName={sykmeldt?.navn ?? ""}
