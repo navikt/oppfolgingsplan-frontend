@@ -34,7 +34,7 @@
     "@tanstack/react-query-devtools": "^5.62.2",
     "@types/http-errors": "^2.0.4",
     "@types/react-datepicker": "^4.19.5",
-    "axios": "^1.8.2",
+    "axios": "^1.9.0",
     "classnames": "^2.5.1",
     "csp-header": "^6.1.0",
     "date-fns": "^2.29.3",
