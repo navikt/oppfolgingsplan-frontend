@@ -4,6 +4,7 @@ import { SpacedDiv } from "../blocks/wrappers/SpacedDiv";
 import { useGodkjennsistOppfolgingsplan } from "../../api/queries/oppfolgingsplan/oppfolgingsplanQueries";
 import { OppfolgingsplanDTO } from "../../schema/oppfolgingsplanSchema";
 import UxSignalsPanel from "../ux-signals/UxSignalsPanel";
+import { useAudience } from "../../hooks/routeHooks";
 
 export type MotpartNavnForAltinn = "arbeidstakeren" | "arbeidsgiveren din";
 
@@ -17,8 +18,11 @@ export const GodkjennOppfolgingsplan = ({
   motpartNavnForAltinn,
 }: Props) => {
   const [delMedNav, setDelMedNav] = useState(false);
+
   const godkjennOppfolgingsplan =
     useGodkjennsistOppfolgingsplan(oppfolgingsplan);
+
+  const { isAudienceSykmeldt } = useAudience();
 
   return (
     <>
@@ -59,7 +63,7 @@ export const GodkjennOppfolgingsplan = ({
       </SpacedDiv>
 
       {/* For booking interviews July 2025 */}
-      <UxSignalsPanel />
+      {isAudienceSykmeldt && <UxSignalsPanel />}
     </>
   );
 };
