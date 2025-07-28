@@ -1,5 +1,5 @@
 import {
-  DecoratorComponents,
+  DecoratorComponentsReact,
   fetchDecoratorReact,
 } from "@navikt/nav-dekoratoren-moduler/ssr";
 import Document, {
@@ -26,7 +26,7 @@ const getDocumentParameter = (
 };
 
 interface Props {
-  Decorator: DecoratorComponents;
+  Decorator: DecoratorComponentsReact;
   language: string;
 }
 
@@ -43,8 +43,6 @@ export default class MyDocument extends Document<Props> {
         chatbot: true,
         feedback: false,
         redirectToApp: true,
-        level: "Level4",
-        urlLookupTable: false,
         logoutWarning: true,
         breadcrumbs: isAudienceSykmeldt
           ? createBreadcrumbsSM(ctx.pathname)
@@ -67,7 +65,7 @@ export default class MyDocument extends Document<Props> {
     return (
       <Html lang="nb">
         <Head>
-          <Decorator.Styles />
+          <Decorator.HeadAssets />
           <link
             rel="preload"
             href="https://cdn.nav.no/aksel/fonts/SourceSans3-normal.woff2"

@@ -33,6 +33,10 @@ spec:
     enabled: true
     path: actuator/metrics
   observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
     autoInstrumentation:
       enabled: true
       runtime: nodejs
@@ -58,14 +62,18 @@ spec:
       value: http://oppfolgingsplan-backend
     - name: OPPFOLGINGSPLAN_BACKEND_CLIENT_ID
       value: "dev-gcp:team-esyfo:oppfolgingsplan-backend"
-    - name: SYKMELDINGER_ARBEIDSGIVER_HOST
-      value: http://sykmeldinger-arbeidsgiver.teamsykmelding
-    - name : SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID
-      value: "dev-gcp:teamsykmelding:sykmeldinger-arbeidsgiver"
+    - name: DINESYKMELDTE_BACKEND_HOST
+      value: http://dinesykmeldte-backend
+    - name : DINESYKMELDTE_BACKEND_CLIENT_ID
+      value: "dev-gcp:team-esyfo:dinesykmeldte-backend"
     - name: MOCK_BACKEND
       value: "false"
     - name: RUNTIME_ENVIRONMENT
       value: dev
+    - name: FLEXJAR_HOST
+      value: "http://flexjar-backend.flex"
+    - name: FLEXJAR_BACKEND_CLIENT_ID
+      value: dev-gcp:flex:flexjar-backend
   accessPolicy:
     outbound:
       rules:
@@ -74,5 +82,8 @@ spec:
         - application: nav-dekoratoren
           namespace: personbruker
         - application: oppfolgingsplan-backend
+        - application: dinesykmeldte-backend
+        - application: flexjar-backend
+          namespace: flex
       external:
         - host: syfooppfolgingsplanservice.dev-fss-pub.nais.io

@@ -9,9 +9,7 @@ import {
 import { GodkjennPlanTidspunkter } from "../GodkjennPlanTidspunkter";
 import { SePlan } from "../SePlan";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
-import { useFerdigstillVarsel } from "../utils/varselHooks";
-import { useFerdigstillGodkjennPlanVarsel } from "../../../api/queries/varsel/ferdigstillingQueries";
-import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
+import { useFerdigstillVarselForPlan } from "../utils/varselHooks";
 import {
   GodkjenningDTO,
   OppfolgingsplanDTO,
@@ -33,10 +31,8 @@ export const GodkjennPlanAvslattOgGodkjent = ({
       return godkjenning.godkjent;
     },
   )?.gyldighetstidspunkt;
-  const ferdigstillVarsel = useFerdigstillGodkjennPlanVarsel();
-  const oppfolgingsplanId = useOppfolgingsplanRouteId();
 
-  useFerdigstillVarsel(ferdigstillVarsel, oppfolgingsplanId);
+  useFerdigstillVarselForPlan();
 
   if (!gyldighetstidspunkt) {
     return null;
