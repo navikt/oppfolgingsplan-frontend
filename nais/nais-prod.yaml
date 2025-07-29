@@ -33,6 +33,10 @@ spec:
     enabled: true
     path: actuator/metrics
   observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
     autoInstrumentation:
       enabled: true
       runtime: nodejs
