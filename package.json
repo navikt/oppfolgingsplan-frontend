@@ -53,7 +53,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@hookform/devtools": "^4.3.0",
+    "@hookform/devtools": "^4.4.0",
     "@testing-library/cypress": "^10.0.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.3.0",
