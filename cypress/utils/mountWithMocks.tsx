@@ -1,4 +1,5 @@
 import { mount } from "cypress/react18";
+import React from "react";
 import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import { HeadManagerContext } from "next/dist/shared/lib/head-manager-context.shared-runtime";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -19,14 +20,14 @@ export interface MockOptions {
 }
 
 interface HeadProps {
-  children: JSX.Element;
+  children: React.JSX.Element;
   mockHeadContext?: boolean;
 }
 
 const HeadProvider = ({
   children,
   mockHeadContext,
-}: HeadProps): JSX.Element => {
+}: HeadProps): React.JSX.Element => {
   if (!mockHeadContext) return children;
   return (
     <HeadManagerContext.Provider
@@ -46,7 +47,7 @@ const HeadProvider = ({
 };
 
 interface RouterProps {
-  children: JSX.Element;
+  children: React.JSX.Element;
   shouldMockRouter?: boolean;
   isArbeidsgiver?: boolean;
   oppfolgingsplanRouteId?: string;
@@ -59,7 +60,7 @@ const RouterProvider = ({
   isArbeidsgiver,
   oppfolgingsplanRouteId,
   narmestelederRouteId,
-}: RouterProps): JSX.Element => {
+}: RouterProps): React.JSX.Element => {
   if (!shouldMockRouter) return children;
 
   if (isArbeidsgiver) {
@@ -81,14 +82,14 @@ const RouterProvider = ({
 };
 
 interface ReactQueryProps {
-  children: JSX.Element;
+  children: React.JSX.Element;
   mockReactQuery?: boolean;
 }
 
 const ReactQueryProvider = ({
   children,
   mockReactQuery,
-}: ReactQueryProps): JSX.Element => {
+}: ReactQueryProps): React.JSX.Element => {
   if (!mockReactQuery) return children;
 
   return (
@@ -110,8 +111,8 @@ const ReactQueryProvider = ({
   );
 };
 export const mountWithMocks = (
-  componentUnderTest: JSX.Element,
-  options?: MockOptions
+  componentUnderTest: React.JSX.Element,
+  options?: MockOptions,
 ) => {
   if (options?.interceptDataApis) {
     interceptDataApis(options.interceptDataApis);
@@ -129,6 +130,6 @@ export const mountWithMocks = (
           {componentUnderTest}
         </RouterProvider>
       </ReactQueryProvider>
-    </HeadProvider>
+    </HeadProvider>,
   );
 };
