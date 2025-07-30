@@ -1,15 +1,17 @@
+import React, { useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
+import { configureLogger } from "@navikt/next-logger";
+
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useAudience } from "../hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
 import { BreadcrumbsAppenderAG } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderAG";
-import React, { useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TestScenarioSelector } from "../components/blocks/testscenarioselector/TestScenarioSelector";
 import { displayTestScenarioSelector } from "../environments/publicEnv";
-import { configureLogger } from "@navikt/next-logger";
 import { OPErrorBoundary } from "../components/blocks/error/OPErrorBoundary";
 import { initFaro } from "../faro/initFaro";
 import { minutesToMillis } from "../utils/dateUtils";
@@ -27,15 +29,19 @@ const TestScenarioDevTools = () => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { isAudienceSykmeldt } = useAudience();
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        gcTime: minutesToMillis(60),
-        staleTime: minutesToMillis(30),
-      },
-    },
-  });
+
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            gcTime: minutesToMillis(60),
+            staleTime: minutesToMillis(30),
+          },
+        },
+      }),
+  );
 
   useEffect(() => {
     initFaro();

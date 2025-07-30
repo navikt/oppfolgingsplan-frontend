@@ -29,6 +29,6 @@ export const getDineSykmeldteTokenFromRequest = async (
   const idportenToken = await getIdportenToken(req);
   return await getTokenX(
     idportenToken,
-    serverEnv.SYKMELDINGER_ARBEIDSGIVER_CLIENT_ID,
+    serverEnv.DINESYKMELDTE_BACKEND_CLIENT_ID,
   );
 };
