@@ -12,7 +12,7 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Upload public files to NAV CDN
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
