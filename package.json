@@ -61,7 +61,7 @@
     "@types/node": "22.15.21",
     "@types/react": "19.1.10",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.39.0",
     "autoprefixer": "^10.4.21",
     "cross-env": "^7.0.3",
