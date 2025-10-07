@@ -7,7 +7,10 @@ interface Props {
   oppfolgingsplanInfoLenkUrl: string;
 }
 
-const OppfolgingsdialogerInfoPersonvern = ({ ingress, oppfolgingsplanInfoLenkUrl }: Props) => {
+const OppfolgingsdialogerInfoPersonvern = ({
+  ingress,
+  oppfolgingsplanInfoLenkUrl,
+}: Props) => {
   return (
     <div className="mb-8">
       <SpacedDiv className="mb-4">
