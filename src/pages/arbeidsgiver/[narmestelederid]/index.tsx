@@ -82,6 +82,7 @@ const Home: NextPage = () => {
             ingress="Oppfølgingsplanen skal gjøre det lettere å bli i jobben. Hensikten er å finne ut hvilke oppgaver som kan gjøres hvis det blir lagt til rette for det.
                           Dere skriver i planen fra hver deres kant. Dere kan endre den når som helst etter hvert som dere ser hvordan det går.
                           Alle godkjente planer kan ses i Altinn av de hos dere som har tilgang."
+            oppfolgingsplanInfoLenkUrl="https://www.nav.no/arbeidsgiver/oppfolgingsplan"
           />
 
           <PageContent />
