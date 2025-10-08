@@ -4,9 +4,13 @@ import { SpacedDiv } from "../wrappers/SpacedDiv";
 
 interface Props {
   ingress: string;
+  oppfolgingsplanInfoLenkUrl: string;
 }
 
-const OppfolgingsdialogerInfoPersonvern = ({ ingress }: Props) => {
+const OppfolgingsdialogerInfoPersonvern = ({
+  ingress,
+  oppfolgingsplanInfoLenkUrl,
+}: Props) => {
   return (
     <div className="mb-8">
       <SpacedDiv className="mb-4">
@@ -18,9 +22,9 @@ const OppfolgingsdialogerInfoPersonvern = ({ ingress }: Props) => {
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykmeldt/hva-er-en-oppfolgingsplan"
+            href={oppfolgingsplanInfoLenkUrl}
           >
-            Hvilke lover som gjelder for oppfølgingsplanen
+            Hvilke lover som gjelder for oppfølgingsplanen (åpner i en ny fane)
           </Link>
         </li>
         <li>
@@ -29,7 +33,7 @@ const OppfolgingsdialogerInfoPersonvern = ({ ingress }: Props) => {
             rel="noopener noreferrer"
             href="https://www.nav.no/personvern"
           >
-            Hvordan NAV behandler personopplysninger
+            Hvordan NAV behandler personopplysninger (åpner i en ny fane)
           </Link>
         </li>
       </ul>
