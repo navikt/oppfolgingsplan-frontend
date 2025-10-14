@@ -12,6 +12,7 @@ import { finnArbeidsgivereForGyldigeSykmeldinger } from "../../../../utils/sykme
 import OpprettModalSM from "../../opprett/OpprettModalSM";
 import IngenPlanerCardSM from "../../opprett/IngenPlanerCardSM";
 import { Button } from "@navikt/ds-react";
+import { FlexjarSykmeldt } from "../../../flexjar/flexjar-sykmeldt";
 
 const texts = {
   oppfolgingsdialogNyKnapp: {
@@ -89,6 +90,7 @@ const OppfolgingsdialogerVisningSM = ({
                 : texts.oppfolgingsdialogerVisning.teaserAktive.titleSinglePlan
             }
           />
+          <FlexjarSykmeldt />
         </div>
       )}
       {harTidligereOppfolgingsplaner(oppfolgingsplaner) && (
