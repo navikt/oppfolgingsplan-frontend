@@ -6,6 +6,9 @@ const moduleExports = {
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
   output: "standalone",
   productionBrowserSourceMaps: true,
+  experimental: {
+    optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
+  },
 };
 
 module.exports = moduleExports;
