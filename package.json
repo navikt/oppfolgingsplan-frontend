@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "scripts": {
     "dev": "next dev",
@@ -21,12 +21,13 @@
     "workerDirectory": "public"
   },
   "dependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@grafana/faro-web-sdk": "^1.18.2",
     "@grafana/faro-web-tracing": "^1.19.0",
-    "@navikt/aksel-icons": "^5.18.3",
+    "@navikt/aksel-icons": "^7.32.1",
     "@navikt/dinesykmeldte-sidemeny": "^5.5.3",
-    "@navikt/ds-css": "^5.18.3",
-    "@navikt/ds-react": "^5.18.3",
+    "@navikt/ds-css": "^7.32.1",
+    "@navikt/ds-react": "^7.32.1",
     "@navikt/nav-dekoratoren-moduler": "^3.4.0",
     "@navikt/next-logger": "^1.35.0",
     "@navikt/oasis": "^3.8.0",
