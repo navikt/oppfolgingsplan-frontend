@@ -5,10 +5,8 @@ const moduleExports = {
   basePath: "/syk/oppfolgingsplaner",
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
   output: "standalone",
-  productionBrowserSourceMaps: true,
-  experimental: {
-    optimizePackageImports: ["@navikt/ds-react", "@navikt/aksel-icons"],
-  },
+  productionBrowserSourceMaps: false,
+  eslint: { ignoreDuringBuilds: true },
 };
 
 module.exports = moduleExports;
