@@ -6,7 +6,7 @@ import { TidligereOppfolgingsplaner } from "../TidligereOppfolgingsplaner";
 import { TilLandingssideKnapp } from "../TilLandingssideKnapp";
 import { NullstillGodkjenningKnapp } from "../NullstillGodkjenningKnapp";
 import { Row } from "../../blocks/wrappers/Row";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
 
 interface Props {
