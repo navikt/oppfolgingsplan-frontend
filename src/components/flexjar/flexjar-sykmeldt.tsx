@@ -14,8 +14,8 @@ const survey: FlexJarSurveyConfig = {
     type: "text",
     maxLength: 500,
     minRows: 4,
-    prompt:
-      "Hvordan kan oppfølgingsplanen bli et bedre verktøy for deg? (Valgfritt)",
+    prompt: "Legg gjerne til en begrunnelse (valgfritt)",
+    description: "Alle tilbakemeldinger er til stor nytte for oss",
     required: false,
   },
 };
