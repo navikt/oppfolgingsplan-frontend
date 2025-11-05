@@ -25,6 +25,8 @@ export type RequestOrigin =
   | "kopierOppfolgingsplanAG"
   | "opprettOppfolgingsplanAG"
   | "fetchTilgangAG"
+  | "fetchPilotStatusAg"
+  | "fetchPilotStatusSm"
   | "fetchKontaktinfo"
   | "fetchNarmesteLedereSM"
   | "fetchOppfolgingsplanerSM"

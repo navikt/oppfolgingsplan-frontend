@@ -122,6 +122,13 @@ export const TestScenarioSelector = () => {
               >
                 Arbeidsgiver har sendt plan til godkjenning
               </RadioWithHelpText>
+
+              <RadioWithHelpText
+                value={"PILOTUSER"}
+                helpText={"Er pilotbruker for ny oppfølgingsplan"}
+              >
+                Er pilotbruker for ny oppfølgingsplan
+              </RadioWithHelpText>
             </RadioGroup>
           </SpacedDiv>
 

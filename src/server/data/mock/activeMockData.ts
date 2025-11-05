@@ -6,6 +6,7 @@ import { planUnderArbeidScenario } from "./testscenarios/planunderarbeid/planUnd
 import { MockSetup, TestScenario } from "./getMockDb";
 import { tidligerePlanerScenario } from "./testscenarios/tidligereoppfolgingsplaner/tidligerePlanerScenario";
 import { godkjentPlanScenario } from "./testscenarios/godkjentplan/godkjentPlanScenario";
+import { pilotUserScenario } from "./testscenarios/isPilotUser/pilotUserScenario";
 
 const activeMockData: MockSetup = { ...planUnderArbeidScenario };
 
@@ -25,6 +26,8 @@ export const getMockSetupForScenario = (scenario: TestScenario) => {
       return sykmeldtSendtTilGodkjenningScenario;
     case "ARBEIDSGIVER_HAR_SENDT_TIL_GODKJENNING":
       return arbeidsgiverSendtTilGodkjenningScenario;
+    case "PILOTUSER":
+      return pilotUserScenario;
   }
 };
 
