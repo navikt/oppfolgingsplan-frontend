@@ -1,7 +1,8 @@
 import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
 import { isProd, nyOppfolgingsplanRoot } from "../../../environments/publicEnv";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
-import { PilotLinkCard } from "./PilotLinkCard";
+import { LinkCard } from "@navikt/ds-react";
+import { ClipboardLinkIcon } from "@navikt/aksel-icons";
 
 export const PilotLinkCardAG = () => {
   const isPilotUserQuery = useIsPilotAG();
@@ -17,7 +18,20 @@ export const PilotLinkCardAG = () => {
     narmesteLederId
   ) {
     return (
-      <PilotLinkCard url={`${nyOppfolgingsplanRoot}/${narmesteLederId}`} />
+      <LinkCard className="mb-6">
+        <LinkCard.Icon>
+          <ClipboardLinkIcon fontSize="2rem" />
+        </LinkCard.Icon>
+        <LinkCard.Title>
+          <LinkCard.Anchor href={`${nyOppfolgingsplanRoot}/${narmesteLederId}`}>
+            Vil du prøve den nye oppfølgingsplanen?
+          </LinkCard.Anchor>
+        </LinkCard.Title>
+        <LinkCard.Description>
+          Vi har laget en ny oppfølgingsplan som nå er tilgjengelig for dere som
+          bor i Stord. <br /> Klikk her for å prøve den!
+        </LinkCard.Description>
+      </LinkCard>
     );
   }
 
