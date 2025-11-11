@@ -24,7 +24,7 @@ export const PilotLinkCardAG = () => {
         </LinkCard.Icon>
         <LinkCard.Title>
           <LinkCard.Anchor href={`${nyOppfolgingsplanRoot}/${narmesteLederId}`}>
-            Vil du prøve den nye oppfølgingsplanen?
+            Vil du prøve vår nye løsning for oppfølgingsplaner?
           </LinkCard.Anchor>
         </LinkCard.Title>
         <LinkCard.Description>
