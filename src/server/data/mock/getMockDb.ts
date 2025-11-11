@@ -16,6 +16,7 @@ import { NarmesteLederDTO } from "../../../schema/narmestelederSchema";
 export type TestScenario =
   | "INGENPLAN"
   | "TIDLIGEREPLANER"
+  | "PILOTUSER"
   | "UNDERARBEID"
   | "GODKJENTPLAN"
   | "SYKMELDT_HAR_SENDT_TIL_GODKJENNING_AG_HAR_ENDRET"
@@ -35,7 +36,6 @@ export interface MockSetup {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var _mockDb: { [key: string]: MockSetup };
 }
 
