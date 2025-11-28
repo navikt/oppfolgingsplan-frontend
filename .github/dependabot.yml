@@ -8,28 +8,30 @@ registries:
 
 updates:
   - package-ecosystem: github-actions
-    directory: '/'
+    directory: "/"
     schedule:
       interval: daily
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: npm
-    directory: '/'
+    directory: "/"
     schedule:
       interval: daily
-      time: '14:30'
+      time: "14:30"
       timezone: Europe/Oslo
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 20
-    registries: '*'
-    reviewers:
-      - ''
+    registries: "*"
     groups:
       aksel-dependencies:
         patterns:
-          - '@navikt/aksel*'
-          - '@navikt/ds*'
+          - "@navikt/aksel*"
+          - "@navikt/ds*"
       react-dependencies:
         patterns:
-          - 'react'
-          - 'react-dom'
-          - '@types/react'
-          - '@types/react-dom'
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
