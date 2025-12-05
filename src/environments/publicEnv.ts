@@ -4,7 +4,7 @@ export const minSideRoot = process.env.NEXT_PUBLIC_MIN_SIDE_ROOT as string;
 
 export const nyOppfolgingsplanRoot: string =
   process.env.NEXT_PUBLIC_NY_OPPFOLGINGSPLAN_ROOT ||
-  "https://www.nav.no/syk/oppfolgingsplan/sykmeldt";
+  "https://www.nav.no/syk/oppfolgingsplan";
 
 export const dineSykemeldteRoot = process.env
   .NEXT_PUBLIC_DINE_SYKMELDTE_URL as string;

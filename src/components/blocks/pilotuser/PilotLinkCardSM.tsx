@@ -17,7 +17,7 @@ export const PilotLinkCardSM = () => {
           <ClipboardLinkIcon fontSize="2rem" />
         </LinkCard.Icon>
         <LinkCard.Title>
-          <LinkCard.Anchor href={nyOppfolgingsplanRoot}>
+          <LinkCard.Anchor href={`${nyOppfolgingsplanRoot}/sykmeldt`}>
             Vi har laget en ny oppfølgingsplan!
           </LinkCard.Anchor>
         </LinkCard.Title>
