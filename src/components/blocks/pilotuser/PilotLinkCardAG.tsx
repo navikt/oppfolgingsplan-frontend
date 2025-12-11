@@ -1,5 +1,5 @@
 import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
-import { isProd, nyOppfolgingsplanRoot } from "../../../environments/publicEnv";
+import { nyOppfolgingsplanRoot } from "../../../environments/publicEnv";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
 import { LinkCard } from "@navikt/ds-react";
 import { ClipboardLinkIcon } from "@navikt/aksel-icons";
@@ -7,10 +7,6 @@ import { ClipboardLinkIcon } from "@navikt/aksel-icons";
 export const PilotLinkCardAG = () => {
   const isPilotUserQuery = useIsPilotAG();
   const narmesteLederId = useNarmesteLederId();
-
-  if (isProd) {
-    return null;
-  }
 
   if (
     isPilotUserQuery.isSuccess &&
