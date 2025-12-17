@@ -8,7 +8,7 @@ export const PilotLinkCardSM = () => {
 
   if (isPilotUserQuery.isSuccess && isPilotUserQuery.data == true) {
     return (
-      <LinkCard className="mb-6">
+      <LinkCard className="mb-6 bg-[#E6F1F8]">
         <LinkCard.Icon>
           <ClipboardLinkIcon fontSize="2rem" />
         </LinkCard.Icon>

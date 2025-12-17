@@ -25,7 +25,7 @@ export const PilotLinkCardAG = () => {
         </LinkCard.Title>
         <LinkCard.Description>
           Vi har laget en ny oppfølgingsplan som nå er tilgjengelig for dere som
-          bor i Stord. <br /> Klikk her for å prøve den!
+          bor i Sunnhordland. <br /> Klikk her for å prøve den!
         </LinkCard.Description>
       </LinkCard>
     );
