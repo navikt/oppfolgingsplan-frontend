@@ -1,7 +1,6 @@
 import React, { ReactElement, ReactNode } from "react";
 import { PageHeading } from "../../heading/PageHeading";
 import styles from "./SykmeldtSide.module.css";
-import { PilotLinkCardSM } from "../../pilotuser/PilotLinkCardSM";
 
 interface SideProps {
   title: string;
@@ -17,7 +16,6 @@ const SykmeldtSide = ({
   return (
     <div className={styles.content}>
       <div className={styles.innercontent}>
-        <PilotLinkCardSM />
         <PageHeading title={title} heading={heading} />
         {children}
       </div>

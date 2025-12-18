@@ -6,7 +6,6 @@ import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
-import { PilotLinkCardAG } from "../pilotuser/PilotLinkCardAG";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -53,7 +52,6 @@ const ArbeidsgiverSide = ({
       navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
     >
       <>
-        <PilotLinkCardAG />
         <PageHeading title={title} heading={heading} />
         {children}
       </>
