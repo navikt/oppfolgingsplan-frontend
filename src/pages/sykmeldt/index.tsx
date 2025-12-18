@@ -19,6 +19,7 @@ import {
 } from "../../utils/oppfolgingplanUtils";
 import OppfolgingsdialogerUtenAktivSykmeldingSM from "../../components/landing/OppfolgingsdialogerUtenAktivSykmeldingSM";
 import { OPSkeleton } from "../../components/blocks/skeleton/OPSkeleton";
+import { PilotLinkCardSM } from "../../components/blocks/pilotuser/PilotLinkCardSM";
 
 const PageContent = () => {
   const oppfolgingsplaner = useOppfolgingsplanerSM();
@@ -86,6 +87,8 @@ const Home: NextPage = () => {
         Alle godkjente planer kan ses i Altinn av de på arbeidsplassen din som har tilgang."
         oppfolgingsplanInfoLenkUrl="https://www.nav.no/oppfolgingsplan#oppfolging"
       />
+
+      <PilotLinkCardSM />
 
       <PageContent />
 

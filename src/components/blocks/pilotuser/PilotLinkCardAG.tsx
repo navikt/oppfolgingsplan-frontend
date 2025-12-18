@@ -2,7 +2,6 @@ import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
 import { nyOppfolgingsplanRoot } from "../../../environments/publicEnv";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
 import { LinkCard } from "@navikt/ds-react";
-import { ClipboardLinkIcon } from "@navikt/aksel-icons";
 
 export const PilotLinkCardAG = () => {
   const isPilotUserQuery = useIsPilotAG();
@@ -14,12 +13,12 @@ export const PilotLinkCardAG = () => {
     narmesteLederId
   ) {
     return (
-      <LinkCard className="mb-6 bg-[#E6F1F8]">
-        <LinkCard.Icon>
-          <ClipboardLinkIcon fontSize="2rem" />
-        </LinkCard.Icon>
+      <LinkCard className="mb-6 bg-[#0067C5] text-white">
         <LinkCard.Title>
-          <LinkCard.Anchor href={`${nyOppfolgingsplanRoot}/${narmesteLederId}`}>
+          <LinkCard.Anchor
+            href={`${nyOppfolgingsplanRoot}/${narmesteLederId}`}
+            className="text-white"
+          >
             Vil du prøve vår nye løsning for oppfølgingsplaner?
           </LinkCard.Anchor>
         </LinkCard.Title>
