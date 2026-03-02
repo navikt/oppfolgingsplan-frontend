@@ -5,7 +5,7 @@ on:
 
 jobs:
   next-app:
-    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/next-app.yaml@main
+    uses: navikt/teamesyfo-github-actions-workflows/.github/workflows/next-app.yaml@bump-sha-docker-build-push
     permissions:
       contents: read
       id-token: write
