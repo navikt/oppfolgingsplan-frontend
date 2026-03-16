@@ -24,10 +24,10 @@
     "@eslint/eslintrc": "^3.3.1",
     "@grafana/faro-web-sdk": "^1.18.2",
     "@grafana/faro-web-tracing": "^1.19.0",
-    "@navikt/aksel-icons": "^7.32.1",
+    "@navikt/aksel-icons": "^8.7.0",
     "@navikt/dinesykmeldte-sidemeny": "^5.5.3",
-    "@navikt/ds-css": "^7.32.1",
-    "@navikt/ds-react": "^7.32.1",
+    "@navikt/ds-css": "^8.7.0",
+    "@navikt/ds-react": "^8.7.0",
     "@navikt/flexjar-widget": "^0.1.11",
     "@navikt/nav-dekoratoren-moduler": "^3.4.0",
     "@navikt/next-logger": "^1.35.0",
@@ -55,6 +55,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@navikt/ds-tailwind": "^8.7.0",
     "@hookform/devtools": "^4.4.0",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/jest-dom": "^6.6.4",
