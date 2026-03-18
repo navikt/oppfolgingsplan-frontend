@@ -29,8 +29,8 @@ export const PilotLinkCardAG = () => {
           </LinkCard.Anchor>
         </LinkCard.Title>
         <LinkCard.Description>
-          På grunn av din geografiske lokasjon er du og din arbeidstaker valgt
-          ut til å prøve den nye planen. Klikk her for å prøve den!
+          Vi har laget en ny oppfølgingsplan som nå er tilgjengelig for dere som
+          bor på Vestlandet. Klikk her for å prøve den!
         </LinkCard.Description>
       </LinkCard>
     );

@@ -25,7 +25,7 @@
     "@grafana/faro-web-sdk": "^1.18.2",
     "@grafana/faro-web-tracing": "^1.19.0",
     "@navikt/aksel-icons": "^8.7.0",
-    "@navikt/dinesykmeldte-sidemeny": "^5.5.3",
+    "@navikt/dinesykmeldte-sidemeny": "^8.0.0",
     "@navikt/ds-css": "^8.7.0",
     "@navikt/ds-react": "^8.7.0",
     "@navikt/flexjar-widget": "^0.1.11",
@@ -55,8 +55,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@navikt/ds-tailwind": "^8.7.0",
     "@hookform/devtools": "^4.4.0",
+    "@navikt/ds-tailwind": "^8.7.0",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^14.3.0",
