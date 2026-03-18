@@ -7,7 +7,7 @@ export const FilledCrossIcon = () => {
       <XMarkOctagonFillIcon
         aria-hidden
         color={
-          "var(--ac-alert-icon-error-color,var(--ax-text-danger-decoration))"
+          "var(--ax-alert-icon-error-color,var(--ax-text-danger-decoration))"
         }
         width={30}
         height={30}

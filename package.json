@@ -55,8 +55,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@navikt/ds-tailwind": "^8.7.0",
     "@hookform/devtools": "^4.4.0",
+    "@navikt/ds-tailwind": "^8.7.0",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^14.3.0",
