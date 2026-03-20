@@ -70,10 +70,6 @@ spec:
       value: "false"
     - name: RUNTIME_ENVIRONMENT
       value: prod
-    - name: FLEXJAR_HOST
-      value: "http://flexjar-backend.flex"
-    - name: FLEXJAR_BACKEND_CLIENT_ID
-      value: prod-gcp:flex:flexjar-backend
   accessPolicy:
     outbound:
       rules:
@@ -83,8 +79,6 @@ spec:
           namespace: personbruker
         - application: oppfolgingsplan-backend
         - application: dinesykmeldte-backend
-        - application: flexjar-backend
-          namespace: flex
       external:
         - host: www.nav.no
         - host: syfooppfolgingsplanservice.prod-fss-pub.nais.io

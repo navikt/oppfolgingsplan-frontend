@@ -23,7 +23,6 @@ import { findAktivPlan } from "../../../../utils/oppfolgingplanUtils";
 import { useTilgangAG } from "../../../../api/queries/arbeidsgiver/tilgangQueriesAG";
 import { IkkeTilgangTilAnsattInfoBoks } from "../../../../components/blocks/infoboks/IkkeTilgangTilAnsattInfoBoks";
 import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
-import { FlexjarArbeidsgiver } from "../../../../components/flexjar/flexjar-arbeidsgiver";
 
 interface ContentProps {
   oppfolgingsplan?: OppfolgingsplanDTO;
@@ -48,7 +47,6 @@ const Content = ({
           <GodkjennPlanSendtInfoBox
             godkjennPlanTargetAudience={"Arbeidstakeren"}
           />
-          <FlexjarArbeidsgiver />
         </GodkjennPlanSendt>
       );
     }
