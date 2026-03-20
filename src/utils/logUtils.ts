@@ -80,6 +80,7 @@ export type RequestOrigin =
   | "useLagreKommentar"
   | "useSlettKommentar"
   | "useFerdigstillGodkjennPlanVarsel"
+  | "postLumiFeedback"
   | "ErrorBoundary";
 
 export const logError = (error: Error, requestOrigin: RequestOrigin) => {

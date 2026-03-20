@@ -6,6 +6,7 @@ import "@navikt/dinesykmeldte-sidemeny/dist/dinesykmeldte-sidemeny.css";
 import { configureLogger } from "@navikt/next-logger";
 
 import "../styles/globals.css";
+import "@navikt/lumi-survey/styles.css";
 import type { AppProps } from "next/app";
 import { useAudience } from "../hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";
