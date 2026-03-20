@@ -28,7 +28,7 @@
     "@navikt/dinesykmeldte-sidemeny": "^8.0.0",
     "@navikt/ds-css": "^8.7.0",
     "@navikt/ds-react": "^8.7.0",
-    "@navikt/flexjar-widget": "^0.1.11",
+    "@navikt/lumi-survey": "^0.1.1",
     "@navikt/nav-dekoratoren-moduler": "^3.4.0",
     "@navikt/next-logger": "^1.35.0",
     "@navikt/oasis": "^3.8.0",

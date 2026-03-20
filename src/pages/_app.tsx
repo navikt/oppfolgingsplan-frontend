@@ -3,10 +3,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "@navikt/dinesykmeldte-sidemeny/dist/dinesykmeldte-sidemeny.css";
-import "@navikt/flexjar-widget/styles.css";
 import { configureLogger } from "@navikt/next-logger";
 
 import "../styles/globals.css";
+import "@navikt/lumi-survey/styles.css";
 import type { AppProps } from "next/app";
 import { useAudience } from "../hooks/routeHooks";
 import { BreadcrumbsAppenderSM } from "../components/blocks/breadcrumbs/BreadcrumbsAppenderSM";

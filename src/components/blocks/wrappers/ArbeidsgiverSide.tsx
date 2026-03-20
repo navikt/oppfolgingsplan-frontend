@@ -6,6 +6,10 @@ import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
+import { LumiSurveyDock, type LumiSurveyTransport } from "@navikt/lumi-survey";
+import { usePostLumiFeedback } from "../../../api/queries/lumi/lumiQueries";
+import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
+import { PILOT_FEEDBACK_SURVEY } from "../../lumi/pilotFeedbackSurvey";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -38,6 +42,29 @@ interface SideProps {
   children: ReactNode;
 }
 
+const LumiSurvey = () => {
+  const isPilotQuery = useIsPilotAG();
+  const postFeedback = usePostLumiFeedback();
+
+  if (isPilotQuery.isSuccess && isPilotQuery.data) {
+    const transport: LumiSurveyTransport = {
+      async submit(submission) {
+        await postFeedback.mutateAsync(submission.transportPayload);
+      },
+    };
+
+    return (
+      <LumiSurveyDock
+        surveyId="oppfolgingsplan-pilot-feedback"
+        survey={PILOT_FEEDBACK_SURVEY}
+        transport={transport}
+      />
+    );
+  }
+
+  return null;
+};
+
 const ArbeidsgiverSide = ({
   title,
   heading,
@@ -46,16 +73,19 @@ const ArbeidsgiverSide = ({
   const sykmeldt = useDineSykmeldte();
 
   return (
-    <PageContainer
-      sykmeldt={getSykmeldtNameAndFnr(sykmeldt.data)}
-      header={getSykmeldtHeader(sykmeldt.data)}
-      navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
-    >
-      <>
-        <PageHeading title={title} heading={heading} />
-        {children}
-      </>
-    </PageContainer>
+    <>
+      <PageContainer
+        sykmeldt={getSykmeldtNameAndFnr(sykmeldt.data)}
+        header={getSykmeldtHeader(sykmeldt.data)}
+        navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
+      >
+        <>
+          <PageHeading title={title} heading={heading} />
+          {children}
+        </>
+      </PageContainer>
+      <LumiSurvey />
+    </>
   );
 };
 

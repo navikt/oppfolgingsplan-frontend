@@ -80,7 +80,7 @@ export type RequestOrigin =
   | "useLagreKommentar"
   | "useSlettKommentar"
   | "useFerdigstillGodkjennPlanVarsel"
-  | "flexjar"
+  | "postLumiFeedback"
   | "ErrorBoundary";
 
 export const logError = (error: Error, requestOrigin: RequestOrigin) => {
