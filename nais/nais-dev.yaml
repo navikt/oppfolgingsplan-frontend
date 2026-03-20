@@ -70,6 +70,10 @@ spec:
       value: "false"
     - name: RUNTIME_ENVIRONMENT
       value: dev
+    - name: LUMI_API_HOST
+      value: http://lumi-api.team-esyfo
+    - name: LUMI_AUDIENCE
+      value: "dev-gcp:team-esyfo:lumi-api"
   accessPolicy:
     outbound:
       rules:
@@ -79,5 +83,6 @@ spec:
           namespace: personbruker
         - application: oppfolgingsplan-backend
         - application: dinesykmeldte-backend
+        - application: lumi-api
       external:
         - host: syfooppfolgingsplanservice.dev-fss-pub.nais.io
