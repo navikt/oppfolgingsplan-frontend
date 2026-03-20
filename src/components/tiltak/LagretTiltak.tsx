@@ -28,25 +28,25 @@ const createStatusLabel = (statusText?: string | null): ReactElement | null => {
   switch (statusText) {
     case STATUS_TILTAK.FORSLAG:
       return (
-        <Tag variant="warning" size="small">
+        <Tag data-color="warning" variant="outline" size="small">
           Foreslått
         </Tag>
       );
     case STATUS_TILTAK.AVBRUTT:
       return (
-        <Tag variant="info" size="small">
+        <Tag data-color="info" variant="outline" size="small">
           Avbrutt
         </Tag>
       );
     case STATUS_TILTAK.IKKE_AKTUELT:
       return (
-        <Tag variant="error" size="small">
+        <Tag data-color="danger" variant="outline" size="small">
           Ikke aktuelt
         </Tag>
       );
     case STATUS_TILTAK.AVTALT:
       return (
-        <Tag variant="success" size="small">
+        <Tag data-color="success" variant="outline" size="small">
           Avtalt
         </Tag>
       );

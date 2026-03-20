@@ -37,7 +37,8 @@ export const AvbrytPlanKnapp = ({ oppfolgingsplanId }: Props) => {
             andre. Etter godkjenning blir den en gjeldende plan.
           </BodyLong>
           <Button
-            variant={"danger"}
+            data-color="danger"
+            variant={"primary"}
             loading={avbrytDialog.isPending}
             onClick={() => {
               avbrytDialog.mutateAsync(oppfolgingsplanId);

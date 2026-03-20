@@ -6,7 +6,7 @@ export const FilledCheckmarkIcon = () => {
     <div className={iconstyles.iconwrapper}>
       <CheckmarkCircleFillIcon
         aria-hidden
-        color={"var(--a-green-600)"}
+        color={"var(--ax-success-700)"}
         width={30}
         height={30}
       />
