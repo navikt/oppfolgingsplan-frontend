@@ -6,10 +6,10 @@ import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
-import { LumiSurveyDock, type LumiSurveyTransport } from "@navikt/lumi-survey";
-import { usePostLumiFeedback } from "../../../api/queries/lumi/lumiQueries";
+import { LumiSurveyDock } from "@navikt/lumi-survey";
+import { useLumiTransport } from "../../../api/queries/lumi/lumiQueries";
 import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
-import { PILOT_FEEDBACK_SURVEY } from "../../lumi/pilotFeedbackSurvey";
+import { PILOT_FEEDBACK_SURVEY } from "../../survey/surveyConfig";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -44,19 +44,9 @@ interface SideProps {
 
 const LumiSurvey = () => {
   const isPilotQuery = useIsPilotAG();
-  const postFeedback = usePostLumiFeedback();
+  const transport = useLumiTransport();
 
   if (isPilotQuery.isSuccess && isPilotQuery.data) {
-    const transport: LumiSurveyTransport = {
-      async submit(submission) {
-        try {
-          await postFeedback.mutateAsync(submission.transportPayload);
-        } catch (e) {
-          console.error("Lumi survey submission failed", e);
-        }
-      },
-    };
-
     return (
       <LumiSurveyDock
         surveyId="oppfolgingsplan-pilot-feedback"
