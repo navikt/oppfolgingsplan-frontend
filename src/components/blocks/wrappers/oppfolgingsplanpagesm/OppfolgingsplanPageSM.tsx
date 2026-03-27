@@ -10,6 +10,12 @@ import { OPSkeleton } from "../../skeleton/OPSkeleton";
 import { OppfolgingsplanPageContentSM } from "./OppfolgingsplanPageContentSM";
 import { NavigationButtons } from "../../buttons/NavigationButtons";
 import { OppfolgingsplanDTO } from "../../../../schema/oppfolgingsplanSchema";
+import { LumiSurveyDock } from "@navikt/lumi-survey";
+import { useLumiTransport } from "../../../../api/queries/lumi/lumiQueries";
+import {
+  CREATE_OPPFOLGINGSPLAN_SM_INTRO,
+  CREATE_OPPFOLGINGSPLAN_SM_SURVEY,
+} from "../../../survey/surveyConfig";
 
 const textOverskrift = (arbeidsgiver?: string) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
@@ -53,6 +59,7 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
   const allePlaner = useOppfolgingsplanerSM();
   const sykmeldinger = useSykmeldingerSM();
   const aktivPlanId = useOppfolgingsplanRouteId();
+  const lumiTransport = useLumiTransport();
 
   return (
     <SykmeldtSide
@@ -85,6 +92,13 @@ export const OppfolgingsplanPageSM = ({ page, children }: Props) => {
       )}
 
       <NavigationButtons activeStep={page.valueOf()} />
+
+      <LumiSurveyDock
+        intro={CREATE_OPPFOLGINGSPLAN_SM_INTRO}
+        surveyId="create-oppfolgingsplan-feedback-sm"
+        survey={CREATE_OPPFOLGINGSPLAN_SM_SURVEY}
+        transport={lumiTransport}
+      />
     </SykmeldtSide>
   );
 };
