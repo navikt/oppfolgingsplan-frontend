@@ -21,7 +21,6 @@ import { findAktivPlan } from "../../../utils/oppfolgingplanUtils";
 import { useOppfolgingsplanRouteId } from "../../../hooks/routeHooks";
 import { OPSkeleton } from "../../../components/blocks/skeleton/OPSkeleton";
 import { OppfolgingsplanDTO } from "../../../schema/oppfolgingsplanSchema";
-import { FlexjarSykmeldt } from "../../../components/flexjar/flexjar-sykmeldt";
 
 interface ContentProps {
   oppfolgingsplan?: OppfolgingsplanDTO;
@@ -91,7 +90,6 @@ const Content = ({
               oppfolgingsplan.arbeidsgiver.naermesteLeder?.navn
             }
           />
-          <FlexjarSykmeldt />
         </GodkjentPlan>
       );
     }

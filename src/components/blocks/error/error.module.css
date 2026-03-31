@@ -13,13 +13,13 @@
 }
 
 .errorimage {
-  margin-right: var(--a-spacing-8);
+  margin-right: var(--ax-space-32);
   flex: 1 1 50%;
 }
 
 @media only screen and (max-width: 960px) {
   .errorimage {
     max-height: 240px;
-    margin-bottom: var(--a-spacing-4);
+    margin-bottom: var(--ax-space-16);
   }
 }

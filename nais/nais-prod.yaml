@@ -70,10 +70,10 @@ spec:
       value: "false"
     - name: RUNTIME_ENVIRONMENT
       value: prod
-    - name: FLEXJAR_HOST
-      value: "http://flexjar-backend.flex"
-    - name: FLEXJAR_BACKEND_CLIENT_ID
-      value: prod-gcp:flex:flexjar-backend
+    - name: LUMI_API_HOST
+      value: http://lumi-api.team-esyfo
+    - name: LUMI_AUDIENCE
+      value: "prod-gcp:team-esyfo:lumi-api"
   accessPolicy:
     outbound:
       rules:
@@ -83,8 +83,7 @@ spec:
           namespace: personbruker
         - application: oppfolgingsplan-backend
         - application: dinesykmeldte-backend
-        - application: flexjar-backend
-          namespace: flex
+        - application: lumi-api
       external:
         - host: www.nav.no
         - host: syfooppfolgingsplanservice.prod-fss-pub.nais.io

@@ -1,15 +1,12 @@
-@import "tailwindcss/base";
-@import "@navikt/ds-css";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@layer tailwind-base, navikt-ds, tailwind-components, tailwind-utilities;
+@import "tailwindcss/base" layer(tailwind-base);
+@import "@navikt/ds-css" layer(navikt-ds);
+@import "tailwindcss/components" layer(tailwind-components);
+@import "tailwindcss/utilities" layer(tailwind-utilities);
 
 html {
   /* Will be set programatically by dekoratøren */
   --decorator-sticky-offset: 0px;
-}
-
-:root {
-  --navds-content-container-max-width: 50rem;
 }
 
 @media print {

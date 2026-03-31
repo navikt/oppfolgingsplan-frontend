@@ -45,8 +45,9 @@ export const SlettArbeidsoppgaveButton = ({
 
           <Row>
             <Button
+              data-color="danger"
               loading={slettArbeidsoppgave.isPending}
-              variant={"danger"}
+              variant={"primary"}
               onClick={() => {
                 slettArbeidsoppgave.mutateAsync(arbeidsoppgaveId).then(() => {
                   setModalOpen(false);
@@ -61,7 +62,6 @@ export const SlettArbeidsoppgaveButton = ({
           </Row>
         </Modal.Body>
       </Modal>
-
       <Button
         variant={"tertiary"}
         icon={<TrashIcon aria-hidden />}

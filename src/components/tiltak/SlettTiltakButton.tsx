@@ -25,7 +25,8 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
         <Modal.Body>
           <Row>
             <Button
-              variant={"danger"}
+              data-color="danger"
+              variant={"primary"}
               loading={slettTiltak.isPending}
               onClick={() => {
                 slettTiltak.mutateAsync(tiltakId).then(() => {
@@ -41,7 +42,6 @@ export const SlettTiltakButton = ({ tiltakId }: Props) => {
           </Row>
         </Modal.Body>
       </Modal>
-
       <Button
         variant={"tertiary"}
         icon={<TrashIcon aria-hidden />}

@@ -1,18 +1,24 @@
 import { useIsPilotSM } from "../../../api/queries/sykmeldt/pilotQueriesSM";
 import { nyOppfolgingsplanRoot } from "../../../environments/publicEnv";
 import { LinkCard } from "@navikt/ds-react";
+import { RocketFillIcon } from "@navikt/aksel-icons";
 
 export const PilotLinkCardSM = () => {
   const isPilotUserQuery = useIsPilotSM();
 
   if (isPilotUserQuery.isSuccess && isPilotUserQuery.data == true) {
     return (
-      <LinkCard className="mb-6 bg-[#0067C5] text-white">
+      <LinkCard
+        style={{
+          backgroundColor: "var(--ax-bg-info-soft)",
+          marginBottom: "1.5rem",
+        }}
+      >
+        <LinkCard.Icon>
+          <RocketFillIcon fontSize="2rem" aria-hidden />
+        </LinkCard.Icon>
         <LinkCard.Title>
-          <LinkCard.Anchor
-            href={`${nyOppfolgingsplanRoot}/sykmeldt`}
-            className="text-white"
-          >
+          <LinkCard.Anchor href={`${nyOppfolgingsplanRoot}/sykmeldt`}>
             Prøv vår nye løsning for oppfølgingsplan!
           </LinkCard.Anchor>
         </LinkCard.Title>
