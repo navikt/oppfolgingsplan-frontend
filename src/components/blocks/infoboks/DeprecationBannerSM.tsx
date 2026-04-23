@@ -5,7 +5,7 @@ import { useIsPilotSM } from "../../../api/queries/sykmeldt/pilotQueriesSM";
 export const DeprecationBannerSM = () => {
   const isPilot = useIsPilotSM();
 
-  if (!isPilot.data) return null;
+  if (!isPilot.isSuccess || isPilot.data !== true) return null;
 
   return (
     <LocalAlert status="announcement" style={{ marginBottom: "1.5rem" }}>

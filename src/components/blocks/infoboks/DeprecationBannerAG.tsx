@@ -1,5 +1,8 @@
 import { LocalAlert, List, Button } from "@navikt/ds-react";
-import { nyOppfolgingsplanRoot } from "../../../environments/publicEnv";
+import {
+  dineSykemeldteRoot,
+  nyOppfolgingsplanRoot,
+} from "../../../environments/publicEnv";
 import { useNarmesteLederId } from "../../../hooks/routeHooks";
 import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
 
@@ -8,9 +11,9 @@ export const DeprecationBannerAG = () => {
   const isPilot = useIsPilotAG();
   const nyLosningUrl = narmesteLederId
     ? `${nyOppfolgingsplanRoot}/${narmesteLederId}`
-    : nyOppfolgingsplanRoot;
+    : dineSykemeldteRoot;
 
-  if (!isPilot.data) return null;
+  if (!isPilot.isSuccess || isPilot.data !== true) return null;
 
   return (
     <LocalAlert status="announcement" style={{ marginBottom: "1.5rem" }}>

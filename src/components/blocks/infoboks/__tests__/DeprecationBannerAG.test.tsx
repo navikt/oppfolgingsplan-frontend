@@ -60,7 +60,7 @@ describe("DeprecationBannerAG", () => {
       screen.getByText(/Hva skjer med gamle planer/i),
     ).toBeInTheDocument();
     jExpect(
-      screen.getByRole("link", { name: /Gå til ny oppfølgingsplan/i }),
+      screen.getByRole("button", { name: /Gå til ny oppfølgingsplan/i }),
     ).toBeInTheDocument();
   });
 });

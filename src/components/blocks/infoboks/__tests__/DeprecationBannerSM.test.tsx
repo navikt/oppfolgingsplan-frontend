@@ -45,7 +45,7 @@ describe("DeprecationBannerSM", () => {
       screen.getByText(/Fra nå av skjer alt i den nye oppfølgingsplanen/i),
     ).toBeInTheDocument();
     jExpect(
-      screen.getByRole("link", { name: /Gå til ny oppfølgingsplan/i }),
+      screen.getByRole("button", { name: /Gå til ny oppfølgingsplan/i }),
     ).toBeInTheDocument();
   });
 });
