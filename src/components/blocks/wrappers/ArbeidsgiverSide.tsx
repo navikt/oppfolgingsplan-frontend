@@ -10,6 +10,7 @@ import { LumiSurveyDock } from "@navikt/lumi-survey";
 import { useLumiTransport } from "../../../api/queries/lumi/lumiQueries";
 import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
 import { PILOT_FEEDBACK_SURVEY } from "../../survey/surveyConfig";
+import { DeprecationBannerAG } from "../infoboks/DeprecationBannerAG";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt.fnr) {
@@ -75,6 +76,7 @@ const ArbeidsgiverSide = ({
       >
         <>
           <PageHeading title={title} heading={heading} />
+          <DeprecationBannerAG />
           {children}
         </>
       </PageContainer>
