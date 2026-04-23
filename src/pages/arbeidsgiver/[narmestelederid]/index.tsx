@@ -19,7 +19,6 @@ import { useTilgangAG } from "../../../api/queries/arbeidsgiver/tilgangQueriesAG
 import OppfolgingsdialogTeasereAG from "../../../components/landing/teaser/arbeidsgiver/OppfolgingsdialogTeasereAG";
 import ReservertSykmeldtMelding from "../../../components/landing/ReservertSykmeldtMeldingAG";
 import useShowSMIsReservertInfoForAG from "../../../components/status/utils/useShowSMIsReservertInfoForAG";
-import { PilotLinkCardAG } from "../../../components/blocks/pilotuser/PilotLinkCardAG";
 
 const PageContent = () => {
   const allePlaner = useOppfolgingsplanerAG();
@@ -85,8 +84,6 @@ const Home: NextPage = () => {
                           Alle godkjente planer kan ses i Altinn av de hos dere som har tilgang."
             oppfolgingsplanInfoLenkUrl="https://www.nav.no/arbeidsgiver/oppfolgingsplan"
           />
-
-          <PilotLinkCardAG />
 
           <PageContent />
 
