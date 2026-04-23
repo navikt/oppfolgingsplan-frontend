@@ -6,10 +6,6 @@ import { PageContainer } from "@navikt/dinesykmeldte-sidemeny";
 import { Sykmeldt } from "../../../schema/sykmeldtSchema";
 import { addSpaceAfterEverySixthCharacter } from "../../../utils/stringUtils";
 import { PersonIcon } from "@navikt/aksel-icons";
-import { LumiSurveyDock } from "@navikt/lumi-survey";
-import { useLumiTransport } from "../../../api/queries/lumi/lumiQueries";
-import { useIsPilotAG } from "../../../api/queries/arbeidsgiver/pilotQueriesAG";
-import { PILOT_FEEDBACK_SURVEY } from "../../survey/surveyConfig";
 import { DeprecationBannerAG } from "../infoboks/DeprecationBannerAG";
 
 const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
@@ -43,23 +39,6 @@ interface SideProps {
   children: ReactNode;
 }
 
-const LumiSurvey = () => {
-  const isPilotQuery = useIsPilotAG();
-  const transport = useLumiTransport();
-
-  if (isPilotQuery.isSuccess && isPilotQuery.data) {
-    return (
-      <LumiSurveyDock
-        surveyId="oppfolgingsplan-pilot-feedback"
-        survey={PILOT_FEEDBACK_SURVEY}
-        transport={transport}
-      />
-    );
-  }
-
-  return null;
-};
-
 const ArbeidsgiverSide = ({
   title,
   heading,
@@ -68,20 +47,17 @@ const ArbeidsgiverSide = ({
   const sykmeldt = useDineSykmeldte();
 
   return (
-    <>
-      <PageContainer
-        sykmeldt={getSykmeldtNameAndFnr(sykmeldt.data)}
-        header={getSykmeldtHeader(sykmeldt.data)}
-        navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
-      >
-        <>
-          <PageHeading title={title} heading={heading} />
-          <DeprecationBannerAG />
-          {children}
-        </>
-      </PageContainer>
-      <LumiSurvey />
-    </>
+    <PageContainer
+      sykmeldt={getSykmeldtNameAndFnr(sykmeldt.data)}
+      header={getSykmeldtHeader(sykmeldt.data)}
+      navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt.data} />}
+    >
+      <>
+        <PageHeading title={title} heading={heading} />
+        <DeprecationBannerAG />
+        {children}
+      </>
+    </PageContainer>
   );
 };
 
