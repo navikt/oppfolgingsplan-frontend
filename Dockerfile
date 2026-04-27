@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs20-debian12 AS runtime
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:20-slim AS runtime
 
 WORKDIR /app
 
